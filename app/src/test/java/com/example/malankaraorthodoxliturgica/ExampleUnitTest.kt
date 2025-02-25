@@ -1,4 +1,4 @@
-package com.example.liturgica
+package com.example.malankaraorthodoxliturgica
 
 import org.junit.Test
 
