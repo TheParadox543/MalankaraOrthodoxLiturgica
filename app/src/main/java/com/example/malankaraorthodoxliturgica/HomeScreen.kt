@@ -20,9 +20,10 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomeScreen(navController: NavController) {
     val prayerCategories = listOf(
-        "Daily Prayers" to listOf("Sleeba", "Kyamtha"),
+        "Daily Prayers" to listOf("Sleeba", "Kyamtha", "Great Lent"),
         "Sacramental Prayers" to listOf("Qurbana", "Baptism", "Wedding", "Funeral"),
         "Feast Day Prayers" to listOf("Christmas", "Easter", "Ascension")
+
     )
 
     LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {

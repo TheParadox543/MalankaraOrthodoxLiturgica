@@ -1,6 +1,7 @@
 package com.example.malankaraorthodoxliturgica
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -31,6 +33,10 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val savedLanguage = sharedPreferences.getString("language", "en") ?: "en"
+        setAppLocale(this, savedLanguage)
         enableEdgeToEdge()
         setContent {
             MalankaraOrthodoxLiturgicaTheme {
@@ -77,7 +83,11 @@ fun MainApp() {
                 val category = navBackStackEntry.arguments?.getString("category")?:""
                 PrayerListScreen(navController, category)
             }
-            composable("settings") { SettingsScreen() }
+            composable("prayer_detail/{category}"){navBackStackEntry ->
+                val category = navBackStackEntry.arguments?.getString("category")?:""
+                PrayerDetailScreen(navController, LocalContext.current, category, "en")
+            }
+            composable("settings") { SettingsScreen(navController) }
         }
     }
 }

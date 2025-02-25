@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,7 +27,7 @@ import androidx.navigation.NavController
 @Composable
 fun PrayerListScreen(navController: NavController, category: String) {
     val options = when (category) {
-        "Daily Prayers" -> listOf("Sleeba", "Kyamtha")
+        "Daily Prayers" -> listOf("Sleeba", "Kyamtha", "Great Lent")
         "Sacramental Prayers" -> listOf("Qurbana", "Baptism", "Wedding", "Funeral")
         "Feast Day Prayers" -> listOf("Christmas", "Easter", "Ascension")
         else -> emptyList()
@@ -56,7 +55,7 @@ fun PrayerListScreen(navController: NavController, category: String) {
                 Card (
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { /* Navigate to prayer content later */ }
+                        .clickable { navController.navigate("prayer_detail/$prayer") }
                         .padding(8.dp),
                     shape = RoundedCornerShape(8.dp),
                     elevation = CardDefaults.cardElevation(4.dp)
