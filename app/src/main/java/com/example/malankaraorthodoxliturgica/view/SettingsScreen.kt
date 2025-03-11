@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica
+package com.example.malankaraorthodoxliturgica.view
 
 import android.app.Activity
 import android.content.Context
@@ -19,14 +19,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.malankaraorthodoxliturgica.model.PrayerRepository
+import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 import java.util.Locale
 
 @Composable
-fun SettingsScreen(navController: NavController) {
+fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val context = LocalContext.current
     val sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
     val savedLanguage = sharedPreferences.getString("language", "en") ?: "en"
@@ -84,8 +87,6 @@ fun setAppLocale(context: Context, languageCode: String) {
     val config = Configuration()
     config.setLocale(locale)
 
-    context.resources.updateConfiguration(config, context.resources.displayMetrics)
-
     val sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
     sharedPreferences.edit().putString("language", languageCode).apply()
 }
@@ -94,4 +95,13 @@ fun restartActivity(context: Context) {
     val intent = (context as Activity).intent
     context.finish()
     context.startActivity(intent)
+}
+
+@Preview
+@Composable
+fun Preview(){
+    SettingsScreen(
+        navController = NavController(LocalContext.current),
+        prayerViewModel = PrayerViewModel(PrayerRepository())
+    )
 }

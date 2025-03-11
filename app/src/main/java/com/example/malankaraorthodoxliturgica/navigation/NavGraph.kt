@@ -23,13 +23,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.malankaraorthodoxliturgica.PrayerDetailScreen
-import com.example.malankaraorthodoxliturgica.SettingsScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentDayScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentPrayerScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentScreen
 import com.example.malankaraorthodoxliturgica.view.HomeScreen
 import com.example.malankaraorthodoxliturgica.view.PrayerListScreen
 import com.example.malankaraorthodoxliturgica.view.QurbanaScreen
+import com.example.malankaraorthodoxliturgica.view.SettingsScreen
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 data class BottomNavItem(val route: String, val icon: ImageVector, val label: String)
@@ -129,7 +129,9 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier) {
             composable("qurbana"){
                 QurbanaScreen(navController, prayerViewModel)
             }
-            composable("settings") { SettingsScreen(navController) }
+            composable("settings") {
+                SettingsScreen(navController, prayerViewModel)
+            }
         }
     }
 }
