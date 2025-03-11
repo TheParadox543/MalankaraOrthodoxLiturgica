@@ -17,8 +17,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,46 +25,32 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PrayerListScreen(navController: NavController, viewModel: PrayerViewModel, category: String) {
-    val prayers by viewModel.prayers
-
-    LaunchedEffect(category) {
-        viewModel.loadPrayers(category)
-    }
+fun QurbanaScreen(navController: NavController, prayerViewModel: PrayerViewModel){
+    val sections = prayerViewModel.getQurbanaSections()
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(category) },
+                title = { Text("Qurbana") },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Previous Page",
-                        )
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
                     }
-                },
+                }
             )
-        },
+        }
     ) { padding ->
         LazyColumn(modifier = Modifier.padding(padding)) {
-            items(prayers) { prayer ->
+            items(sections) { section ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable {
-                            when (prayer) {
-                                "Great Lent" -> navController.navigate("great_lent_main")
-                                "Nineveh Lent" -> navController.navigate("nineveh_lent_main")
-                                "Qurbana" -> navController.navigate("qurbana")
-                                else -> navController.navigate("prayers/$prayer")
-                            }
-                        }
+                        .clickable { navController.navigate("qurbana/$section") }
                         .padding(8.dp),
                     shape = RoundedCornerShape(8.dp),
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
-                    Text(prayer, fontSize = 16.sp, modifier = Modifier.padding(16.dp))
+                    Text(section, fontSize = 16.sp, modifier = Modifier.padding(16.dp))
                 }
             }
         }

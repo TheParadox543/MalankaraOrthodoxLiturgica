@@ -2,6 +2,8 @@ package com.example.malankaraorthodoxliturgica.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
@@ -10,6 +12,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
@@ -25,6 +29,7 @@ import com.example.malankaraorthodoxliturgica.view.GreatLentPrayerScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentScreen
 import com.example.malankaraorthodoxliturgica.view.HomeScreen
 import com.example.malankaraorthodoxliturgica.view.PrayerListScreen
+import com.example.malankaraorthodoxliturgica.view.QurbanaScreen
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 data class BottomNavItem(val route: String, val icon: ImageVector, val label: String)
@@ -35,7 +40,20 @@ val bottomNavItems = listOf(
 )
 
 @Composable
-fun BottomNavBar(navController: NavController) {
+fun BottomNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
+    val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
+
+    if (sectionNavigation) {
+        // Sequential Navigation (Previous/Next)
+        SequentialNavBar(navController, prayerViewModel)
+    } else {
+        // Original Bottom Navigation
+        DefaultBottomNavBar(navController)
+    }
+}
+
+@Composable
+fun DefaultBottomNavBar(navController: NavController) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     NavigationBar {
@@ -51,10 +69,40 @@ fun BottomNavBar(navController: NavController) {
 }
 
 @Composable
+fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
+    val prayerOrder = prayerViewModel.getDayPrayers()
+    val currentIndex = prayerOrder.indexOf(currentRoute?.substringAfterLast("/"))
+
+    val previousRoute = if (currentIndex > 0) "prayers/${prayerOrder[currentIndex - 1]}" else null
+    val nextRoute = if (currentIndex in 0 until prayerOrder.lastIndex) "prayers/${prayerOrder[currentIndex + 1]}" else null
+
+    NavigationBar {
+        NavigationBarItem(
+            icon = { Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous") },
+            label = { Text("Previous") },
+            selected = false,
+            enabled = previousRoute != null,
+            onClick = { previousRoute?.let { navController.navigate(it) } }
+        )
+
+        NavigationBarItem(
+            icon = { Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Next") },
+            label = { Text("Next") },
+            selected = false,
+            enabled = nextRoute != null,
+            onClick = { nextRoute?.let { navController.navigate(it) } }
+        )
+    }
+}
+
+
+@Composable
 fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier) {
     val navController = rememberNavController()
     Scaffold(
-        bottomBar = { BottomNavBar(navController) }
+        bottomBar = { BottomNavBar(navController, prayerViewModel) }
     ) { padding ->
         NavHost(navController, startDestination = "home", Modifier.padding(padding)) {
             composable("home") { HomeScreen(navController, prayerViewModel) }
@@ -77,6 +125,9 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier) {
                 val day = navBackStackEntry.arguments?.getString("day")?:""
                 val prayer = navBackStackEntry.arguments?.getString("prayer")?:""
                 GreatLentPrayerScreen(navController, prayerViewModel, day, prayer)
+            }
+            composable("qurbana"){
+                QurbanaScreen(navController, prayerViewModel)
             }
             composable("settings") { SettingsScreen(navController) }
         }

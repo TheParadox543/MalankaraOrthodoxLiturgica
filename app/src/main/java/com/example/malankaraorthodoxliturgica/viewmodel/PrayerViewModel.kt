@@ -5,10 +5,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
+    val sectionNavigation = MutableStateFlow(false)
+    fun setSectionNavigation(enabled: Boolean) {
+        sectionNavigation.value = enabled
+    }
+
     private val _prayers = mutableStateOf<List<String>>(emptyList())
     val prayers: State<List<String>> = _prayers
+
+    fun getCategories() = repository.getCategories()
 
     fun loadPrayers(category: String) {
         _prayers.value = repository.getPrayers(category)
@@ -16,6 +24,7 @@ class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
 
     fun getGreatLentDays() = repository.getGreatLentDays()
     fun getDayPrayers() = repository.getDayPrayers()
+    fun getQurbanaSections() = repository.getQurbanaSections()
     fun getNextPrayer(currentDay: String, currentPrayer: String): Pair<String, String>? {
         val days = getGreatLentDays()
         val prayers = getDayPrayers()
@@ -47,7 +56,6 @@ class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
             else -> null // No previous prayer (Monday Sandhya)
         }
     }
-
 }
 
 class PrayerViewModelFactory(private val repository: PrayerRepository) : ViewModelProvider.Factory {

@@ -99,12 +99,23 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String, prayer: String){
-    Scaffold() {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Great Lent $day $prayer") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
+                    }
+                }
+            )
+        }
+    ) {
         padding ->
         Column(Modifier.padding(padding)) {
-//            Text("$day $prayer")
             Text("great_lent_${day}_$prayer")
         }
     }
