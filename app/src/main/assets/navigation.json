@@ -1,0 +1,34 @@
+{
+  "home": [
+    "daily_prayers",
+    "sacramental_prayers",
+    "feast_day_prayers"
+  ],
+  "daily_prayers": [
+    "sleeba",
+    "kyamtha",
+    "great_lent",
+    "nineveh_lent"
+  ],
+  "sacramental_prayers": [
+    "qurbana",
+    "baptism",
+    "wedding",
+    "funeral"
+  ],
+  "feast_day_prayers": [
+    "christmas",
+    "easter",
+    "ascension"
+  ],
+  "qurbana": [
+    "preparation",
+    "part_one",
+    "part_two_chapter_one",
+    "part_two_chapter_two",
+    "part_two_chapter_three",
+    "part_two_chapter_four",
+    "part_two_chapter_five",
+    "conclusion"
+  ]
+}
