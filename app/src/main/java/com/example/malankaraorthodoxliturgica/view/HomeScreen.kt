@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica
+package com.example.malankaraorthodoxliturgica.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,10 +15,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.dp
+import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val prayerCategories = listOf(
         "Daily Prayers" to listOf("Sleeba", "Kyamtha", "Great Lent", "Nineveh Lent"),
         "Sacramental Prayers" to listOf("Qurbana", "Baptism", "Wedding", "Funeral"),
