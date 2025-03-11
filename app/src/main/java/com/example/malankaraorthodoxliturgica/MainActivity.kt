@@ -87,6 +87,13 @@ fun MainApp() {
                 val category = navBackStackEntry.arguments?.getString("category")?:""
                 PrayerDetailScreen(navController, LocalContext.current, category, "en")
             }
+            composable("great_lent_main"){
+                GreatLentScreen(navController)
+            }
+            composable("great_lent_day/{prayer}"){ navBackStackEntry ->
+                val day = navBackStackEntry.arguments?.getString("day")?:""
+                GreatLentDayScreen(navController, day)
+            }
             composable("settings") { SettingsScreen(navController) }
         }
     }

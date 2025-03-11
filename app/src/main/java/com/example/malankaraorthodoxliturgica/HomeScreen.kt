@@ -20,9 +20,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomeScreen(navController: NavController) {
     val prayerCategories = listOf(
-        "Daily Prayers" to listOf("Sleeba", "Kyamtha", "Great Lent"),
+        "Daily Prayers" to listOf("Sleeba", "Kyamtha", "Great Lent", "Nineveh Lent"),
         "Sacramental Prayers" to listOf("Qurbana", "Baptism", "Wedding", "Funeral"),
-        "Feast Day Prayers" to listOf("Christmas", "Easter", "Ascension")
+//        "Feast Day Prayers" to listOf("Christmas", "Easter", "Ascension")
 
     )
 

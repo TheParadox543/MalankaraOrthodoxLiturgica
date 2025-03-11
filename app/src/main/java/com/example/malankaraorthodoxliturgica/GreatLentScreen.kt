@@ -1,7 +1,6 @@
 package com.example.malankaraorthodoxliturgica
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,22 +24,15 @@ import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PrayerListScreen(navController: NavController, category: String) {
-    val options = when (category) {
-        "Daily Prayers" -> listOf("Sleeba", "Kyamtha", "Great Lent")
-        "Sacramental Prayers" -> listOf("Qurbana", "Baptism", "Wedding", "Funeral")
-//        "Feast Day Prayers" -> listOf("Christmas", "Easter", "Ascension")
-        else -> emptyList()
-    }
+fun GreatLentScreen(navController: NavController) {
+    val days = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 
-    Scaffold (
+    Scaffold(
         topBar = {
             TopAppBar(
-                title = {Text(category)},
+                title = { Text("Great Lent") },
                 navigationIcon = {
-                    IconButton(
-                        onClick = {navController.popBackStack()}
-                    ) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Previous Page"
@@ -49,19 +41,54 @@ fun PrayerListScreen(navController: NavController, category: String) {
                 }
             )
         }
-    ){ padding ->
+    ) { padding ->
         LazyColumn(modifier = Modifier.padding(padding)) {
-            items(options) { prayer ->
-                Card (
+            items(days) { day ->
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable {
-                            when(prayer){
-                                "Great Lent" -> navController.navigate("great_lent_main")
-                                "Nineveh Lent" -> navController.navigate("nineveh_lent")
-                                else -> navController.navigate("prayer_detail/$prayer")
-                            }
-                        }
+                        .clickable { navController.navigate("great_lent_day/$day") }
+                        .padding(8.dp),
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = CardDefaults.cardElevation(4.dp)
+                ) {
+                    Text(
+                        day,
+                        fontSize = 16.sp,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun GreatLentDayScreen(navController: NavController, day: String) {
+    val prayers = listOf("Sandhya", "Soothara", "Rathri", "Prabatham", "3rd Hour", "6th Hour", "9th Hour")
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(day) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Previous Page"
+                        )
+                    }
+                }
+            )
+        }
+    ) { padding ->
+        LazyColumn(modifier = Modifier.padding(padding)) {
+            items(prayers) { prayer ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { navController.navigate("prayers/great_lent_${day}_${prayer}") }
                         .padding(8.dp),
                     shape = RoundedCornerShape(8.dp),
                     elevation = CardDefaults.cardElevation(4.dp)
