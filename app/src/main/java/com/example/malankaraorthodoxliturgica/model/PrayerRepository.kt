@@ -22,6 +22,7 @@ class PrayerRepository {
         "Part Two Chapter One",
         "Part Two Chapter Two",
         "Part Two Chapter Three",
-        "Conclusion"
+        "Part Two Chapter Four",
+        "Part Two Chapter Five"
     )
 }

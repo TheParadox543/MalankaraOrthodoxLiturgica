@@ -18,10 +18,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,7 +87,7 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { navController.navigate("great_lent_prayer/${day}/${prayer}") }
+                        .clickable { navController.navigate("great_lent_prayer/${day}/${prayers.indexOf(prayer)}") }
                         .padding(8.dp),
                     shape = RoundedCornerShape(8.dp),
                     elevation = CardDefaults.cardElevation(4.dp)
@@ -101,7 +105,10 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String, prayer: String){
+fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String, prayerIndex: Int) {
+    val prayer = prayerViewModel.getDayPrayers()[prayerIndex]
+    val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -113,16 +120,9 @@ fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerV
                 }
             )
         }
-    ) {
-        padding ->
+    ) { padding ->
         Column(Modifier.padding(padding)) {
-            Text("great_lent_${day}_$prayer")
+            Text("great_lent_${day}_$prayerIndex")
         }
     }
-    val next = prayerViewModel.getNextPrayer(day, prayer)
-    if (next != null) navController.navigate("great_lent_prayer/${next.first}/${next.second}")
-
-    val previous = prayerViewModel.getPreviousPrayer(day, prayer)
-    if (previous != null) navController.navigate("great_lent_prayer/${previous.first}/${previous.second}")
-
 }

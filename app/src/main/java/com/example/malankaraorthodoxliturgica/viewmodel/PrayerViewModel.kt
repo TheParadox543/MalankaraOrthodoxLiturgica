@@ -5,18 +5,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 
 class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
-    val sectionNavigation = MutableStateFlow(false)
-    fun setSectionNavigation(enabled: Boolean) {
-        sectionNavigation.value = enabled
-    }
+
+    fun getCategories() = repository.getCategories()
 
     private val _prayers = mutableStateOf<List<String>>(emptyList())
     val prayers: State<List<String>> = _prayers
-
-    fun getCategories() = repository.getCategories()
 
     fun loadPrayers(category: String) {
         _prayers.value = repository.getPrayers(category)
@@ -25,6 +25,14 @@ class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
     fun getGreatLentDays() = repository.getGreatLentDays()
     fun getDayPrayers() = repository.getDayPrayers()
     fun getQurbanaSections() = repository.getQurbanaSections()
+
+    private val _sectionNavigation = MutableStateFlow(false)
+    val sectionNavigation: StateFlow<Boolean> = _sectionNavigation
+
+    fun setSectionNavigation(enabled: Boolean) {
+        _sectionNavigation.value = enabled
+    }
+
     fun getNextPrayer(currentDay: String, currentPrayer: String): Pair<String, String>? {
         val days = getGreatLentDays()
         val prayers = getDayPrayers()

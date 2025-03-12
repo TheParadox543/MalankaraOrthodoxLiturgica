@@ -11,8 +11,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
-import com.example.malankaraorthodoxliturgica.navigation.NavGraph
+import com.example.malankaraorthodoxliturgica.view.navigation.NavGraph
 import com.example.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
+import com.example.malankaraorthodoxliturgica.view.setAppLocale
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModelFactory
 
