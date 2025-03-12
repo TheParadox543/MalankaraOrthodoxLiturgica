@@ -1,6 +1,6 @@
 package com.example.malankaraorthodoxliturgica
 
-import android.content.Context
+//import com.example.malankaraorthodoxliturgica.view.setAppLocale
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,11 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
-import com.example.malankaraorthodoxliturgica.view.navigation.NavGraph
 import com.example.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
-import com.example.malankaraorthodoxliturgica.view.setAppLocale
+import com.example.malankaraorthodoxliturgica.view.navigation.NavGraph
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

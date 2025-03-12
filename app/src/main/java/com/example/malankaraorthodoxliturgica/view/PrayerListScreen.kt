@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,17 +28,22 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PrayerListScreen(navController: NavController, viewModel: PrayerViewModel, category: String) {
-    val prayers by viewModel.categoryPrayers
+fun PrayerListScreen(navController: NavController, prayerViewModel: PrayerViewModel, category: String) {
+    val language by prayerViewModel.selectedLanguage.collectAsState()
+    LaunchedEffect(language) {
+        prayerViewModel.selectedLanguage
+    }
+    val translations = prayerViewModel.loadTranslations()
+    val prayers by prayerViewModel.categoryPrayers
 
     LaunchedEffect(category) {
-        viewModel.loadCategoryPrayers(category)
+        prayerViewModel.loadCategoryPrayers(category)
     }
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(category) },
+                title = { Text(translations[category]?:"") },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
@@ -56,9 +62,9 @@ fun PrayerListScreen(navController: NavController, viewModel: PrayerViewModel, c
                         .fillMaxWidth()
                         .clickable {
                             when (prayer) {
-                                "Great Lent" -> navController.navigate("great_lent_main")
-                                "Nineveh Lent" -> navController.navigate("nineveh_lent_main")
-                                "Qurbana" -> navController.navigate("qurbana")
+                                "great_lent" -> navController.navigate("great_lent_main")
+                                "nineveh" -> navController.navigate("nineveh_lent_main")
+                                "qurbana" -> navController.navigate("qurbana")
                                 else -> navController.navigate("prayers/$prayer")
                             }
                         }
@@ -66,7 +72,7 @@ fun PrayerListScreen(navController: NavController, viewModel: PrayerViewModel, c
                     shape = RoundedCornerShape(8.dp),
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
-                    Text(prayer, fontSize = 16.sp, modifier = Modifier.padding(16.dp))
+                    Text(translations[prayer]?:"", fontSize = 16.sp, modifier = Modifier.padding(16.dp))
                 }
             }
         }

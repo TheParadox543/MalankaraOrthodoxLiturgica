@@ -8,11 +8,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.json.JSONArray
-import org.json.JSONObject
 
 class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
+
+    private val _selectedLanguage = MutableStateFlow("ml")
+    val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
+
+    fun setLanguage(language: String) {
+        _selectedLanguage.value = language
+    }
+    fun loadTranslations() = repository.loadTranslations(selectedLanguage.value)
 
     fun getCategories() = repository.getCategories()
 

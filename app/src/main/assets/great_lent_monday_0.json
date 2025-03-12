@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "type": "subheading",
+    "type": "heading",
     "lit_en": "",
     "lit_ml": "കൗമാ",
     "lit_mn": "",
@@ -25,9 +25,9 @@
   },
   {
     "id": 4,
-    "type": "subheading",
+    "type": "heading",
     "lit_en": "",
-    "lit_ml": "(സൂസൊ)",
+    "lit_ml": "(സ്ലൂസോ)",
     "lit_mn": "",
     "special": ""
   },
@@ -41,7 +41,7 @@
   },
   {
     "id": 6,
-    "type": "subheading",
+    "type": "heading",
     "lit_en": "",
     "lit_ml": "എനിയോനോ",
     "lit_mn": "",

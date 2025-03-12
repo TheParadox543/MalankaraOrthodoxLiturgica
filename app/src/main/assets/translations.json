@@ -73,5 +73,40 @@
     "en": "Friday",
     "ml": "വെള്ളിയാഴ്ച",
     "mn": "Velliyaazhcha"
+  },
+  "sandhya": {
+    "en": "Evening Prayers",
+    "ml": "സന്ധ്യാ",
+    "mn": "Sandhya"
+  },
+  "soothara": {
+    "en": "Matin",
+    "ml": "സൂത്താറാ",
+    "mn": "Soothara"
+  },
+  "rathri": {
+    "en": "Night Prayers",
+    "ml": "രാത്രി",
+    "mn": "Raathri"
+  },
+  "prabatham": {
+    "en": "Morning Prayers",
+    "ml": "പ്രഭാതം",
+    "mn": "Prabatham"
+  },
+  "3rd": {
+    "en": "Third Hour",
+    "ml": "മൂന്നാം മണി",
+    "mn": "Moonnam Mani"
+  },
+  "6th": {
+    "en": "Sixth Hour",
+    "ml": "ആറാം മണി",
+    "mn": "Aaram Mani"
+  },
+  "9th": {
+    "en": "Ninth Hour",
+    "ml": "ഒന്നാം മണി",
+    "mn": "Ombathaam Mani"
   }
 }
