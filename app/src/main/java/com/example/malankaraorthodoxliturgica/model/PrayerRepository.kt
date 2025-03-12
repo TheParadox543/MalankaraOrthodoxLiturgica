@@ -50,7 +50,7 @@ class PrayerRepository(private val context: Context) {
 
     private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
     val prayers: StateFlow<List<Map<String, String>>> = _prayers
-    fun loadPrayers(filename: String): List<Map<String, String>> {
+    fun loadPrayers(filename: String, language: String): List<Map<String, String>> {
         val json = context.assets.open(filename).bufferedReader().use { it.readText() }
         val jsonArray = JSONArray(json)
         val prayerList = mutableListOf<Map<String, String>>()
@@ -58,7 +58,10 @@ class PrayerRepository(private val context: Context) {
         for (i in 0 until jsonArray.length()) {
             val prayerObject = jsonArray.getJSONObject(i)
             val type = prayerObject.getString("type")
-            val content = prayerObject.getString("lit_ml")
+            var content = prayerObject.getString("lit_${language}")
+            if (content.isEmpty()){
+                content = prayerObject.getString("lit_ml")
+            }
 
             prayerList.add(mapOf("type" to type, "content" to content))
         }

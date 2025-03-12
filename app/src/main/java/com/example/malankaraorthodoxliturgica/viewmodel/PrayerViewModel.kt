@@ -37,9 +37,9 @@ class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
     private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
     val prayers: StateFlow<List<Map<String, String>>> = _prayers
 
-    fun loadPrayers(filename: String) {
+    fun loadPrayers(filename: String, language: String) {
         viewModelScope.launch {
-            _prayers.value = repository.loadPrayers(filename)
+            _prayers.value = repository.loadPrayers(filename, language)
         }
     }
 

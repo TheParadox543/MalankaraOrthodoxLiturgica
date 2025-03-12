@@ -19,9 +19,10 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 @Composable
 fun PrayerScreen(prayerViewModel: PrayerViewModel, filename: String, modifier: Modifier = Modifier){
     val prayers by prayerViewModel.prayers.collectAsState()
+    val language by prayerViewModel.selectedLanguage.collectAsState()
 
     LaunchedEffect(filename) {
-        prayerViewModel.loadPrayers(filename)
+        prayerViewModel.loadPrayers(filename, language)
     }
     LazyColumn(
         modifier.padding(8.dp)
