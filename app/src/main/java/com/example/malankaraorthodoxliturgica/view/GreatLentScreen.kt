@@ -111,16 +111,16 @@ fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerV
     val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
 
     Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                title = { Text("Great Lent $day $prayer") },
-//                navigationIcon = {
-//                    IconButton(onClick = { navController.popBackStack() }) {
-//                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
-//                    }
-//                }
-//            )
-//        }
+        topBar = {
+            TopAppBar(
+                title = { Text("Great Lent $day $prayer") },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
+                    }
+                }
+            )
+        }
     ) { padding ->
         PrayerScreen(
             prayerViewModel,

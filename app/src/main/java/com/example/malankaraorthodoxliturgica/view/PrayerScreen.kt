@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -29,7 +30,7 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, filename: String, modifier: M
         prayerViewModel.loadPrayers(filename)
     }
     LazyColumn(
-        Modifier.padding(40.dp)
+        modifier.padding(16.dp)
     ) {
         items(prayers) { prayer ->
 //            Log.d("PrayerScreen", "Prayer: $prayer")
@@ -45,52 +46,52 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, filename: String, modifier: M
 }
 
 @Composable
-fun Heading(text: String) {
+fun Heading(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         fontSize = 12.sp,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth().padding(8.dp)
     )
 }
 
 @Composable
-fun Subheading(text: String) {
+fun Subheading(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         fontSize = 8.sp,
         textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     )
 }
 
 @Composable
-fun Prose(text: String) {
+fun Prose(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         fontSize = 8.sp,
         textAlign = TextAlign.Justify,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     )
 }
 
 @Composable
-fun Song(text: String) {
+fun Song(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         fontSize = 8.sp,
         textAlign = TextAlign.Start,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     )
 }
 
 @Composable
-fun Subtext(text: String) {
+fun Subtext(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
         fontSize = 6.sp,
         textAlign = TextAlign.End,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     )
 }

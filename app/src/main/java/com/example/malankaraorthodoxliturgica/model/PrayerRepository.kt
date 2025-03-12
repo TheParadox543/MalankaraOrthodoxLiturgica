@@ -36,7 +36,6 @@ class PrayerRepository(private val context: Context) {
         "Part Two Chapter Five"
     )
 
-
     private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
     val prayers: StateFlow<List<Map<String, String>>> = _prayers
     fun loadPrayers(filename: String): List<Map<String, String>> {
