@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
 import com.example.malankaraorthodoxliturgica.view.navigation.NavGraph
@@ -19,16 +20,17 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val savedLanguage = sharedPreferences.getString("language", "en") ?: "en"
-        setAppLocale(this, savedLanguage) // Apply locale before UI inflation
-
         super.onCreate(savedInstanceState)
 
-        val prayerRepository = PrayerRepository()
-        val prayerViewModelFactory = PrayerViewModelFactory(prayerRepository)
-        val prayerViewModel = ViewModelProvider(this, prayerViewModelFactory)[PrayerViewModel::class.java]
+        // Create repository instance
+        val repository = PrayerRepository(applicationContext)
 
+        // Create ViewModel using ViewModelProvider
+        val prayerViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel> create(modelClass: Class<T>): T {
+                return PrayerViewModel(repository) as T
+            }
+        })[PrayerViewModel::class.java]
         enableEdgeToEdge()
         setContent {
             MalankaraOrthodoxLiturgicaTheme {

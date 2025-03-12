@@ -4,27 +4,37 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
 
 class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
 
     fun getCategories() = repository.getCategories()
 
-    private val _prayers = mutableStateOf<List<String>>(emptyList())
-    val prayers: State<List<String>> = _prayers
+    private val _categoryPrayers = mutableStateOf<List<String>>(emptyList())
+    val categoryPrayers: State<List<String>> = _categoryPrayers
 
-    fun loadPrayers(category: String) {
-        _prayers.value = repository.getPrayers(category)
+    fun loadCategoryPrayers(category: String) {
+        _categoryPrayers.value = repository.getCategoryPrayers(category)
     }
 
     fun getGreatLentDays() = repository.getGreatLentDays()
     fun getDayPrayers() = repository.getDayPrayers()
     fun getQurbanaSections() = repository.getQurbanaSections()
+
+    private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
+    val prayers: StateFlow<List<Map<String, String>>> = _prayers
+
+    fun loadPrayers(filename: String) {
+        viewModelScope.launch {
+            _prayers.value = repository.loadPrayers(filename)
+        }
+    }
 
     private val _sectionNavigation = MutableStateFlow(false)
     val sectionNavigation: StateFlow<Boolean> = _sectionNavigation

@@ -2,6 +2,7 @@ package com.example.malankaraorthodoxliturgica.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -110,19 +111,21 @@ fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerV
     val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Great Lent $day $prayer") },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
-                    }
-                }
-            )
-        }
+//        topBar = {
+//            TopAppBar(
+//                title = { Text("Great Lent $day $prayer") },
+//                navigationIcon = {
+//                    IconButton(onClick = { navController.popBackStack() }) {
+//                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
+//                    }
+//                }
+//            )
+//        }
     ) { padding ->
-        Column(Modifier.padding(padding)) {
-            Text("great_lent_${day}_$prayerIndex")
-        }
+        PrayerScreen(
+            prayerViewModel,
+            "great_lent_${day}_$prayerIndex.json",
+            Modifier.padding(padding)
+        )
     }
 }

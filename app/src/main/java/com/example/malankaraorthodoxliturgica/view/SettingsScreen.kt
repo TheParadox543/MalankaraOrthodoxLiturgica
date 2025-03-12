@@ -97,11 +97,11 @@ fun restartActivity(context: Context) {
     context.startActivity(intent)
 }
 
-@Preview
-@Composable
-fun Preview(){
-    SettingsScreen(
-        navController = NavController(LocalContext.current),
-        prayerViewModel = PrayerViewModel(PrayerRepository())
-    )
-}
+//@Preview
+//@Composable
+//fun Preview(){
+//    SettingsScreen(
+//        navController = NavController(LocalContext.current),
+//        prayerViewModel = PrayerViewModel(PrayerRepository())
+//    )
+//}

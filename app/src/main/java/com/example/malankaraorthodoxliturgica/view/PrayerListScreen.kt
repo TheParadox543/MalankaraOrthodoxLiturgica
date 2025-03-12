@@ -28,10 +28,10 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrayerListScreen(navController: NavController, viewModel: PrayerViewModel, category: String) {
-    val prayers by viewModel.prayers
+    val prayers by viewModel.categoryPrayers
 
     LaunchedEffect(category) {
-        viewModel.loadPrayers(category)
+        viewModel.loadCategoryPrayers(category)
     }
 
     Scaffold(
