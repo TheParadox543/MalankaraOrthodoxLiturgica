@@ -25,7 +25,7 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun HomeScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val language by prayerViewModel.selectedLanguage.collectAsState()
     LaunchedEffect(language) {
-        prayerViewModel.selectedLanguage
+        prayerViewModel.loadTranslations()
     }
     val translations = prayerViewModel.loadTranslations()
     val categories = prayerViewModel.getCategories()

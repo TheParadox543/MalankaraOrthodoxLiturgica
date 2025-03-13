@@ -12,7 +12,7 @@ class PrayerRepository(private val context: Context) {
     fun getCategoryPrayers(category: String): List<String> {
         return when (category) {
             "daily_prayers" -> listOf("sleeba", "kyamtha", "nineveh", "great_lent")
-            "sacramental" -> listOf("qurbana", "baptism", "wedding", "funeral")
+            "sacrament" -> listOf("qurbana", "baptism", "wedding", "funeral")
 //            "Feast Day Prayers" -> listOf("Christmas", "Easter", "Ascension")
             else -> emptyList()
         }

@@ -31,7 +31,7 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun PrayerListScreen(navController: NavController, prayerViewModel: PrayerViewModel, category: String) {
     val language by prayerViewModel.selectedLanguage.collectAsState()
     LaunchedEffect(language) {
-        prayerViewModel.selectedLanguage
+        prayerViewModel.loadTranslations()
     }
     val translations = prayerViewModel.loadTranslations()
     val prayers by prayerViewModel.categoryPrayers
@@ -45,7 +45,7 @@ fun PrayerListScreen(navController: NavController, prayerViewModel: PrayerViewMo
             TopAppBar(
                 title = { Text(translations[category]?:"") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Previous Page",
@@ -65,7 +65,7 @@ fun PrayerListScreen(navController: NavController, prayerViewModel: PrayerViewMo
                                 "great_lent" -> navController.navigate("great_lent_main")
                                 "nineveh" -> navController.navigate("nineveh_lent_main")
                                 "qurbana" -> navController.navigate("qurbana")
-                                else -> navController.navigate("prayers/$prayer")
+                                else -> navController.navigate("home")
                             }
                         }
                         .padding(8.dp),

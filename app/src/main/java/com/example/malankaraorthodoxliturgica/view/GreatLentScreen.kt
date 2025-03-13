@@ -31,7 +31,7 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val language by prayerViewModel.selectedLanguage.collectAsState()
     LaunchedEffect(language) {
-        prayerViewModel.selectedLanguage
+        prayerViewModel.loadTranslations()
     }
     val translations = prayerViewModel.loadTranslations()
     val days = prayerViewModel.getGreatLentDays()
@@ -41,7 +41,7 @@ fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewMod
             TopAppBar(
                 title = { Text(translations["great_lent"]?:"") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
                     }
                 }
@@ -70,7 +70,7 @@ fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewMod
 fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String) {
     val language by prayerViewModel.selectedLanguage.collectAsState()
     LaunchedEffect(language) {
-        prayerViewModel.selectedLanguage
+        prayerViewModel.loadTranslations()
     }
     val translations = prayerViewModel.loadTranslations()
     val prayers = prayerViewModel.getDayPrayers()
@@ -80,7 +80,7 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
             TopAppBar(
                 title = { Text("${translations["great_lent"]?:""} ${translations[day] ?:""}") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Previous Page"
@@ -124,7 +124,7 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
 fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String, prayerIndex: Int) {
     val language by prayerViewModel.selectedLanguage.collectAsState()
     LaunchedEffect(language) {
-        prayerViewModel.selectedLanguage
+        prayerViewModel.loadTranslations()
     }
     val translations = prayerViewModel.loadTranslations()
     val prayer = prayerViewModel.getDayPrayers()[prayerIndex]
@@ -135,7 +135,7 @@ fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerV
             TopAppBar(
                 title = { Text("${translations["great_lent"]?:""} ${translations[day]?:""} ${translations[prayer]?:""}") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
                     }
                 }

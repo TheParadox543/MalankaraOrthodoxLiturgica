@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.malankaraorthodoxliturgica.model.DataStoreManager
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
 import com.example.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.example.malankaraorthodoxliturgica.view.navigation.NavGraph
@@ -23,10 +24,14 @@ class MainActivity : ComponentActivity() {
         // Create repository instance
         val repository = PrayerRepository(applicationContext)
 
+        // Create datastore instance
+        val dataStoreManager = DataStoreManager(applicationContext)
+
         // Create ViewModel using ViewModelProvider
         val prayerViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return PrayerViewModel(repository) as T
+                @Suppress("UNCHECKED_CAST")
+                return PrayerViewModel(repository, dataStoreManager) as T
             }
         })[PrayerViewModel::class.java]
         enableEdgeToEdge()

@@ -2,21 +2,35 @@ package com.example.malankaraorthodoxliturgica.viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.dataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.malankaraorthodoxliturgica.model.DataStoreManager
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
+class PrayerViewModel(private val repository: PrayerRepository, private val dataStoreManager: DataStoreManager) : ViewModel() {
 
     private val _selectedLanguage = MutableStateFlow("ml")
     val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
 
+    init {
+        // Load stored language from DataStore
+        viewModelScope.launch {
+            dataStoreManager.selectedLanguage.collect { language ->
+                _selectedLanguage.value = language
+            }
+        }
+    }
+
     fun setLanguage(language: String) {
+        viewModelScope.launch{
+            dataStoreManager.saveLanguage(language)
+        }
         _selectedLanguage.value = language
     }
     fun loadTranslations() = repository.loadTranslations(selectedLanguage.value)
@@ -83,11 +97,11 @@ class PrayerViewModel(private val repository: PrayerRepository) : ViewModel() {
     }
 }
 
-class PrayerViewModelFactory(private val repository: PrayerRepository) : ViewModelProvider.Factory {
+class PrayerViewModelFactory(private val repository: PrayerRepository, private val dataStore: DataStoreManager) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PrayerViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PrayerViewModel(repository) as T
+            return PrayerViewModel(repository, dataStore) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

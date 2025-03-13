@@ -33,7 +33,7 @@ fun QurbanaScreen(navController: NavController, prayerViewModel: PrayerViewModel
             TopAppBar(
                 title = { Text("Qurbana") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
                     }
                 }
