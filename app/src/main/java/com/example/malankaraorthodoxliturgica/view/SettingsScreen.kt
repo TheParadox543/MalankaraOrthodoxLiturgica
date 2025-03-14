@@ -31,7 +31,7 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
 
     Column(
         modifier = Modifier.fillMaxSize().padding(32.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ){
         Text(
@@ -55,7 +55,7 @@ fun LanguageDropdownMenu(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopStart) {
         OutlinedButton(onClick = { expanded = true }) {
             Text(selectedOption)
         }

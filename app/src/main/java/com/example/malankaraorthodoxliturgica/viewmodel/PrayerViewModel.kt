@@ -1,8 +1,8 @@
 package com.example.malankaraorthodoxliturgica.viewmodel
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.datastore.dataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -32,8 +32,10 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
             dataStoreManager.saveLanguage(language)
         }
         _selectedLanguage.value = language
+        loadTranslations()
     }
     fun loadTranslations() = repository.loadTranslations(selectedLanguage.value)
+    val translations = repository.loadTranslations(selectedLanguage.value)
 
     fun getCategories() = repository.getCategories()
 
@@ -48,6 +50,19 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     fun getDayPrayers() = repository.getDayPrayers()
     fun getQurbanaSections() = repository.getQurbanaSections()
 
+    private val _topBarNames = MutableStateFlow<List<String>>(emptyList())
+    val topBarNames: StateFlow<List<String>> = _topBarNames
+
+    fun setTopBarKeys(keys: List<String>) {
+        _topBarNames.value = keys
+    }
+
+    var sectionNames: List<String> = listOf()
+    fun updateTopBarLastKey(key: Int) {
+        _topBarNames.value = _topBarNames.value.dropLast(1) + sectionNames[key]
+
+    }
+
     private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
     val prayers: StateFlow<List<Map<String, String>>> = _prayers
 
@@ -57,6 +72,28 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
         }
     }
 
+    private val _filename = MutableStateFlow("")
+    val filename: StateFlow<String> = _filename
+
+    fun setFilename(newFilename: String) {
+        _filename.value = newFilename
+    }
+
+    fun updateIndex(delta: Int): Int? {
+        val regex = Regex("(\\d+)(\\.json)$") // Matches number before ".json"
+        val match = regex.find(_filename.value)
+
+        if (match != null) {
+            val currentIndex = match.groupValues[1].toInt()
+            val newIndex = currentIndex + delta
+            if (newIndex > 0) { // Ensure index doesn't go negative
+                _filename.value = _filename.value.replace(regex, "$newIndex.json")
+            }
+            return newIndex
+        }
+        return null
+    }
+
     private val _sectionNavigation = MutableStateFlow(false)
     val sectionNavigation: StateFlow<Boolean> = _sectionNavigation
 
@@ -64,35 +101,17 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
         _sectionNavigation.value = enabled
     }
 
-    fun getNextPrayer(currentDay: String, currentPrayer: String): Pair<String, String>? {
-        val days = getGreatLentDays()
-        val prayers = getDayPrayers()
-
-        val dayIndex = days.indexOf(currentDay)
-        val prayerIndex = prayers.indexOf(currentPrayer)
-
-        if (dayIndex == -1 || prayerIndex == -1) return null
-
-        return when {
-            prayerIndex < prayers.lastIndex -> currentDay to prayers[prayerIndex + 1] // Move to next prayer
-            dayIndex < days.lastIndex -> days[dayIndex + 1] to prayers.first() // Move to next day
-            else -> null // No next prayer (Friday 9th Hour)
+    fun getNextPrayer() {
+        val newIndex = updateIndex(1)
+        if (newIndex != null) {
+            updateTopBarLastKey(newIndex)
         }
     }
 
-    fun getPreviousPrayer(currentDay: String, currentPrayer: String): Pair<String, String>? {
-        val days = getGreatLentDays()
-        val prayers = getDayPrayers()
-
-        val dayIndex = days.indexOf(currentDay)
-        val prayerIndex = prayers.indexOf(currentPrayer)
-
-        if (dayIndex == -1 || prayerIndex == -1) return null
-
-        return when {
-            prayerIndex > 0 -> currentDay to prayers[prayerIndex - 1] // Move to previous prayer
-            dayIndex > 0 -> days[dayIndex - 1] to prayers.last() // Move to previous day
-            else -> null // No previous prayer (Monday Sandhya)
+    fun getPreviousPrayer() {
+        val newIndex = updateIndex(-1)
+        if (newIndex != null){
+            updateTopBarLastKey(newIndex)
         }
     }
 }

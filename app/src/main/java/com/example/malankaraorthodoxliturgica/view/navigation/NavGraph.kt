@@ -7,11 +7,15 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -29,7 +33,7 @@ import com.example.malankaraorthodoxliturgica.view.GreatLentDayScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentPrayerScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentScreen
 import com.example.malankaraorthodoxliturgica.view.HomeScreen
-import com.example.malankaraorthodoxliturgica.view.PrayerListScreen
+import com.example.malankaraorthodoxliturgica.view.CategoryListScreen
 import com.example.malankaraorthodoxliturgica.view.QurbanaScreen
 import com.example.malankaraorthodoxliturgica.view.SettingsScreen
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
@@ -41,10 +45,35 @@ val bottomNavItems = listOf(
     BottomNavItem("settings", Icons.Default.Settings, "Settings")
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopNavBar(navController: NavController, prayerViewModel: PrayerViewModel){
+    val topBarNames by prayerViewModel.topBarNames.collectAsState()
+    val translations = prayerViewModel.loadTranslations()
+
+    val title = topBarNames.joinToString(separator = " ") { key ->
+        translations[key] ?: "error"
+    }
+    TopAppBar(
+        title = {Text(title)},
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Blue
+        ),
+        navigationIcon = {
+            IconButton(onClick = { navController.navigateUp() }) {
+                Icon(
+                    Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Previous Page",
+                )
+            }
+        }
+    )
+}
+
 @Composable
 fun BottomNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
     val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
-
+    DefaultBottomNavBar(navController)
     if (sectionNavigation) {
         // Sequential Navigation (Previous/Next)
         SequentialNavBar(navController, prayerViewModel)
@@ -88,37 +117,41 @@ fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewMo
                 Icon(
                     Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Previous",
-                    tint = if (previousRoute != null) Color.Black else Color.Gray
                 )
             },
             label = { Text("Previous") },
             selected = false,
-            enabled = previousRoute != null,
-            onClick = { previousRoute?.let { navController.navigate(it) } }
+//            enabled = previousRoute != null,
+            onClick = {
+                Log.d("NewNavBar", "Previous Clicked")
+                prayerViewModel.getPreviousPrayer()
+            }
         )
-
         NavigationBarItem(
             icon = {
                 Icon(
                     Icons.AutoMirrored.Filled.ArrowForward,
                     contentDescription = "Next",
-                    tint = if (nextRoute != null) Color.Black else Color.Gray
                 )
             },
             label = { Text("Next") },
             selected = false,
-            enabled = nextRoute != null,
-            onClick = { nextRoute?.let { navController.navigate(it) } }
+//            enabled = nextRoute != null,
+            onClick = {
+                Log.d("NewNavBar", "Previous Clicked")
+                prayerViewModel.getNextPrayer()
+            }
         )
     }
 }
 
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier) {
+fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     Scaffold(
+        topBar = {TopNavBar(navController, prayerViewModel)},
         bottomBar = { BottomNavBar(navController, prayerViewModel) }
     ) { padding ->
         NavHost(navController, startDestination = "home", Modifier.padding(padding)) {
@@ -129,7 +162,7 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier) {
             composable("prayer_list/{category}"){navBackStackEntry ->
                 val category = navBackStackEntry.arguments?.getString("category")?:""
                 prayerViewModel.setSectionNavigation(false)
-                PrayerListScreen(navController, prayerViewModel, category)
+                CategoryListScreen(navController, prayerViewModel, category)
             }
             composable("prayer_detail/{category}"){navBackStackEntry ->
                 val category = navBackStackEntry.arguments?.getString("category")?:""

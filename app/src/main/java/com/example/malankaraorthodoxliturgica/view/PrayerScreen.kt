@@ -17,12 +17,14 @@ import androidx.compose.ui.unit.sp
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
-fun PrayerScreen(prayerViewModel: PrayerViewModel, filename: String, modifier: Modifier = Modifier){
+fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier){
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
+    val filename by prayerViewModel.filename.collectAsState()
 
     LaunchedEffect(filename) {
         prayerViewModel.loadPrayers(filename, language)
+        prayerViewModel.setFilename(filename)
     }
     LazyColumn(
         modifier.padding(8.dp)
@@ -66,7 +68,7 @@ fun Prose(text: String, modifier: Modifier = Modifier) {
         text = text,
         fontSize = 12.sp,
         textAlign = TextAlign.Justify,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth().padding(horizontal = 8.dp)
     )
 }
 
@@ -76,7 +78,7 @@ fun Song(text: String, modifier: Modifier = Modifier) {
         text = text,
         fontSize = 12.sp,
         textAlign = TextAlign.Start,
-        modifier = modifier.fillMaxWidth().padding(horizontal = 8.dp)
+        modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp)
     )
 }
 
@@ -84,8 +86,8 @@ fun Song(text: String, modifier: Modifier = Modifier) {
 fun Subtext(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        fontSize = 8.sp,
+        fontSize = 12.sp,
         textAlign = TextAlign.End,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth().padding(horizontal = 8.dp)
     )
 }
