@@ -17,6 +17,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,32 +29,24 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 @Composable
 fun QurbanaScreen(navController: NavController, prayerViewModel: PrayerViewModel){
     val sections = prayerViewModel.getQurbanaSections()
+    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Qurbana") },
-                navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Page")
-                    }
-                }
-            )
-        }
-    ) { padding ->
-        LazyColumn(modifier = Modifier.padding(padding)) {
-            items(sections) { section ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { navController.navigate("qurbana/$section") }
-                        .padding(8.dp),
-                    shape = RoundedCornerShape(8.dp),
-                    elevation = CardDefaults.cardElevation(4.dp)
-                ) {
-                    Text(section, fontSize = 16.sp, modifier = Modifier.padding(16.dp))
-                }
+    LazyColumn(modifier = Modifier) {
+        items(sections) { section ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { navController.navigate("qurbana/$section") }
+                    .padding(8.dp),
+                shape = RoundedCornerShape(8.dp),
+                elevation = CardDefaults.cardElevation(4.dp)
+            ) {
+                Text(
+                    text = section,
+                    fontSize = selectedFontSize,
+                    modifier = Modifier.padding(16.dp))
             }
         }
     }
+
 }

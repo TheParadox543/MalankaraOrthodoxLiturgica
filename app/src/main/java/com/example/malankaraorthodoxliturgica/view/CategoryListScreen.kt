@@ -11,6 +11,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,6 +22,7 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 @Composable
 fun CategoryListScreen(navController: NavController, prayerViewModel: PrayerViewModel, category: String) {
     val translations = prayerViewModel.loadTranslations()
+    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val prayers by prayerViewModel.categoryPrayers
 
     LaunchedEffect(category) {
@@ -44,7 +46,10 @@ fun CategoryListScreen(navController: NavController, prayerViewModel: PrayerView
                 shape = RoundedCornerShape(8.dp),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
-                Text(translations[prayer]?:"", fontSize = 16.sp, modifier = Modifier.padding(16.dp))
+                Text(
+                    translations[prayer]?:"",
+                    fontSize = selectedFontSize,
+                    modifier = Modifier.padding(16.dp))
             }
         }
     }

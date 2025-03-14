@@ -2,8 +2,9 @@ package com.example.malankaraorthodoxliturgica.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -19,11 +20,17 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     private val _selectedLanguage = MutableStateFlow("ml")
     val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
 
+    private val _selectedFontSize = MutableStateFlow(16.sp) // Default to medium
+    val selectedFontSize: StateFlow<TextUnit> = _selectedFontSize.asStateFlow()
+
     init {
         // Load stored language from DataStore
         viewModelScope.launch {
             dataStoreManager.selectedLanguage.collect { language ->
                 _selectedLanguage.value = language
+            }
+            dataStoreManager.selectedFont.collect{ size ->
+                _selectedFontSize.value = size.sp
             }
         }
     }
@@ -35,6 +42,14 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
         _selectedLanguage.value = language
         loadTranslations()
     }
+
+    fun setFontSize(size: TextUnit) {
+        _selectedFontSize.value = size
+        viewModelScope.launch {
+            dataStoreManager.saveFontSize(size.value.toInt())
+        }
+    }
+
     fun loadTranslations() = repository.loadTranslations(selectedLanguage.value)
     val translations = repository.loadTranslations(selectedLanguage.value)
 

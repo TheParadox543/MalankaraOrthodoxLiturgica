@@ -2,6 +2,7 @@ package com.example.malankaraorthodoxliturgica.model
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +13,7 @@ private val Context.dataStore by preferencesDataStore(name = "settings")
 
 class DataStoreManager(private val context: Context) {
     private val LANGUAGE_KEY = stringPreferencesKey("selected_language")
-    private val FONT_SIZE_KEY = stringPreferencesKey("font_size")
+    private val FONT_SIZE_KEY = intPreferencesKey("font_size")
 
     // Save language
     suspend fun saveLanguage(language: String) {
@@ -21,7 +22,7 @@ class DataStoreManager(private val context: Context) {
         }
     }
 
-    suspend fun saveFontSize(fontSize: String) {
+    suspend fun saveFontSize(fontSize: Int) {
         context.dataStore.edit { preferences ->
             preferences[FONT_SIZE_KEY] = fontSize
         }
@@ -35,6 +36,6 @@ class DataStoreManager(private val context: Context) {
 
     val selectedFont: Flow<Int> = context.dataStore.data
         .map{preferences ->
-            preferences[FONT_SIZE_KEY]?.toIntOrNull() ?: 12
+            preferences[FONT_SIZE_KEY] ?: 16
         }
 }

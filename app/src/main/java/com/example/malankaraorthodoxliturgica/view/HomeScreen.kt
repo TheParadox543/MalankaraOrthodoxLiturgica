@@ -12,6 +12,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -21,6 +23,7 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun HomeScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val translations = prayerViewModel.loadTranslations()
     val categories = prayerViewModel.getCategories()
+    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     prayerViewModel.setTopBarKeys(listOf("malankara"))
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(categories) { category ->
@@ -34,6 +37,7 @@ fun HomeScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
             ) {
                 Text(
                     text = translations[category] ?: "",
+                    fontSize = selectedFontSize,
                     modifier = Modifier.padding(16.dp),
                     style = MaterialTheme.typography.titleMedium
                 )

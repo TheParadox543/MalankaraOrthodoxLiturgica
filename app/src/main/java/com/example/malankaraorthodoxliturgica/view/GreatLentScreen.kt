@@ -11,6 +11,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -20,6 +22,7 @@ import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 @Composable
 fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val translations = prayerViewModel.loadTranslations()
+    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val days = prayerViewModel.getGreatLentDays()
     prayerViewModel.setTopBarKeys(listOf("great_lent"))
 
@@ -33,7 +36,10 @@ fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewMod
                 shape = RoundedCornerShape(8.dp),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
-                Text(translations[day] ?: "", fontSize = 16.sp, modifier = Modifier.padding(16.dp))
+                Text(
+                    translations[day] ?: "",
+                    fontSize = selectedFontSize,
+                    modifier = Modifier.padding(16.dp))
             }
         }
     }
@@ -42,6 +48,7 @@ fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewMod
 @Composable
 fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String) {
     val translations = prayerViewModel.translations
+    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val prayers = prayerViewModel.getDayPrayers()
     LaunchedEffect(day) {
         prayerViewModel.setTopBarKeys(listOf("great_lent", day))
@@ -67,7 +74,7 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
             ) {
                 Text(
                     translations[prayer]?:"",
-                    fontSize = 16.sp,
+                    fontSize = selectedFontSize,
                     modifier = Modifier.padding(16.dp)
                 )
             }
