@@ -21,10 +21,10 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val filename by prayerViewModel.filename.collectAsState()
+    val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
 
     LaunchedEffect(filename) {
         prayerViewModel.loadPrayers(filename, language)
-        prayerViewModel.setFilename(filename)
     }
     LazyColumn(
         modifier.padding(8.dp)

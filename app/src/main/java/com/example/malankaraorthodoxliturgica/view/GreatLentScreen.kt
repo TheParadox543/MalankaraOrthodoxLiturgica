@@ -10,6 +10,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,9 +41,11 @@ fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewMod
 
 @Composable
 fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String) {
-    val translations = prayerViewModel.loadTranslations()
+    val translations = prayerViewModel.translations
     val prayers = prayerViewModel.getDayPrayers()
-    prayerViewModel.setTopBarKeys(listOf("great_lent", day))
+    LaunchedEffect(day) {
+        prayerViewModel.setTopBarKeys(listOf("great_lent", day))
+    }
 
     LazyColumn(modifier = Modifier) {
         items(prayers) { prayer ->
@@ -50,12 +53,12 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
+                        prayerViewModel.setFilename("great_lent_${day}_${prayers.indexOf(prayer)}.json")
+                        prayerViewModel.setTopBarKeys(listOf("great_lent", day, prayer))
+                        prayerViewModel.sectionNames = prayerViewModel.getDayPrayers()
+//                        PrayerScreen(prayerViewModel)
                         navController.navigate(
-                            "great_lent_prayer/${day}/${
-                                prayers.indexOf(
-                                    prayer
-                                )
-                            }"
+                            "prayerScreen"
                         )
                     }
                     .padding(8.dp),

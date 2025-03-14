@@ -34,6 +34,7 @@ import com.example.malankaraorthodoxliturgica.view.GreatLentPrayerScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentScreen
 import com.example.malankaraorthodoxliturgica.view.HomeScreen
 import com.example.malankaraorthodoxliturgica.view.CategoryListScreen
+import com.example.malankaraorthodoxliturgica.view.PrayerScreen
 import com.example.malankaraorthodoxliturgica.view.QurbanaScreen
 import com.example.malankaraorthodoxliturgica.view.SettingsScreen
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
@@ -57,16 +58,20 @@ fun TopNavBar(navController: NavController, prayerViewModel: PrayerViewModel){
     TopAppBar(
         title = {Text(title)},
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.Blue
+            containerColor = Color.Blue,
+            titleContentColor = Color.White
         ),
         navigationIcon = {
-            IconButton(onClick = { navController.navigateUp() }) {
-                Icon(
-                    Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Previous Page",
-                )
+            if (topBarNames != listOf("malankara")) {
+                IconButton(onClick = { navController.navigateUp() }) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Previous Page",
+                    )
+                }
             }
-        }
+        },
+        scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     )
 }
 
@@ -101,15 +106,9 @@ fun DefaultBottomNavBar(navController: NavController) {
 
 @Composable
 fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-    Log.d("Sequential NavBar", currentRoute ?: "Can't display")
-
-    val prayerOrder = prayerViewModel.getDayPrayers()
-    val baseRoute = currentRoute?.substringBeforeLast("_") ?: ""
-    val currentIndex = currentRoute?.substringAfterLast("_")?.toIntOrNull() ?: -1
-
-    val previousRoute = if (currentIndex > 0) "${baseRoute}_${currentIndex - 1}" else null
-    val nextRoute = if (currentIndex in 0 until prayerOrder.lastIndex) "${baseRoute}_${currentIndex + 1}" else null
+    val topBarNames by prayerViewModel.topBarNames.collectAsState()
+    val currentIndex = prayerViewModel.sectionNames.indexOf(topBarNames.last())
+    val sectionSize = prayerViewModel.sectionNames.size - 1
 
     NavigationBar {
         NavigationBarItem(
@@ -121,7 +120,7 @@ fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewMo
             },
             label = { Text("Previous") },
             selected = false,
-//            enabled = previousRoute != null,
+            enabled = currentIndex > 0,
             onClick = {
                 Log.d("NewNavBar", "Previous Clicked")
                 prayerViewModel.getPreviousPrayer()
@@ -136,17 +135,15 @@ fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewMo
             },
             label = { Text("Next") },
             selected = false,
-//            enabled = nextRoute != null,
+            enabled = currentIndex < sectionSize,
             onClick = {
-                Log.d("NewNavBar", "Previous Clicked")
+                Log.d("NewNavBar", "Next Clicked")
                 prayerViewModel.getNextPrayer()
             }
         )
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
     val navController = rememberNavController()
@@ -183,6 +180,10 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                 val time = navBackStackEntry.arguments?.getString("time")?.toIntOrNull()?: 0
                 prayerViewModel.setSectionNavigation(true)
                 GreatLentPrayerScreen(navController, prayerViewModel, day, time)
+            }
+            composable("prayerScreen"){
+                prayerViewModel.setSectionNavigation(true)
+                PrayerScreen(prayerViewModel)
             }
             composable("qurbana"){
                 prayerViewModel.setSectionNavigation(false)

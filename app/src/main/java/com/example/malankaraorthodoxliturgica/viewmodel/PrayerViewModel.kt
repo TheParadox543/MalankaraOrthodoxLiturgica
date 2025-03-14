@@ -1,5 +1,6 @@
 package com.example.malankaraorthodoxliturgica.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -79,19 +80,19 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
         _filename.value = newFilename
     }
 
-    fun updateIndex(delta: Int): Int? {
+    fun updateIndex(delta: Int) {
         val regex = Regex("(\\d+)(\\.json)$") // Matches number before ".json"
         val match = regex.find(_filename.value)
 
         if (match != null) {
             val currentIndex = match.groupValues[1].toInt()
             val newIndex = currentIndex + delta
-            if (newIndex > 0) { // Ensure index doesn't go negative
+            if (newIndex >= 0 && newIndex < sectionNames.size) { // Ensure index stays in range
+                Log.d("SectionNavigation", "New Index: $newIndex")
                 _filename.value = _filename.value.replace(regex, "$newIndex.json")
+                updateTopBarLastKey(newIndex)
             }
-            return newIndex
         }
-        return null
     }
 
     private val _sectionNavigation = MutableStateFlow(false)
@@ -102,17 +103,11 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     }
 
     fun getNextPrayer() {
-        val newIndex = updateIndex(1)
-        if (newIndex != null) {
-            updateTopBarLastKey(newIndex)
-        }
+        updateIndex(1)
     }
 
     fun getPreviousPrayer() {
-        val newIndex = updateIndex(-1)
-        if (newIndex != null){
-            updateTopBarLastKey(newIndex)
-        }
+        updateIndex(-1)
     }
 }
 
