@@ -2,6 +2,7 @@ package com.example.malankaraorthodoxliturgica.view.navigation
 
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -22,16 +23,22 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -55,17 +62,37 @@ val bottomNavItems = listOf(
     BottomNavItem("settings", Icons.Default.Settings, "Settings")
 )
 
+@Composable
+fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
+    val isVisible = remember { mutableStateOf(true) }
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                if (available.y > 0) {
+                    isVisible.value = true  // Scrolling UP → Show bars
+                } else if (available.y < 0) {
+                    isVisible.value = false // Scrolling DOWN → Hide bars
+                }
+                return Offset.Zero
+            }
+        }
+    }
+    return isVisible to nestedScrollConnection
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNavBar(
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
-    scrollBehavior: TopAppBarScrollBehavior
+    prayerViewModel: PrayerViewModel
 ) {
     val topBarNames by prayerViewModel.topBarNames.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     var translations by remember { mutableStateOf(prayerViewModel.translations) }
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+    val isVisible = rememberScrollAwareVisibility()
 
     LaunchedEffect(selectedLanguage) {
         translations = prayerViewModel.loadTranslations()
@@ -79,39 +106,38 @@ fun TopNavBar(
         }
     }
 
-    TopAppBar(
-        title = { Text(title) },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color.Blue,
-            titleContentColor = Color.White
-        ),
-        navigationIcon = {
-            if (topBarNames != listOf("malankara") && currentRoute != "settings") {
-                IconButton(onClick = { navController.navigateUp() }) {
-                    Icon(
-                        Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Previous Page",
-                    )
+//    AnimatedVisibility(visible = isVisible.value) {
+        TopAppBar(
+            title = { Text(title) },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = Color.Blue,
+                titleContentColor = Color.White
+            ),
+            navigationIcon = {
+                if (topBarNames != listOf("malankara") && currentRoute != "settings") {
+                    IconButton(onClick = { navController.navigateUp() }) {
+                        Icon(
+                            Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Previous Page",
+                        )
+                    }
                 }
             }
-        },
-        scrollBehavior = scrollBehavior
-    )
+        )
+//    }
 }
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomNavBar(navController: NavController, prayerViewModel: PrayerViewModel, scrollBehavior: TopAppBarScrollBehavior) {
+fun BottomNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
     val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
-    AnimatedVisibility(visible = scrollBehavior.state.collapsedFraction == 0f) {
-        Column {
-            if (sectionNavigation) {
-                SequentialNavBar(navController, prayerViewModel, scrollBehavior)
-            } else {
-                DefaultBottomNavBar(navController)
-            }
-        }
+    val isVisible = rememberScrollAwareVisibility() // Track scroll visibility
+
+    if (sectionNavigation) {
+        SequentialNavBar(navController, prayerViewModel)
+    } else {
+        DefaultBottomNavBar(navController)
     }
 }
 
@@ -139,55 +165,71 @@ fun DefaultBottomNavBar(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewModel, scrollBehavior: TopAppBarScrollBehavior) {
+fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
     val topBarNames by prayerViewModel.topBarNames.collectAsState()
     val currentIndex = prayerViewModel.sectionNames.indexOf(topBarNames.last())
     val sectionSize = prayerViewModel.sectionNames.size - 1
+    val isVisible = rememberScrollAwareVisibility()
 
-    NavigationBar {
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Previous",
-                )
-            },
-            label = { Text("Previous") },
-            selected = false,
-            enabled = currentIndex > 0,
-            onClick = {
-                prayerViewModel.getPreviousPrayer()
-            }
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Next",
-                )
-            },
-            label = { Text("Next") },
-            selected = false,
-            enabled = currentIndex < sectionSize,
-            onClick = {
-                prayerViewModel.getNextPrayer()
-            }
-        )
-    }
+//    AnimatedVisibility(visible = isVisible.value) {
+        NavigationBar {
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Previous",
+                    )
+                },
+                label = { Text("Previous") },
+                selected = false,
+                enabled = currentIndex > 0,
+                onClick = {
+                    prayerViewModel.getPreviousPrayer()
+                }
+            )
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowForward,
+                        contentDescription = "Next",
+                    )
+                },
+                label = { Text("Next") },
+                selected = false,
+                enabled = currentIndex < sectionSize,
+                onClick = {
+                    prayerViewModel.getNextPrayer()
+                }
+            )
+        }
+//    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
     val navController = rememberNavController()
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {TopNavBar(navController, prayerViewModel, scrollBehavior)},
-        bottomBar = { BottomNavBar(navController, prayerViewModel, scrollBehavior) }
-    ) { padding ->
-        NavHost(navController, startDestination = "home", Modifier.padding(padding)) {
+        modifier = Modifier
+            .nestedScroll(nestedScrollConnection)
+            .pointerInput(Unit){
+                detectTapGestures { isVisible.value = !isVisible.value }
+            }
+        ,
+        topBar = {
+            AnimatedVisibility(isVisible.value) {
+                TopNavBar(navController, prayerViewModel)
+            }
+        },
+        bottomBar = {
+            AnimatedVisibility (isVisible.value) {
+                BottomNavBar(navController, prayerViewModel)
+            }
+        }
+    ) { innerPadding ->
+        NavHost(navController, startDestination = "home", Modifier.padding(innerPadding)) {
             composable("home") {
                 prayerViewModel.setSectionNavigation(false)
                 HomeScreen(navController, prayerViewModel)
@@ -197,11 +239,6 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                 prayerViewModel.setSectionNavigation(false)
                 CategoryListScreen(navController, prayerViewModel, category)
             }
-//            composable("prayer_detail/{category}"){navBackStackEntry ->
-//                val category = navBackStackEntry.arguments?.getString("category")?:""
-//                prayerViewModel.setSectionNavigation(false)
-//                PrayerDetailScreen(navController, LocalContext.current, category, "en")
-//            }
             composable("great_lent_main"){
                 prayerViewModel.setSectionNavigation(false)
                 GreatLentScreen(navController, prayerViewModel)

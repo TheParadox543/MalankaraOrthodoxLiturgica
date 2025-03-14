@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,12 +24,15 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val filename by prayerViewModel.filename.collectAsState()
+    val listState = rememberLazyListState()
 
     LaunchedEffect(filename) {
         prayerViewModel.loadPrayers(filename, language)
+        listState.scrollToItem(0)
     }
     LazyColumn(
-        modifier.padding(8.dp)
+        modifier.padding(8.dp),
+        state = listState
     ) {
         items(prayers) { prayer ->
             when (prayer["type"]) {
