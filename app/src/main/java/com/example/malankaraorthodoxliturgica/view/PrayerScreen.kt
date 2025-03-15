@@ -1,6 +1,10 @@
 package com.example.malankaraorthodoxliturgica.view
 
+import android.app.Activity
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,13 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.zIndex
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
@@ -28,15 +34,35 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val filename by prayerViewModel.filename.collectAsState()
     val listState = rememberLazyListState()
+    val context = LocalContext.current
+    val activity = context as? Activity
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
+
+    LaunchedEffect(selectedFontSize) {
+        if (selectedFontSize >= 20.sp) {
+            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else {
+            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        }
+    }
     LaunchedEffect(filename) {
         prayerViewModel.loadPrayers(filename, language)
         listState.scrollToItem(0)
     }
-    LazyColumn(
-        Modifier.padding(horizontal = 8.dp, vertical = 80.dp),
-        state = listState
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = if (isLandscape) 80.dp else 8.dp), // Reduce width in landscape
+        contentAlignment = Alignment.Center
     ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth(if (isLandscape) 0.7f else 1f) // Limit width in landscape
+                .fillMaxHeight(if (isLandscape) 1f else 0.8f),
+            state = rememberLazyListState()
+        ) {
         items(prayers) { prayer ->
             when (prayer["type"]) {
                 "heading" -> Heading(
@@ -57,7 +83,7 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier
                 )
             }
         }
-    }
+    }}
 }
 
 @Composable
