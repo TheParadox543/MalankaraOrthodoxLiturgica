@@ -38,11 +38,11 @@ This mobile app provides a structured collection of prayers from the Malankara O
 
 ---
 
-## Credits & Contributors  
-This app is developed to make prayers more accessible within the **Malankara Orthodox Syrian Church** community.  
+## 📜 Credits & Contributors  
 
-👨‍💻 **Development & Coding:** [Samuel Alex Koshy], [Shri Ganesh Keshrimal Purohit]  
-📜 **Text Preparation & Translations:** [Samuel Alex Koshy], [Shaun John], [Lisa Shibu George]  
+- **[Samuel Alex Koshy]** – Development, Implementation, UI Design, and Text Translations  
+- **[Shri Ganesh Keshrimal Purohit]** – Guidance, Structural Planning, and Development Insights  
+- **[Shaun John] & [Lisa Shibu George]** – Additional Text Translations and Preparation  
 
 🙏 **Glory to God!**  
 
