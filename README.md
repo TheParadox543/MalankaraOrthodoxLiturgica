@@ -1,14 +1,48 @@
-# Malankara Orthodox Liturgica 
-An app that organizes paryers and songs used by the Malankara Syrian Orthodox Church. 
-The app provides easy to use navigation that allows the user to reach any prayer easily.
-The app also provides users with multiple language options, such as Malyalam, English and also Manglish.
+# Malankara Orthodox Church Prayer App
 
-## Salient features
-- Easy navigation
-- Multiple languages
-- Controllable font size
+## Overview  
+This mobile app provides a structured collection of prayers from the Malankara Orthodox Syrian Church. It includes daily prayers and sacramental prayers, with support for multiple languages and customizable font sizes.  
 
-## Planned features
-- A pray now feature that navigates to the prayer based on time of day.
-- A bookmark feature.
-- Liturgical calendar.
+---
+
+## Features  
+- 📖 **Prayer Collection** – Includes Daily Prayers and Sacramental Prayers.  
+- 📂 **Categorized Sections** – Prayers are structured by themes and occasions.  
+- 🔤 **Multilingual Support** – Users can choose between **English, Malayalam, and Manglish**.  
+- 🔍 **Adjustable Font Size** – Choose from five font sizes for better readability.  
+- 📜 **Scrollable & Navigable** – Easily navigate between prayer sections with next/previous buttons.  
+- 🎨 **Custom Background** – Set a background image for a visually appealing experience.  
+- 📱 **Landscape Mode for Larger Text** – If the font size is large, the screen switches to landscape mode for better visibility.  
+
+---
+
+## Technical Details  
+
+### Architecture  
+- **MVVM (Model-View-ViewModel)** – Organizes code for better maintainability.  
+- **Jetpack Compose** – Fully declarative UI implementation.  
+- **DataStore** – Stores language and font size preferences persistently.  
+
+### Key Components  
+📂 `PrayerScreen.kt` – Displays prayers, handles navigation and text adjustments.  
+📂 `SettingsScreen.kt` – Allows users to modify language and font size preferences.  
+📂 `DataStoreManager.kt` – Manages persistent settings storage.  
+📂 `PrayerViewModel.kt` – Handles business logic and data fetching.  
+
+---
+
+## Upcoming Features  
+🚀 **Bookmark & Favorites** – Save frequently used prayers.  
+🚀 **Pray Now** – Navigate to the prayer to be used based on the time of the day.   
+🚀 **Liturgical Calendar** – Provide users with the Liturgical Calendar.
+
+---
+
+## Credits & Contributors  
+This app is developed to make prayers more accessible within the **Malankara Orthodox Syrian Church** community.  
+
+👨‍💻 **Development & Coding:** [Samuel Alex Koshy], [Shri Ganesh Keshrimal Purohit]  
+📜 **Text Preparation & Translations:** [Samuel Alex Koshy], [Shaun John], [Lisa Shibu George]  
+
+🙏 **Glory to God!**  
+
