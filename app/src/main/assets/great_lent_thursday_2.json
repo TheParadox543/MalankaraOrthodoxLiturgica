@@ -169,7 +169,7 @@
     },
     {
         "id": 22,
-        "type": "song",
+        "type": "subheading",
         "lit_en": "",
         "lit_ml": "ഉടയോൻ നാഥാ! നിന്നെ വിട്ടെങ്ങെത്തും ഞാൻ",
         "lit_mn": "",
@@ -177,7 +177,7 @@
     },
     {
         "id": 23,
-        "type": "song",
+        "type": "subheading",
         "lit_en": "",
         "lit_ml": "നിൻ മഹിമയിൽ ഞാനെങ്ങമരും ഗൂഢം",
         "lit_mn": "",
@@ -185,7 +185,7 @@
     },
     {
         "id": 24,
-        "type": "song",
+        "type": "subheading",
         "lit_en": "",
         "lit_ml": "വാനിൽ ചെന്നാൽ നീയങ്ങുണ്ടാദ്യന്തം, ഞാൻ",
         "lit_mn": "",
@@ -193,7 +193,7 @@
     },
     {
         "id": 25,
-        "type": "song",
+        "type": "subheading",
         "lit_en": "",
         "lit_ml": "ശീയോളാർന്നാ-ലങ്ങും നിൻ കോയ്മ",
         "lit_mn": "",
@@ -201,7 +201,7 @@
     },
     {
         "id": 26,
-        "type": "song",
+        "type": "subheading",
         "lit_en": "",
         "lit_ml": "നിന്തിരുമുമ്പിൽ-കുറ്റം തീർന്നോനില്ലല്ലോ",
         "lit_mn": "",
@@ -209,7 +209,7 @@
     },
     {
         "id": 27,
-        "type": "song",
+        "type": "subheading",
         "lit_en": "",
         "lit_ml": "കൃപയാലെന്നെ വലമായ് നിർത്തണമേ.",
         "lit_mn": "",
@@ -217,7 +217,7 @@
     },
     {
         "id": 28,
-        "type": "subtext",
+        "type": "subetxt",
         "lit_en": "",
         "lit_ml": "ബാറെക്മോർ. ശുബഹൊ…",
         "lit_mn": "",
