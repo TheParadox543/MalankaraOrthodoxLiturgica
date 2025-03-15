@@ -3,8 +3,12 @@ package com.example.malankaraorthodoxliturgica.view.navigation
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -37,7 +41,9 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
@@ -45,6 +51,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.malankaraorthodoxliturgica.R
 import com.example.malankaraorthodoxliturgica.view.CategoryListScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentDayScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentScreen
@@ -225,70 +232,89 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
             navController.removeOnDestinationChangedListener(listener)
         }
     }
-    Scaffold(
-        modifier = Modifier
-            .nestedScroll(nestedScrollConnection)
-            .pointerInput(Unit) {
-                detectTapGestures { isVisible.value = !isVisible.value }
-            }
-        ,
-        topBar = {
-            if (currentRoute == "prayerScreen") {
-                AnimatedVisibility(
-                    visible = isVisible.value,
-                    modifier = Modifier.zIndex(1f)
-                ) {
+    Box(modifier = Modifier.fillMaxSize()){
+        if (currentRoute != "prayerScreen") {
+            Image(
+                painter = painterResource(id = R.drawable.background),
+                contentDescription = "Background",
+                contentScale = ContentScale.FillWidth,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+//    Box(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .background(
+//                brush = (painterResource(R.drawable.background_image))
+//            )
+//    ) {
+        Scaffold(
+            modifier = Modifier
+                .nestedScroll(nestedScrollConnection)
+                .pointerInput(Unit) {
+                    detectTapGestures { isVisible.value = !isVisible.value }
+                },
+            containerColor = Color.Transparent,
+            topBar = {
+                if (currentRoute == "prayerScreen") {
+                    AnimatedVisibility(
+                        visible = isVisible.value,
+                        modifier = Modifier.zIndex(1f)
+                    ) {
+                        TopNavBar(navController, prayerViewModel)
+                    }
+                } else {
                     TopNavBar(navController, prayerViewModel)
                 }
-            } else {
-              TopNavBar(navController, prayerViewModel)
-            }
-        },
-        bottomBar = {
-            if (currentRoute == "prayerScreen") {
-                AnimatedVisibility(isVisible.value,
-                    modifier = Modifier.zIndex(1f)
-                ) {
+            },
+            bottomBar = {
+                if (currentRoute == "prayerScreen") {
+                    AnimatedVisibility(
+                        isVisible.value,
+                        modifier = Modifier.zIndex(1f)
+                    ) {
+                        BottomNavBar(navController, prayerViewModel)
+                    }
+                } else {
                     BottomNavBar(navController, prayerViewModel)
                 }
-            } else {
-                BottomNavBar(navController, prayerViewModel)
             }
-        }
-    ) { innerPadding ->
-        val padding = getPadding(innerPadding, currentRoute)
-        NavHost(navController, startDestination = "home",
-            Modifier.padding(padding)
-        ) {
-            composable("home") {
-                prayerViewModel.setSectionNavigation(false)
-                HomeScreen(navController, prayerViewModel)
-            }
-            composable("prayer_list/{category}"){navBackStackEntry ->
-                val category = navBackStackEntry.arguments?.getString("category")?:""
-                prayerViewModel.setSectionNavigation(false)
-                CategoryListScreen(navController, prayerViewModel, category)
-            }
-            composable("great_lent_main"){
-                prayerViewModel.setSectionNavigation(false)
-                GreatLentScreen(navController, prayerViewModel)
-            }
-            composable("great_lent_day/{day}"){ navBackStackEntry ->
-                val day = navBackStackEntry.arguments?.getString("day")?:""
-                prayerViewModel.setSectionNavigation(false)
-                GreatLentDayScreen(navController, prayerViewModel, day)
-            }
-            composable("prayerScreen"){
-                prayerViewModel.setSectionNavigation(true)
-                PrayerScreen(prayerViewModel)
-            }
-            composable("qurbana"){
-                prayerViewModel.setSectionNavigation(false)
-                QurbanaScreen(navController, prayerViewModel)
-            }
-            composable("settings") {
-                prayerViewModel.setSectionNavigation(false)
-                SettingsScreen(navController, prayerViewModel)
+        ) { innerPadding ->
+            val padding = getPadding(innerPadding, currentRoute)
+            NavHost(
+                navController, startDestination = "home",
+                Modifier.padding(padding)
+            ) {
+                composable("home") {
+                    prayerViewModel.setSectionNavigation(false)
+                    HomeScreen(navController, prayerViewModel)
+                }
+                composable("prayer_list/{category}") { navBackStackEntry ->
+                    val category = navBackStackEntry.arguments?.getString("category") ?: ""
+                    prayerViewModel.setSectionNavigation(false)
+                    CategoryListScreen(navController, prayerViewModel, category)
+                }
+                composable("great_lent_main") {
+                    prayerViewModel.setSectionNavigation(false)
+                    GreatLentScreen(navController, prayerViewModel)
+                }
+                composable("great_lent_day/{day}") { navBackStackEntry ->
+                    val day = navBackStackEntry.arguments?.getString("day") ?: ""
+                    prayerViewModel.setSectionNavigation(false)
+                    GreatLentDayScreen(navController, prayerViewModel, day)
+                }
+                composable("prayerScreen") {
+                    prayerViewModel.setSectionNavigation(true)
+                    PrayerScreen(prayerViewModel)
+                }
+                composable("qurbana") {
+                    prayerViewModel.setSectionNavigation(false)
+                    QurbanaScreen(navController, prayerViewModel)
+                }
+                composable("settings") {
+                    prayerViewModel.setSectionNavigation(false)
+                    SettingsScreen(navController, prayerViewModel)
+                }
             }
         }
     }

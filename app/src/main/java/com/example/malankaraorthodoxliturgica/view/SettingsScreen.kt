@@ -8,6 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.OutlinedButton
@@ -44,33 +47,54 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
     )
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(32.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Center
     ){
-        Text(
-            text = "Select Language",
-            fontSize = selectedFontSize,
-            fontWeight = FontWeight.Bold
-        )
-        LanguageDropdownMenu(
-            options = languages,
-            selectedOption = languages.firstOrNull { it.second == selectedLanguage }?.first ?: "Select",
-            onOptionSelected = { prayerViewModel.setLanguage(it) }
-        )
+        Card (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            shape = RoundedCornerShape(8.dp),
+            elevation = CardDefaults.cardElevation(4.dp)
+        ){
+            Text(
+                text = "Select Language",
+                fontSize = selectedFontSize,
+                fontWeight = FontWeight.Bold
+            )
+            LanguageDropdownMenu(
+                options = languages,
+                selectedOption = languages.firstOrNull { it.second == selectedLanguage }?.first
+                    ?: "Select",
+                onOptionSelected = { prayerViewModel.setLanguage(it) }
+            )
+        }
+
         Spacer(modifier = Modifier.height(16.dp))
 
         // Font Size Selection
-        Text(
-            text = "Select Font Size",
-            fontSize = selectedFontSize,
-            fontWeight = FontWeight.Bold
-        )
-        FontSizeDropdownMenu(
-            options = fontSizes,
-            selectedOption = fontSizes.firstOrNull { it.second == selectedFontSize }?.first ?: "Medium",
-            onOptionSelected = { prayerViewModel.setFontSize(it) }
-        )
+        Card (
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            shape = RoundedCornerShape(8.dp),
+            elevation = CardDefaults.cardElevation(4.dp)
+        ) {
+            Text(
+                text = "Select Font Size",
+                fontSize = selectedFontSize,
+                fontWeight = FontWeight.Bold
+            )
+            FontSizeDropdownMenu(
+                options = fontSizes,
+                selectedOption = fontSizes.firstOrNull { it.second == selectedFontSize }?.first
+                    ?: "Medium",
+                onOptionSelected = { prayerViewModel.setFontSize(it) }
+            )
+        }
     }
 }
 
