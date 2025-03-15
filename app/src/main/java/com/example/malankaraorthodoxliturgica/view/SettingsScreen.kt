@@ -15,7 +15,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-import kotlinx.coroutines.selects.select
 
 @Composable
 fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel) {

@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.malankaraorthodoxliturgica.model.DataStoreManager
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
 import kotlinx.coroutines.flow.MutableStateFlow
