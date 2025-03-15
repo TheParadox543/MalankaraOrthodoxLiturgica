@@ -1,0 +1,106 @@
+[
+    {
+        "id": 1,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "കൗമാ",
+        "lit_mn": "Kauma",
+        "special": ""
+    },
+    {
+        "id": 2,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "കോലോ",
+        "lit_mn": "Kolo",
+        "special": ""
+    },
+    {
+        "id": 3,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(മൽക്കൂസ് റൗമ്മൊ)",
+        "lit_mn": "(Malkoos Raummo)",
+        "special": ""
+    },
+    {
+        "id": 4,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "പാവനപുണ്യനിധേ! കരുണാബഹുലതയാൽ\nപൊറുതി കടങ്ങൾക്കും-ദോഷങ്ങൾക്കും നൽകണമേ\nനിൻപ്രിയരാം ധാർമ്മികരോടും\nവത്സലരാം നിർമ്മലരോടും\nതെളിവൊടു ഭാസുരമണവറയിൽ\nഞാൻ നിന്നെ കീർത്തിച്ചീടണമേ.",
+        "lit_mn": "PaavanapunyaniDhe! Karunaabahulathayaal\nPoruthi kaDangalkkum-dhoshangalkkum nalkaname\nNinpriyaraam dharmikaroadum\nVatsalaraam nirmalaroadum\nTheLivodu bhaasuramanavaraYil\nNjaan ninne keerthiccheedaname.",
+        "special": ""
+    },
+    {
+        "id": 5,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ. ശുബഹൊ ...മെനഓലം",
+        "lit_mn": "Barekmor. Shubaho ... men olam",
+        "special": ""
+    },
+    {
+        "id": 6,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "പാവനമാം നോമ്പിൻ-വാതിലിടുങ്ങിയതും\nവഴി ദുർഗ്ഗമവും താൻ-ഭോജ്യത്തെ മെയ്യെന്നോണം\nദുശ്ചിന്തയെ വെടിയണമാത്മം\nദുഷ്ടവിചാരങ്ങളെയാത്മം\nവർജ്ജിക്കുന്നില്ലെന്നാകിൽ\nവ്യർത്ഥമഹോ-ഭക്ഷണനോമ്പേറ്റം.",
+        "lit_mn": "Paavanamaam nombin-vaathilidungiyathum\nVazhi durggamavum than-bhojyathe meyyennonam\nDuschinthaye vediyaanamathmam\nDushtavicharangaleyathmam\nVarjjikkunnillennakil\nVyrthamaha-bhakshananompetam.",
+        "special": ""
+    },
+    {
+        "id": 7,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയോ...",
+        "lit_mn": "Moryo...",
+        "special": ""
+    },
+    {
+        "id": 8,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "ബോവൂസോ",
+        "lit_mn": "Bovooso",
+        "special": ""
+    },
+    {
+        "id": 9,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(മാർ യാക്കോബ്)",
+        "lit_mn": "(Mar Yaakob)",
+        "special": ""
+    },
+    {
+        "id": 10,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "മശീഹാ നാഥാ! ശിഷ്ടന്മാർ തൻ നോമ്പേറ്റോനേ!\nപ്രാർത്ഥന നോമ്പെന്നിവയേറ്റിവരിൽ കൃപ തോന്നേണം\nനോമ്പേൽപ്പോനേ! ദീനന്നു വിളിച്ചന്നം നൽകൂ\nപോറ്റൂ പിൻ ചെന്നിങ്ങുവരാനായ് കാത്തീടാതെ",
+        "lit_mn": "Mashiha Naatha! Shishtanmar than nombetone!\nPrarthana nombennivayettivaril kripa thonnenam\nNombelpone! Deenannu vilichannam nalku\nPottu pin chenninguvaranay kaathidathe",
+        "special": ""
+    },
+    {
+        "id": 11,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "പോയീടാ കർഷകരുടെ പിമ്പേയാ കേദാരം\nപ്രാപിക്കുന്നു വിത്തു വിതപ്പോർ കേദാരത്തെ.\nഗതിയില്ലാത്തോർ മുട്ടുന്നേരം നാഥൻ നിന്നെ\nകാത്തിടുമെന്നുള്ളൊരു പാഴ്സെഗ്മൊഴിയാൽ പുണ്യം നേടാ.",
+        "lit_mn": "Poyeeda karshakarude pimpeyaa Kedaaram\nPraapikkunnu vithu vithappor Kedaarathe.\nGathiyillaathor muttuneraam Naathan ninne\nKaathidumennulloru paazsegmozhiyal punyam neda.",
+        "special": ""
+    },
+    {
+        "id": 12,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "\nനൽകീട്ടേവം ചൊന്നാൻ നിന്നെ നിന്ദിച്ചീടാ\nപാലിപ്പോനാരെന്നവനറിയാം നിന്നെക്കാളും.\nശാന്തൻ മോശാ നിബി തൻ നോമ്പേറ്റോനാ മശീഹാ\nപ്രാർത്ഥന കേട്ടിട്ടാത്മാക്കളിലൻപുണ്ടാകേണം.",
+        "lit_mn": "Nalkittevam chonnaan ninne nindicheeda\nPaalipponaarennavan ariyaam ninnekkaalum.\nShaanthan Moshaa Nibi than nombettoonaa Mashihaa\nPraarthana keettittaatmakalilan poondaakenam.",
+        "special": ""
+    },
+    {
+        "id": 13,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "കൗമാ",
+        "lit_mn": "Kauma",
+        "special": ""
+    }
+]
