@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.pm.ActivityInfo
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -92,7 +91,8 @@ fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollCon
 @Composable
 fun TopNavBar(
     navController: NavController,
-    prayerViewModel: PrayerViewModel
+    prayerViewModel: PrayerViewModel,
+    onActionClick: (() -> Unit)? = null // Optional Action button
 ) {
     val topBarNames by prayerViewModel.topBarNames.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
@@ -124,6 +124,17 @@ fun TopNavBar(
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Previous Page",
+                    )
+                }
+            }
+        },
+        actions = {
+            if (onActionClick != null) {
+                IconButton(onClick = onActionClick) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = "Action Button",
+                        tint = Color.White
                     )
                 }
             }
@@ -165,7 +176,6 @@ fun DefaultBottomNavBar(navController: NavController) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
     val topBarNames by prayerViewModel.topBarNames.collectAsState()
@@ -261,7 +271,11 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                         visible = isVisible.value,
                         modifier = Modifier.zIndex(1f)
                     ) {
-                        TopNavBar(navController, prayerViewModel)
+                        TopNavBar(
+                            navController = navController,
+                            prayerViewModel = prayerViewModel,
+                            onActionClick = {navController.navigate("settings")}
+                        )
                     }
                 } else {
                     TopNavBar(navController, prayerViewModel)
