@@ -1,5 +1,7 @@
 package com.example.malankaraorthodoxliturgica.view
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +15,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -93,6 +98,10 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                 onOptionSelected = { prayerViewModel.setFontSize(it) }
             )
         }
+        ListItem(
+            modifier = Modifier.clickable { navController.navigate("aboutApp") },
+            headlineContent = { Text("About the App") }
+        )
     }
 }
 
@@ -150,6 +159,37 @@ fun FontSizeDropdownMenu(
                     }
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun AboutAppScreen(navController: NavController) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black.copy(alpha = 0.3f)) // Semi-transparent overlay
+            .padding(16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    Color.White.copy(alpha = 0.85f),
+                    shape = RoundedCornerShape(8.dp)
+                ) // Opaque background
+                .padding(16.dp)
+        ) {
+            Text("About the App", style = MaterialTheme.typography.headlineLarge)
+            Spacer(Modifier.height(8.dp))
+            Text("This app is designed to provide prayers and religious content for the Malankara Orthodox Syrian Church.")
+            Spacer(Modifier.height(16.dp))
+            Text("📜 Credits & Contributors", style = MaterialTheme.typography.headlineMedium)
+            Text("- Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations")
+            Text("- Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights")
+            Text("- Shaun John & Lisa Shibu George – Additional Text Translations and Preparation")
+            Spacer(Modifier.height(16.dp))
+            Text("Version: 1.0.0", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

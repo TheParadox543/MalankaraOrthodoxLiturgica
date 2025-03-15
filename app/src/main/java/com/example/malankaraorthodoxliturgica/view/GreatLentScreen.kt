@@ -85,5 +85,5 @@ fun GreatLentPrayerScreen(navController: NavController, prayerViewModel: PrayerV
     prayerViewModel.setFilename("great_lent_${day}_$prayerIndex.json")
     prayerViewModel.setTopBarKeys(listOf("great_lent", day, prayerViewModel.getDayPrayers()[prayerIndex]))
     prayerViewModel.sectionNames = prayerViewModel.getDayPrayers()
-    PrayerScreen(prayerViewModel)
+    PrayerScreen(navController, prayerViewModel)
 }

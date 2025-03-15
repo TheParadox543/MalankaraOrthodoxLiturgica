@@ -38,7 +38,7 @@ fun CategoryListScreen(navController: NavController, prayerViewModel: PrayerView
                             "great_lent" -> navController.navigate("great_lent_main")
                             "nineveh" -> navController.navigate("nineveh_lent_main")
                             "qurbana" -> navController.navigate("qurbana")
-                            else -> navController.navigate("home")
+                            else -> navController.navigate("dummy")
                         }
                     }
                     .padding(8.dp),

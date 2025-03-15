@@ -25,10 +25,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
-fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier){
+fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier){
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
@@ -48,7 +49,11 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier
         }
     }
     LaunchedEffect(filename) {
-        prayerViewModel.loadPrayers(filename, language)
+        try {
+            prayerViewModel.loadPrayers(filename, language)
+        } catch(e: Exception) {
+            navController.navigate("dummy")
+        }
         listState.scrollToItem(0)
     }
     Box(
@@ -60,7 +65,7 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth(if (isLandscape) 0.7f else 1f) // Limit width in landscape
-                .fillMaxHeight(if (isLandscape) 1f else 0.8f),
+                .fillMaxHeight(if (isLandscape) 0.9f else 0.8f), // Limit height in portrait
             state = rememberLazyListState()
         ) {
         items(prayers) { prayer ->

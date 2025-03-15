@@ -51,7 +51,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.malankaraorthodoxliturgica.R
+import com.example.malankaraorthodoxliturgica.view.AboutAppScreen
 import com.example.malankaraorthodoxliturgica.view.CategoryListScreen
+import com.example.malankaraorthodoxliturgica.view.DummyScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentDayScreen
 import com.example.malankaraorthodoxliturgica.view.GreatLentScreen
 import com.example.malankaraorthodoxliturgica.view.HomeScreen
@@ -319,7 +321,7 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                 }
                 composable("prayerScreen") {
                     prayerViewModel.setSectionNavigation(true)
-                    PrayerScreen(prayerViewModel)
+                    PrayerScreen(navController, prayerViewModel)
                 }
                 composable("qurbana") {
                     prayerViewModel.setSectionNavigation(false)
@@ -328,6 +330,12 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                 composable("settings") {
                     prayerViewModel.setSectionNavigation(false)
                     SettingsScreen(navController, prayerViewModel)
+                }
+                composable("aboutApp"){
+                    AboutAppScreen(navController)
+                }
+                composable("dummy") {
+                    DummyScreen()
                 }
             }
         }
