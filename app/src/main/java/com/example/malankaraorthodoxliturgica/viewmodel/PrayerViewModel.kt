@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.malankaraorthodoxliturgica.model.DataStoreManager
 import com.example.malankaraorthodoxliturgica.model.PrayerRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +22,7 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
 
     private val _selectedFontSize = MutableStateFlow(16.sp) // Default to medium
-    val selectedFontSize: StateFlow<TextUnit> = _selectedFontSize.asStateFlow()
+    val selectedFontSize: StateFlow<TextUnit> = _selectedFontSize//.asStateFlow()
 
     init {
         // Load stored language from DataStore
@@ -29,6 +30,8 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
             dataStoreManager.selectedLanguage.collect { language ->
                 _selectedLanguage.value = language
             }
+        }
+        viewModelScope.launch {
             dataStoreManager.selectedFont.collect{ size ->
                 _selectedFontSize.value = size.sp
             }

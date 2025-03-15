@@ -1,5 +1,6 @@
 package com.example.malankaraorthodoxliturgica.view
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -47,7 +48,7 @@ fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewMod
 
 @Composable
 fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerViewModel, day: String) {
-    val translations = prayerViewModel.translations
+    val translations = prayerViewModel.loadTranslations()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val prayers = prayerViewModel.getDayPrayers()
     LaunchedEffect(day) {
@@ -63,7 +64,6 @@ fun GreatLentDayScreen(navController: NavController, prayerViewModel: PrayerView
                         prayerViewModel.setFilename("great_lent_${day}_${prayers.indexOf(prayer)}.json")
                         prayerViewModel.setTopBarKeys(listOf("great_lent", day, prayer))
                         prayerViewModel.sectionNames = prayerViewModel.getDayPrayers()
-//                        PrayerScreen(prayerViewModel)
                         navController.navigate(
                             "prayerScreen"
                         )

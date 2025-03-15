@@ -2,8 +2,11 @@ package com.example.malankaraorthodoxliturgica.view.navigation
 
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -40,6 +43,8 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -106,29 +111,25 @@ fun TopNavBar(
         }
     }
 
-//    AnimatedVisibility(visible = isVisible.value) {
-        TopAppBar(
-            title = { Text(title) },
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = Color.Blue,
-                titleContentColor = Color.White
-            ),
-            navigationIcon = {
-                if (topBarNames != listOf("malankara") && currentRoute != "settings") {
-                    IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(
-                            Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Previous Page",
-                        )
-                    }
+    TopAppBar(
+        title = { Text(title) },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = Color.Blue,
+            titleContentColor = Color.White
+        ),
+        navigationIcon = {
+            if (topBarNames != listOf("malankara") && currentRoute != "settings") {
+                IconButton(onClick = { navController.navigateUp() }) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.ArrowBack,
+                        contentDescription = "Previous Page",
+                    )
                 }
             }
-        )
-//    }
+        }
+    )
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomNavBar(navController: NavController, prayerViewModel: PrayerViewModel) {
     val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
@@ -169,67 +170,88 @@ fun SequentialNavBar(navController: NavController, prayerViewModel: PrayerViewMo
     val topBarNames by prayerViewModel.topBarNames.collectAsState()
     val currentIndex = prayerViewModel.sectionNames.indexOf(topBarNames.last())
     val sectionSize = prayerViewModel.sectionNames.size - 1
-    val isVisible = rememberScrollAwareVisibility()
 
-//    AnimatedVisibility(visible = isVisible.value) {
-        NavigationBar {
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Previous",
-                    )
-                },
-                label = { Text("Previous") },
-                selected = false,
-                enabled = currentIndex > 0,
-                onClick = {
-                    prayerViewModel.getPreviousPrayer()
-                }
-            )
-            NavigationBarItem(
-                icon = {
-                    Icon(
-                        Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = "Next",
-                    )
-                },
-                label = { Text("Next") },
-                selected = false,
-                enabled = currentIndex < sectionSize,
-                onClick = {
-                    prayerViewModel.getNextPrayer()
-                }
-            )
-        }
-//    }
+    NavigationBar {
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Previous",
+                )
+            },
+            label = { Text("Previous") },
+            selected = false,
+            enabled = currentIndex > 0,
+            onClick = {
+                prayerViewModel.getPreviousPrayer()
+            }
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = "Next",
+                )
+            },
+            label = { Text("Next") },
+            selected = false,
+            enabled = currentIndex < sectionSize,
+            onClick = {
+                prayerViewModel.getNextPrayer()
+            }
+        )
+    }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+fun getPadding(padding: PaddingValues, currentRoute: String?): PaddingValues {
+    return if (currentRoute != "prayerScreen") {
+        padding
+    } else {
+        PaddingValues(0.dp)
+    }
+}
+
 @Composable
 fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     Scaffold(
         modifier = Modifier
             .nestedScroll(nestedScrollConnection)
-            .pointerInput(Unit){
+            .pointerInput(Unit) {
                 detectTapGestures { isVisible.value = !isVisible.value }
             }
         ,
         topBar = {
-            AnimatedVisibility(isVisible.value) {
-                TopNavBar(navController, prayerViewModel)
+            if (currentRoute == "prayerScreen") {
+                AnimatedVisibility(
+                    visible = isVisible.value,
+                    modifier = Modifier.zIndex(1f)
+                ) {
+                    TopNavBar(navController, prayerViewModel)
+                }
+            } else {
+              TopNavBar(navController, prayerViewModel)
             }
         },
         bottomBar = {
-            AnimatedVisibility (isVisible.value) {
+            if (currentRoute == "prayerScreen") {
+                AnimatedVisibility(isVisible.value,
+                    modifier = Modifier.zIndex(1f)
+                ) {
+                    BottomNavBar(navController, prayerViewModel)
+                }
+            } else {
                 BottomNavBar(navController, prayerViewModel)
             }
         }
     ) { innerPadding ->
-        NavHost(navController, startDestination = "home", Modifier.padding(innerPadding)) {
+        val padding = getPadding(innerPadding, currentRoute)
+        NavHost(navController, startDestination = "home",
+            Modifier.padding(padding)
+        ) {
             composable("home") {
                 prayerViewModel.setSectionNavigation(false)
                 HomeScreen(navController, prayerViewModel)
@@ -248,12 +270,6 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                 prayerViewModel.setSectionNavigation(false)
                 GreatLentDayScreen(navController, prayerViewModel, day)
             }
-//            composable("great_lent_prayer/{day}/{time}"){navBackStackEntry ->
-//                val day = navBackStackEntry.arguments?.getString("day")?:""
-//                val time = navBackStackEntry.arguments?.getString("time")?.toIntOrNull()?: 0
-//                prayerViewModel.setSectionNavigation(true)
-//                GreatLentPrayerScreen(navController, prayerViewModel, day, time)
-//            }
             composable("prayerScreen"){
                 prayerViewModel.setSectionNavigation(true)
                 PrayerScreen(prayerViewModel)

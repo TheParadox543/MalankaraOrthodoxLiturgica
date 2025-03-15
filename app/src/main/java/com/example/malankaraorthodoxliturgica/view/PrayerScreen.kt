@@ -1,5 +1,7 @@
 package com.example.malankaraorthodoxliturgica.view
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
@@ -31,16 +34,27 @@ fun PrayerScreen(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier
         listState.scrollToItem(0)
     }
     LazyColumn(
-        modifier.padding(8.dp),
+        Modifier.padding(horizontal = 8.dp, vertical = 80.dp),
         state = listState
     ) {
         items(prayers) { prayer ->
             when (prayer["type"]) {
-                "heading" -> Heading(text = prayer["content"] ?: "", fontSize = selectedFontSize)
-                "subheading" -> Subheading(text = prayer["content"] ?: "", fontSize = selectedFontSize)
+                "heading" -> Heading(
+                    text = prayer["content"] ?: "",
+                    fontSize = selectedFontSize
+                )
+
+                "subheading" -> Subheading(
+                    text = prayer["content"] ?: "",
+                    fontSize = selectedFontSize
+                )
+
                 "prose" -> Prose(text = prayer["content"] ?: "", fontSize = selectedFontSize)
                 "song" -> Song(text = prayer["content"] ?: "", fontSize = selectedFontSize)
-                "subtext" -> Subtext(text = prayer["content"] ?: "", fontSize = selectedFontSize)
+                "subtext" -> Subtext(
+                    text = prayer["content"] ?: "",
+                    fontSize = selectedFontSize
+                )
             }
         }
     }
@@ -53,7 +67,9 @@ fun Heading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16
         fontSize = fontSize*5/4,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
-        modifier = modifier.fillMaxWidth().padding(8.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp)
     )
 }
 
@@ -73,7 +89,9 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
         text = text,
         fontSize = fontSize,
         textAlign = TextAlign.Justify,
-        modifier = modifier.fillMaxWidth().padding(horizontal = 8.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp)
     )
 }
 
@@ -83,7 +101,9 @@ fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp
         text = text,
         fontSize = fontSize,
         textAlign = TextAlign.Start,
-        modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp)
     )
 }
 
@@ -93,6 +113,8 @@ fun Subtext(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16
         text = text,
         fontSize = fontSize,
         textAlign = TextAlign.End,
-        modifier = modifier.fillMaxWidth().padding(horizontal = 8.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp)
     )
 }
