@@ -1,0 +1,117 @@
+{
+  "malankara": {
+    "en": "Malankara Orthodox Liturgica",
+    "ml": "മലങ്കര ഓർത്തഡോക്സ് ലിറ്റർജിക്ക",
+    "mn": "Malankara Orthodox Liturgica"
+  },
+  "daily_prayers": {
+    "en": "Daily Prayers",
+    "ml": "നിത്യ പ്രാർത്ഥന",
+    "mn": "Nitya Prarthana"
+  },
+  "sacrament": {
+    "en": "Sacramental Prayers",
+    "ml": "കൂദാശകൾ ",
+    "mn": "Koodashakal"
+  },
+  "sleeba": {
+    "en": "Sleeba Prayers",
+    "ml": "സ്ലീബ പ്രാർത്ഥന",
+    "mn": "Sleeba Prarthana"
+  },
+  "kyamtha": {
+    "en": "Kyamtha Prayers",
+    "ml": "ക്യാമ്ത പ്രാർത്ഥന",
+    "mn": "Kyamtha Prarthana"
+  },
+  "nineveh": {
+    "en": "Nineveh Prayers",
+    "ml": "നിനവ പ്രാർത്ഥന",
+    "mn": "Nineveh Prarthana"
+  },
+  "great_lent": {
+    "en": "Great Lent",
+    "ml": "വലിയ നോമ്പ്",
+    "mn": "Valiya Nombu"
+  },
+  "qurbana": {
+    "en": "Holy Qurbana",
+    "ml": "വി. കുർബാന",
+    "mn": "Vi. Qurbana"
+  },
+  "baptism": {
+    "en": "Baptism",
+    "ml": "മാമോദീസ",
+    "mn": "Mamodeesa"
+  },
+  "wedding": {
+    "en": "Wedding",
+    "ml": "വിവാഹം",
+    "mn": "Vivaham"
+  },
+  "funeral": {
+    "en": "Funeral",
+    "ml": "സവിശേഷം",
+    "mn": "Savishesham"
+  },
+  "monday": {
+    "en": "Monday",
+    "ml": "തിങ്കളാഴ്ച",
+    "mn": "Thingalazhcha"
+  },
+  "tuesday": {
+    "en": "Tuesday",
+    "ml": "ചൊവ്വാഴ്ച",
+    "mn": "Chovvazhcha"
+  },
+  "wednesday": {
+    "en": "Wednesday",
+    "ml": "ബുധനാഴ്ച",
+    "mn": "Budhanazhcha"
+  },
+  "thursday": {
+    "en": "Thursday",
+    "ml": "വ്യാഴാഴ്ച",
+    "mn": "Vyazhazhcha"
+  },
+  "friday": {
+    "en": "Friday",
+    "ml": "വെള്ളിയാഴ്ച",
+    "mn": "Velliyaazhcha"
+  },
+  "sandhya": {
+    "en": "Evening Prayers",
+    "ml": "സന്ധ്യാ",
+    "mn": "Sandhya"
+  },
+  "soothara": {
+    "en": "Matin",
+    "ml": "സൂത്താറാ",
+    "mn": "Soothara"
+  },
+  "rathri": {
+    "en": "Night Prayers",
+    "ml": "രാത്രി",
+    "mn": "Raathri"
+  },
+  "prabatham": {
+    "en": "Morning Prayers",
+    "ml": "പ്രഭാതം",
+    "mn": "Prabatham"
+  },
+  "3rd": {
+    "en": "Third Hour",
+    "ml": "മൂന്നാം മണി",
+    "mn": "Moonnam Mani"
+  },
+  "6th": {
+    "en": "Sixth Hour",
+    "ml": "ആറാം മണി",
+    "mn": "Aaram Mani"
+  },
+  "9th": {
+    "en": "Ninth Hour",
+    "ml": "ഒൻപതാം മണി",
+    "mn": "Onpathaam Mani"
+  }
+}

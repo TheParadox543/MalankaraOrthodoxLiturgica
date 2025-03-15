@@ -1,0 +1,730 @@
+[
+    {
+        "id": 1,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "കൗമാ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 2,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "പട്ടക്കാരൻ:- ശുബഹോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 3,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "ജനം:- ബലഹീനരും പാപികളുമായ ഞങ്ങളുടെ മേൽ അനുഗ്രഹങ്ങളും കരുണയും രണ്ടു ലോകങ്ങളിലും എന്നുമെന്നേക്കും ചൊരിയപ്പെടുമാറാകണമേ. ആമ്മീൻ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 4,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "എനിയോനോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 5,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(യോയെ ഉസൊദേക്ക്)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 6,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ജാഗ്രത നോമ്പതിലുള്ളാനായ് ശാശ്വത ജീവിതമാർജ്ജിക്ക.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 7,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "സ്തോത്രം തേ സ്തോത്രം തേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 8,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഒരു നാഴിക പണി ചെയ്തോരും പ്രാപിച്ചോരോ ദീനോറൊ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 9,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "സ്തോത്രം തേ സ്തോത്രം തേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 10,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ. ശുബഹോ മെനഓലം",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 11,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "രുധിരത്താലിത്തിരു സഭയിൻ കടമഖിലം മോചിക്കണമേ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 12,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "സ്തോത്രം തേ സ്തോത്രം തേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 13,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "കുറിയേലായിസ്സോൻ. കുറിയേ ... കുറിയേ ...",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 14,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "എക്ക്ബൊ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 15,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(ആബൊക്സബ്വൊ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 16,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "നേതാക്കൾക്കും നേതാവായ് പ്രാപിക്കും പ്രമുഖസ്ഥാനം.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 17,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "കുറിയേലായിസ്സോൻ. കുറിയേ ... കുറിയേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 18,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "ഞങ്ങളുടെ കർത്താവേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 19,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "കോലോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 20,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(കൂക്കോയോ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 21,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഹാലേലൂയ്യാ കർത്താവേ സ്തോത്രം.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 22,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ. ശുബഹോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 23,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഹാലേലൂയ്യാ നാഥാ! കൃപ ചെയ്ക.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 24,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയോ....",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 25,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "ബോവൂസോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 26,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(മാർ യാക്കോബ്)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 27,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "പ്രാർത്ഥന കേട്ടിട്ടാത്മാക്കൾമേൽ കൃപ ചെയ്യേണം.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 28,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ബോധജ്ഞാനീ ഇന്നടുരാവിൽ പാടുക നീയും.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 29,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "നീ പകലല്ലോ നിന്നിൽ നടപ്പോൻ ഇടറുകയില്ല.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 30,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "തേകീടേണം മനുജാത്മാക്കൾക്കനുതാപം നീ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 31,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "രണ്ടാം കൗമാ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 32,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "+ കർത്താവിന്റെ ബഹുമാനം",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 33,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "എക്ക്ബൊ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 34,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(ആബൊക്സബ്വൊ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 35,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "പിൻവാതിൽക്കലിരുന്നേവം ശീമോൻ പാരം കേണോതി",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 36,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "ഗുരുവേ! ഞാൻ ശിഷ്യൻ-വാതിൽ തുറന്നാലും",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 37,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "സ്വർഗ്ഗത്താക്കോൽ കൈവിട്ടേൻ പാരും വാനും കേഴുന്നു.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 38,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "കുറിയേലായിസ്സോൻ. കുറിയേ ... കുറിയേ ...",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 39,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ഞങ്ങളുടെ കർത്താവേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 40,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "കോലോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 41,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(കൂക്കോയോ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 42,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഹാലേലുയ്യാ വാഴ്ത്തുന്നുടയോനെ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 43,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ. ശുബഹോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 44,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഹാലേലൂയ്യാ സ്തുതിയാൽ കീർത്തിച്ചു.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 45,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയോ....",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 46,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "ബോവൂസോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 47,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(മാർ അപ്രേം)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 48,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "നിന്നറയീന്നേകീടണമേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 49,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "സുസ്ഥിരമേ നിൻ നിർമ്മലത",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 50,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "തിന്മക്കെങ്ങനെ സാധിക്കും?",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 51,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "യാചനയെ നൽകീടണമേ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 52,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "മൂന്നാം കൗമാ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 53,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "+ കർത്താവിന്റെ ബഹുമാനം …",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 54,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "എക്ക്ബൊ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 55,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(ആബൊക്സബ്വൊ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 56,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ലോകസ്നേഹത്തിൽ മുങ്ങി വഴിവിട്ടോർക്കയ്യോ നാശം.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 57,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "കുറിയേലായിസ്സോൻ. കുറിയേ ... കുറിയേ ...",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 58,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "ഞങ്ങളുടെ കർത്താവേ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 59,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "കോലോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 60,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(കൂക്കോയോ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 61,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "\\t ഹാലേലൂയ്യാ കനിവാൽ കൃപ ചെയ്ക.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 62,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ. ശുബഹോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 63,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "\\t ഹാലേലൂയ്യാ കൃപ ചെയ്യുക നാഥാ!",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 64,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയോ.....",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 65,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "ബോവൂസോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 66,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(മാർ ബാലായി)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 67,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "അൻപുണ്ടാകണമോ നിൻ വിധി ദിവസത്തിൽ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 68,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "കനിവോടർത്ഥനകൾ-ക്കുത്തരമരുളണമേ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 69,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഈ ശുശ്രൂഷയെ ഏ-റ്റാർദ്രത തോന്നണം.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 70,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഈ ശുശ്രൂഷയെ ഏ-റ്റാർദ്രത തോന്നണം.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 71,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "ഹാലേലൂയ്യാ ഉ ഹാലേ ... ഉ ഹാലേ ... ദൈവമേ! നിനക്കു സ്തുതി. (മൂന്നു പ്രാവശ്യം ചൊല്ലി കുരിശു വരയ്ക്കണം)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 72,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "\\t കരുണയുള്ള ദൈവമേ നിന്റെ കരുണയാൽ ഞങ്ങളോട് കരുണ ചെയ്യണമേ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 73,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയോ...",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 74,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "(ഉറങ്ങിയവരേ! നിങ്ങൾ ഉണർന്നെഴുന്നേറ്റ്... പേജ്...)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 75,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "ത്രിത്വത്തിന് സ്തുതി. ത്രിത്വത്തിന് സ്‌തുതി... പേജ്..)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 76,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "കോലോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 77,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(കൂക്കോയോ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 78,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "\\t ഹാലേലൂയ്യാ കനിവാൽ കൃപ ചെയ്ക.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 79,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ. ശുബഹോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 80,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "\\t ഹാലേലൂയ്യാ മായിച്ചാൻ ശിക്ഷ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 81,
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയോ…",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 82,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "ബോവൂസോ",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 83,
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(മാർ അപ്രേം)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 84,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "മ്ശിഹാ! തോന്നണമേ കരുണ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 85,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ലോകത്തെ നിരസിക്കണമേ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 86,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "താതന്നും കൃപ ചെയ്യണമേ.",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 87,
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ഞങ്ങൾക്കായ് നോമ്പേറ്റോനേ!",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 88,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "(അത്യുന്നതങ്ങളിൽ സ്വർഗ്ഗീയമാലാഖമാർ.. പേജ് ....)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 89,
+        "type": "prose",
+        "lit_en": "",
+        "lit_ml": "മോറാൻ യേശുമിശിഹാ…. പേജ് ....)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 90,
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "(കൗമാ)",
+        "lit_mn": "",
+        "special": ""
+    },
+    {
+        "id": 91,
+        "type": "newsection",
+        "lit_en": "",
+        "lit_ml": "തിങ്കളാഴ്ച പ്രഭാതനമസ്കാരം",
+        "lit_mn": "",
+        "special": ""
+    }
+]
