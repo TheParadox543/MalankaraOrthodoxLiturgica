@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.model
+package com.paradox543.malankaraorthodoxliturgica.model
 
 import org.json.JSONObject
 import android.content.Context

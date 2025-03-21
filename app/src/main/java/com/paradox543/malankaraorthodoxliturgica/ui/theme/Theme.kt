@@ -1,6 +1,5 @@
-package com.example.malankaraorthodoxliturgica.ui.theme
+package com.paradox543.malankaraorthodoxliturgica.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

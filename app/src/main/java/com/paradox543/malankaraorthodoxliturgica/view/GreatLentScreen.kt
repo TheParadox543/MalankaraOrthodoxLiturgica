@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.view
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,7 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun GreatLentScreen(navController: NavController, prayerViewModel: PrayerViewModel) {

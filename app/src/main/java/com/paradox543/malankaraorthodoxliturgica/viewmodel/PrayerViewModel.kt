@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.viewmodel
+package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -8,8 +8,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.malankaraorthodoxliturgica.model.DataStoreManager
-import com.example.malankaraorthodoxliturgica.model.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
+import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

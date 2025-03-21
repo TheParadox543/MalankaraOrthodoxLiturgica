@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.model
+package com.paradox543.malankaraorthodoxliturgica.model
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit

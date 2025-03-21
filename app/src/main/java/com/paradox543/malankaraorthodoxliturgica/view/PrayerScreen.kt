@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier){

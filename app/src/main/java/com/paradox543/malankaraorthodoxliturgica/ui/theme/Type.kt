@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.ui.theme
+package com.paradox543.malankaraorthodoxliturgica.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

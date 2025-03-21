@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.view.navigation
+package com.paradox543.malankaraorthodoxliturgica.view.navigation
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
@@ -50,17 +50,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.malankaraorthodoxliturgica.R
-import com.example.malankaraorthodoxliturgica.view.AboutAppScreen
-import com.example.malankaraorthodoxliturgica.view.CategoryListScreen
-import com.example.malankaraorthodoxliturgica.view.DummyScreen
-import com.example.malankaraorthodoxliturgica.view.GreatLentDayScreen
-import com.example.malankaraorthodoxliturgica.view.GreatLentScreen
-import com.example.malankaraorthodoxliturgica.view.HomeScreen
-import com.example.malankaraorthodoxliturgica.view.PrayerScreen
-import com.example.malankaraorthodoxliturgica.view.QurbanaScreen
-import com.example.malankaraorthodoxliturgica.view.SettingsScreen
-import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.view.AboutAppScreen
+import com.paradox543.malankaraorthodoxliturgica.view.CategoryListScreen
+import com.paradox543.malankaraorthodoxliturgica.view.DummyScreen
+import com.paradox543.malankaraorthodoxliturgica.view.GreatLentDayScreen
+import com.paradox543.malankaraorthodoxliturgica.view.GreatLentScreen
+import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
+import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
+import com.paradox543.malankaraorthodoxliturgica.view.QurbanaScreen
+import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 data class BottomNavItem(val route: String, val icon: ImageVector, val label: String)
 

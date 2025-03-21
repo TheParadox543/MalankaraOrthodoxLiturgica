@@ -1,6 +1,7 @@
-package com.example.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.view
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,47 +9,38 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
-fun CategoryListScreen(navController: NavController, prayerViewModel: PrayerViewModel, category: String) {
+fun HomeScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val translations = prayerViewModel.loadTranslations()
+    val categories = prayerViewModel.getCategories()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val prayers by prayerViewModel.categoryPrayers
-
-    LaunchedEffect(category) {
-        prayerViewModel.loadCategoryPrayers(category)
-    }
-    prayerViewModel.setTopBarKeys(listOf(category))
-    LazyColumn(modifier = Modifier) {
-        items(prayers) { prayer ->
+    prayerViewModel.setTopBarKeys(listOf("malankara"))
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(categories) { category ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable {
-                        when (prayer) {
-                            "great_lent" -> navController.navigate("great_lent_main")
-                            "nineveh" -> navController.navigate("nineveh_lent_main")
-                            "qurbana" -> navController.navigate("qurbana")
-                            else -> navController.navigate("dummy")
-                        }
-                    }
-                    .padding(8.dp),
+                    .padding(8.dp)
+                    .clickable { navController.navigate("prayer_list/$category") },
                 shape = RoundedCornerShape(8.dp),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
                 Text(
-                    translations[prayer]?:"",
+                    text = translations[category] ?: "",
                     fontSize = selectedFontSize,
-                    modifier = Modifier.padding(16.dp))
+                    modifier = Modifier.padding(16.dp),
+                    style = MaterialTheme.typography.titleMedium
+                )
             }
         }
     }

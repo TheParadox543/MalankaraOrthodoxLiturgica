@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica
+package com.paradox543.malankaraorthodoxliturgica
 
 import org.junit.Test
 

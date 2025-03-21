@@ -1,4 +1,4 @@
-package com.example.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
