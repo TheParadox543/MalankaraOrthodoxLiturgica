@@ -7,18 +7,18 @@ import kotlinx.coroutines.flow.StateFlow
 import org.json.JSONArray
 
 class PrayerRepository(private val context: Context) {
-    fun getCategories(): List<String> = listOf("daily_prayers", "sacrament")
+    fun getCategories(): List<String> = listOf("daily_prayers")//, "sacrament")
 
     fun getCategoryPrayers(category: String): List<String> {
         return when (category) {
-            "daily_prayers" -> listOf("sleeba", "kyamtha", "nineveh", "great_lent")
+            "daily_prayers" -> listOf("sleeba", "great_lent")//, "kyamtha", "nineveh", "great_lent")
             "sacrament" -> listOf("qurbana", "baptism", "wedding", "funeral")
 //            "Feast Day Prayers" -> listOf("Christmas", "Easter", "Ascension")
             else -> emptyList()
         }
     }
 
-    fun getGreatLentDays(): List<String> = listOf("monday", "tuesday", "wednesday", "thursday", "friday")
+    fun getGreatLentDays(): List<String> = listOf("monday", "thursday")//, "tuesday", "wednesday", "thursday", "friday")
 
     fun getDayPrayers(): List<String> = listOf("sandhya", "soothara", "rathri", "prabatham", "3rd", "6th", "9th")
 
@@ -58,12 +58,16 @@ class PrayerRepository(private val context: Context) {
         for (i in 0 until jsonArray.length()) {
             val prayerObject = jsonArray.getJSONObject(i)
             val type = prayerObject.getString("type")
-            var content = prayerObject.getString("lit_${language}")
-            if (content.isEmpty()){
-                content = prayerObject.getString("lit_ml")
+            if (type == "link") {
+                val linkedFile = prayerObject.getString("file")
+                prayerList.addAll(loadPrayers(linkedFile, language)) // Recursively load linked file
+            } else {
+                var content = prayerObject.getString("lit_${language}")
+                if (content.isEmpty()) {
+                    content = prayerObject.getString("lit_ml")
+                }
+                prayerList.add(mapOf("type" to type, "content" to content))
             }
-
-            prayerList.add(mapOf("type" to type, "content" to content))
         }
 
         return prayerList

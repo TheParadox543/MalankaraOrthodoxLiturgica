@@ -60,6 +60,7 @@ import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.view.QurbanaScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.view.SleebaScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 data class BottomNavItem(val route: String, val icon: ImageVector, val label: String)
@@ -318,6 +319,10 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                     val day = navBackStackEntry.arguments?.getString("day") ?: ""
                     prayerViewModel.setSectionNavigation(false)
                     GreatLentDayScreen(navController, prayerViewModel, day)
+                }
+                composable("sleeba"){
+                    prayerViewModel.setSectionNavigation(false)
+                    SleebaScreen(navController, prayerViewModel)
                 }
                 composable("prayerScreen") {
                     prayerViewModel.setSectionNavigation(true)

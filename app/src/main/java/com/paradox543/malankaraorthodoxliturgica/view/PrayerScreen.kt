@@ -40,7 +40,6 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-
     LaunchedEffect(selectedFontSize) {
         if (selectedFontSize >= 20.sp) {
             activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -51,10 +50,10 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
     LaunchedEffect(filename) {
         try {
             prayerViewModel.loadPrayers(filename, language)
+            listState.scrollToItem(0)
         } catch(e: Exception) {
             navController.navigate("dummy")
         }
-        listState.scrollToItem(0)
     }
     Box(
         modifier = Modifier
@@ -66,7 +65,7 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
             modifier = Modifier
                 .fillMaxWidth(if (isLandscape) 0.7f else 1f) // Limit width in landscape
                 .fillMaxHeight(if (isLandscape) 0.9f else 0.8f), // Limit height in portrait
-            state = rememberLazyListState()
+            state = listState
         ) {
         items(prayers) { prayer ->
             when (prayer["type"]) {
@@ -80,8 +79,16 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
                     fontSize = selectedFontSize
                 )
 
-                "prose" -> Prose(text = prayer["content"] ?: "", fontSize = selectedFontSize)
-                "song" -> Song(text = prayer["content"] ?: "", fontSize = selectedFontSize)
+                "prose" -> Prose(
+                    text = prayer["content"] ?: "",
+                    fontSize = selectedFontSize
+                )
+
+                "song" -> Song(
+                    text = prayer["content"] ?: "",
+                    fontSize = selectedFontSize
+                )
+
                 "subtext" -> Subtext(
                     text = prayer["content"] ?: "",
                     fontSize = selectedFontSize
@@ -110,26 +117,28 @@ fun Subheading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit =
         text = text,
         fontSize = fontSize,
         textAlign = TextAlign.Center,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp)
     )
 }
 
 @Composable
 fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
     Text(
-        text = text,
+        text = text.replace("\\t", "    "),
         fontSize = fontSize,
         textAlign = TextAlign.Justify,
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = 8.dp, vertical = 4.dp)
     )
 }
 
 @Composable
 fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
     Text(
-        text = text,
+        text = text.replace("\\t", "    "),
         fontSize = fontSize,
         textAlign = TextAlign.Start,
         modifier = modifier

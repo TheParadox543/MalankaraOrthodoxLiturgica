@@ -10,7 +10,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -19,28 +18,23 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
-fun CategoryListScreen(navController: NavController, prayerViewModel: PrayerViewModel, category: String) {
+fun SleebaScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val translations = prayerViewModel.loadTranslations()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val prayers by prayerViewModel.categoryPrayers
+    val prayers = prayerViewModel.getDayPrayers().take(2)
 
-    LaunchedEffect(category) {
-        prayerViewModel.loadCategoryPrayers(category)
-    }
-    prayerViewModel.setTopBarKeys(listOf(category))
     LazyColumn(modifier = Modifier) {
         items(prayers) { prayer ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
-                        when (prayer) {
-                            "great_lent" -> navController.navigate("great_lent_main")
-                            "nineveh" -> navController.navigate("nineveh_lent_main")
-                            "qurbana" -> navController.navigate("qurbana")
-                            "sleeba" -> navController.navigate("sleeba")
-                            else -> navController.navigate("dummy")
-                        }
+                        prayerViewModel.setFilename("sleeba_${prayers.indexOf(prayer)}.json")
+                        prayerViewModel.setTopBarKeys(listOf("sleeba", prayer))
+                        prayerViewModel.sectionNames = prayerViewModel.getDayPrayers().take(2)
+                        navController.navigate(
+                            "prayerScreen"
+                        )
                     }
                     .padding(8.dp),
                 shape = RoundedCornerShape(8.dp),
@@ -49,7 +43,8 @@ fun CategoryListScreen(navController: NavController, prayerViewModel: PrayerView
                 Text(
                     translations[prayer]?:"",
                     fontSize = selectedFontSize,
-                    modifier = Modifier.padding(16.dp))
+                    modifier = Modifier.padding(16.dp)
+                )
             }
         }
     }

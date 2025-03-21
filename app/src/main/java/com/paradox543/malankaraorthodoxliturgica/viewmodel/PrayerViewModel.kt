@@ -85,8 +85,11 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     val prayers: StateFlow<List<Map<String, String>>> = _prayers
 
     fun loadPrayers(filename: String, language: String) {
-        viewModelScope.launch {
-            _prayers.value = repository.loadPrayers(filename, language)
+        try {
+            val prayers = repository.loadPrayers(filename, language)
+            _prayers.value = prayers
+        } catch (e: Exception) {
+            throw e
         }
     }
 
