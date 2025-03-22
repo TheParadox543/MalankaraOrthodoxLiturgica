@@ -18,7 +18,7 @@ class PrayerRepository(private val context: Context) {
         }
     }
 
-    fun getGreatLentDays(): List<String> = listOf("monday", "thursday")//, "tuesday", "wednesday", "thursday", "friday")
+    fun getGreatLentDays(): List<String> = listOf("monday", "tuesday", "thursday")//, "wednesday", "thursday", "friday")
 
     fun getDayPrayers(): List<String> = listOf("sandhya", "soothara", "rathri", "prabatham", "3rd", "6th", "9th")
 

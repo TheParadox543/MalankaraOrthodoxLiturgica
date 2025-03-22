@@ -3,6 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.view
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,6 +53,7 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
             prayerViewModel.loadPrayers(filename, language)
             listState.scrollToItem(0)
         } catch(e: Exception) {
+            Log.e("PrayerScreen", e.message?: "Could not infer error")
             navController.navigate("dummy")
         }
     }
@@ -63,7 +65,7 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
     ) {
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth(if (isLandscape) 0.7f else 1f) // Limit width in landscape
+                .fillMaxWidth(if (isLandscape) 0.8f else 1f) // Limit width in landscape
                 .fillMaxHeight(if (isLandscape) 0.9f else 0.8f), // Limit height in portrait
             state = listState
         ) {
