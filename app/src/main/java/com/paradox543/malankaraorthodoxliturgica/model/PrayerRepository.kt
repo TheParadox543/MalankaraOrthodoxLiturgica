@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.StateFlow
 import org.json.JSONArray
 
 class PrayerRepository(private val context: Context) {
-    fun getCategories(): List<String> = listOf("daily_prayers")//, "sacrament")
+    fun getCategories(): List<String> = listOf("daily_prayers", "sacrament")
 
     fun getCategoryPrayers(category: String): List<String> {
         return when (category) {
             "daily_prayers" -> listOf("sleeba", "great_lent")//, "kyamtha", "nineveh", "great_lent")
-            "sacrament" -> listOf("qurbana", "baptism", "wedding", "funeral")
+            "sacrament" -> listOf("wedding", "houseWarming") //,"qurbana", "baptism", "wedding", "funeral")
 //            "Feast Day Prayers" -> listOf("Christmas", "Easter", "Ascension")
             else -> emptyList()
         }
@@ -30,6 +30,11 @@ class PrayerRepository(private val context: Context) {
         "Part Two Chapter Three",
         "Part Two Chapter Four",
         "Part Two Chapter Five"
+    )
+
+    fun getWeddingSections(): List<String> = listOf(
+        "ring",
+        "crown"
     )
 
     private val _selectedLanguage = MutableStateFlow("ml") // Default language

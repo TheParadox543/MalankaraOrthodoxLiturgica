@@ -113,5 +113,20 @@
     "en": "Ninth Hour",
     "ml": "ഒൻപതാം മണി",
     "mn": "Onpathaam Mani"
+  },
+  "ring": {
+    "en": "Ceremony of Blessing of the Ring",
+    "ml": "മോതിരം വാഴ്വിന്റെ ക്രമം",
+    "mn": "Mothiram Vazhvinthe Kramam"
+  },
+  "crown": {
+    "en": "Ceremony of Blessing of the Crown",
+    "ml": "കിരീടം വാഴ്വിന്റെ ക്രമം",
+    "mn": "Kireedam Vazhvinthe Kramam"
+  },
+  "houseWarming": {
+    "en": "House Warming",
+    "ml": "ഭവനശുദ്ധീകരണം",
+    "mn": "Bhavanashudhikaranam"
   }
 }

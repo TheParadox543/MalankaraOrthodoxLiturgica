@@ -19,42 +19,31 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
-fun CategoryListScreen(navController: NavController, prayerViewModel: PrayerViewModel, category: String) {
+fun WeddingScreen(navController: NavController, prayerViewModel: PrayerViewModel){
     val translations = prayerViewModel.loadTranslations()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val prayers by prayerViewModel.categoryPrayers
-
-    LaunchedEffect(category) {
-        prayerViewModel.loadCategoryPrayers(category)
+    val sections = prayerViewModel.getWeddingSections()
+    LaunchedEffect(Unit) {
+        prayerViewModel.setTopBarKeys(listOf("wedding"))
     }
-    prayerViewModel.setTopBarKeys(listOf(category))
+
     LazyColumn(modifier = Modifier) {
-        items(prayers) { prayer ->
+        items(sections) { section ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
-                        when (prayer) {
-                            "great_lent" -> navController.navigate("great_lent_main")
-                            "nineveh" -> navController.navigate("nineveh_lent_main")
-                            "qurbana" -> navController.navigate("qurbana")
-                            "sleeba" -> navController.navigate("sleeba")
-                            "wedding" -> navController.navigate("wedding")
-                            "houseWarming" -> {
-                                prayerViewModel.setFilename("houseWarming_0.json")
-                                prayerViewModel.setTopBarKeys(listOf("houseWarming"))
-                                prayerViewModel.sectionNames = listOf()
-                                navController.navigate("prayerScreen")
-                            }
-                            else -> navController.navigate("dummy")
-                        }
+                        prayerViewModel.setFilename("wedding_${sections.indexOf(section)}.json")
+                        prayerViewModel.setTopBarKeys(listOf(section))
+                        prayerViewModel.sectionNames = prayerViewModel.getWeddingSections()
+                        navController.navigate("prayerScreen")
                     }
                     .padding(8.dp),
                 shape = RoundedCornerShape(8.dp),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
                 Text(
-                    translations[prayer]?:"",
+                    translations[section] ?: "",
                     fontSize = selectedFontSize,
                     modifier = Modifier.padding(16.dp))
             }

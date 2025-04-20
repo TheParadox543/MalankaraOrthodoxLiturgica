@@ -59,6 +59,7 @@ import com.paradox543.malankaraorthodoxliturgica.view.GreatLentScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.view.QurbanaScreen
+import com.paradox543.malankaraorthodoxliturgica.view.WeddingScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SleebaScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
@@ -77,9 +78,10 @@ fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollCon
     val nestedScrollConnection = remember {
         object : NestedScrollConnection {
             override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                if (available.y > 0) {
-                    isVisible.value = true  // Scrolling UP → Show bars
-                } else if (available.y < 0) {
+//                if (available.y > 0) {
+//                    isVisible.value = true  // Scrolling UP → Show bars
+//                } else
+                if (available.y < 0) {
                     isVisible.value = false // Scrolling DOWN → Hide bars
                 }
                 return Offset.Zero
@@ -246,14 +248,14 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
         }
     }
     Box(modifier = Modifier.fillMaxSize()){
-        if (currentRoute != "prayerScreen") {
-            Image(
-                painter = painterResource(id = R.drawable.background),
-                contentDescription = "Background",
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
+//        if (currentRoute != "prayerScreen") {
+//            Image(
+//                painter = painterResource(id = R.drawable.background),
+//                contentDescription = "Background",
+//                contentScale = ContentScale.FillWidth,
+//                modifier = Modifier.fillMaxSize()
+//            )
+//        }
 //    Box(
 //        modifier = Modifier
 //            .fillMaxSize()
@@ -331,6 +333,10 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
                 composable("qurbana") {
                     prayerViewModel.setSectionNavigation(false)
                     QurbanaScreen(navController, prayerViewModel)
+                }
+                composable("wedding") {
+                    prayerViewModel.setSectionNavigation(false)
+                    WeddingScreen(navController, prayerViewModel)
                 }
                 composable("settings") {
                     prayerViewModel.setSectionNavigation(false)

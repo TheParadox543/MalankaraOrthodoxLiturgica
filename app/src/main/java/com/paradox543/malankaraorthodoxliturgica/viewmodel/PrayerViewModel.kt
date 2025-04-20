@@ -67,6 +67,7 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     fun getGreatLentDays() = repository.getGreatLentDays()
     fun getDayPrayers() = repository.getDayPrayers()
     fun getQurbanaSections() = repository.getQurbanaSections()
+    fun getWeddingSections() = repository.getWeddingSections()
 
     private val _topBarNames = MutableStateFlow<List<String>>(emptyList())
     val topBarNames: StateFlow<List<String>> = _topBarNames
@@ -129,6 +130,7 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     fun getPreviousPrayer() {
         updateIndex(-1)
     }
+
 }
 
 class PrayerViewModelFactory(private val repository: PrayerRepository, private val dataStore: DataStoreManager) : ViewModelProvider.Factory {
