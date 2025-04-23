@@ -187,9 +187,9 @@ fun AboutAppScreen(navController: NavController) {
             Text("📜 Credits & Contributors", style = MaterialTheme.typography.headlineMedium)
             Text("- Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations")
             Text("- Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights")
-            Text("- Shaun John & Lisa Shibu George – Additional Text Translations and Preparation")
+            Text("- Shaun John, Lisa Shibu George & Sabu John – Additional Text Translations and Preparation")
             Spacer(Modifier.height(16.dp))
-            Text("Version: 1.0.0", style = MaterialTheme.typography.bodySmall)
+            Text("Version: 0.1.3", style = MaterialTheme.typography.bodySmall)
         }
     }
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
@@ -17,6 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -35,7 +39,11 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val filename by prayerViewModel.filename.collectAsState()
-    val listState = rememberLazyListState()
+//    val listState = rememberLazyListState()
+    val listState = rememberSaveable(saver = LazyListState.Saver){
+        LazyListState()
+    }
+    val lastLoadedFilename = remember { mutableStateOf<String?>(null)}
     val context = LocalContext.current
     val activity = context as? Activity
     val configuration = LocalConfiguration.current
@@ -51,7 +59,10 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
     LaunchedEffect(filename) {
         try {
             prayerViewModel.loadPrayers(filename, language)
-            listState.scrollToItem(0)
+            if (filename != lastLoadedFilename.value) {
+                listState.scrollToItem(0)
+                lastLoadedFilename.value = filename
+            }
         } catch(e: Exception) {
             Log.e("PrayerScreen", e.message?: "Could not infer error")
             navController.navigate("dummy")
