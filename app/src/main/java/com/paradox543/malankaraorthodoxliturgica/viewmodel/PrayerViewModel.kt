@@ -9,13 +9,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
+import com.paradox543.malankaraorthodoxliturgica.model.NavigationRepository
+import com.paradox543.malankaraorthodoxliturgica.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PrayerViewModel(private val repository: PrayerRepository, private val dataStoreManager: DataStoreManager) : ViewModel() {
+@HiltViewModel
+class PrayerViewModel @Inject constructor(
+   private val prayerRepository: PrayerRepository,
+   private val dataStoreManager: DataStoreManager,
+   private val navRepository: NavigationRepository
+) : ViewModel() {
 
     private val _selectedLanguage = MutableStateFlow("ml")
     val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
@@ -52,22 +61,11 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
         }
     }
 
-    fun loadTranslations() = repository.loadTranslations(selectedLanguage.value)
-    val translations = repository.loadTranslations(selectedLanguage.value)
-
-    fun getCategories() = repository.getCategories()
+    fun loadTranslations() = prayerRepository.loadTranslations(selectedLanguage.value)
+    val translations = prayerRepository.loadTranslations(selectedLanguage.value)
 
     private val _categoryPrayers = mutableStateOf<List<String>>(emptyList())
     val categoryPrayers: State<List<String>> = _categoryPrayers
-
-    fun loadCategoryPrayers(category: String) {
-        _categoryPrayers.value = repository.getCategoryPrayers(category)
-    }
-
-    fun getGreatLentDays() = repository.getGreatLentDays()
-    fun getDayPrayers() = repository.getDayPrayers()
-    fun getQurbanaSections() = repository.getQurbanaSections()
-    fun getWeddingSections() = repository.getWeddingSections()
 
     private val _topBarNames = MutableStateFlow<List<String>>(emptyList())
     val topBarNames: StateFlow<List<String>> = _topBarNames
@@ -87,7 +85,7 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
 
     fun loadPrayers(filename: String, language: String) {
         try {
-            val prayers = repository.loadPrayers(filename, language)
+            val prayers = prayerRepository.loadPrayers(filename, language)
             _prayers.value = prayers
         } catch (e: Exception) {
             throw e
@@ -130,14 +128,13 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
     fun getPreviousPrayer() {
         updateIndex(-1)
     }
-
 }
 
-class PrayerViewModelFactory(private val repository: PrayerRepository, private val dataStore: DataStoreManager) : ViewModelProvider.Factory {
+class PrayerViewModelFactory(private val prayerRepository: PrayerRepository, private val dataStore: DataStoreManager, private val navRepository: NavigationRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PrayerViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return PrayerViewModel(repository, dataStore) as T
+            return PrayerViewModel(prayerRepository, dataStore, navRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

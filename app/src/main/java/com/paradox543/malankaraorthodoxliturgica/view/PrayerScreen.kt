@@ -1,7 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.app.Activity
-import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.layout.Box
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -39,7 +37,6 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val filename by prayerViewModel.filename.collectAsState()
-//    val listState = rememberLazyListState()
     val listState = rememberSaveable(saver = LazyListState.Saver){
         LazyListState()
     }
@@ -49,13 +46,13 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-    LaunchedEffect(selectedFontSize) {
-        if (selectedFontSize >= 20.sp) {
-            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        } else {
-            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-        }
-    }
+//    LaunchedEffect(selectedFontSize) {
+//        if (selectedFontSize >= 20.sp) {
+//            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+//        } else {
+//            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+//        }
+//    }
     LaunchedEffect(filename) {
         try {
             prayerViewModel.loadPrayers(filename, language)
@@ -80,35 +77,36 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
                 .fillMaxHeight(if (isLandscape) 0.9f else 0.8f), // Limit height in portrait
             state = listState
         ) {
-        items(prayers) { prayer ->
-            when (prayer["type"]) {
-                "heading" -> Heading(
-                    text = prayer["content"] ?: "",
-                    fontSize = selectedFontSize
-                )
+            items(prayers) { prayer ->
+                when (prayer["type"]) {
+                    "heading" -> Heading(
+                        text = prayer["content"] ?: "",
+                        fontSize = selectedFontSize
+                    )
 
-                "subheading" -> Subheading(
-                    text = prayer["content"] ?: "",
-                    fontSize = selectedFontSize
-                )
+                    "subheading" -> Subheading(
+                        text = prayer["content"] ?: "",
+                        fontSize = selectedFontSize
+                    )
 
-                "prose" -> Prose(
-                    text = prayer["content"] ?: "",
-                    fontSize = selectedFontSize
-                )
+                    "prose" -> Prose(
+                        text = prayer["content"] ?: "",
+                        fontSize = selectedFontSize
+                    )
 
-                "song" -> Song(
-                    text = prayer["content"] ?: "",
-                    fontSize = selectedFontSize
-                )
+                    "song" -> Song(
+                        text = prayer["content"] ?: "",
+                        fontSize = selectedFontSize
+                    )
 
-                "subtext" -> Subtext(
-                    text = prayer["content"] ?: "",
-                    fontSize = selectedFontSize
-                )
+                    "subtext" -> Subtext(
+                        text = prayer["content"] ?: "",
+                        fontSize = selectedFontSize
+                    )
+                }
             }
         }
-    }}
+    }
 }
 
 @Composable

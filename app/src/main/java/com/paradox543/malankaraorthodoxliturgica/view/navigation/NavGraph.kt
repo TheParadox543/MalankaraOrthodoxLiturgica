@@ -3,7 +3,6 @@ package com.paradox543.malankaraorthodoxliturgica.view.navigation
 import android.app.Activity
 import android.content.pm.ActivityInfo
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -40,28 +39,22 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.view.AboutAppScreen
-import com.paradox543.malankaraorthodoxliturgica.view.CategoryListScreen
 import com.paradox543.malankaraorthodoxliturgica.view.DummyScreen
-import com.paradox543.malankaraorthodoxliturgica.view.GreatLentDayScreen
-import com.paradox543.malankaraorthodoxliturgica.view.GreatLentScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
-import com.paradox543.malankaraorthodoxliturgica.view.QurbanaScreen
-import com.paradox543.malankaraorthodoxliturgica.view.WeddingScreen
+import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
-import com.paradox543.malankaraorthodoxliturgica.view.SleebaScreen
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 data class BottomNavItem(val route: String, val icon: ImageVector, val label: String)
@@ -228,7 +221,9 @@ fun getPadding(padding: PaddingValues, currentRoute: String?): PaddingValues {
 }
 
 @Composable
-fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
+fun NavGraph(modifier: Modifier = Modifier) {
+    val prayerViewModel: PrayerViewModel = hiltViewModel()
+    val navViewModel: NavViewModel = hiltViewModel()
     val navController = rememberNavController()
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
@@ -248,21 +243,6 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
         }
     }
     Box(modifier = Modifier.fillMaxSize()){
-//        if (currentRoute != "prayerScreen") {
-//            Image(
-//                painter = painterResource(id = R.drawable.background),
-//                contentDescription = "Background",
-//                contentScale = ContentScale.FillWidth,
-//                modifier = Modifier.fillMaxSize()
-//            )
-//        }
-//    Box(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .background(
-//                brush = (painterResource(R.drawable.background_image))
-//            )
-//    ) {
         Scaffold(
             modifier = Modifier
                 .nestedScroll(nestedScrollConnection)
@@ -306,37 +286,19 @@ fun NavGraph(prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier) {
             ) {
                 composable("home") {
                     prayerViewModel.setSectionNavigation(false)
-                    HomeScreen(navController, prayerViewModel)
+                    HomeScreen(navController, prayerViewModel, navViewModel)
                 }
-                composable("prayer_list/{category}") { navBackStackEntry ->
-                    val category = navBackStackEntry.arguments?.getString("category") ?: ""
-                    prayerViewModel.setSectionNavigation(false)
-                    CategoryListScreen(navController, prayerViewModel, category)
-                }
-                composable("great_lent_main") {
-                    prayerViewModel.setSectionNavigation(false)
-                    GreatLentScreen(navController, prayerViewModel)
-                }
-                composable("great_lent_day/{day}") { navBackStackEntry ->
-                    val day = navBackStackEntry.arguments?.getString("day") ?: ""
-                    prayerViewModel.setSectionNavigation(false)
-                    GreatLentDayScreen(navController, prayerViewModel, day)
-                }
-                composable("sleeba"){
-                    prayerViewModel.setSectionNavigation(false)
-                    SleebaScreen(navController, prayerViewModel)
+                composable("section/{route}") { backStackEntry ->
+                    val route = backStackEntry.arguments?.getString("route") ?: ""
+                    val node = navViewModel.getNodeByRoute(route)
+                    if (node != null) {
+                        prayerViewModel.setTopBarKeys(listOf(route))
+                        SectionScreen(navController, prayerViewModel, node.children)
+                    }
                 }
                 composable("prayerScreen") {
                     prayerViewModel.setSectionNavigation(true)
                     PrayerScreen(navController, prayerViewModel)
-                }
-                composable("qurbana") {
-                    prayerViewModel.setSectionNavigation(false)
-                    QurbanaScreen(navController, prayerViewModel)
-                }
-                composable("wedding") {
-                    prayerViewModel.setSectionNavigation(false)
-                    WeddingScreen(navController, prayerViewModel)
                 }
                 composable("settings") {
                     prayerViewModel.setSectionNavigation(false)

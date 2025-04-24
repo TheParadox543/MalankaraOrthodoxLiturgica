@@ -4,12 +4,12 @@
     "ml": "മലങ്കര ഓർത്തഡോക്സ് ലിറ്റർജിക്ക",
     "mn": "Malankara Orthodox Liturgica"
   },
-  "daily_prayers": {
+  "dailyPrayers": {
     "en": "Daily Prayers",
     "ml": "നിത്യ പ്രാർത്ഥന",
     "mn": "Nitya Prarthana"
   },
-  "sacrament": {
+  "sacraments": {
     "en": "Sacramental Prayers",
     "ml": "കൂദാശകൾ ",
     "mn": "Koodashakal"
@@ -29,7 +29,7 @@
     "ml": "നിനവ പ്രാർത്ഥന",
     "mn": "Nineveh Prarthana"
   },
-  "great_lent": {
+  "greatLent": {
     "en": "Great Lent",
     "ml": "വലിയ നോമ്പ്",
     "mn": "Valiya Nombu"
