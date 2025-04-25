@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -17,19 +18,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    navViewModel: NavViewModel,
     nodes: List<PageNode>
 ) {
     val translations = prayerViewModel.loadTranslations()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(nodes) { node ->
+        itemsIndexed(nodes) { index, node ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -40,6 +43,8 @@ fun SectionScreen(
                         } else if (node.filename.isNotEmpty()) {
                             prayerViewModel.setFilename(node.filename)
                             prayerViewModel.setTopBarKeys(listOf(node.route))
+                            navViewModel.setCurrentSiblingIndex(index)
+                            navViewModel.setSiblingNodes(nodes)
                             navController.navigate("prayerScreen")
                         }
                     },
