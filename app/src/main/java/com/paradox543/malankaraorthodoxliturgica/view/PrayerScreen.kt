@@ -1,8 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
-import android.app.Activity
 import android.content.res.Configuration
+import android.os.Build
 import android.util.Log
+import androidx.activity.compose.BackHandler
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,17 +24,23 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
+@RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
 @Composable
-fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel, modifier: Modifier = Modifier){
+fun PrayerScreen(
+    navController: NavController,
+    prayerViewModel: PrayerViewModel,
+    navViewModel: NavViewModel,
+    modifier: Modifier = Modifier
+) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
@@ -41,8 +49,6 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
         LazyListState()
     }
     val lastLoadedFilename = remember { mutableStateOf<String?>(null)}
-    val context = LocalContext.current
-    val activity = context as? Activity
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
@@ -65,6 +71,14 @@ fun PrayerScreen(navController: NavController, prayerViewModel: PrayerViewModel,
             navController.navigate("dummy")
         }
     }
+
+//    BackHandler {
+//        navViewModel.goBack()
+//        if (navViewModel.isAtRoot()) {
+//            navController.navigateUp()
+//        }
+//    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()

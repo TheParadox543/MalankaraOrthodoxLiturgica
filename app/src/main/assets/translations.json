@@ -94,22 +94,22 @@
     "ml": "രാത്രി",
     "mn": "Raathri"
   },
-  "prabatham": {
+  "prabhatham": {
     "en": "Morning Prayers",
     "ml": "പ്രഭാതം",
-    "mn": "Prabatham"
+    "mn": "Prabhatham"
   },
-  "3rd": {
+  "moonam": {
     "en": "Third Hour",
     "ml": "മൂന്നാം മണി",
     "mn": "Moonnam Mani"
   },
-  "6th": {
+  "aaraam": {
     "en": "Sixth Hour",
     "ml": "ആറാം മണി",
     "mn": "Aaram Mani"
   },
-  "9th": {
+  "onbatham": {
     "en": "Ninth Hour",
     "ml": "ഒൻപതാം മണി",
     "mn": "Onpathaam Mani"

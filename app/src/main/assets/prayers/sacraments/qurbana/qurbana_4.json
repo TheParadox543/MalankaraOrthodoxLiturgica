@@ -1,0 +1,610 @@
+[
+    {
+        "id": 1,
+        "type": "heading",
+        "lit_ml": "Part II Chapter 3",
+        "lit_en": "Part II Chapter 3",
+        "lit_mn": "Part II Chapter 3",
+        "special": ""
+    },
+    {
+        "id": 2,
+        "type": "heading",
+        "lit_ml": "DIPTYCHS",
+        "lit_en": "DIPTYCHS",
+        "lit_mn": "DIPTYCHS",
+        "special": ""
+    },
+    {
+        "id": 3,
+        "type": "subheading",
+        "lit_ml": "(The great intercession)",
+        "lit_en": "(The great intercession)",
+        "lit_mn": "(The great intercession)",
+        "special": ""
+    },
+    {
+        "id": 4,
+        "type": "subheading",
+        "lit_ml": "1. FOR THE LIVING SPIRITUAL FATHERS",
+        "lit_en": "1. FOR THE LIVING SPIRITUAL FATHERS",
+        "lit_mn": "1. FOR THE LIVING SPIRITUAL FATHERS",
+        "special": ""
+    },
+    {
+        "id": 5,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Barekmor. Let us pray and beseech the Lord our God at this great and solemn and sacred moment, for all the spiritual Fathers, our rulers; who are appointed over us, this day and in this life to shepherd and govern the holy churches of God in the four quarters of the earth; our holy and revered and blessed Patriarches, Our Father Mar Ignasius, and Our Father Mar Baselios, and Our Father Mar Gregorios, and our Bishop, Our father Mar *(N), who are being upheld by God; along with all the other orthodox bishops and spiritual Fathers, truly faithful; Let us beseech the Lord.",
+        "lit_en": "Acolyte :- Barekmor. Let us pray and beseech the Lord our God at this great and solemn and sacred moment, for all the spiritual Fathers, our rulers; who are appointed over us, this day and in this life to shepherd and govern the holy churches of God in the four quarters of the earth; our holy and revered and blessed Patriarches, Our Father Mar Ignasius, and Our Father Mar Baselios, and Our Father Mar Gregorios, and our Bishop, Our father Mar *(N), who are being upheld by God; along with all the other orthodox bishops and spiritual Fathers, truly faithful; Let us beseech the Lord.",
+        "lit_mn": "Acolyte :- Barekmor. Let us pray and beseech the Lord our God at this great and solemn and sacred moment, for all the spiritual Fathers, our rulers; who are appointed over us, this day and in this life to shepherd and govern the holy churches of God in the four quarters of the earth; our holy and revered and blessed Patriarches, Our Father Mar Ignasius, and Our Father Mar Baselios, and Our Father Mar Gregorios, and our Bishop, Our father Mar *(N), who are being upheld by God; along with all the other orthodox bishops and spiritual Fathers, truly faithful; Let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 6,
+        "type": "prose",
+        "lit_ml": "People :-Kurielaison.",
+        "lit_en": "People :-Kurielaison.",
+        "lit_mn": "People :-Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 7,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prays silently and then loudly)",
+        "lit_en": "Priest :-(Prays silently and then loudly)",
+        "lit_mn": "Priest :-(Prays silently and then loudly)",
+        "special": ""
+    },
+    {
+        "id": 8,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 9,
+        "type": "subheading",
+        "lit_ml": "2. FOR THE LIVING FAITHFUL BRETHREN",
+        "lit_en": "2. FOR THE LIVING FAITHFUL BRETHREN",
+        "lit_mn": "2. FOR THE LIVING FAITHFUL BRETHREN",
+        "special": ""
+    },
+    {
+        "id": 10,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Barekmor. Again we call to remembrance, O Lord, all our brethren, the faithful and true Christians, who have bidden us and earnestly requested us, humble and feeble though we be, to remember them on this occasion and at this time. We pray Thee, Lord God Almighty, on behalf of all those who are fallen in all kinds of hard trials and taken refuge in Thee, that they may soon be delivered and visited by Thee; and on behalf of this congregation preserved by God, and for the unity and prosperity of all her faithful members, that they may continue in virtue: Let us beseech the Lord.",
+        "lit_en": "Acolyte :- Barekmor. Again we call to remembrance, O Lord, all our brethren, the faithful and true Christians, who have bidden us and earnestly requested us, humble and feeble though we be, to remember them on this occasion and at this time. We pray Thee, Lord God Almighty, on behalf of all those who are fallen in all kinds of hard trials and taken refuge in Thee, that they may soon be delivered and visited by Thee; and on behalf of this congregation preserved by God, and for the unity and prosperity of all her faithful members, that they may continue in virtue: Let us beseech the Lord.",
+        "lit_mn": "Acolyte :- Barekmor. Again we call to remembrance, O Lord, all our brethren, the faithful and true Christians, who have bidden us and earnestly requested us, humble and feeble though we be, to remember them on this occasion and at this time. We pray Thee, Lord God Almighty, on behalf of all those who are fallen in all kinds of hard trials and taken refuge in Thee, that they may soon be delivered and visited by Thee; and on behalf of this congregation preserved by God, and for the unity and prosperity of all her faithful members, that they may continue in virtue: Let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 11,
+        "type": "prose",
+        "lit_ml": "People :-Kurielaison",
+        "lit_en": "People :-Kurielaison",
+        "lit_mn": "People :-Kurielaison",
+        "special": ""
+    },
+    {
+        "id": 12,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prays silently and then loudly)",
+        "lit_en": "Priest :-(Prays silently and then loudly)",
+        "lit_mn": "Priest :-(Prays silently and then loudly)",
+        "special": ""
+    },
+    {
+        "id": 13,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 14,
+        "type": "subheading",
+        "lit_ml": "3. FOR THE LIVING FAITHFUL SECULAR RULERS",
+        "lit_en": "3. FOR THE LIVING FAITHFUL SECULAR RULERS",
+        "lit_mn": "3. FOR THE LIVING FAITHFUL SECULAR RULERS",
+        "special": ""
+    },
+    {
+        "id": 15,
+        "type": "prose",
+        "lit_ml": "Acolyte :-Barekmor, Again we remember all the faithful and truly Christian rulers, who have established and confirmed in the true faith, the churches and the monasteries of God in the four quarters of the earth. Let us beseech the Lord for the whole Christian community, the clergy and the faithful people, that they may continue in virtue.",
+        "lit_en": "Acolyte :-Barekmor, Again we remember all the faithful and truly Christian rulers, who have established and confirmed in the true faith, the churches and the monasteries of God in the four quarters of the earth. Let us beseech the Lord for the whole Christian community, the clergy and the faithful people, that they may continue in virtue.",
+        "lit_mn": "Acolyte :-Barekmor, Again we remember all the faithful and truly Christian rulers, who have established and confirmed in the true faith, the churches and the monasteries of God in the four quarters of the earth. Let us beseech the Lord for the whole Christian community, the clergy and the faithful people, that they may continue in virtue.",
+        "special": ""
+    },
+    {
+        "id": 16,
+        "type": "prose",
+        "lit_ml": "People :-Kurielaison.",
+        "lit_en": "People :-Kurielaison.",
+        "lit_mn": "People :-Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 17,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prays silently and then loudly)",
+        "lit_en": "Priest :-(Prays silently and then loudly)",
+        "lit_mn": "Priest :-(Prays silently and then loudly)",
+        "special": ""
+    },
+    {
+        "id": 18,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 19,
+        "type": "subheading",
+        "lit_ml": "4. FOR THE MOTHER OF GOD AND THE SAINTS",
+        "lit_en": "4. FOR THE MOTHER OF GOD AND THE SAINTS",
+        "lit_mn": "4. FOR THE MOTHER OF GOD AND THE SAINTS",
+        "special": ""
+    },
+    {
+        "id": 20,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Barekmor. Again we commemorate her, who is worthy of being called blessed, and extolled of all the generations of the earth, holy, glorious and blessed, ever virgin and blissful, Mary the Mother of God. Along with her let us remember also the Prophets and the Apostles; the Preachers and the Evangelists; the Martyrs and the Confessors; the blessed St. John the Baptist, the forerunner of his master; and the illustrious Saint Stephen, chief of the Acolytes, and the first of the martyrs; and the exalted St. Peter and St. Paul, chief among the Apostles. Let us remember at the same time, the whole company of the saints, both men and women. May their prayers be to us a refuge. Let us beseech the Lord.",
+        "lit_en": "Acolyte :- Barekmor. Again we commemorate her, who is worthy of being called blessed, and extolled of all the generations of the earth, holy, glorious and blessed, ever virgin and blissful, Mary the Mother of God. Along with her let us remember also the Prophets and the Apostles; the Preachers and the Evangelists; the Martyrs and the Confessors; the blessed St. John the Baptist, the forerunner of his master; and the illustrious Saint Stephen, chief of the Acolytes, and the first of the martyrs; and the exalted St. Peter and St. Paul, chief among the Apostles. Let us remember at the same time, the whole company of the saints, both men and women. May their prayers be to us a refuge. Let us beseech the Lord.",
+        "lit_mn": "Acolyte :- Barekmor. Again we commemorate her, who is worthy of being called blessed, and extolled of all the generations of the earth, holy, glorious and blessed, ever virgin and blissful, Mary the Mother of God. Along with her let us remember also the Prophets and the Apostles; the Preachers and the Evangelists; the Martyrs and the Confessors; the blessed St. John the Baptist, the forerunner of his master; and the illustrious Saint Stephen, chief of the Acolytes, and the first of the martyrs; and the exalted St. Peter and St. Paul, chief among the Apostles. Let us remember at the same time, the whole company of the saints, both men and women. May their prayers be to us a refuge. Let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 21,
+        "type": "prose",
+        "lit_ml": "People :-Kurielaison.",
+        "lit_en": "People :-Kurielaison.",
+        "lit_mn": "People :-Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 22,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prays silently and then loudly)",
+        "lit_en": "Priest :-(Prays silently and then loudly)",
+        "lit_mn": "Priest :-(Prays silently and then loudly)",
+        "special": ""
+    },
+    {
+        "id": 23,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 24,
+        "type": "subheading",
+        "lit_ml": "5. FOR THE DEPARTED SPIRITUAL Father's AND DOCTORS OF THE CHURCH",
+        "lit_en": "5. FOR THE DEPARTED SPIRITUAL Father's AND DOCTORS OF THE CHURCH",
+        "lit_mn": "5. FOR THE DEPARTED SPIRITUAL Father's AND DOCTORS OF THE CHURCH",
+        "special": ""
+    },
+    {
+        "id": 25,
+        "type": "prose",
+        "lit_ml": "Acolyte :-Barekmor. Again we remember those, who have before us fallen asleep in holiness and taken repose in the abode of the saints, and who maintained and delivered and entrusted to us the one apostolic and uncorrupt faith. We also acknowledge those three synods, sacred, holy and ecumenical; namely that in Nicea, that in Constantinople, and that in Ephesus; and our illustrious and divine holy Fathers and Doctors, who participated in them; the venerable St. James, the first Archbishop of Jerusalem, apostle and martyr; and Ignasius, Clement, Dionysius, Athanasius, Julius, Base lius, Gregorius, Dioscorus, Timothius, Philoxenos, Antimus, and Ivanius; and mentionable especially by name, St. Cyril, that exalted and veritable tower of knowledge, who expounded the doctrine of the incarnation of God the Word, our Lord Jesus Christ, declaring and showing clearly that He became incarnate. We remember also our Patriarch St. Severus, the crown of the Syrians, the eloquent mouth, the pillar and the doctor of the Holy Church of God as a whole; the meadow abounding in blossom, who preached all the time that Mary was undoubtedly the God - bearer; and our venerable and holy Father Mor Jacob Baradaeus, the upholder of the Orthodox faith; and Mor Ephrem and Mor Jacob and Mor Isaac and Mor Baleus and Mor Bar Soumas, the chief among mourners; and Mor Simeon the Stylite, and Mor Abahai the elect one; and those before them, and with them, and after them, who have kept and handed down and entrusted to us the one genuine and undefiled faith. May their prayers be a strong - hold to us. Let us beseech the Lord.",
+        "lit_en": "Acolyte :-Barekmor. Again we remember those, who have before us fallen asleep in holiness and taken repose in the abode of the saints, and who maintained and delivered and entrusted to us the one apostolic and uncorrupt faith. We also acknowledge those three synods, sacred, holy and ecumenical; namely that in Nicea, that in Constantinople, and that in Ephesus; and our illustrious and divine holy Fathers and Doctors, who participated in them; the venerable St. James, the first Archbishop of Jerusalem, apostle and martyr; and Ignasius, Clement, Dionysius, Athanasius, Julius, Base lius, Gregorius, Dioscorus, Timothius, Philoxenos, Antimus, and Ivanius; and mentionable especially by name, St. Cyril, that exalted and veritable tower of knowledge, who expounded the doctrine of the incarnation of God the Word, our Lord Jesus Christ, declaring and showing clearly that He became incarnate. We remember also our Patriarch St. Severus, the crown of the Syrians, the eloquent mouth, the pillar and the doctor of the Holy Church of God as a whole; the meadow abounding in blossom, who preached all the time that Mary was undoubtedly the God - bearer; and our venerable and holy Father Mor Jacob Baradaeus, the upholder of the Orthodox faith; and Mor Ephrem and Mor Jacob and Mor Isaac and Mor Baleus and Mor Bar Soumas, the chief among mourners; and Mor Simeon the Stylite, and Mor Abahai the elect one; and those before them, and with them, and after them, who have kept and handed down and entrusted to us the one genuine and undefiled faith. May their prayers be a strong - hold to us. Let us beseech the Lord.",
+        "lit_mn": "Acolyte :-Barekmor. Again we remember those, who have before us fallen asleep in holiness and taken repose in the abode of the saints, and who maintained and delivered and entrusted to us the one apostolic and uncorrupt faith. We also acknowledge those three synods, sacred, holy and ecumenical; namely that in Nicea, that in Constantinople, and that in Ephesus; and our illustrious and divine holy Fathers and Doctors, who participated in them; the venerable St. James, the first Archbishop of Jerusalem, apostle and martyr; and Ignasius, Clement, Dionysius, Athanasius, Julius, Base lius, Gregorius, Dioscorus, Timothius, Philoxenos, Antimus, and Ivanius; and mentionable especially by name, St. Cyril, that exalted and veritable tower of knowledge, who expounded the doctrine of the incarnation of God the Word, our Lord Jesus Christ, declaring and showing clearly that He became incarnate. We remember also our Patriarch St. Severus, the crown of the Syrians, the eloquent mouth, the pillar and the doctor of the Holy Church of God as a whole; the meadow abounding in blossom, who preached all the time that Mary was undoubtedly the God - bearer; and our venerable and holy Father Mor Jacob Baradaeus, the upholder of the Orthodox faith; and Mor Ephrem and Mor Jacob and Mor Isaac and Mor Baleus and Mor Bar Soumas, the chief among mourners; and Mor Simeon the Stylite, and Mor Abahai the elect one; and those before them, and with them, and after them, who have kept and handed down and entrusted to us the one genuine and undefiled faith. May their prayers be a strong - hold to us. Let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 26,
+        "type": "prose",
+        "lit_ml": "People :- Kurielaison.",
+        "lit_en": "People :- Kurielaison.",
+        "lit_mn": "People :- Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 27,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prays silently and then loudly)",
+        "lit_en": "Priest :-(Prays silently and then loudly)",
+        "lit_mn": "Priest :-(Prays silently and then loudly)",
+        "special": ""
+    },
+    {
+        "id": 28,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 29,
+        "type": "subheading",
+        "lit_ml": "6. FOR ALL THE FAITHFUL DEPARTED",
+        "lit_en": "6. FOR ALL THE FAITHFUL DEPARTED",
+        "lit_mn": "6. FOR ALL THE FAITHFUL DEPARTED",
+        "special": ""
+    },
+    {
+        "id": 30,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Barekmor. Again we remember all the faithful departed ones, who have passed away in love and in the true faith, from this holy sanctuary, and from this church, and from this place, and from all places and regions; those who before us have fallen asleep, and are at rest, and have attained to Thee, O God the Father, the Lord of both the spirits and of all the flesh. Let us pary and beseech Christ, our God, who has received to Himself their spirits and their souls, that He may according to His abundant mercies, account them worthy of the remission of debts, and the forgiveness of sins, and make both us and them, to attain to His heavenly kingdom. Let us cry aloud and say three times - Kurielaison.",
+        "lit_en": "Acolyte :- Barekmor. Again we remember all the faithful departed ones, who have passed away in love and in the true faith, from this holy sanctuary, and from this church, and from this place, and from all places and regions; those who before us have fallen asleep, and are at rest, and have attained to Thee, O God the Father, the Lord of both the spirits and of all the flesh. Let us pary and beseech Christ, our God, who has received to Himself their spirits and their souls, that He may according to His abundant mercies, account them worthy of the remission of debts, and the forgiveness of sins, and make both us and them, to attain to His heavenly kingdom. Let us cry aloud and say three times - Kurielaison.",
+        "lit_mn": "Acolyte :- Barekmor. Again we remember all the faithful departed ones, who have passed away in love and in the true faith, from this holy sanctuary, and from this church, and from this place, and from all places and regions; those who before us have fallen asleep, and are at rest, and have attained to Thee, O God the Father, the Lord of both the spirits and of all the flesh. Let us pary and beseech Christ, our God, who has received to Himself their spirits and their souls, that He may according to His abundant mercies, account them worthy of the remission of debts, and the forgiveness of sins, and make both us and them, to attain to His heavenly kingdom. Let us cry aloud and say three times - Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 31,
+        "type": "prose",
+        "lit_ml": "People :-Kurielaison, Kurielaison, Kurielaison.",
+        "lit_en": "People :-Kurielaison, Kurielaison, Kurielaison.",
+        "lit_mn": "People :-Kurielaison, Kurielaison, Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 32,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prays silently and then loudly and ends his prayer saying) DíMethoolose Oph Lan Valíhoon.",
+        "lit_en": "Priest :-(Prays silently and then loudly and ends his prayer saying) DíMethoolose Oph Lan Valíhoon.",
+        "lit_mn": "Priest :-(Prays silently and then loudly and ends his prayer saying) DíMethoolose Oph Lan Valíhoon.",
+        "special": ""
+    },
+    {
+        "id": 33,
+        "type": "prose",
+        "lit_ml": "People :- Comfort us O God, and grant remission and forgiveness for all offences, which both we and they have committed against Thee, willingly and unwillingly, knowingly and unknowingly.",
+        "lit_en": "People :- Comfort us O God, and grant remission and forgiveness for all offences, which both we and they have committed against Thee, willingly and unwillingly, knowingly and unknowingly.",
+        "lit_mn": "People :- Comfort us O God, and grant remission and forgiveness for all offences, which both we and they have committed against Thee, willingly and unwillingly, knowingly and unknowingly.",
+        "special": ""
+    },
+    {
+        "id": 34,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prays silently and then loudly)",
+        "lit_en": "Priest :-(Prays silently and then loudly)",
+        "lit_mn": "Priest :-(Prays silently and then loudly)",
+        "special": ""
+    },
+    {
+        "id": 35,
+        "type": "prose",
+        "lit_ml": "People :- Amen. As it was, and is, and shall be, from generation to generation, for all generations, and for ever and ever. Amen.",
+        "lit_en": "People :- Amen. As it was, and is, and shall be, from generation to generation, for all generations, and for ever and ever. Amen.",
+        "lit_mn": "People :- Amen. As it was, and is, and shall be, from generation to generation, for all generations, and for ever and ever. Amen.",
+        "special": ""
+    },
+    {
+        "id": 36,
+        "type": "prose",
+        "lit_ml": "Priest :- Peace be to you all.",
+        "lit_en": "Priest :- Peace be to you all.",
+        "lit_mn": "Priest :- Peace be to you all.",
+        "special": ""
+    },
+    {
+        "id": 37,
+        "type": "prose",
+        "lit_ml": "People :- And to Thy spirit.",
+        "lit_en": "People :- And to Thy spirit.",
+        "lit_mn": "People :- And to Thy spirit.",
+        "special": ""
+    },
+    {
+        "id": 38,
+        "type": "prose",
+        "lit_ml": "Priest :- (Second Benediction) Nehívoon + + + … May the grace of Jesus Christ, the exalted God and our Saviour… + + + …",
+        "lit_en": "Priest :- (Second Benediction) Nehívoon + + + … May the grace of Jesus Christ, the exalted God and our Saviour… + + + …",
+        "lit_mn": "Priest :- (Second Benediction) Nehívoon + + + … May the grace of Jesus Christ, the exalted God and our Saviour… + + + …",
+        "special": ""
+    },
+    {
+        "id": 39,
+        "type": "subheading",
+        "lit_ml": "(The Chancel is veiled)",
+        "lit_en": "(The Chancel is veiled)",
+        "lit_mn": "(The Chancel is veiled)",
+        "special": ""
+    },
+    {
+        "id": 40,
+        "type": "subheading",
+        "lit_ml": "(Fraction, Consignation And Commixtion)",
+        "lit_en": "(Fraction, Consignation And Commixtion)",
+        "lit_mn": "(Fraction, Consignation And Commixtion)",
+        "special": ""
+    },
+    {
+        "id": 41,
+        "type": "subheading",
+        "lit_ml": "(While the Priest is performing the Fraction, consignation, and commixtion, the choir sings the following Catholic Hymn or some other Hymn prescribed for the occasion)",
+        "lit_en": "(While the Priest is performing the Fraction, consignation, and commixtion, the choir sings the following Catholic Hymn or some other Hymn prescribed for the occasion)",
+        "lit_mn": "(While the Priest is performing the Fraction, consignation, and commixtion, the choir sings the following Catholic Hymn or some other Hymn prescribed for the occasion)",
+        "special": ""
+    },
+    {
+        "id": 42,
+        "type": "heading",
+        "lit_ml": "CATHOLIC HYMN",
+        "lit_en": "CATHOLIC HYMN",
+        "lit_mn": "CATHOLIC HYMN",
+        "special": ""
+    },
+    {
+        "id": 43,
+        "type": "subheading",
+        "lit_ml": "(Bítharívo Deelok Hanono)",
+        "lit_en": "(Bítharívo Deelok Hanono)",
+        "lit_mn": "(Bítharívo Deelok Hanono)",
+        "special": ""
+    },
+    {
+        "id": 44,
+        "type": "prose",
+        "lit_ml": "Tune:- Mor Ephrem (Anpudayone Nin Vathil...)",
+        "lit_en": "Tune:- Mor Ephrem (Anpudayone Nin Vathil...)",
+        "lit_mn": "Tune:- Mor Ephrem (Anpudayone Nin Vathil...)",
+        "special": ""
+    },
+    {
+        "id": 45,
+        "type": "song",
+        "lit_ml": "Hearken, gracius Lord, we pray,\nKnocking at Thy door, we say,\nDo not Thou deny our pleas\nNeedy are Thy devotees.",
+        "lit_en": "Hearken, gracius Lord, we pray,\nKnocking at Thy door, we say,\nDo not Thou deny our pleas\nNeedy are Thy devotees.",
+        "lit_mn": "Hearken, gracius Lord, we pray,\nKnocking at Thy door, we say,\nDo not Thou deny our pleas\nNeedy are Thy devotees.",
+        "special": ""
+    },
+    {
+        "id": 46,
+        "type": "song",
+        "lit_ml": "When chastizing us, O God,\nSpare us from Thy wrathful rod;\nOpen to us mercyís door,\nKindly hear as we implore.",
+        "lit_en": "When chastizing us, O God,\nSpare us from Thy wrathful rod;\nOpen to us mercyís door,\nKindly hear as we implore.",
+        "lit_mn": "When chastizing us, O God,\nSpare us from Thy wrathful rod;\nOpen to us mercyís door,\nKindly hear as we implore.",
+        "special": ""
+    },
+    {
+        "id": 47,
+        "type": "song",
+        "lit_ml": "Hearken as we call to Thee\nIn ourselves so frail are We;\nHear our prayír, for good art Thou,\nGrant our needs, though great eínow",
+        "lit_en": "Hearken as we call to Thee\nIn ourselves so frail are We;\nHear our prayír, for good art Thou,\nGrant our needs, though great eínow",
+        "lit_mn": "Hearken as we call to Thee\nIn ourselves so frail are We;\nHear our prayír, for good art Thou,\nGrant our needs, though great eínow",
+        "special": ""
+    },
+    {
+        "id": 48,
+        "type": "song",
+        "lit_ml": "Mercy grant, Lord, mercy grant,\nThine abundant mercy grant;\nCount not Thou our evil deeds;\nKind one, who doth know our deeds.",
+        "lit_en": "Mercy grant, Lord, mercy grant,\nThine abundant mercy grant;\nCount not Thou our evil deeds;\nKind one, who doth know our deeds.",
+        "lit_mn": "Mercy grant, Lord, mercy grant,\nThine abundant mercy grant;\nCount not Thou our evil deeds;\nKind one, who doth know our deeds.",
+        "special": ""
+    },
+    {
+        "id": 49,
+        "type": "subheading",
+        "lit_ml": "(SropedíNooro)",
+        "lit_en": "(SropedíNooro)",
+        "lit_mn": "(SropedíNooro)",
+        "special": ""
+    },
+    {
+        "id": 50,
+        "type": "song",
+        "lit_ml": "Seraphim of fiery line\nSaw Isaiah in the shrine;\nEach six-wing-ed, round the throne,\nEver serving God alone;",
+        "lit_en": "Seraphim of fiery line\nSaw Isaiah in the shrine;\nEach six-wing-ed, round the throne,\nEver serving God alone;",
+        "lit_mn": "Seraphim of fiery line\nSaw Isaiah in the shrine;\nEach six-wing-ed, round the throne,\nEver serving God alone;",
+        "special": ""
+    },
+    {
+        "id": 51,
+        "type": "song",
+        "lit_ml": "Covered each with two his face\nLest he see that Holy Grace;\nCovered each with two his feet\nLest they burn in holy heat.",
+        "lit_en": "Covered each with two his face\nLest he see that Holy Grace;\nCovered each with two his feet\nLest they burn in holy heat.",
+        "lit_mn": "Covered each with two his face\nLest he see that Holy Grace;\nCovered each with two his feet\nLest they burn in holy heat.",
+        "special": ""
+    },
+    {
+        "id": 52,
+        "type": "song",
+        "lit_ml": "Two-wingíd flying they a vow,\nHoly, holy, holy, thou Holy art Thou, Lord of hosts\nPraise to Thee be, all our boast.",
+        "lit_en": "Two-wingíd flying they a vow,\nHoly, holy, holy, thou Holy art Thou, Lord of hosts\nPraise to Thee be, all our boast.",
+        "lit_mn": "Two-wingíd flying they a vow,\nHoly, holy, holy, thou Holy art Thou, Lord of hosts\nPraise to Thee be, all our boast.",
+        "special": ""
+    },
+    {
+        "id": 53,
+        "type": "heading",
+        "lit_ml": "CATHOLIC LITANY",
+        "lit_en": "CATHOLIC LITANY",
+        "lit_mn": "CATHOLIC LITANY",
+        "special": ""
+    },
+    {
+        "id": 54,
+        "type": "subheading",
+        "lit_ml": "(A general supplication)",
+        "lit_en": "(A general supplication)",
+        "lit_mn": "(A general supplication)",
+        "special": ""
+    },
+    {
+        "id": 55,
+        "type": "subheading",
+        "lit_ml": "(When the Priest has finished the commixtion, the Acolyte shall say one or more of the following litanies, as required)",
+        "lit_en": "(When the Priest has finished the commixtion, the Acolyte shall say one or more of the following litanies, as required)",
+        "lit_mn": "(When the Priest has finished the commixtion, the Acolyte shall say one or more of the following litanies, as required)",
+        "special": ""
+    },
+    {
+        "id": 56,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Let us beseech the Lord.",
+        "lit_en": "Acolyte :- Let us beseech the Lord.",
+        "lit_mn": "Acolyte :- Let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 57,
+        "type": "prose",
+        "lit_ml": "People :-Kurielaison.",
+        "lit_en": "People :-Kurielaison.",
+        "lit_mn": "People :-Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 58,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Barekmor. My brethren, always let us pray to the Lord, that by His mercy we be accounted worthy of the angel of peace and concord, mercy and compassion.",
+        "lit_en": "Acolyte :- Barekmor. My brethren, always let us pray to the Lord, that by His mercy we be accounted worthy of the angel of peace and concord, mercy and compassion.",
+        "lit_mn": "Acolyte :- Barekmor. My brethren, always let us pray to the Lord, that by His mercy we be accounted worthy of the angel of peace and concord, mercy and compassion.",
+        "special": ""
+    },
+    {
+        "id": 59,
+        "type": "prose",
+        "lit_ml": "People :- Grant us O Lord, by Thy mercy.",
+        "lit_en": "People :- Grant us O Lord, by Thy mercy.",
+        "lit_mn": "People :- Grant us O Lord, by Thy mercy.",
+        "special": ""
+    },
+    {
+        "id": 60,
+        "type": "prose",
+        "lit_ml": "Acolyte :- That there be peace to the churches; and welfare to the monasteries; and goodly preservation to their priests; and prosperous times to their members; my brethren, always, let us beseech the Lord.",
+        "lit_en": "Acolyte :- That there be peace to the churches; and welfare to the monasteries; and goodly preservation to their priests; and prosperous times to their members; my brethren, always, let us beseech the Lord.",
+        "lit_mn": "Acolyte :- That there be peace to the churches; and welfare to the monasteries; and goodly preservation to their priests; and prosperous times to their members; my brethren, always, let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 61,
+        "type": "prose",
+        "lit_ml": "People :- Grant us peace O Lord, by Thy mercy.",
+        "lit_en": "People :- Grant us peace O Lord, by Thy mercy.",
+        "lit_mn": "People :- Grant us peace O Lord, by Thy mercy.",
+        "special": ""
+    },
+    {
+        "id": 62,
+        "type": "prose",
+        "lit_ml": "Acolyte :- That we may be true Christians, who please God by good deeds, and by virtuous and pure lives; my brethren, always let us beseech the Lord.",
+        "lit_en": "Acolyte :- That we may be true Christians, who please God by good deeds, and by virtuous and pure lives; my brethren, always let us beseech the Lord.",
+        "lit_mn": "Acolyte :- That we may be true Christians, who please God by good deeds, and by virtuous and pure lives; my brethren, always let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 63,
+        "type": "prose",
+        "lit_ml": "People :- Enable us, O Lord, by Thy grace.",
+        "lit_en": "People :- Enable us, O Lord, by Thy grace.",
+        "lit_mn": "People :- Enable us, O Lord, by Thy grace.",
+        "special": ""
+    },
+    {
+        "id": 64,
+        "type": "prose",
+        "lit_ml": "Acolyte :- That we and our departed ones, and our community as a whole be saved from unquenchable fire, and undying worms; from hard treatments, and bitter wailing; and from the unending gnashing of teeth; My brethren, always let us beseech the Lord.",
+        "lit_en": "Acolyte :- That we and our departed ones, and our community as a whole be saved from unquenchable fire, and undying worms; from hard treatments, and bitter wailing; and from the unending gnashing of teeth; My brethren, always let us beseech the Lord.",
+        "lit_mn": "Acolyte :- That we and our departed ones, and our community as a whole be saved from unquenchable fire, and undying worms; from hard treatments, and bitter wailing; and from the unending gnashing of teeth; My brethren, always let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 65,
+        "type": "prose",
+        "lit_ml": "People :- Save us, O Lord, by Thy cross.",
+        "lit_en": "People :- Save us, O Lord, by Thy cross.",
+        "lit_mn": "People :- Save us, O Lord, by Thy cross.",
+        "special": ""
+    },
+    {
+        "id": 66,
+        "type": "prose",
+        "lit_ml": "Acolyte :- That we may be delivered from that bitter and fatal voice, that utters to those on the left, ìDepart from me, You accursed, and inherit the fire that consumes the wicked, and them that do iniquity;î my brethren, always let us beseech the Lord.",
+        "lit_en": "Acolyte :- That we may be delivered from that bitter and fatal voice, that utters to those on the left, ìDepart from me, You accursed, and inherit the fire that consumes the wicked, and them that do iniquity;î my brethren, always let us beseech the Lord.",
+        "lit_mn": "Acolyte :- That we may be delivered from that bitter and fatal voice, that utters to those on the left, ìDepart from me, You accursed, and inherit the fire that consumes the wicked, and them that do iniquity;î my brethren, always let us beseech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 67,
+        "type": "prose",
+        "lit_ml": "People :- Save us, O Lord, by Thy cross.",
+        "lit_en": "People :- Save us, O Lord, by Thy cross.",
+        "lit_mn": "People :- Save us, O Lord, by Thy cross.",
+        "special": ""
+    },
+    {
+        "id": 68,
+        "type": "prose",
+        "lit_ml": "Acolyte :- That we may deserve to hear that gladdening voice that says to those on the right Come and enter, blessed of my Father, and inherit the kingdom prepared for you, from before the foundation of the world; my brethren, always let us beesech the Lord.",
+        "lit_en": "Acolyte :- That we may deserve to hear that gladdening voice that says to those on the right Come and enter, blessed of my Father, and inherit the kingdom prepared for you, from before the foundation of the world; my brethren, always let us beesech the Lord.",
+        "lit_mn": "Acolyte :- That we may deserve to hear that gladdening voice that says to those on the right Come and enter, blessed of my Father, and inherit the kingdom prepared for you, from before the foundation of the world; my brethren, always let us beesech the Lord.",
+        "special": ""
+    },
+    {
+        "id": 69,
+        "type": "prose",
+        "lit_ml": "People :- Enable us, O Lord, by Thy grace.",
+        "lit_en": "People :- Enable us, O Lord, by Thy grace.",
+        "lit_mn": "People :- Enable us, O Lord, by Thy grace.",
+        "special": ""
+    },
+    {
+        "id": 70,
+        "type": "prose",
+        "lit_ml": "Acolyte :-Grant O Lord, our master, by Thy mercy and compassion, and bestow O Lord, by Thy grace and abundant mercy: Complete healing to the sick; comfort to the afflicted; liberation to the bound; return to those who are afar; and goodly preservation to those that are near. Concord and love to those that are at strife; reassembling to the dispersed; discovery to the lost; consolation to the wailing; composure to the oppressed; satisfaction to those in privation; encouragement and assistance to the widows; sustenance and sufficiency to the poor; complete forgiveness to sinners; High exaltation to the priesthood, and respectability to the acolyte. May Thy peace O Lord, reign in the kingdoms of the earth; and there be cessation of wars; repose to the dead; and to us forgiveness of debts and sins.",
+        "lit_en": "Acolyte :-Grant O Lord, our master, by Thy mercy and compassion, and bestow O Lord, by Thy grace and abundant mercy: Complete healing to the sick; comfort to the afflicted; liberation to the bound; return to those who are afar; and goodly preservation to those that are near. Concord and love to those that are at strife; reassembling to the dispersed; discovery to the lost; consolation to the wailing; composure to the oppressed; satisfaction to those in privation; encouragement and assistance to the widows; sustenance and sufficiency to the poor; complete forgiveness to sinners; High exaltation to the priesthood, and respectability to the acolyte. May Thy peace O Lord, reign in the kingdoms of the earth; and there be cessation of wars; repose to the dead; and to us forgiveness of debts and sins.",
+        "lit_mn": "Acolyte :-Grant O Lord, our master, by Thy mercy and compassion, and bestow O Lord, by Thy grace and abundant mercy: Complete healing to the sick; comfort to the afflicted; liberation to the bound; return to those who are afar; and goodly preservation to those that are near. Concord and love to those that are at strife; reassembling to the dispersed; discovery to the lost; consolation to the wailing; composure to the oppressed; satisfaction to those in privation; encouragement and assistance to the widows; sustenance and sufficiency to the poor; complete forgiveness to sinners; High exaltation to the priesthood, and respectability to the acolyte. May Thy peace O Lord, reign in the kingdoms of the earth; and there be cessation of wars; repose to the dead; and to us forgiveness of debts and sins.",
+        "special": ""
+    },
+    {
+        "id": 71,
+        "type": "prose",
+        "lit_ml": "People :- Grant us, O Lord, by Thy grace.",
+        "lit_en": "People :- Grant us, O Lord, by Thy grace.",
+        "lit_mn": "People :- Grant us, O Lord, by Thy grace.",
+        "special": ""
+    },
+    {
+        "id": 72,
+        "type": "prose",
+        "lit_ml": "Acolyte :- My brethren, let us continuously beseech the Lord, that there may be good remembrance to Saint Mary, Mother of God and to all the Saints and to the faithful departed.",
+        "lit_en": "Acolyte :- My brethren, let us continuously beseech the Lord, that there may be good remembrance to Saint Mary, Mother of God and to all the Saints and to the faithful departed.",
+        "lit_mn": "Acolyte :- My brethren, let us continuously beseech the Lord, that there may be good remembrance to Saint Mary, Mother of God and to all the Saints and to the faithful departed.",
+        "special": ""
+    },
+    {
+        "id": 73,
+        "type": "prose",
+        "lit_ml": "People :- May their prayers be to us a stronghold. Amen.",
+        "lit_en": "People :- May their prayers be to us a stronghold. Amen.",
+        "lit_mn": "People :- May their prayers be to us a stronghold. Amen.",
+        "special": ""
+    },
+    {
+        "id": 74,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Abundant mercy and compassion from Christ, our God, we have asked, and we continue to supplicate Him for our sake; and for the sake of our parents and our brethren; for our leaders and teachers; our departed ones and for one another. Let us give thanks to God the Father, the Lord of all things, and worship His Only begotten Son, and glorify His living Holy Spirit; and committing our lives into the hands of the all - compassionate Lord, let us pray for mercy.",
+        "lit_en": "Acolyte :- Abundant mercy and compassion from Christ, our God, we have asked, and we continue to supplicate Him for our sake; and for the sake of our parents and our brethren; for our leaders and teachers; our departed ones and for one another. Let us give thanks to God the Father, the Lord of all things, and worship His Only begotten Son, and glorify His living Holy Spirit; and committing our lives into the hands of the all - compassionate Lord, let us pray for mercy.",
+        "lit_mn": "Acolyte :- Abundant mercy and compassion from Christ, our God, we have asked, and we continue to supplicate Him for our sake; and for the sake of our parents and our brethren; for our leaders and teachers; our departed ones and for one another. Let us give thanks to God the Father, the Lord of all things, and worship His Only begotten Son, and glorify His living Holy Spirit; and committing our lives into the hands of the all - compassionate Lord, let us pray for mercy.",
+        "special": ""
+    },
+    {
+        "id": 75,
+        "type": "prose",
+        "lit_ml": "People :- O Good One, be compassionate to us, and have mercy upon us.",
+        "lit_en": "People :- O Good One, be compassionate to us, and have mercy upon us.",
+        "lit_mn": "People :- O Good One, be compassionate to us, and have mercy upon us.",
+        "special": ""
+    },
+    {
+        "id": 76,
+        "type": "newsection",
+        "lit_ml": "chapter 4",
+        "lit_en": "chapter 4",
+        "lit_mn": "chapter 4",
+        "special": ""
+    }
+]

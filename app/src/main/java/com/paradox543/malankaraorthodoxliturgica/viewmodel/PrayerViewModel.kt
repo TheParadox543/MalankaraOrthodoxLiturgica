@@ -1,8 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
@@ -10,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
 import com.paradox543.malankaraorthodoxliturgica.model.NavigationRepository
-import com.paradox543.malankaraorthodoxliturgica.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -64,9 +61,6 @@ class PrayerViewModel @Inject constructor(
     fun loadTranslations() = prayerRepository.loadTranslations(selectedLanguage.value)
     val translations = prayerRepository.loadTranslations(selectedLanguage.value)
 
-    private val _categoryPrayers = mutableStateOf<List<String>>(emptyList())
-    val categoryPrayers: State<List<String>> = _categoryPrayers
-
     private val _topBarNames = MutableStateFlow<List<String>>(emptyList())
     val topBarNames: StateFlow<List<String>> = _topBarNames
 
@@ -119,14 +113,6 @@ class PrayerViewModel @Inject constructor(
 
     fun setSectionNavigation(enabled: Boolean) {
         _sectionNavigation.value = enabled
-    }
-
-    fun getNextPrayer() {
-        updateIndex(1)
-    }
-
-    fun getPreviousPrayer() {
-        updateIndex(-1)
     }
 }
 

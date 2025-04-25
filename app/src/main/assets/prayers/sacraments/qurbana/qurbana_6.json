@@ -1,0 +1,810 @@
+[
+    {
+        "id": 1,
+        "type": "heading",
+        "lit_ml": "CHAPTER V",
+        "lit_en": "CHAPTER V",
+        "lit_mn": "CHAPTER V",
+        "special": ""
+    },
+    {
+        "id": 2,
+        "type": "heading",
+        "lit_ml": "THANKS - GIVING",
+        "lit_en": "THANKS - GIVING",
+        "lit_mn": "THANKS - GIVING",
+        "special": ""
+    },
+    {
+        "id": 3,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prayer)",
+        "lit_en": "Priest :-(Prayer)",
+        "lit_mn": "Priest :-(Prayer)",
+        "special": ""
+    },
+    {
+        "id": 4,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 5,
+        "type": "prose",
+        "lit_ml": "Priest :-Peace be to you all.",
+        "lit_en": "Priest :-Peace be to you all.",
+        "lit_mn": "Priest :-Peace be to you all.",
+        "special": ""
+    },
+    {
+        "id": 6,
+        "type": "prose",
+        "lit_ml": "People :-And to Thy spirit.",
+        "lit_en": "People :-And to Thy spirit.",
+        "lit_mn": "People :-And to Thy spirit.",
+        "special": ""
+    },
+    {
+        "id": 7,
+        "type": "prose",
+        "lit_ml": "(The third Inclination)",
+        "lit_en": "(The third Inclination)",
+        "lit_mn": "(The third Inclination)",
+        "special": ""
+    },
+    {
+        "id": 8,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Barekmor. After having received these holy mysteries, which have been administered, let us again bow our heads before the merciful Lord.",
+        "lit_en": "Acolyte :- Barekmor. After having received these holy mysteries, which have been administered, let us again bow our heads before the merciful Lord.",
+        "lit_mn": "Acolyte :- Barekmor. After having received these holy mysteries, which have been administered, let us again bow our heads before the merciful Lord.",
+        "special": ""
+    },
+    {
+        "id": 9,
+        "type": "prose",
+        "lit_ml": "People :- (We bow our heads) before Thee, our Lord and our God.",
+        "lit_en": "People :- (We bow our heads) before Thee, our Lord and our God.",
+        "lit_mn": "People :- (We bow our heads) before Thee, our Lord and our God.",
+        "special": ""
+    },
+    {
+        "id": 10,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prayer)",
+        "lit_en": "Priest :-(Prayer)",
+        "lit_mn": "Priest :-(Prayer)",
+        "special": ""
+    },
+    {
+        "id": 11,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 12,
+        "type": "prose",
+        "lit_ml": "Acolyte :-Barekmor.",
+        "lit_en": "Acolyte :-Barekmor.",
+        "lit_mn": "Acolyte :-Barekmor.",
+        "special": ""
+    },
+    {
+        "id": 13,
+        "type": "prose",
+        "lit_ml": "Priest :-(Hoothoma)",
+        "lit_en": "Priest :-(Hoothoma)",
+        "lit_mn": "Priest :-(Hoothoma)",
+        "special": ""
+    },
+    {
+        "id": 14,
+        "type": "subheading",
+        "lit_ml": "HYMN",
+        "lit_en": "HYMN",
+        "lit_mn": "HYMN",
+        "special": ""
+    },
+    {
+        "id": 15,
+        "type": "subheading",
+        "lit_ml": "Kurbono Dí Koreb Kohíno (Kaazhcha Ithil)",
+        "lit_en": "Kurbono Dí Koreb Kohíno (Kaazhcha Ithil)",
+        "lit_mn": "Kurbono Dí Koreb Kohíno (Kaazhcha Ithil)",
+        "special": ""
+    },
+    {
+        "id": 16,
+        "type": "song",
+        "lit_ml": "May this offered Eucharist\nBy the Priest, appease Thee, Lord,\nMay it gladden angels high,\nOur departed ones absolve.",
+        "lit_en": "May this offered Eucharist\nBy the Priest, appease Thee, Lord,\nMay it gladden angels high,\nOur departed ones absolve.",
+        "lit_mn": "May this offered Eucharist\nBy the Priest, appease Thee, Lord,\nMay it gladden angels high,\nOur departed ones absolve.",
+        "special": ""
+    },
+    {
+        "id": 17,
+        "type": "song",
+        "lit_ml": "By Thy Motherís plea,\nAnd of all Thy Saints,\nLord, absolve our sins,\nAnd with us, our dead.",
+        "lit_en": "By Thy Motherís plea,\nAnd of all Thy Saints,\nLord, absolve our sins,\nAnd with us, our dead.",
+        "lit_mn": "By Thy Motherís plea,\nAnd of all Thy Saints,\nLord, absolve our sins,\nAnd with us, our dead.",
+        "special": ""
+    },
+    {
+        "id": 18,
+        "type": "song",
+        "lit_ml": "Make us worthy, Lord,\nThy sweet voice to hear;\nCome, ye blessed ones,\nPossess the kingdom.",
+        "lit_en": "Make us worthy, Lord,\nThy sweet voice to hear;\nCome, ye blessed ones,\nPossess the kingdom.",
+        "lit_mn": "Make us worthy, Lord,\nThy sweet voice to hear;\nCome, ye blessed ones,\nPossess the kingdom.",
+        "special": ""
+    },
+    {
+        "id": 19,
+        "type": "heading",
+        "lit_ml": "DISMISSAL",
+        "lit_en": "DISMISSAL",
+        "lit_mn": "DISMISSAL",
+        "special": ""
+    },
+    {
+        "id": 20,
+        "type": "prose",
+        "lit_ml": "Priest :-Seloon bashlomo.",
+        "lit_en": "Priest :-Seloon bashlomo.",
+        "lit_mn": "Priest :-Seloon bashlomo.",
+        "special": ""
+    },
+    {
+        "id": 21,
+        "type": "prose",
+        "lit_ml": "Depart in Peace.......",
+        "lit_en": "Depart in Peace.......",
+        "lit_mn": "Depart in Peace.......",
+        "special": ""
+    },
+    {
+        "id": 22,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 23,
+        "type": "prose",
+        "lit_ml": "Priest :-Those who are distant, and those who are near.",
+        "lit_en": "Priest :-Those who are distant, and those who are near.",
+        "lit_mn": "Priest :-Those who are distant, and those who are near.",
+        "special": ""
+    },
+    {
+        "id": 24,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 25,
+        "type": "prose",
+        "lit_ml": "Priest :-And I, a frail and sinful servant.....",
+        "lit_en": "Priest :-And I, a frail and sinful servant.....",
+        "lit_mn": "Priest :-And I, a frail and sinful servant.....",
+        "special": ""
+    },
+    {
+        "id": 26,
+        "type": "prose",
+        "lit_ml": "People :-Amen. May the Lord accept your oblation and help us by your prayers.",
+        "lit_en": "People :-Amen. May the Lord accept your oblation and help us by your prayers.",
+        "lit_mn": "People :-Amen. May the Lord accept your oblation and help us by your prayers.",
+        "special": ""
+    },
+    {
+        "id": 27,
+        "type": "song",
+        "lit_ml": "Thy Blood and Body taken,\nBut for debts absolving, and for pardon,\nAnd for standing on Thy right\nHalleluiah - with clear faces.",
+        "lit_en": "Thy Blood and Body taken,\nBut for debts absolving, and for pardon,\nAnd for standing on Thy right\nHalleluiah - with clear faces.",
+        "lit_mn": "Thy Blood and Body taken,\nBut for debts absolving, and for pardon,\nAnd for standing on Thy right\nHalleluiah - with clear faces.",
+        "special": ""
+    },
+    {
+        "id": 28,
+        "type": "song",
+        "lit_ml": "From The Valley Of Delight - Give them to Drink.\nMay Thy Body eaten here, and Thy Life blood.\nWhat we drank in faith, O Lord,",
+        "lit_en": "From The Valley Of Delight - Give them to Drink.\nMay Thy Body eaten here, and Thy Life blood.\nWhat we drank in faith, O Lord,",
+        "lit_mn": "From The Valley Of Delight - Give them to Drink.\nMay Thy Body eaten here, and Thy Life blood.\nWhat we drank in faith, O Lord,",
+        "special": ""
+    },
+    {
+        "id": 29,
+        "type": "song",
+        "lit_ml": "May they bridge and passage be - for our spirits\nSaving us from flames of hell Halleluiah - life bestowing. Barekmor.",
+        "lit_en": "May they bridge and passage be - for our spirits\nSaving us from flames of hell Halleluiah - life bestowing. Barekmor.",
+        "lit_mn": "May they bridge and passage be - for our spirits\nSaving us from flames of hell Halleluiah - life bestowing. Barekmor.",
+        "special": ""
+    },
+    {
+        "id": 30,
+        "type": "song",
+        "lit_ml": "Praise the Son of God, who in - the upper room\nBrake His body for His friends;\nMingled He His precious blood, the cup of life,\nAdamís children to redeem Halleluiah - through absolving.",
+        "lit_en": "Praise the Son of God, who in - the upper room\nBrake His body for His friends;\nMingled He His precious blood, the cup of life,\nAdamís children to redeem Halleluiah - through absolving.",
+        "lit_mn": "Praise the Son of God, who in - the upper room\nBrake His body for His friends;\nMingled He His precious blood, the cup of life,\nAdamís children to redeem Halleluiah - through absolving.",
+        "special": ""
+    },
+    {
+        "id": 31,
+        "type": "song",
+        "lit_ml": "For these open hands outstretched, which\ntook from Thee\nSuch a pledge of life divine,\nBe they not shrunk at judgementís hour on that day\nWhen the blazing flames consume Halleluiah - but outstretched be.",
+        "lit_en": "For these open hands outstretched, which\ntook from Thee\nSuch a pledge of life divine,\nBe they not shrunk at judgementís hour on that day\nWhen the blazing flames consume Halleluiah - but outstretched be.",
+        "lit_mn": "For these open hands outstretched, which\ntook from Thee\nSuch a pledge of life divine,\nBe they not shrunk at judgementís hour on that day\nWhen the blazing flames consume Halleluiah - but outstretched be.",
+        "special": ""
+    },
+    {
+        "id": 32,
+        "type": "subtext",
+        "lit_ml": "MeníOlam vadamol Olam.........",
+        "lit_en": "MeníOlam vadamol Olam.........",
+        "lit_mn": "MeníOlam vadamol Olam.........",
+        "special": ""
+    },
+    {
+        "id": 33,
+        "type": "subtext",
+        "lit_ml": "Hearing sighs of all the dead, our redeemer",
+        "lit_en": "Hearing sighs of all the dead, our redeemer",
+        "lit_mn": "Hearing sighs of all the dead, our redeemer",
+        "special": ""
+    },
+    {
+        "id": 34,
+        "type": "subtext",
+        "lit_ml": "On the cross on Calvary;",
+        "lit_en": "On the cross on Calvary;",
+        "lit_mn": "On the cross on Calvary;",
+        "special": ""
+    },
+    {
+        "id": 35,
+        "type": "subtext",
+        "lit_ml": "Waxing strong He went and brake - that yoke of death",
+        "lit_en": "Waxing strong He went and brake - that yoke of death",
+        "lit_mn": "Waxing strong He went and brake - that yoke of death",
+        "special": ""
+    },
+    {
+        "id": 36,
+        "type": "subtext",
+        "lit_ml": "From the necks of those who died Halleluiah - and consoled them.",
+        "lit_en": "From the necks of those who died Halleluiah - and consoled them.",
+        "lit_mn": "From the necks of those who died Halleluiah - and consoled them.",
+        "special": ""
+    },
+    {
+        "id": 37,
+        "type": "subtext",
+        "lit_ml": "Moriyo rahemalain.........",
+        "lit_en": "Moriyo rahemalain.........",
+        "lit_mn": "Moriyo rahemalain.........",
+        "special": ""
+    },
+    {
+        "id": 38,
+        "type": "subheading",
+        "lit_ml": "(Ethro)",
+        "lit_en": "(Ethro)",
+        "lit_mn": "(Ethro)",
+        "special": ""
+    },
+    {
+        "id": 39,
+        "type": "prose",
+        "lit_ml": "Priest :O Lord, may this oblation........",
+        "lit_en": "Priest :O Lord, may this oblation........",
+        "lit_mn": "Priest :O Lord, may this oblation........",
+        "special": ""
+    },
+    {
+        "id": 40,
+        "type": "prose",
+        "lit_ml": "People :-Amen",
+        "lit_en": "People :-Amen",
+        "lit_mn": "People :-Amen",
+        "special": ""
+    },
+    {
+        "id": 41,
+        "type": "heading",
+        "lit_ml": "(Ekbo)",
+        "lit_en": "(Ekbo)",
+        "lit_mn": "(Ekbo)",
+        "special": ""
+    },
+    {
+        "id": 42,
+        "type": "heading",
+        "lit_ml": "(Tune:- En Mose Yab haye Líkubel)",
+        "lit_en": "(Tune:- En Mose Yab haye Líkubel)",
+        "lit_mn": "(Tune:- En Mose Yab haye Líkubel)",
+        "special": ""
+    },
+    {
+        "id": 43,
+        "type": "heading",
+        "lit_ml": "(Paathakanam Rubelinu Jeevan Mosa)",
+        "lit_en": "(Paathakanam Rubelinu Jeevan Mosa)",
+        "lit_mn": "(Paathakanam Rubelinu Jeevan Mosa)",
+        "special": ""
+    },
+    {
+        "id": 44,
+        "type": "song",
+        "lit_ml": "If by the blood of beasts - the law absolved Ruben who did sin,\nMuch more - shall be absolved - the faithful dead\nFor whom a living sacri-fice was made.\nKurielaison, Kurielaison, Kurielaison.\nLord have mercy, upon us,\nLord be kind and have mercy,\nAnswer Lord, and have mercy\nPraise to Thee, O Lord,\nPraise to Thee, O Lord,\nPraise to Thee, ever our hope. Barekmor.",
+        "lit_en": "If by the blood of beasts - the law absolved Ruben who did sin,\nMuch more - shall be absolved - the faithful dead\nFor whom a living sacri-fice was made.\nKurielaison, Kurielaison, Kurielaison.\nLord have mercy, upon us,\nLord be kind and have mercy,\nAnswer Lord, and have mercy\nPraise to Thee, O Lord,\nPraise to Thee, O Lord,\nPraise to Thee, ever our hope. Barekmor.",
+        "lit_mn": "If by the blood of beasts - the law absolved Ruben who did sin,\nMuch more - shall be absolved - the faithful dead\nFor whom a living sacri-fice was made.\nKurielaison, Kurielaison, Kurielaison.\nLord have mercy, upon us,\nLord be kind and have mercy,\nAnswer Lord, and have mercy\nPraise to Thee, O Lord,\nPraise to Thee, O Lord,\nPraise to Thee, ever our hope. Barekmor.",
+        "special": ""
+    },
+    {
+        "id": 45,
+        "type": "prose",
+        "lit_ml": "Priest :-Our Father Who Art in Heaven,",
+        "lit_en": "Priest :-Our Father Who Art in Heaven,",
+        "lit_mn": "Priest :-Our Father Who Art in Heaven,",
+        "special": ""
+    },
+    {
+        "id": 46,
+        "type": "prose",
+        "lit_ml": "People :-Hallowed be Thy Name.....",
+        "lit_en": "People :-Hallowed be Thy Name.....",
+        "lit_mn": "People :-Hallowed be Thy Name.....",
+        "special": ""
+    },
+    {
+        "id": 47,
+        "type": "prose",
+        "lit_ml": "Priest :-Hail Mary, Full of Grace,",
+        "lit_en": "Priest :-Hail Mary, Full of Grace,",
+        "lit_mn": "Priest :-Hail Mary, Full of Grace,",
+        "special": ""
+    },
+    {
+        "id": 48,
+        "type": "prose",
+        "lit_ml": "People :-The Lord is with Thee........",
+        "lit_en": "People :-The Lord is with Thee........",
+        "lit_mn": "People :-The Lord is with Thee........",
+        "special": ""
+    },
+    {
+        "id": 49,
+        "type": "heading",
+        "lit_ml": "POST COMMUNION",
+        "lit_en": "POST COMMUNION",
+        "lit_mn": "POST COMMUNION",
+        "special": ""
+    },
+    {
+        "id": 50,
+        "type": "heading",
+        "lit_ml": "(The Chancel is veiled)",
+        "lit_en": "(The Chancel is veiled)",
+        "lit_mn": "(The Chancel is veiled)",
+        "special": ""
+    },
+    {
+        "id": 51,
+        "type": "song",
+        "lit_ml": "High Priests and priests - and acolytes too Lord did set,\nAnd they - His church - adorn with ha-lleluiah songs;\nPriests offer ear - thly fruits, their ma - sterís\nsymbols true\nAnd call the Ho - ly Ghost with faith to come to them.",
+        "lit_en": "High Priests and priests - and acolytes too Lord did set,\nAnd they - His church - adorn with ha-lleluiah songs;\nPriests offer ear - thly fruits, their ma - sterís\nsymbols true\nAnd call the Ho - ly Ghost with faith to come to them.",
+        "lit_mn": "High Priests and priests - and acolytes too Lord did set,\nAnd they - His church - adorn with ha-lleluiah songs;\nPriests offer ear - thly fruits, their ma - sterís\nsymbols true\nAnd call the Ho - ly Ghost with faith to come to them.",
+        "special": ""
+    },
+    {
+        "id": 52,
+        "type": "song",
+        "lit_ml": "As them He chose - without compul - sion now He comes,\nAnd dwelling in - the bread He makes - it Body true,\nAnd brooding in - the mingled cup - He makes it Blood.\nLet us, the faith - ful cry aloud - Halleluiah.",
+        "lit_en": "As them He chose - without compul - sion now He comes,\nAnd dwelling in - the bread He makes - it Body true,\nAnd brooding in - the mingled cup - He makes it Blood.\nLet us, the faith - ful cry aloud - Halleluiah.",
+        "lit_mn": "As them He chose - without compul - sion now He comes,\nAnd dwelling in - the bread He makes - it Body true,\nAnd brooding in - the mingled cup - He makes it Blood.\nLet us, the faith - ful cry aloud - Halleluiah.",
+        "special": ""
+    },
+    {
+        "id": 53,
+        "type": "song",
+        "lit_ml": "The One on whom - fi - e - ry an - gels trembling gaze,\nThat One as Bread - and Wine upon - the altar see;\nAs angels clad - in lightning are - enflamed by Him,\nSo those who eat - them have their fa - ces made as bright.",
+        "lit_en": "The One on whom - fi - e - ry an - gels trembling gaze,\nThat One as Bread - and Wine upon - the altar see;\nAs angels clad - in lightning are - enflamed by Him,\nSo those who eat - them have their fa - ces made as bright.",
+        "lit_mn": "The One on whom - fi - e - ry an - gels trembling gaze,\nThat One as Bread - and Wine upon - the altar see;\nAs angels clad - in lightning are - enflamed by Him,\nSo those who eat - them have their fa - ces made as bright.",
+        "special": ""
+    },
+    {
+        "id": 54,
+        "type": "song",
+        "lit_ml": "The secrets of - the Son are for - the angels fire;\nSo witnesseth - Isaiah too - who them perceived;\nThose mysteries - within Godís bo - som deep concealed,\nFor Adamís sons - dispensed upon - the table, see",
+        "lit_en": "The secrets of - the Son are for - the angels fire;\nSo witnesseth - Isaiah too - who them perceived;\nThose mysteries - within Godís bo - som deep concealed,\nFor Adamís sons - dispensed upon - the table, see",
+        "lit_mn": "The secrets of - the Son are for - the angels fire;\nSo witnesseth - Isaiah too - who them perceived;\nThose mysteries - within Godís bo - som deep concealed,\nFor Adamís sons - dispensed upon - the table, see",
+        "special": ""
+    },
+    {
+        "id": 55,
+        "type": "song",
+        "lit_ml": "Alike the che - rubís chariot see - the altar set,\nìCelestial Powírs - gather round it - filled with awe great.\nThe body of - the Son upon - the altar see,\nWhere Adamís chil - dren raise Him on - their hands\nin state",
+        "lit_en": "Alike the che - rubís chariot see - the altar set,\nìCelestial Powírs - gather round it - filled with awe great.\nThe body of - the Son upon - the altar see,\nWhere Adamís chil - dren raise Him on - their hands\nin state",
+        "lit_mn": "Alike the che - rubís chariot see - the altar set,\nìCelestial Powírs - gather round it - filled with awe great.\nThe body of - the Son upon - the altar see,\nWhere Adamís chil - dren raise Him on - their hands\nin state",
+        "special": ""
+    },
+    {
+        "id": 56,
+        "type": "song",
+        "lit_ml": "Here clad as one - in silk the priest - doth stand to serve;\nFor those in need - he bringeth forth - dispersing gems.\nCelestials if - perchance be moved - to jealousy;\nThose cherubim - could envy well - the sons of men.",
+        "lit_en": "Here clad as one - in silk the priest - doth stand to serve;\nFor those in need - he bringeth forth - dispersing gems.\nCelestials if - perchance be moved - to jealousy;\nThose cherubim - could envy well - the sons of men.",
+        "lit_mn": "Here clad as one - in silk the priest - doth stand to serve;\nFor those in need - he bringeth forth - dispersing gems.\nCelestials if - perchance be moved - to jealousy;\nThose cherubim - could envy well - the sons of men.",
+        "special": ""
+    },
+    {
+        "id": 57,
+        "type": "song",
+        "lit_ml": "Behold, where Zi - on fixed the cross - to crucify,\nThere grew the erst-while tree that firm-ly held the Ram;\nBehold, where nails-affixed the hands-of Christ the son,\nThere once was I-saac freed from bonds - of sacrifice.\nThe Basílomo Kohíno (Thannejamanan)",
+        "lit_en": "Behold, where Zi - on fixed the cross - to crucify,\nThere grew the erst-while tree that firm-ly held the Ram;\nBehold, where nails-affixed the hands-of Christ the son,\nThere once was I-saac freed from bonds - of sacrifice.\nThe Basílomo Kohíno (Thannejamanan)",
+        "lit_mn": "Behold, where Zi - on fixed the cross - to crucify,\nThere grew the erst-while tree that firm-ly held the Ram;\nBehold, where nails-affixed the hands-of Christ the son,\nThere once was I-saac freed from bonds - of sacrifice.\nThe Basílomo Kohíno (Thannejamanan)",
+        "special": ""
+    },
+    {
+        "id": 58,
+        "type": "song",
+        "lit_ml": "O priest, who bea-reth mysteries-come thou in peace,\nDisbursing life-to all, the boun-ty of thy hand.\nO priest, we hail-thee, bearing ho-ly incense sweet,\nIncensing forth-its smoke, perfu-ming all the world.",
+        "lit_en": "O priest, who bea-reth mysteries-come thou in peace,\nDisbursing life-to all, the boun-ty of thy hand.\nO priest, we hail-thee, bearing ho-ly incense sweet,\nIncensing forth-its smoke, perfu-ming all the world.",
+        "lit_mn": "O priest, who bea-reth mysteries-come thou in peace,\nDisbursing life-to all, the boun-ty of thy hand.\nO priest, we hail-thee, bearing ho-ly incense sweet,\nIncensing forth-its smoke, perfu-ming all the world.",
+        "special": ""
+    },
+    {
+        "id": 59,
+        "type": "song",
+        "lit_ml": "O priest, come thou-in peace by Ho-ly Ghost sustained,\nWho bearest in-thy tongue the keys-of heavínís house.\nO priest, we hail-thee, thou whose bind-ing\nhere on earth\nIs bound by God-in heavínís height - Halleluiah",
+        "lit_en": "O priest, come thou-in peace by Ho-ly Ghost sustained,\nWho bearest in-thy tongue the keys-of heavínís house.\nO priest, we hail-thee, thou whose bind-ing\nhere on earth\nIs bound by God-in heavínís height - Halleluiah",
+        "lit_mn": "O priest, come thou-in peace by Ho-ly Ghost sustained,\nWho bearest in-thy tongue the keys-of heavínís house.\nO priest, we hail-thee, thou whose bind-ing\nhere on earth\nIs bound by God-in heavínís height - Halleluiah",
+        "special": ""
+    },
+    {
+        "id": 60,
+        "type": "song",
+        "lit_ml": "O priest, come thou-in peace, whose loo-sing here below\nIs loosed by hea-venís Lord on high-Kurielaison.\nTo God be praise-and grace to you-and pardon mine.\nAnd to St. James - that doctor good-remembrance be,\n(Bar Aloho dí Badí Beehooso)",
+        "lit_en": "O priest, come thou-in peace, whose loo-sing here below\nIs loosed by hea-venís Lord on high-Kurielaison.\nTo God be praise-and grace to you-and pardon mine.\nAnd to St. James - that doctor good-remembrance be,\n(Bar Aloho dí Badí Beehooso)",
+        "lit_mn": "O priest, come thou-in peace, whose loo-sing here below\nIs loosed by hea-venís Lord on high-Kurielaison.\nTo God be praise-and grace to you-and pardon mine.\nAnd to St. James - that doctor good-remembrance be,\n(Bar Aloho dí Badí Beehooso)",
+        "special": ""
+    },
+    {
+        "id": 61,
+        "type": "subheading",
+        "lit_ml": "(Than Belial Paapikale...)",
+        "lit_en": "(Than Belial Paapikale...)",
+        "lit_mn": "(Than Belial Paapikale...)",
+        "special": ""
+    },
+    {
+        "id": 62,
+        "type": "song",
+        "lit_ml": "O son of God-who sinners saved-by sacrifice,\nThy offíring shall-my passions quell-my pains dispel.\nO Good one, Thou-whose side was rent-on Calvary,\nquench thou my thirst-by blood and wa-ter shed\nfrom thee.",
+        "lit_en": "O son of God-who sinners saved-by sacrifice,\nThy offíring shall-my passions quell-my pains dispel.\nO Good one, Thou-whose side was rent-on Calvary,\nquench thou my thirst-by blood and wa-ter shed\nfrom thee.",
+        "lit_mn": "O son of God-who sinners saved-by sacrifice,\nThy offíring shall-my passions quell-my pains dispel.\nO Good one, Thou-whose side was rent-on Calvary,\nquench thou my thirst-by blood and wa-ter shed\nfrom thee.",
+        "special": ""
+    },
+    {
+        "id": 63,
+        "type": "subheading",
+        "lit_ml": "(When the priest cleans the holy vessels)",
+        "lit_en": "(When the priest cleans the holy vessels)",
+        "lit_mn": "(When the priest cleans the holy vessels)",
+        "special": ""
+    },
+    {
+        "id": 64,
+        "type": "subheading",
+        "lit_ml": "(Hymn:- Tune - Mor Ephrem)",
+        "lit_en": "(Hymn:- Tune - Mor Ephrem)",
+        "lit_mn": "(Hymn:- Tune - Mor Ephrem)",
+        "special": ""
+    },
+    {
+        "id": 65,
+        "type": "subheading",
+        "lit_ml": "(Kaphar Moríyo bespoogo)",
+        "lit_en": "(Kaphar Moríyo bespoogo)",
+        "lit_mn": "(Kaphar Moríyo bespoogo)",
+        "special": ""
+    },
+    {
+        "id": 66,
+        "type": "subheading",
+        "lit_ml": "(Ente kadangalashesham)",
+        "lit_en": "(Ente kadangalashesham)",
+        "lit_mn": "(Ente kadangalashesham)",
+        "special": ""
+    },
+    {
+        "id": 67,
+        "type": "song",
+        "lit_ml": "Clear, O Lord, my evíry debt\nBy Thy mercyís sponge, I pray;\nAll the sins I did to Thee\nBy Thy kindness me absolve.",
+        "lit_en": "Clear, O Lord, my evíry debt\nBy Thy mercyís sponge, I pray;\nAll the sins I did to Thee\nBy Thy kindness me absolve.",
+        "lit_mn": "Clear, O Lord, my evíry debt\nBy Thy mercyís sponge, I pray;\nAll the sins I did to Thee\nBy Thy kindness me absolve.",
+        "special": ""
+    },
+    {
+        "id": 68,
+        "type": "song",
+        "lit_ml": "Christ, life-giving king who art\nSince, I served Thy sacraments,\nMake me equal with the just\nAnd the righteous who Thee love.",
+        "lit_en": "Christ, life-giving king who art\nSince, I served Thy sacraments,\nMake me equal with the just\nAnd the righteous who Thee love.",
+        "lit_mn": "Christ, life-giving king who art\nSince, I served Thy sacraments,\nMake me equal with the just\nAnd the righteous who Thee love.",
+        "special": ""
+    },
+    {
+        "id": 69,
+        "type": "song",
+        "lit_ml": "May I serve Thee ever, Lord,\nIn the heavínly kingdom blest;\nThere for ever, serving Thee,\nNow and always, evermore.",
+        "lit_en": "May I serve Thee ever, Lord,\nIn the heavínly kingdom blest;\nThere for ever, serving Thee,\nNow and always, evermore.",
+        "lit_mn": "May I serve Thee ever, Lord,\nIn the heavínly kingdom blest;\nThere for ever, serving Thee,\nNow and always, evermore.",
+        "special": ""
+    },
+    {
+        "id": 70,
+        "type": "song",
+        "lit_ml": "Endless praise unto the Lord,\nGrace to you upon that day;\nMercy from the righteous judge\nBe to sinful, humble me.",
+        "lit_en": "Endless praise unto the Lord,\nGrace to you upon that day;\nMercy from the righteous judge\nBe to sinful, humble me.",
+        "lit_mn": "Endless praise unto the Lord,\nGrace to you upon that day;\nMercy from the righteous judge\nBe to sinful, humble me.",
+        "special": ""
+    },
+    {
+        "id": 71,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Mercy show, Lord, mercy show,",
+        "lit_en": "Acolyte :- Mercy show, Lord, mercy show,",
+        "lit_mn": "Acolyte :- Mercy show, Lord, mercy show,",
+        "special": ""
+    },
+    {
+        "id": 72,
+        "type": "song",
+        "lit_ml": "Show me mercy who am dullFor this priest and acolyte too\nWhoíve raised this Qurban to Thee",
+        "lit_en": "Show me mercy who am dullFor this priest and acolyte too\nWhoíve raised this Qurban to Thee",
+        "lit_mn": "Show me mercy who am dullFor this priest and acolyte too\nWhoíve raised this Qurban to Thee",
+        "special": ""
+    },
+    {
+        "id": 73,
+        "type": "subtext",
+        "lit_ml": "Stoumen Kalos. Kurielaison.",
+        "lit_en": "Stoumen Kalos. Kurielaison.",
+        "lit_mn": "Stoumen Kalos. Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 74,
+        "type": "subheading",
+        "lit_ml": "(Office For The Dead)",
+        "lit_en": "(Office For The Dead)",
+        "lit_mn": "(Office For The Dead)",
+        "special": ""
+    },
+    {
+        "id": 75,
+        "type": "prose",
+        "lit_ml": "Priest :-(Nízale Kulan.............) (Let us all pray................)",
+        "lit_en": "Priest :-(Nízale Kulan.............) (Let us all pray................)",
+        "lit_mn": "Priest :-(Nízale Kulan.............) (Let us all pray................)",
+        "special": ""
+    },
+    {
+        "id": 76,
+        "type": "prose",
+        "lit_ml": "People :- O merciful Lord, have mercy upon us and help us.",
+        "lit_en": "People :- O merciful Lord, have mercy upon us and help us.",
+        "lit_mn": "People :- O merciful Lord, have mercy upon us and help us.",
+        "special": ""
+    },
+    {
+        "id": 77,
+        "type": "prose",
+        "lit_ml": "Priest :- (ThesíBuhítho...........) Make us worthy to offer up praise........ (Promion)",
+        "lit_en": "Priest :- (ThesíBuhítho...........) Make us worthy to offer up praise........ (Promion)",
+        "lit_mn": "Priest :- (ThesíBuhítho...........) Make us worthy to offer up praise........ (Promion)",
+        "special": ""
+    },
+    {
+        "id": 78,
+        "type": "prose",
+        "lit_ml": "Priest :- Unto Him be glory who by His death.........",
+        "lit_en": "Priest :- Unto Him be glory who by His death.........",
+        "lit_mn": "Priest :- Unto Him be glory who by His death.........",
+        "special": ""
+    },
+    {
+        "id": 79,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 80,
+        "type": "subheading",
+        "lit_ml": "(Sedíro)",
+        "lit_en": "(Sedíro)",
+        "lit_mn": "(Sedíro)",
+        "special": ""
+    },
+    {
+        "id": 81,
+        "type": "prose",
+        "lit_ml": "Priest :-O Thou quickener of the dead.........",
+        "lit_en": "Priest :-O Thou quickener of the dead.........",
+        "lit_mn": "Priest :-O Thou quickener of the dead.........",
+        "special": ""
+    },
+    {
+        "id": 82,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 83,
+        "type": "prose",
+        "lit_ml": "Priest :-May we receive of God........",
+        "lit_en": "Priest :-May we receive of God........",
+        "lit_mn": "Priest :-May we receive of God........",
+        "special": ""
+    },
+    {
+        "id": 84,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 85,
+        "type": "prose",
+        "lit_ml": "Hymn :- Moran Yesu Míssiho",
+        "lit_en": "Hymn :- Moran Yesu Míssiho",
+        "lit_mn": "Hymn :- Moran Yesu Míssiho",
+        "special": ""
+    },
+    {
+        "id": 86,
+        "type": "song",
+        "lit_ml": "O Lord jesus, Messiah,\nNot for vengeance - nor our judgementbe for us here",
+        "lit_en": "O Lord jesus, Messiah,\nNot for vengeance - nor our judgementbe for us here",
+        "lit_mn": "O Lord jesus, Messiah,\nNot for vengeance - nor our judgementbe for us here",
+        "special": ""
+    },
+    {
+        "id": 87,
+        "type": "heading",
+        "lit_ml": "1. PRAYERS BEFORE RECEIVING HOLY COMMUNION",
+        "lit_en": "1. PRAYERS BEFORE RECEIVING HOLY COMMUNION",
+        "lit_mn": "1. PRAYERS BEFORE RECEIVING HOLY COMMUNION",
+        "special": ""
+    },
+    {
+        "id": 88,
+        "type": "prose",
+        "lit_ml": "Make me worthy O Lord, to receive Thee with holiness, that by the food of Thy holy Body, my lust may be lulled, and by the drink of Thy living chalice my passions may be quenched, and by Thee, I may become worthy of the absolution of debts, and the remission of sins, my Lord and my God, for ever. Amen.",
+        "lit_en": "Make me worthy O Lord, to receive Thee with holiness, that by the food of Thy holy Body, my lust may be lulled, and by the drink of Thy living chalice my passions may be quenched, and by Thee, I may become worthy of the absolution of debts, and the remission of sins, my Lord and my God, for ever. Amen.",
+        "lit_mn": "Make me worthy O Lord, to receive Thee with holiness, that by the food of Thy holy Body, my lust may be lulled, and by the drink of Thy living chalice my passions may be quenched, and by Thee, I may become worthy of the absolution of debts, and the remission of sins, my Lord and my God, for ever. Amen.",
+        "special": ""
+    },
+    {
+        "id": 89,
+        "type": "prose",
+        "lit_ml": "(Another)",
+        "lit_en": "(Another)",
+        "lit_mn": "(Another)",
+        "special": ""
+    },
+    {
+        "id": 90,
+        "type": "prose",
+        "lit_ml": "O Lord God, make me worthy, that my body may be hallowed by Thy holy body, and my soul made bright by Thy propitiating Blood. May they be to me for the remission of my debts, and the forgiveness of my sins, my Lord and my God, for ever. Amen.",
+        "lit_en": "O Lord God, make me worthy, that my body may be hallowed by Thy holy body, and my soul made bright by Thy propitiating Blood. May they be to me for the remission of my debts, and the forgiveness of my sins, my Lord and my God, for ever. Amen.",
+        "lit_mn": "O Lord God, make me worthy, that my body may be hallowed by Thy holy body, and my soul made bright by Thy propitiating Blood. May they be to me for the remission of my debts, and the forgiveness of my sins, my Lord and my God, for ever. Amen.",
+        "special": ""
+    },
+    {
+        "id": 91,
+        "type": "prose",
+        "lit_ml": "(Another)",
+        "lit_en": "(Another)",
+        "lit_mn": "(Another)",
+        "special": ""
+    },
+    {
+        "id": 92,
+        "type": "prose",
+        "lit_ml": "Make me worthy O Lord God, to receive thy holy body and drink thy propitiating Blood that I may inherit thy heavenly Kingdom, with all those who have pleased Thy good will, my Lord and my God, for ever. Amen.",
+        "lit_en": "Make me worthy O Lord God, to receive thy holy body and drink thy propitiating Blood that I may inherit thy heavenly Kingdom, with all those who have pleased Thy good will, my Lord and my God, for ever. Amen.",
+        "lit_mn": "Make me worthy O Lord God, to receive thy holy body and drink thy propitiating Blood that I may inherit thy heavenly Kingdom, with all those who have pleased Thy good will, my Lord and my God, for ever. Amen.",
+        "special": ""
+    },
+    {
+        "id": 93,
+        "type": "heading",
+        "lit_ml": "2. PRAYERS AFTER RECEIVING HOLY COMMUNION",
+        "lit_en": "2. PRAYERS AFTER RECEIVING HOLY COMMUNION",
+        "lit_mn": "2. PRAYERS AFTER RECEIVING HOLY COMMUNION",
+        "special": ""
+    },
+    {
+        "id": 94,
+        "type": "prose",
+        "lit_ml": "O Lord, thy exalted and holy mouth has promised and said ìWhoso eats my Body and drinks my Blood and believes in me, shall abide in me, and I in him, and I will raise him up on the last day,î O Lord, I have eaten Thy holy Body and drunk thy propitiating Blood. May they not become to me for judgement or vengeance or condemnation or indictment; but for remission of debts, and the forgiveness of sins, and for the blessed resurrection from the place of the dead, and for a joyful face before Thy awe-inspring throne, my Lord and my God, forever. Amen.",
+        "lit_en": "O Lord, thy exalted and holy mouth has promised and said ìWhoso eats my Body and drinks my Blood and believes in me, shall abide in me, and I in him, and I will raise him up on the last day,î O Lord, I have eaten Thy holy Body and drunk thy propitiating Blood. May they not become to me for judgement or vengeance or condemnation or indictment; but for remission of debts, and the forgiveness of sins, and for the blessed resurrection from the place of the dead, and for a joyful face before Thy awe-inspring throne, my Lord and my God, forever. Amen.",
+        "lit_mn": "O Lord, thy exalted and holy mouth has promised and said ìWhoso eats my Body and drinks my Blood and believes in me, shall abide in me, and I in him, and I will raise him up on the last day,î O Lord, I have eaten Thy holy Body and drunk thy propitiating Blood. May they not become to me for judgement or vengeance or condemnation or indictment; but for remission of debts, and the forgiveness of sins, and for the blessed resurrection from the place of the dead, and for a joyful face before Thy awe-inspring throne, my Lord and my God, forever. Amen.",
+        "special": ""
+    },
+    {
+        "id": 95,
+        "type": "prose",
+        "lit_ml": "(Another)",
+        "lit_en": "(Another)",
+        "lit_mn": "(Another)",
+        "special": ""
+    },
+    {
+        "id": 96,
+        "type": "prose",
+        "lit_ml": "Lord, I thank thee for Thy abundant mercy, by which I have been enabled to participate in Thy heavenly table. O Lord, let me not be condemned by the reception of Thy holy mysteries. But by becoming worthy of the fellowship with Thy Holy spirit, let me find portion and inheritance with all the righteous ones, from the beginning of the world. I will offer up praise and thanks giving to Thee, and to Thy only begotten Son, and to Thy Spirit all-holy, good, adorable and life giving, con-substantial with Thee, now and at all times, for ever. Amen.",
+        "lit_en": "Lord, I thank thee for Thy abundant mercy, by which I have been enabled to participate in Thy heavenly table. O Lord, let me not be condemned by the reception of Thy holy mysteries. But by becoming worthy of the fellowship with Thy Holy spirit, let me find portion and inheritance with all the righteous ones, from the beginning of the world. I will offer up praise and thanks giving to Thee, and to Thy only begotten Son, and to Thy Spirit all-holy, good, adorable and life giving, con-substantial with Thee, now and at all times, for ever. Amen.",
+        "lit_mn": "Lord, I thank thee for Thy abundant mercy, by which I have been enabled to participate in Thy heavenly table. O Lord, let me not be condemned by the reception of Thy holy mysteries. But by becoming worthy of the fellowship with Thy Holy spirit, let me find portion and inheritance with all the righteous ones, from the beginning of the world. I will offer up praise and thanks giving to Thee, and to Thy only begotten Son, and to Thy Spirit all-holy, good, adorable and life giving, con-substantial with Thee, now and at all times, for ever. Amen.",
+        "special": ""
+    },
+    {
+        "id": 97,
+        "type": "prose",
+        "lit_ml": "(Another)",
+        "lit_en": "(Another)",
+        "lit_mn": "(Another)",
+        "special": ""
+    },
+    {
+        "id": 98,
+        "type": "prose",
+        "lit_ml": "O Jesus Christ, our Lord, who by Thy will, and of Thy Father, and Thy Holy Spirit, offered Thyself as sacrifice for our sake, and made us to eat Thy holy Body and drink Thy sanctifying Blood, confirm me in Thy love and fill me with reverence to Thee. Establish me in Thy faith and adorn me with unblameable life. Forgive my sins and those of my departed ones, that continuously I may praise Thee, and God the Father who begat Thee, and Thy Holy Spirit, now and always for ever. Amen.",
+        "lit_en": "O Jesus Christ, our Lord, who by Thy will, and of Thy Father, and Thy Holy Spirit, offered Thyself as sacrifice for our sake, and made us to eat Thy holy Body and drink Thy sanctifying Blood, confirm me in Thy love and fill me with reverence to Thee. Establish me in Thy faith and adorn me with unblameable life. Forgive my sins and those of my departed ones, that continuously I may praise Thee, and God the Father who begat Thee, and Thy Holy Spirit, now and always for ever. Amen.",
+        "lit_mn": "O Jesus Christ, our Lord, who by Thy will, and of Thy Father, and Thy Holy Spirit, offered Thyself as sacrifice for our sake, and made us to eat Thy holy Body and drink Thy sanctifying Blood, confirm me in Thy love and fill me with reverence to Thee. Establish me in Thy faith and adorn me with unblameable life. Forgive my sins and those of my departed ones, that continuously I may praise Thee, and God the Father who begat Thee, and Thy Holy Spirit, now and always for ever. Amen.",
+        "special": ""
+    },
+    {
+        "id": 99,
+        "type": "heading",
+        "lit_ml": "3. PRAYER FOR RECEIVING THE BURKSO",
+        "lit_en": "3. PRAYER FOR RECEIVING THE BURKSO",
+        "lit_mn": "3. PRAYER FOR RECEIVING THE BURKSO",
+        "special": ""
+    },
+    {
+        "id": 100,
+        "type": "heading",
+        "lit_ml": "(Blessed Bread)",
+        "lit_en": "(Blessed Bread)",
+        "lit_mn": "(Blessed Bread)",
+        "special": ""
+    },
+    {
+        "id": 101,
+        "type": "prose",
+        "lit_ml": "Increase me, O Lord, with good things upon good things, and with blessings upon blessings from Thee, O Father, Son and Holy Spiritfor ever. Amen.",
+        "lit_en": "Increase me, O Lord, with good things upon good things, and with blessings upon blessings from Thee, O Father, Son and Holy Spiritfor ever. Amen.",
+        "lit_mn": "Increase me, O Lord, with good things upon good things, and with blessings upon blessings from Thee, O Father, Son and Holy Spiritfor ever. Amen.",
+        "special": ""
+    }
+]
