@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
@@ -12,19 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
-@RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNavBar(
@@ -34,14 +27,9 @@ fun TopNavBar(
     onActionClick: (() -> Unit)? = null // Optional Action button
 ) {
     val topBarNames by prayerViewModel.topBarNames.collectAsState()
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
-    var translations by remember { mutableStateOf(prayerViewModel.translations) }
+    val translations by prayerViewModel.translations.collectAsState()
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
     val isVisible = rememberScrollAwareVisibility()
-
-    LaunchedEffect(selectedLanguage) {
-        translations = prayerViewModel.loadTranslations()
-    }
 
     val title = if (currentRoute == "settings") {
         translations["malankara"] ?: "error"
@@ -61,7 +49,6 @@ fun TopNavBar(
             if (topBarNames != listOf("malankara") && currentRoute != "settings") {
                 IconButton(onClick = {
                     navController.navigateUp()
-//                    navViewModel.goBack()
                 }) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,

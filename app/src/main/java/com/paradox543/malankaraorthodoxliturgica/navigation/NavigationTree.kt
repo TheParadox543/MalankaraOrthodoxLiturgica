@@ -103,7 +103,9 @@ object NavigationTree {
                 prayer(createCompleteRoute(currentRoute, "Part I"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_1.json"),
                 prayer(createCompleteRoute(currentRoute, "Part II Chapter 1"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_2.json"),
                 prayer(createCompleteRoute(currentRoute, "Part II Chapter 2"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_3.json"),
-                prayer(createCompleteRoute(currentRoute, "Part II Chapter 3"), "${PrayerRoutes.QURBANA}/$currentRoute/qurbana_4.json")
+                prayer(createCompleteRoute(currentRoute, "Part II Chapter 3"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_4.json"),
+                prayer(createCompleteRoute(currentRoute, "Part II Chapter 4"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_5.json"),
+                prayer(createCompleteRoute(currentRoute, "Part II Chapter 5"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_6.json")
             )
         )
     }

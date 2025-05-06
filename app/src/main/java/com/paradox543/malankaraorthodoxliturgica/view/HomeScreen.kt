@@ -12,11 +12,11 @@ fun HomeScreen(
     navViewModel: NavViewModel,
 ) {
     val rootNode = navViewModel.rootNode
-    prayerViewModel.setTopBarKeys(listOf(rootNode.route))
+    prayerViewModel.setTopBarKeys(rootNode.route)
     SectionScreen(
         navController = navController,
         prayerViewModel = prayerViewModel,
         navViewModel = navViewModel,
-        nodes = rootNode.children
+        rootNode.children
     )
 }

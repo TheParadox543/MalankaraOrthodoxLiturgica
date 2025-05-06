@@ -1,10 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.os.Build
 import android.util.Log
-import androidx.activity.compose.BackHandler
-import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,17 +24,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
+import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
-@RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PrayerScreen(
     navController: NavController,
@@ -44,79 +52,91 @@ fun PrayerScreen(
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val filename by prayerViewModel.filename.collectAsState()
     val listState = rememberSaveable(saver = LazyListState.Saver){
         LazyListState()
     }
-    val lastLoadedFilename = remember { mutableStateOf<String?>(null)}
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val currentSiblingIndex by navViewModel.currentSiblingIndex.collectAsState()
+    val siblingNodes by navViewModel.siblingNodes.collectAsState()
+    val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
-//    LaunchedEffect(selectedFontSize) {
-//        if (selectedFontSize >= 20.sp) {
-//            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-//        } else {
-//            activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-//        }
-//    }
-    LaunchedEffect(filename) {
-        try {
-            prayerViewModel.loadPrayers(filename, language)
-            if (filename != lastLoadedFilename.value) {
-                listState.scrollToItem(0)
-                lastLoadedFilename.value = filename
-            }
-        } catch(e: Exception) {
-            Log.e("PrayerScreen", e.message?: "Could not infer error")
-            navController.navigate("dummy")
-        }
-    }
+    val currentFilename = siblingNodes[currentSiblingIndex!!].filename
+    prayerViewModel.loadPrayers(currentFilename, language)
+    prayerViewModel.setTopBarKeys(siblingNodes[currentSiblingIndex!!].route)
 
-//    BackHandler {
-//        navViewModel.goBack()
-//        if (navViewModel.isAtRoot()) {
-//            navController.navigateUp()
-//        }
-//    }
-
-    Box(
+    Scaffold(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = if (isLandscape) 80.dp else 8.dp), // Reduce width in landscape
-        contentAlignment = Alignment.Center
+            .nestedScroll(nestedScrollConnection)
+            .pointerInput(Unit) {
+                detectTapGestures { isVisible.value = !isVisible.value }
+            },
+        containerColor = Color.Transparent,
+        topBar = {
+            AnimatedVisibility(
+                visible = isVisible.value,
+                modifier = Modifier.zIndex(1f)
+            ) {
+                TopNavBar(
+                    navController = navController,
+                    prayerViewModel = prayerViewModel,
+                    navViewModel = navViewModel,
+                    onActionClick = { navController.navigate("settings") }
+                )
+            }
+        },
+        bottomBar = {
+            AnimatedVisibility(
+                visible = isVisible.value,
+                modifier = Modifier.zIndex(1f)
+            ) {
+                SectionNavBar(
+                    navController = navController,
+                    prayerViewModel = prayerViewModel,
+                    navViewModel = navViewModel
+                )
+            }
+        }
     ) {
-        LazyColumn(
+        Box(
             modifier = Modifier
-                .fillMaxWidth(if (isLandscape) 0.8f else 1f) // Limit width in landscape
-                .fillMaxHeight(if (isLandscape) 0.9f else 0.8f), // Limit height in portrait
-            state = listState
+                .fillMaxSize()
+                .padding(horizontal = if (isLandscape) 80.dp else 8.dp), // Reduce width in landscape
+            contentAlignment = Alignment.Center
         ) {
-            items(prayers) { prayer ->
-                when (prayer["type"]) {
-                    "heading" -> Heading(
-                        text = prayer["content"] ?: "",
-                        fontSize = selectedFontSize
-                    )
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth(if (isLandscape) 0.8f else 1f) // Limit width in landscape
+                    .fillMaxHeight(if (isLandscape) 0.9f else 0.8f), // Limit height in portrait
+                state = listState
+            ) {
+                items(prayers) { prayer ->
+                    when (prayer["type"]) {
+                        "heading" -> Heading(
+                            text = prayer["content"] ?: "",
+                            fontSize = selectedFontSize
+                        )
 
-                    "subheading" -> Subheading(
-                        text = prayer["content"] ?: "",
-                        fontSize = selectedFontSize
-                    )
+                        "subheading" -> Subheading(
+                            text = prayer["content"] ?: "",
+                            fontSize = selectedFontSize
+                        )
 
-                    "prose" -> Prose(
-                        text = prayer["content"] ?: "",
-                        fontSize = selectedFontSize
-                    )
+                        "prose" -> Prose(
+                            text = prayer["content"] ?: "",
+                            fontSize = selectedFontSize
+                        )
 
-                    "song" -> Song(
-                        text = prayer["content"] ?: "",
-                        fontSize = selectedFontSize
-                    )
+                        "song" -> Song(
+                            text = prayer["content"] ?: "",
+                            fontSize = selectedFontSize
+                        )
 
-                    "subtext" -> Subtext(
-                        text = prayer["content"] ?: "",
-                        fontSize = selectedFontSize
-                    )
+                        "subtext" -> Subtext(
+                            text = prayer["content"] ?: "",
+                            fontSize = selectedFontSize
+                        )
+                    }
                 }
             }
         }

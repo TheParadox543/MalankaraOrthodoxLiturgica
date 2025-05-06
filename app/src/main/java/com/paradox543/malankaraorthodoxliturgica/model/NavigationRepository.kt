@@ -8,6 +8,4 @@ import javax.inject.Singleton
 @Singleton
 class NavigationRepository @Inject constructor(
     @ApplicationContext private val context: Context
-) {
-
-}
+)
