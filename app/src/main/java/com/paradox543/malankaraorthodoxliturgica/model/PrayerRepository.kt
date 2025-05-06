@@ -2,8 +2,6 @@ package com.paradox543.malankaraorthodoxliturgica.model
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import org.json.JSONArray
 import org.json.JSONObject
 import javax.inject.Inject
@@ -13,12 +11,6 @@ import javax.inject.Singleton
 class PrayerRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    private val _selectedLanguage = MutableStateFlow("ml") // Default language
-    val selectedLanguage: StateFlow<String> = _selectedLanguage
-
-    private val _translations = MutableStateFlow<Map<String, Map<String, String>>>(emptyMap())
-    val translations: StateFlow<Map<String, Map<String, String>>> = _translations
-
     fun loadTranslations(language: String): Map<String, String>{
         val json = context.assets.open("translations.json").bufferedReader().use {it.readText()}
         val jsonObject = JSONObject(json)
@@ -29,9 +21,6 @@ class PrayerRepository @Inject constructor(
         }
         return translationMap
     }
-
-    private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
-    val prayers: StateFlow<List<Map<String, String>>> = _prayers
 
     fun loadPrayers(filename: String, language: String): List<Map<String, String>> {
         val json = context.assets.open("prayers/$filename").bufferedReader().use { it.readText() }

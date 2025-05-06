@@ -1,23 +1,32 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
+import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
@@ -28,34 +37,46 @@ fun SectionScreen(
     navViewModel: NavViewModel,
     nodes: List<PageNode>
 ) {
-    val translations = prayerViewModel.loadTranslations()
+    val translations by prayerViewModel.translations.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        itemsIndexed(nodes) { index, node ->
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-                    .clickable {
-                        if (node.children.isNotEmpty()) {
-                            navController.navigate("section/${node.route}")
-                        } else if (node.filename.isNotEmpty()) {
-                            prayerViewModel.setFilename(node.filename)
-                            prayerViewModel.setTopBarKeys(listOf(node.route))
-                            navViewModel.setCurrentSiblingIndex(index)
-                            navViewModel.setSiblingNodes(nodes)
-                            navController.navigate("prayerScreen")
-                        }
-                    },
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp)
-            ) {
-                Text(
-                    text = translations[node.route] ?: node.route,
-                    fontSize = selectedFontSize,
-                    modifier = Modifier.padding(16.dp)
-                )
+    Scaffold (
+        containerColor = Color.Transparent,
+        topBar = {
+            TopNavBar(
+                navController = navController,
+                prayerViewModel = prayerViewModel,
+                navViewModel = navViewModel
+            )
+        },
+        bottomBar = {BottomNavBar(navController = navController)}
+    ){ innerPadding ->
+        LazyColumn(modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)) {
+            itemsIndexed(nodes) { index, node ->
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .clickable {
+                            if (node.children.isNotEmpty()) {
+                                navController.navigate("section/${node.route}")
+                            } else if (node.filename.isNotEmpty()) {
+                                navViewModel.setSiblingNodes(nodes)
+                                navViewModel.setCurrentSiblingIndex(index)
+                                navController.navigate("prayerScreen/${node.route}")
+                            }
+                        },
+                    shape = RoundedCornerShape(8.dp),
+                    elevation = CardDefaults.cardElevation(4.dp)
+                ) {
+                    val text = node.route.split("_").last()
+                    Text(
+                        text = translations[text] ?: text,
+                        fontSize = selectedFontSize,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
             }
         }
     }

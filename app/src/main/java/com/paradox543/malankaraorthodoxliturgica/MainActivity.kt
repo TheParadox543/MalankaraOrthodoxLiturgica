@@ -15,15 +15,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             MalankaraOrthodoxLiturgicaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavGraph(Modifier.fillMaxSize().padding(innerPadding))
-                }
+                NavGraph(Modifier.fillMaxSize())
             }
         }
     }

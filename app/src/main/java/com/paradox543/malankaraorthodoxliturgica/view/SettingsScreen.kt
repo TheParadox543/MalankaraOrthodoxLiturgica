@@ -40,7 +40,11 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
 
-    val languages = listOf("English" to "en", "Malayalam" to "ml", "Manglish" to "mn")
+    val languages = listOf(
+        "Malayalam" to "ml",
+        "English" to "en",
+        "Manglish" to "mn"
+    )
     val fontSizes = listOf(
         "Very Small" to 12.sp,
         "Small" to 14.sp,

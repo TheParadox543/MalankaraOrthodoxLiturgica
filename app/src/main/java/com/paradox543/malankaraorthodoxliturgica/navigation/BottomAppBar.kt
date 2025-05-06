@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
+import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -15,21 +16,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
-
 @Composable
-fun BottomNavBar(navController: NavController, prayerViewModel: PrayerViewModel, navViewModel: NavViewModel) {
-    val sectionNavigation by prayerViewModel.sectionNavigation.collectAsState()
-    val isVisible = rememberScrollAwareVisibility() // Track scroll visibility
-
-    if (sectionNavigation) {
-        SeqNavBar(navController, prayerViewModel, navViewModel)
-    } else {
-        DefaultBottomNavBar(navController)
-    }
-}
-
-@Composable
-fun DefaultBottomNavBar(navController: NavController) {
+fun BottomNavBar(navController: NavController) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     NavigationBar {
@@ -51,15 +39,14 @@ fun DefaultBottomNavBar(navController: NavController) {
 }
 
 @Composable
-fun SeqNavBar(
+fun SectionNavBar(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     navViewModel: NavViewModel
 ) {
-    val topBarNames by prayerViewModel.topBarNames.collectAsState()
-    val currentNode = navViewModel.currentNode
-    val hasPrev by navViewModel.hasPrevSibling.collectAsState()
-    val hasNext by navViewModel.hasNextSibling.collectAsState()
+    val prevSibling by navViewModel.prevSiblingIndex.collectAsState()
+    val nextSibling by navViewModel.nextSiblingIndex.collectAsState()
+    Log.d("BottomBar", "prevSibling: $prevSibling, nextSibling: $nextSibling")
 
     NavigationBar {
         NavigationBarItem(
@@ -71,11 +58,8 @@ fun SeqNavBar(
             },
             label = { Text("Previous") },
             selected = false,
-            enabled = hasPrev,
-            onClick = {
-                val prevFileName = navViewModel.goToPrevSibling()
-                prayerViewModel.setFilename(prevFileName)
-            }
+            enabled = prevSibling != null,
+            onClick = {navViewModel.setCurrentSiblingIndex(prevSibling)}
         )
         NavigationBarItem(
             icon = {
@@ -86,11 +70,8 @@ fun SeqNavBar(
             },
             label = { Text("Next") },
             selected = false,
-            enabled = hasNext,
-            onClick = {
-                val nextFilename = navViewModel.goToNextSibling()
-                prayerViewModel.setFilename(nextFilename)
-            }
+            enabled = nextSibling != null,
+            onClick = {navViewModel.setCurrentSiblingIndex(nextSibling)}
         )
     }
 }
