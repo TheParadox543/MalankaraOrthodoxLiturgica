@@ -16,3 +16,6 @@ local.properties
 /app/build
 /app/release
 /app/debug
+/.idea
+/.kotlin
+.idea/kotlinc.xml

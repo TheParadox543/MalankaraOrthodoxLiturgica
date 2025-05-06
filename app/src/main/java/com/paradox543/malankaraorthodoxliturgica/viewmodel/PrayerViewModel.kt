@@ -1,33 +1,40 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
-import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
 import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PrayerViewModel(private val repository: PrayerRepository, private val dataStoreManager: DataStoreManager) : ViewModel() {
+@HiltViewModel
+class PrayerViewModel @Inject constructor(
+    private val prayerRepository: PrayerRepository,
+    private val dataStoreManager: DataStoreManager
+) : ViewModel() {
 
     private val _selectedLanguage = MutableStateFlow("ml")
     val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
 
     private val _selectedFontSize = MutableStateFlow(16.sp) // Default to medium
-    val selectedFontSize: StateFlow<TextUnit> = _selectedFontSize//.asStateFlow()
+    val selectedFontSize: StateFlow<TextUnit> = _selectedFontSize.asStateFlow()
+
+    private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
+    val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
     init {
         // Load stored language from DataStore
         viewModelScope.launch {
             dataStoreManager.selectedLanguage.collect { language ->
                 _selectedLanguage.value = language
+                loadTranslations(language)
             }
         }
         viewModelScope.launch {
@@ -42,7 +49,7 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
             dataStoreManager.saveLanguage(language)
         }
         _selectedLanguage.value = language
-        loadTranslations()
+        loadTranslations(language)
     }
 
     fun setFontSize(size: TextUnit) {
@@ -52,33 +59,18 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
         }
     }
 
-    fun loadTranslations() = repository.loadTranslations(selectedLanguage.value)
-    val translations = repository.loadTranslations(selectedLanguage.value)
-
-    fun getCategories() = repository.getCategories()
-
-    private val _categoryPrayers = mutableStateOf<List<String>>(emptyList())
-    val categoryPrayers: State<List<String>> = _categoryPrayers
-
-    fun loadCategoryPrayers(category: String) {
-        _categoryPrayers.value = repository.getCategoryPrayers(category)
+    private fun loadTranslations(language: String) {
+        viewModelScope.launch {
+            val loadedTranslations = prayerRepository.loadTranslations(language)
+            _translations.update { loadedTranslations }
+        }
     }
-
-    fun getGreatLentDays() = repository.getGreatLentDays()
-    fun getDayPrayers() = repository.getDayPrayers()
-    fun getQurbanaSections() = repository.getQurbanaSections()
 
     private val _topBarNames = MutableStateFlow<List<String>>(emptyList())
     val topBarNames: StateFlow<List<String>> = _topBarNames
 
-    fun setTopBarKeys(keys: List<String>) {
-        _topBarNames.value = keys
-    }
-
-    var sectionNames: List<String> = listOf()
-    fun updateTopBarLastKey(key: Int) {
-        _topBarNames.value = _topBarNames.value.dropLast(1) + sectionNames[key]
-
+    fun setTopBarKeys(route: String) {
+        _topBarNames.value = route.split("_")
     }
 
     private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
@@ -86,7 +78,7 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
 
     fun loadPrayers(filename: String, language: String) {
         try {
-            val prayers = repository.loadPrayers(filename, language)
+            val prayers = prayerRepository.loadPrayers(filename, language)
             _prayers.value = prayers
         } catch (e: Exception) {
             throw e
@@ -98,46 +90,6 @@ class PrayerViewModel(private val repository: PrayerRepository, private val data
 
     fun setFilename(newFilename: String) {
         _filename.value = newFilename
-    }
-
-    fun updateIndex(delta: Int) {
-        val regex = Regex("(\\d+)(\\.json)$") // Matches number before ".json"
-        val match = regex.find(_filename.value)
-
-        if (match != null) {
-            val currentIndex = match.groupValues[1].toInt()
-            val newIndex = currentIndex + delta
-            if (newIndex >= 0 && newIndex < sectionNames.size) { // Ensure index stays in range
-                Log.d("SectionNavigation", "New Index: $newIndex")
-                _filename.value = _filename.value.replace(regex, "$newIndex.json")
-                updateTopBarLastKey(newIndex)
-            }
-        }
-    }
-
-    private val _sectionNavigation = MutableStateFlow(false)
-    val sectionNavigation: StateFlow<Boolean> = _sectionNavigation
-
-    fun setSectionNavigation(enabled: Boolean) {
-        _sectionNavigation.value = enabled
-    }
-
-    fun getNextPrayer() {
-        updateIndex(1)
-    }
-
-    fun getPreviousPrayer() {
-        updateIndex(-1)
-    }
-}
-
-class PrayerViewModelFactory(private val repository: PrayerRepository, private val dataStore: DataStoreManager) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(PrayerViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return PrayerViewModel(repository, dataStore) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
 

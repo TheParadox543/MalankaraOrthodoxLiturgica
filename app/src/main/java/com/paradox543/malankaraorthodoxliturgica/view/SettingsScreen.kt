@@ -40,7 +40,11 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
 
-    val languages = listOf("English" to "en", "Malayalam" to "ml", "Manglish" to "mn")
+    val languages = listOf(
+        "Malayalam" to "ml",
+        "English" to "en",
+        "Manglish" to "mn"
+    )
     val fontSizes = listOf(
         "Very Small" to 12.sp,
         "Small" to 14.sp,
@@ -187,9 +191,9 @@ fun AboutAppScreen(navController: NavController) {
             Text("📜 Credits & Contributors", style = MaterialTheme.typography.headlineMedium)
             Text("- Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations")
             Text("- Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights")
-            Text("- Shaun John & Lisa Shibu George – Additional Text Translations and Preparation")
+            Text("- Shaun John, Lisa Shibu George & Sabu John – Additional Text Translations and Preparation")
             Spacer(Modifier.height(16.dp))
-            Text("Version: 1.0.0", style = MaterialTheme.typography.bodySmall)
+            Text("Version: 0.2.0", style = MaterialTheme.typography.bodySmall)
         }
     }
 }
