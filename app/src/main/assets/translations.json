@@ -4,12 +4,12 @@
     "ml": "മലങ്കര ഓർത്തഡോക്സ് ലിറ്റർജിക്ക",
     "mn": "Malankara Orthodox Liturgica"
   },
-  "daily_prayers": {
+  "dailyPrayers": {
     "en": "Daily Prayers",
     "ml": "നിത്യ പ്രാർത്ഥന",
     "mn": "Nitya Prarthana"
   },
-  "sacrament": {
+  "sacraments": {
     "en": "Sacramental Prayers",
     "ml": "കൂദാശകൾ ",
     "mn": "Koodashakal"
@@ -29,7 +29,7 @@
     "ml": "നിനവ പ്രാർത്ഥന",
     "mn": "Nineveh Prarthana"
   },
-  "great_lent": {
+  "greatLent": {
     "en": "Great Lent",
     "ml": "വലിയ നോമ്പ്",
     "mn": "Valiya Nombu"
@@ -94,24 +94,39 @@
     "ml": "രാത്രി",
     "mn": "Raathri"
   },
-  "prabatham": {
+  "prabhatham": {
     "en": "Morning Prayers",
     "ml": "പ്രഭാതം",
-    "mn": "Prabatham"
+    "mn": "Prabhatham"
   },
-  "3rd": {
+  "moonam": {
     "en": "Third Hour",
     "ml": "മൂന്നാം മണി",
     "mn": "Moonnam Mani"
   },
-  "6th": {
+  "aaraam": {
     "en": "Sixth Hour",
     "ml": "ആറാം മണി",
     "mn": "Aaram Mani"
   },
-  "9th": {
+  "onbatham": {
     "en": "Ninth Hour",
     "ml": "ഒൻപതാം മണി",
     "mn": "Onpathaam Mani"
+  },
+  "ring": {
+    "en": "Ceremony of Blessing of the Ring",
+    "ml": "മോതിരം വാഴ്വിന്റെ ക്രമം",
+    "mn": "Mothiram Vazhvinthe Kramam"
+  },
+  "crown": {
+    "en": "Ceremony of Blessing of the Crown",
+    "ml": "കിരീടം വാഴ്വിന്റെ ക്രമം",
+    "mn": "Kireedam Vazhvinthe Kramam"
+  },
+  "houseWarming": {
+    "en": "House Warming",
+    "ml": "ഭവനശുദ്ധീകരണം",
+    "mn": "Bhavanashudhikaranam"
   }
 }

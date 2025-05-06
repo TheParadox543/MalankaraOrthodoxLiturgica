@@ -1,0 +1,290 @@
+[
+    {
+        "id": 1,
+        "type": "heading",
+        "lit_ml": "Chapter 2",
+        "lit_en": "Chapter 2",
+        "lit_mn": "Chapter 2",
+        "special": ""
+    },
+    {
+        "id": 2,
+        "type": "subheading",
+        "lit_ml": "(First Benediction)",
+        "lit_en": "(First Benediction)",
+        "lit_mn": "(First Benediction)",
+        "special": ""
+    },
+    {
+        "id": 3,
+        "type": "subheading",
+        "lit_ml": "Priest :- Hoobo + + +..... May the love of God the Father + + +",
+        "lit_en": "Priest :- Hoobo + + +..... May the love of God the Father + + +",
+        "lit_mn": "Priest :- Hoobo + + +..... May the love of God the Father + + +",
+        "special": ""
+    },
+    {
+        "id": 4,
+        "type": "subheading",
+        "lit_ml": "People :- Amen. With Thy spirit.",
+        "lit_en": "People :- Amen. With Thy spirit.",
+        "lit_mn": "People :- Amen. With Thy spirit.",
+        "special": ""
+    },
+    {
+        "id": 5,
+        "type": "subheading",
+        "lit_ml": "Priest :- Up above where Christ sits...........",
+        "lit_en": "Priest :- Up above where Christ sits...........",
+        "lit_mn": "Priest :- Up above where Christ sits...........",
+        "special": ""
+    },
+    {
+        "id": 6,
+        "type": "subheading",
+        "lit_ml": "People :- With the Lord God are they, (our minds and our intellect and our hearts)",
+        "lit_en": "People :- With the Lord God are they, (our minds and our intellect and our hearts)",
+        "lit_mn": "People :- With the Lord God are they, (our minds and our intellect and our hearts)",
+        "special": ""
+    },
+    {
+        "id": 7,
+        "type": "subheading",
+        "lit_ml": "Priest :- Let us praise the Lord with reverence.",
+        "lit_en": "Priest :- Let us praise the Lord with reverence.",
+        "lit_mn": "Priest :- Let us praise the Lord with reverence.",
+        "special": ""
+    },
+    {
+        "id": 8,
+        "type": "subheading",
+        "lit_ml": "People :- Meet it is and right to do so.",
+        "lit_en": "People :- Meet it is and right to do so.",
+        "lit_mn": "People :- Meet it is and right to do so.",
+        "special": ""
+    },
+    {
+        "id": 9,
+        "type": "subheading",
+        "lit_ml": "Priest :- (Prays silently with waving of hands)",
+        "lit_en": "Priest :- (Prays silently with waving of hands)",
+        "lit_mn": "Priest :- (Prays silently with waving of hands)",
+        "special": ""
+    },
+    {
+        "id": 10,
+        "type": "subheading",
+        "lit_ml": "Priest :- (Prays aloud with hands outstretched)",
+        "lit_en": "Priest :- (Prays aloud with hands outstretched)",
+        "lit_mn": "Priest :- (Prays aloud with hands outstretched)",
+        "special": ""
+    },
+    {
+        "id": 11,
+        "type": "subheading",
+        "lit_ml": "People :- Holy, Holy, Holy, Lord God Almighty, by whose glory the heaven and the earth are filled, Hosanna in the highest. Blessed is He who has come, and is to come in the name of the Lord God, Glory be to Him in the highest.",
+        "lit_en": "People :- Holy, Holy, Holy, Lord God Almighty, by whose glory the heaven and the earth are filled, Hosanna in the highest. Blessed is He who has come, and is to come in the name of the Lord God, Glory be to Him in the highest.",
+        "lit_mn": "People :- Holy, Holy, Holy, Lord God Almighty, by whose glory the heaven and the earth are filled, Hosanna in the highest. Blessed is He who has come, and is to come in the name of the Lord God, Glory be to Him in the highest.",
+        "special": ""
+    },
+    {
+        "id": 12,
+        "type": "subheading",
+        "lit_ml": "(Priest prays silently with waving of hands)",
+        "lit_en": "(Priest prays silently with waving of hands)",
+        "lit_mn": "(Priest prays silently with waving of hands)",
+        "special": ""
+    },
+    {
+        "id": 13,
+        "type": "heading",
+        "lit_ml": "INSTITUTION",
+        "lit_en": "INSTITUTION",
+        "lit_mn": "INSTITUTION",
+        "special": ""
+    },
+    {
+        "id": 14,
+        "type": "prose",
+        "lit_ml": "Priest :- (Blesses the bread) Barek + + Vu Kades + ..........",
+        "lit_en": "Priest :- (Blesses the bread) Barek + + Vu Kades + ..........",
+        "lit_mn": "Priest :- (Blesses the bread) Barek + + Vu Kades + ..........",
+        "special": ""
+    },
+    {
+        "id": 15,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 16,
+        "type": "prose",
+        "lit_ml": "Priest :- (Blesses the Cup) Barek + + Vu Kades +.........",
+        "lit_en": "Priest :- (Blesses the Cup) Barek + + Vu Kades +.........",
+        "lit_mn": "Priest :- (Blesses the Cup) Barek + + Vu Kades +.........",
+        "special": ""
+    },
+    {
+        "id": 17,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 18,
+        "type": "heading",
+        "lit_ml": "ANAMNESIS (SACRIFICIAL MEMORIAL)",
+        "lit_en": "ANAMNESIS (SACRIFICIAL MEMORIAL)",
+        "lit_mn": "ANAMNESIS (SACRIFICIAL MEMORIAL)",
+        "special": ""
+    },
+    {
+        "id": 19,
+        "type": "prose",
+        "lit_ml": "Priest :- (Words of commemoration) This do ye in my memorial.... Adamo Dose No.",
+        "lit_en": "Priest :- (Words of commemoration) This do ye in my memorial.... Adamo Dose No.",
+        "lit_mn": "Priest :- (Words of commemoration) This do ye in my memorial.... Adamo Dose No.",
+        "special": ""
+    },
+    {
+        "id": 20,
+        "type": "prose",
+        "lit_ml": "People :- We commemorate Thy death, O Lord, and confess Thy resurrection, and await Thy second Coming. May Thy blessings be upon us all.",
+        "lit_en": "People :- We commemorate Thy death, O Lord, and confess Thy resurrection, and await Thy second Coming. May Thy blessings be upon us all.",
+        "lit_mn": "People :- We commemorate Thy death, O Lord, and confess Thy resurrection, and await Thy second Coming. May Thy blessings be upon us all.",
+        "special": ""
+    },
+    {
+        "id": 21,
+        "type": "prose",
+        "lit_ml": "Priest :- (Prayer aloud, at the end of which the priest raises aloft his hands saying) Labook Kad Omoro.",
+        "lit_en": "Priest :- (Prayer aloud, at the end of which the priest raises aloft his hands saying) Labook Kad Omoro.",
+        "lit_mn": "Priest :- (Prayer aloud, at the end of which the priest raises aloft his hands saying) Labook Kad Omoro.",
+        "special": ""
+    },
+    {
+        "id": 22,
+        "type": "prose",
+        "lit_ml": "People :- Have mercy upon us O God, Father Almighty. We praise Thee, we bless Thee, we worship thee, and we beseech Thee, O Lord God. O Good one, have compassion and mercy upon us.",
+        "lit_en": "People :- Have mercy upon us O God, Father Almighty. We praise Thee, we bless Thee, we worship thee, and we beseech Thee, O Lord God. O Good one, have compassion and mercy upon us.",
+        "lit_mn": "People :- Have mercy upon us O God, Father Almighty. We praise Thee, we bless Thee, we worship thee, and we beseech Thee, O Lord God. O Good one, have compassion and mercy upon us.",
+        "special": ""
+    },
+    {
+        "id": 23,
+        "type": "prose",
+        "lit_ml": "(Invocation of the Holy Spirit)",
+        "lit_en": "(Invocation of the Holy Spirit)",
+        "lit_mn": "(Invocation of the Holy Spirit)",
+        "special": ""
+    },
+    {
+        "id": 24,
+        "type": "subheading",
+        "lit_ml": "(The Priest prays silently with the waving of hands)",
+        "lit_en": "(The Priest prays silently with the waving of hands)",
+        "lit_mn": "(The Priest prays silently with the waving of hands)",
+        "special": ""
+    },
+    {
+        "id": 25,
+        "type": "prose",
+        "lit_ml": "Acolyte :- Barekmor. How solemn is this occasion, and how aweful this time, rny beloved, wherein the living Holy spirit comes down fluttering from the most elevated heights of heaven, and broods upon this Eucharist that is set, hallowing it: Stand ye still in reverence and pray.",
+        "lit_en": "Acolyte :- Barekmor. How solemn is this occasion, and how aweful this time, rny beloved, wherein the living Holy spirit comes down fluttering from the most elevated heights of heaven, and broods upon this Eucharist that is set, hallowing it: Stand ye still in reverence and pray.",
+        "lit_mn": "Acolyte :- Barekmor. How solemn is this occasion, and how aweful this time, rny beloved, wherein the living Holy spirit comes down fluttering from the most elevated heights of heaven, and broods upon this Eucharist that is set, hallowing it: Stand ye still in reverence and pray.",
+        "special": ""
+    },
+    {
+        "id": 26,
+        "type": "prose",
+        "lit_ml": "People :- Peace be with us and good-will be to us all.",
+        "lit_en": "People :- Peace be with us and good-will be to us all.",
+        "lit_mn": "People :- Peace be with us and good-will be to us all.",
+        "special": ""
+    },
+    {
+        "id": 27,
+        "type": "prose",
+        "lit_ml": "Priest :-(Aloud). Anin Moriyo.......... O Lord, answer me........",
+        "lit_en": "Priest :-(Aloud). Anin Moriyo.......... O Lord, answer me........",
+        "lit_mn": "Priest :-(Aloud). Anin Moriyo.......... O Lord, answer me........",
+        "special": ""
+    },
+    {
+        "id": 28,
+        "type": "prose",
+        "lit_ml": "People :- Kurielaison, Kurielaison, Kurielaison.",
+        "lit_en": "People :- Kurielaison, Kurielaison, Kurielaison.",
+        "lit_mn": "People :- Kurielaison, Kurielaison, Kurielaison.",
+        "special": ""
+    },
+    {
+        "id": 29,
+        "type": "subheading",
+        "lit_ml": "CONSECRATION",
+        "lit_en": "CONSECRATION",
+        "lit_mn": "CONSECRATION",
+        "special": ""
+    },
+    {
+        "id": 30,
+        "type": "prose",
+        "lit_ml": "Priest :-(Consecrates the bread) May the Holy Spirit...........+ + +...........",
+        "lit_en": "Priest :-(Consecrates the bread) May the Holy Spirit...........+ + +...........",
+        "lit_mn": "Priest :-(Consecrates the bread) May the Holy Spirit...........+ + +...........",
+        "special": ""
+    },
+    {
+        "id": 31,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 32,
+        "type": "prose",
+        "lit_ml": "Priest :-(Consecrates the wine) May the Holy Spirit...........+ + +............",
+        "lit_en": "Priest :-(Consecrates the wine) May the Holy Spirit...........+ + +............",
+        "lit_mn": "Priest :-(Consecrates the wine) May the Holy Spirit...........+ + +............",
+        "special": ""
+    },
+    {
+        "id": 33,
+        "type": "prose",
+        "lit_ml": "People :-Amen.",
+        "lit_en": "People :-Amen.",
+        "lit_mn": "People :-Amen.",
+        "special": ""
+    },
+    {
+        "id": 34,
+        "type": "prose",
+        "lit_ml": "Priest :-(Prayer aloud)",
+        "lit_en": "Priest :-(Prayer aloud)",
+        "lit_mn": "Priest :-(Prayer aloud)",
+        "special": ""
+    },
+    {
+        "id": 35,
+        "type": "prose",
+        "lit_ml": "People :-Amen",
+        "lit_en": "People :-Amen",
+        "lit_mn": "People :-Amen",
+        "special": ""
+    },
+    {
+        "id": 36,
+        "type": "newsection",
+        "lit_ml": "Chapter 3",
+        "lit_en": "Chapter 3",
+        "lit_mn": "Chapter 3",
+        "special": ""
+    }
+]
