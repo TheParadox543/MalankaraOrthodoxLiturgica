@@ -11,7 +11,6 @@ This mobile app provides a structured collection of prayers from the Malankara O
 - 🔤 **Multilingual Support** – Users can choose between **English, Malayalam, and Manglish**.  
 - 🔍 **Adjustable Font Size** – Choose from five font sizes for better readability.  
 - 📜 **Scrollable & Navigable** – Easily navigate between prayer sections with next/previous buttons.  
-- 🎨 **Custom Background** – Set a background image for a visually appealing experience.  
 - 📱 **Landscape Mode for Larger Text** – If the font size is large, the screen switches to landscape mode for better visibility.  
 
 ---
@@ -35,6 +34,10 @@ This mobile app provides a structured collection of prayers from the Malankara O
 🚀 **Bookmark & Favorites** – Save frequently used prayers.  
 🚀 **Pray Now** – Navigate to the prayer to be used based on the time of the day.   
 🚀 **Liturgical Calendar** – Provide users with the Liturgical Calendar.
+🚀 **Search Bar** - Implement a search bar that allows users to navigate to the screen and section of their choice with a few keywords.
+🚀 **QR code scanner** - Give a QR code that allows users to navigate to the required page.
+🚀 **Auto silent / DND mode** - Put the device to the relevant notification settings based on user preference.
+🚀 **Bible** - Read Bible and excerpts within the required pages.
 
 ---
 
