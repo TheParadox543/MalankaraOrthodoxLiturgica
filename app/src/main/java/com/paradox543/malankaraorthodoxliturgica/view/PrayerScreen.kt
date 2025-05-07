@@ -2,10 +2,12 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +15,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,6 +37,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,9 +60,7 @@ fun PrayerScreen(
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val listState = rememberSaveable(saver = LazyListState.Saver){
-        LazyListState()
-    }
+
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     val currentSiblingIndex by navViewModel.currentSiblingIndex.collectAsState()
@@ -64,6 +70,18 @@ fun PrayerScreen(
     val currentFilename = siblingNodes[currentSiblingIndex!!].filename
     prayerViewModel.loadPrayers(currentFilename, language)
     prayerViewModel.setTopBarKeys(siblingNodes[currentSiblingIndex!!].route)
+
+    val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
+        LazyListState()
+    }
+    val lastFilename = remember { mutableStateOf(currentFilename) }
+    // Scroll to the top whenever currentSiblingIndex changes
+    LaunchedEffect(currentFilename) {
+        if (currentFilename != lastFilename.value) {
+            listState.scrollToItem(0)
+            lastFilename.value = currentFilename
+        }
+    }
 
     Scaffold(
         modifier = Modifier
@@ -92,7 +110,6 @@ fun PrayerScreen(
             ) {
                 SectionNavBar(
                     navController = navController,
-                    prayerViewModel = prayerViewModel,
                     navViewModel = navViewModel
                 )
             }
@@ -112,6 +129,11 @@ fun PrayerScreen(
             ) {
                 items(prayers) { prayer ->
                     when (prayer["type"]) {
+                        "title" -> Title(
+                            text = prayer["content"] ?: "",
+                            fontSize = selectedFontSize
+                        )
+
                         "heading" -> Heading(
                             text = prayer["content"] ?: "",
                             fontSize = selectedFontSize
@@ -125,6 +147,12 @@ fun PrayerScreen(
                         "prose" -> Prose(
                             text = prayer["content"] ?: "",
                             fontSize = selectedFontSize
+                        )
+
+                        "collapsible" -> CollapsibleTextBlock(
+                            title = prayer["content"] ?: "",
+                            content = "",
+                            fontSize = selectedFontSize,
                         )
 
                         "song" -> Song(
@@ -141,6 +169,20 @@ fun PrayerScreen(
             }
         }
     }
+}
+
+@Composable
+fun Title(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+    Text(
+        text = text,
+        fontSize = fontSize * 5 / 4,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    )
 }
 
 @Composable
@@ -171,7 +213,7 @@ fun Subheading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit =
 @Composable
 fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
     Text(
-        text = text.replace("\\t", "    "),
+        text = text.replace("/t", "    "),
         fontSize = fontSize,
         textAlign = TextAlign.Justify,
         modifier = modifier
@@ -181,9 +223,51 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 }
 
 @Composable
+fun CollapsibleTextBlock(
+    title: String,
+    content: String,
+    fontSize: TextUnit = 16.sp
+) {
+    var expanded by remember { mutableStateOf(false) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                text = title,
+                fontSize = fontSize * 5 / 4,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline,
+                modifier = Modifier.weight(1f)
+            )
+            Icon(
+                imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                contentDescription = if (expanded) "Collapse" else "Expand"
+            )
+        }
+
+        AnimatedVisibility(visible = expanded) {
+            Text(
+                text = content,
+                fontSize = fontSize,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+        }
+    }
+}
+
+@Composable
 fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
     Text(
-        text = text.replace("\\t", "    "),
+        text = text.replace("/t", "    "),
         fontSize = fontSize,
         textAlign = TextAlign.Start,
         modifier = modifier
