@@ -84,12 +84,5 @@ class PrayerViewModel @Inject constructor(
             throw e
         }
     }
-
-    private val _filename = MutableStateFlow("")
-    val filename: StateFlow<String> = _filename
-
-    fun setFilename(newFilename: String) {
-        _filename.value = newFilename
-    }
 }
 
