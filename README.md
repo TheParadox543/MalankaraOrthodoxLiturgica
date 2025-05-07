@@ -33,11 +33,11 @@ This mobile app provides a structured collection of prayers from the Malankara O
 ## Upcoming Features  
 🚀 **Bookmark & Favorites** – Save frequently used prayers.  
 🚀 **Pray Now** – Navigate to the prayer to be used based on the time of the day.   
-🚀 **Liturgical Calendar** – Provide users with the Liturgical Calendar.
-🚀 **Search Bar** - Implement a search bar that allows users to navigate to the screen and section of their choice with a few keywords.
-🚀 **QR code scanner** - Give a QR code that allows users to navigate to the required page.
-🚀 **Auto silent / DND mode** - Put the device to the relevant notification settings based on user preference.
-🚀 **Bible** - Read Bible and excerpts within the required pages.
+🚀 **Liturgical Calendar** – Provide users with the Liturgical Calendar.  
+🚀 **Search Bar** - Implement a search bar that allows users to navigate to the screen and section of their choice with a few keywords.  
+🚀 **QR code scanner** - Give a QR code that allows users to navigate to the required page.  
+🚀 **Auto silent / DND mode** - Put the device to the relevant notification settings based on user preference.  
+🚀 **Bible** - Read Bible and excerpts within the required pages.  
 
 ---
 
