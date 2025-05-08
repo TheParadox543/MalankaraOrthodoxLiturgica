@@ -604,5 +604,9 @@
         "lit_en": "",
         "lit_ml": "സഭയും സുതരും-പിതൃസുത റൂഹായെ\nസ്തു‌തിഗീതത്തോ-ടൊത്തു വണങ്ങീടും.",
         "lit_mn": ""
+    },
+    {
+        "type": "link-collapsible",
+        "file": "praiseOfCherubims.json"
     }
 ]
