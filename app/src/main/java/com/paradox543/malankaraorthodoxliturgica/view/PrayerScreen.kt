@@ -8,6 +8,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -124,47 +126,92 @@ fun PrayerScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth(if (isLandscape) 0.8f else 1f) // Limit width in landscape
-                    .fillMaxHeight(if (isLandscape) 0.9f else 0.8f), // Limit height in portrait
+                    .fillMaxHeight(0.9f), // Limit height to avoid out of bounds
                 state = listState
             ) {
+                item {
+                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 28.dp))
+                }
                 items(prayers) { prayer ->
                     when (prayer["type"]) {
-                        "title" -> Title(
-                            text = prayer["content"] ?: "",
-                            fontSize = selectedFontSize
-                        )
+                        "title" -> {
+                            Title(
+                                text = (prayer["content"] ?: "").toString(),
+                                fontSize = selectedFontSize
+                            )
+                        }
 
-                        "heading" -> Heading(
-                            text = prayer["content"] ?: "",
-                            fontSize = selectedFontSize
-                        )
+                        "heading" -> {
+                            Heading(
+                                text = (prayer["content"] ?: "").toString(),
+                                fontSize = selectedFontSize
+                            )
+                        }
 
-                        "subheading" -> Subheading(
-                            text = prayer["content"] ?: "",
-                            fontSize = selectedFontSize
-                        )
+                        "subheading" -> {
+                            Subheading(
+                                text = (prayer["content"] ?: "").toString(),
+                                fontSize = selectedFontSize
+                            )
+                        }
 
-                        "prose" -> Prose(
-                            text = prayer["content"] ?: "",
-                            fontSize = selectedFontSize
-                        )
+                        "prose" -> {
+                            Prose(
+                                text = (prayer["content"] ?: "").toString(),
+                                fontSize = selectedFontSize
+                            )
+                        }
 
-                        "collapsible" -> CollapsibleTextBlock(
-                            title = prayer["content"] ?: "",
-                            content = "",
-                            fontSize = selectedFontSize,
-                        )
+                        "song" -> {
+                            Song(
+                                text = (prayer["content"] ?: "").toString(),
+                                fontSize = selectedFontSize
+                            )
+                        }
 
-                        "song" -> Song(
-                            text = prayer["content"] ?: "",
-                            fontSize = selectedFontSize
-                        )
+                        "subtext" -> {
+                            Subtext(
+                                text = (prayer["content"] ?: "").toString(),
+                                fontSize = selectedFontSize
+                            )
+                        }
 
-                        "subtext" -> Subtext(
-                            text = prayer["content"] ?: "",
-                            fontSize = selectedFontSize
-                        )
+                        "collapsible-block" -> {
+                            val title = prayer["title"] as? String ?: "Expandable Section"
+                            val items = prayer["items"] as? List<Map<String, String>> ?: emptyList()
+
+                            CollapsibleTextBlock(
+                                title = title,
+                                fontSize = selectedFontSize,
+                            ){
+                                Column {
+                                    items.forEach {item ->
+                                        when (item["type"]) {
+                                            "heading" -> Heading(text = item["content"] ?: "", fontSize = selectedFontSize)
+                                            "subheading" -> Subheading(text = item["content"] ?: "", fontSize = selectedFontSize)
+                                            "prose" -> Prose(text = item["content"] ?: "", fontSize = selectedFontSize)
+                                            "song" -> Song(text = item["content"] ?: "", fontSize = selectedFontSize)
+                                            "subtext" -> Subtext(text = item["content"] ?: "", fontSize = selectedFontSize)
+                                            else -> Text("Unknown collapsible item: ${item["type"]}")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        "error" -> {
+                            Text("Error: ${prayer["content"]}", color=MaterialTheme.colorScheme.error)
+                        }
+
+                        "newsection" -> {
+                            Text("")
+                        }
+                        else -> {
+                            Text("Unknown prayer element: ${prayer["type"]}")
+                        }
                     }
+                }
+                item {
+                    Spacer(Modifier.padding(if (isLandscape) 16.dp else 24.dp))
                 }
             }
         }
@@ -189,7 +236,7 @@ fun Title(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 fun Heading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
     Text(
         text = text,
-        fontSize = fontSize*5/4,
+        fontSize = fontSize * 5 / 4,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
         modifier = modifier
@@ -225,8 +272,8 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 @Composable
 fun CollapsibleTextBlock(
     title: String,
-    content: String,
-    fontSize: TextUnit = 16.sp
+    fontSize: TextUnit = 16.sp,
+    content: @Composable () -> Unit // Changed content to Composable Lambda
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -245,7 +292,7 @@ fun CollapsibleTextBlock(
                 text = title,
                 fontSize = fontSize * 5 / 4,
                 fontWeight = FontWeight.Bold,
-                textDecoration = TextDecoration.Underline,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f)
             )
             Icon(
@@ -255,11 +302,9 @@ fun CollapsibleTextBlock(
         }
 
         AnimatedVisibility(visible = expanded) {
-            Text(
-                text = content,
-                fontSize = fontSize,
-                modifier = Modifier.padding(top = 8.dp)
-            )
+            Column{
+                content()
+            }
         }
     }
 }
