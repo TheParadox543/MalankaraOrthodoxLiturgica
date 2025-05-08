@@ -6,6 +6,14 @@
         "lit_mn": ""
     },
     {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "psalm51.json"
+    },
+    {
         "type": "heading",
         "lit_en": "",
         "lit_ml": "(എനിയോനൊ-മശീഹദാഖ്)",
@@ -150,7 +158,7 @@
         "lit_mn": ""
     },
     {
-        "type": "heoding",
+        "type": "heading",
         "lit_en": "",
         "lit_ml": "(കോലോ-കുക്കോയൊ)",
         "lit_mn": ""
@@ -182,7 +190,7 @@
     {
         "type": "song",
         "lit_en": "",
-        "lit_ml": "ധാന്യൻ സഹജേ! മൃതിയാൽ നി-ന്നെ നീക്കി\nക-ന്നികളൊപ്പം-മണവറയിൽ-പാർപ്പിച്ചോൻ.",
+        "lit_ml": "ധന്യൻ സഹജേ! മൃതിയാൽ നി-ന്നെ നീക്കി\nക-ന്നികളൊപ്പം-മണവറയിൽ-പാർപ്പിച്ചോൻ.",
         "lit_mn": ""
     },
     {

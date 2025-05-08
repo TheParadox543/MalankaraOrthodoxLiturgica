@@ -6,6 +6,10 @@
         "lit_mn": ""
     },
     {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
         "type": "heading",
         "lit_en": "",
         "lit_ml": "(കുക്കിലിയോൻ എട്ടാം നിറം)",
@@ -526,5 +530,9 @@
         "lit_en": "",
         "lit_ml": "ആർദ്രതയാൽ നാഥാ ദേവാ!\nദാസിക്കേകണമേ പുണ്യം\nനിൻ മഹിമോദയ നാൾ തന്നിൽ\nനിർത്തണമേ വലമായിവളെ.",
         "lit_mn": ""
+    },
+    {
+        "type": "link-collapsible",
+        "file": "praiseOfCherubims.json"
     }
 ]

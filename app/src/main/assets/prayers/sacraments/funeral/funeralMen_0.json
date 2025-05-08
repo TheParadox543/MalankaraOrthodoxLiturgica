@@ -6,6 +6,14 @@
         "lit_mn": ""
     },
     {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "psalm51.json"
+    },
+    {
         "type": "heading",
         "lit_en": "",
         "lit_ml": "(എനിയോനൊ- കാദീശൊദശ്റീശ്‌കിൻത്തെ)",

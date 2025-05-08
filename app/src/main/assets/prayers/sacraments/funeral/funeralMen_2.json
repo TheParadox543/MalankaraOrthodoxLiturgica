@@ -6,6 +6,10 @@
         "lit_mn": ""
     },
     {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
         "type": "heading",
         "lit_en": "",
         "lit_ml": "(കുക്കിലിയോൻ)",
