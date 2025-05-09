@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
-import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -14,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun BottomNavBar(navController: NavController) {
@@ -41,12 +39,10 @@ fun BottomNavBar(navController: NavController) {
 @Composable
 fun SectionNavBar(
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
     navViewModel: NavViewModel
 ) {
     val prevSibling by navViewModel.prevSiblingIndex.collectAsState()
     val nextSibling by navViewModel.nextSiblingIndex.collectAsState()
-    Log.d("BottomBar", "prevSibling: $prevSibling, nextSibling: $nextSibling")
 
     NavigationBar {
         NavigationBarItem(

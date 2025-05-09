@@ -73,8 +73,8 @@ class PrayerViewModel @Inject constructor(
         _topBarNames.value = route.split("_")
     }
 
-    private val _prayers = MutableStateFlow<List<Map<String, String>>>(emptyList())
-    val prayers: StateFlow<List<Map<String, String>>> = _prayers
+    private val _prayers = MutableStateFlow<List<Map<String, Any>>>(emptyList())
+    val prayers: StateFlow<List<Map<String, Any>>> = _prayers
 
     fun loadPrayers(filename: String, language: String) {
         try {
@@ -83,13 +83,6 @@ class PrayerViewModel @Inject constructor(
         } catch (e: Exception) {
             throw e
         }
-    }
-
-    private val _filename = MutableStateFlow("")
-    val filename: StateFlow<String> = _filename
-
-    fun setFilename(newFilename: String) {
-        _filename.value = newFilename
     }
 }
 

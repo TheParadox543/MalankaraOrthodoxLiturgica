@@ -51,8 +51,8 @@
   },
   "funeral": {
     "en": "Funeral",
-    "ml": "സവിശേഷം",
-    "mn": "Savishesham"
+    "ml": "ശവസംസ്ക്കാരം",
+    "mn": "Funeral"
   },
   "monday": {
     "en": "Monday",
@@ -128,5 +128,70 @@
     "en": "House Warming",
     "ml": "ഭവനശുദ്ധീകരണം",
     "mn": "Bhavanashudhikaranam"
+  },
+  "preparation": {
+    "en": "Preparation",
+    "ml": "",
+    "mn": "Prarambham"
+  },
+  "partOne": {
+    "en": "Part I",
+    "ml": "Bagham I",
+    "mn": "Bagham I"
+  },
+  "chapterOne": {
+    "en": "Part II Chapter 1",
+    "ml": "",
+    "mn": ""
+  },
+  "chapterTwo": {
+    "en": "Part II Chapter 2",
+    "ml": "",
+    "mn": ""
+  },
+  "chapterThree": {
+    "en": "Part II Chapter 3",
+    "ml": "",
+    "mn": ""
+  },
+  "chapterFour": {
+    "en": "Part II Chapter 4",
+    "ml": "",
+    "mn": ""
+  },
+  "chapterFive": {
+    "en": "Part II Chapter 5",
+    "ml": "",
+    "mn": ""
+  },
+  "men": {
+    "en": "Men",
+    "ml": "പുരുഷന്മാർ",
+    "mn": "Men"
+  },
+  "women": {
+    "en": "Women",
+    "ml": "സ്ത്രീകൾ",
+    "mn": "Women"
+  },
+  "firstPart": {
+    "en": "Part One",
+    "ml": "ഒന്നാം ശുശ്രൂഷ",
+    "mn": "Part One"
+  },
+  "secondPart": {
+    "en": "Part Two",
+    "ml": "രണ്ടാം ശുശ്രൂഷ",
+    "mn": "Part Two"
+  },
+  "thirdPart": {
+    "en": "Part Three",
+    "ml": "മൂന്നാം ശുശ്രൂഷ",
+    "mn": "Part Three"
+  },
+  "fourthPart": {
+    "en": "Part Four",
+    "ml": "നാലാം ശുശ്രൂഷ",
+    "mn": "Part Four"
   }
 }
