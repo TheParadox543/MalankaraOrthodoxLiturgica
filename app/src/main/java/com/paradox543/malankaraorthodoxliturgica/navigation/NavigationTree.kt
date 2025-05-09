@@ -10,6 +10,9 @@ object PrayerRoutes {
     const val GREAT_LENT = "greatLent"
     const val SLEEBA = "sleeba"
     const val QURBANA = "qurbana"
+    const val FUNERAL = "funeral"
+    const val MEN = "men"
+    const val WOMEN = "women"
 
 //    Time Routes
     const val SANDHYA = "sandhya"
@@ -20,6 +23,12 @@ object PrayerRoutes {
     const val AARAAM = "aaraam"
     const val ONBATHAM = "onbatham"
     const val WEDDING = "wedding"
+
+//    Parts
+    const val FIRSTPART = "firstPart"
+    const val SECONDPART = "secondPart"
+    const val THIRDPART = "thirdPart"
+    const val FOURTHPART = "fourthPart"
 }
 
 object NavigationTree {
@@ -89,7 +98,8 @@ object NavigationTree {
             children = listOf(
                 qurbanaSection(currentRoute),
                 weddingSection(currentRoute),
-                prayer("houseWarming", "${PrayerRoutes.SACRAMENTS}/houseWarming.json")
+                prayer("houseWarming", "${PrayerRoutes.SACRAMENTS}/houseWarming.json"),
+                funeralSection(currentRoute)
             )
         )
     }
@@ -99,13 +109,13 @@ object NavigationTree {
         return PageNode(
             route = currentRoute,
             children = listOf(
-                prayer(createCompleteRoute(currentRoute, "Preparation"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_0.json"),
-                prayer(createCompleteRoute(currentRoute, "Part I"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_1.json"),
-                prayer(createCompleteRoute(currentRoute, "Part II Chapter 1"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_2.json"),
-                prayer(createCompleteRoute(currentRoute, "Part II Chapter 2"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_3.json"),
-                prayer(createCompleteRoute(currentRoute, "Part II Chapter 3"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_4.json"),
-                prayer(createCompleteRoute(currentRoute, "Part II Chapter 4"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_5.json"),
-                prayer(createCompleteRoute(currentRoute, "Part II Chapter 5"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_6.json")
+                prayer(createCompleteRoute(currentRoute, "preparation"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_0.json"),
+                prayer(createCompleteRoute(currentRoute, "partOne"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_1.json"),
+                prayer(createCompleteRoute(currentRoute, "chapterOne"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_2.json"),
+                prayer(createCompleteRoute(currentRoute, "chapterTwo"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_3.json"),
+                prayer(createCompleteRoute(currentRoute, "chapterThree"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_4.json"),
+                prayer(createCompleteRoute(currentRoute, "chapterFour"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_5.json"),
+                prayer(createCompleteRoute(currentRoute, "chapterFive"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_6.json")
             )
         )
     }
@@ -117,6 +127,43 @@ object NavigationTree {
             children = listOf(
                 prayer(createCompleteRoute(currentRoute, "ring"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/ring.json"),
                 prayer(createCompleteRoute(currentRoute, "crown"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/crown.json")
+            )
+        )
+    }
+
+    private fun funeralSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.FUNERAL
+        return PageNode(
+            route = currentRoute,
+            children = listOf(
+                menSection(),
+                womenSection()
+            )
+        )
+    }
+
+    private fun menSection(): PageNode{
+        val currentRoute = PrayerRoutes.MEN
+        return PageNode(
+            route = currentRoute,
+            children = listOf(
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.FIRSTPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralMen_0.json"),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.SECONDPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralMen_1.json"),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.THIRDPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralMen_2.json"),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.FOURTHPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralMen_3.json")
+            )
+        )
+    }
+
+    private fun womenSection(): PageNode {
+        val currentRoute = PrayerRoutes.WOMEN
+        return PageNode(
+            route = currentRoute,
+            children = listOf(
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.FIRSTPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralWomen_0.json"),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.SECONDPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralWomen_1.json"),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.THIRDPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralWomen_2.json"),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.FOURTHPART), filename = "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.FUNERAL}/funeralWomen_3.json")
             )
         )
     }
