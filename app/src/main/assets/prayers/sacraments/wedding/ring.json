@@ -16,12 +16,8 @@
         "special": ""
     },
     {
-        "id": 3,
-        "type": "heading",
-        "lit_ml": "കൗമ",
-        "lit_mn": "Kauma",
-        "lit_en": "",
-        "special": ""
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
     },
     {
         "id": 4,
@@ -177,7 +173,7 @@
     },
     {
         "id": 23,
-        "type": "link",
+        "type": "link-collapsible",
         "file": "psalm51.json"
     },
     {

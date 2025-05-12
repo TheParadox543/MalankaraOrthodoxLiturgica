@@ -80,37 +80,37 @@
     "mn": "Velliyaazhcha"
   },
   "sandhya": {
-    "en": "Evening Prayers",
+    "en": "Vespers",
     "ml": "സന്ധ്യാ",
     "mn": "Sandhya"
   },
   "soothara": {
-    "en": "Matin",
+    "en": "Compline",
     "ml": "സൂത്താറാ",
     "mn": "Soothara"
   },
   "rathri": {
-    "en": "Night Prayers",
+    "en": "Matins",
     "ml": "രാത്രി",
     "mn": "Raathri"
   },
   "prabhatham": {
-    "en": "Morning Prayers",
+    "en": "Prime",
     "ml": "പ്രഭാതം",
     "mn": "Prabhatham"
   },
   "moonam": {
-    "en": "Third Hour",
+    "en": "Terce",
     "ml": "മൂന്നാം മണി",
     "mn": "Moonnam Mani"
   },
   "aaraam": {
-    "en": "Sixth Hour",
+    "en": "Sext",
     "ml": "ആറാം മണി",
     "mn": "Aaram Mani"
   },
   "onbatham": {
-    "en": "Ninth Hour",
+    "en": "None",
     "ml": "ഒൻപതാം മണി",
     "mn": "Onpathaam Mani"
   },

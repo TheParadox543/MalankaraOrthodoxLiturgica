@@ -14,8 +14,9 @@ object PrayerRoutes {
     const val FUNERAL = "funeral"
     const val MEN = "men"
     const val WOMEN = "women"
+    const val WEDDING = "wedding"
 
-//    Time Routes
+//    Canonical Routes
     const val SANDHYA = "sandhya"
     const val SOOTHARA = "soothara"
     const val RATHRI = "rathri"
@@ -23,7 +24,6 @@ object PrayerRoutes {
     const val MOONAM = "moonam"
     const val AARAAM = "aaraam"
     const val ONBATHAM = "onbatham"
-    const val WEDDING = "wedding"
 
 //    Parts
     const val FIRSTPART = "firstPart"
@@ -49,7 +49,7 @@ object NavigationTree {
             children = listOf(
                 sleebaSection(currentRoute),
                 sheemaSection(currentRoute),
-                greatLentSection(currentRoute)
+//                greatLentSection(currentRoute)
             )
         )
     }
@@ -124,7 +124,7 @@ object NavigationTree {
         return PageNode(
             route = currentRoute,
             children = listOf(
-                qurbanaSection(currentRoute),
+//                qurbanaSection(currentRoute),
                 weddingSection(currentRoute),
                 prayer("houseWarming", "${PrayerRoutes.SACRAMENTS}/houseWarming.json"),
                 funeralSection(currentRoute)

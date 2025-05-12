@@ -1,13 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
-import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -19,7 +16,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.paradox543.malankaraorthodoxliturgica.view.AboutAppScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
@@ -76,10 +72,10 @@ fun NavGraph(modifier: Modifier = Modifier) {
             PrayerScreen(navController, prayerViewModel, navViewModel)
         }
         composable("settings") {
-            SettingsScreen(navController, prayerViewModel)
+            SettingsScreen(navController, prayerViewModel, navViewModel)
         }
-        composable("aboutApp") {
-            AboutAppScreen(navController)
-        }
+//        composable("aboutApp") {
+//            AboutAppScreen()
+//        }
     }
 }
