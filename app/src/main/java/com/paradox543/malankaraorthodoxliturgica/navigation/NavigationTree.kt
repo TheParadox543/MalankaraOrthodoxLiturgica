@@ -9,12 +9,14 @@ object PrayerRoutes {
     const val SACRAMENTS = "sacraments"
     const val GREAT_LENT = "greatLent"
     const val SLEEBA = "sleeba"
+    const val SHEEMA = "sheema"
     const val QURBANA = "qurbana"
     const val FUNERAL = "funeral"
     const val MEN = "men"
     const val WOMEN = "women"
+    const val WEDDING = "wedding"
 
-//    Time Routes
+//    Canonical Routes
     const val SANDHYA = "sandhya"
     const val SOOTHARA = "soothara"
     const val RATHRI = "rathri"
@@ -22,7 +24,6 @@ object PrayerRoutes {
     const val MOONAM = "moonam"
     const val AARAAM = "aaraam"
     const val ONBATHAM = "onbatham"
-    const val WEDDING = "wedding"
 
 //    Parts
     const val FIRSTPART = "firstPart"
@@ -47,7 +48,8 @@ object NavigationTree {
             route = currentRoute,
             children = listOf(
                 sleebaSection(currentRoute),
-                greatLentSection(currentRoute)
+                sheemaSection(currentRoute),
+//                greatLentSection(currentRoute)
             )
         )
     }
@@ -63,6 +65,16 @@ object NavigationTree {
         )
     }
 
+    private fun sheemaSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.SHEEMA
+        return PageNode(
+            route = currentRoute,
+            children = listOf(
+                day(currentRoute, "monday")
+            )
+        )
+    }
+
     private fun greatLentSection(parentRoute: String): PageNode {
         val currentRoute = PrayerRoutes.GREAT_LENT
         return PageNode(
@@ -71,6 +83,22 @@ object NavigationTree {
                 lentDay(currentRoute, "monday"),
                 lentDay(currentRoute, "tuesday"),
                 lentDay(currentRoute, "thursday")
+            )
+        )
+    }
+
+    private fun day(parentRoute: String, day: String): PageNode {
+        val currentRoute = createCompleteRoute(parentRoute, day)
+        return PageNode(
+            route = currentRoute,
+            children = listOf(
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.SANDHYA), "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/${currentRoute}_0.json".lowercase()),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.SOOTHARA), "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/${currentRoute}_1.json".lowercase()),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.RATHRI), "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/${currentRoute}_2.json".lowercase()),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.PRABHATHAM), "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/${currentRoute}_3.json".lowercase()),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.MOONAM), "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/${currentRoute}_4.json".lowercase()),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.AARAAM), "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/${currentRoute}_5.json".lowercase()),
+                prayer(createCompleteRoute(currentRoute, PrayerRoutes.ONBATHAM), "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/${currentRoute}_6.json".lowercase())
             )
         )
     }
@@ -96,7 +124,7 @@ object NavigationTree {
         return PageNode(
             route = currentRoute,
             children = listOf(
-                qurbanaSection(currentRoute),
+//                qurbanaSection(currentRoute),
                 weddingSection(currentRoute),
                 prayer("houseWarming", "${PrayerRoutes.SACRAMENTS}/houseWarming.json"),
                 funeralSection(currentRoute)
