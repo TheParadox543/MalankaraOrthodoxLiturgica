@@ -1,7 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.model
 
 import android.content.Context
-import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okio.IOException
 import org.json.JSONArray
@@ -63,7 +62,10 @@ class PrayerRepository @Inject constructor(
                     else -> {
                         var content = prayerObject.optString("lit_${language}")
                         if (content.isEmpty()) {
-                            content = prayerObject.optString("lit_ml")
+                            return listOf(mapOf(
+                                "type" to "error",
+                                "content" to "Content in this language has not been added yet."
+                            ))
                         }
                         prayerList.add(mapOf("type" to type, "content" to content))
                     }
