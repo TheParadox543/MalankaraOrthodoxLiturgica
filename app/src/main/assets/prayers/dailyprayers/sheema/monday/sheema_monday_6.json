@@ -1,0 +1,56 @@
+[
+    {
+        "type": "title",
+        "lit_en": "",
+        "lit_ml": "ഒമ്പതാംമണി",
+        "lit_mn": ""
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "കോലൊ",
+        "lit_mn": ""
+    },
+    {
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(ഹവീലൊലനപ്ശൊ)",
+        "lit_mn": ""
+    },
+    {
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "സ്നാനം തന്നിൽനിന്നെയണിഞ്ഞിഹ നിൻമെയ് രക്തങ്ങൾ\nകൈക്കൊണ്ടോരായ് നിന്നുടെ ശരണേ മൃതരായോർക്കോർമ്മ\nഭൂസ്വർഗ്ഗങ്ങളിലേകണമെ ആത്മാക്കൾക്കാശ്വാസമതും\n/tനാഥാ! നൽകണമെ.",
+        "lit_mn": ""
+    },
+    {
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ-ശുബഹൊ-മെനഓലം",
+        "lit_mn": ""
+    },
+    {
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "ആദാമുടയോനാദാം നന്ദനനാദാമിൻ ജനകൻ\nതാഴ്മയോടാദത്തെ സന്ദർശിച്ചാൻ പാതാളത്തിൽ\nമൃതിയെനീക്കി നിനക്കേകും ഞാനോഹരിയെന്ന\n/tരുളിയതാം വാഗ്ദാനം പോലെ",
+        "lit_mn": ""
+    },
+    {
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയൊ..",
+        "lit_mn": ""
+    },
+    {
+        "type": "link",
+        "file": "karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

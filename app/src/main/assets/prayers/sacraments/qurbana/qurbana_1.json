@@ -578,25 +578,25 @@
     {
         "id": 73,
         "type": "prose",
-        "lit_ml": "\\t+ Who For Us Men, And For Our Salvation, Came Down From Heaven,",
-        "lit_en": "\\t+ Who For Us Men, And For Our Salvation, Came Down From Heaven,",
-        "lit_mn": "\\t+ Who For Us Men, And For Our Salvation, Came Down From Heaven,",
+        "lit_ml": "/t+ Who For Us Men, And For Our Salvation, Came Down From Heaven,",
+        "lit_en": "/t+ Who For Us Men, And For Our Salvation, Came Down From Heaven,",
+        "lit_mn": "/t+ Who For Us Men, And For Our Salvation, Came Down From Heaven,",
         "special": ""
     },
     {
         "id": 74,
         "type": "prose",
-        "lit_ml": "\\t+ And Was Incarnate Of The Holy Virgin Mary, Mother Of God, By The Holy Ghost, And Became Man:",
-        "lit_en": "\\t+ And Was Incarnate Of The Holy Virgin Mary, Mother Of God, By The Holy Ghost, And Became Man:",
-        "lit_mn": "\\t+ And Was Incarnate Of The Holy Virgin Mary, Mother Of God, By The Holy Ghost, And Became Man:",
+        "lit_ml": "/t+ And Was Incarnate Of The Holy Virgin Mary, Mother Of God, By The Holy Ghost, And Became Man:",
+        "lit_en": "/t+ And Was Incarnate Of The Holy Virgin Mary, Mother Of God, By The Holy Ghost, And Became Man:",
+        "lit_mn": "/t+ And Was Incarnate Of The Holy Virgin Mary, Mother Of God, By The Holy Ghost, And Became Man:",
         "special": ""
     },
     {
         "id": 75,
         "type": "prose",
-        "lit_ml": "\\t+ And Was Crucified For Us In The Days Of Pontius Pilate; And suffered, And Died, And Was Buried:",
-        "lit_en": "\\t+ And Was Crucified For Us In The Days Of Pontius Pilate; And suffered, And Died, And Was Buried:",
-        "lit_mn": "\\t+ And Was Crucified For Us In The Days Of Pontius Pilate; And suffered, And Died, And Was Buried:",
+        "lit_ml": "/t+ And Was Crucified For Us In The Days Of Pontius Pilate; And suffered, And Died, And Was Buried:",
+        "lit_en": "/t+ And Was Crucified For Us In The Days Of Pontius Pilate; And suffered, And Died, And Was Buried:",
+        "lit_mn": "/t+ And Was Crucified For Us In The Days Of Pontius Pilate; And suffered, And Died, And Was Buried:",
         "special": ""
     },
     {

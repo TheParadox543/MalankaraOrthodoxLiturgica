@@ -137,17 +137,17 @@
     {
         "id": 17,
         "type": "song",
-        "lit_ml": "വാഴ്‌‌വേറ്റബ്രാഹാം--താതൻ തൻ ഭവനം\n\\tമൂന്നു പുമാന്മാരാൽ\n\\tസാക്ഷാൽ മണവാളൻ മശിഹാ\n\\tസക്കായ് ഭവനത്തെ വാഴ്ത്തി,\nസ്വാരാധകരേ - റിയ വീട്ടിൽ - ത്രിത്വം വാണീടണമേ നൽ-\n\\tതലമുറയാ - ലിതു വാഴ്ത്തപ്പെടണം.",
-        "lit_en": "Blessed was the house of Abraham—the father\n\\tBy three men of honor\n\\tThe Bridegroom, the Messiah Himself\n\\tPraised the house of Zacchaeus,\nMay worshippers—within that home—dwell with the Trinity\n\\tFrom generation to generation—let this be blessed.",
-        "lit_mn": "Vaazhvettabraaham--thathan than bhavanam\n\\tMoonnu pumaanmaaral\n\\tSaakshaal manavaalan mashiha\n\\tSakkaay bhavanathe vaazhthi,\nSwaaradhakare - riya veettil - thrithwam vaaNideName nal-\n\\tThalamurayaa - lithu vaazhthappedaNam.",
+        "lit_ml": "വാഴ്‌‌വേറ്റബ്രാഹാം--താതൻ തൻ ഭവനം\n/tമൂന്നു പുമാന്മാരാൽ\n/tസാക്ഷാൽ മണവാളൻ മശിഹാ\n/tസക്കായ് ഭവനത്തെ വാഴ്ത്തി,\nസ്വാരാധകരേ - റിയ വീട്ടിൽ - ത്രിത്വം വാണീടണമേ നൽ-\n/tതലമുറയാ - ലിതു വാഴ്ത്തപ്പെടണം.",
+        "lit_en": "Blessed was the house of Abraham—the father\n/tBy three men of honor\n/tThe Bridegroom, the Messiah Himself\n/tPraised the house of Zacchaeus,\nMay worshippers—within that home—dwell with the Trinity\n/tFrom generation to generation—let this be blessed.",
+        "lit_mn": "Vaazhvettabraaham--thathan than bhavanam\n/tMoonnu pumaanmaaral\n/tSaakshaal manavaalan mashiha\n/tSakkaay bhavanathe vaazhthi,\nSwaaradhakare - riya veettil - thrithwam vaaNideName nal-\n/tThalamurayaa - lithu vaazhthappedaNam.",
         "special": ""
     },
     {
         "id": 18,
         "type": "song",
-        "lit_ml": "ഏവൻഗേല്യോനിൽ - മോറാൻ ശിഷ്യരൊടായ്\n\\tചൊല്ലി കേട്ടേൻ ഞാൻ\n\\tകൈക്കൊൾവൂ നിങ്ങളെ വീടേത്-\n\\tആ വീ - ടെന്നെ കൈക്കൊൾവൂ\nഅബ്രാഹാമിൻ ഭവനം പോൽ - ഞങ്ങളണഞ്ഞൊരു ഭവനത്തെ\n\\tരക്ഷകനേ!- വാഴ്ത്തുക തൃക്കൈയാൽ.",
-        "lit_en": "In the Gospel—our Lord with His disciples\n\\tSaid, and I have heard it\n\\t“Accept those who welcome you—\n\\tReceive me into your house,”\nLike the house of Abraham—bless this house we have entered\n\\tO Savior!—with Your holy hand.",
-        "lit_mn": "Evangelyonil - Moraan shishyarodaay\n\\tCholli ketten njan\n\\tKaikkolvoo ningale veedethu-\n\\tAavi - tenne kaikkolvoo\nAbrahaamin bhavanam pol - njangal aNanjora bhavanathe\n\\tRakshakane! - vaazhthuka thrikkaiyaal.",
+        "lit_ml": "ഏവൻഗേല്യോനിൽ - മോറാൻ ശിഷ്യരൊടായ്\n/tചൊല്ലി കേട്ടേൻ ഞാൻ\n/tകൈക്കൊൾവൂ നിങ്ങളെ വീടേത്-\n/tആ വീ - ടെന്നെ കൈക്കൊൾവൂ\nഅബ്രാഹാമിൻ ഭവനം പോൽ - ഞങ്ങളണഞ്ഞൊരു ഭവനത്തെ\n/tരക്ഷകനേ!- വാഴ്ത്തുക തൃക്കൈയാൽ.",
+        "lit_en": "In the Gospel—our Lord with His disciples\n/tSaid, and I have heard it\n/t“Accept those who welcome you—\n/tReceive me into your house,”\nLike the house of Abraham—bless this house we have entered\n/tO Savior!—with Your holy hand.",
+        "lit_mn": "Evangelyonil - Moraan shishyarodaay\n/tCholli ketten njan\n/tKaikkolvoo ningale veedethu-\n/tAavi - tenne kaikkolvoo\nAbrahaamin bhavanam pol - njangal aNanjora bhavanathe\n/tRakshakane! - vaazhthuka thrikkaiyaal.",
         "special": ""
     },
     {
@@ -161,9 +161,9 @@
     {
         "id": 20,
         "type": "song",
-        "lit_ml": "ശൂന്യാരണ്യത്തിൽ - നേടി സംതൃപ്തി,\n\\tജനമഞ്ചപ്പത്താൽ\n\\tശ്രേഷ്ഠാ - ചാര്യന്മാരാർന്നോ-\n\\tരീഗേ - ഹത്തെയുമതിനുള്ളിൽ\nപാർപ്പോരെയും രക്ഷകനേ!\nതൃക്കൈയാൽ വാഴ്ത്തണമേ നൽ\n\\tതലമുറയാ - ലിതു വാഴ്ത്തപ്പെടണം",
-        "lit_en": "In the barren wilderness—satisfaction was found,\n\\tThe people with heavenly bread\n\\tGreat teachers, they too—\n\\tFound peace within the tent\nEven those who dwell within, O Savior!\nBless them with Your hand\n\\tAnd from generation to generation—may it be blessed.",
-        "lit_mn": "Shoonyaaranyathil - nedi samthripti,\n\\tJanam anjappathaal\n\\tShreshtaa-chaaryanmar aarnno-\n\\tReege - hattheyum athinullil\nPaarpporeyum Rakshakane!\nThrikkaiyaal vaazhtheName nal\n\\tThalamurayaa - ithu vaazhthappedaNam",
+        "lit_ml": "ശൂന്യാരണ്യത്തിൽ - നേടി സംതൃപ്തി,\n/tജനമഞ്ചപ്പത്താൽ\n/tശ്രേഷ്ഠാ - ചാര്യന്മാരാർന്നോ-\n/tരീഗേ - ഹത്തെയുമതിനുള്ളിൽ\nപാർപ്പോരെയും രക്ഷകനേ!\nതൃക്കൈയാൽ വാഴ്ത്തണമേ നൽ\n/tതലമുറയാ - ലിതു വാഴ്ത്തപ്പെടണം",
+        "lit_en": "In the barren wilderness—satisfaction was found,\n/tThe people with heavenly bread\n/tGreat teachers, they too—\n/tFound peace within the tent\nEven those who dwell within, O Savior!\nBless them with Your hand\n/tAnd from generation to generation—may it be blessed.",
+        "lit_mn": "Shoonyaaranyathil - nedi samthripti,\n/tJanam anjappathaal\n/tShreshtaa-chaaryanmar aarnno-\n/tReege - hattheyum athinullil\nPaarpporeyum Rakshakane!\nThrikkaiyaal vaazhtheName nal\n/tThalamurayaa - ithu vaazhthappedaNam",
         "special": ""
     },
     {
@@ -177,9 +177,9 @@
     {
         "id": 22,
         "type": "song",
-        "lit_ml": "ഏ - ലിയാവി - ന്നാശീർവ്വാദത്താൽ; വിധവാഗേഹത്തിൽ\n\\tകുംഭ - ത്തിൽ ധാന്യപ്പൊടിയും\n\\tകൊമ്പിൽ തൈലവുമറ്റില്ല\nആ വരമാർന്നീടട്ടെ നിൻ - ഭക്തരണഞ്ഞൊരു ഭവനം നൽ\n\\tതലമുറയാ - ലിതു വാഴ്ത്തപ്പെടണം.",
-        "lit_en": "By the blessing of Elijah—in the house of the widow\n\\tThe jar—was never empty of grain\n\\tNor was the jug of oil depleted\nMay such a gift be found in the home—of the faithful who welcome You\n\\tTitle – Litu should be praised.",
-        "lit_mn": "Ē - liyaavinn aasheervaadathaal; vidhavaagehathil\n\\tKumbh - thil dhaanyappodiyum\n\\tKombil thailavum attila\nAa varam aarnneedatte nin--bhaktar aNanjora bhavanam nal\n\\tThalamurayaa – lithu vaazhthappedaNam.",
+        "lit_ml": "ഏ - ലിയാവി - ന്നാശീർവ്വാദത്താൽ; വിധവാഗേഹത്തിൽ\n/tകുംഭ - ത്തിൽ ധാന്യപ്പൊടിയും\n/tകൊമ്പിൽ തൈലവുമറ്റില്ല\nആ വരമാർന്നീടട്ടെ നിൻ - ഭക്തരണഞ്ഞൊരു ഭവനം നൽ\n/tതലമുറയാ - ലിതു വാഴ്ത്തപ്പെടണം.",
+        "lit_en": "By the blessing of Elijah—in the house of the widow\n/tThe jar—was never empty of grain\n/tNor was the jug of oil depleted\nMay such a gift be found in the home—of the faithful who welcome You\n/tTitle – Litu should be praised.",
+        "lit_mn": "Ē - liyaavinn aasheervaadathaal; vidhavaagehathil\n/tKumbh - thil dhaanyappodiyum\n/tKombil thailavum attila\nAa varam aarnneedatte nin--bhaktar aNanjora bhavanam nal\n/tThalamurayaa – lithu vaazhthappedaNam.",
         "special": ""
     },
     {

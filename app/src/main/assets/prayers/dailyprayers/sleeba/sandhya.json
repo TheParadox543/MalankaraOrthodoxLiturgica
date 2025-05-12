@@ -316,8 +316,8 @@
     {
         "id": 39,
         "type": "song",
-        "lit_ml": "വാനിലു മൂഴി യിലേദനിലും-ഹാലേലുയ്യാ\nദയറാ ദേവാഗാര'ങ്ങളി-ലെല്ലാടത്തും\nകന്യകമറിയാമിന്നുണ്ടാകട്ടെ നല്ലോർമ്മ.\nനിർമ്മലമാം കന്യാത്വത്തിൽ -തിരുവുളമാർന്നു\nരാജാധീശനിറങ്ങിവസിച്ചവൾ തന്നുദരത്തിൽ\n\\tഭൂവിസ്വർഗ്ഗേ - തൽസ്മൃതി വളരട്ടെ\n\\tകോട്ടയതായ് പ്രാർത്ഥന തീരട്ടെ;\nനാഥാ! ചേർക്കുക ഞങ്ങളെ നിൻ മാതൃ-സ്മരണത്തിൽ",
-        "lit_mn": "Vanilu moozhiyiledanilum halleluyya\nDayara deva garangalili-elladathum\nKannayaka mariyaminuntakaette nalloarma\nNirmalamam kannyathwathil-thiruvulamarnnu\nRaja dheesanirangi vasichaval thannuda rathil\n\\tBhuviswarge- thalsmruthi valaratte\n\\tKottayathai- prarthanna theeratte\nNadha! Cherkuka njaagale nin mathrusmaranathil.",
+        "lit_ml": "വാനിലു മൂഴി യിലേദനിലും-ഹാലേലുയ്യാ\nദയറാ ദേവാഗാര'ങ്ങളി-ലെല്ലാടത്തും\nകന്യകമറിയാമിന്നുണ്ടാകട്ടെ നല്ലോർമ്മ.\nനിർമ്മലമാം കന്യാത്വത്തിൽ -തിരുവുളമാർന്നു\nരാജാധീശനിറങ്ങിവസിച്ചവൾ തന്നുദരത്തിൽ\n/tഭൂവിസ്വർഗ്ഗേ - തൽസ്മൃതി വളരട്ടെ\n/tകോട്ടയതായ് പ്രാർത്ഥന തീരട്ടെ;\nനാഥാ! ചേർക്കുക ഞങ്ങളെ നിൻ മാതൃ-സ്മരണത്തിൽ",
+        "lit_mn": "Vanilu moozhiyiledanilum halleluyya\nDayara deva garangalili-elladathum\nKannayaka mariyaminuntakaette nalloarma\nNirmalamam kannyathwathil-thiruvulamarnnu\nRaja dheesanirangi vasichaval thannuda rathil\n/tBhuviswarge- thalsmruthi valaratte\n/tKottayathai- prarthanna theeratte\nNadha! Cherkuka njaagale nin mathrusmaranathil.",
         "lit_en": "",
         "special": ""
     },
@@ -332,8 +332,8 @@
     {
         "id": 41,
         "type": "song",
-        "lit_ml": "വാറും നിർമ്മലകന്യക തന്നുദരത്തിൽ\nഹിതമോടുദയം ചെയ്തൊരു ദൈവസുതാ! സ്തോത്രം തേ.\nകർണ്ണ ത്താലവനെ കൈയ്ക്കൊ-ണ്ടുദരേ പേറി.\nഗർഭാശയ കന്യാമുദ്രകളീന്നും നിർഗ്ഗതനായ്\n\\tജാതികളെ-ലജ്ജാകുലരാക്കി\n\\tസ്തുതിയധികം-താഴ്ച‌ വരിച്ചോനേ!\nനരനായ് രക്ഷ കൊടുത്തവനേ! സഭ കീർത്തിക്കുന്നു.",
-        "lit_mn": "Vazhverum nirmala kanyaka than udarathil\nHithamod udhayam cheythoru daiva sutha sthothram the\nKarnathal avane kaikond udhare peri\nGarbhashaya kanyamudhragaleenum nirgathanayi\n\\tJaathikale lejakular aaki\n\\tSthuthi athikam thazhma varichone\nNaranayi reksha koduthavane sabha keerthikyunnu",
+        "lit_ml": "വാറും നിർമ്മലകന്യക തന്നുദരത്തിൽ\nഹിതമോടുദയം ചെയ്തൊരു ദൈവസുതാ! സ്തോത്രം തേ.\nകർണ്ണ ത്താലവനെ കൈയ്ക്കൊ-ണ്ടുദരേ പേറി.\nഗർഭാശയ കന്യാമുദ്രകളീന്നും നിർഗ്ഗതനായ്\n/tജാതികളെ-ലജ്ജാകുലരാക്കി\n/tസ്തുതിയധികം-താഴ്ച‌ വരിച്ചോനേ!\nനരനായ് രക്ഷ കൊടുത്തവനേ! സഭ കീർത്തിക്കുന്നു.",
+        "lit_mn": "Vazhverum nirmala kanyaka than udarathil\nHithamod udhayam cheythoru daiva sutha sthothram the\nKarnathal avane kaikond udhare peri\nGarbhashaya kanyamudhragaleenum nirgathanayi\n/tJaathikale lejakular aaki\n/tSthuthi athikam thazhma varichone\nNaranayi reksha koduthavane sabha keerthikyunnu",
         "lit_en": "",
         "special": ""
     },
@@ -348,15 +348,15 @@
     {
         "id": 43,
         "type": "song",
-        "lit_ml": "പ്രാർത്ഥിപ്പിൻ ശ്ലീഹന്മാരേ! കർത്താവോടായ്\nഭിന്നത സഭ തൻ സന്താനങ്ങളിലി-ല്ലാതാവാൻ.\nനിങ്ങളതിൽ ചൊല്ലിയതാകും-വിശ്വാസത്തെ\nമായിച്ചിടുവാൻ-ദുസ്‌താർക്കികരതിനെ ചുറ്റുന്നു.\n\\tസത്യമതാം-മൂശയിലാവചനം\n\\tകനകം പോൽ-ശോധിച്ചീടട്ടെ.\nവൈദികർ വാഴ്ത്തും, ശുദ്ധസഭയ്ക്കുദയം ചേർത്തോനെ.",
-        "lit_mn": "Prarthipin sleehanmare Karthavodai\nBhinatha sabha than santhanagalil ilathavan\nNingalathil choliyathakum vishwasathe\nMayichiduvaan dustharkikarathine chuttunnu\n\\tSathyamatham mooshayilavam\n\\tKanakam pol shodhicheedatte\nVaidikar vazhthum shudha sabhakyudayam cherthone",
+        "lit_ml": "പ്രാർത്ഥിപ്പിൻ ശ്ലീഹന്മാരേ! കർത്താവോടായ്\nഭിന്നത സഭ തൻ സന്താനങ്ങളിലി-ല്ലാതാവാൻ.\nനിങ്ങളതിൽ ചൊല്ലിയതാകും-വിശ്വാസത്തെ\nമായിച്ചിടുവാൻ-ദുസ്‌താർക്കികരതിനെ ചുറ്റുന്നു.\n/tസത്യമതാം-മൂശയിലാവചനം\n/tകനകം പോൽ-ശോധിച്ചീടട്ടെ.\nവൈദികർ വാഴ്ത്തും, ശുദ്ധസഭയ്ക്കുദയം ചേർത്തോനെ.",
+        "lit_mn": "Prarthipin sleehanmare Karthavodai\nBhinatha sabha than santhanagalil ilathavan\nNingalathil choliyathakum vishwasathe\nMayichiduvaan dustharkikarathine chuttunnu\n/tSathyamatham mooshayilavam\n/tKanakam pol shodhicheedatte\nVaidikar vazhthum shudha sabhakyudayam cherthone",
         "lit_en": "",
         "special": ""
     },
     {
         "id": 44,
         "type": "song",
-        "lit_ml": "ക്രൂശിന്മേൽ തലചായിച്ചോൻ -വലഭാഗത്തായ്\nമുടി മുടയുന്നതു കണ്ടപ്പോൾ സഹദേവന്മാർ നിങ്ങൾ\nനാനാവിധ യാതന' യെയും-കൂസിടാതെ\nഗളരുധിര് ത്താൽ ധവളിമ അംഗങ്ങൾ-ക്കുളവാക്കി\n\\tപീഡകളെ വെന്നിഹ മശിഹായെ\n\\tസ്നേഹിച്ചോർ -ധന്യന്മാർ നിങ്ങൾ\nഭൂസ്വർഗ്ഗങ്ങളിലേറുന്നു സ്മരണം- നിങ്ങൾക്കായ്.",
+        "lit_ml": "ക്രൂശിന്മേൽ തലചായിച്ചോൻ -വലഭാഗത്തായ്\nമുടി മുടയുന്നതു കണ്ടപ്പോൾ സഹദേവന്മാർ നിങ്ങൾ\nനാനാവിധ യാതന' യെയും-കൂസിടാതെ\nഗളരുധിര് ത്താൽ ധവളിമ അംഗങ്ങൾ-ക്കുളവാക്കി\n/tപീഡകളെ വെന്നിഹ മശിഹായെ\n/tസ്നേഹിച്ചോർ -ധന്യന്മാർ നിങ്ങൾ\nഭൂസ്വർഗ്ഗങ്ങളിലേറുന്നു സ്മരണം- നിങ്ങൾക്കായ്.",
         "lit_mn": "Krooshinmel thala chayichon valabhagathayi\nMudimudayunathu kandapol sahadenmar ningal\nNanavidha yathaneyum koosidathe\nGalrodhirathal dhavilamayangangal ulavaki\nPeedakale veniha mashihaye\nSnehichor dhyanyanmar ningal\nBhooswargangalil ettunnu smaranam ningalkayi",
         "lit_en": "",
         "special": ""
@@ -372,8 +372,8 @@
     {
         "id": 46,
         "type": "song",
-        "lit_ml": "(മാർത്തോമ്മാ) പണ്ഡിതവൈദ്യാ!-രോഗാർത്തർക്കായ്\nസൗഖ്യമിയറ്റിടുവാനധികാരം തേ നൽകി പരൻ\nപാർത്താൽ നിന്ന സ്ഥികളത്രേ ഞങ്ങൾക്കഭയം;\nഞങ്ങടെ യാചന നിൻ പ്രാർത്ഥനയാൽ നൽ-കീടട്ടെ;\n\\tആരോഗ്യം വ്യാധിഗ്രസ്തർക്കും\n\\tവിശ്രാമം-പീഡിത ജനതയ്ക്കും;\nക്ഷമ ഞങ്ങൾക്കും പ്രത്യാഗമനം ദൂരസ്ഥർക്കും.",
-        "lit_mn": "(Marthoma) panditha vaidhya roogartharkai\nSaukhyamiyetiduvan adhikaram the nalki paran\nParthal nin asthikal athre njangal abhayam\nNjangade yachana ninprarthanayal nalkeedatte\n\\tAarokyam vyadhigrastharkum\n\\tVishramam peeditha janathkyum\nKshama njangalkum prathyagamanam doorastharkum",
+        "lit_ml": "(മാർത്തോമ്മാ) പണ്ഡിതവൈദ്യാ!-രോഗാർത്തർക്കായ്\nസൗഖ്യമിയറ്റിടുവാനധികാരം തേ നൽകി പരൻ\nപാർത്താൽ നിന്ന സ്ഥികളത്രേ ഞങ്ങൾക്കഭയം;\nഞങ്ങടെ യാചന നിൻ പ്രാർത്ഥനയാൽ നൽ-കീടട്ടെ;\n/tആരോഗ്യം വ്യാധിഗ്രസ്തർക്കും\n/tവിശ്രാമം-പീഡിത ജനതയ്ക്കും;\nക്ഷമ ഞങ്ങൾക്കും പ്രത്യാഗമനം ദൂരസ്ഥർക്കും.",
+        "lit_mn": "(Marthoma) panditha vaidhya roogartharkai\nSaukhyamiyetiduvan adhikaram the nalki paran\nParthal nin asthikal athre njangal abhayam\nNjangade yachana ninprarthanayal nalkeedatte\n/tAarokyam vyadhigrastharkum\n/tVishramam peeditha janathkyum\nKshama njangalkum prathyagamanam doorastharkum",
         "lit_en": "",
         "special": ""
     },
@@ -388,24 +388,24 @@
     {
         "id": 48,
         "type": "song",
-        "lit_ml": "ആഹ്വാനം ചെയ്യുന്നുതവി' -ക്കെത്തുക നാഥാ!\nകലഹിപ്പിക്കുന്നുലകത്തെ ദുഷ്‌ടൻ-വഞ്ചനയാൽ\nഭിന്നത നൃപ വിധികർത്താക്കളി-ലവനുളവാക്കി\nധാർമ്മികരെയും വീഴിപ്പാൻ വഴി നോ-ക്കീടുന്നു.\n\\tകർത്താവേ! നിൻ കരുണയിലെന്യേ\n\\tസങ്കേതം-ഞങ്ങൾക്കെങ്ങുള്ളൂ?\nദുഷ്ടനെ ഞങ്ങളിൽ നിന്നോടിക്കുക നിൻ-സ്ലീബായാൽ.",
-        "lit_mn": "Aahvaum cheynuthaviky ethuka nadha\nKalahipikyunn ulakathe dushtan thantrathal\nBhinatha nrupa vidhi karthakalil avan ulavaaki\nDhaarmikaryem veezhipaan vazhi nokidunnu\n\\tKarthave nin karunayil ennye\n\\tSanketham njangalk engullu\nDushtane njaangalil ninodikyuga nin sleebayal",
+        "lit_ml": "ആഹ്വാനം ചെയ്യുന്നുതവി' -ക്കെത്തുക നാഥാ!\nകലഹിപ്പിക്കുന്നുലകത്തെ ദുഷ്‌ടൻ-വഞ്ചനയാൽ\nഭിന്നത നൃപ വിധികർത്താക്കളി-ലവനുളവാക്കി\nധാർമ്മികരെയും വീഴിപ്പാൻ വഴി നോ-ക്കീടുന്നു.\n/tകർത്താവേ! നിൻ കരുണയിലെന്യേ\n/tസങ്കേതം-ഞങ്ങൾക്കെങ്ങുള്ളൂ?\nദുഷ്ടനെ ഞങ്ങളിൽ നിന്നോടിക്കുക നിൻ-സ്ലീബായാൽ.",
+        "lit_mn": "Aahvaum cheynuthaviky ethuka nadha\nKalahipikyunn ulakathe dushtan thantrathal\nBhinatha nrupa vidhi karthakalil avan ulavaaki\nDhaarmikaryem veezhipaan vazhi nokidunnu\n/tKarthave nin karunayil ennye\n/tSanketham njangalk engullu\nDushtane njaangalil ninodikyuga nin sleebayal",
         "lit_en": "",
         "special": ""
     },
     {
         "id": 49,
         "type": "song",
-        "lit_ml": "ന്യായാധിപന്യായാധിപതേ അങ്ങേക്കരിശം\nചേർത്ത കടത്താലെൻ തല താഴ്ത്തരുതേ-വിധിഗേഹേ\nമോചനയോഗ്യതയില്ലെങ്കിലു-മെന്നിലിരിക്കും\nനിന്തിരുമെയ്യും രക്തവുമോർത്തെന്മേൽ കൃപചെയ്തു.\n\\tനിൻസ്നേഹാൽ-സ്ലീബാ ഞാൻ കൂപ്പി;\n\\tപിഴപോക്കി-നിൻ മെയ് രുധിരങ്ങൾ.\nഹിതമൊടു കരുണാമയനീശോ, മമ' -നൽകുക മുക്തി.",
-        "lit_mn": "Nyadhipa nyayathipathe angeky arisham\nChertha kadathal enn thala thazhtazhute vidigehe\nMochana yogyatha illengilum ennil irikyum\nNin thirumeyum rakthavum orthenmel krupa cheyka\n\\tNin sneehaal Sleeba Njan koopi\n\\tPizha poki nin mei rudhirangal\nHithamodu karunamayn eesho mama nalkuka mukthi",
+        "lit_ml": "ന്യായാധിപന്യായാധിപതേ അങ്ങേക്കരിശം\nചേർത്ത കടത്താലെൻ തല താഴ്ത്തരുതേ-വിധിഗേഹേ\nമോചനയോഗ്യതയില്ലെങ്കിലു-മെന്നിലിരിക്കും\nനിന്തിരുമെയ്യും രക്തവുമോർത്തെന്മേൽ കൃപചെയ്തു.\n/tനിൻസ്നേഹാൽ-സ്ലീബാ ഞാൻ കൂപ്പി;\n/tപിഴപോക്കി-നിൻ മെയ് രുധിരങ്ങൾ.\nഹിതമൊടു കരുണാമയനീശോ, മമ' -നൽകുക മുക്തി.",
+        "lit_mn": "Nyadhipa nyayathipathe angeky arisham\nChertha kadathal enn thala thazhtazhute vidigehe\nMochana yogyatha illengilum ennil irikyum\nNin thirumeyum rakthavum orthenmel krupa cheyka\n/tNin sneehaal Sleeba Njan koopi\n/tPizha poki nin mei rudhirangal\nHithamodu karunamayn eesho mama nalkuka mukthi",
         "lit_en": "",
         "special": ""
     },
     {
         "id": 50,
         "type": "song",
-        "lit_ml": "ഖേദം വേണ്ടാ മശിഹായിൽ മൃതി പൂണ്ടോരേ!\nആസന്നം പ്രതിഫലമേകും പുനരുത്ഥാനദിനം.\nകേടെന്യേ കബറുകളീന്നും നിങ്ങളെഴുന്നേ\nറ്റതിവേഗം രാജാത്മജനെ' എതിരേൽപ്പാനെത്തും.\n\\tമഹിമാവിൻ നീരാളം' ചാർത്തി\n\\tതിരുമുമ്പിൽ സ്തുതിപാടും നിങ്ങൾ\nകനിവാലാദാം സുത ജീവപ്രദനേ -കൃപ ചെയ്തു.",
-        "lit_mn": "Khedam veenda mashihayi mruthi poondore\nAasannam prathiphalam eekum punaruthanidhinam\nKedanye khabarukaleenum ningal ezhunet\nathi vegam rajathmajane ethirelpan ethum\n\\tMahimavin neeralam charthi\n\\tThirumunpil sthuthi paadum ningal\nKanival aadham sutha jeevapradhane krupa cheyka",
+        "lit_ml": "ഖേദം വേണ്ടാ മശിഹായിൽ മൃതി പൂണ്ടോരേ!\nആസന്നം പ്രതിഫലമേകും പുനരുത്ഥാനദിനം.\nകേടെന്യേ കബറുകളീന്നും നിങ്ങളെഴുന്നേ\nറ്റതിവേഗം രാജാത്മജനെ' എതിരേൽപ്പാനെത്തും.\n/tമഹിമാവിൻ നീരാളം' ചാർത്തി\n/tതിരുമുമ്പിൽ സ്തുതിപാടും നിങ്ങൾ\nകനിവാലാദാം സുത ജീവപ്രദനേ -കൃപ ചെയ്തു.",
+        "lit_mn": "Khedam veenda mashihayi mruthi poondore\nAasannam prathiphalam eekum punaruthanidhinam\nKedanye khabarukaleenum ningal ezhunet\nathi vegam rajathmajane ethirelpan ethum\n/tMahimavin neeralam charthi\n/tThirumunpil sthuthi paadum ningal\nKanival aadham sutha jeevapradhane krupa cheyka",
         "lit_en": "",
         "special": ""
     },
@@ -436,8 +436,8 @@
     {
         "id": 54,
         "type": "song",
-        "lit_ml": "മക്കളിലപ്പൻ കൃപ ചെയ്തതു പോലെ-ഹാ-ഹാ\nഭക്തന്മാരിൽ ദൈവം കൃപ ചെയ്യും.\n\\tപുല്ലിനു തുല്യം നരനുടെ നാൾകളഹോ-ഹാ-ഹാ\n\\tപൂക്കുന്നിതു വയലിൽ പൂച്ചെടി പോലെ.",
-        "lit_mn": "Makkalilappan krupa chaivathu pole Haleluyyah (Ou Haleluyyah)\nBhakthanmaril Daivam krupa cheyyum\n\\tPullinu thullyam naranude nalkalaho Haleluyyah (Ou Haleluyyah)\n\\tPookunnithu vayalil poochedipole",
+        "lit_ml": "മക്കളിലപ്പൻ കൃപ ചെയ്തതു പോലെ-ഹാ-ഹാ\nഭക്തന്മാരിൽ ദൈവം കൃപ ചെയ്യും.\n/tപുല്ലിനു തുല്യം നരനുടെ നാൾകളഹോ-ഹാ-ഹാ\n/tപൂക്കുന്നിതു വയലിൽ പൂച്ചെടി പോലെ.",
+        "lit_mn": "Makkalilappan krupa chaivathu pole Haleluyyah (Ou Haleluyyah)\nBhakthanmaril Daivam krupa cheyyum\n/tPullinu thullyam naranude nalkalaho Haleluyyah (Ou Haleluyyah)\n/tPookunnithu vayalil poochedipole",
         "lit_en": "",
         "special": ""
     },
