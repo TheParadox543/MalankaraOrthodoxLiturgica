@@ -130,7 +130,7 @@ fun PrayerScreen(
                 state = listState
             ) {
                 item {
-                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 28.dp))
+                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 32.dp))
                 }
                 items(prayers) { prayer ->
                     when (prayer["type"]) {
@@ -211,7 +211,7 @@ fun PrayerScreen(
                     }
                 }
                 item {
-                    Spacer(Modifier.padding(if (isLandscape) 16.dp else 24.dp))
+                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 44.dp))
                 }
             }
         }

@@ -70,7 +70,8 @@ object NavigationTree {
         return PageNode(
             route = currentRoute,
             children = listOf(
-                day(currentRoute, "monday")
+                day(currentRoute, "monday"),
+                day(currentRoute, "tuesday")
             )
         )
     }
