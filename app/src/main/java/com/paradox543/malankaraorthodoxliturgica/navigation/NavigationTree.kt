@@ -71,7 +71,8 @@ object NavigationTree {
             route = currentRoute,
             children = listOf(
                 day(currentRoute, "monday"),
-                day(currentRoute, "tuesday")
+                day(currentRoute, "tuesday"),
+                day(currentRoute, "wednesday")
             )
         )
     }

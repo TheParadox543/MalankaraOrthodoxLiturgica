@@ -1,0 +1,56 @@
+[
+    {
+        "type": "title",
+        "lit_en": "",
+        "lit_ml": "ബുധൻ ഒമ്പതാംമണി",
+        "lit_mn": ""
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "കോലൊ",
+        "lit_mn": ""
+    },
+    {
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(ആനിദേ ദശ്ക്കൽ)",
+        "lit_mn": ""
+    },
+    {
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "രക്ഷകനാം നാഥാ! നിൻമെയ് ഭക്ഷിച്ച്\nരക്തം പാനം ചെയ്‌തങ്ങയെ-നോക്കിപ്പാർക്കും\nമൃതരെക്കബറുകളീ-ന്നഴിവില്ലാതുയിരോ-\nടെഴുന്നേൽപ്പിച്ചണിയിക്കണമെ-ശോഭന വസനം.",
+        "lit_mn": ""
+    },
+    {
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ.......ശുബഹൊ........",
+        "lit_mn": ""
+    },
+    {
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "മേഘവിഭൂഷിതനായ്-രാജകുമാരനഹോ\nജീവൻ വിഗതർക്കേകിടുവാൻ-ഘോഷമോടെത്തും\nകൊമ്പൊലിയന്നണിയിൽ-കേൾക്കും ശിഷ്ടജനം\nമഹിമാംബരമാർന്നെതിരേൽപ്പാ-നുഴറിച്ചെല്ലും.",
+        "lit_mn": ""
+    },
+    {
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയൊ….",
+        "lit_mn": ""
+    },
+    {
+        "type": "link",
+        "file": "karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]
