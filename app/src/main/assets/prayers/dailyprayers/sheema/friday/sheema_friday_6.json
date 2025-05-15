@@ -1,0 +1,56 @@
+[
+    {
+        "type": "title",
+        "lit_en": "",
+        "lit_ml": "വെള്ളി ഒമ്പതാംമണി",
+        "lit_mn": ""
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "lit_en": "",
+        "lit_ml": "കോലൊ",
+        "lit_mn": ""
+    },
+    {
+        "type": "subheading",
+        "lit_en": "",
+        "lit_ml": "(തൈഹൂൻ ഒൽമ്മ)",
+        "lit_mn": ""
+    },
+    {
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "നാഥാ! താവകമിരു ലോകം-\nനിന്നധികാരം താനെങ്ങും\nസ്ലീബായാൽ ജീവിതരെക്കാ-\nത്തൻപാൽ മുക്തി മൃതർക്കേക.",
+        "lit_mn": ""
+    },
+    {
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "ബാറെക്മോർ....... ശുബഹോ.",
+        "lit_mn": ""
+    },
+    {
+        "type": "song",
+        "lit_en": "",
+        "lit_ml": "സ്തോത്രം മൃതജീവപ്രദനേ!-\nകബറീന്നേറ്റീടുന്നോനേ!\nനിൻ പ്രേക്ഷകതാതനുമമലൻ-\nറൂഹായ്ക്കും ഹാലേലുയ്യാ.",
+        "lit_mn": ""
+    },
+    {
+        "type": "subtext",
+        "lit_en": "",
+        "lit_ml": "മൊറിയൊ…",
+        "lit_mn": ""
+    },
+    {
+        "type": "link",
+        "file": "karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]
