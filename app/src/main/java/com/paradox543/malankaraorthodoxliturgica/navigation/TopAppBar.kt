@@ -32,10 +32,10 @@ fun TopNavBar(
     val isVisible = rememberScrollAwareVisibility()
 
     val title = if (currentRoute == "settings") {
-        translations["malankara"] ?: "error"
+        translations["malankara"] ?: "malankara"
     } else {
         topBarNames.joinToString(separator = " ") { key ->
-            translations[key] ?: "error"
+            translations[key] ?: key
         }
     }
 
