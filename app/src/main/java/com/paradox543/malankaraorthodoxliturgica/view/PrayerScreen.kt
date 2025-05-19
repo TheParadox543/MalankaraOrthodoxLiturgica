@@ -5,6 +5,7 @@ import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -120,17 +121,18 @@ fun PrayerScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = if (isLandscape) 80.dp else 8.dp), // Reduce width in landscape
+                .padding(horizontal = if (isLandscape) 40.dp else 20.dp), // Reduce width in landscape
             contentAlignment = Alignment.Center
         ) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth(if (isLandscape) 0.8f else 1f) // Limit width in landscape
                     .fillMaxHeight(0.9f), // Limit height to avoid out of bounds
-                state = listState
+                state = listState,
+                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 item {
-                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 28.dp))
+                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 32.dp))
                 }
                 items(prayers) { prayer ->
                     when (prayer["type"]) {
@@ -211,7 +213,7 @@ fun PrayerScreen(
                     }
                 }
                 item {
-                    Spacer(Modifier.padding(if (isLandscape) 16.dp else 24.dp))
+                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 44.dp))
                 }
             }
         }
@@ -228,7 +230,6 @@ fun Title(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
         textDecoration = TextDecoration.Underline,
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
     )
 }
 
@@ -241,7 +242,6 @@ fun Heading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
     )
 }
 
@@ -253,7 +253,6 @@ fun Subheading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit =
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
     )
 }
 
@@ -265,7 +264,29 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
         textAlign = TextAlign.Justify,
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp)
+    )
+}
+
+@Composable
+fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+    Text(
+        text = text.replace("/t", "    "),
+        fontSize = fontSize,
+        textAlign = TextAlign.Start,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 4.dp)
+    )
+}
+
+@Composable
+fun Subtext(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+    Text(
+        text = text,
+        fontSize = fontSize,
+        textAlign = TextAlign.End,
+        modifier = modifier
+            .fillMaxWidth()
     )
 }
 
@@ -280,7 +301,6 @@ fun CollapsibleTextBlock(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -307,28 +327,4 @@ fun CollapsibleTextBlock(
             }
         }
     }
-}
-
-@Composable
-fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
-    Text(
-        text = text.replace("/t", "    "),
-        fontSize = fontSize,
-        textAlign = TextAlign.Start,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 12.dp)
-    )
-}
-
-@Composable
-fun Subtext(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
-    Text(
-        text = text,
-        fontSize = fontSize,
-        textAlign = TextAlign.End,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 8.dp)
-    )
 }
