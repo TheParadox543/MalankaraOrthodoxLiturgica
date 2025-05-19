@@ -256,12 +256,12 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
             fontSize = selectedFontSize
         )
         Text(
-            "- Shaun John, Lisa Shibu George & Sabu John – Additional Text Translations and Preparation",
+            "- Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy & Sunitha Mathew – Additional Text Translations and Preparation",
             fontSize = selectedFontSize
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            "Version: 0.2.0",
+            "Version: 0.2.3",
             style = MaterialTheme.typography.bodySmall,
             fontSize = selectedFontSize * 0.8f
         )

@@ -1,202 +1,272 @@
 {
-  "malankara": {
-    "en": "Malankara Orthodox Liturgica",
-    "ml": "മലങ്കര ഓർത്തഡോക്സ് ലിറ്റർജിക്ക",
-    "mn": "Malankara Orthodox Liturgica"
-  },
-  "dailyPrayers": {
-    "en": "Daily Prayers",
-    "ml": "നിത്യ പ്രാർത്ഥന",
-    "mn": "Nitya Prarthana"
-  },
-  "sacraments": {
-    "en": "Sacramental Prayers",
-    "ml": "കൂദാശകൾ ",
-    "mn": "Koodashakal"
-  },
-  "sleeba": {
-    "en": "Sleeba Prayers",
-    "ml": "സ്ലീബ പ്രാർത്ഥന",
-    "mn": "Sleeba Prarthana"
-  },
-  "kyamtha": {
-    "en": "Kyamtha Prayers",
-    "ml": "ക്യാമ്ത പ്രാർത്ഥന",
-    "mn": "Kyamtha Prarthana"
-  },
-  "nineveh": {
-    "en": "Nineveh Prayers",
-    "ml": "നിനവ പ്രാർത്ഥന",
-    "mn": "Nineveh Prarthana"
-  },
-  "greatLent": {
-    "en": "Great Lent",
-    "ml": "വലിയ നോമ്പ്",
-    "mn": "Valiya Nombu"
-  },
-  "qurbana": {
-    "en": "Holy Qurbana",
-    "ml": "വി. കുർബാന",
-    "mn": "Vi. Qurbana"
-  },
-  "baptism": {
-    "en": "Baptism",
-    "ml": "മാമോദീസ",
-    "mn": "Mamodeesa"
-  },
-  "wedding": {
-    "en": "Wedding",
-    "ml": "വിവാഹം",
-    "mn": "Vivaham"
-  },
-  "funeral": {
-    "en": "Funeral",
-    "ml": "ശവസംസ്ക്കാരം",
-    "mn": "Funeral"
-  },
-  "monday": {
-    "en": "Monday",
-    "ml": "തിങ്കളാഴ്ച",
-    "mn": "Thingalazhcha"
-  },
-  "tuesday": {
-    "en": "Tuesday",
-    "ml": "ചൊവ്വാഴ്ച",
-    "mn": "Chovvazhcha"
-  },
-  "wednesday": {
-    "en": "Wednesday",
-    "ml": "ബുധനാഴ്ച",
-    "mn": "Budhanazhcha"
-  },
-  "thursday": {
-    "en": "Thursday",
-    "ml": "വ്യാഴാഴ്ച",
-    "mn": "Vyazhazhcha"
-  },
-  "friday": {
-    "en": "Friday",
-    "ml": "വെള്ളിയാഴ്ച",
-    "mn": "Velliyaazhcha"
-  },
-  "sandhya": {
-    "en": "Vespers",
-    "ml": "സന്ധ്യാ",
-    "mn": "Sandhya"
-  },
-  "soothara": {
-    "en": "Compline",
-    "ml": "സൂത്താറാ",
-    "mn": "Soothara"
-  },
-  "rathri": {
-    "en": "Matins",
-    "ml": "രാത്രി",
-    "mn": "Raathri"
-  },
-  "prabhatham": {
-    "en": "Prime",
-    "ml": "പ്രഭാതം",
-    "mn": "Prabhatham"
-  },
-  "moonam": {
-    "en": "Terce",
-    "ml": "മൂന്നാം മണി",
-    "mn": "Moonnam Mani"
-  },
-  "aaraam": {
-    "en": "Sext",
-    "ml": "ആറാം മണി",
-    "mn": "Aaram Mani"
-  },
-  "onbatham": {
-    "en": "None",
-    "ml": "ഒൻപതാം മണി",
-    "mn": "Onpathaam Mani"
-  },
-  "ring": {
-    "en": "Ceremony of Blessing of the Ring",
-    "ml": "മോതിരം വാഴ്വിന്റെ ക്രമം",
-    "mn": "Mothiram Vazhvinthe Kramam"
-  },
-  "crown": {
-    "en": "Ceremony of Blessing of the Crown",
-    "ml": "കിരീടം വാഴ്വിന്റെ ക്രമം",
-    "mn": "Kireedam Vazhvinthe Kramam"
-  },
-  "houseWarming": {
-    "en": "House Warming",
-    "ml": "ഭവനശുദ്ധീകരണം",
-    "mn": "Bhavanashudhikaranam"
-  },
-  "preparation": {
-    "en": "Preparation",
-    "ml": "",
-    "mn": "Prarambham"
-  },
-  "partOne": {
-    "en": "Part I",
-    "ml": "Bagham I",
-    "mn": "Bagham I"
-  },
-  "chapterOne": {
-    "en": "Part II Chapter 1",
-    "ml": "",
-    "mn": ""
-  },
-  "chapterTwo": {
-    "en": "Part II Chapter 2",
-    "ml": "",
-    "mn": ""
-  },
-  "chapterThree": {
-    "en": "Part II Chapter 3",
-    "ml": "",
-    "mn": ""
-  },
-  "chapterFour": {
-    "en": "Part II Chapter 4",
-    "ml": "",
-    "mn": ""
-  },
-  "chapterFive": {
-    "en": "Part II Chapter 5",
-    "ml": "",
-    "mn": ""
-  },
-  "men": {
-    "en": "Men",
-    "ml": "പുരുഷന്മാർ",
-    "mn": "Men"
-  },
-  "women": {
-    "en": "Women",
-    "ml": "സ്ത്രീകൾ",
-    "mn": "Women"
-  },
-  "firstPart": {
-    "en": "Part One",
-    "ml": "ഒന്നാം ശുശ്രൂഷ",
-    "mn": "Part One"
-  },
-  "secondPart": {
-    "en": "Part Two",
-    "ml": "രണ്ടാം ശുശ്രൂഷ",
-    "mn": "Part Two"
-  },
-  "thirdPart": {
-    "en": "Part Three",
-    "ml": "മൂന്നാം ശുശ്രൂഷ",
-    "mn": "Part Three"
-  },
-  "fourthPart": {
-    "en": "Part Four",
-    "ml": "നാലാം ശുശ്രൂഷ",
-    "mn": "Part Four"
-  },
-  "sheema": {
-    "en": "Sheema",
-    "ml": "ശ്ഹീമാ",
-    "mn": "Sheema"
-  }
+    "malankara": {
+        "en": "Malankara Orthodox Liturgica",
+        "ml": "മലങ്കര ഓർത്തഡോക്സ് ലിറ്റർജിക്ക",
+        "mn": "Malankara Orthodox Liturgica"
+    },
+    "dailyPrayers": {
+        "en": "Daily Prayers",
+        "ml": "നിത്യ പ്രാർത്ഥന",
+        "mn": "Nitya Prarthana"
+    },
+    "sacraments": {
+        "en": "Sacramental Prayers",
+        "ml": "കൂദാശകൾ ",
+        "mn": "Koodashakal"
+    },
+    "sleeba": {
+        "en": "Sleeba Prayers",
+        "ml": "സ്ലീബ പ്രാർത്ഥന",
+        "mn": "Sleeba Prarthana"
+    },
+    "kyamtha": {
+        "en": "Kyamtha Prayers",
+        "ml": "ക്യാമ്ത പ്രാർത്ഥന",
+        "mn": "Kyamtha Prarthana"
+    },
+    "nineveh": {
+        "en": "Nineveh Prayers",
+        "ml": "നിനവ പ്രാർത്ഥന",
+        "mn": "Nineveh Prarthana"
+    },
+    "greatLent": {
+        "en": "Great Lent",
+        "ml": "വലിയ നോമ്പ്",
+        "mn": "Valiya Nombu"
+    },
+    "qurbana": {
+        "en": "Holy Qurbana",
+        "ml": "വി. കുർബാന",
+        "mn": "Vi. Qurbana"
+    },
+    "baptism": {
+        "en": "Baptism",
+        "ml": "മാമോദീസ",
+        "mn": "Mamodeesa"
+    },
+    "wedding": {
+        "en": "Wedding",
+        "ml": "വിവാഹം",
+        "mn": "Vivaham"
+    },
+    "funeral": {
+        "en": "Funeral",
+        "ml": "ശവസംസ്ക്കാരം",
+        "mn": "Funeral"
+    },
+    "monday": {
+        "en": "Monday",
+        "ml": "തിങ്കളാഴ്ച",
+        "mn": "Thingalazhcha"
+    },
+    "tuesday": {
+        "en": "Tuesday",
+        "ml": "ചൊവ്വാഴ്ച",
+        "mn": "Chovvazhcha"
+    },
+    "wednesday": {
+        "en": "Wednesday",
+        "ml": "ബുധനാഴ്ച",
+        "mn": "Budhanazhcha"
+    },
+    "thursday": {
+        "en": "Thursday",
+        "ml": "വ്യാഴാഴ്ച",
+        "mn": "Vyazhazhcha"
+    },
+    "friday": {
+        "en": "Friday",
+        "ml": "വെള്ളിയാഴ്ച",
+        "mn": "Velliyaazhcha"
+    },
+    "saturday": {
+        "en": "Saturday",
+        "ml": "ശനി",
+        "mn": "Shani"
+    },
+    "sandhya": {
+        "en": "Vespers",
+        "ml": "സന്ധ്യാ",
+        "mn": "Sandhya"
+    },
+    "soothara": {
+        "en": "Compline",
+        "ml": "സൂത്താറാ",
+        "mn": "Soothara"
+    },
+    "rathri": {
+        "en": "Matins",
+        "ml": "രാത്രി",
+        "mn": "Raathri"
+    },
+    "prabhatham": {
+        "en": "Prime",
+        "ml": "പ്രഭാതം",
+        "mn": "Prabhatham"
+    },
+    "moonam": {
+        "en": "Terce",
+        "ml": "മൂന്നാം മണി",
+        "mn": "Moonnam Mani"
+    },
+    "aaraam": {
+        "en": "Sext",
+        "ml": "ആറാം മണി",
+        "mn": "Aaram Mani"
+    },
+    "onbatham": {
+        "en": "None",
+        "ml": "ഒൻപതാം മണി",
+        "mn": "Onpathaam Mani"
+    },
+    "ring": {
+        "en": "Ceremony of Blessing of the Ring",
+        "ml": "മോതിരം വാഴ്വിന്റെ ക്രമം",
+        "mn": "Mothiram Vazhvinthe Kramam"
+    },
+    "crown": {
+        "en": "Ceremony of Blessing of the Crown",
+        "ml": "കിരീടം വാഴ്വിന്റെ ക്രമം",
+        "mn": "Kireedam Vazhvinthe Kramam"
+    },
+    "houseWarming": {
+        "en": "House Warming",
+        "ml": "ഭവനശുദ്ധീകരണം",
+        "mn": "Bhavanashudhikaranam"
+    },
+    "preparation": {
+        "en": "Preparation",
+        "ml": "",
+        "mn": "Prarambham"
+    },
+    "partOne": {
+        "en": "Part I",
+        "ml": "Bagham I",
+        "mn": "Bagham I"
+    },
+    "chapterOne": {
+        "en": "Part II Chapter 1",
+        "ml": "",
+        "mn": ""
+    },
+    "chapterTwo": {
+        "en": "Part II Chapter 2",
+        "ml": "",
+        "mn": ""
+    },
+    "chapterThree": {
+        "en": "Part II Chapter 3",
+        "ml": "",
+        "mn": ""
+    },
+    "chapterFour": {
+        "en": "Part II Chapter 4",
+        "ml": "",
+        "mn": ""
+    },
+    "chapterFive": {
+        "en": "Part II Chapter 5",
+        "ml": "",
+        "mn": ""
+    },
+    "men": {
+        "en": "Men",
+        "ml": "പുരുഷന്മാർ",
+        "mn": "Men"
+    },
+    "women": {
+        "en": "Women",
+        "ml": "സ്ത്രീകൾ",
+        "mn": "Women"
+    },
+    "firstPart": {
+        "en": "Part One",
+        "ml": "ഒന്നാം ശുശ്രൂഷ",
+        "mn": "Part One"
+    },
+    "secondPart": {
+        "en": "Part Two",
+        "ml": "രണ്ടാം ശുശ്രൂഷ",
+        "mn": "Part Two"
+    },
+    "thirdPart": {
+        "en": "Part Three",
+        "ml": "മൂന്നാം ശുശ്രൂഷ",
+        "mn": "Part Three"
+    },
+    "fourthPart": {
+        "en": "Part Four",
+        "ml": "നാലാം ശുശ്രൂഷ",
+        "mn": "Part Four"
+    },
+    "sheema": {
+        "en": "Shehimo",
+        "ml": "ശ്ഹീമാ",
+        "mn": "Sheema"
+    },
+    "commonPrayers": {
+        "en": "Common Prayers",
+        "ml": "പൊതുവായ പ്രാർത്ഥനകൾ",
+        "mn": "Pothuvaaya Praarthanakal"
+    },
+    "kauma": {
+        "en": "Kauma",
+        "ml": "കൗമ",
+        "mn": "Kauma"
+    },
+    "lords": {
+        "en": "Lord's Prayer",
+        "ml": "കർത്തൃ പ്രാർത്ഥനാ",
+        "mn": "Karthru Prarthana"
+    },
+    "mary": {
+        "en": "Prayer to St. Mary",
+        "ml": "ദൈവ മാതാവിനോടുള്ള അപേക്ഷാ",
+        "mn": "Daiva Mathavinodulla Apekshaa"
+    },
+    "nicene": {
+        "en": "Nicene Creed",
+        "ml": "വിശ്വാസപ്രമാണം",
+        "mn": "Vishaavasapramaanam"
+    },
+    "angels": {
+        "en": "Praise of Angels",
+        "ml": "മാലാഖമാരുടെ സ്തുതി ",
+        "mn": "Malakhamarude Stuthi"
+    },
+    "cherubims": {
+        "en": "Praise of Cherubims",
+        "ml": "ക്രോബേന്മാരുടെ സ്തുതി",
+        "mn": "Cherubimaarude Stuthi"
+    },
+    "promiyon": {
+        "en": "Promiyon",
+        "ml": "പ്രുമിയോൻ",
+        "mn": "Promiyon"
+    },
+    "sheemaMary": {
+        "en": "",
+        "ml": "വി. ദൈവമാതാവിൻ്റെ ഓർമ്മയിൽ",
+        "mn": "St. Mary's"
+    },
+    "sheemaSleeba": {
+        "ml": "വി. സ്ലീബായുടെ",
+        "mn": "",
+        "en": ""
+    },
+    "sheemaSaints": {
+        "ml": "പരിശുദ്ധന്മാരുടെ ഓർമ്മയിൽ",
+        "en": "",
+        "mn": ""
+    },
+    "sheemaApostle": {
+        "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ",
+        "en": "",
+        "mn": ""
+    },
+    "cyclic": {
+        "ml": "ധൂപപ്രാർത്ഥനകൾ",
+        "en": "Cyclic prayers",
+        "mn": "Kukiliyonukal"
+    }
 }

@@ -1,11 +1,17 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import com.paradox543.malankaraorthodoxliturgica.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.time.DayOfWeek
+import java.time.LocalDateTime
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -60,7 +66,7 @@ class NavViewModel @Inject constructor() : ViewModel() {
         } else {
             _nextSiblingIndex.value = null
         }
-//        _nextSiblingIndex.value = if (currentIndex + 1 < siblings.size) currentIndex + 1 else null
+
         if (currentIndex > 0) {
             if (siblings[currentIndex - 1].filename.isNotEmpty()) {
                 _prevSiblingIndex.value = currentIndex - 1
@@ -70,42 +76,89 @@ class NavViewModel @Inject constructor() : ViewModel() {
         } else {
             _prevSiblingIndex.value = null
         }
-//        _prevSiblingIndex.value = if (currentIndex > 0) currentIndex - 1 else null
-
     }
 
-    fun goToNextSibling(): String {
-        val currentIndex = _currentSiblingIndex.value ?: return ""
-        val siblings = _siblingNodes.value
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun prayNow(now: LocalDateTime? = null): List<String> {
+        val currentDateTime = now ?: LocalDateTime.now() // Explicitly use IST
+        val prayerList = mutableListOf<String>()
+        val hour = currentDateTime.hour
+        var currentDay = currentDateTime.dayOfWeek.value - 1
 
-        if (currentIndex != -1 && currentIndex < siblings.lastIndex) {
-            setCurrentSiblingIndex(currentIndex + 1)
-            return siblings[currentIndex + 1].filename
+        if (hour >= 18) {
+            currentDay += 1
         }
-        return ""
-    }
-
-    fun goToPrevSibling(): String {
-        val currentIndex = _currentSiblingIndex.value ?: return ""
-        val siblings = _siblingNodes.value
-
-        if (currentIndex > 0) {
-            setCurrentSiblingIndex(currentIndex - 1)
-            return siblings[currentIndex - 1].filename
-        }
-        return ""
-    }
-
-    fun hasNextSibling(): Boolean {
-        val currentIndex = _currentSiblingIndex.value ?: return false
-        val siblings = _siblingNodes.value
-
-        if (currentIndex + 1 < siblings.size) {
-            val nextSibling = siblings[currentIndex + 1]
-            return nextSibling.filename.isNotEmpty() // Check if filename is not empty
+        if (currentDay > 6) {
+            currentDay = 0
         }
 
-        return false // Return false if there is no next sibling
+        fun decideTime(option: String): List<String> {
+            if (hour in 18..21) {
+                prayerList.add("${option}_sandhya")
+            }
+            if (hour >= 18) {
+                prayerList.add("${option}_soothara")
+            }
+            if (hour >= 20 || hour <= 6) {
+                prayerList.add("${option}_rathri")
+            }
+            if (hour in 5..11) {
+                prayerList.add("${option}_prabaatham")
+            }
+            if (hour in 5..17) {
+                prayerList.add("${option}_moonam")
+                prayerList.add("${option}_aaraam")
+            }
+            if (hour in 11..17) {
+                prayerList.add("${option}_onbatham")
+            }
+            return prayerList
+        }
+
+        if (currentDay != 6) {
+            val dayName = currentDateTime.dayOfWeek.getDisplayName(java.time.format.TextStyle.FULL, Locale.ENGLISH).lowercase(Locale.ENGLISH)
+            decideTime("sheema_$dayName")
+        }
+
+        val javaDayOfWeek = currentDateTime.dayOfWeek
+        if ((javaDayOfWeek == DayOfWeek.SUNDAY || currentDay == 0) && (hour in 10..12)) {
+            prayerList.add("wedding_ring")
+            prayerList.add("wedding_crown")
+        }
+
+        decideTime("sleeba")
+        Log.d("NavViewModel", prayerList.toString())
+        return prayerList.distinct()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAllPrayerNodes(): List<PageNode> {
+        val allNodes = mutableListOf<PageNode>()
+        val list = prayNow()
+        for (item in list) {
+            val node = findNode(rootNode, item)
+            if (node != null) {
+                allNodes.add(node)
+            }
+        }
+        return allNodes
+    }
+
+    fun getParentRoute(route: String): String? {
+        val parts = route.split("_")
+        return if (parts.size > 1) {
+            parts.dropLast(1).joinToString("_")
+        } else {
+            null
+        }
+    }
+
+    fun getIndexOfSibling(currentRoute: String, parentRoute: String?): Int? {
+        if (parentRoute == null) {
+            return null // Root has no siblings in this context
+        }
+
+        val parentNode = findNode(rootNode, parentRoute)
+        return parentNode?.children?.indexOfFirst { it.route == currentRoute }
+    }
 }

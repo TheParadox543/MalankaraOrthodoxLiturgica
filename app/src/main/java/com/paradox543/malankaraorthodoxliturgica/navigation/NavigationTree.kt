@@ -5,6 +5,7 @@ import com.paradox543.malankaraorthodoxliturgica.model.PageNode
 object PrayerRoutes {
 //    Section Routes
     const val ROOT = "malankara"
+    const val COMMON_PRAYERS = "commonPrayers"
     const val DAILY_PRAYERS = "dailyPrayers"
     const val SACRAMENTS = "sacraments"
     const val GREAT_LENT = "greatLent"
@@ -15,6 +16,7 @@ object PrayerRoutes {
     const val MEN = "men"
     const val WOMEN = "women"
     const val WEDDING = "wedding"
+    const val BAPTISM = "baptism"
 
 //    Canonical Routes
     const val SANDHYA = "sandhya"
@@ -37,10 +39,27 @@ object NavigationTree {
     fun getNavigationTree() = PageNode(
         route = PrayerRoutes.ROOT,
         children = listOf(
+            commonPrayersSection(PrayerRoutes.ROOT),
             dailyPrayersSection(PrayerRoutes.ROOT),
             sacramentsSection(PrayerRoutes.ROOT)
         )
     )
+
+    private fun commonPrayersSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.COMMON_PRAYERS
+        return PageNode(
+            route = currentRoute,
+            children = listOf(
+                prayer("lords", "commonprayers/lords.json"),
+                prayer("mary", "commonprayers/mary.json"),
+                prayer("kauma", "commonprayers/doxology.json"),
+                prayer("nicene", "commonprayers/nicenecreed.json"),
+                prayer("angels", "commonprayers/praiseOfCherubims.json"),
+                prayer("cherubims", "krobenmaare.json"),
+                prayer("cyclic", "cyclicprayers.json")
+            )
+        )
+    }
 
     private fun dailyPrayersSection(parentRoute: String): PageNode {
         val currentRoute = PrayerRoutes.DAILY_PRAYERS
@@ -70,7 +89,13 @@ object NavigationTree {
         return PageNode(
             route = currentRoute,
             children = listOf(
-                day(currentRoute, "monday")
+                day(currentRoute, "monday"),
+                day(currentRoute, "tuesday"),
+                day(currentRoute, "wednesday"),
+                day(currentRoute, "thursday"),
+                day(currentRoute, "friday"),
+                day(currentRoute, "saturday"),
+                promiyonSection(currentRoute)
             )
         )
     }
@@ -119,12 +144,26 @@ object NavigationTree {
         )
     }
 
+    private fun promiyonSection(parentRoute: String): PageNode {
+        val currentRoute = createCompleteRoute(parentRoute, "promiyon")
+        return PageNode(
+            route = currentRoute,
+            children = listOf(
+                prayer("sheemaMary", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/sheema_mary.json".lowercase()),
+                prayer("sheemaSleeba", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/sheema_sleeba.json".lowercase()),
+                prayer("sheemaSaints", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/sheema_saints.json".lowercase()),
+                prayer("sheemaApostle", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/sheema_apostle.json".lowercase())
+            )
+        )
+    }
+
     private fun sacramentsSection(parentRoute: String): PageNode {
         val currentRoute = PrayerRoutes.SACRAMENTS
         return PageNode(
             route = currentRoute,
             children = listOf(
 //                qurbanaSection(currentRoute),
+                prayer(PrayerRoutes.BAPTISM, "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.BAPTISM}.json"),
                 weddingSection(currentRoute),
                 prayer("houseWarming", "${PrayerRoutes.SACRAMENTS}/houseWarming.json"),
                 funeralSection(currentRoute)

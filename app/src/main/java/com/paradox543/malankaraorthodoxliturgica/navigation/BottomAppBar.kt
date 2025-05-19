@@ -21,14 +21,12 @@ fun BottomNavBar(navController: NavController) {
     NavigationBar {
         bottomNavItems.forEach { item ->
             NavigationBarItem(
-                icon = { Icon(item.icon, contentDescription = item.label) },
+                icon =  item.icon,
                 label = { Text(item.label) },
                 selected = currentRoute == item.route,
                 onClick = {
-                    if (currentRoute == "settings"){
-                        navController.navigateUp()
-                    } else {
-                        navController.navigate(item.route)
+                    navController.navigate(item.route) {
+                        navController.popBackStack(item.route, inclusive = true)
                     }
                 }
             )
