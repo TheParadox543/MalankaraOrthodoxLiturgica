@@ -17,6 +17,6 @@ fun HomeScreen(
         navController = navController,
         prayerViewModel = prayerViewModel,
         navViewModel = navViewModel,
-        rootNode.children
+        rootNode
     )
 }

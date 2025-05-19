@@ -55,7 +55,8 @@ object NavigationTree {
                 prayer("kauma", "commonprayers/doxology.json"),
                 prayer("nicene", "commonprayers/nicenecreed.json"),
                 prayer("angels", "commonprayers/praiseOfCherubims.json"),
-                prayer("cherubims", "krobenmaare.json")
+                prayer("cherubims", "krobenmaare.json"),
+                prayer("cyclic", "cyclicprayers.json")
             )
         )
     }

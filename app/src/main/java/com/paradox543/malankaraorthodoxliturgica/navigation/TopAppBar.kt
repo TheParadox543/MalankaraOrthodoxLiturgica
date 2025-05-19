@@ -46,7 +46,7 @@ fun TopNavBar(
             titleContentColor = Color.White
         ),
         navigationIcon = {
-            if (topBarNames != listOf("malankara") && currentRoute != "settings") {
+            if (currentRoute != "home") {
                 IconButton(onClick = {
                     navController.navigateUp()
                 }) {
