@@ -91,6 +91,7 @@ class NavViewModel @Inject constructor() : ViewModel() {
         if (currentDay > 6) {
             currentDay = 0
         }
+        val adjustedDayOfWeek = DayOfWeek.of(currentDay + 1)
 
         fun decideTime(option: String): List<String> {
             if (hour in 18..21) {
@@ -116,12 +117,11 @@ class NavViewModel @Inject constructor() : ViewModel() {
         }
 
         if (currentDay != 6) {
-            val dayName = currentDateTime.dayOfWeek.getDisplayName(java.time.format.TextStyle.FULL, Locale.ENGLISH).lowercase(Locale.ENGLISH)
+            val dayName = adjustedDayOfWeek.getDisplayName(java.time.format.TextStyle.FULL, Locale.ENGLISH).lowercase(Locale.ENGLISH)
             decideTime("sheema_$dayName")
         }
 
-        val javaDayOfWeek = currentDateTime.dayOfWeek
-        if ((javaDayOfWeek == DayOfWeek.SUNDAY || currentDay == 0) && (hour in 10..12)) {
+        if ((adjustedDayOfWeek == DayOfWeek.SUNDAY || adjustedDayOfWeek == DayOfWeek.MONDAY) && (hour in 10..12)) {
             prayerList.add("wedding_ring")
             prayerList.add("wedding_crown")
         }
