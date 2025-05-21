@@ -21,7 +21,7 @@
     },
     "kyamtha": {
         "en": "Kyamtha Prayers",
-        "ml": "ക്യാമ്ത പ്രാർത്ഥന",
+        "ml": "ക്യംതാ പ്രാർത്ഥന",
         "mn": "Kyamtha Prarthana"
     },
     "nineveh": {
@@ -84,37 +84,37 @@
         "ml": "ശനി",
         "mn": "Shani"
     },
-    "sandhya": {
+    "vespers": {
         "en": "Vespers",
         "ml": "സന്ധ്യാ",
         "mn": "Sandhya"
     },
-    "soothara": {
+    "compline": {
         "en": "Compline",
         "ml": "സൂത്താറാ",
         "mn": "Soothara"
     },
-    "rathri": {
+    "matins": {
         "en": "Matins",
         "ml": "രാത്രി",
         "mn": "Raathri"
     },
-    "prabhatham": {
+    "prime": {
         "en": "Prime",
         "ml": "പ്രഭാതം",
         "mn": "Prabhatham"
     },
-    "moonam": {
+    "terce": {
         "en": "Terce",
         "ml": "മൂന്നാം മണി",
         "mn": "Moonnam Mani"
     },
-    "aaraam": {
+    "sext": {
         "en": "Sext",
         "ml": "ആറാം മണി",
         "mn": "Aaram Mani"
     },
-    "onbatham": {
+    "none": {
         "en": "None",
         "ml": "ഒൻപതാം മണി",
         "mn": "Onpathaam Mani"

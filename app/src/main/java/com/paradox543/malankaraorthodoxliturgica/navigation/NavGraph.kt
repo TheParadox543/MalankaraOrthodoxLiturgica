@@ -70,7 +70,6 @@ fun NavGraph(modifier: Modifier = Modifier) {
         }
         composable("section/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
-//            prayerViewModel.setTopBarKeys(route)
             val node = navViewModel.findNode(navViewModel.rootNode, route)
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, navViewModel, node)

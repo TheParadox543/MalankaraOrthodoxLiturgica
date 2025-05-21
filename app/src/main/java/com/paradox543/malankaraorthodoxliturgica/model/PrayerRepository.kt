@@ -1,12 +1,14 @@
 package com.paradox543.malankaraorthodoxliturgica.model
 
 import android.content.Context
+import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okio.IOException
 import org.json.JSONArray
 import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.reflect.typeOf
 
 @Singleton
 class PrayerRepository @Inject constructor(
@@ -31,7 +33,7 @@ class PrayerRepository @Inject constructor(
 
         try {
             val json =
-                context.assets.open("prayers/$filename").bufferedReader().use { it.readText() }
+                context.assets.open("prayers/$language/$filename").bufferedReader().use { it.readText() }
             val jsonArray = JSONArray(json)
 
             for (i in 0 until jsonArray.length()) {
@@ -59,8 +61,27 @@ class PrayerRepository @Inject constructor(
                         ) // Add file as a collapsible block
                     }
 
+                    "collapsible" -> {
+                        val title = prayerObject.getString("title")
+                        val itemList = mutableListOf<Map<String, String>>()
+                        val itemsJson = prayerObject.getJSONArray("items")
+                        for (j in 0 until itemsJson.length()) {
+                            val itemObject = itemsJson.getJSONObject(j)
+                            val itemType = itemObject.getString("type")
+                            val itemContent = itemObject.optString("content")
+                            if (itemContent.isEmpty()) {
+                                return listOf(mapOf(
+                                    "type" to "error",
+                                    "content" to "Content in this language has not been added yet."
+                                ))
+                            }
+                            itemList.add(mapOf("type" to itemType, "content" to itemContent))
+                        }
+                        prayerList.add(mapOf("type" to "collapsible-block", "title" to title, "items" to itemList))
+                    } // Add content as collapsible block
+
                     else -> {
-                        var content = prayerObject.optString("lit_${language}")
+                        val content = prayerObject.optString("content")
                         if (content.isEmpty()) {
                             return listOf(mapOf(
                                 "type" to "error",
@@ -72,9 +93,9 @@ class PrayerRepository @Inject constructor(
                 }
             }
         } catch (e: IOException) {
-            return listOf(mapOf("type" to "error", "content" to "Error loading file: $filename"))
+            return listOf(mapOf("type" to "error", "content" to "Error loading file: $language/$filename"))
         } catch (e: org.json.JSONException) {
-            return listOf(mapOf("type" to "error", "content" to "Error parsing JSON in: $filename"))
+            return listOf(mapOf("type" to "error", "content" to "Error parsing JSON in: $language/$filename"))
         }
         return prayerList
     }
@@ -83,15 +104,16 @@ class PrayerRepository @Inject constructor(
         val itemList = mutableListOf<Map<String, String>>()
         var title = ""
         try {
-            val json = context.assets.open("prayers/$filename").bufferedReader().use { it.readText() }
+            Log.d("PrayerRep", "prayers/$language/$filename")
+            val json = context.assets.open("prayers/$language/$filename").bufferedReader().use { it.readText() }
             val jsonArray = JSONArray(json)
 
             for (i in 0 until jsonArray.length()) {
                 val prayerObject = jsonArray.getJSONObject(i)
                 val type = prayerObject.getString("type")
-                var content = prayerObject.getString("lit_${language}")
+                val content = prayerObject.optString("content")
                 if (content.isEmpty()) {
-                    content = prayerObject.getString("lit_ml")
+                    return mapOf("type" to "error", "content" to "Content in this language has not been added yet.")
                 }
                 if (type == "heading" && title.isEmpty()) {
                     title = content
@@ -102,9 +124,9 @@ class PrayerRepository @Inject constructor(
             }
             return mapOf("type" to "collapsible-block", "title" to title, "items" to itemList)
         } catch (e: IOException) {
-            return mapOf("type" to "error", "content" to "Error loading file: $filename")
+            return mapOf("type" to "error", "content" to "Error loading file: $language/$filename")
         } catch (e: org.json.JSONException) {
-            return mapOf("type" to "error", "content" to "Error parsing JSON in: $filename")
+            return mapOf("type" to "error", "content" to "Error parsing JSON in: $language/$filename")
         }
     }
 }

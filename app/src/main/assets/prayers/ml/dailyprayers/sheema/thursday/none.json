@@ -1,0 +1,46 @@
+[
+    {
+        "type": "title",
+        "content": "none"
+    },
+    {
+        "type": "title",
+        "content": "ഒമ്പതാംമണി"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "കോലൊ"
+    },
+    {
+        "type": "subheading",
+        "content": "(ബാറൂബ്ത്തൊ ബീശീസ്)"
+    },
+    {
+        "type": "song",
+        "content": "പുത്രനിലേറ്റുപറഞ്ഞാജ്ഞകൾ നിറവേറ്റി\nവിശ്വാസം കാത്തോർ-മൃതർ നിൻ വരവിങ്കൽ\nസ്വർഗ്ഗവുമഴിവറ്റ-ജീവനുമാർജ്ജിക്കും\nഹാലേ........ഉഹാലേ......അവരാനന്ദിക്കും"
+    },
+    {
+        "type": "subtext",
+        "content": "ബാറെക്മോർ-ശൂബഹൊ-"
+    },
+    {
+        "type": "song",
+        "content": "ദൈവസുതാഗമനം-മിന്നൽ പിണരൊപ്പം\nപിളരും കല്ലറകൾ-മൃതിഗതരെഴുന്നേൽക്കും\nപുനരുത്ഥാനകനാം-കർത്താവിനെ വാഴ്ത്തി\nഹാലേ.......ഹാലേ......സ്തുതിഗീതം പാടും."
+    },
+    {
+        "type": "subtext",
+        "content": "മൊറിയൊ…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]
