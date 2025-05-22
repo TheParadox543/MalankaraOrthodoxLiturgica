@@ -28,11 +28,21 @@ object PrayerRoutes {
     const val SEXT = "sext"
     const val NONE = "none"
 
-//    Parts
+//    Funeral Parts
     const val FIRSTPART = "firstPart"
     const val SECONDPART = "secondPart"
     const val THIRDPART = "thirdPart"
     const val FOURTHPART = "fourthPart"
+
+//    Qurbana Parts
+    const val PREPARATION = "preparation"
+    const val PARTONE = "partOne"
+    const val CHAPTERONE = "chapterOne"
+    const val CHAPTERTWO = "chapterTwo"
+    const val CHAPTERTHREE = "chapterThree"
+    const val CHAPTERFOUR = "chapterFour"
+    const val CHAPTERFIVE = "chapterFive"
+    const val APPENDIXONE = "appendixOne"
 }
 
 val CanonicalHours = listOf(
@@ -43,6 +53,16 @@ val CanonicalHours = listOf(
     PrayerRoutes.TERCE,
     PrayerRoutes.SEXT,
     PrayerRoutes.NONE
+)
+
+val QurbanaParts = listOf(
+    PrayerRoutes.PREPARATION,
+    PrayerRoutes.PARTONE,
+    PrayerRoutes.CHAPTERONE,
+    PrayerRoutes.CHAPTERTWO,
+    PrayerRoutes.CHAPTERTHREE,
+    PrayerRoutes.CHAPTERFOUR,
+    PrayerRoutes.CHAPTERFIVE
 )
 
 object NavigationTree {
@@ -174,7 +194,7 @@ object NavigationTree {
         return PageNode(
             route = currentRoute,
             children = listOf(
-//                qurbanaSection(currentRoute),
+                qurbanaSection(currentRoute),
                 prayer(PrayerRoutes.BAPTISM, "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.BAPTISM}.json"),
                 weddingSection(currentRoute),
                 prayer("houseWarming", "${PrayerRoutes.SACRAMENTS}/houseWarming.json"),
@@ -185,17 +205,19 @@ object NavigationTree {
 
     private fun qurbanaSection(parentRoute: String): PageNode {
         val currentRoute = PrayerRoutes.QURBANA
+        val children = mutableListOf<PageNode>()
+        for (item in QurbanaParts) {
+            val childNode = createCompleteRoute(currentRoute, item)
+            children.add(
+                prayer(
+                    route = childNode,
+                    filename = "${PrayerRoutes.SACRAMENTS}/${childNode.replace("_", "/")}.json"
+                )
+            )
+        }
         return PageNode(
             route = currentRoute,
-            children = listOf(
-                prayer(createCompleteRoute(currentRoute, "preparation"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_0.json"),
-                prayer(createCompleteRoute(currentRoute, "partOne"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_1.json"),
-                prayer(createCompleteRoute(currentRoute, "chapterOne"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_2.json"),
-                prayer(createCompleteRoute(currentRoute, "chapterTwo"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_3.json"),
-                prayer(createCompleteRoute(currentRoute, "chapterThree"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_4.json"),
-                prayer(createCompleteRoute(currentRoute, "chapterFour"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_5.json"),
-                prayer(createCompleteRoute(currentRoute, "chapterFive"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/qurbana_6.json")
-            )
+            children = children
         )
     }
 
