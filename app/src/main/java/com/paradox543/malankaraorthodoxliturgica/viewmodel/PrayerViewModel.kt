@@ -29,6 +29,9 @@ class PrayerViewModel @Inject constructor(
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
+    private val _selectedNotificationPreference = MutableStateFlow("off")
+    val selectedNotificationPreference: StateFlow<String> = _selectedNotificationPreference.asStateFlow()
+
     init {
         // Load stored language from DataStore
         viewModelScope.launch {
@@ -40,6 +43,11 @@ class PrayerViewModel @Inject constructor(
         viewModelScope.launch {
             dataStoreManager.selectedFont.collect{ size ->
                 _selectedFontSize.value = size.sp
+            }
+        }
+        viewModelScope.launch {
+            dataStoreManager.selectedNotificationPreference.collect { preference ->
+                _selectedNotificationPreference.value = preference
             }
         }
     }
@@ -56,6 +64,13 @@ class PrayerViewModel @Inject constructor(
         _selectedFontSize.value = size
         viewModelScope.launch {
             dataStoreManager.saveFontSize(size.value.toInt())
+        }
+    }
+
+    fun setNotificationPreference(preference: String) {
+        _selectedNotificationPreference.value = preference
+        viewModelScope.launch {
+            dataStoreManager.saveNotificationPreference(preference)
         }
     }
 

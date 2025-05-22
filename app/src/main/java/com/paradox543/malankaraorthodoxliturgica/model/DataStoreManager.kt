@@ -14,6 +14,7 @@ private val Context.dataStore by preferencesDataStore(name = "settings")
 class DataStoreManager(private val context: Context) {
     private val LANGUAGE_KEY = stringPreferencesKey("selected_language")
     private val FONT_SIZE_KEY = intPreferencesKey("font_size")
+    private val NOTIFICATION_PREFERENCE_KEY = stringPreferencesKey("notification_preference")
 
     // Save language
     suspend fun saveLanguage(language: String) {
@@ -28,6 +29,12 @@ class DataStoreManager(private val context: Context) {
         }
     }
 
+    suspend fun saveNotificationPreference(notificationPreference: String) {
+        context.dataStore.edit { preferences ->
+            preferences[NOTIFICATION_PREFERENCE_KEY] = notificationPreference
+        }
+    }
+
     // Read language
     val selectedLanguage: Flow<String> = context.dataStore.data
         .map { preferences ->
@@ -36,6 +43,11 @@ class DataStoreManager(private val context: Context) {
 
     val selectedFont: Flow<Int> = context.dataStore.data
         .map{preferences ->
-            preferences[FONT_SIZE_KEY] ?: 16
+            preferences[FONT_SIZE_KEY] ?: 16 // Default to basic size
+        }
+
+    val selectedNotificationPreference: Flow<String> = context.dataStore.data
+        .map{preferences ->
+            preferences[NOTIFICATION_PREFERENCE_KEY] ?: "off" // Default to off
         }
 }
