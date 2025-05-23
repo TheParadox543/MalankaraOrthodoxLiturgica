@@ -70,6 +70,11 @@ fun PrayerScreen(
     val siblingNodes by navViewModel.siblingNodes.collectAsState()
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
+    if (siblingNodes.isEmpty() || currentSiblingIndex == null) {
+        navController.navigate("home"){
+            navController.popBackStack("home", true)
+        }
+    }
     val currentFilename = siblingNodes[currentSiblingIndex!!].filename
     prayerViewModel.loadPrayers(currentFilename, language)
     prayerViewModel.setTopBarKeys(siblingNodes[currentSiblingIndex!!].route)
@@ -85,6 +90,45 @@ fun PrayerScreen(
             lastFilename.value = currentFilename
         }
     }
+
+//    val context = LocalContext.current
+//    val lifecycleOwner = LocalLifecycleOwner.current
+//    val showPermissionPrompt = remember { mutableStateOf(false) }
+//
+//    // Observe lifecycle events to activate/deactivate notification mode
+//    DisposableEffect(lifecycleOwner) {
+//        val observer = LifecycleEventObserver { source, event ->
+//            when (event) {
+//                Lifecycle.Event.ON_RESUME -> {
+//                    // User enters PrayerScreen or returns to it
+//                    if (prayerViewModel.hasNotificationPolicyAccess()) {
+//                        prayerViewModel.activatePrayerNotificationMode()
+//                    }
+////                    else {
+////                        // Permission not granted, show a dialog or snackbar to the user
+////                        // and provide a way to open settings.
+////                        // Example: Show a dialog with an option to go to settings
+////                        showNotificationPermissionDialog(context, prayerViewModel, true)
+////                    }
+//                }
+//
+//                Lifecycle.Event.ON_PAUSE -> {
+//                    // User leaves PrayerScreen (e.g., goes to another screen, or app goes to background)
+//                    prayerViewModel.deactivatePrayerNotificationMode()
+//                }
+//
+//                else -> {}
+//            }
+//        }
+//        lifecycleOwner.lifecycle.addObserver(observer)
+//
+//        // When the PrayerScreen Composable leaves the composition (e.g., navigated away)
+//        onDispose {
+//            // Ensure deactivation if the screen is removed from the composition
+//            prayerViewModel.deactivatePrayerNotificationMode()
+//            lifecycleOwner.lifecycle.removeObserver(observer)
+//        }
+//    }
 
     Scaffold(
         modifier = Modifier

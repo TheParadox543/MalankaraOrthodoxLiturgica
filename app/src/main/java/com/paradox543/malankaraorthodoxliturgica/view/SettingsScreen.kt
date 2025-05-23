@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
-import android.widget.Space
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -50,7 +49,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel, navViewModel: NavViewModel) {
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val selectedNotificationPreference by prayerViewModel.selectedNotificationPreference.collectAsState()
+//    val selectedNotificationPreference by prayerViewModel.selectedNotificationPreference.collectAsState()
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
 
@@ -66,11 +65,11 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
         "Large" to 20.sp,
         "Very Large" to 24.sp
     )
-    val notificationPreferences = listOf(
-        "Off" to "off",
-        "Silent" to "silent",
-        "DND" to "dnd"
-    )
+//    val notificationPreferences = listOf(
+//        "Off" to "off",
+//        "Silent" to "silent",
+//        "DND" to "dnd"
+//    )
 
     Scaffold(
         topBar = {
@@ -153,37 +152,37 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Notification Preferences
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp)
-            ) {
-                Row(
-                    Modifier
-                        .padding(12.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    Text(
-                        text = "Select Notification Preference",
-                        fontSize = selectedFontSize,
-                        fontWeight = FontWeight.Bold
-                    )
-                    NotificationPreferenceDropdownMenu(
-                        options = notificationPreferences,
-                        selectedOption = notificationPreferences.firstOrNull { it.second == selectedNotificationPreference }?.first
-                            ?: "Off",
-                        selectedFontSize = selectedFontSize,
-                        onOptionSelected = { prayerViewModel.setNotificationPreference(it) }
-                    )
-                }
-            }
+//            Spacer(modifier = Modifier.height(16.dp))
+//
+//            // Notification Preferences
+//            Card(
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(8.dp),
+//                shape = RoundedCornerShape(8.dp),
+//                elevation = CardDefaults.cardElevation(4.dp)
+//            ) {
+//                Row(
+//                    Modifier
+//                        .padding(12.dp)
+//                        .fillMaxWidth(),
+//                    horizontalArrangement = Arrangement.SpaceBetween,
+//                    verticalAlignment = Alignment.CenterVertically
+//                ){
+//                    Text(
+//                        text = "Select Notification Preference",
+//                        fontSize = selectedFontSize,
+//                        fontWeight = FontWeight.Bold
+//                    )
+//                    NotificationPreferenceDropdownMenu(
+//                        options = notificationPreferences,
+//                        selectedOption = notificationPreferences.firstOrNull { it.second == selectedNotificationPreference }?.first
+//                            ?: "Off",
+//                        selectedFontSize = selectedFontSize,
+//                        onOptionSelected = { prayerViewModel.setNotificationPreference(it) }
+//                    )
+//                }
+//            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -287,34 +286,34 @@ fun FontSizeDropdownMenu(
     }
 }
 
-@Composable
-fun NotificationPreferenceDropdownMenu(
-    options: List<Pair<String, String>>,
-    selectedOption: String,
-    selectedFontSize: TextUnit,
-    onOptionSelected: (String) -> Unit
-) {
-    var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(selectedOption) }
-
-    Box {
-        OutlinedButton(onClick = { expanded = true }) {
-            Text(selectedText, fontSize = selectedFontSize)
-        }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            options.forEach { (optionDisplay, value) ->
-                DropdownMenuItem(
-                    text = { Text(optionDisplay) },
-                    onClick = {
-                        selectedText = optionDisplay
-                        onOptionSelected(value)
-                        expanded = false
-                    }
-                )
-            }
-        }
-    }
-}
+//@Composable
+//fun NotificationPreferenceDropdownMenu(
+//    options: List<Pair<String, String>>,
+//    selectedOption: String,
+//    selectedFontSize: TextUnit,
+//    onOptionSelected: (String) -> Unit
+//) {
+//    var expanded by remember { mutableStateOf(false) }
+//    var selectedText by remember { mutableStateOf(selectedOption) }
+//
+//    Box {
+//        OutlinedButton(onClick = { expanded = true }) {
+//            Text(selectedText, fontSize = selectedFontSize)
+//        }
+//        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+//            options.forEach { (optionDisplay, value) ->
+//                DropdownMenuItem(
+//                    text = { Text(optionDisplay) },
+//                    onClick = {
+//                        selectedText = optionDisplay
+//                        onOptionSelected(value)
+//                        expanded = false
+//                    }
+//                )
+//            }
+//        }
+//    }
+//}
 
 @Composable
 fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
@@ -353,3 +352,35 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
         )
     }
 }
+
+//@Composable
+//fun ShowNotificationPermissionDialog(context: Context, prayerViewModel: PrayerViewModel, showPermissionPrompt: Boolean) {
+//    // Implement your dialog here. You can use AlertDialog or a custom Composable.
+//    // This is a placeholder for the actual UI logic.
+//    val openSettingsIntent = remember { prayerViewModel.getNotificationPolicyAccessIntent() }
+//
+//    // Example simplified dialog (you'd use state to control its visibility)
+//    if (showPermissionPrompt) {
+//        AlertDialog(
+//            onDismissRequest = { /* dismiss */ },
+//            title = { Text("Permission Needed") },
+//            text = { Text("To change notification mode, please grant 'Do Not Disturb access' in settings.") },
+//            confirmButton = {
+//                Button(onClick = {
+//                    if (openSettingsIntent != null) {
+//                        context.startActivity(openSettingsIntent)
+//                    }
+//                    // dismiss dialog
+//                }) {
+//                    Text("Go to Settings")
+//                }
+//            },
+//            dismissButton = {
+//                Button(onClick = { /* dismiss dialog */ }) {
+//                    Text("Cancel")
+//                }
+//            }
+//        )
+//    }
+////     You would typically manage 'showPermissionPrompt' as a MutableState<Boolean> in your ViewModel or Screen state.
+//}
