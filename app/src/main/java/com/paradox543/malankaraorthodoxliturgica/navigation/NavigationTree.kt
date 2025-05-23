@@ -204,9 +204,17 @@ object NavigationTree {
             route = currentRoute,
             children = listOf(
                 qurbanaSection(currentRoute),
-                prayer(PrayerRoutes.BAPTISM, "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.BAPTISM}.json"),
+                prayer(
+                    PrayerRoutes.BAPTISM,
+                    "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.BAPTISM}.json",
+                    languages = listOf("ml", "mn"),
+                ),
                 weddingSection(currentRoute),
-                prayer("houseWarming", "${PrayerRoutes.SACRAMENTS}/housewarming.json"),
+                prayer(
+                    "houseWarming",
+                    "${PrayerRoutes.SACRAMENTS}/housewarming.json",
+                    languages = listOf("ml", "mn"),
+                ),
                 funeralSection(currentRoute)
             )
         )
@@ -235,8 +243,16 @@ object NavigationTree {
         return PageNode(
             route = currentRoute,
             children = listOf(
-                prayer(createCompleteRoute(currentRoute, "ring"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/ring.json"),
-                prayer(createCompleteRoute(currentRoute, "crown"), "${PrayerRoutes.SACRAMENTS}/$currentRoute/crown.json")
+                prayer(
+                    createCompleteRoute(currentRoute, "ring"),
+                    "${PrayerRoutes.SACRAMENTS}/$currentRoute/ring.json",
+                    languages = listOf("ml", "mn"),
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "crown"),
+                    "${PrayerRoutes.SACRAMENTS}/$currentRoute/crown.json",
+                    languages = listOf("ml", "mn")
+                )
             )
         )
     }
@@ -258,7 +274,11 @@ object NavigationTree {
         for (item in FuneralParts) {
             val childRoute = createCompleteRoute(currentRoute, item)
             children.add(
-                prayer(childRoute, "${PrayerRoutes.SACRAMENTS}/${childRoute.replace("_", "/")}.json")
+                prayer(
+                    childRoute,
+                    "${PrayerRoutes.SACRAMENTS}/${childRoute.replace("_", "/")}.json",
+                    languages = listOf("ml", "mn")
+                )
             )
         }
         return PageNode(
