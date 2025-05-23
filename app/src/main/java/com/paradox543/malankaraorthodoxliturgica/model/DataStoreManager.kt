@@ -36,6 +36,6 @@ class DataStoreManager(private val context: Context) {
 
     val selectedFont: Flow<Int> = context.dataStore.data
         .map{preferences ->
-            preferences[FONT_SIZE_KEY] ?: 16
+            preferences[FONT_SIZE_KEY] ?: 16 // Default to basic size
         }
 }

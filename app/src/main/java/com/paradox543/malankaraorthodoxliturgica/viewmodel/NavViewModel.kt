@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import com.paradox543.malankaraorthodoxliturgica.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree
+import com.paradox543.malankaraorthodoxliturgica.navigation.PrayerRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -91,37 +92,39 @@ class NavViewModel @Inject constructor() : ViewModel() {
         if (currentDay > 6) {
             currentDay = 0
         }
+        val adjustedDayOfWeek = DayOfWeek.of(currentDay + 1)
 
         fun decideTime(option: String): List<String> {
             if (hour in 18..21) {
-                prayerList.add("${option}_sandhya")
+                prayerList.add("${option}_${PrayerRoutes.VESPERS}")
             }
             if (hour >= 18) {
-                prayerList.add("${option}_soothara")
+                prayerList.add("${option}_${PrayerRoutes.COMPLINE}")
             }
             if (hour >= 20 || hour <= 6) {
-                prayerList.add("${option}_rathri")
+                prayerList.add("${option}_${PrayerRoutes.MATINS}")
             }
             if (hour in 5..11) {
-                prayerList.add("${option}_prabaatham")
+                prayerList.add("${option}_${PrayerRoutes.PRIME}")
             }
             if (hour in 5..17) {
-                prayerList.add("${option}_moonam")
-                prayerList.add("${option}_aaraam")
+                prayerList.add("${option}_${PrayerRoutes.TERCE}")
+                prayerList.add("${option}_${PrayerRoutes.SEXT}")
             }
             if (hour in 11..17) {
-                prayerList.add("${option}_onbatham")
+                prayerList.add("${option}_${PrayerRoutes.NONE}")
             }
             return prayerList
         }
 
         if (currentDay != 6) {
-            val dayName = currentDateTime.dayOfWeek.getDisplayName(java.time.format.TextStyle.FULL, Locale.ENGLISH).lowercase(Locale.ENGLISH)
+            val dayName = adjustedDayOfWeek.getDisplayName(java.time.format.TextStyle.FULL, Locale.ENGLISH).lowercase(Locale.ENGLISH)
             decideTime("sheema_$dayName")
+        } else {
+            decideTime("kyamtha")
         }
 
-        val javaDayOfWeek = currentDateTime.dayOfWeek
-        if ((javaDayOfWeek == DayOfWeek.SUNDAY || currentDay == 0) && (hour in 10..12)) {
+        if ((adjustedDayOfWeek == DayOfWeek.SUNDAY || adjustedDayOfWeek == DayOfWeek.MONDAY) && (hour in 10..12)) {
             prayerList.add("wedding_ring")
             prayerList.add("wedding_crown")
         }

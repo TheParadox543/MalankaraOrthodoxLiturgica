@@ -21,7 +21,7 @@
     },
     "kyamtha": {
         "en": "Kyamtha Prayers",
-        "ml": "ക്യാമ്ത പ്രാർത്ഥന",
+        "ml": "ക്യംതാ പ്രാർത്ഥന",
         "mn": "Kyamtha Prarthana"
     },
     "nineveh": {
@@ -84,37 +84,37 @@
         "ml": "ശനി",
         "mn": "Shani"
     },
-    "sandhya": {
+    "vespers": {
         "en": "Vespers",
         "ml": "സന്ധ്യാ",
         "mn": "Sandhya"
     },
-    "soothara": {
+    "compline": {
         "en": "Compline",
         "ml": "സൂത്താറാ",
         "mn": "Soothara"
     },
-    "rathri": {
+    "matins": {
         "en": "Matins",
         "ml": "രാത്രി",
         "mn": "Raathri"
     },
-    "prabhatham": {
+    "prime": {
         "en": "Prime",
         "ml": "പ്രഭാതം",
         "mn": "Prabhatham"
     },
-    "moonam": {
+    "terce": {
         "en": "Terce",
         "ml": "മൂന്നാം മണി",
         "mn": "Moonnam Mani"
     },
-    "aaraam": {
+    "sext": {
         "en": "Sext",
         "ml": "ആറാം മണി",
         "mn": "Aaram Mani"
     },
-    "onbatham": {
+    "none": {
         "en": "None",
         "ml": "ഒൻപതാം മണി",
         "mn": "Onpathaam Mani"
@@ -136,38 +136,38 @@
     },
     "preparation": {
         "en": "Preparation",
-        "ml": "",
+        "ml": "പ്രാരംഭം",
         "mn": "Prarambham"
     },
     "partOne": {
         "en": "Part I",
-        "ml": "Bagham I",
-        "mn": "Bagham I"
+        "ml": "ഒന്നാം ഭാഗം",
+        "mn": "Onnaam Bhaaagam"
     },
     "chapterOne": {
         "en": "Part II Chapter 1",
-        "ml": "",
-        "mn": ""
+        "ml": "രണ്ടാം ഭാഗം ഒന്നാം അദ്ധ്യായം",
+        "mn": "Randaam Bhaagam Onnaam Adhyaayam"
     },
     "chapterTwo": {
         "en": "Part II Chapter 2",
-        "ml": "",
-        "mn": ""
+        "ml": "രണ്ടാം ഭാഗം രണ്ടാം അദ്ധ്യായം",
+        "mn": "Randaam Bhaagam Randaam Adhyaayam"
     },
     "chapterThree": {
         "en": "Part II Chapter 3",
-        "ml": "",
-        "mn": ""
+        "ml": "രണ്ടാം ഭാഗം മൂന്നാം അദ്ധ്യായം",
+        "mn": "Randaam Bhaagam Moonnaam Adhyaayam"
     },
     "chapterFour": {
         "en": "Part II Chapter 4",
-        "ml": "",
-        "mn": ""
+        "ml": "രണ്ടാം ഭാഗം നാലാം അദ്ധ്യായം",
+        "mn": "Randaam Bhaagam Naalaam Adhyaayam"
     },
     "chapterFive": {
         "en": "Part II Chapter 5",
-        "ml": "",
-        "mn": ""
+        "ml": "രണ്ടാം ഭാഗം അഞ്ചാം അദ്ധ്യായം",
+        "mn": "Randaam Bhaagam Anjaam Adhyaayam"
     },
     "men": {
         "en": "Men",

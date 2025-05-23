@@ -79,29 +79,40 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
+                .padding(horizontal = 20.dp)
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
+
             Card(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(8.dp)
+                    .fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
-                Text(
-                    text = "Select Language",
-                    fontSize = selectedFontSize,
-                    fontWeight = FontWeight.Bold
-                )
-                LanguageDropdownMenu(
-                    options = languages,
-                    selectedOption = languages.firstOrNull { it.second == selectedLanguage }?.first
-                        ?: "Select",
-                    selectedFontSize = selectedFontSize,
-                    onOptionSelected = { prayerViewModel.setLanguage(it) }
-                )
+                Row(
+                    Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Select Language",
+                        fontSize = selectedFontSize,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f),
+                    )
+                    LanguageDropdownMenu(
+                        options = languages,
+                        selectedOption = languages.firstOrNull { it.second == selectedLanguage }?.first
+                            ?: "ml",
+                        selectedFontSize = selectedFontSize,
+                        onOptionSelected = { prayerViewModel.setLanguage(it) }
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -114,18 +125,27 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                 shape = RoundedCornerShape(8.dp),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
-                Text(
-                    text = "Select Font Size",
-                    fontSize = selectedFontSize,
-                    fontWeight = FontWeight.Bold
-                )
-                FontSizeDropdownMenu(
-                    options = fontSizes,
-                    selectedOption = fontSizes.firstOrNull { it.second == selectedFontSize }?.first
-                        ?: "Medium",
-                    selectedFontSize = selectedFontSize,
-                    onOptionSelected = { prayerViewModel.setFontSize(it) }
-                )
+                Row(
+                    Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Select Font Size",
+                        fontSize = selectedFontSize,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f),
+                    )
+                    FontSizeDropdownMenu(
+                        options = fontSizes,
+                        selectedOption = fontSizes.firstOrNull { it.second == selectedFontSize }?.first
+                            ?: "Medium",
+                        selectedFontSize = selectedFontSize,
+                        onOptionSelected = { prayerViewModel.setFontSize(it) }
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -179,7 +199,7 @@ fun LanguageDropdownMenu(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.TopStart) {
+    Box {
         OutlinedButton(onClick = { expanded = true }) {
             Text(selectedOption, fontSize = selectedFontSize)
         }
@@ -261,7 +281,7 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            "Version: 0.2.3",
+            "Version: 0.3.0",
             style = MaterialTheme.typography.bodySmall,
             fontSize = selectedFontSize * 0.8f
         )
