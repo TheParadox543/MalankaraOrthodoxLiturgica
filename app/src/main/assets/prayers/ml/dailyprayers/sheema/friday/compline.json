@@ -1,10 +1,6 @@
 [
     {
         "type": "title",
-        "content": "compline"
-    },
-    {
-        "type": "title",
         "content": "വെള്ളി സൂത്താറാ"
     },
     {
@@ -65,6 +61,6 @@
     },
     {
         "type": "link",
-        "file": "sootharacommon.json"
+        "file": "commonprayers/complinecommon.json"
     }
 ]

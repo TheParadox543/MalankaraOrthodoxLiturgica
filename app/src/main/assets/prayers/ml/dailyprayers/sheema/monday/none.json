@@ -1,10 +1,6 @@
 [
     {
         "type": "title",
-        "content": "none"
-    },
-    {
-        "type": "title",
         "content": "ഒമ്പതാംമണി"
     },
     {
@@ -37,7 +33,7 @@
     },
     {
         "type": "link",
-        "file": "karunaniranjavane.json"
+        "file": "commonprayers/karunaniranjavane.json"
     },
     {
         "type": "link-collapsible",
