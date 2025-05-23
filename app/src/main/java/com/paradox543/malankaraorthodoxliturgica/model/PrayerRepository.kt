@@ -8,7 +8,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.reflect.typeOf
 
 @Singleton
 class PrayerRepository @Inject constructor(
