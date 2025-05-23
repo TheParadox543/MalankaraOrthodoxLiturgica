@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
-import android.widget.Space
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -50,7 +49,6 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel, navViewModel: NavViewModel) {
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val selectedNotificationPreference by prayerViewModel.selectedNotificationPreference.collectAsState()
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
 
@@ -65,11 +63,6 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
         "Medium" to 16.sp,
         "Large" to 20.sp,
         "Very Large" to 24.sp
-    )
-    val notificationPreferences = listOf(
-        "Off" to "off",
-        "Silent" to "silent",
-        "DND" to "dnd"
     )
 
     Scaffold(
@@ -149,38 +142,6 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                             ?: "Medium",
                         selectedFontSize = selectedFontSize,
                         onOptionSelected = { prayerViewModel.setFontSize(it) }
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            // Notification Preferences
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                shape = RoundedCornerShape(8.dp),
-                elevation = CardDefaults.cardElevation(4.dp)
-            ) {
-                Row(
-                    Modifier
-                        .padding(12.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ){
-                    Text(
-                        text = "Select Notification Preference",
-                        fontSize = selectedFontSize,
-                        fontWeight = FontWeight.Bold
-                    )
-                    NotificationPreferenceDropdownMenu(
-                        options = notificationPreferences,
-                        selectedOption = notificationPreferences.firstOrNull { it.second == selectedNotificationPreference }?.first
-                            ?: "Off",
-                        selectedFontSize = selectedFontSize,
-                        onOptionSelected = { prayerViewModel.setNotificationPreference(it) }
                     )
                 }
             }
@@ -279,35 +240,6 @@ fun FontSizeDropdownMenu(
                     onClick = {
                         selectedText = label
                         onOptionSelected(size)
-                        expanded = false
-                    }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun NotificationPreferenceDropdownMenu(
-    options: List<Pair<String, String>>,
-    selectedOption: String,
-    selectedFontSize: TextUnit,
-    onOptionSelected: (String) -> Unit
-) {
-    var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(selectedOption) }
-
-    Box {
-        OutlinedButton(onClick = { expanded = true }) {
-            Text(selectedText, fontSize = selectedFontSize)
-        }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            options.forEach { (optionDisplay, value) ->
-                DropdownMenuItem(
-                    text = { Text(optionDisplay) },
-                    onClick = {
-                        selectedText = optionDisplay
-                        onOptionSelected(value)
                         expanded = false
                     }
                 )
