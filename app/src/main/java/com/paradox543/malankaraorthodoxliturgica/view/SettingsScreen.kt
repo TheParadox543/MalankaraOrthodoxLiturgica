@@ -102,7 +102,8 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                     Text(
                         text = "Select Language",
                         fontSize = selectedFontSize,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f),
                     )
                     LanguageDropdownMenu(
                         options = languages,
@@ -134,7 +135,8 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                     Text(
                         text = "Select Font Size",
                         fontSize = selectedFontSize,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f),
                     )
                     FontSizeDropdownMenu(
                         options = fontSizes,
