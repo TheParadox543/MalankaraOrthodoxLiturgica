@@ -9,11 +9,11 @@
     },
     {
         "type": "link-collapsible",
-        "file": "urakkumilatta.json"
+        "file": "commonprayers/urakkumilatta.json"
     },
     {
         "type": "link-collapsible",
-        "file": "psalm133118116.json"
+        "file": "psalms/psalm133118116.json"
     },
     {
         "type": "heading",
@@ -261,11 +261,11 @@
     },
     {
         "type": "link",
-        "file": "karunaniranjavane.json"
+        "file": "commonprayers/karunaniranjavane.json"
     },
     {
         "type": "link",
-        "file": "nightfourthkauma.json"
+        "file": "commonprayers/nightfourthkauma.json"
     },
     {
         "type": "heading",
@@ -337,7 +337,7 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/praiseOfCherubims.json"
+        "file": "commonprayers/praiseOfAngels.json"
     },
     {
         "type": "link-collapsible",

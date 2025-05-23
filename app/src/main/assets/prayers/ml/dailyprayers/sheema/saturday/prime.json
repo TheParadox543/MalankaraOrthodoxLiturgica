@@ -25,7 +25,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "psalm51.json"
+        "file": "psalms/psalm51.json"
     },
     {
         "type": "prose",
@@ -37,7 +37,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "psalm63.json"
+        "file": "psalms/psalm63.json"
     },
     {
         "type": "heading",
@@ -89,7 +89,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "psalm113.json"
+        "file": "psalms/psalm113.json"
     },
     {
         "type": "heading",

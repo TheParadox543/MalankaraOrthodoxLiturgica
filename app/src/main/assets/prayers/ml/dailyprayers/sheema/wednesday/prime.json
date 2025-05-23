@@ -81,11 +81,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "psalms/"
-    },
-    {
-        "type": "linkcollapsible",
-        "content": "psalm113.json"
+        "file": "psalms/psalm113.json"
     },
     {
         "type": "heading",
