@@ -187,6 +187,7 @@ fun PrayerScreen(
                                 fontSize = selectedFontSize,
                             ){
                                 Column {
+                                    Spacer(Modifier.padding(8.dp))
                                     items.forEach {item ->
                                         when (item["type"]) {
                                             "heading" -> Heading(text = item["content"] ?: "", fontSize = selectedFontSize)
@@ -194,8 +195,9 @@ fun PrayerScreen(
                                             "prose" -> Prose(text = item["content"] ?: "", fontSize = selectedFontSize)
                                             "song" -> Song(text = item["content"] ?: "", fontSize = selectedFontSize)
                                             "subtext" -> Subtext(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            else -> Text("Unknown collapsible item: ${item["type"]}")
+                                            else -> Text("Unknown collapsible item: ${item["type"]}", color=MaterialTheme.colorScheme.error)
                                         }
+                                        Spacer(Modifier.padding(4.dp))
                                     }
                                 }
                             }
@@ -208,7 +210,7 @@ fun PrayerScreen(
                             Text("")
                         }
                         else -> {
-                            Text("Unknown prayer element: ${prayer["type"]}")
+                            Text("Unknown prayer element: ${prayer["type"]}", color=MaterialTheme.colorScheme.error)
                         }
                     }
                 }
