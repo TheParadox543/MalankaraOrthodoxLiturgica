@@ -20,9 +20,6 @@ class NavViewModel @Inject constructor() : ViewModel() {
 
     val rootNode = NavigationTree.getNavigationTree()
 
-    private val _currentNode = MutableStateFlow(rootNode)
-    val currentNode: StateFlow<PageNode> = _currentNode
-
     private val _currentSiblingIndex = MutableStateFlow<Int?>(null)
     val currentSiblingIndex: StateFlow<Int?> = _currentSiblingIndex
 
