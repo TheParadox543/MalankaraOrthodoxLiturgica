@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -12,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.R
@@ -30,6 +33,15 @@ val bottomNavItems = listOf(
         "prayNow", "Pray Now"
     ) {
         Icon(painterResource(R.drawable.clock), "Clock")
+    },
+    BottomNavItem(
+        "bible", "Bible"
+    ) {
+        Icon(
+            painterResource(R.drawable.bible),
+            "Bible",
+            modifier = Modifier.size(40.dp)
+        )
     },
     BottomNavItem(
         "settings", "Settings"
