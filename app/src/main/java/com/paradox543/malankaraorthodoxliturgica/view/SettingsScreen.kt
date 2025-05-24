@@ -17,6 +17,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
@@ -90,6 +92,10 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                     .padding(8.dp)
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                ),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
                 Row(
@@ -123,6 +129,10 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                     .fillMaxWidth()
                     .padding(8.dp),
                 shape = RoundedCornerShape(8.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                ),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
                 Row(
@@ -156,7 +166,7 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                     Icon(
                         Icons.Filled.Info,
                         contentDescription = "About App Icon",
-                        tint = MaterialTheme.colorScheme.primary // Optional: Customize the icon color
+                        tint = MaterialTheme.colorScheme.tertiary
                     )
                 },
                 headlineContent = { Text("About the App", fontSize = selectedFontSize) }
@@ -200,7 +210,13 @@ fun LanguageDropdownMenu(
     var expanded by remember { mutableStateOf(false) }
 
     Box {
-        OutlinedButton(onClick = { expanded = true }) {
+        OutlinedButton(
+            onClick = { expanded = true },
+            colors = ButtonDefaults.textButtonColors(
+                MaterialTheme.colorScheme.primary,
+                MaterialTheme.colorScheme.onPrimary,
+            ),
+        ) {
             Text(selectedOption, fontSize = selectedFontSize)
         }
 
@@ -232,7 +248,13 @@ fun FontSizeDropdownMenu(
     var selectedText by remember { mutableStateOf(selectedOption) }
 
     Box {
-        OutlinedButton(onClick = { expanded = true }) {
+        OutlinedButton(
+            onClick = { expanded = true },
+            colors = ButtonDefaults.textButtonColors(
+                MaterialTheme.colorScheme.tertiary,
+                MaterialTheme.colorScheme.onTertiary,
+            ),
+        ) {
             Text(selectedText, fontSize = selectedFontSize)
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
@@ -281,7 +303,7 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            "Version: 0.3.0",
+            "Version: 0.3.1",
             style = MaterialTheme.typography.bodySmall,
             fontSize = selectedFontSize * 0.8f
         )

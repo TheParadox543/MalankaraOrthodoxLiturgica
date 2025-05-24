@@ -1,0 +1,530 @@
+[
+    {
+        "book": {
+            "en": "Genesis",
+            "ml": "ഉല്പത്തി"
+        },
+        "verses": 1533,
+        "chapters": 50
+    },
+    {
+        "book": {
+            "en": "Exodus",
+            "ml": "പുറപ്പാട്"
+        },
+        "verses": 1213,
+        "chapters": 40
+    },
+    {
+        "book": {
+            "en": "Leviticus",
+            "ml": "ലേവ്യപുസ്തകം"
+        },
+        "verses": 859,
+        "chapters": 27
+    },
+    {
+        "book": {
+            "en": "Numbers",
+            "ml": "സംഖ്യാപുസ്തകം"
+        },
+        "verses": 1288,
+        "chapters": 36
+    },
+    {
+        "book": {
+            "en": "Deuteronomy",
+            "ml": "ആവർത്തനപുസ്തകം"
+        },
+        "verses": 959,
+        "chapters": 34
+    },
+    {
+        "book": {
+            "en": "Joshua",
+            "ml": "യോശുവ"
+        },
+        "verses": 658,
+        "chapters": 24
+    },
+    {
+        "book": {
+            "en": "Judges",
+            "ml": "ന്യായാധിപന്മാർ"
+        },
+        "verses": 618,
+        "chapters": 21
+    },
+    {
+        "book": {
+            "en": "Ruth",
+            "ml": "രൂത്ത്"
+        },
+        "verses": 85,
+        "chapters": 4
+    },
+    {
+        "book": {
+            "en": "1 Samuel",
+            "ml": "1 ശമൂവേൽ"
+        },
+        "verses": 810,
+        "chapters": 31
+    },
+    {
+        "book": {
+            "en": "2 Samuel",
+            "ml": "2 ശമൂവേൽ"
+        },
+        "verses": 695,
+        "chapters": 24
+    },
+    {
+        "book": {
+            "en": "1 Kings",
+            "ml": "1 രാജാക്കന്മാർ"
+        },
+        "verses": 816,
+        "chapters": 22
+    },
+    {
+        "book": {
+            "en": "2 Kings",
+            "ml": "2 രാജാക്കന്മാർ"
+        },
+        "verses": 719,
+        "chapters": 25
+    },
+    {
+        "book": {
+            "en": "1 Chronicles",
+            "ml": "1 ദിനവൃത്താന്തം"
+        },
+        "verses": 942,
+        "chapters": 29
+    },
+    {
+        "book": {
+            "en": "2 Chronicles",
+            "ml": "2 ദിനവൃത്താന്തം"
+        },
+        "verses": 822,
+        "chapters": 36
+    },
+    {
+        "book": {
+            "en": "Ezra",
+            "ml": "എസ്രാ"
+        },
+        "verses": 280,
+        "chapters": 10
+    },
+    {
+        "book": {
+            "en": "Nehemiah",
+            "ml": "നെഹെമ്യാവ്"
+        },
+        "verses": 406,
+        "chapters": 13
+    },
+    {
+        "book": {
+            "en": "Esther",
+            "ml": "എസ്ഥേർ"
+        },
+        "verses": 167,
+        "chapters": 10
+    },
+    {
+        "book": {
+            "en": "Job",
+            "ml": "ഇയ്യോബ്"
+        },
+        "verses": 1070,
+        "chapters": 42
+    },
+    {
+        "book": {
+            "en": "Psalms",
+            "ml": "സങ്കീർത്തനങ്ങൾ"
+        },
+        "verses": 2461,
+        "chapters": 150
+    },
+    {
+        "book": {
+            "en": "Proverbs",
+            "ml": "സദൃശ്യവാക്യങ്ങൾ"
+        },
+        "verses": 915,
+        "chapters": 31
+    },
+    {
+        "book": {
+            "en": "Ecclesiastes",
+            "ml": "സഭാപ്രസംഗി"
+        },
+        "verses": 222,
+        "chapters": 12
+    },
+    {
+        "book": {
+            "en": "Song of Solomon",
+            "ml": "ഉത്തമഗീതം"
+        },
+        "verses": 117,
+        "chapters": 8
+    },
+    {
+        "book": {
+            "en": "Isaiah",
+            "ml": "യെശയ്യാവ്"
+        },
+        "verses": 1292,
+        "chapters": 66
+    },
+    {
+        "book": {
+            "en": "Jeremiah",
+            "ml": "യിരെമ്യാവ്"
+        },
+        "verses": 1364,
+        "chapters": 52
+    },
+    {
+        "book": {
+            "en": "Lamentations",
+            "ml": "വിലാപങ്ങൾ"
+        },
+        "verses": 154,
+        "chapters": 5
+    },
+    {
+        "book": {
+            "en": "Ezekiel",
+            "ml": "യെഹെസ്കേൽ"
+        },
+        "verses": 1273,
+        "chapters": 48
+    },
+    {
+        "book": {
+            "en": "Daniel",
+            "ml": "ദാനിയേൽ"
+        },
+        "verses": 357,
+        "chapters": 12
+    },
+    {
+        "book": {
+            "en": "Hosea",
+            "ml": "ഹോശേയ"
+        },
+        "verses": 197,
+        "chapters": 14
+    },
+    {
+        "book": {
+            "en": "Joel",
+            "ml": "യോവേൽ"
+        },
+        "verses": 73,
+        "chapters": 3
+    },
+    {
+        "book": {
+            "en": "Amos",
+            "ml": "ആമോസ്"
+        },
+        "verses": 146,
+        "chapters": 9
+    },
+    {
+        "book": {
+            "en": "Obadiah",
+            "ml": "ഓബദ്യാവ്"
+        },
+        "verses": 21,
+        "chapters": 1
+    },
+    {
+        "book": {
+            "en": "Jonah",
+            "ml": "യോനാ"
+        },
+        "verses": 48,
+        "chapters": 4
+    },
+    {
+        "book": {
+            "en": "Micah",
+            "ml": "മീഖാ"
+        },
+        "verses": 105,
+        "chapters": 7
+    },
+    {
+        "book": {
+            "en": "Nahum",
+            "ml": "നാഹും"
+        },
+        "verses": 47,
+        "chapters": 3
+    },
+    {
+        "book": {
+            "en": "Habakkuk",
+            "ml": "ഹബക്കൂക്ക്"
+        },
+        "verses": 56,
+        "chapters": 3
+    },
+    {
+        "book": {
+            "en": "Zephaniah",
+            "ml": "സെഫന്യാവ്"
+        },
+        "verses": 53,
+        "chapters": 3
+    },
+    {
+        "book": {
+            "en": "Haggai",
+            "ml": "ഹഗ്ഗായി"
+        },
+        "verses": 38,
+        "chapters": 2
+    },
+    {
+        "book": {
+            "en": "Zechariah",
+            "ml": "സെഖര്യാവ്"
+        },
+        "verses": 211,
+        "chapters": 14
+    },
+    {
+        "book": {
+            "en": "Malachi",
+            "ml": "മലാഖി"
+        },
+        "verses": 55,
+        "chapters": 4
+    },
+    {
+        "book": {
+            "en": "Matthew",
+            "ml": "മത്തായി"
+        },
+        "verses": 1071,
+        "chapters": 28
+    },
+    {
+        "book": {
+            "en": "Mark",
+            "ml": "മർക്കോസ്"
+        },
+        "verses": 678,
+        "chapters": 16
+    },
+    {
+        "book": {
+            "en": "Luke",
+            "ml": "ലൂക്കോസ്"
+        },
+        "verses": 1151,
+        "chapters": 24
+    },
+    {
+        "book": {
+            "en": "John",
+            "ml": "യോഹന്നാൻ"
+        },
+        "verses": 879,
+        "chapters": 21
+    },
+    {
+        "book": {
+            "en": "Acts",
+            "ml": "പ്രവൃത്തികൾ"
+        },
+        "verses": 1007,
+        "chapters": 28
+    },
+    {
+        "book": {
+            "en": "Romans",
+            "ml": "റോമർ"
+        },
+        "verses": 433,
+        "chapters": 16
+    },
+    {
+        "book": {
+            "en": "1 Corinthians",
+            "ml": "1 കൊരിന്ത്യർ"
+        },
+        "verses": 437,
+        "chapters": 16
+    },
+    {
+        "book": {
+            "en": "2 Corinthians",
+            "ml": "2 കൊരിന്ത്യർ"
+        },
+        "verses": 257,
+        "chapters": 13
+    },
+    {
+        "book": {
+            "en": "Galatians",
+            "ml": "ഗലാത്യർ"
+        },
+        "verses": 149,
+        "chapters": 6
+    },
+    {
+        "book": {
+            "en": "Ephesians",
+            "ml": "എഫെസ്യർ"
+        },
+        "verses": 155,
+        "chapters": 6
+    },
+    {
+        "book": {
+            "en": "Philippians",
+            "ml": "ഫിലിപ്പിയർ"
+        },
+        "verses": 104,
+        "chapters": 4
+    },
+    {
+        "book": {
+            "en": "Colossians",
+            "ml": "കൊലോസ്യർ"
+        },
+        "verses": 95,
+        "chapters": 4
+    },
+    {
+        "book": {
+            "en": "1 Thessalonians",
+            "ml": "1 തെസ്സലൊനീക്യർ"
+        },
+        "verses": 89,
+        "chapters": 5
+    },
+    {
+        "book": {
+            "en": "2 Thessalonians",
+            "ml": "2 തെസ്സലൊനീക്യർ"
+        },
+        "verses": 47,
+        "chapters": 3
+    },
+    {
+        "book": {
+            "en": "1 Timothy",
+            "ml": "1 തിമൊഥെയൊസ്"
+        },
+        "verses": 133,
+        "chapters": 6
+    },
+    {
+        "book": {
+            "en": "2 Timothy",
+            "ml": "2 തിമൊഥെയൊസ്"
+        },
+        "verses": 83,
+        "chapters": 4
+    },
+    {
+        "book": {
+            "en": "Titus",
+            "ml": "തീത്തൊസ്"
+        },
+        "verses": 46,
+        "chapters": 3
+    },
+    {
+        "book": {
+            "en": "Philemon",
+            "ml": "ഫിലേമോൻ"
+        },
+        "verses": 25,
+        "chapters": 1
+    },
+    {
+        "book": {
+            "en": "Hebrews",
+            "ml": "എബ്രായർ"
+        },
+        "verses": 303,
+        "chapters": 13
+    },
+    {
+        "book": {
+            "en": "James",
+            "ml": "യാക്കോബ്"
+        },
+        "verses": 108,
+        "chapters": 5
+    },
+    {
+        "book": {
+            "en": "1 Peter",
+            "ml": "1 പത്രോസ്"
+        },
+        "verses": 105,
+        "chapters": 5
+    },
+    {
+        "book": {
+            "en": "2 Peter",
+            "ml": "2 പത്രോസ്"
+        },
+        "verses": 61,
+        "chapters": 3
+    },
+    {
+        "book": {
+            "en": "1 John",
+            "ml": "1 യോഹന്നാൻ"
+        },
+        "verses": 105,
+        "chapters": 5
+    },
+    {
+        "book": {
+            "en": "2 John",
+            "ml": "2 യോഹന്നാൻ"
+        },
+        "verses": 13,
+        "chapters": 1
+    },
+    {
+        "book": {
+            "en": "3 John",
+            "ml": "3 യോഹന്നാൻ"
+        },
+        "verses": 14,
+        "chapters": 1
+    },
+    {
+        "book": {
+            "en": "Jude",
+            "ml": "യൂദാ"
+        },
+        "verses": 25,
+        "chapters": 1
+    },
+    {
+        "book": {
+            "en": "Revelation",
+            "ml": "വെളിപാട്"
+        },
+        "verses": 404,
+        "chapters": 22
+    }
+]

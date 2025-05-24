@@ -20,6 +20,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
+import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
+import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
@@ -27,17 +30,6 @@ import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-
-data class BottomNavItem(val route: String, val icon: @Composable () -> Unit, val label: String)
-
-val bottomNavItems = listOf(
-    BottomNavItem("home", { Icon(Icons.Default.Home, "Home") }, "Home"),
-    BottomNavItem("prayNow",
-        { Icon(painterResource(R.drawable.clock), "Clock") },
-        "Pray Now"
-    ),
-    BottomNavItem("settings", { Icon(Icons.Default.Settings, "Settings") }, "Settings")
-)
 
 @Composable
 fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
@@ -82,6 +74,18 @@ fun NavGraph(modifier: Modifier = Modifier) {
         }
         composable("prayNow") {
             PrayNowScreen(navController, prayerViewModel, navViewModel)
+        }
+        composable("bible") {
+            BibleScreen(navController, prayerViewModel, navViewModel)
+        }
+        composable("bible/{book}") {backStackEntry ->
+            val book = backStackEntry.arguments?.getString("book") ?: ""
+            BibleBookScreen(navController, prayerViewModel, navViewModel, book)
+        }
+        composable("bible/{book}/{chapter}") {backStackEntry ->
+            val book = backStackEntry.arguments?.getString("book") ?: ""
+            val chapter = backStackEntry.arguments?.getString("chapter") ?: ""
+            BibleChapterScreen(navController, prayerViewModel, navViewModel, book.toInt(), chapter.toInt())
         }
         composable("settings") {
             SettingsScreen(navController, prayerViewModel, navViewModel)

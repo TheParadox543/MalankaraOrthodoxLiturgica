@@ -13,8 +13,8 @@ import javax.inject.Singleton
 class PrayerRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    fun loadTranslations(language: String): Map<String, String>{
-        val json = context.assets.open("translations.json").bufferedReader().use {it.readText()}
+    fun loadTranslations(language: String): Map<String, String> {
+        val json = context.assets.open("translations.json").bufferedReader().use { it.readText() }
         val jsonObject = JSONObject(json)
         val translationMap = mutableMapOf<String, String>()
         for (key in jsonObject.keys()) {
@@ -24,15 +24,26 @@ class PrayerRepository @Inject constructor(
         return translationMap
     }
 
-    fun loadPrayers(filename: String, language: String, depth: Int = 0, maxDepth: Int = 5): List<Map<String, Any>> {
+    fun loadPrayers(
+        filename: String,
+        language: String,
+        depth: Int = 0,
+        maxDepth: Int = 5
+    ): List<Map<String, Any>> {
         if (depth > maxDepth) {
-            return listOf(mapOf("type" to "error", "content" to "Error: Exceeded maximum link depth."))
+            return listOf(
+                mapOf(
+                    "type" to "error",
+                    "content" to "Error: Exceeded maximum link depth."
+                )
+            )
         }
         val prayerList = mutableListOf<Map<String, Any>>()
 
         try {
             val json =
-                context.assets.open("prayers/$language/$filename").bufferedReader().use { it.readText() }
+                context.assets.open("prayers/$language/$filename").bufferedReader()
+                    .use { it.readText() }
             val jsonArray = JSONArray(json)
 
             for (i in 0 until jsonArray.length()) {
@@ -69,42 +80,63 @@ class PrayerRepository @Inject constructor(
                             val itemType = itemObject.getString("type")
                             val itemContent = itemObject.optString("content")
                             if (itemContent.isEmpty()) {
-                                return listOf(mapOf(
-                                    "type" to "error",
-                                    "content" to "Content in this language has not been added yet."
-                                ))
+                                return listOf(
+                                    mapOf(
+                                        "type" to "error",
+                                        "content" to "Content in this language has not been added yet."
+                                    )
+                                )
                             }
                             itemList.add(mapOf("type" to itemType, "content" to itemContent))
                         }
-                        prayerList.add(mapOf("type" to "collapsible-block", "title" to title, "items" to itemList))
+                        prayerList.add(
+                            mapOf(
+                                "type" to "collapsible-block",
+                                "title" to title,
+                                "items" to itemList
+                            )
+                        )
                     } // Add content as collapsible block
 
                     else -> {
                         val content = prayerObject.optString("content")
                         if (content.isEmpty()) {
-                            return listOf(mapOf(
-                                "type" to "error",
-                                "content" to "Content in this language has not been added yet."
-                            ))
+                            return listOf(
+                                mapOf(
+                                    "type" to "error",
+                                    "content" to "Content in this language has not been added yet."
+                                )
+                            )
                         }
                         prayerList.add(mapOf("type" to type, "content" to content))
                     }
                 }
             }
         } catch (e: IOException) {
-            return listOf(mapOf("type" to "error", "content" to "Error loading file: $language/$filename"))
+            return listOf(
+                mapOf(
+                    "type" to "error",
+                    "content" to "Error loading file: $language/$filename"
+                )
+            )
         } catch (e: org.json.JSONException) {
-            return listOf(mapOf("type" to "error", "content" to "Error parsing JSON in: $language/$filename"))
+            return listOf(
+                mapOf(
+                    "type" to "error",
+                    "content" to "Error parsing JSON in: $language/$filename"
+                )
+            )
         }
         return prayerList
     }
 
-    private fun loadPrayerAsCollapsible(filename: String, language: String): Map<String, Any>{
+    private fun loadPrayerAsCollapsible(filename: String, language: String): Map<String, Any> {
         val itemList = mutableListOf<Map<String, String>>()
         var title = ""
         try {
             Log.d("PrayerRep", "prayers/$language/$filename")
-            val json = context.assets.open("prayers/$language/$filename").bufferedReader().use { it.readText() }
+            val json = context.assets.open("prayers/$language/$filename").bufferedReader()
+                .use { it.readText() }
             val jsonArray = JSONArray(json)
 
             for (i in 0 until jsonArray.length()) {
@@ -112,7 +144,10 @@ class PrayerRepository @Inject constructor(
                 val type = prayerObject.getString("type")
                 val content = prayerObject.optString("content")
                 if (content.isEmpty()) {
-                    return mapOf("type" to "error", "content" to "Content in this language has not been added yet.")
+                    return mapOf(
+                        "type" to "error",
+                        "content" to "Content in this language has not been added yet."
+                    )
                 }
                 if (type == "heading" && title.isEmpty()) {
                     title = content
@@ -125,7 +160,44 @@ class PrayerRepository @Inject constructor(
         } catch (e: IOException) {
             return mapOf("type" to "error", "content" to "Error loading file: $language/$filename")
         } catch (e: org.json.JSONException) {
-            return mapOf("type" to "error", "content" to "Error parsing JSON in: $language/$filename")
+            return mapOf(
+                "type" to "error",
+                "content" to "Error parsing JSON in: $language/$filename"
+            )
         }
+    }
+
+    suspend fun loadBibleChapters(): List<BibleBook> {
+        val json = context.assets.open("bibleBooks.json").bufferedReader().use { it.readText() }
+        val jsonArray = JSONArray(json)
+        val bibleChapters = mutableListOf<BibleBook>()
+
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val bookObject = jsonObject.getJSONObject("book")
+            val englishName = bookObject.getString("en")
+            val malayalamName = bookObject.getString("ml")
+            val book = BookName(englishName, malayalamName)
+            val verses = jsonObject.getInt("verses")
+            val chapters = jsonObject.getInt("chapters")
+            bibleChapters.add(BibleBook(book, chapters, verses))
+        }
+        return bibleChapters
+    }
+
+    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String = "ml"): Map<String, String> {
+        val json = context.assets.open("bible-$language.json").bufferedReader().use { it.readText() }
+        val bibleObject = JSONObject(json)
+        val bookObject = bibleObject.getJSONArray("Book")[bookNumber] as JSONObject
+        val chapterObject = bookObject.getJSONArray("Chapter")[chapterNumber] as JSONObject
+        val versesArray = chapterObject.getJSONArray("Verse")
+        val versesMap = mutableMapOf<String, String>()
+        for(i in 0 until versesArray.length()) {
+            val verseObject = versesArray.getJSONObject(i)
+            val verseNumber = (i + 1).toString()
+            val verseText = verseObject.getString("Verse")
+            versesMap[verseNumber] = verseText
+        }
+        return versesMap
     }
 }
