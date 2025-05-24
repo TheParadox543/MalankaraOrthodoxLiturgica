@@ -58,16 +58,22 @@ fun BibleScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(horizontal = 10.dp)
+                .padding(horizontal = 12.dp)
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
-                SectionCard("Old Testament")
+                when(bibleLanguage) {
+                    "en" -> SectionCard("Old Testament")
+                    "ml" -> SectionCard("പഴയ നിയമം")
+                }
             }
             items(oldTestamentChapters.size) { index ->
                 BibleCard (oldTestamentChapters[index], bibleLanguage, selectedFontSize, navController)
             }
             item(span = {GridItemSpan(this.maxLineSpan)}) {
-                SectionCard("New Testament")
+                when(selectedLanguage){
+                    "en" -> SectionCard("New Testament")
+                    "ml" -> SectionCard("പുതിയ നിയമം")
+                }
             }
             items(newTestamentChapters.size) {index ->
                 BibleCard(newTestamentChapters[index], bibleLanguage, selectedFontSize, navController)
