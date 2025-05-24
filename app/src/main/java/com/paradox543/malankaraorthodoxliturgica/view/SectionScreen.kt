@@ -11,13 +11,13 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.model.PageNode
@@ -38,7 +38,6 @@ fun SectionScreen(
     val nodes = node.children
     prayerViewModel.setTopBarKeys(node.route)
     Scaffold (
-        containerColor = Color.Transparent,
         topBar = {
             TopNavBar(
                 navController = navController,
@@ -70,6 +69,10 @@ fun SectionScreen(
                             }
                         },
                     shape = RoundedCornerShape(8.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    ),
                     elevation = CardDefaults.cardElevation(4.dp)
                 ) {
                     val text = node.route.split("_").last()
