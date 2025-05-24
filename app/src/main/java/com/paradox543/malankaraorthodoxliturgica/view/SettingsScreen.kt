@@ -303,7 +303,7 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            "Version: 0.3.0",
+            "Version: 0.3.1",
             style = MaterialTheme.typography.bodySmall,
             fontSize = selectedFontSize * 0.8f
         )

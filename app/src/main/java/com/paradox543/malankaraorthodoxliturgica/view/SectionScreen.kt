@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -100,14 +101,14 @@ fun SectionScreen(
             }
             else {
                 Column {
-                    Spacer(Modifier.weight(0.25f))
+                    Spacer(Modifier.weight(0.4f))
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding)
                             .padding(horizontal = 20.dp)
-                            .weight(0.75f),
+                            .weight(0.6f),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         itemsIndexed(nodes) { index, node ->
@@ -152,6 +153,10 @@ private fun SectionCard(
                     navController.navigate("prayerScreen/${node.route}")
                 }
             },
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+        ),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {

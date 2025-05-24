@@ -3,8 +3,14 @@ package com.paradox543.malankaraorthodoxliturgica.model
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class BookName(
+    val en: String,
+    val ml: String
+)
+
+@Serializable
 data class BibleBook(
-    val book: String = "",
+    val book: BookName,
     val chapters: Int = 1,
     val verses: Int = 1
 )

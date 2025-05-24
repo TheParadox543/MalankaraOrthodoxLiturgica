@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class PageNode(
     val route: String,
     val filename: String = "",
+    val parent: String?,
     val children: List<PageNode> = emptyList(),
     val languages: List<String> = listOf("ml"),
 )
