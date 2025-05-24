@@ -23,6 +23,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 
 data class BottomNavItem(val route: String, val label: String, val icon: @Composable () -> Unit)
 
+val iconSize = 24.dp
 val bottomNavItems = listOf(
     BottomNavItem(
         "home", "Home"
@@ -32,7 +33,11 @@ val bottomNavItems = listOf(
     BottomNavItem(
         "prayNow", "Pray Now"
     ) {
-        Icon(painterResource(R.drawable.clock), "Clock")
+        Icon(
+            painterResource(R.drawable.clock),
+            "Clock",
+            modifier = Modifier.size(iconSize),
+        )
     },
     BottomNavItem(
         "bible", "Bible"
@@ -40,7 +45,7 @@ val bottomNavItems = listOf(
         Icon(
             painterResource(R.drawable.bible),
             "Bible",
-            modifier = Modifier.size(40.dp)
+            modifier = Modifier.size(iconSize),
         )
     },
     BottomNavItem(
