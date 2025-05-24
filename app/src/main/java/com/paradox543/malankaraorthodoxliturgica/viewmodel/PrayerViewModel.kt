@@ -86,15 +86,43 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    fun loadBible(): List<List<BibleBook>> {
+    private val _bibleBooks = MutableStateFlow<List<BibleBook>>(emptyList())
+    val bibleBooks: StateFlow<List<BibleBook>> = _bibleBooks
+    init {
+        viewModelScope.launch { loadBibleBooks() }
+    }
+
+    suspend fun loadBibleBooks() {
         try {
-            val bibleChapters = prayerRepository.loadBible()
-            val oldTestament = bibleChapters.take(39)
-            val newTestament = bibleChapters.drop(39)
-            return listOf(oldTestament, newTestament)
+            val bibleChapters = prayerRepository.loadBibleChapters()
+            _bibleBooks.value = bibleChapters
         } catch (e: Exception) {
             throw e
         }
+    }
+
+    fun findBibleBookWithIndex(bookName: String, language: String): Pair<BibleBook?, Int?> {
+        val currentBooks = _bibleBooks.value
+
+        currentBooks.forEachIndexed { index, bibleBook ->
+            when(language){
+                "en" -> {
+                    if (bibleBook.book.en == bookName) {
+                        return Pair(bibleBook, index)
+                    }
+                }
+                "ml" -> {
+                    if (bibleBook.book.ml == bookName) {
+                        return Pair(bibleBook, index)
+                    }
+                }
+            }
+        }
+        return Pair(null, null)
+    }
+
+    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String): Map<String, String> {
+        return prayerRepository.loadBibleChapter(bookNumber, chapterNumber, language)
     }
 }
 
