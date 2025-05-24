@@ -28,17 +28,6 @@ import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
-data class BottomNavItem(val route: String, val icon: @Composable () -> Unit, val label: String)
-
-val bottomNavItems = listOf(
-    BottomNavItem("home", { Icon(Icons.Default.Home, "Home") }, "Home"),
-    BottomNavItem("prayNow",
-        { Icon(painterResource(R.drawable.clock), "Clock") },
-        "Pray Now"
-    ),
-    BottomNavItem("settings", { Icon(Icons.Default.Settings, "Settings") }, "Settings")
-)
-
 @Composable
 fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
     val isVisible = remember { mutableStateOf(true) }
