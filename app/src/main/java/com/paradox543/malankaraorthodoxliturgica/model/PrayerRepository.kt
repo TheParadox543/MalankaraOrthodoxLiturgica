@@ -128,4 +128,23 @@ class PrayerRepository @Inject constructor(
             return mapOf("type" to "error", "content" to "Error parsing JSON in: $language/$filename")
         }
     }
+
+    fun loadBible(): List<BibleBook> {
+        val json = context.assets.open("bibleChapters.json").bufferedReader().use {it.readText()}
+        val jsonArray = JSONArray(json)
+        val bibleChapters = mutableListOf<BibleBook>()
+
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            val book = jsonObject.getString("book")
+            val verses = jsonObject.getInt("verses")
+            val chapters = jsonObject.getInt("chapters")
+            bibleChapters.add(BibleBook(book, chapters, verses))
+        }
+        return bibleChapters
+    }
+
+    fun loadBibleContent(language: String) {
+        val json = context.assets.open("")
+    }
 }

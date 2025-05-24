@@ -20,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
@@ -71,6 +72,9 @@ fun NavGraph(modifier: Modifier = Modifier) {
         }
         composable("prayNow") {
             PrayNowScreen(navController, prayerViewModel, navViewModel)
+        }
+        composable("bible") {
+            BibleScreen(navController, prayerViewModel, navViewModel)
         }
         composable("settings") {
             SettingsScreen(navController, prayerViewModel, navViewModel)

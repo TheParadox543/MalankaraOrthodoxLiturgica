@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.model.BibleBook
 import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
 import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -80,6 +81,15 @@ class PrayerViewModel @Inject constructor(
         try {
             val prayers = prayerRepository.loadPrayers(filename, language)
             _prayers.value = prayers
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    fun loadBible(): List<BibleBook> {
+        try {
+            val bibleChapters = prayerRepository.loadBible()
+            return bibleChapters
         } catch (e: Exception) {
             throw e
         }
