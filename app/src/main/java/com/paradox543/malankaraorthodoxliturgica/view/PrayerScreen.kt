@@ -92,7 +92,6 @@ fun PrayerScreen(
             .pointerInput(Unit) {
                 detectTapGestures { isVisible.value = !isVisible.value }
             },
-        containerColor = Color.Transparent,
         topBar = {
             AnimatedVisibility(
                 visible = isVisible.value,

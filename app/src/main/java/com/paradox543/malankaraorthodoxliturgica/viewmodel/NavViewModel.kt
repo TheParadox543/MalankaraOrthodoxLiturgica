@@ -121,6 +121,16 @@ class NavViewModel @Inject constructor() : ViewModel() {
             decideTime("kyamtha")
         }
 
+        if ((adjustedDayOfWeek == DayOfWeek.SUNDAY) && (hour in 6..13)) {
+            prayerList.add("${PrayerRoutes.QURBANA}_${PrayerRoutes.PREPARATION}")
+            prayerList.add("${PrayerRoutes.QURBANA}_${PrayerRoutes.PARTONE}")
+            prayerList.add("${PrayerRoutes.QURBANA}_${PrayerRoutes.CHAPTERONE}")
+            prayerList.add("${PrayerRoutes.QURBANA}_${PrayerRoutes.CHAPTERTWO}")
+            prayerList.add("${PrayerRoutes.QURBANA}_${PrayerRoutes.CHAPTERTHREE}")
+            prayerList.add("${PrayerRoutes.QURBANA}_${PrayerRoutes.CHAPTERFOUR}")
+            prayerList.add("${PrayerRoutes.QURBANA}_${PrayerRoutes.CHAPTERFIVE}")
+        }
+
         if ((adjustedDayOfWeek == DayOfWeek.SUNDAY || adjustedDayOfWeek == DayOfWeek.MONDAY) && (hour in 10..12)) {
             prayerList.add("wedding_ring")
             prayerList.add("wedding_crown")
