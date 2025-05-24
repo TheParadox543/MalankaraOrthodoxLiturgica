@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -35,6 +36,8 @@ fun BibleScreen(
     navViewModel: NavViewModel
 ) {
     val bibleChapters = prayerViewModel.loadBible()
+    val oldTestament = bibleChapters[0]
+    val newTestament = bibleChapters[1]
     Scaffold(
         topBar = {
             TopNavBar(navController, prayerViewModel, navViewModel)
@@ -49,9 +52,40 @@ fun BibleScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            items(bibleChapters.size) { index ->
-                BibleCard (bibleChapters[index])
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                SectionCard("Old Testament")
             }
+            items(oldTestament.size) { index ->
+                BibleCard (oldTestament[index])
+            }
+            item(span = {GridItemSpan(this.maxLineSpan)}) {
+                SectionCard("New Testament")
+            }
+            items(newTestament.size) {index ->
+                BibleCard(newTestament[index])
+            }
+        }
+    }
+}
+
+@Composable
+fun SectionCard(title: String) {
+    Card(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .height(60.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        )
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(title)
         }
     }
 }
@@ -80,9 +114,7 @@ fun BibleCard(bibleChapter: BibleBook){
         )
         {
             Text(
-                text = bibleChapter.book,
-                modifier = Modifier
-                    .padding(12.dp)
+                text = bibleChapter.book
             )
         }
     }

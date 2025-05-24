@@ -86,10 +86,12 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    fun loadBible(): List<BibleBook> {
+    fun loadBible(): List<List<BibleBook>> {
         try {
             val bibleChapters = prayerRepository.loadBible()
-            return bibleChapters
+            val oldTestament = bibleChapters.take(39)
+            val newTestament = bibleChapters.drop(39)
+            return listOf(oldTestament, newTestament)
         } catch (e: Exception) {
             throw e
         }
