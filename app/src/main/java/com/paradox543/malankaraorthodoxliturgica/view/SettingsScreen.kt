@@ -17,7 +17,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -71,8 +70,7 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
         topBar = {
            TopNavBar(
                navController = navController,
-               prayerViewModel = prayerViewModel,
-               navViewModel = navViewModel
+               prayerViewModel = prayerViewModel
            )
         },
         bottomBar = {BottomNavBar(navController)}

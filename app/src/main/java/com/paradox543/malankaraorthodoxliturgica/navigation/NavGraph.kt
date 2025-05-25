@@ -2,10 +2,6 @@ package com.paradox543.malankaraorthodoxliturgica.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -14,12 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
@@ -76,16 +70,16 @@ fun NavGraph(modifier: Modifier = Modifier) {
             PrayNowScreen(navController, prayerViewModel, navViewModel)
         }
         composable("bible") {
-            BibleScreen(navController, prayerViewModel, navViewModel)
+            BibleScreen(navController, prayerViewModel)
         }
         composable("bible/{book}") {backStackEntry ->
             val book = backStackEntry.arguments?.getString("book") ?: ""
-            BibleBookScreen(navController, prayerViewModel, navViewModel, book)
+            BibleBookScreen(navController, prayerViewModel, book)
         }
         composable("bible/{book}/{chapter}") {backStackEntry ->
             val book = backStackEntry.arguments?.getString("book") ?: ""
             val chapter = backStackEntry.arguments?.getString("chapter") ?: ""
-            BibleChapterScreen(navController, prayerViewModel, navViewModel, book.toInt(), chapter.toInt())
+            BibleChapterScreen(navController, prayerViewModel, book.toInt(), chapter.toInt())
         }
         composable("settings") {
             SettingsScreen(navController, prayerViewModel, navViewModel)

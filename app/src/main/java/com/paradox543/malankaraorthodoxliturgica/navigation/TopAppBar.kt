@@ -13,10 +13,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,14 +22,11 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun TopNavBar(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    navViewModel: NavViewModel,
-    onActionClick: (() -> Unit)? = null // Optional Action button
+    onActionClick: (() -> Unit)? = null // Optional Action button{}
 ) {
     val topBarNames by prayerViewModel.topBarNames.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-    val isVisible = rememberScrollAwareVisibility()
-
     val title = if (currentRoute == "settings") {
         translations["malankara"] ?: "malankara"
     } else {
