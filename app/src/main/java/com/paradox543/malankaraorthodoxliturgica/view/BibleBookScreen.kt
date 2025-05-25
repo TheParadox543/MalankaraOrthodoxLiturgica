@@ -3,8 +3,8 @@ package com.paradox543.malankaraorthodoxliturgica.view
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -23,17 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleBookScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    navViewModel: NavViewModel,
     bookName: String
 ) {
-//    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     var bibleLanguage = selectedLanguage
     if (selectedLanguage == "mn") {
@@ -48,14 +45,14 @@ fun BibleBookScreen(
     val chapters = bibleBook?.chapters ?: 1
     Scaffold(
         topBar = {
-            TopNavBar(navController, prayerViewModel, navViewModel)
+            TopNavBar(navController, prayerViewModel)
         },
         bottomBar = {
             BottomNavBar(navController)
         }
     ) {innerPadding ->
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(128.dp),
+            columns = GridCells.Adaptive(72.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
@@ -74,9 +71,9 @@ fun BibleBookScreen(
 fun BibleChapterCard(chapterIndex: Int, navController: NavController, bookIndex: Int) {
     Card(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(12.dp)
             .fillMaxSize()
-            .height(60.dp)
+            .aspectRatio(1f)
             .clickable {
                 navController.navigate("bible/${bookIndex}/$chapterIndex")
             },

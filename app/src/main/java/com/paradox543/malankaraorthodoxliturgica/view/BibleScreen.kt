@@ -27,14 +27,12 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.model.BibleBook
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    navViewModel: NavViewModel
 ) {
     val bibleChapters by prayerViewModel.bibleBooks.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
@@ -47,7 +45,7 @@ fun BibleScreen(
     val newTestamentChapters = bibleChapters.drop(39)
     Scaffold(
         topBar = {
-            TopNavBar(navController, prayerViewModel, navViewModel)
+            TopNavBar(navController, prayerViewModel)
         },
         bottomBar = {
             BottomNavBar(navController)
@@ -70,7 +68,7 @@ fun BibleScreen(
                 BibleCard (oldTestamentChapters[index], bibleLanguage, selectedFontSize, navController)
             }
             item(span = {GridItemSpan(this.maxLineSpan)}) {
-                when(selectedLanguage){
+                when(bibleLanguage){
                     "en" -> SectionCard("New Testament")
                     "ml" -> SectionCard("പുതിയ നിയമം")
                 }

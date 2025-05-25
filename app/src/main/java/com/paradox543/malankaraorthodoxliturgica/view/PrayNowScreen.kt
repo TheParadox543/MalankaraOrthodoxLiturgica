@@ -58,8 +58,7 @@ fun PrayNowScreen(
         topBar = {
             TopNavBar(
                 navController = navController,
-                prayerViewModel = prayerViewModel,
-                navViewModel = navViewModel
+                prayerViewModel = prayerViewModel
             )
         },
         bottomBar = { BottomNavBar(navController = navController) }
