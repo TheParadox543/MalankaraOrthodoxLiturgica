@@ -8,6 +8,7 @@ object PrayerRoutes {
     const val COMMON_PRAYERS = "commonPrayers"
     const val DAILY_PRAYERS = "dailyPrayers"
     const val SACRAMENTS = "sacraments"
+    const val FEASTS = "feasts"
     const val GREAT_LENT = "greatLent"
     const val SLEEBA = "sleeba"
     const val KYAMTHA = "kyamtha"
@@ -18,6 +19,8 @@ object PrayerRoutes {
     const val WOMEN = "women"
     const val WEDDING = "wedding"
     const val BAPTISM = "baptism"
+    const val ASCENSION = "ascension"
+    const val PENTECOST = "pentecost"
 
 //    Canonical Routes
     const val VESPERS = "vespers"
@@ -72,6 +75,12 @@ val FuneralParts = listOf(
     PrayerRoutes.FOURTHPART
 )
 
+val PentecostParts = listOf(
+    PrayerRoutes.FIRSTPART,
+    PrayerRoutes.SECONDPART,
+    PrayerRoutes.THIRDPART,
+)
+
 object NavigationTree {
 
     fun getNavigationTree() = PageNode(
@@ -81,7 +90,8 @@ object NavigationTree {
         children = listOf(
             commonPrayersSection(PrayerRoutes.ROOT),
             dailyPrayersSection(PrayerRoutes.ROOT),
-            sacramentsSection(PrayerRoutes.ROOT)
+            sacramentsSection(PrayerRoutes.ROOT),
+            feastsSection(PrayerRoutes.FEASTS),
         )
     )
 
@@ -228,6 +238,42 @@ object NavigationTree {
                 ),
                 funeralSection(currentRoute)
             )
+        )
+    }
+
+    private fun feastsSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.FEASTS
+        return PageNode(
+            route = currentRoute,
+            parent = parentRoute,
+            children = listOf(
+                prayer(
+                    PrayerRoutes.ASCENSION,
+                    "${PrayerRoutes.FEASTS}/${PrayerRoutes.ASCENSION}.json",
+                    currentRoute
+                ),
+                pentecostSection(currentRoute),
+            )
+        )
+    }
+
+    private fun pentecostSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.PENTECOST
+        val children = mutableListOf<PageNode>()
+        for (item in PentecostParts) {
+            val childNode = createCompleteRoute(currentRoute, item)
+            children.add(
+                prayer(
+                    route = childNode,
+                    filename = "${PrayerRoutes.FEASTS}/${childNode.replace("_", "/")}.json",
+                    currentRoute
+                )
+            )
+        }
+        return PageNode(
+            route = currentRoute,
+            parent = parentRoute,
+            children = children
         )
     }
 

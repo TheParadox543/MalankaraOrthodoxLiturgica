@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
 import android.content.Context
+import com.paradox543.malankaraorthodoxliturgica.model.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
 import com.paradox543.malankaraorthodoxliturgica.model.NavigationRepository
 import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
@@ -32,4 +33,10 @@ object AppModule {
     fun provideNavigationRepository(
         @ApplicationContext context: Context
     ): NavigationRepository = NavigationRepository(context)
+
+    @Provides
+    @Singleton
+    fun provideBibleRepository(
+        @ApplicationContext context: Context
+    ): BibleRepository = BibleRepository(context)
 }

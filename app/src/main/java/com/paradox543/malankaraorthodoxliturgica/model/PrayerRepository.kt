@@ -134,7 +134,6 @@ class PrayerRepository @Inject constructor(
         val itemList = mutableListOf<Map<String, String>>()
         var title = ""
         try {
-            Log.d("PrayerRep", "prayers/$language/$filename")
             val json = context.assets.open("prayers/$language/$filename").bufferedReader()
                 .use { it.readText() }
             val jsonArray = JSONArray(json)
@@ -165,39 +164,5 @@ class PrayerRepository @Inject constructor(
                 "content" to "Error parsing JSON in: $language/$filename"
             )
         }
-    }
-
-    suspend fun loadBibleChapters(): List<BibleBook> {
-        val json = context.assets.open("bibleBooks.json").bufferedReader().use { it.readText() }
-        val jsonArray = JSONArray(json)
-        val bibleChapters = mutableListOf<BibleBook>()
-
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val bookObject = jsonObject.getJSONObject("book")
-            val englishName = bookObject.getString("en")
-            val malayalamName = bookObject.getString("ml")
-            val book = BookName(englishName, malayalamName)
-            val verses = jsonObject.getInt("verses")
-            val chapters = jsonObject.getInt("chapters")
-            bibleChapters.add(BibleBook(book, chapters, verses))
-        }
-        return bibleChapters
-    }
-
-    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String = "ml"): Map<String, String> {
-        val json = context.assets.open("bible-$language.json").bufferedReader().use { it.readText() }
-        val bibleObject = JSONObject(json)
-        val bookObject = bibleObject.getJSONArray("Book")[bookNumber] as JSONObject
-        val chapterObject = bookObject.getJSONArray("Chapter")[chapterNumber] as JSONObject
-        val versesArray = chapterObject.getJSONArray("Verse")
-        val versesMap = mutableMapOf<String, String>()
-        for(i in 0 until versesArray.length()) {
-            val verseObject = versesArray.getJSONObject(i)
-            val verseNumber = (i + 1).toString()
-            val verseText = verseObject.getString("Verse")
-            versesMap[verseNumber] = verseText
-        }
-        return versesMap
     }
 }

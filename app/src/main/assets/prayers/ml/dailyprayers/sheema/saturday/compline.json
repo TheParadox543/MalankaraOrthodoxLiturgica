@@ -61,6 +61,6 @@
     },
     {
         "type": "link",
-        "file": "commonprayerscommon.json"
+        "file": "commonprayers/complinecommon.json"
     }
 ]

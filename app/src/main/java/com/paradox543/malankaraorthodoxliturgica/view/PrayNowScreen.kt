@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -50,18 +51,12 @@ fun PrayNowScreen(
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    prayerViewModel.setTopBarKeys("malankara")
     val nodes = navViewModel.getAllPrayerNodes()
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
+    val title = translations["prayNow"]?: "Pray Now"
     Scaffold (
-        topBar = {
-            TopNavBar(
-                navController = navController,
-                prayerViewModel = prayerViewModel,
-                navViewModel = navViewModel
-            )
-        },
+        topBar = { TopNavBar(title, navController) },
         bottomBar = { BottomNavBar(navController = navController) }
     ) { innerPadding ->
         Box {
@@ -90,7 +85,6 @@ fun PrayNowScreen(
                             items(nodes) { node ->
                                 PrayNowCard(
                                     node,
-                                    navViewModel,
                                     navController,
                                     translations,
                                     selectedFontSize
@@ -118,7 +112,6 @@ fun PrayNowScreen(
                         items(nodes) { node ->
                             PrayNowCard(
                                 node,
-                                navViewModel,
                                 navController,
                                 translations,
                                 selectedFontSize
@@ -134,35 +127,21 @@ fun PrayNowScreen(
 @Composable
 private fun PrayNowCard(
     node: PageNode,
-    navViewModel: NavViewModel,
     navController: NavController,
     translations: Map<String, String>,
     selectedFontSize: TextUnit
 ) {
+    var errorState = remember { false }
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-                if (node.filename.isNotEmpty()) {
-                    val parentRoute =
-                        navViewModel.getParentRoute(node.route)
-                    val parentNode = navViewModel.findNode(
-                        navViewModel.rootNode,
-                        parentRoute ?: ""
-                    )
-                    val siblingIndex =
-                        navViewModel.getIndexOfSibling(
-                            node.route,
-                            parentRoute
-                        )
-                    if (parentNode != null && siblingIndex != null) {
-                        navViewModel.setSiblingNodes(parentNode.children)
-                        navViewModel.setCurrentSiblingIndex(siblingIndex)
-                        navController.navigate("prayerScreen/${node.route}")
-                    }
+                if (node.filename != null) {
+                    navController.navigate("prayerScreen/${node.route}")
                 } else {
-                    Log.d("PrayNowScreen", "No file found")
+                    Log.w("PrayNowScreen", "No file found")
+                    errorState = true
                 }
             },
         shape = RoundedCornerShape(8.dp),
@@ -176,10 +155,15 @@ private fun PrayNowCard(
         val translatedParts = routeParts.map { part ->
             translations[part] ?: part
         }
-        Text(
-            translatedParts.joinToString(" "),
-            fontSize = selectedFontSize,
-            modifier = Modifier.padding(16.dp)
-        )
+        Column {
+            Text(
+                translatedParts.joinToString(" "),
+                fontSize = selectedFontSize,
+                modifier = Modifier.padding(16.dp)
+            )
+            if (errorState) {
+                Text("No file found", color = MaterialTheme.colorScheme.error)
+            }
+        }
     }
 }

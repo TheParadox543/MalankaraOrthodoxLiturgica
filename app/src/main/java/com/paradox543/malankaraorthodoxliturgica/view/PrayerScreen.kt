@@ -25,7 +25,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,7 +33,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
@@ -46,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
@@ -58,32 +57,28 @@ fun PrayerScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     navViewModel: NavViewModel,
+    node: PageNode,
     modifier: Modifier = Modifier
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val translations by prayerViewModel.translations.collectAsState()
+    var title = ""
+    for (item in node.route.split("_")){
+        title += translations[item] + " "
+    }
 
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-    val currentSiblingIndex by navViewModel.currentSiblingIndex.collectAsState()
-    val siblingNodes by navViewModel.siblingNodes.collectAsState()
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
-    val currentFilename = siblingNodes[currentSiblingIndex!!].filename
+    val currentFilename = node.filename?: "NoFileNameFound"
+    val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
     prayerViewModel.loadPrayers(currentFilename, language)
-    prayerViewModel.setTopBarKeys(siblingNodes[currentSiblingIndex!!].route)
 
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()
-    }
-    val lastFilename = remember { mutableStateOf(currentFilename) }
-    // Scroll to the top whenever currentSiblingIndex changes
-    LaunchedEffect(currentFilename) {
-        if (currentFilename != lastFilename.value) {
-            listState.scrollToItem(0)
-            lastFilename.value = currentFilename
-        }
     }
 
     Scaffold(
@@ -98,9 +93,8 @@ fun PrayerScreen(
                 modifier = Modifier.zIndex(1f)
             ) {
                 TopNavBar(
-                    navController = navController,
-                    prayerViewModel = prayerViewModel,
-                    navViewModel = navViewModel,
+                    title,
+                    navController,
                     onActionClick = { navController.navigate("settings") }
                 )
             }
@@ -110,10 +104,7 @@ fun PrayerScreen(
                 visible = isVisible.value,
                 modifier = Modifier.zIndex(1f)
             ) {
-                SectionNavBar(
-                    navController = navController,
-                    navViewModel = navViewModel
-                )
+                SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
             }
         }
     ) {

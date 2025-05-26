@@ -3,8 +3,8 @@ package com.paradox543.malankaraorthodoxliturgica.view
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -23,23 +23,22 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleBookScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    navViewModel: NavViewModel,
+    bibleViewModel: BibleViewModel,
     bookName: String
 ) {
-//    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     var bibleLanguage = selectedLanguage
     if (selectedLanguage == "mn") {
         bibleLanguage = "en"
     }
-    val (bibleBook, bookIndex) = prayerViewModel.findBibleBookWithIndex(bookName, bibleLanguage)
+    val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, bibleLanguage)
     if (bibleBook == null){
         navController.navigate("bible") {
             popUpTo("bible") { inclusive = true }
@@ -47,15 +46,11 @@ fun BibleBookScreen(
     }
     val chapters = bibleBook?.chapters ?: 1
     Scaffold(
-        topBar = {
-            TopNavBar(navController, prayerViewModel, navViewModel)
-        },
-        bottomBar = {
-            BottomNavBar(navController)
-        }
+        topBar = { TopNavBar(bookName, navController) },
+        bottomBar = { BottomNavBar(navController) }
     ) {innerPadding ->
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(128.dp),
+            columns = GridCells.Adaptive(72.dp),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
@@ -63,22 +58,22 @@ fun BibleBookScreen(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(count = chapters) {index ->
-                BibleChapterCard(index, navController, bookIndex?: 1)
+            items(count = chapters) { chapterIndex ->
+                BibleChapterCard(navController, bookIndex?: 0, chapterIndex)
             }
         }
     }
 }
 
 @Composable
-fun BibleChapterCard(chapterIndex: Int, navController: NavController, bookIndex: Int) {
+fun BibleChapterCard(navController: NavController, bookIndex: Int, chapterIndex: Int) {
     Card(
         modifier = Modifier
-            .padding(8.dp)
+            .padding(12.dp)
             .fillMaxSize()
-            .height(60.dp)
+            .aspectRatio(1f)
             .clickable {
-                navController.navigate("bible/${bookIndex}/$chapterIndex")
+                navController.navigate("bible/$bookIndex/$chapterIndex")
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
