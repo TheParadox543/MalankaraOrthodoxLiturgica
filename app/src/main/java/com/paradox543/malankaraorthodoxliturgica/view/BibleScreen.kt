@@ -27,14 +27,16 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.model.BibleBook
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    bibleViewModel: BibleViewModel,
 ) {
-    val bibleChapters by prayerViewModel.bibleBooks.collectAsState()
+    val bibleChapters by bibleViewModel.bibleBooks.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
@@ -102,11 +104,10 @@ fun SectionCard(title: String) {
 
 @Composable
 fun BibleCard(bibleBook: BibleBook, bibleLanguage: String, selectedFontSize: TextUnit, navController: NavController){
-    var bookName = ""
-    when(bibleLanguage) {
-        "en" -> bookName = bibleBook.book.en
-        "mn" -> bookName = bibleBook.book.en
-        "ml" -> bookName = bibleBook.book.ml
+    val bookName = when(bibleLanguage) {
+        "en" -> bibleBook.book.en
+        "ml" -> bibleBook.book.ml
+        else -> bibleBook.book.en
     }
     Card(
         modifier = Modifier

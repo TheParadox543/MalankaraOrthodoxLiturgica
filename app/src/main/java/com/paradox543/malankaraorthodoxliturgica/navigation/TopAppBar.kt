@@ -11,11 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

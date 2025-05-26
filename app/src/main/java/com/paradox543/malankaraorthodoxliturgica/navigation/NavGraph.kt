@@ -22,6 +22,7 @@ import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
@@ -49,6 +50,7 @@ fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollCon
 fun NavGraph(modifier: Modifier = Modifier) {
     val prayerViewModel: PrayerViewModel = hiltViewModel()
     val navViewModel: NavViewModel = hiltViewModel()
+    val bibleViewModel: BibleViewModel = hiltViewModel()
     val navController = rememberNavController()
     NavHost(navController, startDestination = "home") {
         composable("home") {
@@ -72,17 +74,22 @@ fun NavGraph(modifier: Modifier = Modifier) {
             PrayNowScreen(navController, prayerViewModel, navViewModel)
         }
         composable("bible") {
-            BibleScreen(navController, prayerViewModel)
+            BibleScreen(navController, prayerViewModel, bibleViewModel)
         }
         composable("bible/{bookName}") {backStackEntry ->
             val book = backStackEntry.arguments?.getString("bookName") ?: ""
-            BibleBookScreen(navController, prayerViewModel, book)
+            BibleBookScreen(navController, prayerViewModel, bibleViewModel, book)
         }
-        composable("bible/{bookName}/{bookIndex}/{chapterIndex}") {backStackEntry ->
-            val bookName = backStackEntry.arguments?.getString("bookName") ?: ""
+        composable("bible/{bookIndex}/{chapterIndex}") {backStackEntry ->
             val bookIndex = backStackEntry.arguments?.getString("bookIndex") ?: ""
             val chapterIndex = backStackEntry.arguments?.getString("chapterIndex") ?: ""
-            BibleChapterScreen(navController, prayerViewModel, bookName, bookIndex.toInt(), chapterIndex.toInt())
+            BibleChapterScreen(
+                navController,
+                prayerViewModel,
+                bibleViewModel,
+                bookIndex.toInt(),
+                chapterIndex.toInt()
+            )
         }
         composable("settings") {
             SettingsScreen(navController, prayerViewModel)
