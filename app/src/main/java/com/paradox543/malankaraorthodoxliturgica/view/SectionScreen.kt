@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -141,10 +142,10 @@ private fun SectionCard(
             .clickable {
                 if (node.children.isNotEmpty()) {
                     navController.navigate("section/${node.route}")
-                } else if (node.filename.isNotEmpty()) {
-                    navViewModel.setSiblingNodes(nodes)
-                    navViewModel.setCurrentSiblingIndex(index)
+                } else if (node.filename != null) {
                     navController.navigate("prayerScreen/${node.route}")
+                } else {
+                    Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
                 }
             },
         colors = CardDefaults.cardColors(

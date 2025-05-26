@@ -85,7 +85,6 @@ fun PrayNowScreen(
                             items(nodes) { node ->
                                 PrayNowCard(
                                     node,
-                                    navViewModel,
                                     navController,
                                     translations,
                                     selectedFontSize
@@ -113,7 +112,6 @@ fun PrayNowScreen(
                         items(nodes) { node ->
                             PrayNowCard(
                                 node,
-                                navViewModel,
                                 navController,
                                 translations,
                                 selectedFontSize
@@ -129,7 +127,6 @@ fun PrayNowScreen(
 @Composable
 private fun PrayNowCard(
     node: PageNode,
-    navViewModel: NavViewModel,
     navController: NavController,
     translations: Map<String, String>,
     selectedFontSize: TextUnit
@@ -140,25 +137,10 @@ private fun PrayNowCard(
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-                if (node.filename.isNotEmpty()) {
-                    val parentRoute =
-                        navViewModel.getParentRoute(node.route)
-                    val parentNode = navViewModel.findNode(
-                        navViewModel.rootNode,
-                        parentRoute ?: ""
-                    )
-                    val siblingIndex =
-                        navViewModel.getIndexOfSibling(
-                            node.route,
-                            parentRoute
-                        )
-                    if (parentNode != null && siblingIndex != null) {
-                        navViewModel.setSiblingNodes(parentNode.children)
-                        navViewModel.setCurrentSiblingIndex(siblingIndex)
-                        navController.navigate("prayerScreen/${node.route}")
-                    }
+                if (node.filename != null) {
+                    navController.navigate("prayerScreen/${node.route}")
                 } else {
-                    Log.d("PrayNowScreen", "No file found")
+                    Log.w("PrayNowScreen", "No file found")
                     errorState = true
                 }
             },

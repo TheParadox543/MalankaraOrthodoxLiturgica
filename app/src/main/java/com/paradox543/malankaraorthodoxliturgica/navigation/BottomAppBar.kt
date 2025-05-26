@@ -11,15 +11,12 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 
 data class BottomNavItem(val route: String, val label: String, val icon: @Composable () -> Unit)
 
@@ -78,11 +75,9 @@ fun BottomNavBar(navController: NavController) {
 @Composable
 fun SectionNavBar(
     navController: NavController,
-    navViewModel: NavViewModel
+    prevNodeRoute: String?,
+    nextNodeRoute: String?
 ) {
-    val prevSibling by navViewModel.prevSiblingIndex.collectAsState()
-    val nextSibling by navViewModel.nextSiblingIndex.collectAsState()
-
     NavigationBar {
         NavigationBarItem(
             icon = {
@@ -93,8 +88,12 @@ fun SectionNavBar(
             },
             label = { Text("Previous") },
             selected = false,
-            enabled = prevSibling != null,
-            onClick = {navViewModel.setCurrentSiblingIndex(prevSibling)}
+            enabled = prevNodeRoute != null,
+            onClick = {
+                navController.navigate(prevNodeRoute!!) {
+                    navController.popBackStack()
+                }
+            }
         )
         NavigationBarItem(
             icon = {
@@ -105,8 +104,12 @@ fun SectionNavBar(
             },
             label = { Text("Next") },
             selected = false,
-            enabled = nextSibling != null,
-            onClick = {navViewModel.setCurrentSiblingIndex(nextSibling)}
+            enabled = nextNodeRoute != null,
+            onClick = {
+                navController.navigate(nextNodeRoute!!) {
+                    navController.popBackStack()
+                }
+            }
         )
     }
 }

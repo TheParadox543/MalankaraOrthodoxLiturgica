@@ -72,23 +72,14 @@ fun PrayerScreen(
 
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-    val currentSiblingIndex by navViewModel.currentSiblingIndex.collectAsState()
-    val siblingNodes by navViewModel.siblingNodes.collectAsState()
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
-    val currentFilename = siblingNodes[currentSiblingIndex!!].filename
+    val currentFilename = node.filename?: "NoFileNameFound"
+    val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
     prayerViewModel.loadPrayers(currentFilename, language)
 
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()
-    }
-    val lastFilename = remember { mutableStateOf(currentFilename) }
-    // Scroll to the top whenever currentSiblingIndex changes
-    LaunchedEffect(currentFilename) {
-        if (currentFilename != lastFilename.value) {
-            listState.scrollToItem(0)
-            lastFilename.value = currentFilename
-        }
     }
 
     Scaffold(
@@ -114,10 +105,7 @@ fun PrayerScreen(
                 visible = isVisible.value,
                 modifier = Modifier.zIndex(1f)
             ) {
-                SectionNavBar(
-                    navController = navController,
-                    navViewModel = navViewModel
-                )
+                SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
             }
         }
     ) {
