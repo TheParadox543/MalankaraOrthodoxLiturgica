@@ -63,8 +63,10 @@ fun NavGraph(modifier: Modifier = Modifier) {
         }
         composable("prayerScreen/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
-//            prayerViewModel.setTopBarKeys(route)
-            PrayerScreen(navController, prayerViewModel, navViewModel)
+            val node = navViewModel.findNode(navViewModel.rootNode, route)
+            if (node != null) {
+                PrayerScreen(navController, prayerViewModel, navViewModel, node)
+            }
         }
         composable("prayNow") {
             PrayNowScreen(navController, prayerViewModel, navViewModel)
@@ -72,17 +74,18 @@ fun NavGraph(modifier: Modifier = Modifier) {
         composable("bible") {
             BibleScreen(navController, prayerViewModel)
         }
-        composable("bible/{book}") {backStackEntry ->
-            val book = backStackEntry.arguments?.getString("book") ?: ""
+        composable("bible/{bookName}") {backStackEntry ->
+            val book = backStackEntry.arguments?.getString("bookName") ?: ""
             BibleBookScreen(navController, prayerViewModel, book)
         }
-        composable("bible/{book}/{chapter}") {backStackEntry ->
-            val book = backStackEntry.arguments?.getString("book") ?: ""
-            val chapter = backStackEntry.arguments?.getString("chapter") ?: ""
-            BibleChapterScreen(navController, prayerViewModel, book.toInt(), chapter.toInt())
+        composable("bible/{bookName}/{bookIndex}/{chapterIndex}") {backStackEntry ->
+            val bookName = backStackEntry.arguments?.getString("bookName") ?: ""
+            val bookIndex = backStackEntry.arguments?.getString("bookIndex") ?: ""
+            val chapterIndex = backStackEntry.arguments?.getString("chapterIndex") ?: ""
+            BibleChapterScreen(navController, prayerViewModel, bookName, bookIndex.toInt(), chapterIndex.toInt())
         }
         composable("settings") {
-            SettingsScreen(navController, prayerViewModel, navViewModel)
+            SettingsScreen(navController, prayerViewModel)
         }
     }
 }

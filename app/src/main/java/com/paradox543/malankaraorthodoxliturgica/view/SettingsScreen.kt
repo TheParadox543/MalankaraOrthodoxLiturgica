@@ -43,11 +43,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
-fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel, navViewModel: NavViewModel) {
+fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val scrollState = rememberScrollState()
@@ -59,21 +58,16 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
         "Manglish" to "mn"
     )
     val fontSizes = listOf(
-        "Very Small" to 12.sp,
-        "Small" to 14.sp,
+        "Very Small" to 8.sp,
+        "Small" to 12.sp,
         "Medium" to 16.sp,
         "Large" to 20.sp,
         "Very Large" to 24.sp
     )
 
     Scaffold(
-        topBar = {
-           TopNavBar(
-               navController = navController,
-               prayerViewModel = prayerViewModel
-           )
-        },
-        bottomBar = {BottomNavBar(navController)}
+        topBar = { TopNavBar("Settings", navController) },
+        bottomBar = { BottomNavBar(navController) }
     ) { innerPadding ->
         Column(
             modifier = Modifier

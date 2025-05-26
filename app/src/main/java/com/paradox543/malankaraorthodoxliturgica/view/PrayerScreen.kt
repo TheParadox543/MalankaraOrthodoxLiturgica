@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
@@ -57,11 +58,17 @@ fun PrayerScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     navViewModel: NavViewModel,
+    node: PageNode,
     modifier: Modifier = Modifier
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val language by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val translations by prayerViewModel.translations.collectAsState()
+    var title = ""
+    for (item in node.route.split("_")){
+        title += translations[item]
+    }
 
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -97,8 +104,8 @@ fun PrayerScreen(
                 modifier = Modifier.zIndex(1f)
             ) {
                 TopNavBar(
-                    navController = navController,
-                    prayerViewModel = prayerViewModel,
+                    title,
+                    navController,
                     onActionClick = { navController.navigate("settings") }
                 )
             }

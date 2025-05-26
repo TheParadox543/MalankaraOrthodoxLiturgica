@@ -21,8 +21,9 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 fun BibleChapterScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    bookNumber: Int,
-    chapterNumber: Int
+    bookName: String,
+    bookIndex: Int,
+    chapterIndex: Int
 ) {
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
@@ -30,14 +31,17 @@ fun BibleChapterScreen(
     if (selectedLanguage == "mn") {
         bibleLanguage = "en"
     }
-    val chapterData = prayerViewModel.loadBibleChapter(bookNumber, chapterNumber, bibleLanguage)
+    val title = if (bookIndex == 18 && selectedLanguage == "ml") {
+        "${chapterIndex + 1}-ാം സങ്കീർത്തനം"
+    } else if (bookIndex == 18) {
+        "${chapterIndex + 1} $bookName"
+    } else {
+        "$bookName ${chapterIndex + 1}"
+    }
+    val chapterData = prayerViewModel.loadBibleChapter(bookIndex, chapterIndex, bibleLanguage)
     Scaffold(
-        topBar = {
-            TopNavBar(navController, prayerViewModel)
-        },
-        bottomBar = {
-            BottomNavBar(navController)
-        }
+        topBar = { TopNavBar(title, navController) },
+        bottomBar = { BottomNavBar(navController) }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier

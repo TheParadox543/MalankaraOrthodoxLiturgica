@@ -283,5 +283,15 @@
         "ml": "പെന്തികൊസ്തി പെരുന്നാൾ",
         "en": "Pentecost",
         "mn": "Pentecosti Perunnal"
+    },
+    "prayNow": {
+        "en": "Pray Now",
+        "mn": "Ippol Praarthikkam",
+        "ml": "ഇപ്പോൾ പ്രാർത്ഥിക്കാം"
+    },
+    "bible": {
+        "en": "Bible",
+        "mn": "Bible",
+        "ml": "വേദപുസ്തകം"
     }
 }

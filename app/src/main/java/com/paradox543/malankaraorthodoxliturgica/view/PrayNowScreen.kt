@@ -26,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -54,13 +55,9 @@ fun PrayNowScreen(
     val nodes = navViewModel.getAllPrayerNodes()
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
+    val title = translations["prayNow"]?: "Pray Now"
     Scaffold (
-        topBar = {
-            TopNavBar(
-                navController = navController,
-                prayerViewModel = prayerViewModel
-            )
-        },
+        topBar = { TopNavBar(title, navController) },
         bottomBar = { BottomNavBar(navController = navController) }
     ) { innerPadding ->
         Box {
@@ -138,6 +135,7 @@ private fun PrayNowCard(
     translations: Map<String, String>,
     selectedFontSize: TextUnit
 ) {
+    var errorState = remember { false }
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -162,6 +160,7 @@ private fun PrayNowCard(
                     }
                 } else {
                     Log.d("PrayNowScreen", "No file found")
+                    errorState = true
                 }
             },
         shape = RoundedCornerShape(8.dp),
@@ -175,10 +174,15 @@ private fun PrayNowCard(
         val translatedParts = routeParts.map { part ->
             translations[part] ?: part
         }
-        Text(
-            translatedParts.joinToString(" "),
-            fontSize = selectedFontSize,
-            modifier = Modifier.padding(16.dp)
-        )
+        Column {
+            Text(
+                translatedParts.joinToString(" "),
+                fontSize = selectedFontSize,
+                modifier = Modifier.padding(16.dp)
+            )
+            if (errorState) {
+                Text("No file found", color = MaterialTheme.colorScheme.error)
+            }
+        }
     }
 }

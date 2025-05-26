@@ -20,20 +20,11 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNavBar(
+    title: String = "malankara",
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
     onActionClick: (() -> Unit)? = null // Optional Action button{}
 ) {
-    val topBarNames by prayerViewModel.topBarNames.collectAsState()
-    val translations by prayerViewModel.translations.collectAsState()
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-    val title = if (currentRoute == "settings") {
-        translations["malankara"] ?: "malankara"
-    } else {
-        topBarNames.joinToString(separator = " ") { key ->
-            translations[key] ?: key
-        }
-    }
 
     TopAppBar(
         title = { Text(title) },
