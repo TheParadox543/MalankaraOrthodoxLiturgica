@@ -50,15 +50,13 @@ fun SectionScreen(
     val nodes = node.children
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
-    prayerViewModel.setTopBarKeys(node.route)
+    var title = ""
+    for (item in node.route.split("_")){
+        title += translations[item]
+    }
     Scaffold (
-        topBar = {
-            TopNavBar(
-                navController = navController,
-                prayerViewModel = prayerViewModel
-            )
-        },
-        bottomBar = {BottomNavBar(navController = navController)}
+        topBar = { TopNavBar(title, navController) },
+        bottomBar = { BottomNavBar(navController = navController) }
     ){ innerPadding ->
         Box{
             Image(

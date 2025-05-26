@@ -185,11 +185,11 @@ class PrayerRepository @Inject constructor(
         return bibleChapters
     }
 
-    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String = "ml"): Map<String, String> {
+    fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: String = "ml"): Map<String, String> {
         val json = context.assets.open("bible-$language.json").bufferedReader().use { it.readText() }
         val bibleObject = JSONObject(json)
-        val bookObject = bibleObject.getJSONArray("Book")[bookNumber] as JSONObject
-        val chapterObject = bookObject.getJSONArray("Chapter")[chapterNumber] as JSONObject
+        val bookObject = bibleObject.getJSONArray("Book")[bookIndex] as JSONObject
+        val chapterObject = bookObject.getJSONArray("Chapter")[chapterIndex] as JSONObject
         val versesArray = chapterObject.getJSONArray("Verse")
         val versesMap = mutableMapOf<String, String>()
         for(i in 0 until versesArray.length()) {

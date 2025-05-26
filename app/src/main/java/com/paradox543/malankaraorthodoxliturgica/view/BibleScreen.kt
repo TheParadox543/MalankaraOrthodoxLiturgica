@@ -37,19 +37,17 @@ fun BibleScreen(
     val bibleChapters by prayerViewModel.bibleBooks.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val translations by prayerViewModel.translations.collectAsState()
     var bibleLanguage = selectedLanguage
     if (selectedLanguage == "mn") {
         bibleLanguage = "en"
     }
     val oldTestamentChapters = bibleChapters.take(39)
     val newTestamentChapters = bibleChapters.drop(39)
+    val title = translations["bible"] ?: "Bible"
     Scaffold(
-        topBar = {
-            TopNavBar(navController, prayerViewModel)
-        },
-        bottomBar = {
-            BottomNavBar(navController)
-        }
+        topBar = { TopNavBar(title, navController) },
+        bottomBar = { BottomNavBar(navController) }
     ) {innerPadding ->
         LazyVerticalGrid(
             columns = GridCells.Adaptive(180.dp),

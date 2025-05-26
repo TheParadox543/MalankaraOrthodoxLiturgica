@@ -44,12 +44,8 @@ fun BibleBookScreen(
     }
     val chapters = bibleBook?.chapters ?: 1
     Scaffold(
-        topBar = {
-            TopNavBar(navController, prayerViewModel)
-        },
-        bottomBar = {
-            BottomNavBar(navController)
-        }
+        topBar = { TopNavBar(bookName, navController) },
+        bottomBar = { BottomNavBar(navController) }
     ) {innerPadding ->
         LazyVerticalGrid(
             columns = GridCells.Adaptive(72.dp),
@@ -60,22 +56,22 @@ fun BibleBookScreen(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(count = chapters) {index ->
-                BibleChapterCard(index, navController, bookIndex?: 1)
+            items(count = chapters) { chapterIndex ->
+                BibleChapterCard(navController, bookName,bookIndex?: 0, chapterIndex)
             }
         }
     }
 }
 
 @Composable
-fun BibleChapterCard(chapterIndex: Int, navController: NavController, bookIndex: Int) {
+fun BibleChapterCard(navController: NavController, bookName: String, bookIndex: Int, chapterIndex: Int) {
     Card(
         modifier = Modifier
             .padding(12.dp)
             .fillMaxSize()
             .aspectRatio(1f)
             .clickable {
-                navController.navigate("bible/${bookIndex}/$chapterIndex")
+                navController.navigate("bible/$bookName/$bookIndex/$chapterIndex")
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
