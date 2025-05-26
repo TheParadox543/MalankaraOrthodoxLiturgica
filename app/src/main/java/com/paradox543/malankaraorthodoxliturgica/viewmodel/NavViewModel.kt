@@ -127,7 +127,6 @@ class NavViewModel @Inject constructor() : ViewModel() {
         }
 
         decideTime("sleeba")
-        Log.d("NavViewModel", prayerList.toString())
         return prayerList.distinct()
     }
 

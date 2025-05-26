@@ -134,7 +134,6 @@ class PrayerRepository @Inject constructor(
         val itemList = mutableListOf<Map<String, String>>()
         var title = ""
         try {
-            Log.d("PrayerRep", "prayers/$language/$filename")
             val json = context.assets.open("prayers/$language/$filename").bufferedReader()
                 .use { it.readText() }
             val jsonArray = JSONArray(json)
