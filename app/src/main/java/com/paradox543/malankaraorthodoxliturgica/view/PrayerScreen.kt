@@ -67,7 +67,7 @@ fun PrayerScreen(
     val translations by prayerViewModel.translations.collectAsState()
     var title = ""
     for (item in node.route.split("_")){
-        title += translations[item]
+        title += translations[item] + " "
     }
 
     val configuration = LocalConfiguration.current
@@ -78,7 +78,6 @@ fun PrayerScreen(
 
     val currentFilename = siblingNodes[currentSiblingIndex!!].filename
     prayerViewModel.loadPrayers(currentFilename, language)
-    prayerViewModel.setTopBarKeys(siblingNodes[currentSiblingIndex!!].route)
 
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()
