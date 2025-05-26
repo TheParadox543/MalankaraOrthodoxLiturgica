@@ -20,26 +20,41 @@ class NavViewModel @Inject constructor() : ViewModel() {
 
     val rootNode = NavigationTree.getNavigationTree()
 
-    private val _currentSiblingIndex = MutableStateFlow<Int?>(null)
-    val currentSiblingIndex: StateFlow<Int?> = _currentSiblingIndex
+    private val _currentNode = MutableStateFlow<PageNode?>(null)
+    val currentNode: StateFlow<PageNode?> = _currentNode
 
-    private val _nextSiblingIndex = MutableStateFlow<Int?>(null)
-    val nextSiblingIndex: StateFlow<Int?> = _nextSiblingIndex
+    private val _parentNode = MutableStateFlow<PageNode?>(null)
+    val parentNode: StateFlow<PageNode?> = _parentNode
 
-    private val _prevSiblingIndex = MutableStateFlow<Int?>(null)
-    val prevSiblingIndex: StateFlow<Int?> = _prevSiblingIndex
+    fun getAdjacentSiblingRoutes(node: PageNode): Pair<String?, String?> {
+        val parentRoute = node.parent
+        if (_parentNode.value?.route != parentRoute) {
+            _parentNode.value = findNode(rootNode, parentRoute?:"")
+        }
 
-    fun setCurrentSiblingIndex(index: Int?) {
-        _currentSiblingIndex.value = index
-        updateSiblingNavigationState()
-    }
+        if (_parentNode.value == null) {
+            return Pair(null, null)
+        }
 
-    private val _siblingNodes =
-        MutableStateFlow<List<PageNode>>(emptyList()) // Initially empty list
-    val siblingNodes: StateFlow<List<PageNode>> = _siblingNodes
+        val siblings = _parentNode.value!!.children
+        val currentIndex = siblings.indexOf(node)
+        if (currentIndex == -1) {
+            return Pair(null, null)
+        }
 
-    fun setSiblingNodes(nodes: List<PageNode>) {
-        _siblingNodes.value = nodes
+        val prevSiblingNode: PageNode? = siblings.getOrNull(currentIndex - 1)
+        val nextSiblingNode: PageNode? = siblings.getOrNull(currentIndex + 1)
+
+        // Apply the condition: route is returned only if the node exists AND its filename is not null
+        val prevSiblingRoute: String? = prevSiblingNode?.takeIf { it.filename != null }?.route
+        val nextSiblingRoute: String? = nextSiblingNode?.takeIf { it.filename != null }?.route
+
+        // Generate the required routes
+        val prevRoute = prevSiblingRoute?.let { "prayerScreen/$prevSiblingRoute" }
+        val nextRoute = nextSiblingRoute?.let { "prayerScreen/$nextSiblingRoute" }
+
+        // Return the pair of nullable String routes
+        return Pair(prevRoute, nextRoute)
     }
 
     fun findNode(node: PageNode, route: String): PageNode? {
@@ -49,31 +64,6 @@ class NavViewModel @Inject constructor() : ViewModel() {
             if (result != null) return result
         }
         return null
-    }
-
-    private fun updateSiblingNavigationState() {
-        val currentIndex = _currentSiblingIndex.value ?: return
-        val siblings = _siblingNodes.value
-
-        if (currentIndex + 1 < siblings.size) {
-            if (siblings[currentIndex + 1].filename.isNotEmpty()) {
-                _nextSiblingIndex.value = currentIndex + 1
-            } else {
-                _nextSiblingIndex.value = null
-            }
-        } else {
-            _nextSiblingIndex.value = null
-        }
-
-        if (currentIndex > 0) {
-            if (siblings[currentIndex - 1].filename.isNotEmpty()) {
-                _prevSiblingIndex.value = currentIndex - 1
-            } else {
-                _prevSiblingIndex.value = null
-            }
-        } else {
-            _prevSiblingIndex.value = null
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -137,7 +127,6 @@ class NavViewModel @Inject constructor() : ViewModel() {
         }
 
         decideTime("sleeba")
-        Log.d("NavViewModel", prayerList.toString())
         return prayerList.distinct()
     }
 
@@ -152,23 +141,5 @@ class NavViewModel @Inject constructor() : ViewModel() {
             }
         }
         return allNodes
-    }
-
-    fun getParentRoute(route: String): String? {
-        val parts = route.split("_")
-        return if (parts.size > 1) {
-            parts.dropLast(1).joinToString("_")
-        } else {
-            null
-        }
-    }
-
-    fun getIndexOfSibling(currentRoute: String, parentRoute: String?): Int? {
-        if (parentRoute == null) {
-            return null // Root has no siblings in this context
-        }
-
-        val parentNode = findNode(rootNode, parentRoute)
-        return parentNode?.children?.indexOfFirst { it.route == currentRoute }
     }
 }

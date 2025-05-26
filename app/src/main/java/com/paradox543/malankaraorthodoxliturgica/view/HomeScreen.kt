@@ -12,7 +12,6 @@ fun HomeScreen(
     navViewModel: NavViewModel,
 ) {
     val rootNode = navViewModel.rootNode
-    prayerViewModel.setTopBarKeys(rootNode.route)
     SectionScreen(
         navController = navController,
         prayerViewModel = prayerViewModel,

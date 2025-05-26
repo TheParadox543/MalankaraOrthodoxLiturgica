@@ -27,31 +27,29 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.model.BibleBook
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    navViewModel: NavViewModel
+    bibleViewModel: BibleViewModel,
 ) {
-    val bibleChapters by prayerViewModel.bibleBooks.collectAsState()
+    val bibleChapters by bibleViewModel.bibleBooks.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val translations by prayerViewModel.translations.collectAsState()
     var bibleLanguage = selectedLanguage
     if (selectedLanguage == "mn") {
         bibleLanguage = "en"
     }
     val oldTestamentChapters = bibleChapters.take(39)
     val newTestamentChapters = bibleChapters.drop(39)
+    val title = translations["bible"] ?: "Bible"
     Scaffold(
-        topBar = {
-            TopNavBar(navController, prayerViewModel, navViewModel)
-        },
-        bottomBar = {
-            BottomNavBar(navController)
-        }
+        topBar = { TopNavBar(title, navController) },
+        bottomBar = { BottomNavBar(navController) }
     ) {innerPadding ->
         LazyVerticalGrid(
             columns = GridCells.Adaptive(180.dp),
@@ -70,7 +68,7 @@ fun BibleScreen(
                 BibleCard (oldTestamentChapters[index], bibleLanguage, selectedFontSize, navController)
             }
             item(span = {GridItemSpan(this.maxLineSpan)}) {
-                when(selectedLanguage){
+                when(bibleLanguage){
                     "en" -> SectionCard("New Testament")
                     "ml" -> SectionCard("പുതിയ നിയമം")
                 }
@@ -106,11 +104,10 @@ fun SectionCard(title: String) {
 
 @Composable
 fun BibleCard(bibleBook: BibleBook, bibleLanguage: String, selectedFontSize: TextUnit, navController: NavController){
-    var bookName = ""
-    when(bibleLanguage) {
-        "en" -> bookName = bibleBook.book.en
-        "mn" -> bookName = bibleBook.book.en
-        "ml" -> bookName = bibleBook.book.ml
+    val bookName = when(bibleLanguage) {
+        "en" -> bibleBook.book.en
+        "ml" -> bibleBook.book.ml
+        else -> bibleBook.book.en
     }
     Card(
         modifier = Modifier
