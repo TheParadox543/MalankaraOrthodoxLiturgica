@@ -52,7 +52,7 @@ fun SectionScreen(
     val screenWidth = configuration.screenWidthDp.dp
     var title = ""
     for (item in node.route.split("_")){
-        title += translations[item]
+        title += translations[item] + " "
     }
     Scaffold (
         topBar = { TopNavBar(title, navController) },

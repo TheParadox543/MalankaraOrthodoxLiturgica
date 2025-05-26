@@ -67,13 +67,6 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    private val _topBarNames = MutableStateFlow<List<String>>(emptyList())
-    val topBarNames: StateFlow<List<String>> = _topBarNames
-
-    fun setTopBarKeys(route: String) {
-        _topBarNames.value = route.split("_")
-    }
-
     private val _prayers = MutableStateFlow<List<Map<String, Any>>>(emptyList())
     val prayers: StateFlow<List<Map<String, Any>>> = _prayers
 

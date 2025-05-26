@@ -51,7 +51,6 @@ fun PrayNowScreen(
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    prayerViewModel.setTopBarKeys("malankara")
     val nodes = navViewModel.getAllPrayerNodes()
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
