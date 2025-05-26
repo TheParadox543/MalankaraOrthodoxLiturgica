@@ -268,5 +268,20 @@
         "ml": "ധൂപപ്രാർത്ഥനകൾ",
         "en": "Cyclic prayers",
         "mn": "Kukiliyonukal"
+    },
+    "feasts": {
+        "en": "Feasts",
+        "ml": "പെരുന്നാളുകൾ",
+        "mn": "Perunnalukal"
+    },
+    "ascension": {
+        "ml": "സ്വർഗ്ഗാരോഹണ പെരുന്നാൾ",
+        "en": "Feast of Ascension",
+        "mn": "Swargarohanna Perunnal"
+    },
+    "pentecost": {
+        "ml": "പെന്തികൊസ്തി പെരുന്നാൾ",
+        "en": "Pentecost",
+        "mn": "Pentecosti Perunnal"
     }
 }
