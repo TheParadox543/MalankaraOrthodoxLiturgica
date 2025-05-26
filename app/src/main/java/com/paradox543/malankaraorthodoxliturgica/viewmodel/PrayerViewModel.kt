@@ -4,7 +4,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.model.BibleBook
 import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
 import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -77,45 +76,6 @@ class PrayerViewModel @Inject constructor(
         } catch (e: Exception) {
             throw e
         }
-    }
-
-    private val _bibleBooks = MutableStateFlow<List<BibleBook>>(emptyList())
-    val bibleBooks: StateFlow<List<BibleBook>> = _bibleBooks
-    init {
-        viewModelScope.launch { loadBibleBooks() }
-    }
-
-    suspend fun loadBibleBooks() {
-        try {
-            val bibleChapters = prayerRepository.loadBibleChapters()
-            _bibleBooks.value = bibleChapters
-        } catch (e: Exception) {
-            throw e
-        }
-    }
-
-    fun findBibleBookWithIndex(bookName: String, language: String): Pair<BibleBook?, Int?> {
-        val currentBooks = _bibleBooks.value
-
-        currentBooks.forEachIndexed { index, bibleBook ->
-            when(language){
-                "en" -> {
-                    if (bibleBook.book.en == bookName) {
-                        return Pair(bibleBook, index)
-                    }
-                }
-                "ml" -> {
-                    if (bibleBook.book.ml == bookName) {
-                        return Pair(bibleBook, index)
-                    }
-                }
-            }
-        }
-        return Pair(null, null)
-    }
-
-    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String): Map<String, String> {
-        return prayerRepository.loadBibleChapter(bookNumber, chapterNumber, language)
     }
 }
 

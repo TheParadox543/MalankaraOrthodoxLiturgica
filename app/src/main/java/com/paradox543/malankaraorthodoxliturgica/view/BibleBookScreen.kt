@@ -23,12 +23,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleBookScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    bibleViewModel: BibleViewModel,
     bookName: String
 ) {
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
@@ -36,7 +38,7 @@ fun BibleBookScreen(
     if (selectedLanguage == "mn") {
         bibleLanguage = "en"
     }
-    val (bibleBook, bookIndex) = prayerViewModel.findBibleBookWithIndex(bookName, bibleLanguage)
+    val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, bibleLanguage)
     if (bibleBook == null){
         navController.navigate("bible") {
             popUpTo("bible") { inclusive = true }
@@ -57,21 +59,21 @@ fun BibleBookScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(count = chapters) { chapterIndex ->
-                BibleChapterCard(navController, bookName,bookIndex?: 0, chapterIndex)
+                BibleChapterCard(navController, bookIndex?: 0, chapterIndex)
             }
         }
     }
 }
 
 @Composable
-fun BibleChapterCard(navController: NavController, bookName: String, bookIndex: Int, chapterIndex: Int) {
+fun BibleChapterCard(navController: NavController, bookIndex: Int, chapterIndex: Int) {
     Card(
         modifier = Modifier
             .padding(12.dp)
             .fillMaxSize()
             .aspectRatio(1f)
             .clickable {
-                navController.navigate("bible/$bookName/$bookIndex/$chapterIndex")
+                navController.navigate("bible/$bookIndex/$chapterIndex")
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
