@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBook
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
@@ -103,11 +103,11 @@ fun SectionCard(title: String) {
 }
 
 @Composable
-fun BibleCard(bibleBook: BibleBook, bibleLanguage: String, selectedFontSize: TextUnit, navController: NavController){
+fun BibleCard(bibleDetails: BibleDetails, bibleLanguage: String, selectedFontSize: TextUnit, navController: NavController){
     val bookName = when(bibleLanguage) {
-        "en" -> bibleBook.book.en
-        "ml" -> bibleBook.book.ml
-        else -> bibleBook.book.en
+        "en" -> bibleDetails.book.en
+        "ml" -> bibleDetails.book.ml
+        else -> bibleDetails.book.en
     }
     Card(
         modifier = Modifier

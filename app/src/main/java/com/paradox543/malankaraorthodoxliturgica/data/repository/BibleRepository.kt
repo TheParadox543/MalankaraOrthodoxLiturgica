@@ -1,50 +1,73 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBook
-import com.paradox543.malankaraorthodoxliturgica.data.model.BookName
+import android.util.Log
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleRoot
+import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
 import dagger.hilt.android.qualifiers.ApplicationContext
-import org.json.JSONArray
-import org.json.JSONObject
+import kotlinx.serialization.json.Json
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class BibleRepository @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val json: Json
 ) {
 
-    fun loadBibleChapters(): List<BibleBook> {
-        val json = context.assets.open("bibleBooks.json").bufferedReader().use { it.readText() }
-        val jsonArray = JSONArray(json)
-        val bibleChapters = mutableListOf<BibleBook>()
-
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val bookObject = jsonObject.getJSONObject("book")
-            val englishName = bookObject.getString("en")
-            val malayalamName = bookObject.getString("ml")
-            val book = BookName(englishName, malayalamName)
-            val verses = jsonObject.getInt("verses")
-            val chapters = jsonObject.getInt("chapters")
-            bibleChapters.add(BibleBook(book, chapters, verses))
-        }
-        return bibleChapters
+    // Lazily load and cache the Bible chapters to avoid re-reading the asset
+    private val cachedBibleChapters: List<BibleDetails> by lazy {
+        loadJsonAsset<List<BibleDetails>>("bibleBooks.json") ?: emptyList()
     }
 
-    fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: String = "ml"): Map<String, String> {
-        val json = context.assets.open("bible-$language.json").bufferedReader().use { it.readText() }
-        val bibleObject = JSONObject(json)
-        val bookObject = bibleObject.getJSONArray("Book")[bookIndex] as JSONObject
-        val chapterObject = bookObject.getJSONArray("Chapter")[chapterIndex] as JSONObject
-        val versesArray = chapterObject.getJSONArray("Verse")
-        val versesMap = mutableMapOf<String, String>()
-        for(i in 0 until versesArray.length()) {
-            val verseObject = versesArray.getJSONObject(i)
-            val verseNumber = (i + 1).toString()
-            val verseText = verseObject.getString("Verse")
-            versesMap[verseNumber] = verseText
+    // Generic helper function to load and parse JSON from assets
+    private inline fun <reified T> loadJsonAsset(fileName: String): T? {
+        return try {
+            context.assets.open(fileName).use { inputStream ->
+                val jsonString = inputStream.bufferedReader().use { it.readText() }
+                json.decodeFromString<T>(jsonString) // <--- This is where kotlinx.serialization does its magic!
+            }
+        } catch (e: Exception) {
+            Log.e("BibleRepository", "Error loading or parsing $fileName: ${e.message}", e)
+            null
         }
-        return versesMap
+    }
+
+    fun loadBibleDetails(): List<BibleDetails> {
+        return cachedBibleChapters
+    }
+
+    // Cache for loaded chapter files (e.g., bible-ml.json, bible-en.json)
+    // Using ConcurrentHashMap for potential thread safety if accessed from multiple coroutines
+    private val cachedBibleChapterFiles: ConcurrentHashMap<String, BibleRoot> = ConcurrentHashMap()
+
+
+    /**
+     * Loads a specific Bible chapter's verses from a language-specific JSON file.
+     * Caches the entire language file to avoid re-reading for subsequent chapter requests.
+     *
+     * @param bookIndex The 0-based index of the book within the JSON file.
+     * @param chapterIndex The 0-based index of the chapter within the book.
+     * @param language The language code (e.g., "ml", "en").
+     * @return A map where keys are verse numbers (as String) and values are verse text.
+     */
+    fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: String = "ml"): Chapter? {
+        val fileName = "bible-$language.json"
+
+        // Load or retrieve the cached BibleRoot object for the specific language file
+        val bibleRoot = cachedBibleChapterFiles.computeIfAbsent(fileName) {
+            loadJsonAsset<BibleRoot>(fileName)
+                ?: run {
+                    Log.e("BibleRepository", "Failed to load Bible file: $fileName")
+                    BibleRoot( emptyList()) // Return empty if the file itself can't be loaded
+                }
+        }
+
+        // Access the book and chapter using safe indexing
+        val book = bibleRoot.Book.getOrNull(bookIndex)
+        val chapter = book?.Chapter?.getOrNull(chapterIndex)
+        return chapter
     }
 }

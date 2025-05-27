@@ -2,7 +2,8 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBook
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,23 +15,23 @@ import javax.inject.Inject
 class BibleViewModel @Inject constructor(
     private val bibleRepository: BibleRepository
 ): ViewModel() {
-    private val _bibleBooks = MutableStateFlow<List<BibleBook>>(emptyList())
-    val bibleBooks: StateFlow<List<BibleBook>> = _bibleBooks
+    private val _bibleBooks = MutableStateFlow<List<BibleDetails>>(emptyList())
+    val bibleBooks: StateFlow<List<BibleDetails>> = _bibleBooks
 
     init {
-        viewModelScope.launch { loadBibleBooks() }
+        viewModelScope.launch { loadBibleDetails() }
     }
 
-    private fun loadBibleBooks() {
+    private fun loadBibleDetails() {
         try {
-            val bibleChapters = bibleRepository.loadBibleChapters()
+            val bibleChapters = bibleRepository.loadBibleDetails()
             _bibleBooks.value = bibleChapters
         } catch (e: Exception) {
             throw e
         }
     }
 
-    fun findBibleBookWithIndex(bookName: String, language: String): Pair<BibleBook?, Int?> {
+    fun findBibleBookWithIndex(bookName: String, language: String): Pair<BibleDetails?, Int?> {
         val currentBooks = _bibleBooks.value
 
         currentBooks.forEachIndexed { index, bibleBook ->
@@ -50,7 +51,7 @@ class BibleViewModel @Inject constructor(
         return Pair(null, null)
     }
 
-    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String): Map<String, String> {
+    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String): Chapter? {
         return bibleRepository.loadBibleChapter(bookNumber, chapterNumber, language)
     }
 
