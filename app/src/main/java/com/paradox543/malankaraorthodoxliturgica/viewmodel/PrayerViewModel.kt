@@ -4,8 +4,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
-import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.DataStoreManager
+import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

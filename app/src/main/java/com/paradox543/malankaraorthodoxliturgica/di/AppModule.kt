@@ -1,10 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
 import android.content.Context
-import com.paradox543.malankaraorthodoxliturgica.model.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.model.DataStoreManager
-import com.paradox543.malankaraorthodoxliturgica.model.NavigationRepository
-import com.paradox543.malankaraorthodoxliturgica.model.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.DataStoreManager
+import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,4 +40,10 @@ object AppModule {
     fun provideBibleRepository(
         @ApplicationContext context: Context
     ): BibleRepository = BibleRepository(context)
+
+    @Provides
+    @Singleton
+    fun provideCalendarRepository(
+        @ApplicationContext context: Context
+    ): CalendarRepository = CalendarRepository(context)
 }

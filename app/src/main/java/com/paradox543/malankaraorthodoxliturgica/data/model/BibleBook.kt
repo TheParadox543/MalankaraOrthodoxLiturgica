@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.model
+package com.paradox543.malankaraorthodoxliturgica.data.model
 
 import kotlinx.serialization.Serializable
 

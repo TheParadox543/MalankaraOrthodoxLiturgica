@@ -15,7 +15,6 @@ fun HomeScreen(
     SectionScreen(
         navController = navController,
         prayerViewModel = prayerViewModel,
-        navViewModel = navViewModel,
         rootNode
     )
 }

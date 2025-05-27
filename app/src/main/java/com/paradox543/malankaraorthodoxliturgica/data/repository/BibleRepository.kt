@@ -1,6 +1,8 @@
-package com.paradox543.malankaraorthodoxliturgica.model
+package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBook
+import com.paradox543.malankaraorthodoxliturgica.data.model.BookName
 import dagger.hilt.android.qualifiers.ApplicationContext
 import org.json.JSONArray
 import org.json.JSONObject
@@ -12,7 +14,7 @@ class BibleRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
 
-    suspend fun loadBibleChapters(): List<BibleBook> {
+    fun loadBibleChapters(): List<BibleBook> {
         val json = context.assets.open("bibleBooks.json").bufferedReader().use { it.readText() }
         val jsonArray = JSONArray(json)
         val bibleChapters = mutableListOf<BibleBook>()

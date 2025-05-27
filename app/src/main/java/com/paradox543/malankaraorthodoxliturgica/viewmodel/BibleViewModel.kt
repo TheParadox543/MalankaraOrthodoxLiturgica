@@ -2,8 +2,8 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.model.BibleBook
-import com.paradox543.malankaraorthodoxliturgica.model.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBook
+import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +21,7 @@ class BibleViewModel @Inject constructor(
         viewModelScope.launch { loadBibleBooks() }
     }
 
-    suspend fun loadBibleBooks() {
+    private fun loadBibleBooks() {
         try {
             val bibleChapters = bibleRepository.loadBibleChapters()
             _bibleBooks.value = bibleChapters
@@ -81,15 +81,14 @@ class BibleViewModel @Inject constructor(
         // --- Calculate Next Chapter Route ---
         var nextRoute: String? = null
         var nextChapterBookIndex = bookIndex
-        var nextChapterIndex = chapterIndex + 1
+        val nextChapterIndex = chapterIndex + 1
 
         if (nextChapterIndex >= bibleBook.chapters) { // Need to go to the next book
             nextChapterBookIndex += 1
             if (nextChapterBookIndex < books.size) { // Check if next book exists
                 val nextBook = books[nextChapterBookIndex]
                 if (nextBook.chapters > 0) {
-                    nextChapterIndex = 0 // First chapter of the next book
-                    nextRoute = "bible/$nextChapterBookIndex/$nextChapterIndex"
+                    nextRoute = "bible/$nextChapterBookIndex/0" // First chapter of the next book
                 }
                 // If nextBook.chapters is 0, nextRoute remains null
             }

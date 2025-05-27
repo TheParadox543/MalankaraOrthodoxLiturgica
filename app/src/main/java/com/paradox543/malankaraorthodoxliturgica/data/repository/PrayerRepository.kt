@@ -1,7 +1,6 @@
-package com.paradox543.malankaraorthodoxliturgica.model
+package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
-import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okio.IOException
 import org.json.JSONArray
