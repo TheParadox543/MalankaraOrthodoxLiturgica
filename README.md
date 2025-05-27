@@ -12,6 +12,8 @@ This mobile app provides a structured collection of prayers from the Malankara O
 - 🔍 **Adjustable Font Size** – Choose from five font sizes for better readability.  
 - 📜 **Scrollable & Navigable** – Easily navigate between prayer sections with next/previous buttons.  
 - 📱 **Landscape Mode for Larger Text** – If the font size is large, the screen switches to landscape mode for better visibility.  
+- 🕰️ **Pray Now** – Automatically navigate to the appropriate prayer based on the current time of day.
+- 📖 **Bible Integration** – Read Bible passages and excerpts within the app, alongside prayers where relevant.  
 
 ---
 
@@ -47,9 +49,6 @@ This mobile app provides a structured collection of prayers from the Malankara O
 - 📑 **Bookmarks & Favorites**  
   Quickly access and save frequently used prayers for easy reference.
 
-- 🕰️ **Pray Now**  
-  Context-aware feature that navigates directly to the appropriate prayer based on the current time of day.
-
 - 📅 **Liturgical Calendar Integration**  
   View the Malankara Orthodox Church's liturgical calendar for feasts, fasts, and special occasions.
 
@@ -61,9 +60,6 @@ This mobile app provides a structured collection of prayers from the Malankara O
 
 - 📵 **Auto Silent / DND Mode**  
   Automatically set the phone to silent or Do Not Disturb during prayers, based on user preferences.
-
-- 📖 **In-App Bible**  
-  Read Bible passages and excerpts within the app, alongside prayers where relevant.
 
 ---
 
