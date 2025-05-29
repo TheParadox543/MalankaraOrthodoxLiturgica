@@ -24,11 +24,13 @@ data class LiturgicalEventDetails(
 // Example: { "2025": { "1": { "1": ["FEAST_CIRCUMCISION", "COMM_ST_BASIL"] } } }
 
 // Represents a list of event keys for a specific day (e.g., ["FEAST_CIRCUMCISION"])
-typealias DayKeysForDate = List<String>
+typealias EventKeysForDate = List<String>
 
-// Represents a map of day (String) to its list of DayKeysForDate (nullable list for absent days)
-typealias MonthKeys = Map<String, DayKeysForDate?>
+// Represents a map of day (String) to its list of EventKeysForDate (nullable list for absent days)
+typealias DateKeysInMonth = Map<String, EventKeysForDate?>
 
-// Represents a map of month (String) to its MonthKeys
-typealias YearKeys = Map<String, MonthKeys>
+// Represents a map of month (String) to its DateKeysInMonth
+typealias MonthKeysInYear = Map<String, DateKeysInMonth>
 
+// Represents a map of year (String) to its MonthKeysInYear, which is the base of the entire structure
+typealias YearKeys = Map<String, MonthKeysInYear>

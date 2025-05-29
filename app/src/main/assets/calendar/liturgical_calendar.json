@@ -1,5 +1,15 @@
 {
     "2025": {
+        "5": {
+            "4": ["firstSundayAfterNewSunday"],
+            "8": ["feastOfStJohnTheApostle"],
+            "10": ["feastOfStSimonTheZealot"],
+            "11": ["secondSundayAfterNewSunday"],
+            "15": ["feastOfStMaryForHarvest"],
+            "18": ["thirdSundayAfterNewSunday"],
+            "25": ["fourthSundayAfterNewSunday"],
+            "29": ["ascension"]
+        },
         "6": {
             "1": ["sundayBeforePentecost"],
             "5": ["worldEnvironmentDay"],

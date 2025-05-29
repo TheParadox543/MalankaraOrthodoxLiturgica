@@ -55,6 +55,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideCalendarRepository(
-        @ApplicationContext context: Context
-    ): CalendarRepository = CalendarRepository(context)
+        @ApplicationContext context: Context,
+        json: Json
+    ): CalendarRepository = CalendarRepository(context, json)
 }
