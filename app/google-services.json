@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "40219425510",
+    "project_id": "liturgica-3d3a4",
+    "storage_bucket": "liturgica-3d3a4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40219425510:android:159abb4d415be2845c1927",
+        "android_client_info": {
+          "package_name": "com.paradox543.malankaraorthodoxliturgica"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPY5saVpdTj7Ewk2AGVFV7GMiFS4_Uk5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
