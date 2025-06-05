@@ -1,0 +1,142 @@
+[
+    {
+        "type": "title",
+        "content": "njaayaraazhcha sootthaaraa"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kolokal"
+    },
+    {
+        "type": "subheading",
+        "content": "(men haabaayu mor)"
+    },
+    {
+        "type": "song",
+        "content": "njaananchunnen paapatthaal;\nshuddharkkekum-modappoonkaavil\n/tveli-kkotthenne naathaa!\n/ten paa-pam rodhikkalle';\nrakshicchenne narakutthi\nnnekuka vaasam-thiruhithamaam sthaane."
+    },
+    {
+        "type": "subtext",
+        "content": "baareklor. Shubaho .... Menaolam ..."
+    },
+    {
+        "type": "song",
+        "content": "sthuthi, anuthaapakkaar mumpil\nvaathil thurakkum-raajaavaameesho\n/tpaatha-kiyaam njaanarththicchu;\n/tnalvara-daanatthaal modam.\nNalkuka bhaavuka daathaave!'\ntheeraname njaan-ninnute kinnaramaayu."
+    },
+    {
+        "type": "subtext",
+        "content": "moriyoraahem ..."
+    },
+    {
+        "type": "heading",
+        "content": "maar baalaayiyute bovuso"
+    },
+    {
+        "type": "subheading",
+        "content": "(hoyan lahaatthoye)"
+    },
+    {
+        "type": "song",
+        "content": "paapam cheythoro-taardrathayullaane!\nAnpundaakaname nin vidhidivasatthil"
+    },
+    {
+        "type": "song",
+        "content": "aartthanmaar vaathil -muttunnu krupaalo!\nKanivotarththanakal-kkuttharamarulaname."
+    },
+    {
+        "type": "song",
+        "content": "Vaanavanaam thaathaa-yaachikkunnatiyaar\nee shushrooshaye e-ttaardratha thonnenam."
+    },
+    {
+        "type": "song",
+        "content": "Vaanavar thaanneeshaa- maanavar than-gathiye,\nee shushrooshaye e-ttaardratha thonnenam."
+    },
+    {
+        "type": "subheading",
+        "content": "(allenkil)"
+    },
+    {
+        "type": "subheading",
+        "content": "(bkoolmedam esu baakkeesu)"
+    },
+    {
+        "type": "song",
+        "content": "akhilam njaanaaraanjittum\ndyvabhayatthe mikacchonnum\nnjaan darshicchilla-thal snehatthaale\ndhaarmmikanaam yauseppaarnnu-misrem raajathvam\nmahithan moosha vibhaagicchaan-vatiyaal vaaridhiye\n/thaananiyaadyanmaara thinaal-\n/tagniyilninnum rakshitharaayu\nthankatthekkaalathu kaamyam;\nmadhu vilumathu madhuram paaram\ndyvaaraadhanaye-snehippon dhanyan."
+    },
+    {
+        "type": "subtext",
+        "content": "baarekmor. Shubaho ... Menaolam ..."
+    },
+    {
+        "type": "song",
+        "content": "kataloram vazhi pokumpol\nanyonyam vettitthinnum\nmathsyatthe darshi-cchaarnnenaashcharyam.\nVismayasahitham nilkkumpol-chinthicchevam njaan\nbhuvane thammil vizhungunno-rundee marthyarilum,\n/tnyaayavidhikkettheetaattha\n/tjeeviye enthinu nindicchu;\nkanmumpil vidhikandaalum\nparane vizhungum martthuyanmaar\nkuttakkaaravare - elkkunnon dhanyan."
+    },
+    {
+        "type": "subtext",
+        "content": "moriyoraaho…"
+    },
+    {
+        "type": "heading",
+        "content": "maar apreminte bovuso"
+    },
+    {
+        "type": "subheading",
+        "content": "(moraanesraahaammelyn)"
+    },
+    {
+        "type": "song",
+        "content": "aardratha thonnaname naathaa!\nIkkarmmam kykkollaname."
+    },
+    {
+        "type": "song",
+        "content": "Vrutthikalaal kartthaave! Njaan\nnin kopatthinu paathramathaayu\nkarunaabdhe! Nee kopikkaa;\nsusthirame nin nirmmalathu."
+    },
+    {
+        "type": "song",
+        "content": "Nibi vaakyam pol janamellaam\njalabindu kkalkkoppamathaam\nnyrmmalyatthe bhajippaan\nthinmaykkengane saadhikkum."
+    },
+    {
+        "type": "song",
+        "content": "Praarththana ketteetunnone!\nYaachana nalkeetunnone!\nPraarththanayil preethyaa' sadayam\nyaachanaye nalkeetaname."
+    },
+    {
+        "type": "subheading",
+        "content": "(allenkil)"
+    },
+    {
+        "type": "subheading",
+        "content": "ekbo"
+    },
+    {
+        "type": "subheading",
+        "content": "(perunnaalukalkku - voyili dahaveesu)"
+    },
+    {
+        "type": "song",
+        "content": "neethijnjanmaar-maddhye kashtam!-njaan thunayatton.\n/tsanmaarggam njaan sheelicchilla.\n/thaa! Njaananyan-thal perunnaalil;\nen dushkruthyam-paayicchitunnavareennenne."
+    },
+    {
+        "type": "subtext",
+        "content": "kuriyelaayison, kuri ... Kuri ...."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    },
+    {
+        "type": "prose",
+        "content": "/t(pattakkaarundenkil thutarnnu dhoopapraarththanakal natatthunnu. Illaatthapaksham kuriyelaayistton .. Kuri.. Kuri.. Njangalute kartthaave! Njangalutemel anugraham cheyyunname ennathum kartthu praarththanayum cholli avasaanippikkunnu.)"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/cyclicprayers.json"
+    },
+    {
+        "type": "prose",
+        "content": "(saadhaaranayaayi ivite dhoopapraarththana avasaanikkunnu. Velliyaazhcha muthalaaya sleebaaye smarikkunna prathyeka divasangalil sleebaayute kookkiliyonum chollendathaakunnu.)"
+    }
+]
