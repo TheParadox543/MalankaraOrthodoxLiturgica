@@ -1,0 +1,104 @@
+[
+    {
+        "type": "title",
+        "content": "moonnaam maniyute namaskaaram"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "collapsible",
+        "title": "promiyon",
+        "items": [
+            {
+                "type": "prose",
+                "content": "pattakkaaran:-naamellaavarum praarththicchu ..."
+            },
+            {
+                "type": "prose",
+                "content": "janam:- kaarunyavaanaaya kartthaave! Njangalotu karu na cheythu njangale sahaayikkaname."
+            },
+            {
+                "type": "prose",
+                "content": "pattakkaaran:-sthuthiyum, sthothravum…"
+            },
+            {
+                "type": "prose",
+                "content": "parishuddhanmaaril sthithicheyyunna parishuddhanum, adya shyanaaya nithyanum, prakruthyaa nallavanum, poornnaprabala num, praabalyamulla adhikaariyum, than്re pithaavinotu saaraamshatthil onnaayi sthithicheyyunnavanum, thanne prasaviccha maathaavine uyartthukayum, thanne snehiccha shuddhimaanmaareyum, shuddhimathikaleyum valartthukayum cheytha sarvvashakthanumaaya kartthaavinu sthuthi. Thani kku ... Bkulahoon ... Aammeen."
+            },
+            {
+                "type": "subheading",
+                "content": "sedaraa"
+            },
+            {
+                "type": "prose",
+                "content": "karunayulla kartthaave! Nin്re maathaavinteyum parishuddhanmaaruteyum praarththanakal moolam, paapikalaaya njangalkku paapamochanam nalkaname. Aathmashareerangalute karakalilninnu njangale vetippaakkaname. Nin്re athyu nnathamaaya dyvathvatthinu preethikaramaayirikkunna sakala ttheyum, ninnotulla bhakthi moolam vetippilum vishuddhi yilum anushdtippaan njangale padtippikkaname. Ninte parishuddhanmaarute avakaashatthil njangale chertthuko llaname. Avarotonnicchu ninakku njangal keertthana ngal paatukayum, neethiyin kireetangalaal prathidaananaa mukalil alankarikkappetukayum cheyyaname. Kunjaatukale nin്re valathubhaagatthum, pallaatukale nin്re itathu bhaagatthum nirtthumpol, njangaleyum njangalute mari cchupoyavareyum, nin്re kunjaatukalotonnicchu cherkka name. Njangalute maathaapithaakkalkkum, sahodaree sahodarangalkkum, gurukkanmaarkkum, vishvaasikalaaya ellaa maricchupoyavarkkum nalla ormmayundaakkaname. Njangalum avarum ninte valathubhaagatthu ninnu ninne kaanukayum, ninakkum, nin്re pithaavinum, jeevan nalkunna vishuddharoohaaykkum, ippozhum ellaayppozhum sthuthiyum sthothravum samarppikkukayum cheyyumaaraa kaname. Hosho ... Aammeen."
+            },
+            {
+                "type": "prose",
+                "content": "pattakkaaran:- dyvatthil ninnu katangalkku parihaaravum…"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "kolokal"
+    },
+    {
+        "type": "subheading",
+        "content": "(enono nuharo)"
+    },
+    {
+        "type": "song",
+        "content": "dyvatthe pettoru maathaavaam\nmariyaamettam vaazhttol\ndyvika kunjaatineyaashcharyam\nthan matiyil thaalolicchaal\n/tghoraagniprabhayum theekshuna\n/tjvaalayumeshaayvaan eeshan\n/tveeryatthaalavale thaangi\nkrobedootharathatthinmel\nereetunnone ettaal."
+    },
+    {
+        "type": "subtext",
+        "content": "baarekmor. Shubaho… menaolam …"
+    },
+    {
+        "type": "song",
+        "content": "athbhuthamaam phalamekum vruksham\nkarkkashamaam shila meenevam\npaashandarkkethire drushtaantham\nmoonnennam sabha kaattunnu.\n/tkunjaatine vruksham nalki.\n/ttheekkalppaara jalam nalki,\n/testheeraa mathsyavumeki;\nkanyaakshepakare moonnum\nparihaasatthotu veekshicchu."
+    },
+    {
+        "type": "subtext",
+        "content": "moriyoraahem melyn...."
+    },
+    {
+        "type": "heading",
+        "content": "maar yaakkobin്re bovuso"
+    },
+    {
+        "type": "subheading",
+        "content": "(sekku aamaan ombaaratho)"
+    },
+    {
+        "type": "song",
+        "content": "1. Dhanye! Nin praarththana mevatte njangalotonni\nccharththana kettittekeetatte punyam naathan."
+    },
+    {
+        "type": "song",
+        "content": "2 enthaunnathyam bhaumika puthrikkundaayennu\nchonneetum njaan sambhramamaarnnittathbhuthapoorvvam."
+    },
+    {
+        "type": "song",
+        "content": "3. Thrukkaarunyam suthane thaazhtthi savidhe' chertthu;\ndyvasuthan than maathaavaakaan thiruhithamaarnnaal."
+    },
+    {
+        "type": "song",
+        "content": "4. Saumyarilallaathengamarum njaan ennura cheython\njaatharilettam thaazhmappettullavalil paartthaan"
+    },
+    {
+        "type": "song",
+        "content": "5. Aarumuyartthappettillithupolathinaal spashtam\nmariyaameppolaarum thaazhappettittilla."
+    },
+    {
+        "type": "song",
+        "content": "6. Ompathu maasam ninne ettol than praarththanayaal\ndyvaathmajane! Kopatthin dandozhivaakkenam."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

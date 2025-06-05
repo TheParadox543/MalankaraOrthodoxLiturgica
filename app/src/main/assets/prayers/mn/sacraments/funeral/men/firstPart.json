@@ -5,11 +5,11 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/doxology.Json"
+        "file": "commonprayers/doxology.json"
     },
     {
         "type": "link-collapsible",
-        "file": "psalm51.Json"
+        "file": "psalm51.json"
     },
     {
         "type": "heading",

@@ -148,12 +148,14 @@ class PrayerRepository @Inject constructor(
                         "content" to "Content in this language has not been added yet."
                     )
                 }
-                if (type == "heading" && title.isEmpty()) {
+                if (type == "title") {
                     title = content
+                    continue
+                } else if (type == "heading" && title.isEmpty()) {
+                    title = content
+                    continue
                 }
-                if (type != "heading") {
-                    itemList.add(mapOf("type" to type, "content" to content))
-                }
+                itemList.add(mapOf("type" to type, "content" to content))
             }
             return mapOf("type" to "collapsible-block", "title" to title, "items" to itemList)
         } catch (e: IOException) {

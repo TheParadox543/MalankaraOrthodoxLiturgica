@@ -1,15 +1,11 @@
 [
     {
         "type": "title",
-        "content": "thirdPart"
-    },
-    {
-        "type": "title",
         "content": "moonnaam shushroosha"
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/doxology.Json"
+        "file": "commonprayers/doxology.json"
     },
     {
         "type": "heading",

@@ -1,0 +1,78 @@
+[
+    {
+        "type": "title",
+        "content": "maddhyaahna namaskkaaram"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kolokal"
+    },
+    {
+        "type": "subheading",
+        "content": "(thooro dseenaayu)"
+    },
+    {
+        "type": "song",
+        "content": "mosha chamacchoraa-petakadrushtaantham\nmariyaame! Shlommo-jeevajalatthin munkuriyaam\nroohaa than shoshappaa shlom\naishaayan daaveeduktham\nsthiramaam purame shlommo nin\nudaratthee-nnudayam cheytheeshan."
+    },
+    {
+        "type": "subtext",
+        "content": "baarekmor. Shubaho ..."
+    },
+    {
+        "type": "song",
+        "content": "slee-baayenthi, saatthaanotelppaan\nsahadenmaar chennu-khadgatthaal mruthiyettorum\ntheeyaal venneeraayorum\nporil kaattiya veeryatthaal\nsaatthaan kopaakulanaayi\nnalkuka thal praarththanayaal punyam."
+    },
+    {
+        "type": "subtext",
+        "content": "menaolam…"
+    },
+    {
+        "type": "song",
+        "content": "naathaa! Nin meyyum -rakthavumettoraam\nmruthare siddharkkaay-pande sajjeekruthamaakum\npanthikkanpo-tirutthaname.\nNin sharane maranam poondor\nninne ettoraamavare\nelkkaname - thaathankal neeyum"
+    },
+    {
+        "type": "subtext",
+        "content": "moriyoraahem melyn …"
+    },
+    {
+        "type": "heading",
+        "content": "maar baalaayiyute bovuso"
+    },
+    {
+        "type": "subheading",
+        "content": "(basu yoletthoku)"
+    },
+    {
+        "type": "song",
+        "content": "1. Janani, parishuddha-praarththanayaal naathaa!\nPunyam njangalkkum vigathar'kkum nalka."
+    },
+    {
+        "type": "song",
+        "content": "2. Mariyaamin maranam-varadaayakamaaka\nthal praarththana njangal-kkaathmaavinu kotta."
+    },
+    {
+        "type": "song",
+        "content": "3. Parishuddha shleehaa-nibi, sahadenmaare!\nYaachippin krupaye-njangalkkaayu ningal."
+    },
+    {
+        "type": "song",
+        "content": "4. Nin sharane mrutharaam-thaatha sahodararil\nchoriyaname moda-ppanineeran naathaa!"
+    },
+    {
+        "type": "song",
+        "content": "5. Susmruthi jananikkum-vishruthi siddharkkum\njeevan vigatharkkum-cherppone! Sthothram!\n6. Janani, parishuddha-praarththanayaal naathaa!\nPunyam njangalkkum-vigatharkkum nalka."
+    },
+    {
+        "type": "prose",
+        "content": "vaayanakkaaran:- neethimaanmaarute kootaaratthil mahatthuvatthinreyum, rakshayuteyum shabdam ennu daaveedu mukhaa tharam parishuddharoohaa-paati."
+    },
+    {
+        "type": "subheading",
+        "content": "(pazhayaniyama vaayana - vi. Kurbbaana)"
+    }
+]
