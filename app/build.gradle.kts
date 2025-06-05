@@ -5,7 +5,10 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    // Google services plugin
     id("com.google.gms.google-services")
+    // Add the Crashlytics plugin
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -16,8 +19,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 24
         targetSdk = 35
-        versionCode = 13
-        versionName = "0.3.2"
+        versionCode = 14
+        versionName = "0.3.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,6 +78,7 @@ dependencies {
     // Dependencies for FireBase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
 }
 
 kotlin {
