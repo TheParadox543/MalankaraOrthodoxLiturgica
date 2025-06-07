@@ -12,8 +12,8 @@
         "content": "pattakkaaran:-shubaho laabo vabro valrooho kaadeesho."
     },
     {
-        "type": "janam",
-        "content": "- balaheenarum paapikalumaaya njangalutemel anu grahangalum karunayum, randu lokangalilum ennume nnekkum choriyappetumaaraakaname. Aammeen."
+        "type": "prose",
+        "content": "Janam: - balaheenarum paapikalumaaya njangalutemel anu grahangalum karunayum, randu lokangalilum ennume nnekkum choriyappetumaaraakaname. Aammeen."
     },
     {
         "type": "collapsible",
@@ -166,8 +166,8 @@
                 "content": "pattakkaaran:- dyvatthilninnu katangalkku parihaaravum, paapangalkku mochanavum, randu lokangalilum enne kkum naam kykkollumaaraakatte."
             },
             {
-                "type": "janam",
-                "content": "- aammeen."
+                "type": "prose",
+                "content": "Janam: - aammeen."
             }
         ]
     },

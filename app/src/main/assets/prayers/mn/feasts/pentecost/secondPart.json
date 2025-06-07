@@ -8,8 +8,8 @@
         "content": "pattakkaaran: shubaho..."
     },
     {
-        "type": "janam",
-        "content": "balaheenarum...."
+        "type": "prose",
+        "content": "Janam: balaheenarum...."
     },
     {
         "type": "collapsible",
@@ -286,8 +286,8 @@
         "content": "/tnaam moonnupraavashyam kuriyelaayison ennu ettu chollanam. Kuriye...... Kuriye...... Kuriye....."
     },
     {
-        "type": "shushrooshakkaaran",
-        "content": "- naam nilatthu muttukutthi kartthaavinotu praarththikkanam."
+        "type": "prose",
+        "content": "Shushrooshakkaaran: - naam nilatthu muttukutthi kartthaavinotu praarththikkanam."
     },
     {
         "type": "collapsible",
