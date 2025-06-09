@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,12 +21,12 @@ class SettingsViewModel @Inject constructor(
 
     // Expose language from DataStore as a StateFlow
     // We use stateIn to convert the Flow from DataStore into a StateFlow
-    val selectedLanguage: StateFlow<String> = settingsRepository.selectedLanguage
+    val selectedLanguage: StateFlow<AppLanguage> = settingsRepository.selectedLanguage
         .stateIn(
             scope = viewModelScope,
             // WhileSubscribed ensures the flow is collected as long as there are active collectors
             started = SharingStarted.WhileSubscribed(5_000), // 5s timeout before cancelling upstream
-            initialValue = "ml" // Initial value until DataStore emits
+            initialValue = AppLanguage.MALAYALAM // Initial value until DataStore emits
         )
 
     // Expose font size from DataStore as a StateFlow (converted to TextUnit)
@@ -40,7 +41,7 @@ class SettingsViewModel @Inject constructor(
         )
 
     // Function to set (and save) language
-    fun setLanguage(language: String) {
+    fun setLanguage(language: AppLanguage) {
         viewModelScope.launch {
             settingsRepository.saveLanguage(language)
         }

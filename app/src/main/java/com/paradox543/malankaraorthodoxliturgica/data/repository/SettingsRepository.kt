@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,9 +30,9 @@ class SettingsRepository @Inject constructor(
     private val fontSizeKey = intPreferencesKey("font_size")
 
     // Save language
-    suspend fun saveLanguage(language: String) {
+    suspend fun saveLanguage(language: AppLanguage) {
         context.dataStore.edit { preferences ->
-            preferences[languageKey] = language
+            preferences[languageKey] = language.code
         }
     }
 
@@ -41,14 +42,16 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    val selectedLanguage: StateFlow<String> = context.dataStore.data // Using the injected dataStore
+    val selectedLanguage: StateFlow<AppLanguage> = context.dataStore.data
         .map { preferences ->
-            preferences[languageKey] ?: "ml" // Default to Malayalam
+            // Read the string code, then convert to AppLanguage enum
+            val code = preferences[languageKey] ?: AppLanguage.MALAYALAM.code
+            AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM // Default to Malayalam if code not found
         }
         .stateIn(
-            scope = repositoryScope, // Use the long-lived scope for the repository
-            started = SharingStarted.Eagerly, // Start collecting eagerly when the StateFlow is created
-            initialValue = "ml" // Provide an initial value that will be emitted immediately
+            scope = repositoryScope,
+            started = SharingStarted.Eagerly,
+            initialValue = AppLanguage.MALAYALAM // Initial value is also an AppLanguage enum
         )
 
     val selectedFont: StateFlow<Int> = context.dataStore.data // Using the injected dataStore
