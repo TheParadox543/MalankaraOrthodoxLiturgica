@@ -24,16 +24,16 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleBookScreen(
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookName: String
 ) {
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     var bibleLanguage = selectedLanguage
     if (selectedLanguage == "mn") {
         bibleLanguage = "en"

@@ -28,25 +28,29 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleScreen(
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
 ) {
     val bibleChapters by bibleViewModel.bibleBooks.collectAsState()
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val translations by prayerViewModel.translations.collectAsState()
-    var bibleLanguage = selectedLanguage
-    if (selectedLanguage == "mn") {
-        bibleLanguage = "en"
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val bibleLanguage = if (selectedLanguage == "mn") {
+        "en" // Explicitly map 'mn' to 'en' for translation purposes
+    } else {
+        selectedLanguage
     }
     val oldTestamentChapters = bibleChapters.take(39)
     val newTestamentChapters = bibleChapters.drop(39)
-    val title = translations["bible"] ?: "Bible"
+    val title = when(bibleLanguage){
+        "ml" -> "വേദപുസ്തകം"
+        else -> "Bible"
+    }
+
     Scaffold(
         topBar = { TopNavBar(title, navController) },
         bottomBar = { BottomNavBar(navController) }

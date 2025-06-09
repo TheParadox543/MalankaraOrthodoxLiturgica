@@ -43,12 +43,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
-fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+fun SettingsScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
 
@@ -108,7 +108,7 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                         selectedOption = languages.firstOrNull { it.second == selectedLanguage }?.first
                             ?: "ml",
                         selectedFontSize = selectedFontSize,
-                        onOptionSelected = { prayerViewModel.setLanguage(it) }
+                        onOptionSelected = { settingsViewModel.setLanguage(it) }
                     )
                 }
             }
@@ -145,7 +145,7 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                         selectedOption = fontSizes.firstOrNull { it.second == selectedFontSize }?.first
                             ?: "Medium",
                         selectedFontSize = selectedFontSize,
-                        onOptionSelected = { prayerViewModel.setFontSize(it) }
+                        onOptionSelected = { settingsViewModel.setFontSize(it) }
                     )
                 }
             }
