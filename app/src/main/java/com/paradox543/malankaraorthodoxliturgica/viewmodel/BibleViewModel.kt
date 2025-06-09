@@ -2,8 +2,9 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.model.BibleBook
-import com.paradox543.malankaraorthodoxliturgica.model.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
+import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,23 +15,23 @@ import javax.inject.Inject
 class BibleViewModel @Inject constructor(
     private val bibleRepository: BibleRepository
 ): ViewModel() {
-    private val _bibleBooks = MutableStateFlow<List<BibleBook>>(emptyList())
-    val bibleBooks: StateFlow<List<BibleBook>> = _bibleBooks
+    private val _bibleBooks = MutableStateFlow<List<BibleDetails>>(emptyList())
+    val bibleBooks: StateFlow<List<BibleDetails>> = _bibleBooks
 
     init {
-        viewModelScope.launch { loadBibleBooks() }
+        viewModelScope.launch { loadBibleDetails() }
     }
 
-    suspend fun loadBibleBooks() {
+    private fun loadBibleDetails() {
         try {
-            val bibleChapters = bibleRepository.loadBibleChapters()
+            val bibleChapters = bibleRepository.loadBibleDetails()
             _bibleBooks.value = bibleChapters
         } catch (e: Exception) {
             throw e
         }
     }
 
-    fun findBibleBookWithIndex(bookName: String, language: String): Pair<BibleBook?, Int?> {
+    fun findBibleBookWithIndex(bookName: String, language: String): Pair<BibleDetails?, Int?> {
         val currentBooks = _bibleBooks.value
 
         currentBooks.forEachIndexed { index, bibleBook ->
@@ -50,7 +51,7 @@ class BibleViewModel @Inject constructor(
         return Pair(null, null)
     }
 
-    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String): Map<String, String> {
+    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String): Chapter? {
         return bibleRepository.loadBibleChapter(bookNumber, chapterNumber, language)
     }
 
@@ -81,15 +82,14 @@ class BibleViewModel @Inject constructor(
         // --- Calculate Next Chapter Route ---
         var nextRoute: String? = null
         var nextChapterBookIndex = bookIndex
-        var nextChapterIndex = chapterIndex + 1
+        val nextChapterIndex = chapterIndex + 1
 
         if (nextChapterIndex >= bibleBook.chapters) { // Need to go to the next book
             nextChapterBookIndex += 1
             if (nextChapterBookIndex < books.size) { // Check if next book exists
                 val nextBook = books[nextChapterBookIndex]
                 if (nextBook.chapters > 0) {
-                    nextChapterIndex = 0 // First chapter of the next book
-                    nextRoute = "bible/$nextChapterBookIndex/$nextChapterIndex"
+                    nextRoute = "bible/$nextChapterBookIndex/0" // First chapter of the next book
                 }
                 // If nextBook.chapters is 0, nextRoute remains null
             }

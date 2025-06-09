@@ -1,0 +1,51 @@
+{
+    "2025": {
+        "5": {
+            "4": ["firstSundayAfterNewSunday"],
+            "8": ["feastOfStJohnTheApostle"],
+            "10": ["feastOfStSimonTheZealot"],
+            "11": ["secondSundayAfterNewSunday"],
+            "15": ["feastOfStMaryForHarvest"],
+            "18": ["thirdSundayAfterNewSunday"],
+            "25": ["fourthSundayAfterNewSunday"],
+            "29": ["ascension"]
+        },
+        "6": {
+            "1": ["sundayBeforePentecost"],
+            "5": ["worldEnvironmentDay"],
+            "8": ["pentecost"],
+            "9": ["stAaron"],
+            "11": ["feastOfStBartholomew"],
+            "13": ["goldenFriday"],
+            "15": ["firstSundayAfterPentecost"],
+            "16": ["apostlesFastStart"],
+            "19": ["feastOfStJames"],
+            "22": ["secondSundayAfterPentecost"],
+            "24": ["birthOfStJohn"],
+            "29": ["thirdSundayAfterPentecost", "feastOfApostlesFast"],
+            "30": ["feastOfTwelveApostles"]
+        },
+        "7": {
+            "3": ["dukhrono"],
+            "5": ["feastOf72Evangelists", "MarThomaVII"],
+            "6": ["fourthSundayAfterPentecost", "missionSunday"],
+            "13": ["fifthSundayAfterPentecost"],
+            "15": ["feastOfStKuriakose"],
+            "20": ["sixthSundayAfterPentecost", "feastOfMaryElijah"],
+            "22": ["feastOfStMaryMagdalene"],
+            "25": ["feastOfMarEpiphanios"],
+            "27": ["seventhSundayAfterPentecost", "feastOfStSimonTheStylite"],
+            "31": ["feastOfMarGregoriosBarHebraeus"]
+        },
+        "8": {
+            "1": ["shoonoyoFast"],
+            "3": ["eighthSundayAfterPentecost"],
+            "6": ["transfiguration"],
+            "7": ["feastOfStDemetrios"],
+            "10": ["firstSundayAfterTransfiguration"],
+            "12": ["feastOfStAzazayel"],
+            "13": ["prophetMicha"],
+            "15": ["feastOfStAssumption"]
+        }
+    }
+}
