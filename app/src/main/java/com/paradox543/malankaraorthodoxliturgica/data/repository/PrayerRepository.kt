@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okio.IOException
 import org.json.JSONArray
@@ -12,20 +13,20 @@ import javax.inject.Singleton
 class PrayerRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    fun loadTranslations(language: String): Map<String, String> {
+    fun loadTranslations(language: AppLanguage): Map<String, String> {
         val json = context.assets.open("translations.json").bufferedReader().use { it.readText() }
         val jsonObject = JSONObject(json)
         val translationMap = mutableMapOf<String, String>()
         for (key in jsonObject.keys()) {
             val innerObject = jsonObject.getJSONObject(key)
-            translationMap[key] = innerObject.getString(language)
+            translationMap[key] = innerObject.getString(language.code)
         }
         return translationMap
     }
 
     fun loadPrayers(
         filename: String,
-        language: String,
+        language: AppLanguage,
         depth: Int = 0,
         maxDepth: Int = 5
     ): List<Map<String, Any>> {
@@ -41,7 +42,7 @@ class PrayerRepository @Inject constructor(
 
         try {
             val json =
-                context.assets.open("prayers/$language/$filename").bufferedReader()
+                context.assets.open("prayers/${language.code}/$filename").bufferedReader()
                     .use { it.readText() }
             val jsonArray = JSONArray(json)
 
@@ -129,11 +130,11 @@ class PrayerRepository @Inject constructor(
         return prayerList
     }
 
-    private fun loadPrayerAsCollapsible(filename: String, language: String): Map<String, Any> {
+    private fun loadPrayerAsCollapsible(filename: String, language: AppLanguage): Map<String, Any> {
         val itemList = mutableListOf<Map<String, String>>()
         var title = ""
         try {
-            val json = context.assets.open("prayers/$language/$filename").bufferedReader()
+            val json = context.assets.open("prayers/${language.code}/$filename").bufferedReader()
                 .use { it.readText() }
             val jsonArray = JSONArray(json)
 

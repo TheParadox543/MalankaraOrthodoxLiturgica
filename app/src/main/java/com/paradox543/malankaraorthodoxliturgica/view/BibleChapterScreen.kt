@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
@@ -30,23 +31,17 @@ fun BibleChapterScreen(
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
     val bibleBook = bibleBooks[bookIndex]
-    var bibleLanguage = selectedLanguage
-    if (selectedLanguage == "mn") {
-        bibleLanguage = "en"
-    }
+
     val bookName: String = when(selectedLanguage) {
-        "en" -> bibleBook.book.en
-        "ml" -> bibleBook.book.ml
+        AppLanguage.MALAYALAM -> bibleBook.book.ml
         else -> bibleBook.book.en
     }
-    val title = if (bookIndex == 18 && selectedLanguage == "ml") {
+    val title = if (bookIndex == 18 && selectedLanguage == AppLanguage.MALAYALAM) {
         "${chapterIndex + 1}-ാം സങ്കീർത്തനം"
-    } else if (bookIndex == 18) {
-        "${chapterIndex + 1} $bookName"
     } else {
         "$bookName ${chapterIndex + 1}"
     }
-    val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, bibleLanguage)
+    val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, selectedLanguage)
     val (prevRoute, nextRoute) = bibleViewModel.getAdjacentChapters(bookIndex, chapterIndex)
     Scaffold(
         topBar = { TopNavBar(title, navController, onActionClick = { navController.navigate("settings")}) },

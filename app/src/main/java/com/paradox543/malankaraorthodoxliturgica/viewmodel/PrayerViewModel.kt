@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,7 +37,7 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    private fun loadTranslations(language: String) {
+    private fun loadTranslations(language: AppLanguage) {
         viewModelScope.launch {
             val loadedTranslations = prayerRepository.loadTranslations(language)
             _translations.update { loadedTranslations }

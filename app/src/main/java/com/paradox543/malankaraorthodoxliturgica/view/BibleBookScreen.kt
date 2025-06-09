@@ -34,17 +34,15 @@ fun BibleBookScreen(
     bookName: String
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    var bibleLanguage = selectedLanguage
-    if (selectedLanguage == "mn") {
-        bibleLanguage = "en"
-    }
-    val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, bibleLanguage)
+
+    val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, selectedLanguage)
     if (bibleBook == null){
         navController.navigate("bible") {
             popUpTo("bible") { inclusive = true }
         }
     }
     val chapters = bibleBook?.chapters ?: 1
+
     Scaffold(
         topBar = { TopNavBar(bookName, navController) },
         bottomBar = { BottomNavBar(navController) }

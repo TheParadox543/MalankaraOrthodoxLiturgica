@@ -63,7 +63,6 @@ fun PrayerScreen(
     modifier: Modifier = Modifier
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
-    val language by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
     var title = ""

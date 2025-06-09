@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -39,15 +40,12 @@ fun BibleScreen(
     val bibleChapters by bibleViewModel.bibleBooks.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
-    val bibleLanguage = if (selectedLanguage == "mn") {
-        "en" // Explicitly map 'mn' to 'en' for translation purposes
-    } else {
-        selectedLanguage
-    }
+
     val oldTestamentChapters = bibleChapters.take(39)
     val newTestamentChapters = bibleChapters.drop(39)
-    val title = when(bibleLanguage){
-        "ml" -> "വേദപുസ്തകം"
+
+    val title = when(selectedLanguage){
+        AppLanguage.MALAYALAM -> "വേദപുസ്തകം"
         else -> "Bible"
     }
 
@@ -63,22 +61,22 @@ fun BibleScreen(
                 .padding(horizontal = 12.dp)
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
-                when(bibleLanguage) {
-                    "en" -> SectionCard("Old Testament")
-                    "ml" -> SectionCard("പഴയ നിയമം")
+                when(selectedLanguage) {
+                    AppLanguage.MALAYALAM -> SectionCard("പഴയ നിയമം")
+                    else -> SectionCard("Old Testament")
                 }
             }
             items(oldTestamentChapters.size) { index ->
-                BibleCard (oldTestamentChapters[index], bibleLanguage, selectedFontSize, navController)
+                BibleCard (oldTestamentChapters[index], selectedLanguage, selectedFontSize, navController)
             }
             item(span = {GridItemSpan(this.maxLineSpan)}) {
-                when(bibleLanguage){
-                    "en" -> SectionCard("New Testament")
-                    "ml" -> SectionCard("പുതിയ നിയമം")
+                when(selectedLanguage){
+                    AppLanguage.MALAYALAM -> SectionCard("പുതിയ നിയമം")
+                    else -> SectionCard("New Testament")
                 }
             }
             items(newTestamentChapters.size) {index ->
-                BibleCard(newTestamentChapters[index], bibleLanguage, selectedFontSize, navController)
+                BibleCard(newTestamentChapters[index], selectedLanguage, selectedFontSize, navController)
             }
         }
     }
@@ -107,10 +105,9 @@ fun SectionCard(title: String) {
 }
 
 @Composable
-fun BibleCard(bibleDetails: BibleDetails, bibleLanguage: String, selectedFontSize: TextUnit, navController: NavController){
-    val bookName = when(bibleLanguage) {
-        "en" -> bibleDetails.book.en
-        "ml" -> bibleDetails.book.ml
+fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, selectedFontSize: TextUnit, navController: NavController){
+    val bookName = when(selectedLanguage) {
+        AppLanguage.MALAYALAM -> bibleDetails.book.ml
         else -> bibleDetails.book.en
     }
     Card(
