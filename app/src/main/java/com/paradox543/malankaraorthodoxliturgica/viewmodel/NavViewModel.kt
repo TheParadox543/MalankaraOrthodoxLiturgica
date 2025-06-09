@@ -1,10 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
-import com.paradox543.malankaraorthodoxliturgica.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree
 import com.paradox543.malankaraorthodoxliturgica.navigation.PrayerRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel

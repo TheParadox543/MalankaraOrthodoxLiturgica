@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
-import com.paradox543.malankaraorthodoxliturgica.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 
 object PrayerRoutes {
 //    Section Routes
@@ -331,7 +331,7 @@ object NavigationTree {
         )
     }
 
-    private fun menSection(parentRoute: String): PageNode{
+    private fun menSection(parentRoute: String): PageNode {
         val currentRoute = createCompleteRoute(parentRoute ,PrayerRoutes.MEN)
         val children = mutableListOf<PageNode>()
         for (item in FuneralParts) {

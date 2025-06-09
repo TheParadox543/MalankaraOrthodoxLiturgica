@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
@@ -169,11 +169,11 @@ fun PrayerScreen(
                         }
 
                         "collapsible-block" -> {
-                            val title = prayer["title"] as? String ?: "Expandable Section"
+                            val collapsibleTitle = prayer["title"] as? String ?: "Expandable Section"
                             val items = prayer["items"] as? List<Map<String, String>> ?: emptyList()
 
                             CollapsibleTextBlock(
-                                title = title,
+                                title = collapsibleTitle,
                                 fontSize = selectedFontSize,
                             ){
                                 Column {

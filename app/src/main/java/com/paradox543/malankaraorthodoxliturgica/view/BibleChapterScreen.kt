@@ -57,10 +57,12 @@ fun BibleChapterScreen(
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp)
         ) {
-            items(chapterData.size) { index ->
-                val verseNumber = (index + 1).toString()
-                val verseText = chapterData[verseNumber]!!
-                VerseItem(verseNumber, verseText, selectedFontSize)
+            chapterData?.Verse?.let {
+                items(it.size) { index ->
+                    val verseNumber = (index + 1).toString()
+                    val verseText = chapterData.Verse[index].Verse
+                    VerseItem(verseNumber, verseText, selectedFontSize)
+                }
             }
         }
     }
