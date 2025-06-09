@@ -2,9 +2,9 @@ package com.paradox543.malankaraorthodoxliturgica.di
 
 import android.content.Context
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.data.repository.DataStoreManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,9 +19,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDataStoreManager(
+    fun provideSettingsRepository(
         @ApplicationContext context: Context
-    ): DataStoreManager = DataStoreManager(context)
+    ): SettingsRepository = SettingsRepository(context)
 
     @Provides
     @Singleton // Ensure only one instance of Json is created

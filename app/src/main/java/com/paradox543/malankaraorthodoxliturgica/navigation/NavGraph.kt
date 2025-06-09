@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -25,6 +24,7 @@ import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
@@ -47,52 +47,53 @@ fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollCon
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NavGraph(modifier: Modifier = Modifier) {
+fun NavGraph() {
+    val settingsViewModel: SettingsViewModel = hiltViewModel()
     val prayerViewModel: PrayerViewModel = hiltViewModel()
     val navViewModel: NavViewModel = hiltViewModel()
     val bibleViewModel: BibleViewModel = hiltViewModel()
     val navController = rememberNavController()
     NavHost(navController, startDestination = "home") {
         composable("home") {
-            HomeScreen(navController, prayerViewModel, navViewModel)
+            HomeScreen(navController, prayerViewModel, settingsViewModel, navViewModel)
         }
         composable("section/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
             val node = navViewModel.findNode(navViewModel.rootNode, route)
             if (node != null) {
-                SectionScreen(navController, prayerViewModel, node)
+                SectionScreen(navController, prayerViewModel, settingsViewModel, node)
             }
         }
         composable("prayerScreen/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
             val node = navViewModel.findNode(navViewModel.rootNode, route)
             if (node != null) {
-                PrayerScreen(navController, prayerViewModel, navViewModel, node)
+                PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
             }
         }
         composable("prayNow") {
-            PrayNowScreen(navController, prayerViewModel, navViewModel)
+            PrayNowScreen(navController, settingsViewModel, prayerViewModel, navViewModel)
         }
         composable("bible") {
-            BibleScreen(navController, prayerViewModel, bibleViewModel)
+            BibleScreen(navController, settingsViewModel, bibleViewModel)
         }
         composable("bible/{bookName}") {backStackEntry ->
             val book = backStackEntry.arguments?.getString("bookName") ?: ""
-            BibleBookScreen(navController, prayerViewModel, bibleViewModel, book)
+            BibleBookScreen(navController, settingsViewModel, bibleViewModel, book)
         }
         composable("bible/{bookIndex}/{chapterIndex}") {backStackEntry ->
             val bookIndex = backStackEntry.arguments?.getString("bookIndex") ?: ""
             val chapterIndex = backStackEntry.arguments?.getString("chapterIndex") ?: ""
             BibleChapterScreen(
                 navController,
-                prayerViewModel,
+                settingsViewModel,
                 bibleViewModel,
                 bookIndex.toInt(),
                 chapterIndex.toInt()
             )
         }
         composable("settings") {
-            SettingsScreen(navController, prayerViewModel)
+            SettingsScreen(navController, settingsViewModel)
         }
     }
 }

@@ -16,18 +16,18 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleChapterScreen(
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookIndex: Int,
     chapterIndex: Int
 ) {
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
     val bibleBook = bibleBooks[bookIndex]
     var bibleLanguage = selectedLanguage

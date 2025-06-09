@@ -50,19 +50,21 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PrayerScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
     node: PageNode,
     modifier: Modifier = Modifier
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
-    val language by prayerViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val language by settingsViewModel.selectedLanguage.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
     var title = ""
     for (item in node.route.split("_")){
@@ -75,7 +77,7 @@ fun PrayerScreen(
 
     val currentFilename = node.filename?: "NoFileNameFound"
     val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
-    prayerViewModel.loadPrayers(currentFilename, language)
+    prayerViewModel.loadPrayers(currentFilename)
 
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()

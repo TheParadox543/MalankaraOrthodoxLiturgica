@@ -36,15 +36,17 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     node: PageNode
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val nodes = node.children
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp

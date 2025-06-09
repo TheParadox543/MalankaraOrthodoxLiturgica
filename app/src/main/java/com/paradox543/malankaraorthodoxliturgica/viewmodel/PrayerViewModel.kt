@@ -1,11 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.data.repository.DataStoreManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,45 +15,24 @@ import javax.inject.Inject
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
     private val prayerRepository: PrayerRepository,
-    private val dataStoreManager: DataStoreManager
+    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
-    private val _selectedLanguage = MutableStateFlow("ml")
-    val selectedLanguage: StateFlow<String> = _selectedLanguage.asStateFlow()
-
-    private val _selectedFontSize = MutableStateFlow(16.sp) // Default to medium
-    val selectedFontSize: StateFlow<TextUnit> = _selectedFontSize.asStateFlow()
+    private val selectedLanguage = settingsRepository.selectedLanguage
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
+    private val _prayers = MutableStateFlow<List<Map<String, Any>>>(emptyList())
+    val prayers: StateFlow<List<Map<String, Any>>> = _prayers
+
     init {
-        // Load stored language from DataStore
+        // Observe language from SettingsViewModel and trigger translation loading
         viewModelScope.launch {
-            dataStoreManager.selectedLanguage.collect { language ->
-                _selectedLanguage.value = language
+            selectedLanguage.collect { language ->
+                // When the language changes (from DataStore), load translations
                 loadTranslations(language)
             }
-        }
-        viewModelScope.launch {
-            dataStoreManager.selectedFont.collect{ size ->
-                _selectedFontSize.value = size.sp
-            }
-        }
-    }
-
-    fun setLanguage(language: String) {
-        viewModelScope.launch{
-            dataStoreManager.saveLanguage(language)
-        }
-        _selectedLanguage.value = language
-        loadTranslations(language)
-    }
-
-    fun setFontSize(size: TextUnit) {
-        _selectedFontSize.value = size
-        viewModelScope.launch {
-            dataStoreManager.saveFontSize(size.value.toInt())
         }
     }
 
@@ -66,15 +43,20 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    private val _prayers = MutableStateFlow<List<Map<String, Any>>>(emptyList())
-    val prayers: StateFlow<List<Map<String, Any>>> = _prayers
-
-    fun loadPrayers(filename: String, language: String) {
-        try {
-            val prayers = prayerRepository.loadPrayers(filename, language)
-            _prayers.value = prayers
-        } catch (e: Exception) {
-            throw e
+    // This function can remain, but it should likely take language from `settingsViewModel.selectedLanguage.value`
+    // at the time it's called, or you can pass it from the UI.
+    // If filename depends on language, this might need more thought.
+    fun loadPrayers(filename: String) {
+        viewModelScope.launch { // Launch in ViewModelScope for async operation
+            try {
+                // Access the current language from SettingsViewModel
+                val language = selectedLanguage.value
+                val prayers = prayerRepository.loadPrayers(filename, language)
+                _prayers.value = prayers
+            } catch (e: Exception) {
+                // Consider more robust error handling (e.g., expose to UI via StateFlow)
+                throw e
+            }
         }
     }
 }
