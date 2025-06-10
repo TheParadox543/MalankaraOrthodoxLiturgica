@@ -8,11 +8,11 @@
         "content": "pattakkaaran: shubaho......."
     },
     {
-        "type": "janam",
-        "content": "balaheenarum...."
+        "type": "prose",
+        "content": "Janam: balaheenarum...."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "praarambha praarththana",
         "items": [
             {
@@ -58,7 +58,7 @@
         "content": "sthaumenkaalos…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "allenkil",
         "items": [
             {
@@ -84,7 +84,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "prumiyon",
         "items": [
             {
@@ -142,7 +142,7 @@
         "content": "moriyo...."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ethro",
         "items": [
             {
@@ -200,7 +200,7 @@
         "content": "yohannaan 14 : 25 27, 15: 26, 16: 15"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "evangeliyon vaayana",
         "items": [
             {
@@ -250,7 +250,7 @@
         "content": "shushrooshakkaaran:- naam nilatthu muttukutthi kartthaavinotu praarththikkanam."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "rahasyapraarththana",
         "items": [
             {
@@ -272,7 +272,7 @@
         "content": "paripaavanamaam thrithvatthin\nparipoornnaaraadhana njangal\ntheriyathaashvaasapradanaam\nroohaayaal thanne sathyam,\naathmamayan thanne dyvam\ndyvattheyaaraadhippon\nnerilumaathmaavilumavane\npoojiccheetaan baaddhuyasthan."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "hootthomo",
         "items": [
             {

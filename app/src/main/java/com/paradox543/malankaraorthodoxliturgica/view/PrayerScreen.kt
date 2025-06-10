@@ -10,10 +10,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -25,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,25 +48,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PrayerScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
-    node: PageNode,
-    modifier: Modifier = Modifier
+    node: PageNode
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
-    val language by prayerViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
     var title = ""
     for (item in node.route.split("_")){
@@ -75,7 +80,15 @@ fun PrayerScreen(
 
     val currentFilename = node.filename?: "NoFileNameFound"
     val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
-    prayerViewModel.loadPrayers(currentFilename, language)
+
+    // Ensure prayers are loaded only when filename changes
+    LaunchedEffect(currentFilename) {
+        prayerViewModel.loadPrayerElements(currentFilename)
+    }
+
+    // Store the initial system bar padding values
+    val initialTopPadding = remember { mutableStateOf(0.dp) }
+    val initialBottomPadding = remember { mutableStateOf(0.dp) }
 
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()
@@ -100,115 +113,150 @@ fun PrayerScreen(
             }
         },
         bottomBar = {
-            AnimatedVisibility(
-                visible = isVisible.value,
-                modifier = Modifier.zIndex(1f)
-            ) {
-                SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
+            if (prevNodeRoute != null || nextNodeRoute != null) {
+                AnimatedVisibility(
+                    visible = isVisible.value,
+                    modifier = Modifier.zIndex(1f)
+                ) {
+                    SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
+                }
             }
         }
-    ) {
+    ) { innerPadding ->
+
+        // Capture the system window insets once when the composable is first launched
+        LaunchedEffect(innerPadding) {
+            if (initialTopPadding.value == 0.dp){
+                initialTopPadding.value = innerPadding.calculateTopPadding()
+            }
+            if (initialBottomPadding.value == 0.dp) {
+                initialBottomPadding.value = innerPadding.calculateBottomPadding()
+            }
+        }
+
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = if (isLandscape) 40.dp else 20.dp), // Reduce width in landscape
+                .padding(horizontal = if (isLandscape) 40.dp else 20.dp) // Reduce width in landscape
+//                .padding(top = initialTopPadding.value)
+                .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxWidth(if (isLandscape) 0.8f else 1f) // Limit width in landscape
-                    .fillMaxHeight(0.9f), // Limit height to avoid out of bounds
+                    .fillMaxWidth(if (isLandscape) 0.8f else 1f), // Limit width in landscape
+//                    .fillMaxHeight(0.9f), // Limit height to avoid out of bounds
                 state = listState,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 item {
-                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 32.dp))
+//                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 32.dp))
+                    Spacer(Modifier.padding(top = initialTopPadding.value))
                 }
-                items(prayers) { prayer ->
-                    when (prayer["type"]) {
-                        "title" -> {
-                            Title(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "heading" -> {
-                            Heading(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "subheading" -> {
-                            Subheading(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "prose" -> {
-                            Prose(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "song" -> {
-                            Song(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "subtext" -> {
-                            Subtext(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "collapsible-block" -> {
-                            val title = prayer["title"] as? String ?: "Expandable Section"
-                            val items = prayer["items"] as? List<Map<String, String>> ?: emptyList()
-
-                            CollapsibleTextBlock(
-                                title = title,
-                                fontSize = selectedFontSize,
-                            ){
-                                Column {
-                                    Spacer(Modifier.padding(8.dp))
-                                    items.forEach {item ->
-                                        when (item["type"]) {
-                                            "heading" -> Heading(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "subheading" -> Subheading(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "prose" -> Prose(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "song" -> Song(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "subtext" -> Subtext(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            else -> Text("Unknown collapsible item: ${item["type"]}", color=MaterialTheme.colorScheme.error)
-                                        }
-                                        Spacer(Modifier.padding(4.dp))
-                                    }
-                                }
-                            }
-                        }
-                        "error" -> {
-                            Text("Error: ${prayer["content"]}", color=MaterialTheme.colorScheme.error)
-                        }
-
-                        "newsection" -> {
-                            Text("")
-                        }
-                        else -> {
-                            Text("Unknown prayer element: ${prayer["type"]}", color=MaterialTheme.colorScheme.error)
-                        }
-                    }
+                items(prayers) { prayerElement ->
+                    PrayerElementRenderer(prayerElement, selectedFontSize)
                 }
                 item {
-                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 44.dp))
+//                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 44.dp))
+                    Spacer(Modifier.padding(bottom = initialBottomPadding.value))
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun PrayerElementRenderer(
+    prayerElement: PrayerElement,
+    selectedFontSize: TextUnit
+) {
+    when (prayerElement) {
+        is PrayerElement.Title -> {
+            Title(
+                text = prayerElement.content,
+                fontSize = selectedFontSize
+            )
+        }
+
+        is PrayerElement.Heading -> {
+            Heading(
+                text = prayerElement.content,
+                fontSize = selectedFontSize
+            )
+        }
+
+        is PrayerElement.Subheading -> {
+            Subheading(
+                text = prayerElement.content,
+                fontSize = selectedFontSize
+            )
+        }
+
+        is PrayerElement.Prose -> {
+            Prose(
+                text = prayerElement.content,
+                fontSize = selectedFontSize
+            )
+        }
+
+        is PrayerElement.Song -> {
+            Song(
+                text = prayerElement.content,
+                fontSize = selectedFontSize
+            )
+        }
+
+        is PrayerElement.Subtext -> {
+            Subtext(
+                text = prayerElement.content,
+                fontSize = selectedFontSize
+            )
+        }
+
+        is PrayerElement.CollapsibleBlock -> {
+            CollapsibleTextBlock(
+                title = prayerElement.title,
+                fontSize = selectedFontSize,
+            ) {
+                Column {
+                    Spacer(Modifier.padding(8.dp))
+                    prayerElement.items.forEach { nestedItem -> // Loop through type-safe items
+                        // Recursively call the renderer for nested items
+                        PrayerElementRenderer(nestedItem, selectedFontSize)
+                        Spacer(Modifier.padding(4.dp))
+                    }
+                }
+            }
+        }
+
+        is PrayerElement.Error -> {
+            Text("Error: ${prayerElement.content}", color = MaterialTheme.colorScheme.error)
+        }
+
+        is PrayerElement.Link -> {
+            // This block indicates that a 'Link' element unexpectedly reached the UI.
+            // Log an error or render a debug message, as it should ideally not happen.
+            Text(
+                "UI Error: Unresolved Link element encountered (file: ${prayerElement.file})",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+
+        is PrayerElement.LinkCollapsible -> {
+            // Similar to 'Link', this suggests an issue in the data resolution layer.
+            Text(
+                "UI Error: Unresolved LinkCollapsible element encountered (file: ${prayerElement.file})",
+                color = MaterialTheme.colorScheme.error,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+
+//        else -> {
+//            Text(
+//                "Unknown prayer element: $prayerElement",
+//                color = MaterialTheme.colorScheme.error
+//            )
+//        }
     }
 }
 

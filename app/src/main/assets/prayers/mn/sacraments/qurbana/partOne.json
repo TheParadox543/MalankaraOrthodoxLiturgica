@@ -20,7 +20,7 @@
         "content": "/tkartthaave! Ninne prasaviccha mariyaamum, ninne maamodeesaa mukkiya yohannaanum njangalkkuvendi ninnotapekshikkum. Njangalotu karuna cheyyaname."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "maar severiyosin്re maaneesaa-gadyam",
         "items": [
             {
@@ -30,7 +30,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "maar severiyosin്re maaneesaa ( suriyaani)",
         "items": [
             {
@@ -52,32 +52,32 @@
         "content": "pattakkaaran:- dyvame! Nee parishuddhanaakunnu."
     },
     {
-        "type": "janam",
-        "content": "- balavaane! Nee parishuddhanaakunnu."
+        "type": "prose",
+        "content": "Janam: - balavaane! Nee parishuddhanaakunnu."
     },
     {
-        "type": "janam",
+        "type": "prose",
         "content": "Maranamillaatthavane! Nee parishuddhanaakunnu."
     },
     {
-        "type": "janam",
+        "type": "prose",
         "content": "Njangalkkuvendi kurishikkappettavane!"
     },
     {
-        "type": "janam",
+        "type": "prose",
         "content": "Njangalotu karuna cheyyaname. + (moonnu praavashyam chollanam)"
     },
     {
-        "type": "janam",
+        "type": "prose",
         "content": "kuriyelaayison, kuriye .. Kuriye .."
     },
     {
-        "type": "pattakkaaran",
-        "content": "- (rahasyamaayi) oru praarththana"
+        "type": "prose",
+        "content": "Pattakkaaran: - (rahasyamaayi) oru praarththana"
     },
     {
-        "type": "janam",
-        "content": "- (shleehe gbaayo)"
+        "type": "prose",
+        "content": "janam: - (shleehe gbaayo)"
     },
     {
         "type": "song",
@@ -100,8 +100,8 @@
         "content": "parishuddhanaaya (inna) shleehaayute pothulekhana tthil ninnu. Haabeebaayu - baarekmor."
     },
     {
-        "type": "janam",
-        "content": "- (shleehanmaarute / shleehaayute) utayavanu sthuthi yum nammute mel than്re anugrahangalum-enne-kkum undaayirikkatte."
+        "type": "prose",
+        "content": "Janam: - (shleehanmaarute / shleehaayute) utayavanu sthuthi yum nammute mel than്re anugrahangalum-enne-kkum undaayirikkatte."
     },
     {
         "type": "subheading",
@@ -112,12 +112,12 @@
         "content": "/tvishvasicchavaraaya janakkoottatthinu ekamanasum, ekaa bhipraayavum aayirunnu. Avaril yaathoruvanum avan്re sampaadyangalekkuricchu svanthamennu paranjuvannilla. Ennaalo avarkkundaayirunna sakalavum pothu vakayaayirunnu. Shleehanmaar yeshumashihaayute uyirppi nekkuricchu valiya shakthiyotukooti saakshicchukondirunnu. Avar ellaavarotum koote valiya krupayum undaayirunnu. Avarute itayil daridranaaya oruvanum undaayirunnilla. Enthennaal nilangalum bhavanangalum undaayirunnavar ava vittu vila konduvannu shleehanmaarute kaalkkal vaykkukayum, ororuvanum aavashyampole nalkukayum cheythuvannu. Kuprosu deshatthuninnulla oru levyanum, aashvaasatthin്re puthran, ennarththamulla 'barnnabaa' ennu shleehanmaar vilicchirunnavanumaaya yausephinu oru nilam undaayirunnu. Avan athu vittu vila konduvannu shleehanmaarute kaalkkal vacchu. Haabibaayu, baarekmor."
     },
     {
-        "type": "pattakkaaran",
-        "content": "- (rahasyamaayi) oru praarththana"
+        "type": "prose",
+        "content": "Pattakkaaran: - (rahasyamaayi) oru praarththana"
     },
     {
-        "type": "janam",
-        "content": "- (thoobykku eettho)"
+        "type": "prose",
+        "content": "janam: - (thoobykku eettho)"
     },
     {
         "type": "song",
@@ -132,8 +132,8 @@
         "content": "vaayanakkaaran:- paulosu shleehaa (ephesosukaarkku) ezhuthiya lekhanatthil ninnu. Aahaayu baarekmor."
     },
     {
-        "type": "janam",
-        "content": "- shleehaayute utayavana sthuthiyum-nammutemel thante anugrahangalum-ennekkum undaayirikkatte."
+        "type": "prose",
+        "content": "Janam: - shleehaayute utayavana sthuthiyum-nammutemel thante anugrahangalum-ennekkum undaayirikkatte."
     },
     {
         "type": "subheading",
@@ -144,12 +144,12 @@
         "content": "/tnammute kartthaavil bandhikkappettavanaaya njaan ningalotapekshikkunnathenthennaal, ningal vilikkappetta vilikku yogyamaakunna prakaaram sakala manovinayatthotum, shaanthathayotum, deerghakshamayotum natappin. Snehatthaal thammiltthammil sahikkunnavarum samaadhaanabandhatthil aathmaavin്re aikyam kaatthukolluvaan thaalparyamullavarum aayirippin. Ningalute viliyute ekasharanatthil ningal vilikkappettirikkunna prakaaram ningal ekashareeratthilum, eka aathmaavilum irippaanaayittuthanne. Enthennaal oru kartthaavum oru vishvaasavum oru maamodeesaayumeyulloo. Ellaavaruteyum pithaavum, ellaavarutemelum, ellaavarilkkootiyum, ellaavarilum vyaaparikkunnavanum, ekadyvamaakunnu. Aahaayu, baarekmor."
     },
     {
-        "type": "pattakkaaran",
-        "content": "- (rahasyamaayi) oru praarththana."
+        "type": "prose",
+        "content": "Pattakkaaran: - (rahasyamaayi) oru praarththana."
     },
     {
-        "type": "janam",
-        "content": "-haaleluyyaa! Haaleluyyaa! Sthuthiyaakunna balikal thanikkarppippin. Vetippulla kaazhchakal etu tthu-kartthaavinte praakaarangalilekku praveshicchu thante vishuddha madbahaa mumpaake-kartthaavine vandippin-haa leluyyaa."
+        "type": "prose",
+        "content": "Janam: -haaleluyyaa! Haaleluyyaa! Sthuthiyaakunna balikal thanikkarppippin. Vetippulla kaazhchakal etu tthu-kartthaavinte praakaarangalilekku praveshicchu thante vishuddha madbahaa mumpaake-kartthaavine vandippin-haa leluyyaa."
     },
     {
         "type": "heading",

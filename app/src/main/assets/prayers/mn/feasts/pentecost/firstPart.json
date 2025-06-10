@@ -12,7 +12,7 @@
         "content": "onnaam shushroosha"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "praarambhapraarththana",
         "items": [
             {
@@ -114,7 +114,7 @@
         "content": "neraam vachanam girimakutam pookkujvala darshana theja saalavar than hrudayangale niravaakki-vaagdattham pol kotiyoru kaattaal priyare modippicchu-mashihaa vaagdaa nappati theenaampukal pol paavana roohaaye vibhajiccheki."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "allenkil",
         "items": [
             {
@@ -136,7 +136,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "prumiyon",
         "items": [
             {
@@ -190,7 +190,7 @@
         "content": "moriyo....."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ethro",
         "items": [
             {
@@ -248,7 +248,7 @@
         "content": "yohannaan 14 : 1 - 17."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "evangeliyon vaayana",
         "items": [
             {
@@ -302,7 +302,7 @@
         "content": "(pattakkaaran thronosinte dargaayute mumpil muttukutthi kkondu thaazhekkaanunna rahasyapraarththana chollunnu. Appol mattulla ellaavarum muttukutthikkondu kuriyelaa yison chollunnu.)"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "rahasyapraarththana",
         "items": [
             {

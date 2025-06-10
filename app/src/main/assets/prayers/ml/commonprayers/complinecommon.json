@@ -44,7 +44,7 @@
         "file": "commonprayers/praiseOfCherubims.json"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "(91, 120-ാം മസുമൂർ പദ്യം)",
         "items": [
             {
@@ -158,7 +158,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "അപേക്ഷ",
         "items": [
             {
@@ -196,7 +196,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "കൗമാ (ക്രോബേന്മാരുടെ സ്‌തുതി പദ്യം)",
         "items": [
             {

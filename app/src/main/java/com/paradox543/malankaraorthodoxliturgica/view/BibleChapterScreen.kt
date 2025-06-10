@@ -13,40 +13,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleChapterScreen(
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookIndex: Int,
     chapterIndex: Int
 ) {
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
     val bibleBook = bibleBooks[bookIndex]
-    var bibleLanguage = selectedLanguage
-    if (selectedLanguage == "mn") {
-        bibleLanguage = "en"
-    }
+
     val bookName: String = when(selectedLanguage) {
-        "en" -> bibleBook.book.en
-        "ml" -> bibleBook.book.ml
+        AppLanguage.MALAYALAM -> bibleBook.book.ml
         else -> bibleBook.book.en
     }
-    val title = if (bookIndex == 18 && selectedLanguage == "ml") {
+    val title = if (bookIndex == 18 && selectedLanguage == AppLanguage.MALAYALAM) {
         "${chapterIndex + 1}-ാം സങ്കീർത്തനം"
-    } else if (bookIndex == 18) {
-        "${chapterIndex + 1} $bookName"
     } else {
         "$bookName ${chapterIndex + 1}"
     }
-    val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, bibleLanguage)
+    val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, selectedLanguage)
     val (prevRoute, nextRoute) = bibleViewModel.getAdjacentChapters(bookIndex, chapterIndex)
     Scaffold(
         topBar = { TopNavBar(title, navController, onActionClick = { navController.navigate("settings")}) },
@@ -57,10 +52,12 @@ fun BibleChapterScreen(
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp)
         ) {
-            items(chapterData.size) { index ->
-                val verseNumber = (index + 1).toString()
-                val verseText = chapterData[verseNumber]!!
-                VerseItem(verseNumber, verseText, selectedFontSize)
+            chapterData?.Verse?.let {
+                items(it.size) { index ->
+                    val verseNumber = (index + 1).toString()
+                    val verseText = chapterData.Verse[index].Verse
+                    VerseItem(verseNumber, verseText, selectedFontSize)
+                }
             }
         }
     }

@@ -8,7 +8,7 @@
         "file": "commonprayers/doxology.json"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രാർത്ഥന",
         "items": [
             {
@@ -58,7 +58,7 @@
         "content": "സ്തൗമെൻകാലോസ്…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രുമിയോൻ",
         "items": [
             {
@@ -68,7 +68,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "സെദരാ",
         "items": [
             {

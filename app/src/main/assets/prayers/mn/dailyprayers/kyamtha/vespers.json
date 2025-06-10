@@ -12,11 +12,11 @@
         "content": "pattakkaaran:-shubaho laabo vabro valrooho kaadeesho."
     },
     {
-        "type": "janam",
-        "content": "- balaheenarum paapikalumaaya njangalutemel anu grahangalum karunayum, randu lokangalilum ennume nnekkum choriyappetumaaraakaname. Aammeen."
+        "type": "prose",
+        "content": "Janam: - balaheenarum paapikalumaaya njangalutemel anu grahangalum karunayum, randu lokangalilum ennume nnekkum choriyappetumaaraakaname. Aammeen."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "praarambha praarththana",
         "items": [
             {
@@ -114,7 +114,7 @@
         "content": "sthaumenkaalosu kuriyelaayison,"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "promiyon",
         "items": [
             {
@@ -166,8 +166,8 @@
                 "content": "pattakkaaran:- dyvatthilninnu katangalkku parihaaravum, paapangalkku mochanavum, randu lokangalilum enne kkum naam kykkollumaaraakatte."
             },
             {
-                "type": "janam",
-                "content": "- aammeen."
+                "type": "prose",
+                "content": "Janam: - aammeen."
             }
         ]
     },
@@ -204,7 +204,7 @@
         "content": "moriyo raahemmelynu aadaaryn."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ethro",
         "items": [
             {

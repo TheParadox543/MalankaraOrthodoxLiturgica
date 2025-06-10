@@ -1,10 +1,6 @@
 [
     {
         "type": "title",
-        "content": "crown"
-    },
-    {
-        "type": "title",
         "content": "രണ്ടാം ശുശ്രൂഷ"
     },
     {
@@ -472,8 +468,8 @@
         "content": "ശുശ്രൂഷക്കാരൻ : വന്ദ്യ പിതാവിന്റെ പ്രാർത്ഥന നാം ഏറ്റുചൊല്ലണം."
     },
     {
-        "type": "link",
-        "file": "nicenecreed.json"
+        "type": "link-collapsible",
+        "file": "commonprayers/nicenecreed.json"
     },
     {
         "type": "heading",

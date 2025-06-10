@@ -78,5 +78,13 @@
     {
         "type": "link-collapsible",
         "file": "commonprayers/nicenecreed.json"
+    },
+    {
+        "type": "prose",
+        "content": "ശുശ്രൂഷക്കാരൻ:- ബാറെക്മോർ. സ്തൗമെൻകാലോസ്"
+    },
+    {
+        "type": "prose",
+        "content": "ജനം:- കുറിയേലായിസ്സോൻ."
     }
 ]

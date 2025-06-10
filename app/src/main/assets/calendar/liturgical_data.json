@@ -1,0 +1,10 @@
+{
+    "sundayBeforePentecost": {
+        "type": "Sunday",
+        "color": "red"
+    },
+    "pentecost": {
+        "type": "Sunday",
+        "color": "red"
+    }
+}
