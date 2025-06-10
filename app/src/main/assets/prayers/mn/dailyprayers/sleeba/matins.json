@@ -12,8 +12,8 @@
         "content": "pattakkaaran:- shubaho ..."
     },
     {
-        "type": "janam",
-        "content": "- balaheenarum paapikalumaaya njangalute mel anugrahangalum karunayum randulokangalilum ennu mennekkum choriyappetumaaraakaname. Aammeen,"
+        "type": "prose",
+        "content": "Janam: - balaheenarum paapikalumaaya njangalute mel anugrahangalum karunayum randulokangalilum ennu mennekkum choriyappetumaaraakaname. Aammeen,"
     },
     {
         "type": "heading",
@@ -25,7 +25,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "psalm133118116.json"
+        "file": "psalms/psalm133118116.json"
     },
     {
         "type": "heading",

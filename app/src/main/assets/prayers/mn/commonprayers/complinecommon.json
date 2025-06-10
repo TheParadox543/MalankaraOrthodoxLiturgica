@@ -44,7 +44,7 @@
         "file": "commonprayers/praiseOfCherubims.json"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "(91, 120-aam masumoor padyam)",
         "items": [
             {
@@ -158,7 +158,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "apeksha",
         "items": [
             {
@@ -196,7 +196,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "kaumaa (krobenmaarute sthuthi padyam)",
         "items": [
             {

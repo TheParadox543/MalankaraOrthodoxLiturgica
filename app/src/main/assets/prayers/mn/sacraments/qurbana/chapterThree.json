@@ -124,7 +124,7 @@
         "content": "janam :- aammeen."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "5-aam thubden(mattonnu)",
         "items": [
             {
@@ -226,7 +226,7 @@
         "content": "8. Nanmanira-njaa-ne ente\nhaaleluyyaa-u-haaleluyyaa\nthinmakale - nee- orkkaruthe.\nKuriye-laa-yison."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "allenkil(sroppe dnooro enna pole)",
         "items": [
             {
@@ -268,7 +268,7 @@
         "content": "Janam :- kuriye-laayison"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "lutthiniya",
         "items": [
             {
@@ -346,7 +346,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "janmadina vivaaha vaarshika sthothra praarththanakal",
         "items": [
             {

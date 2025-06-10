@@ -72,7 +72,7 @@
         "file": "psalm148149150.json"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രൊമിയോൻ",
         "items": [
             {
@@ -98,7 +98,7 @@
         "content": "ഹൂസോയോ"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "സെദറാ",
         "items": [
             {
@@ -184,7 +184,7 @@
         "content": "മൊറിയോറാ..."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "എത്രോ",
         "items": [
             {

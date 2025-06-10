@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -33,21 +32,21 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    navViewModel: NavViewModel,
+    settingsViewModel: SettingsViewModel,
     node: PageNode
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val nodes = node.children
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -81,13 +80,10 @@ fun SectionScreen(
                             .padding(horizontal = 20.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        itemsIndexed(nodes) { index, node ->
+                        items(nodes.size) { index ->
                             SectionCard(
-                                node,
+                                nodes[index],
                                 navController,
-                                navViewModel,
-                                nodes,
-                                index,
                                 translations,
                                 selectedFontSize
                             )
@@ -107,13 +103,10 @@ fun SectionScreen(
                             .weight(0.6f),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        itemsIndexed(nodes) { index, node ->
+                        items(nodes.size) { index ->
                             SectionCard(
-                                node,
+                                nodes[index],
                                 navController,
-                                navViewModel,
-                                nodes,
-                                index,
                                 translations,
                                 selectedFontSize
                             )
@@ -129,9 +122,6 @@ fun SectionScreen(
 private fun SectionCard(
     node: PageNode,
     navController: NavController,
-    navViewModel: NavViewModel,
-    nodes: List<PageNode>,
-    index: Int,
     translations: Map<String, String>,
     selectedFontSize: TextUnit
 ) {

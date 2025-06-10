@@ -12,11 +12,11 @@
         "content": "pattakkaaran:- shubaho ..."
     },
     {
-        "type": "janam",
-        "content": "- balaheenarum, paapikalumaaya njangalutemel anugrahangalum karunayum randu lokangalilum ennu mennekkum choriyappetumaaraakaname. Aammeen."
+        "type": "prose",
+        "content": "Janam: - balaheenarum, paapikalumaaya njangalutemel anugrahangalum karunayum randu lokangalilum ennu mennekkum choriyappetumaaraakaname. Aammeen."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "praarambha praarththana",
         "items": [
             {
@@ -62,12 +62,12 @@
         "content": "pattakkaaran:- naamellaavarum praarththicchu ..."
     },
     {
-        "type": "janam",
-        "content": "- kaarunyavaanaaya kartthaave! Njangalotu karuna cheythu njangale sahaayikkaname."
+        "type": "prose",
+        "content": "Janam: - kaarunyavaanaaya kartthaave! Njangalotu karuna cheythu njangale sahaayikkaname."
     },
     {
-        "type": "pattakkaaran",
-        "content": "- sthuthiyum sthothravum..."
+        "type": "prose",
+        "content": "Pattakkaaran: - sthuthiyum sthothravum..."
     },
     {
         "type": "heading",

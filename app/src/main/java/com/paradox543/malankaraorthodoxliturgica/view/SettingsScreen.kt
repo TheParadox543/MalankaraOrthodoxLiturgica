@@ -41,21 +41,22 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
-fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewModel) {
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+fun SettingsScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
 
     val languages = listOf(
-        "മലയാളം" to "ml",
-//        "English" to "en",
-        "Manglish" to "mn"
+        "മലയാളം" to AppLanguage.MALAYALAM,
+//        "English" to AppLanguage.ENGLISH,
+        "Manglish" to AppLanguage.MANGLISH
     )
     val fontSizes = listOf(
         "Very Small" to 8.sp,
@@ -106,9 +107,9 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                     LanguageDropdownMenu(
                         options = languages,
                         selectedOption = languages.firstOrNull { it.second == selectedLanguage }?.first
-                            ?: "ml",
+                            ?: AppLanguage.MALAYALAM.code,
                         selectedFontSize = selectedFontSize,
-                        onOptionSelected = { prayerViewModel.setLanguage(it) }
+                        onOptionSelected = { settingsViewModel.setLanguage(it) }
                     )
                 }
             }
@@ -145,7 +146,7 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
                         selectedOption = fontSizes.firstOrNull { it.second == selectedFontSize }?.first
                             ?: "Medium",
                         selectedFontSize = selectedFontSize,
-                        onOptionSelected = { prayerViewModel.setFontSize(it) }
+                        onOptionSelected = { settingsViewModel.setFontSize(it) }
                     )
                 }
             }
@@ -194,10 +195,10 @@ fun SettingsScreen(navController: NavController, prayerViewModel: PrayerViewMode
 
 @Composable
 fun LanguageDropdownMenu(
-    options: List<Pair<String, String>>,
+    options: List<Pair<String, AppLanguage>>,
     selectedOption: String,
     selectedFontSize: TextUnit,
-    onOptionSelected: (String) -> Unit
+    onOptionSelected: (AppLanguage) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -290,7 +291,8 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
             fontSize = selectedFontSize
         )
         Text(
-            "- Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy & Sunitha Mathew – Additional Text Translations and Preparation",
+            "- Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew & " +
+                    "Nohan George– Additional Text Translations and Preparation",
             fontSize = selectedFontSize
         )
         Spacer(Modifier.height(16.dp))

@@ -8,12 +8,12 @@
         "content": "(Thala thodunnayāl - purushanŭ purushan; sthreekku sthree. Kuttiyey mukham thekkottākki idathukayyil thalabhāgam thāṅṅi eduthukondu kizhakkottu thirinnu nilkkunnu.)"
     },
     {
-        "type": "pattakāran",
-        "content": "Pithāvinuṃ Puthranum Parishuddha Rūhāykkum sthuthi."
+        "type": "prose",
+        "content": "Pattakāran: Pithāvinuṃ Puthranum Parishuddha Rūhāykkum sthuthi."
     },
     {
-        "type": "janam",
-        "content": "Balahīnaruṃ pāpikalaaya ñangalute mēl karuṇayum kripayum randu lokangalilum enneykkum uṇṭāyirikkatte."
+        "type": "prose",
+        "content": "Janam: Balahīnaruṃ pāpikalaaya ñangalute mēl karuṇayum kripayum randu lokangalilum enneykkum uṇṭāyirikkatte."
     },
     {
         "type": "heading",
@@ -124,15 +124,15 @@
         "content": "Karttāv enne mēyikkum. Enikku ñerukkamuṇṭāvukayilla. Avan puṣṭiyuḷḷa mēchchilir enne pārppikkum."
     },
     {
-        "type": "songs",
-        "content": "Yū-hā-nōn ñetti, - Yōrddān bhramamārnnu."
+        "type": "prose",
+        "content": "Songs: Yū-hā-nōn ñetti, - Yōrddān bhramamārnnu."
     },
     {
-        "type": "songs",
+        "type": "prose",
         "content": "Sāppēnmār pāṭi: Māmoodeesāykkāgathanām"
     },
     {
-        "type": "songs",
+        "type": "prose",
         "content": "Daivam - shuddhan shuddhan Parishuddhan."
     },
     {

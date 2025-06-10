@@ -16,7 +16,7 @@
         "content": "oru kaumaa"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "praarambha praarththanakal",
         "items": [
             {
@@ -186,7 +186,7 @@
         "content": "bedu mor dukharono thobo laneede mhymane\ndekhaal phagaroku kaadeesho veshthee dmokku haayo\n/tvankumun men yaameenoku\n/tbyaumo ddhanho raabooso"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "allenkil (dahattho lo nehatthe)",
         "items": [
             {

@@ -12,16 +12,16 @@
         "content": "Pattakkaran: Shubaho laabo…\\n\\t(Pithaavinum Puthranum Parishudhdha Roohaykkum sthuthi.)"
     },
     {
-        "type": "janam",
-        "content": "Balahinarium paapikalumaya njangalde mel / anugrahavum karunayum / randu lokangalilum / ennumennekkum choriyaappettumarakaname. / Aammeen."
+        "type": "prose",
+        "content": "Janam: Balahinarium paapikalumaya njangalde mel / anugrahavum karunayum / randu lokangalilum / ennumennekkum choriyaappettumarakaname. / Aammeen."
     },
     {
-        "type": "pattakkaran",
-        "content": "Daivamaaya Karthave! Anashwaramaaya viruninum azhivilatha manavarakkyum njangale yogyarakkename. Aa virunilekku kshanikkappettirikkunna athithikalodukoode ninte nithyamaaya santhoshangalilekku njangaleyum kshanikkename. Avarude koottathilum idayilum ninnukondu njangal ninakkum ninte pithaavinum Parishudhdha Roohaykkum sthuthiyum sthothravum karettumarakaname. Hosh’o..."
+        "type": "prose",
+        "content": "Pattakkaran: Daivamaaya Karthave! Anashwaramaaya viruninum azhivilatha manavarakkyum njangale yogyarakkename. Aa virunilekku kshanikkappettirikkunna athithikalodukoode ninte nithyamaaya santhoshangalilekku njangaleyum kshanikkename. Avarude koottathilum idayilum ninnukondu njangal ninakkum ninte pithaavinum Parishudhdha Roohaykkum sthuthiyum sthothravum karettumarakaname. Hosh’o..."
     },
     {
-        "type": "janam",
-        "content": "Aammeen"
+        "type": "prose",
+        "content": "Janam: Aammeen"
     },
     {
         "type": "subheading",
@@ -52,8 +52,8 @@
         "content": "Pattakkaran: Karthave parasparam bandhitharaayirikkunna ee daasare ninte nalvarangalude aishwaryathaal shreshtharaakkukayum ninte daanangalal santhoshippikkukayum cheyyename. Ninte divya kalpanakalil ninnulla aanandamkondu ivare niraykkename. Pithaavum Puthranum Parishudhdha Roohayumaayullove! Santhoshollaasangalodukoode ivar ninakku sthuthi paadukayum thirusannidhiyil aahlaadikkukayum cheyyumarakaname. Hosh’o..."
     },
     {
-        "type": "janam",
-        "content": "Aammeen"
+        "type": "prose",
+        "content": "Janam: Aammeen"
     },
     {
         "type": "heading",
@@ -80,8 +80,8 @@
         "content": "Shushrooshakkaran: Stoumen Qaloos..."
     },
     {
-        "type": "janam",
-        "content": "Kuriyelaison."
+        "type": "prose",
+        "content": "Janam: Kuriyelaison."
     },
     {
         "type": "heading",
@@ -92,16 +92,16 @@
         "content": "Pattakkaran: Naam ellavarum prarthichu Karthavinod anugrahavum karunayum yaachikkanam."
     },
     {
-        "type": "janam",
-        "content": "Anugrahikkunnavanaaya Karthave / njangalod karuna cheythu / njangale sahaayikkaname."
+        "type": "prose",
+        "content": "Janam: Anugrahikkunnavanaaya Karthave / njangalod karuna cheythu / njangale sahaayikkaname."
     },
     {
-        "type": "pattakkaran",
-        "content": "Sthuthiyum sthothravum prabhayum pukarshayyum idavidathe karettuvaan njangale yogyarakkename.\\n\\tUndayirunavarum ippozhullavanu ennaennikkum... aviduththae daasaarude kireedangal aasheervadikkapedunna ee samayaththum... Bukool Hoon..."
+        "type": "prose",
+        "content": "Pattakkaran: Sthuthiyum sthothravum prabhayum pukarshayyum idavidathe karettuvaan njangale yogyarakkename.\\n\\tUndayirunavarum ippozhullavanu ennaennikkum... aviduththae daasaarude kireedangal aasheervadikkapedunna ee samayaththum... Bukool Hoon..."
     },
     {
-        "type": "janam",
-        "content": "Aammeen"
+        "type": "prose",
+        "content": "Janam: Aammeen"
     },
     {
         "type": "heading",
@@ -112,16 +112,16 @@
         "content": "Pattakkaran: Sakala swargiya senakalum ... \\n ninakkum ninte pithavinum parishudha Roohaykkum sthuthium sthothravum njangal karettunnu. Hosh’o..."
     },
     {
-        "type": "janam",
-        "content": "Aammeen"
+        "type": "prose",
+        "content": "Janam: Aammeen"
     },
     {
-        "type": "pattakkaran",
-        "content": "Daivaththil ninnum..."
+        "type": "prose",
+        "content": "Pattakkaran: Daivaththil ninnum..."
     },
     {
-        "type": "janam",
-        "content": "Aammeen"
+        "type": "prose",
+        "content": "Janam: Aammeen"
     },
     {
         "type": "heading",
@@ -152,8 +152,8 @@
         "content": "Pattakkaran: Koththine pattannaththil kalyanavirishninaayi ... \\n Njangalum ivarum ninte valaththubhaagaththil ninnukondu ninte karunay darshikkum ninakkum ninte pithavinum parishudha Roohaykkum sthuthium sthothravum karettum cheyyumaarakunnu. Hosh’o..."
     },
     {
-        "type": "janam",
-        "content": "Aammeen."
+        "type": "prose",
+        "content": "Janam: Aammeen."
     },
     {
         "type": "song",
@@ -164,12 +164,12 @@
         "content": "Shushrooshakkaar: Parishudhanaya Paulos Shleehaa Ephesosukarkku ezhutthiya lekhanaththil ninnum. Aahaay Barekmor."
     },
     {
-        "type": "janam",
-        "content": "Shleehaayude udayavanu sthuthium / namudemeel thante anugrahangalum / ennaekum / undaayirikkatte."
+        "type": "prose",
+        "content": "Janam: Shleehaayude udayavanu sthuthium / namudemeel thante anugrahangalum / ennaekum / undaayirikkatte."
     },
     {
-        "type": "shushrooshakkaaran",
-        "content": "(Ephesians 5:20 - 6:3)\\n\\t Nammude karthavaaya Yeshu Mashihayaude naamaaththil sarvadhhaaa sarvruththinum vendi pithavaaya daivaththae sthuthikkavin. Mashihayaalulla snehaththaal parasparam keezhppettukaayi cheyvin. StreekaLe namude karthavine ennaprakaaram ningal ninṟu bharththakkante anusareepeen. Enthennu, Mashihā sabhayude thalavum sharīraththinte rakshithavum aakunna prakaaram bharththavum bhāryāyākaayi. Sabhā Mashihāykku keezhppettunna prakaaram thanne bhāryāmārum avaravaru bharththākkaṁmāreḷl avaravaru sakalaththilum keezhppettanam. Purushmaru, Mashihā thante sabhāyāyi snehichappoḷ nīngalum ninte bhāryāmāre snehippīn. Sabhāye jalaththil uLLla snehāṇaṁ koṭṭum vachanaṁ koṭṭum vēṇḍumāṇaṁ śuddhikurayēāṁ kāḷaththumāṇaṁ kaṟṟakūṭāṁ ninṟa sthathvavān thējśvēnāyitthe sabhaykāyi Mashihā svapraāṇane samārppichuḷḷuṁallo. Aṅṅane thanne purushmaru svānta śarīrāṇe ennāpoḷ bhāryāmaru snehikkendathākuṁ. Enthennu, tanne bhāryāyi snehikkunnavan thānethanneyākunnu snehikkunnathu. Āruṁ orikkalum svānta śarīraththē dveshikkunnillallo. Pinnēyō Mashihā sabhāykku veṇḍi ennathu pōṡippikkukaayi athinu veṇḍi śramikkukaayi cheyyunnu. Nāṁ aviduththē sharīraththinte avayavakaḷuṁ māṁsabandhikaḷuṁ aśthisambandhikaḷuṁ aakunnu. Āyaththukondu purushan tanṟe pithāvinēyum māthāvinēyum viṭṭupirinjittu tanṟe bhāryāyāyittūḷṟikkāṇu. Avariruvārum ēkasharīrāyiththīrikkum. Ithoru vaḷiya rahasyamāṇu. Njaan Mashihāyēkkūṟiccūṁ aviduththē sabhāykūṟiccūṁ parayunnu. Aprakāraṁ thanne nīṅṅaḷ oruvaruṟuṟu tanṟe bhāryāyi snehikkendākuṁ. Bhāryāyākaṭṭe svabharththāvine ādarikkukayum vēṇṭu. Makkale nīṅṅaḷ karthāvine ōṟṭu māthā-pitākkāṉmāre anusareepeen. Enthennu, athu neethiāyirikkum. Ninṟe pithāvinēyum māthāvinēyum bahumānikkuka ennuḷḷathu prathijña cheytha prathama kalpanayāyirikkunnu. Aahāy... Barekmor."
+        "type": "prose",
+        "content": "Shushrooshakkaaran: (Ephesians 5:20 - 6:3)\\n\\t Nammude karthavaaya Yeshu Mashihayaude naamaaththil sarvadhhaaa sarvruththinum vendi pithavaaya daivaththae sthuthikkavin. Mashihayaalulla snehaththaal parasparam keezhppettukaayi cheyvin. StreekaLe namude karthavine ennaprakaaram ningal ninṟu bharththakkante anusareepeen. Enthennu, Mashihā sabhayude thalavum sharīraththinte rakshithavum aakunna prakaaram bharththavum bhāryāyākaayi. Sabhā Mashihāykku keezhppettunna prakaaram thanne bhāryāmārum avaravaru bharththākkaṁmāreḷl avaravaru sakalaththilum keezhppettanam. Purushmaru, Mashihā thante sabhāyāyi snehichappoḷ nīngalum ninte bhāryāmāre snehippīn. Sabhāye jalaththil uLLla snehāṇaṁ koṭṭum vachanaṁ koṭṭum vēṇḍumāṇaṁ śuddhikurayēāṁ kāḷaththumāṇaṁ kaṟṟakūṭāṁ ninṟa sthathvavān thējśvēnāyitthe sabhaykāyi Mashihā svapraāṇane samārppichuḷḷuṁallo. Aṅṅane thanne purushmaru svānta śarīrāṇe ennāpoḷ bhāryāmaru snehikkendathākuṁ. Enthennu, tanne bhāryāyi snehikkunnavan thānethanneyākunnu snehikkunnathu. Āruṁ orikkalum svānta śarīraththē dveshikkunnillallo. Pinnēyō Mashihā sabhāykku veṇḍi ennathu pōṡippikkukaayi athinu veṇḍi śramikkukaayi cheyyunnu. Nāṁ aviduththē sharīraththinte avayavakaḷuṁ māṁsabandhikaḷuṁ aśthisambandhikaḷuṁ aakunnu. Āyaththukondu purushan tanṟe pithāvinēyum māthāvinēyum viṭṭupirinjittu tanṟe bhāryāyāyittūḷṟikkāṇu. Avariruvārum ēkasharīrāyiththīrikkum. Ithoru vaḷiya rahasyamāṇu. Njaan Mashihāyēkkūṟiccūṁ aviduththē sabhāykūṟiccūṁ parayunnu. Aprakāraṁ thanne nīṅṅaḷ oruvaruṟuṟu tanṟe bhāryāyi snehikkendākuṁ. Bhāryāyākaṭṭe svabharththāvine ādarikkukayum vēṇṭu. Makkale nīṅṅaḷ karthāvine ōṟṭu māthā-pitākkāṉmāre anusareepeen. Enthennu, athu neethiāyirikkum. Ninṟe pithāvinēyum māthāvinēyum bahumānikkuka ennuḷḷathu prathijña cheytha prathama kalpanayāyirikkunnu. Aahāy... Barekmor."
     },
     {
         "type": "heading",
@@ -188,28 +188,28 @@
         "content": "Shushrooshakkaar: Naam adakkaththoduṁ bhayaththoduṁ vanakkaththoduṁ chevikoduthth namude mumbhaake vaayikkappedunna namude karthaveshuMashihayude vishuddha Evangelionile daivaththinte jeevanulla vachanangalude ariyippine kelkkanam."
     },
     {
-        "type": "pattakkaran",
-        "content": "Ningalekkellavarkum samaadhaanam undaayirikkatte."
+        "type": "prose",
+        "content": "Pattakkaran: Ningalekkellavarkum samaadhaanam undaayirikkatte."
     },
     {
-        "type": "janam",
-        "content": "Aviduththe aathmaavinodu koodae / daivamaaya karthav / njangaleyum / yoghyarakki theerkumaarakattte."
+        "type": "prose",
+        "content": "Janam: Aviduththe aathmaavinodu koodae / daivamaaya karthav / njangaleyum / yoghyarakki theerkumaarakattte."
     },
     {
-        "type": "pattakkaran",
-        "content": "Jeevan nalkunna suviseshamaaya..."
+        "type": "prose",
+        "content": "Pattakkaran: Jeevan nalkunna suviseshamaaya..."
     },
     {
-        "type": "janam",
-        "content": "Vannavannum varuvaanirikkunnavannum vaazhtthappettavannakunnu. / Namude rakshaykkaayi thanne ayachchavannu sthuthikalum / naam ellavaryudeyum meele thante anugrahangalkum / ennaekum undaayirikkatte."
+        "type": "prose",
+        "content": "Janam: Vannavannum varuvaanirikkunnavannum vaazhtthappettavannakunnu. / Namude rakshaykkaayi thanne ayachchavannu sthuthikalum / naam ellavaryudeyum meele thante anugrahangalkum / ennaekum undaayirikkatte."
     },
     {
-        "type": "pattakkaran",
-        "content": "Parishuddha Kanyakayil ninnu..."
+        "type": "prose",
+        "content": "Pattakkaran: Parishuddha Kanyakayil ninnu..."
     },
     {
-        "type": "janam",
-        "content": "Aṅṅane vishwasicchu / njangal / ettuparayunnu."
+        "type": "prose",
+        "content": "Janam: Aṅṅane vishwasicchu / njangal / ettuparayunnu."
     },
     {
         "type": "subheading",
