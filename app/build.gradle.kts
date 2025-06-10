@@ -19,8 +19,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 24
         targetSdk = 35
-        versionCode = 14
-        versionName = "0.3.3"
+        versionCode = 15
+        versionName = "0.3.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,38 +48,47 @@ android {
 }
 
 dependencies {
+    // Core AndroidX & Kotlin Extensions
+    implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
+    implementation(libs.androidx.lifecycle.runtime.ktx) // Lifecycle-aware components for Kotlin coroutines
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.androidx.navigation.compose)
+    // Jetpack Compose UI
+    implementation(libs.androidx.activity.compose)    // Compose integration for Activity
+    implementation(platform(libs.androidx.compose.bom)) // BOM for consistent Compose library versions
+    implementation(libs.androidx.ui)                  // Core Compose UI toolkit
+    implementation(libs.androidx.ui.graphics)         // Compose graphics primitives
+    implementation(libs.androidx.material3)           // Material Design 3 components for Compose
 
-    implementation(libs.kotlinx.serialization.json)
-    implementation(libs.hilt.android)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.hilt.android.compiler)
+    // Jetpack Navigation
+    implementation(libs.androidx.navigation.runtime.ktx) // Core Navigation library for Kotlin
+    implementation(libs.androidx.navigation.compose)  // Navigation integration for Compose
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    // Data Serialization
+    implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
 
-    // Dependencies for DataStore
-    implementation(libs.androidx.datastore.preferences)
+    // Dependency Injection
+    implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
+    implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
+    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
-    // Dependencies for FireBase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
+    // Data Storage
+    implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
+
+    // Firebase Services
+    implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency
+    implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
+    implementation(libs.firebase.crashlytics)         // Firebase Crashlytics for crash reporting
+
+    // Testing Dependencies
+    testImplementation(libs.junit)                    // Standard JUnit 4 for local unit tests
+    androidTestImplementation(libs.androidx.junit)    // JUnit extensions for Android instrumented tests
+    androidTestImplementation(libs.androidx.espresso.core) // Espresso for UI testing
+    androidTestImplementation(platform(libs.androidx.compose.bom)) // BOM for Compose testing libs
+    androidTestImplementation(libs.androidx.ui.test.junit4) // Compose testing rules for JUnit 4
+
+    // Debugging & Development Tools (only for debug builds)
+    debugImplementation(libs.androidx.ui.tooling)     // Compose tooling for previews and inspection
+    debugImplementation(libs.androidx.ui.test.manifest) // Compose test manifest for UI testing
 }
 
 kotlin {

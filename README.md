@@ -14,8 +14,8 @@ This mobile app provides a structured collection of prayers from the Malankara O
 - 🔍 **Adjustable Font Size** – Choose from five font sizes for better readability.  
 - 📜 **Scrollable & Navigable** – Easily navigate between prayer sections with next/previous buttons.  
 - 📱 **Landscape Mode for Larger Text** – If the font size is large, the screen switches to landscape mode for better visibility.  
-- 🕰️ **Pray Now** - Context-aware feature that navigates directly to the appropriate prayer based on the current time of day.  
-- 📖 **In-App Bible** - Read Bible passages and excerpts within the app, alongside prayers where relevant.
+- 🕰️ **Pray Now** – Automatically navigate to the appropriate prayer based on the current time of day.
+- 📖 **Bible Integration** – Read Bible passages and excerpts within the app, alongside prayers where relevant.  
 
 ---
 

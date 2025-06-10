@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.model
+package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
