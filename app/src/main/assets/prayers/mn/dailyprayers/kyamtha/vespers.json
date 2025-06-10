@@ -16,7 +16,7 @@
         "content": "Janam: - balaheenarum paapikalumaaya njangalutemel anu grahangalum karunayum, randu lokangalilum ennume nnekkum choriyappetumaaraakaname. Aammeen."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "praarambha praarththana",
         "items": [
             {
@@ -114,7 +114,7 @@
         "content": "sthaumenkaalosu kuriyelaayison,"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "promiyon",
         "items": [
             {
@@ -204,7 +204,7 @@
         "content": "moriyo raahemmelynu aadaaryn."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ethro",
         "items": [
             {

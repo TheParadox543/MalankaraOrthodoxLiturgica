@@ -16,7 +16,7 @@
         "content": "janam: - kuriyelaayson."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "promiyon",
         "items": [
             {

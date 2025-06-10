@@ -12,7 +12,7 @@
         "content": "ജനം: ബലഹീനരും...."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രാരംഭ പ്രാർത്ഥന",
         "items": [
             {
@@ -82,7 +82,7 @@
         "content": "സ്തൗമെൻകാലോസ്…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "അല്ലെങ്കിൽ",
         "items": [
             {
@@ -108,7 +108,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രുമിയോൻ",
         "items": [
             {
@@ -166,7 +166,7 @@
         "content": "മൊറിയൊ...."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "എത്രോ",
         "items": [
             {
@@ -224,7 +224,7 @@
         "content": "യോഹന്നാൻ 14 : 25 27, 15: 26, 16: 15"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ഏവൻഗേലിയോൻ വായന",
         "items": [
             {
@@ -274,7 +274,7 @@
         "content": "ശുശ്രൂഷക്കാരൻ:- നാം നിലത്തു മുട്ടുകുത്തി കർത്താവിനോട് പ്രാർത്ഥിക്കണം."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "രഹസ്യപ്രാർത്ഥന",
         "items": [
             {
@@ -296,7 +296,7 @@
         "content": "പരിപാവനമാം ത്രിത്വത്തിൻ\nപരിപൂർണ്ണാരാധന ഞങ്ങൾ\nതേറിയതാശ്വാസപ്രദനാം\nറൂഹായാൽ തന്നെ സത്യം,\nആത്മമയൻ തന്നെ ദൈവം\nദൈവത്തേയാരാധിപ്പോൻ\nനേരിലുമാത്മാവിലുമവനെ\nപൂജിച്ചീടാൻ ബാദ്ധ്യസ്ഥൻ."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ഹൂത്തോമൊ",
         "items": [
             {

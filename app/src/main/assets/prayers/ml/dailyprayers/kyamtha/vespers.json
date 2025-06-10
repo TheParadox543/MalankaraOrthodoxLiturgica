@@ -16,7 +16,7 @@
         "content": "ജനം:- ബലഹീനരും പാപികളുമായ ഞങ്ങളുടെമേൽ അനു ഗ്രഹങ്ങളും കരുണയും, രണ്ടു ലോകങ്ങളിലും എന്നുമെ ന്നേക്കും ചൊരിയപ്പെടുമാറാകണമേ. ആമ്മീൻ."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രാരംഭ പ്രാർത്ഥന",
         "items": [
             {
@@ -114,7 +114,7 @@
         "content": "സ്തൗമെൻകാലോസ് കുറിയേലായിസ്സോൻ,"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രൊമിയോൻ",
         "items": [
             {
@@ -204,7 +204,7 @@
         "content": "മൊറിയോ റാഹേമ്മേലൈനു ആദാറൈൻ."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "എത്രോ",
         "items": [
             {

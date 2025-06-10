@@ -20,7 +20,7 @@
         "content": "/tkartthaave! Ninne prasaviccha mariyaamum, ninne maamodeesaa mukkiya yohannaanum njangalkkuvendi ninnotapekshikkum. Njangalotu karuna cheyyaname."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "maar severiyosin്re maaneesaa-gadyam",
         "items": [
             {
@@ -30,7 +30,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "maar severiyosin്re maaneesaa ( suriyaani)",
         "items": [
             {

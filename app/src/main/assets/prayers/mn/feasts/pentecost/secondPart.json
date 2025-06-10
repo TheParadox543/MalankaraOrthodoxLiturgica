@@ -12,7 +12,7 @@
         "content": "Janam: balaheenarum...."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "praarambha praarththana",
         "items": [
             {
@@ -82,7 +82,7 @@
         "content": "sthaumen…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "allenkil",
         "items": [
             {
@@ -120,7 +120,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "prumiyon",
         "items": [
             {
@@ -174,7 +174,7 @@
         "content": "moriyo…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ethro",
         "items": [
             {
@@ -232,7 +232,7 @@
         "content": "yohannaan 4 : 13 24"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "evangeliyon vaayana",
         "items": [
             {
@@ -290,7 +290,7 @@
         "content": "Shushrooshakkaaran: - naam nilatthu muttukutthi kartthaavinotu praarththikkanam."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "rahasyapraarththana",
         "items": [
             {

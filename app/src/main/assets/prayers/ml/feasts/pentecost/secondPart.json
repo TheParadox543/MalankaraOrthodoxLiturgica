@@ -12,7 +12,7 @@
         "content": "ജനം: ബലഹീനരും...."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രാരംഭ പ്രാർത്ഥന",
         "items": [
             {
@@ -158,7 +158,7 @@
         "content": "സ്തൗമെൻ…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "അല്ലെങ്കിൽ",
         "items": [
             {
@@ -196,7 +196,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രുമിയോൻ",
         "items": [
             {
@@ -250,7 +250,7 @@
         "content": "മൊറിയൊ…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "എത്രൊ",
         "items": [
             {
@@ -308,7 +308,7 @@
         "content": "യോഹന്നാൻ 4 : 13 24"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ഏവൻഗേലിയോൻ വായന",
         "items": [
             {
@@ -370,7 +370,7 @@
         "content": "ശുശ്രൂഷക്കാരൻ:- നാം നിലത്തു മുട്ടുകുത്തി കർത്താവിനോട് പ്രാർത്ഥിക്കണം."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "രഹസ്യപ്രാർത്ഥന",
         "items": [
             {
