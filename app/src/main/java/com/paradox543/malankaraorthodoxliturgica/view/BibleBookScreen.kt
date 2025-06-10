@@ -24,27 +24,25 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleBookScreen(
     navController: NavController,
-    prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookName: String
 ) {
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
-    var bibleLanguage = selectedLanguage
-    if (selectedLanguage == "mn") {
-        bibleLanguage = "en"
-    }
-    val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, bibleLanguage)
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+
+    val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, selectedLanguage)
     if (bibleBook == null){
         navController.navigate("bible") {
             popUpTo("bible") { inclusive = true }
         }
     }
     val chapters = bibleBook?.chapters ?: 1
+
     Scaffold(
         topBar = { TopNavBar(bookName, navController) },
         bottomBar = { BottomNavBar(navController) }

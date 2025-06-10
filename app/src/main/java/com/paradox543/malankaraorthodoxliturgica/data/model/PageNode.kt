@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.model
+package com.paradox543.malankaraorthodoxliturgica.data.model
 
 import kotlinx.serialization.Serializable
 
@@ -8,5 +8,5 @@ data class PageNode(
     val filename: String? = null,
     val parent: String?,
     val children: List<PageNode> = emptyList(),
-    val languages: List<String> = listOf("ml"),
+    val languages: List<String> = listOf(AppLanguage.MALAYALAM.code),
 )
