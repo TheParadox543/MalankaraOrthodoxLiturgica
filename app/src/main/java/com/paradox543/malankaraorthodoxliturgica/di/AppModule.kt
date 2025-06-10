@@ -36,7 +36,7 @@ object AppModule {
     @Singleton
     fun providePrayerRepository(
         @ApplicationContext context: Context
-    ): PrayerRepository = PrayerRepository(context)
+    ): PrayerRepository = PrayerRepository(context, Json)
 
     @Provides
     @Singleton
