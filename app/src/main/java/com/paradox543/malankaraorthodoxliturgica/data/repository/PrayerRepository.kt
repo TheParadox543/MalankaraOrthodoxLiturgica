@@ -6,7 +6,6 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import okio.IOException
-import org.json.JSONArray
 import org.json.JSONObject
 import javax.inject.Inject
 

@@ -88,8 +88,8 @@
         "content": "ജനം : ആമ്മീൻ"
     },
     {
-        "type": "link",
-        "file": "psalm51.json"
+        "type": "link-collapsible",
+        "file": "psalms/psalm51.json"
     },
     {
         "type": "heading",
