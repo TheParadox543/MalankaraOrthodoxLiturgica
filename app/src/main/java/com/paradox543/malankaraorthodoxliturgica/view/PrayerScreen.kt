@@ -10,13 +10,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -30,6 +26,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -94,6 +91,20 @@ fun PrayerScreen(
         LazyListState()
     }
 
+    // Observe if the LazyColumn has been scrolled to its very end
+    val isScrolledToTheEnd by remember {
+        derivedStateOf {
+            !listState.isScrollInProgress && !listState.canScrollForward // True if there's no more content to scroll down to
+        }
+    }
+
+    // React to the scroll state change
+    LaunchedEffect(isScrolledToTheEnd) {
+        if (isScrolledToTheEnd) {
+            isVisible.value = true // Make bars visible when scrolled to the end
+        }
+    }
+
     Scaffold(
         modifier = Modifier
             .nestedScroll(nestedScrollConnection)
@@ -137,26 +148,23 @@ fun PrayerScreen(
         Box(
             modifier = Modifier
                 .padding(horizontal = if (isLandscape) 40.dp else 20.dp) // Reduce width in landscape
-//                .padding(top = initialTopPadding.value)
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth(if (isLandscape) 0.8f else 1f), // Limit width in landscape
-//                    .fillMaxHeight(0.9f), // Limit height to avoid out of bounds
                 state = listState,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
+                listState.canScrollForward
                 item {
-//                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 32.dp))
                     Spacer(Modifier.padding(top = initialTopPadding.value))
                 }
                 items(prayers) { prayerElement ->
                     PrayerElementRenderer(prayerElement, selectedFontSize)
                 }
                 item {
-//                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 44.dp))
                     Spacer(Modifier.padding(bottom = initialBottomPadding.value))
                 }
             }
