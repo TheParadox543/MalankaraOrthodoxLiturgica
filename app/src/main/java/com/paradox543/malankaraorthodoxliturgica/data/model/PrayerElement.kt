@@ -4,8 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonClassDiscriminator
 
-@Serializable
-@JsonClassDiscriminator("type")  // Use type field in the JSON to deserialize the object
+@Serializable(with= PrayerElementSerializer::class)
+//@JsonClassDiscriminator("type")  // Use type field in the JSON to deserialize the object
 sealed interface PrayerElement {
 
     // Simple data classes
