@@ -141,4 +141,8 @@ class NavViewModel @Inject constructor() : ViewModel() {
         }
         return allNodes
     }
+
+    fun getInitialNode() {
+        rootNode
+    }
 }

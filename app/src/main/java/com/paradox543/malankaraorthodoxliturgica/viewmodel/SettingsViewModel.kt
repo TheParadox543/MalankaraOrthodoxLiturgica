@@ -19,26 +19,9 @@ class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository
 ): ViewModel() {
 
-    // Expose language from DataStore as a StateFlow
-    // We use stateIn to convert the Flow from DataStore into a StateFlow
     val selectedLanguage: StateFlow<AppLanguage> = settingsRepository.selectedLanguage
-        .stateIn(
-            scope = viewModelScope,
-            // WhileSubscribed ensures the flow is collected as long as there are active collectors
-            started = SharingStarted.WhileSubscribed(5_000), // 5s timeout before cancelling upstream
-            initialValue = AppLanguage.MALAYALAM // Initial value until DataStore emits
-        )
-
-    // Expose font size from DataStore as a StateFlow (converted to TextUnit)
-    val selectedFontSize: StateFlow<TextUnit> = settingsRepository.selectedFont
-        .map { sizeInt ->
-            sizeInt.sp // Convert Int to TextUnit
-        }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = 16.sp // Initial value until DataStore emits
-        )
+    val selectedFontSize: StateFlow<TextUnit> = settingsRepository.selectedFontSize
+    val hasCompletedOnboarding: StateFlow<Boolean> = settingsRepository.hasCompletedOnboarding
 
     // Function to set (and save) language
     fun setLanguage(language: AppLanguage) {
@@ -50,7 +33,13 @@ class SettingsViewModel @Inject constructor(
     // Function to set (and save) font size
     fun setFontSize(size: TextUnit) {
         viewModelScope.launch {
-            settingsRepository.saveFontSize(size.value.toInt()) // Convert TextUnit back to Int for DataStore
+            settingsRepository.saveFontSize(size) // Convert TextUnit back to Int for DataStore
+        }
+    }
+
+    fun setOnboardingCompleted() {
+        viewModelScope.launch {
+            settingsRepository.saveOnboardingStatus(true)
         }
     }
 }
