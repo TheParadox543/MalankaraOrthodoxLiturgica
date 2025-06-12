@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
@@ -277,7 +278,7 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            "Version: 0.3.4",
+            "Version: ${BuildConfig.VERSION_NAME}",
             style = MaterialTheme.typography.bodySmall,
             fontSize = selectedFontSize * 0.8f
         )

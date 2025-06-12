@@ -84,3 +84,21 @@ class SettingsRepository @Inject constructor(
             initialValue = false // Initial value for the StateFlow
         )
 }
+
+/**
+    // Helper function to get version name using context
+    fun getPackageInfo(packageManager: PackageManager, packageName: String, flags: Int = 0): String? {
+        return try{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                packageManager.getPackageInfo(
+                    packageName,
+                    PackageManager.PackageInfoFlags.of(flags.toLong())
+                ).versionName
+            } else {
+                packageManager.getPackageInfo(packageName, flags).versionName
+            }
+        } catch (e: Exception) {
+            "Error: $e"
+        }
+    }
+ */

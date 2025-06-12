@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -143,23 +142,7 @@ fun OnboardingScreen(
             ) {
                 Text("Get Started!")
             }
-            val versionName = getPackageInfo(packageManager = navController.context.packageManager, packageName = navController.context.packageName)
-            Text("Version: ${versionName ?: " Error "}")
+            Text("Version: ${BuildConfig.VERSION_NAME}")
         }
-    }
-}
-
-fun getPackageInfo(packageManager: PackageManager, packageName: String, flags: Int = 0): String? {
-    return try{
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            packageManager.getPackageInfo(
-                packageName,
-                PackageManager.PackageInfoFlags.of(flags.toLong())
-            ).versionName
-        } else {
-            packageManager.getPackageInfo(packageName, flags).versionName
-        }
-    } catch (e: Exception) {
-        "Error: $e"
     }
 }
