@@ -45,11 +45,11 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    fun loadPrayerElements(filename: String) {
+    fun loadPrayerElements(filename: String, passedLanguage: AppLanguage? = null) {
         viewModelScope.launch { // Launch in ViewModelScope for async operation
             try {
                 // Access the current language from SettingsViewModel
-                val language = selectedLanguage.value
+                val language = passedLanguage ?: selectedLanguage.value
                 val prayers = prayerRepository.loadPrayerElements(filename, language)
                 _prayers.value = prayers
             } catch (e: Exception) {

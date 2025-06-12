@@ -21,6 +21,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,13 +34,15 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
 @Composable
 fun OnboardingScreen(
     navController: NavController,
-    settingsViewModel: SettingsViewModel
+    settingsViewModel: SettingsViewModel,
+    prayerViewModel: PrayerViewModel
 ) {
     // Current selections (will be saved when "Get Started" is clicked)
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
@@ -46,6 +50,11 @@ fun OnboardingScreen(
 
     // State for language dropdown menu
     var languageExpanded by remember { mutableStateOf(false) }
+    val prayers by prayerViewModel.prayers.collectAsState()
+    val filename = "commonprayers/lords.json"
+    LaunchedEffect(selectedLanguage) {
+        prayerViewModel.loadPrayerElements(filename, selectedLanguage)
+    }
 
     Scaffold { paddingValues ->
         Column(
@@ -123,7 +132,21 @@ fun OnboardingScreen(
                 steps = 3
             )
 
-            Spacer(Modifier.height(48.dp))
+            Spacer(Modifier.height(20.dp))
+
+            if (!prayers.isEmpty()) {
+                Column(
+                    modifier = Modifier.height(300.dp)
+                ) {
+                    Text(
+                        "Sample Prayer",
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                    PrayerElementRenderer(prayers[1], selectedFontSize)
+                }
+            }
+
+            Spacer(Modifier.height(32.dp))
 
             // --- Get Started Button ---
             Button(

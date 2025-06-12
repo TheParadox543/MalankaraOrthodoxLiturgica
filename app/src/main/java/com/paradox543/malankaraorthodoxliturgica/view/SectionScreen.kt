@@ -17,6 +17,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -30,6 +32,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
@@ -94,6 +97,13 @@ fun SectionScreen(
             else {
                 Column {
                     Spacer(Modifier.weight(0.4f))
+                    if (BuildConfig.DEBUG) {
+                        FilledTonalButton(
+                            onClick = {settingsViewModel.setOnboardingCompleted(false)}
+                        ) {
+                            Text("Reset onboarding")
+                        }
+                    }
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier

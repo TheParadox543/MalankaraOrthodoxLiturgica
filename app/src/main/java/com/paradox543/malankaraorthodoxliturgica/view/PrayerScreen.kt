@@ -176,7 +176,7 @@ fun PrayerScreen(
 }
 
 @Composable
-private fun PrayerElementRenderer(
+fun PrayerElementRenderer(
     prayerElement: PrayerElement,
     selectedFontSize: AppFontSize
 ) {

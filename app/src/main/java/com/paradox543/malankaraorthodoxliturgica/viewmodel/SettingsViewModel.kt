@@ -32,9 +32,9 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun setOnboardingCompleted() {
+    fun setOnboardingCompleted(status: Boolean = true) {
         viewModelScope.launch {
-            settingsRepository.saveOnboardingStatus(true)
+            settingsRepository.saveOnboardingStatus(status)
         }
     }
 }
