@@ -1,6 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -28,6 +31,7 @@ class SettingsRepository @Inject constructor(
 
     private val languageKey = stringPreferencesKey("selected_language")
     private val fontSizeKey = intPreferencesKey("font_size")
+    private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
 
     // Save language
     suspend fun saveLanguage(language: AppLanguage) {
@@ -36,9 +40,15 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    suspend fun saveFontSize(fontSize: Int) {
+    suspend fun saveFontSize(fontSize: TextUnit) {
         context.dataStore.edit { preferences ->
-            preferences[fontSizeKey] = fontSize
+            preferences[fontSizeKey] = fontSize.value.toInt()
+        }
+    }
+
+    suspend fun saveOnboardingStatus(completed: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[hasCompletedOnboardingKey] = completed
         }
     }
 
@@ -54,13 +64,24 @@ class SettingsRepository @Inject constructor(
             initialValue = AppLanguage.MALAYALAM // Initial value is also an AppLanguage enum
         )
 
-    val selectedFont: StateFlow<Int> = context.dataStore.data // Using the injected dataStore
+    val selectedFontSize: StateFlow<TextUnit> = context.dataStore.data // Using the injected dataStore
         .map { preferences ->
-            preferences[fontSizeKey] ?: 16 // Default to basic size
+            val sizeInt = preferences[fontSizeKey] ?: 16 // Default to basic size
+            sizeInt.sp // Convert to TextUnit
         }
         .stateIn(
             scope = repositoryScope, // Use the long-lived scope for the repository
             started = SharingStarted.Eagerly, // Start collecting eagerly when the StateFlow is created
-            initialValue = 16 // Provide an initial value that will be emitted immediately
+            initialValue = 16.sp // Provide an initial value that will be emitted immediately
+        )
+
+    val hasCompletedOnboarding: StateFlow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[hasCompletedOnboardingKey] == true // Default to false if not set
+        }
+        .stateIn(
+            scope = repositoryScope,
+            started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
+            initialValue = false // Initial value for the StateFlow
         )
 }

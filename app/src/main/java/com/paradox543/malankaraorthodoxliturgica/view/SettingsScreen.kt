@@ -53,11 +53,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
 
-    val languages = listOf(
-        "മലയാളം" to AppLanguage.MALAYALAM,
-//        "English" to AppLanguage.ENGLISH,
-        "Manglish" to AppLanguage.MANGLISH
-    )
     val fontSizes = listOf(
         "Very Small" to 8.sp,
         "Small" to 12.sp,
@@ -105,9 +100,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         modifier = Modifier.weight(1f),
                     )
                     LanguageDropdownMenu(
-                        options = languages,
-                        selectedOption = languages.firstOrNull { it.second == selectedLanguage }?.first
-                            ?: AppLanguage.MALAYALAM.code,
+                        selectedOption = selectedLanguage,
                         selectedFontSize = selectedFontSize,
                         onOptionSelected = { settingsViewModel.setLanguage(it) }
                     )
@@ -143,8 +136,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     )
                     FontSizeDropdownMenu(
                         options = fontSizes,
-                        selectedOption = fontSizes.firstOrNull { it.second == selectedFontSize }?.first
-                            ?: "Medium",
+                        selectedOption = selectedFontSize.value.toString(),
                         selectedFontSize = selectedFontSize,
                         onOptionSelected = { settingsViewModel.setFontSize(it) }
                     )
@@ -195,8 +187,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
 
 @Composable
 fun LanguageDropdownMenu(
-    options: List<Pair<String, AppLanguage>>,
-    selectedOption: String,
+    selectedOption: AppLanguage,
     selectedFontSize: TextUnit,
     onOptionSelected: (AppLanguage) -> Unit
 ) {
@@ -210,18 +201,18 @@ fun LanguageDropdownMenu(
                 MaterialTheme.colorScheme.onPrimary,
             ),
         ) {
-            Text(selectedOption, fontSize = selectedFontSize)
+            Text(selectedOption.displayName, fontSize = selectedFontSize)
         }
 
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            options.forEach { (optionDisplay, option) ->
+            AppLanguage.entries.forEach { language ->
                 DropdownMenuItem(
-                    text = { Text(optionDisplay) },
+                    text = { Text(language.displayName) },
                     onClick = {
-                        onOptionSelected(option)
+                        onOptionSelected(language)
                         expanded = false
                     }
                 )
@@ -297,7 +288,7 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            "Version: 0.3.1",
+            "Version: 0.3.4",
             style = MaterialTheme.typography.bodySmall,
             fontSize = selectedFontSize * 0.8f
         )

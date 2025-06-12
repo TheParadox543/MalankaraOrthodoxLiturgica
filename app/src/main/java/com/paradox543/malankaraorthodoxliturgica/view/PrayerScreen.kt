@@ -25,6 +25,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -34,6 +35,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
@@ -49,7 +53,6 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -157,7 +160,6 @@ fun PrayerScreen(
                 state = listState,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                listState.canScrollForward
                 item {
                     Spacer(Modifier.padding(top = initialTopPadding.value))
                 }
@@ -375,4 +377,23 @@ fun CollapsibleTextBlock(
             }
         }
     }
+}
+
+@Composable
+fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
+    val isVisible = remember { mutableStateOf(true) }
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                if (available.y > 20) {
+                    isVisible.value = true  // Scrolling UP → Show bars
+                } else if (available.y < 0) {
+                    isVisible.value = false // Scrolling DOWN → Hide bars
+                }
+                return Offset.Zero
+            }
+        }
+    }
+    return isVisible to nestedScrollConnection
 }
