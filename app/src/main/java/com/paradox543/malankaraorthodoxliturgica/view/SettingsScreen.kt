@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -52,14 +53,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
     val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
-
-    val fontSizes = listOf(
-        "Very Small" to 8.sp,
-        "Small" to 12.sp,
-        "Medium" to 16.sp,
-        "Large" to 20.sp,
-        "Very Large" to 24.sp
-    )
 
     Scaffold(
         topBar = { TopNavBar("Settings", navController) },
@@ -95,13 +88,13 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 ) {
                     Text(
                         text = "Select Language",
-                        fontSize = selectedFontSize,
+                        fontSize = selectedFontSize.fontSize,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f),
                     )
                     LanguageDropdownMenu(
                         selectedOption = selectedLanguage,
-                        selectedFontSize = selectedFontSize,
+                        selectedFontSize = selectedFontSize.fontSize,
                         onOptionSelected = { settingsViewModel.setLanguage(it) }
                     )
                 }
@@ -130,13 +123,11 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 ) {
                     Text(
                         text = "Select Font Size",
-                        fontSize = selectedFontSize,
+                        fontSize = selectedFontSize.fontSize,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.weight(1f),
                     )
                     FontSizeDropdownMenu(
-                        options = fontSizes,
-                        selectedOption = selectedFontSize.value.toString(),
                         selectedFontSize = selectedFontSize,
                         onOptionSelected = { settingsViewModel.setFontSize(it) }
                     )
@@ -154,7 +145,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         tint = MaterialTheme.colorScheme.tertiary
                     )
                 },
-                headlineContent = { Text("About the App", fontSize = selectedFontSize) }
+                headlineContent = { Text("About the App", fontSize = selectedFontSize.fontSize) }
             )
         }
     }
@@ -170,7 +161,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         modifier = Modifier.padding(8.dp),
                         tint = MaterialTheme.colorScheme.primary
                     )
-                    Text("About the App", fontSize = selectedFontSize * 1.2f)
+                    Text("About the App", fontSize = selectedFontSize.fontSize * 1.2f)
                 }
             },
             text = {
@@ -178,7 +169,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
             },
             confirmButton = {
                 Button(onClick = { showDialog = false }) {
-                    Text("Close", fontSize = selectedFontSize)
+                    Text("Close", fontSize = selectedFontSize.fontSize)
                 }
             }
         )
@@ -223,13 +214,11 @@ fun LanguageDropdownMenu(
 
 @Composable
 fun FontSizeDropdownMenu(
-    options: List<Pair<String, TextUnit>>,
-    selectedOption: String,
-    selectedFontSize: TextUnit,
-    onOptionSelected: (TextUnit) -> Unit
+    selectedFontSize: AppFontSize,
+    onOptionSelected: (AppFontSize) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(selectedOption) }
+    var selectedText by remember { mutableStateOf(selectedFontSize) }
 
     Box {
         OutlinedButton(
@@ -239,15 +228,15 @@ fun FontSizeDropdownMenu(
                 MaterialTheme.colorScheme.onTertiary,
             ),
         ) {
-            Text(selectedText, fontSize = selectedFontSize)
+            Text(selectedText.displayName, fontSize = selectedFontSize.fontSize)
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            options.forEach { (label, size) ->
+            AppFontSize.entries.forEach { appFontSize ->
                 DropdownMenuItem(
-                    text = { Text(label) },
+                    text = { Text(appFontSize.displayName) },
                     onClick = {
-                        selectedText = label
-                        onOptionSelected(size)
+                        selectedText = appFontSize
+                        onOptionSelected(appFontSize)
                         expanded = false
                     }
                 )

@@ -49,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
@@ -177,55 +178,55 @@ fun PrayerScreen(
 @Composable
 private fun PrayerElementRenderer(
     prayerElement: PrayerElement,
-    selectedFontSize: TextUnit
+    selectedFontSize: AppFontSize
 ) {
     when (prayerElement) {
         is PrayerElement.Title -> {
             Title(
                 text = prayerElement.content,
-                fontSize = selectedFontSize
+                fontSize = selectedFontSize.fontSize
             )
         }
 
         is PrayerElement.Heading -> {
             Heading(
                 text = prayerElement.content,
-                fontSize = selectedFontSize
+                fontSize = selectedFontSize.fontSize
             )
         }
 
         is PrayerElement.Subheading -> {
             Subheading(
                 text = prayerElement.content,
-                fontSize = selectedFontSize
+                fontSize = selectedFontSize.fontSize
             )
         }
 
         is PrayerElement.Prose -> {
             Prose(
                 text = prayerElement.content,
-                fontSize = selectedFontSize
+                fontSize = selectedFontSize.fontSize
             )
         }
 
         is PrayerElement.Song -> {
             Song(
                 text = prayerElement.content,
-                fontSize = selectedFontSize
+                fontSize = selectedFontSize.fontSize
             )
         }
 
         is PrayerElement.Subtext -> {
             Subtext(
                 text = prayerElement.content,
-                fontSize = selectedFontSize
+                fontSize = selectedFontSize.fontSize
             )
         }
 
         is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
                 title = prayerElement.title,
-                fontSize = selectedFontSize,
+                fontSize = selectedFontSize.fontSize,
             ) {
                 Column {
                     Spacer(Modifier.padding(8.dp))
