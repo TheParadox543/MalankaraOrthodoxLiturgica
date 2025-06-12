@@ -47,7 +47,7 @@ fun NavGraph(
             HomeScreen(navController, prayerViewModel, settingsViewModel, navViewModel)
         }
         composable("onboarding") {
-            OnboardingScreen(navController, settingsViewModel)
+            OnboardingScreen(navController, settingsViewModel, prayerViewModel)
         }
         composable("section/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
