@@ -56,7 +56,7 @@ fun BibleChapterScreen(
                 items(it.size) { index ->
                     val verseNumber = (index + 1).toString()
                     val verseText = chapterData.Verse[index].Verse
-                    VerseItem(verseNumber, verseText, selectedFontSize)
+                    VerseItem(verseNumber, verseText, selectedFontSize.fontSize)
                 }
             }
         }

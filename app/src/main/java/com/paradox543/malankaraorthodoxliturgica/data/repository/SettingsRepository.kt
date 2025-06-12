@@ -1,13 +1,12 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.sp
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -40,9 +39,9 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    suspend fun saveFontSize(fontSize: TextUnit) {
+    suspend fun saveFontSize(fontSize: AppFontSize) {
         context.dataStore.edit { preferences ->
-            preferences[fontSizeKey] = fontSize.value.toInt()
+            preferences[fontSizeKey] = fontSize.intValue
         }
     }
 
@@ -64,15 +63,15 @@ class SettingsRepository @Inject constructor(
             initialValue = AppLanguage.MALAYALAM // Initial value is also an AppLanguage enum
         )
 
-    val selectedFontSize: StateFlow<TextUnit> = context.dataStore.data // Using the injected dataStore
+    val selectedFontSize: StateFlow<AppFontSize> = context.dataStore.data // Using the injected dataStore
         .map { preferences ->
             val sizeInt = preferences[fontSizeKey] ?: 16 // Default to basic size
-            sizeInt.sp // Convert to TextUnit
+            AppFontSize.fromInt(sizeInt) // Convert to TextUnit
         }
         .stateIn(
             scope = repositoryScope, // Use the long-lived scope for the repository
             started = SharingStarted.Eagerly, // Start collecting eagerly when the StateFlow is created
-            initialValue = 16.sp // Provide an initial value that will be emitted immediately
+            initialValue = AppFontSize.Medium // Provide an initial value that will be emitted immediately
         )
 
     val hasCompletedOnboarding: StateFlow<Boolean> = context.dataStore.data

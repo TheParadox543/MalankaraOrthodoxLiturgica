@@ -1,17 +1,18 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -29,8 +30,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
@@ -42,7 +43,7 @@ fun OnboardingScreen(
 ) {
     // Current selections (will be saved when "Get Started" is clicked)
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
-    var selectedFontSize by remember { mutableStateOf(16.sp) } // Default medium size, adjust as needed
+    var selectedFontSize by remember { mutableStateOf(AppFontSize.Medium) } // Default medium size, adjust as needed
 
     // State for language dropdown menu
     var languageExpanded by remember { mutableStateOf(false) }
@@ -60,13 +61,14 @@ fun OnboardingScreen(
         ) {
             Text(
                 text = "Welcome to Liturgica!",
-                fontSize = selectedFontSize * 7 / 4,
+                fontSize = selectedFontSize.fontSize * 7 / 4,
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
                 text = "Please choose your preferred language and font size.",
                 style = MaterialTheme.typography.bodyLarge,
+                fontSize = selectedFontSize.fontSize,
                 modifier = Modifier.padding(bottom = 32.dp)
             )
 
@@ -83,7 +85,9 @@ fun OnboardingScreen(
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageExpanded)
                     },
-                    modifier = Modifier.menuAnchor().fillMaxWidth()
+                    modifier = Modifier
+                        .menuAnchor()
+                        .fillMaxWidth()
                 )
                 ExposedDropdownMenu(
                     expanded = languageExpanded,
@@ -92,7 +96,7 @@ fun OnboardingScreen(
                 ) {
                     AppLanguage.entries.forEach {
                         DropdownMenuItem(
-                            text = { Text(it.displayName) },
+                            text = { Text(it.displayName, fontSize = selectedFontSize.fontSize) },
                             onClick = {
                                 selectedLanguage = it
                                 languageExpanded = false
@@ -107,54 +111,18 @@ fun OnboardingScreen(
 
             // --- Font Size Selection ---
             Text(
-                text = "Font Size: ${
-                    when (selectedFontSize) {
-                        12.sp -> "Small"
-                        16.sp -> "Medium"
-                        20.sp -> "Large"
-                        else -> "Custom" // Or handle your specific sizes
-                    }
-                }",
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 8.dp)
+                text = "Font Size: ${selectedFontSize.displayName}",
+                fontSize = selectedFontSize.fontSize
             )
             Slider(
-                value = selectedFontSize.value,
-                onValueChange = { selectedFontSize = it.sp },
-                valueRange = 12f..20f,
-                modifier = Modifier.fillMaxWidth()
+                value = selectedFontSize.intValue.toFloat(),
+                onValueChange = { sliderPositionFloat ->
+                    selectedFontSize = AppFontSize.fromInt(sliderPositionFloat.toInt())
+                },
+                modifier = Modifier.width(240.dp),
+                valueRange = 8f..24f,
+                steps = 3
             )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // You can use RadioButtons, Slider, or simple Buttons for font size
-                Button(
-                    onClick = { selectedFontSize = 12.sp },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (selectedFontSize == 12.sp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer
-                    )
-                ) {
-                    Text("Small")
-                }
-                Button(
-                    onClick = { selectedFontSize = 16.sp },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (selectedFontSize == 16.sp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer
-                    )
-                ) {
-                    Text("Medium")
-                }
-                Button(
-                    onClick = { selectedFontSize = 20.sp },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = if (selectedFontSize == 20.sp) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondaryContainer
-                    )
-                ) {
-                    Text("Large")
-                }
-            }
 
             Spacer(Modifier.height(48.dp))
 
@@ -175,6 +143,23 @@ fun OnboardingScreen(
             ) {
                 Text("Get Started!")
             }
+            val versionName = getPackageInfo(packageManager = navController.context.packageManager, packageName = navController.context.packageName)
+            Text("Version: ${versionName ?: " Error "}")
         }
+    }
+}
+
+fun getPackageInfo(packageManager: PackageManager, packageName: String, flags: Int = 0): String? {
+    return try{
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            packageManager.getPackageInfo(
+                packageName,
+                PackageManager.PackageInfoFlags.of(flags.toLong())
+            ).versionName
+        } else {
+            packageManager.getPackageInfo(packageName, flags).versionName
+        }
+    } catch (e: Exception) {
+        "Error: $e"
     }
 }

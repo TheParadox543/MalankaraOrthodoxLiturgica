@@ -32,10 +32,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -131,7 +131,7 @@ private fun PrayNowCard(
     node: PageNode,
     navController: NavController,
     translations: Map<String, String>,
-    selectedFontSize: TextUnit
+    selectedFontSize: AppFontSize
 ) {
     var errorState = remember { false }
     Card(
@@ -160,7 +160,7 @@ private fun PrayNowCard(
         Column {
             Text(
                 translatedParts.joinToString(" "),
-                fontSize = selectedFontSize,
+                fontSize = selectedFontSize.fontSize,
                 modifier = Modifier.padding(16.dp)
             )
             if (errorState) {
