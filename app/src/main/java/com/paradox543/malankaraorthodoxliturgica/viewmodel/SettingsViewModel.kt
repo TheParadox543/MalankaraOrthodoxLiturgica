@@ -1,7 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
@@ -11,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val settingsRepository: SettingsRepository
+    private val settingsRepository: SettingsRepository,
+    private val firebaseAnalytics: FirebaseAnalytics,
 ): ViewModel() {
 
     val selectedLanguage = settingsRepository.selectedLanguage
@@ -22,6 +25,10 @@ class SettingsViewModel @Inject constructor(
     fun setLanguage(language: AppLanguage) {
         viewModelScope.launch {
             settingsRepository.saveLanguage(language)
+            val bundle = Bundle().apply {
+                putString("language", language.name)
+            }
+            firebaseAnalytics.logEvent("language_selected", bundle)
         }
     }
 
@@ -32,9 +39,16 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    fun logTutorialStart() {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, null)
+    }
+
     fun setOnboardingCompleted(status: Boolean = true) {
         viewModelScope.launch {
             settingsRepository.saveOnboardingStatus(status)
+            if (status) {
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
+            }
         }
     }
 }

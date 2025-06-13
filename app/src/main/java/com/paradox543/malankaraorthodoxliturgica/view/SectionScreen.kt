@@ -96,13 +96,6 @@ fun SectionScreen(
             else {
                 Column {
                     Spacer(Modifier.weight(0.4f))
-                    if (BuildConfig.DEBUG) {
-                        FilledTonalButton(
-                            onClick = {settingsViewModel.setOnboardingCompleted(false)}
-                        ) {
-                            Text("Reset onboarding")
-                        }
-                    }
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier

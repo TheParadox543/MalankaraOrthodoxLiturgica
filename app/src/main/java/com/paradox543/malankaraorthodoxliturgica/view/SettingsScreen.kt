@@ -22,6 +22,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -148,6 +149,16 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 },
                 headlineContent = { Text("About the App", fontSize = selectedFontSize.fontSize) }
             )
+
+            if (BuildConfig.DEBUG) {
+                Spacer(Modifier.padding(16.dp))
+
+                FilledTonalButton(
+                    onClick = {settingsViewModel.setOnboardingCompleted(false)}
+                ) {
+                    Text("Reset onboarding")
+                }
+            }
         }
     }
 

@@ -42,7 +42,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 fun OnboardingScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel,
-    prayerViewModel: PrayerViewModel
+    prayerViewModel: PrayerViewModel,
 ) {
     // Current selections (will be saved when "Get Started" is clicked)
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
@@ -54,6 +54,9 @@ fun OnboardingScreen(
     val filename = "commonprayers/lords.json"
     LaunchedEffect(selectedLanguage) {
         prayerViewModel.loadPrayerElements(filename, selectedLanguage)
+    }
+    LaunchedEffect(Unit) {
+        settingsViewModel.logTutorialStart()
     }
 
     Scaffold { paddingValues ->
@@ -69,14 +72,12 @@ fun OnboardingScreen(
         ) {
             Text(
                 text = "Welcome to Liturgica!",
-                fontSize = selectedFontSize.fontSize * 7 / 4,
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
             Text(
                 text = "Please choose your preferred language and font size.",
                 style = MaterialTheme.typography.bodyLarge,
-                fontSize = selectedFontSize.fontSize,
                 modifier = Modifier.padding(bottom = 32.dp)
             )
 
@@ -104,7 +105,7 @@ fun OnboardingScreen(
                 ) {
                     AppLanguage.entries.forEach {
                         DropdownMenuItem(
-                            text = { Text(it.displayName, fontSize = selectedFontSize.fontSize) },
+                            text = { Text(it.displayName) },
                             onClick = {
                                 selectedLanguage = it
                                 languageExpanded = false
@@ -142,7 +143,7 @@ fun OnboardingScreen(
                         "Sample Prayer",
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
-                    PrayerElementRenderer(prayers[1], selectedFontSize)
+                    PrayerElementRenderer(prayers[1], selectedFontSize, prayerViewModel, filename)
                 }
             }
 
@@ -156,7 +157,7 @@ fun OnboardingScreen(
                     settingsViewModel.setOnboardingCompleted()
                     // Navigate to the home screen
                     navController.navigate("home") { // Define your main app route
-                        popUpTo("onboarding_route") { // Remove onboarding from back stack
+                        popUpTo("onboarding") { // Remove onboarding from back stack
                             inclusive = true
                         }
                     }

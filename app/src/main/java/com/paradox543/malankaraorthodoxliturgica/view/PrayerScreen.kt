@@ -85,6 +85,7 @@ fun PrayerScreen(
     // Ensure prayers are loaded only when filename changes
     LaunchedEffect(currentFilename) {
         prayerViewModel.loadPrayerElements(currentFilename)
+        prayerViewModel.logPrayerScreenView(title, currentFilename)
     }
 
     // Store the initial system bar padding values
@@ -165,7 +166,7 @@ fun PrayerScreen(
                     Spacer(Modifier.padding(top = initialTopPadding.value))
                 }
                 items(prayers) { prayerElement ->
-                    PrayerElementRenderer(prayerElement, selectedFontSize)
+                    PrayerElementRenderer(prayerElement, selectedFontSize, prayerViewModel, currentFilename)
                 }
                 item {
                     Spacer(Modifier.padding(bottom = initialBottomPadding.value))
@@ -178,7 +179,9 @@ fun PrayerScreen(
 @Composable
 fun PrayerElementRenderer(
     prayerElement: PrayerElement,
-    selectedFontSize: AppFontSize
+    selectedFontSize: AppFontSize,
+    prayerViewModel: PrayerViewModel,
+    filename: String,
 ) {
     when (prayerElement) {
         is PrayerElement.Title -> {
@@ -232,7 +235,7 @@ fun PrayerElementRenderer(
                     Spacer(Modifier.padding(8.dp))
                     prayerElement.items.forEach { nestedItem -> // Loop through type-safe items
                         // Recursively call the renderer for nested items
-                        PrayerElementRenderer(nestedItem, selectedFontSize)
+                        PrayerElementRenderer(nestedItem, selectedFontSize, prayerViewModel, filename)
                         Spacer(Modifier.padding(4.dp))
                     }
                 }
@@ -240,34 +243,34 @@ fun PrayerElementRenderer(
         }
 
         is PrayerElement.Error -> {
-            Text("Error: ${prayerElement.content}", color = MaterialTheme.colorScheme.error)
+            ErrorBlock(
+                "Error: ${prayerElement.content}",
+                prayerViewModel,
+                filename,
+                fontSize = selectedFontSize.fontSize
+            )
         }
 
         is PrayerElement.Link -> {
             // This block indicates that a 'Link' element unexpectedly reached the UI.
             // Log an error or render a debug message, as it should ideally not happen.
-            Text(
-                "UI Error: Unresolved Link element encountered (file: ${prayerElement.file})",
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall
+            ErrorBlock(
+                "UI Error: Unresolved Link element encountered",
+                prayerViewModel,
+                filename,
+                fontSize = selectedFontSize.fontSize
             )
         }
 
         is PrayerElement.LinkCollapsible -> {
             // Similar to 'Link', this suggests an issue in the data resolution layer.
-            Text(
-                "UI Error: Unresolved LinkCollapsible element encountered (file: ${prayerElement.file})",
-                color = MaterialTheme.colorScheme.error,
-                style = MaterialTheme.typography.bodySmall
+            ErrorBlock(
+                "UI Error: Unresolved LinkCollapsible element encountered",
+                prayerViewModel,
+                filename,
+                fontSize = selectedFontSize.fontSize
             )
         }
-
-//        else -> {
-//            Text(
-//                "Unknown prayer element: $prayerElement",
-//                color = MaterialTheme.colorScheme.error
-//            )
-//        }
     }
 }
 
@@ -339,6 +342,24 @@ fun Subtext(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16
         modifier = modifier
             .fillMaxWidth()
     )
+}
+
+@Composable
+fun ErrorBlock(
+    text: String,
+    prayerViewModel: PrayerViewModel,
+    errorLocation: String,
+    fontSize: TextUnit = AppFontSize.Medium.fontSize,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = text,
+        fontSize = fontSize,
+        color = MaterialTheme.colorScheme.error,
+        modifier = modifier
+            .fillMaxWidth()
+    )
+    prayerViewModel.handlePrayerElementError(text, errorLocation)
 }
 
 @Composable
