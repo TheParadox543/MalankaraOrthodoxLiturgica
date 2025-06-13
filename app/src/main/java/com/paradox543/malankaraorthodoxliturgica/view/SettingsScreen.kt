@@ -154,7 +154,8 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 Spacer(Modifier.padding(16.dp))
 
                 FilledTonalButton(
-                    onClick = {settingsViewModel.setOnboardingCompleted(false)}
+                    onClick = { settingsViewModel.setOnboardingCompleted(false) },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
                 ) {
                     Text("Reset onboarding")
                 }
