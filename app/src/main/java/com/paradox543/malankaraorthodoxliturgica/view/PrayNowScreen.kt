@@ -85,10 +85,15 @@ fun PrayNowScreen(
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             items(nodes) { node ->
+                                val routeParts = node.route.split("_")
+                                val translatedParts = routeParts.joinToString(" ") { part ->
+                                    translations[part] ?: part
+                                }
                                 PrayNowCard(
                                     node,
                                     navController,
-                                    translations,
+                                    translatedParts,
+                                    prayerViewModel,
                                     selectedFontSize
                                 )
                             }
@@ -102,24 +107,36 @@ fun PrayNowScreen(
             } else {
                 Column {
                     Spacer(Modifier.weight(0.4f))
-                    LazyVerticalGrid(
-                        columns = GridCells.Adaptive(240.dp),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                            .padding(horizontal = 20.dp)
-                            .weight(0.6f),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        items(nodes) { node ->
-                            PrayNowCard(
-                                node,
-                                navController,
-                                translations,
-                                selectedFontSize
-                            )
+                    if (nodes.isNotEmpty()) {
+                        LazyVerticalGrid(
+                            columns = GridCells.Adaptive(240.dp),
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(innerPadding)
+                                .padding(horizontal = 20.dp)
+                                .weight(0.6f),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            items(nodes) { node ->
+                                val routeParts = node.route.split("_")
+                                val translatedParts = routeParts.joinToString(" ") { part ->
+                                    translations[part] ?: part
+                                }
+                                PrayNowCard(
+                                    node,
+                                    navController,
+                                    translatedParts,
+                                    prayerViewModel,
+                                    selectedFontSize
+                                )
+                            }
+                        }
+                    } else {
+                        Column(Modifier.padding(innerPadding)) {
+                            Text("No prayers found for this time.")
                         }
                     }
+
                 }
             }
         }
@@ -130,7 +147,8 @@ fun PrayNowScreen(
 private fun PrayNowCard(
     node: PageNode,
     navController: NavController,
-    translations: Map<String, String>,
+    translatedParts: String,
+    prayerViewModel: PrayerViewModel,
     selectedFontSize: AppFontSize
 ) {
     var errorState = remember { false }
@@ -140,6 +158,7 @@ private fun PrayNowCard(
             .padding(8.dp)
             .clickable {
                 if (node.filename != null) {
+                    prayerViewModel.logPrayNowItemSelection(translatedParts, node.route)
                     navController.navigate("prayerScreen/${node.route}")
                 } else {
                     Log.w("PrayNowScreen", "No file found")
@@ -153,13 +172,9 @@ private fun PrayNowCard(
         ),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
-        val routeParts = node.route.split("_")
-        val translatedParts = routeParts.map { part ->
-            translations[part] ?: part
-        }
         Column {
             Text(
-                translatedParts.joinToString(" "),
+                translatedParts,
                 fontSize = selectedFontSize.fontSize,
                 modifier = Modifier.padding(16.dp)
             )

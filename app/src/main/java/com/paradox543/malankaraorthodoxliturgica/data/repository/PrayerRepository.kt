@@ -42,7 +42,7 @@ class PrayerRepository @Inject constructor(
     ): List<PrayerElement> {
         if (currentDepth > maxLinkDepth) {
             throw PrayerLinkDepthExceededException(
-                "Exceeded maximum link depth ($maxLinkDepth) while loading $language/$fileName"
+                "Exceeded maximum link depth ($maxLinkDepth) while loading ${language.code}/$fileName"
             )
         }
 
@@ -51,9 +51,9 @@ class PrayerRepository @Inject constructor(
             val jsonString = inputStream.bufferedReader().use { it.readText() }
             json.decodeFromString<List<PrayerElement>>(jsonString) // Use the injected 'json'
         } catch (e: IOException) {
-            throw PrayerContentNotFoundException("Error loading file: ${language.code}/$fileName. ${e.message}")
+            throw PrayerContentNotFoundException("Error loading file: ${language.code}/$fileName.")
         } catch (e: Exception) {
-            throw PrayerParsingException("Error parsing JSON in: ${language.code}/$fileName.", e)
+            throw PrayerParsingException("Error parsing JSON in: ${language.code}/$fileName.")
         }
 
         // ... (rest of your recursive logic remains the same) ...
@@ -65,8 +65,10 @@ class PrayerRepository @Inject constructor(
                         resolvedElements.addAll(
                             loadPrayerElements(element.file, language, currentDepth + 1)
                         )
-                    } catch (e: Exception) {
-                        resolvedElements.add(PrayerElement.Error("Failed to load linked file: ${element.file}. ${e.message}"))
+                    } catch (e1: PrayerContentNotFoundException) {
+                        resolvedElements.add(PrayerElement.Error("Failed to find linked file: ${language.code}/${element.file}."))
+                    } catch (e2: Exception) {
+                        resolvedElements.add(PrayerElement.Error("Failed to load linked file: ${language.code}/${element.file}."))
                     }
                 }
                 is PrayerElement.LinkCollapsible -> {
@@ -78,8 +80,10 @@ class PrayerRepository @Inject constructor(
                                 currentDepth + 1 // Increment depth as we're loading a new file
                             )
                         )
-                    } catch (e: Exception) {
-                        resolvedElements.add(PrayerElement.Error("Failed to load collapsible link: ${element.file}. ${e.message}"))
+                    } catch (e1: PrayerContentNotFoundException) {
+                        resolvedElements.add(PrayerElement.Error("Failed to find collapsible link: ${language.code}/${element.file}."))
+                    } catch (e2: Exception) {
+                        resolvedElements.add(PrayerElement.Error("Failed to load collapsible link: ${language.code}/${element.file}."))
                     }
                 }
                 is PrayerElement.CollapsibleBlock -> {
@@ -89,8 +93,10 @@ class PrayerRepository @Inject constructor(
                             is PrayerElement.Link -> { // Handle nested links
                                 try {
                                     resolvedItems.addAll(loadPrayerElements(nestedItem.file, language, currentDepth + 1))
+                                } catch (e1: PrayerContentNotFoundException) {
+                                    resolvedElements.add(PrayerElement.Error("Failed to find nested link: ${language.code}/${nestedItem.file}."))
                                 } catch (e: Exception) {
-                                    resolvedItems.add(PrayerElement.Error("Failed to load nested link: ${nestedItem.file}. ${e.message}"))
+                                    resolvedItems.add(PrayerElement.Error("Failed to load nested link: ${nestedItem.file}."))
                                 }
                             }
                             else -> resolvedItems.add(nestedItem)
