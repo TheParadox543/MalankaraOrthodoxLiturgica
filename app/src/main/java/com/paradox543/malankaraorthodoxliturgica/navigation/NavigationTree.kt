@@ -21,6 +21,10 @@ object PrayerRoutes {
     const val BAPTISM = "baptism"
     const val ASCENSION = "ascension"
     const val PENTECOST = "pentecost"
+    const val CONTEXTUAL = "contextual"
+    const val AFTER_FOOD = "afterFood"
+    const val BEFORE_FOOD = "beforeFood"
+    const val FOR_SICK = "forSick"
 
 //    Canonical Routes
     const val VESPERS = "vespers"
@@ -91,7 +95,8 @@ object NavigationTree {
             commonPrayersSection(PrayerRoutes.ROOT),
             dailyPrayersSection(PrayerRoutes.ROOT),
             sacramentsSection(PrayerRoutes.ROOT),
-            feastsSection(PrayerRoutes.FEASTS),
+            feastsSection(PrayerRoutes.ROOT),
+            contextualSection(PrayerRoutes.ROOT),
         )
     )
 
@@ -369,6 +374,31 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = children,
+        )
+    }
+
+    private fun contextualSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.CONTEXTUAL
+        return PageNode(
+            route = currentRoute,
+            parent = parentRoute,
+            children = listOf(
+                prayer(
+                    PrayerRoutes.BEFORE_FOOD,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.BEFORE_FOOD}.json",
+                    currentRoute
+                ),
+                prayer(
+                    PrayerRoutes.AFTER_FOOD,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.AFTER_FOOD}.json",
+                    currentRoute
+                ),
+                prayer(
+                    PrayerRoutes.FOR_SICK,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.FOR_SICK}.json",
+                    currentRoute
+                )
+            )
         )
     }
 

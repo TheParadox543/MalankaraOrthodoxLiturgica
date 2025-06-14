@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,10 +29,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -123,7 +125,7 @@ private fun SectionCard(
     node: PageNode,
     navController: NavController,
     translations: Map<String, String>,
-    selectedFontSize: TextUnit
+    selectedFontSize: AppFontSize
 ) {
     Card(
         modifier = Modifier
@@ -148,7 +150,7 @@ private fun SectionCard(
         val text = node.route.split("_").last()
         Text(
             text = translations[text] ?: text,
-            fontSize = selectedFontSize,
+            fontSize = selectedFontSize.fontSize,
             modifier = Modifier.padding(16.dp)
         )
     }

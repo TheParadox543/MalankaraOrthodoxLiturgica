@@ -16,13 +16,13 @@
     },
     "sleeba": {
         "en": "Sleeba Prayers",
-        "ml": "സ്ലീബ പ്രാർത്ഥന",
-        "mn": "Sleeba Prarthana"
+        "ml": "സ്ലീബ നമസ്ക്കാരം",
+        "mn": "Sleeba Namaskaaram"
     },
     "kyamtha": {
         "en": "Kyamtha Prayers",
-        "ml": "ക്യംതാ പ്രാർത്ഥന",
-        "mn": "Kyamtha Prarthana"
+        "ml": "ക്യംതാ നമസ്ക്കാരം",
+        "mn": "Kyamtha Namaskaram"
     },
     "nineveh": {
         "en": "Nineveh Prayers",
@@ -201,8 +201,8 @@
     },
     "sheema": {
         "en": "Shehimo",
-        "ml": "ശ്ഹീമാ",
-        "mn": "Sheema"
+        "ml": "ശ്ഹീമാ നമസ്ക്കാരം",
+        "mn": "Sheema Namaskaaram"
     },
     "commonPrayers": {
         "en": "Common Prayers",
@@ -289,9 +289,24 @@
         "mn": "Ippol Praarthikkam",
         "ml": "ഇപ്പോൾ പ്രാർത്ഥിക്കാം"
     },
-    "bible": {
-        "en": "Bible",
-        "mn": "Bible",
-        "ml": "വേദപുസ്തകം"
+    "contextual": {
+        "en": "Contextual Prayers",
+        "mn": "Sandarbochitha Praarthanakal",
+        "ml": "സന്ദർഭോചിത പ്രാർത്ഥനകൾ"
+    },
+    "beforeFood": {
+        "ml": "ഭക്ഷണം കഴിക്കുന്നതിനു മുമ്പ്",
+        "mn": "Before Food",
+        "en": "Before Food"
+    },
+    "afterFood": {
+        "en": "After Food",
+        "ml": "ഭക്ഷണം കഴിച്ചശേഷം",
+        "mn": "After Food"
+    },
+    "forSick": {
+        "ml": "രോഗികൾക്കുവേണ്ടി",
+        "en": "For the Sick",
+        "mn": "For the Sick"
     }
 }

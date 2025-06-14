@@ -1,7 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
@@ -17,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
     private val prayerRepository: PrayerRepository,
-    settingsRepository: SettingsRepository
+    settingsRepository: SettingsRepository,
+    private val firebaseAnalytics: FirebaseAnalytics
 ) : ViewModel() {
 
     private val selectedLanguage = settingsRepository.selectedLanguage
@@ -45,11 +48,11 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    fun loadPrayerElements(filename: String) {
+    fun loadPrayerElements(filename: String, passedLanguage: AppLanguage? = null) {
         viewModelScope.launch { // Launch in ViewModelScope for async operation
             try {
                 // Access the current language from SettingsViewModel
-                val language = selectedLanguage.value
+                val language = passedLanguage ?: selectedLanguage.value
                 val prayers = prayerRepository.loadPrayerElements(filename, language)
                 _prayers.value = prayers
             } catch (e: Exception) {
@@ -58,6 +61,32 @@ class PrayerViewModel @Inject constructor(
                 _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
             }
         }
+    }
+
+    fun logPrayerScreenView(prayerName: String, prayerId: String) {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.ITEM_ID, prayerId) // Use ITEM_ID for specific items
+            putString(FirebaseAnalytics.Param.ITEM_NAME, prayerName)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "prayer") // Custom parameter
+        }
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle) // Log as a screen view
+    }
+
+    fun logPrayNowItemSelection(prayerName: String, prayerId: String) {
+        val bundle = Bundle().apply {
+            putString(FirebaseAnalytics.Param.ITEM_ID, prayerId) // Use ITEM_ID for specific items
+            putString(FirebaseAnalytics.Param.ITEM_NAME, prayerName)
+            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "prayNow") // Custom parameter
+        }
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+    }
+
+    fun handlePrayerElementError(errorMessage: String, errorLocation: String) {
+        val bundle = Bundle().apply {
+            putString("error_description", errorMessage)
+            putString("error_location", errorLocation) // Specific to this error source
+        }
+        firebaseAnalytics.logEvent("app_error", bundle)
     }
 }
 

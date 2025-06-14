@@ -21,9 +21,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
@@ -105,7 +105,7 @@ fun SectionCard(title: String) {
 }
 
 @Composable
-fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, selectedFontSize: TextUnit, navController: NavController){
+fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, selectedFontSize: AppFontSize, navController: NavController){
     val bookName = when(selectedLanguage) {
         AppLanguage.MALAYALAM -> bibleDetails.book.ml
         else -> bibleDetails.book.en
@@ -131,7 +131,7 @@ fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, selecte
             verticalArrangement = Arrangement.Center
         )
         {
-            Text(bookName, fontSize = selectedFontSize)
+            Text(bookName, fontSize = selectedFontSize.fontSize)
         }
     }
 }

@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.data.model
 
-enum class AppLanguage(val code: String) {
-    MALAYALAM("ml"),
-    ENGLISH("en"),
-    MANGLISH("mn");
+enum class AppLanguage(val code: String, val displayName: String) {
+    MALAYALAM("ml", "മലയാളം"),
+//    ENGLISH("en", "English"),
+    MANGLISH("mn", "Manglish (Malayalam in English Script)");
 
     companion object {
         fun fromCode(code: String): AppLanguage? {

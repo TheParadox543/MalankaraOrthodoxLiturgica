@@ -65,11 +65,11 @@
     },
     {
         "type": "link-collapsible",
-        "file": "psalm113.json"
+        "file": "psalms/psalm113.json"
     },
     {
         "type": "link-collapsible",
-        "file": "psalm148149150.json"
+        "file": "psalms/psalm148149150.json"
     },
     {
         "type": "collapsible-block",
