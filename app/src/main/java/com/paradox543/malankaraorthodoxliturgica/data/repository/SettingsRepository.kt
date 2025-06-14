@@ -1,10 +1,12 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -28,6 +30,7 @@ class SettingsRepository @Inject constructor(
 
     private val languageKey = stringPreferencesKey("selected_language")
     private val fontSizeKey = intPreferencesKey("font_size")
+    private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
 
     // Save language
     suspend fun saveLanguage(language: AppLanguage) {
@@ -36,9 +39,15 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    suspend fun saveFontSize(fontSize: Int) {
+    suspend fun saveFontSize(fontSize: AppFontSize) {
         context.dataStore.edit { preferences ->
-            preferences[fontSizeKey] = fontSize
+            preferences[fontSizeKey] = fontSize.intValue
+        }
+    }
+
+    suspend fun saveOnboardingStatus(completed: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[hasCompletedOnboardingKey] = completed
         }
     }
 
@@ -54,13 +63,42 @@ class SettingsRepository @Inject constructor(
             initialValue = AppLanguage.MALAYALAM // Initial value is also an AppLanguage enum
         )
 
-    val selectedFont: StateFlow<Int> = context.dataStore.data // Using the injected dataStore
+    val selectedFontSize: StateFlow<AppFontSize> = context.dataStore.data // Using the injected dataStore
         .map { preferences ->
-            preferences[fontSizeKey] ?: 16 // Default to basic size
+            val sizeInt = preferences[fontSizeKey] ?: 16 // Default to basic size
+            AppFontSize.fromInt(sizeInt) // Convert to TextUnit
         }
         .stateIn(
             scope = repositoryScope, // Use the long-lived scope for the repository
             started = SharingStarted.Eagerly, // Start collecting eagerly when the StateFlow is created
-            initialValue = 16 // Provide an initial value that will be emitted immediately
+            initialValue = AppFontSize.Medium // Provide an initial value that will be emitted immediately
+        )
+
+    val hasCompletedOnboarding: StateFlow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[hasCompletedOnboardingKey] == true // Default to false if not set
+        }
+        .stateIn(
+            scope = repositoryScope,
+            started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
+            initialValue = false // Initial value for the StateFlow
         )
 }
+
+/**
+    // Helper function to get version name using context
+    fun getPackageInfo(packageManager: PackageManager, packageName: String, flags: Int = 0): String? {
+        return try{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                packageManager.getPackageInfo(
+                    packageName,
+                    PackageManager.PackageInfoFlags.of(flags.toLong())
+                ).versionName
+            } else {
+                packageManager.getPackageInfo(packageName, flags).versionName
+            }
+        } catch (e: Exception) {
+            "Error: $e"
+        }
+    }
+ */

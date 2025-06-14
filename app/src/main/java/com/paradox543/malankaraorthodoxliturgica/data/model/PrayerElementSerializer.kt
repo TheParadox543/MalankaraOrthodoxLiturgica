@@ -61,13 +61,13 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
                 // --- Fallback for unknown types ---
                 else -> {
                     // Create an Error element with informative content
-                    PrayerElement.Error("Unknown or invalid PrayerElement type: '$type'. Original JSON: ${element.toString()}")
+                    PrayerElement.Error("Unknown or invalid PrayerElement type: '$type'.")
                 }
             }
         } catch (e: Exception) {
             // Catch any serialization exceptions that might occur even for known types
             // (e.g., missing required fields, type mismatch for a property)
-            PrayerElement.Error("Error parsing PrayerElement '$type': ${e.message}. Original JSON: ${element.toString()}")
+            PrayerElement.Error("Error parsing PrayerElement: ${element.toString().substring(0, 10)}")
         }
     }
 
