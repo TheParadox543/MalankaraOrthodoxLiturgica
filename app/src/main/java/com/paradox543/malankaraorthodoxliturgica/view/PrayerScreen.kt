@@ -3,6 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.view
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
@@ -38,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -215,17 +217,10 @@ fun PrayerElementRenderer(
         }
 
         is PrayerElement.Song -> {
-            val horizontalScrollState = rememberScrollState()
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(horizontalScrollState)
-            ) {
-                Song(
-                    text = prayerElement.content,
-                    fontSize = selectedFontSize.fontSize
-                )
-            }
+            Song(
+                text = prayerElement.content,
+                fontSize = selectedFontSize.fontSize
+            )
         }
 
         is PrayerElement.Subtext -> {
@@ -332,14 +327,22 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 
 @Composable
 fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
-    Text(
-        text = text.replace("/t", "    "),
-        fontSize = fontSize,
-        textAlign = TextAlign.Start,
-        modifier = modifier
+    val horizontalScrollState = rememberScrollState()
+    Row(
+        modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-    )
+            .horizontalScroll(horizontalScrollState)
+            .border(4.dp, Color.Gray)
+    ) {
+        Text(
+            text = text.replace("/t", "    "),
+            fontSize = fontSize,
+            textAlign = TextAlign.Start,
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp)
+        )
+    }
 }
 
 @Composable
