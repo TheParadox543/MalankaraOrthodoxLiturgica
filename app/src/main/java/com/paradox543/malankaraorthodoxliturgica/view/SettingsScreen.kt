@@ -22,7 +22,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -38,6 +38,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -92,7 +93,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         text = "Select Language",
                         fontSize = selectedFontSize.fontSize,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.weight(1f),
                     )
                     LanguageDropdownMenu(
                         selectedOption = selectedLanguage,
@@ -153,7 +153,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
             if (BuildConfig.DEBUG) {
                 Spacer(Modifier.padding(16.dp))
 
-                FilledTonalButton(
+                ElevatedButton(
                     onClick = { settingsViewModel.setOnboardingCompleted(false) },
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 ) {
@@ -198,14 +198,14 @@ fun LanguageDropdownMenu(
     var expanded by remember { mutableStateOf(false) }
 
     Box {
-        OutlinedButton(
-            onClick = { expanded = true },
-            colors = ButtonDefaults.textButtonColors(
-                MaterialTheme.colorScheme.primary,
-                MaterialTheme.colorScheme.onPrimary,
-            ),
+        Button(
+            onClick = { expanded = true }
         ) {
-            Text(selectedOption.displayName, fontSize = selectedFontSize)
+            Text(
+                selectedOption.displayName,
+                textAlign = TextAlign.Center,
+                fontSize = selectedFontSize,
+            )
         }
 
         DropdownMenu(
@@ -218,7 +218,8 @@ fun LanguageDropdownMenu(
                     onClick = {
                         onOptionSelected(language)
                         expanded = false
-                    }
+                    },
+                    enabled = language != selectedOption
                 )
             }
         }
@@ -251,7 +252,8 @@ fun FontSizeDropdownMenu(
                         selectedText = appFontSize
                         onOptionSelected(appFontSize)
                         expanded = false
-                    }
+                    },
+                    enabled = appFontSize != selectedFontSize
                 )
             }
         }
