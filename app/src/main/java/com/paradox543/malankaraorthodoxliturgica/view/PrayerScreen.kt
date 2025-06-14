@@ -35,6 +35,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -183,6 +184,7 @@ fun PrayerElementRenderer(
     prayerViewModel: PrayerViewModel,
     filename: String,
 ) {
+    val defaultTextStyle = MaterialTheme.typography.bodyLarge.copy(fontSize = selectedFontSize.fontSize) // Or your app's default
     when (prayerElement) {
         is PrayerElement.Title -> {
             Title(
@@ -213,10 +215,14 @@ fun PrayerElementRenderer(
         }
 
         is PrayerElement.Song -> {
-            Song(
-                text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize
+            AutoFitZoomableSong(
+                songContent = prayerElement.content,
+                defaultTextStyle = defaultTextStyle,
             )
+//            Song(
+//                text = prayerElement.content,
+//                fontSize = selectedFontSize.fontSize
+//            )
         }
 
         is PrayerElement.Subtext -> {
