@@ -98,7 +98,6 @@ fun PrayerScreen(
     // Ensure prayers are loaded only when filename changes
     LaunchedEffect(currentFilename) {
         prayerViewModel.loadPrayerElements(currentFilename)
-        prayerViewModel.logPrayerScreenView(title, currentFilename)
     }
 
     // Store the initial system bar padding values

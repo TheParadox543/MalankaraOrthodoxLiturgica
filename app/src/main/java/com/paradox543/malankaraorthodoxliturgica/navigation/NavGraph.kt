@@ -3,11 +3,13 @@ package com.paradox543.malankaraorthodoxliturgica.navigation
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
@@ -29,12 +31,20 @@ fun NavGraph(
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
 ) {
-//    val settingsViewModel: SettingsViewModel = hiltViewModel()
     val prayerViewModel: PrayerViewModel = hiltViewModel()
-//    val navViewModel: NavViewModel = hiltViewModel()
     val bibleViewModel: BibleViewModel = hiltViewModel()
     val navController = rememberNavController()
     val onboardingStatus by settingsViewModel.hasCompletedOnboarding.collectAsState()
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+    val arguments = navBackStackEntry?.arguments
+    LaunchedEffect(currentRoute, arguments) {
+        if (currentRoute != null) {
+            settingsViewModel.logScreensVisited(currentRoute, arguments)
+        }
+    }
+
     NavHost(
         navController,
         startDestination = if (onboardingStatus) {
