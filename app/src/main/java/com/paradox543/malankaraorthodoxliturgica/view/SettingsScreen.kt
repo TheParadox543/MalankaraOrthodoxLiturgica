@@ -28,6 +28,7 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -54,6 +55,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 fun SettingsScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val songScrollState by settingsViewModel.songScrollState.collectAsState()
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
 
@@ -133,6 +135,55 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         selectedFontSize = selectedFontSize,
                         onOptionSelected = { settingsViewModel.setFontSize(it) }
                     )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Song Scroll State
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                ),
+                elevation = CardDefaults.cardElevation(4.dp)
+            ) {
+                Column(
+                    Modifier.padding(8.dp)
+                ) {
+                    Row(
+                        Modifier
+                            .padding(4.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = "Text Layout for Songs",
+                            fontSize = selectedFontSize.fontSize,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.weight(1f),
+                        )
+                        Switch(
+                            checked = songScrollState,
+                            onCheckedChange = { settingsViewModel.setSongScrollState(it) }
+                        )
+                    }
+                    if (songScrollState) {
+                        Text(
+                            "Long lines will extend off-screen and can be scrolled horizontally",
+                            fontSize = selectedFontSize.fontSize
+                        )
+                    } else {
+                        Text(
+                            "Lines stay within the screen",
+                            fontSize = selectedFontSize.fontSize,
+                        )
+                    }
                 }
             }
 

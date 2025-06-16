@@ -31,25 +31,7 @@ class SettingsRepository @Inject constructor(
     private val languageKey = stringPreferencesKey("selected_language")
     private val fontSizeKey = intPreferencesKey("font_size")
     private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
-
-    // Save language
-    suspend fun saveLanguage(language: AppLanguage) {
-        context.dataStore.edit { preferences ->
-            preferences[languageKey] = language.code
-        }
-    }
-
-    suspend fun saveFontSize(fontSize: AppFontSize) {
-        context.dataStore.edit { preferences ->
-            preferences[fontSizeKey] = fontSize.intValue
-        }
-    }
-
-    suspend fun saveOnboardingStatus(completed: Boolean) {
-        context.dataStore.edit { preferences ->
-            preferences[hasCompletedOnboardingKey] = completed
-        }
-    }
+    private val songScrollStateKey = booleanPreferencesKey("song_scroll_state")
 
     val selectedLanguage: StateFlow<AppLanguage> = context.dataStore.data
         .map { preferences ->
@@ -83,6 +65,41 @@ class SettingsRepository @Inject constructor(
             started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
             initialValue = false // Initial value for the StateFlow
         )
+
+    val songScrollState: StateFlow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[songScrollStateKey] == true // Default to false if not set
+        }
+        .stateIn(
+            scope = repositoryScope,
+            started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
+            initialValue = false // Initial value for the StateFlow
+        )
+
+    // Save language
+    suspend fun saveLanguage(language: AppLanguage) {
+        context.dataStore.edit { preferences ->
+            preferences[languageKey] = language.code
+        }
+    }
+
+    suspend fun saveFontSize(fontSize: AppFontSize) {
+        context.dataStore.edit { preferences ->
+            preferences[fontSizeKey] = fontSize.intValue
+        }
+    }
+
+    suspend fun saveOnboardingStatus(completed: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[hasCompletedOnboardingKey] = completed
+        }
+    }
+
+    suspend fun saveSongScrollState(isHorizontal: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[songScrollStateKey] = isHorizontal
+        }
+    }
 }
 
 /**

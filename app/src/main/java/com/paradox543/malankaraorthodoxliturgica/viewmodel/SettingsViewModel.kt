@@ -20,6 +20,7 @@ class SettingsViewModel @Inject constructor(
     val selectedLanguage = settingsRepository.selectedLanguage
     val selectedFontSize = settingsRepository.selectedFontSize
     val hasCompletedOnboarding = settingsRepository.hasCompletedOnboarding
+    val songScrollState = settingsRepository.songScrollState
 
     // Function to set (and save) language
     fun setLanguage(language: AppLanguage) {
@@ -49,6 +50,12 @@ class SettingsViewModel @Inject constructor(
             if (status) {
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
             }
+        }
+    }
+
+    fun setSongScrollState(isHorizontal: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.saveSongScrollState(isHorizontal)
         }
     }
 }
