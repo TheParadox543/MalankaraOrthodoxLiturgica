@@ -133,7 +133,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     )
                     FontSizeDropdownMenu(
                         selectedFontSize = selectedFontSize,
-                        onOptionSelected = { settingsViewModel.setFontSize(it) }
+                        onOptionSelected = { settingsViewModel.setFontSizeFromSettings(it) }
                     )
                 }
             }
