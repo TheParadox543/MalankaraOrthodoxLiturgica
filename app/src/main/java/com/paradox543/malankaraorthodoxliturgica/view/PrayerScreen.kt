@@ -3,8 +3,10 @@ package com.paradox543.malankaraorthodoxliturgica.view
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -68,8 +71,9 @@ fun PrayerScreen(
     node: PageNode
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val songScrollState by settingsViewModel.songScrollState.collectAsState()
     var title = ""
     for (item in node.route.split("_")){
         title += translations[item] + " "
@@ -166,7 +170,13 @@ fun PrayerScreen(
                     Spacer(Modifier.padding(top = initialTopPadding.value))
                 }
                 items(prayers) { prayerElement ->
-                    PrayerElementRenderer(prayerElement, selectedFontSize, prayerViewModel, currentFilename)
+                    PrayerElementRenderer(
+                        prayerElement,
+                        selectedFontSize,
+                        prayerViewModel,
+                        currentFilename,
+                        songScrollState,
+                    )
                 }
                 item {
                     Spacer(Modifier.padding(bottom = initialBottomPadding.value))
@@ -182,6 +192,7 @@ fun PrayerElementRenderer(
     selectedFontSize: AppFontSize,
     prayerViewModel: PrayerViewModel,
     filename: String,
+    isSongHorizontalScroll: Boolean = false,
 ) {
     when (prayerElement) {
         is PrayerElement.Title -> {
@@ -215,7 +226,8 @@ fun PrayerElementRenderer(
         is PrayerElement.Song -> {
             Song(
                 text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize
+                fontSize = selectedFontSize.fontSize,
+                isHorizontal = isSongHorizontalScroll
             )
         }
 
@@ -322,15 +334,29 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 }
 
 @Composable
-fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
-    Text(
-        text = text.replace("/t", "    "),
-        fontSize = fontSize,
-        textAlign = TextAlign.Start,
+fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp, isHorizontal: Boolean = false) {
+    val horizontalScrollState = rememberScrollState()
+    Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-    )
+            .let { currentModifier ->
+                if (isHorizontal) {
+                    currentModifier.horizontalScroll(horizontalScrollState)
+                } else {
+                    currentModifier
+                }
+            }
+            .border(4.dp, MaterialTheme.colorScheme.outline)
+    ) {
+        Text(
+            text = text.replace("/t", "    "),
+            fontSize = fontSize,
+            textAlign = TextAlign.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp)
+        )
+    }
 }
 
 @Composable
