@@ -6,6 +6,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,6 +33,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -86,6 +88,13 @@ fun PrayerScreen(
     val currentFilename = node.filename?: "NoFileNameFound"
     val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
 
+    // State to accumulate zoom gesture delta for triggering discrete steps
+    var cumulativeZoomFactor by remember { mutableFloatStateOf(1f) }
+
+    // Define thresholds for triggering a step up/down (adjust these for sensitivity)
+    val zoomInThreshold = 1.2f  // If accumulated zoom factor exceeds this, step up
+    val zoomOutThreshold = 0.8f // If accumulated zoom factor falls below this, step down
+
     // Ensure prayers are loaded only when filename changes
     LaunchedEffect(currentFilename) {
         prayerViewModel.loadPrayerElements(currentFilename)
@@ -119,6 +128,19 @@ fun PrayerScreen(
             .nestedScroll(nestedScrollConnection)
             .pointerInput(Unit) {
                 detectTapGestures { isVisible.value = !isVisible.value }
+            }
+            .pointerInput(Unit) {
+                detectTransformGestures { _, _, zoom, _ ->
+                    cumulativeZoomFactor *= zoom
+
+                    if (cumulativeZoomFactor >= zoomInThreshold) {
+                        settingsViewModel.stepFontSize(1)
+                        cumulativeZoomFactor = 1f
+                    } else if (cumulativeZoomFactor <= zoomOutThreshold) {
+                        settingsViewModel.stepFontSize(-1)
+                        cumulativeZoomFactor = 1f
+                    }
+                }
             },
         topBar = {
             AnimatedVisibility(
