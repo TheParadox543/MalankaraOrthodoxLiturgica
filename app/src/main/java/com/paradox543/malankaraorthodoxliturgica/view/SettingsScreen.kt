@@ -1,5 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -24,13 +27,17 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,6 +47,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
@@ -47,12 +55,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
+import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
@@ -60,10 +70,13 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     val context = LocalContext.current
     val scrollState = rememberScrollState()
-    var showDialog by remember { mutableStateOf(false) }
+    val bottomSheetState = rememberModalBottomSheetState()
+    var showAboutAppDialog by remember { mutableStateOf(false) }
+    var showQrCodeDialog by remember { mutableStateOf(false) }
+    var showShareAppBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
-        topBar = { TopNavBar("Settings", navController, settingsViewModel) },
+        topBar = { TopNavBar("Settings", navController) },
         bottomBar = { BottomNavBar(navController) }
     ) { innerPadding ->
         Column(
@@ -193,7 +206,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
             Spacer(Modifier.height(16.dp))
 
             ListItem(
-                modifier = Modifier.clickable { showDialog = true },
+                modifier = Modifier.clickable { showAboutAppDialog = true },
                 leadingContent = {
                     Icon(
                         Icons.Filled.Info,
@@ -216,11 +229,8 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     )
                 },
                 modifier = Modifier
-                    .clickable { // Make the entire card clickable
-                        settingsViewModel.shareApp(
-                            shareMessage = "Check out this app for Orthodox Liturgical needs:", // Your custom message
-                            context = context,
-                        )
+                    .clickable {
+                        showShareAppBottomSheet = true
                     },
                 leadingContent = {
                     Icon(
@@ -244,9 +254,9 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
         }
     }
 
-    if (showDialog) {
+    if (showAboutAppDialog) {
         AlertDialog(
-            onDismissRequest = { showDialog = false },
+            onDismissRequest = { showAboutAppDialog = false },
             title = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
@@ -262,11 +272,88 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 AboutAppDialogContent()
             },
             confirmButton = {
-                Button(onClick = { showDialog = false }) {
+                Button(onClick = { showAboutAppDialog = false }) {
                     Text("Close", fontSize = selectedFontSize.fontSize)
                 }
             }
         )
+    }
+
+    if (showQrCodeDialog) {
+        QrCodeShareDialog(
+            onDismissRequest = { showQrCodeDialog = false }
+        )
+    }
+
+    if (showShareAppBottomSheet) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                showShareAppBottomSheet = false
+            },
+            sheetState = bottomSheetState
+        ) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp)
+            ) {
+                Card(
+                    Modifier
+                        .weight(0.5f)
+                        .height(200.dp)
+                        .padding(8.dp)
+                        .clickable(
+                            onClick = {
+                                settingsViewModel.shareAppPlayStoreLink(
+                                    context = context,
+                                    shareMessage = "Welcome to Liturgica: A digital repository for " +
+                                            "all your books in the Malankara Orthodox Church", // Your custom message
+                                )
+                            }
+                        )
+                ) {
+                    Column(
+                        Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Text(
+                            "Share link",
+                            Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                        )
+                        Image(
+                            painterResource(R.drawable.share_icon),
+                            "Share icon",
+                            Modifier.size(60.dp),
+                        )
+                    }
+                }
+                Card(
+                    Modifier
+                        .weight(0.5f)
+                        .height(200.dp)
+                        .padding(8.dp)
+                        .clickable {
+                            showQrCodeDialog = true
+                        }
+                ) {
+                    Column (
+                        Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Text(
+                            "Generate QR code",
+                        )
+                        Image(
+                            painterResource(R.drawable.play_logo),
+                            "Play store logo",
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -283,7 +370,7 @@ fun LanguageDropdownMenu(
             onClick = { expanded = true }
         ) {
             Text(
-                selectedOption.displayName,
+                selectedOption.displayName.split(" ")[0],
                 textAlign = TextAlign.Center,
                 fontSize = selectedFontSize,
             )
@@ -378,4 +465,43 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
             fontSize = selectedFontSize * 0.8f
         )
     }
+}
+
+
+@Composable
+fun QrCodeShareDialog( onDismissRequest: () -> Unit ) {
+    // You can determine a fixed size for the QR code display here if you want
+    val qrCodeDisplaySizeDp = 200.dp // Example fixed size
+
+    AlertDialog(
+        onDismissRequest = onDismissRequest,
+        title = { Text("Scan to Get the App!") },
+        text = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                // Load the pre-generated QR code image directly from drawables
+                Image(
+                    painter = painterResource(id = R.drawable.app_share_qr), // Your QR image filename
+                    contentDescription = "QR Code for App Store Link",
+                    modifier = Modifier
+                        .size(qrCodeDisplaySizeDp)
+                        .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(8.dp))
+                        .padding(8.dp)
+                )
+                Spacer(Modifier.height(16.dp))
+                Text(
+                    text = "Scan this QR code with any QR scanner app to download from the Play Store.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismissRequest) {
+                Text("Close")
+            }
+        },
+    )
 }

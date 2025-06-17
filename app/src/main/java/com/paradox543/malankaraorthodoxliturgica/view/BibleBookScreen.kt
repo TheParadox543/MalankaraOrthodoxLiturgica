@@ -44,7 +44,7 @@ fun BibleBookScreen(
     val chapters = bibleBook?.chapters ?: 1
 
     Scaffold(
-        topBar = { TopNavBar(bookName, navController, settingsViewModel) },
+        topBar = { TopNavBar(bookName, navController) },
         bottomBar = { BottomNavBar(navController) }
     ) {innerPadding ->
         LazyVerticalGrid(

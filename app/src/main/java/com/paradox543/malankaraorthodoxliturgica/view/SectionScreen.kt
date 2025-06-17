@@ -55,7 +55,7 @@ fun SectionScreen(
         title += translations[item] + " "
     }
     Scaffold (
-        topBar = { TopNavBar(title, navController, settingsViewModel) },
+        topBar = { TopNavBar(title, navController) },
         bottomBar = { BottomNavBar(navController = navController) }
     ){ innerPadding ->
         Box{
