@@ -28,7 +28,7 @@ class BibleRepository @Inject constructor(
         return try {
             context.assets.open(fileName).use { inputStream ->
                 val jsonString = inputStream.bufferedReader().use { it.readText() }
-                json.decodeFromString<T>(jsonString) // <--- This is where kotlinx.serialization does its magic!
+                json.decodeFromString<T>(jsonString)
             }
         } catch (e: Exception) {
             Log.e("BibleRepository", "Error loading or parsing $fileName: ${e.message}", e)
@@ -55,7 +55,11 @@ class BibleRepository @Inject constructor(
      * @return A map where keys are verse numbers (as String) and values are verse text.
      */
     fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: AppLanguage = AppLanguage.MALAYALAM): Chapter? {
-        val fileName = "bible-${language.code}.json"
+        val bibleLanguage = when(language){
+            AppLanguage.MALAYALAM -> "ml"
+            else -> "en"
+        }
+        val fileName = "bible-${bibleLanguage}.json"
 
         // Load or retrieve the cached BibleRoot object for the specific language file
         val bibleRoot = cachedBibleChapterFiles.computeIfAbsent(fileName) {

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,13 +48,20 @@ fun BibleChapterScreen(
         topBar = { TopNavBar(title, navController, onActionClick = { navController.navigate("settings")}) },
         bottomBar = { SectionNavBar(navController, prevRoute, nextRoute) }
     ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp)
-        ) {
-            chapterData?.Verse?.let {
-                items(it.size) { index ->
+        if (chapterData == null ) {
+            Text(
+                "Error in loading Bible content.",
+                Modifier.padding(innerPadding),
+                MaterialTheme.colorScheme.error
+            )
+        }
+        else {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp)
+            ) {
+                items(chapterData.Verse.size) { index ->
                     val verseNumber = (index + 1).toString()
                     val verseText = chapterData.Verse[index].Verse
                     VerseItem(verseNumber, verseText, selectedFontSize.fontSize)
