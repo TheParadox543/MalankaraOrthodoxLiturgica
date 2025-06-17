@@ -50,7 +50,7 @@ fun BibleScreen(
     }
 
     Scaffold(
-        topBar = { TopNavBar(title, navController) },
+        topBar = { TopNavBar(title, navController, settingsViewModel) },
         bottomBar = { BottomNavBar(navController) }
     ) {innerPadding ->
         LazyVerticalGrid(

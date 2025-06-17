@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -45,7 +46,12 @@ fun BibleChapterScreen(
     val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, selectedLanguage)
     val (prevRoute, nextRoute) = bibleViewModel.getAdjacentChapters(bookIndex, chapterIndex)
     Scaffold(
-        topBar = { TopNavBar(title, navController, onActionClick = { navController.navigate("settings")}) },
+        topBar = { TopNavBar(
+            title,
+            navController,
+            settingsViewModel
+        ) { navController.navigate("settings") }
+        },
         bottomBar = { SectionNavBar(navController, prevRoute, nextRoute) }
     ) { innerPadding ->
         if (chapterData == null ) {
@@ -76,8 +82,7 @@ fun VerseItem(verseNumber: String, verseText: String, fontSize: TextUnit) {
     Row {
         Text(
             text = verseNumber,
-            modifier = Modifier.padding(8.dp),
-            fontSize = fontSize,
+            modifier = Modifier.padding(4.dp).requiredWidth(20.dp),
         )
         Text(
             text = verseText,
