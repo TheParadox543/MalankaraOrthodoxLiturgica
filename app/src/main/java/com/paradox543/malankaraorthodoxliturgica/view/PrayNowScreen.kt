@@ -58,7 +58,7 @@ fun PrayNowScreen(
     val screenWidth = configuration.screenWidthDp.dp
     val title = translations["prayNow"]?: "Pray Now"
     Scaffold (
-        topBar = { TopNavBar(title, navController) },
+        topBar = { TopNavBar(title, navController, settingsViewModel) },
         bottomBar = { BottomNavBar(navController = navController) }
     ) { innerPadding ->
         Box {

@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -38,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
@@ -56,11 +58,12 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
+    val context = LocalContext.current
     val scrollState = rememberScrollState()
     var showDialog by remember { mutableStateOf(false) }
 
     Scaffold(
-        topBar = { TopNavBar("Settings", navController) },
+        topBar = { TopNavBar("Settings", navController, settingsViewModel) },
         bottomBar = { BottomNavBar(navController) }
     ) { innerPadding ->
         Column(
@@ -187,7 +190,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(Modifier.height(16.dp))
 
             ListItem(
                 modifier = Modifier.clickable { showDialog = true },
@@ -199,6 +202,33 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     )
                 },
                 headlineContent = { Text("About the App", fontSize = selectedFontSize.fontSize) }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            // Share App
+            ListItem(
+                headlineContent = {
+                    Text(
+                        "Share this App",
+                        fontSize = selectedFontSize.fontSize,
+                        fontWeight = FontWeight.Bold,
+                    )
+                },
+                modifier = Modifier
+                    .clickable { // Make the entire card clickable
+                        settingsViewModel.shareApp(
+                            shareMessage = "Check out this app for Orthodox Liturgical needs:", // Your custom message
+                            context = context,
+                        )
+                    },
+                leadingContent = {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = "Share App",
+                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                    )
+                }
             )
 
             if (BuildConfig.DEBUG) {
