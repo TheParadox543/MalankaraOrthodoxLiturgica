@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -48,8 +49,7 @@ fun BibleChapterScreen(
     Scaffold(
         topBar = { TopNavBar(
             title,
-            navController,
-            settingsViewModel
+            navController
         ) { navController.navigate("settings") }
         },
         bottomBar = { SectionNavBar(navController, prevRoute, nextRoute) }
@@ -83,6 +83,7 @@ fun VerseItem(verseNumber: String, verseText: String, fontSize: TextUnit) {
         Text(
             text = verseNumber,
             modifier = Modifier.padding(4.dp).requiredWidth(20.dp),
+            textAlign = TextAlign.Center
         )
         Text(
             text = verseText,

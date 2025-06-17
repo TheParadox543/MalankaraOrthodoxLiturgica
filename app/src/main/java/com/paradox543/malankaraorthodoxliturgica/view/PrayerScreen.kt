@@ -148,8 +148,7 @@ fun PrayerScreen(
             ) {
                 TopNavBar(
                     title,
-                    navController,
-                    settingsViewModel
+                    navController
                 ) { navController.navigate("settings") }
             }
         },
