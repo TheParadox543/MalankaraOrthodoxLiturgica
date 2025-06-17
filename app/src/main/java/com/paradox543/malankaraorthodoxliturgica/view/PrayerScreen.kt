@@ -9,11 +9,9 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -174,33 +172,27 @@ fun PrayerScreen(
             }
         }
 
-        Box(
+        LazyColumn(
             modifier = Modifier
-                .padding(horizontal = if (isLandscape) 40.dp else 20.dp) // Reduce width in landscape
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
+                .padding(horizontal = if (isLandscape) 40.dp else 20.dp),
+//                    .fillMaxWidth(if (isLandscape) 0.8f else 1f), // Limit width in landscape
+            state = listState,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(if (isLandscape) 0.8f else 1f), // Limit width in landscape
-                state = listState,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                item {
-                    Spacer(Modifier.padding(top = initialTopPadding.value))
-                }
-                items(prayers) { prayerElement ->
-                    PrayerElementRenderer(
-                        prayerElement,
-                        selectedFontSize,
-                        prayerViewModel,
-                        currentFilename,
-                        songScrollState,
-                    )
-                }
-                item {
-                    Spacer(Modifier.padding(bottom = initialBottomPadding.value))
-                }
+            item {
+                Spacer(Modifier.padding(top = initialTopPadding.value))
+            }
+            items(prayers) { prayerElement ->
+                PrayerElementRenderer(
+                    prayerElement,
+                    selectedFontSize,
+                    prayerViewModel,
+                    currentFilename,
+                    songScrollState,
+                )
+            }
+            item {
+                Spacer(Modifier.padding(bottom = initialBottomPadding.value))
             }
         }
     }
