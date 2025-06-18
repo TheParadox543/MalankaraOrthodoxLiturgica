@@ -63,15 +63,6 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    fun logPrayerScreenView(prayerName: String, prayerId: String) {
-        val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.ITEM_ID, prayerId) // Use ITEM_ID for specific items
-            putString(FirebaseAnalytics.Param.ITEM_NAME, prayerName)
-            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "prayer") // Custom parameter
-        }
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle) // Log as a screen view
-    }
-
     fun logPrayNowItemSelection(prayerName: String, prayerId: String) {
         val bundle = Bundle().apply {
             putString(FirebaseAnalytics.Param.ITEM_ID, prayerId) // Use ITEM_ID for specific items
