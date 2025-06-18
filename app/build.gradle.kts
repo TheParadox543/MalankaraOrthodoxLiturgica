@@ -1,3 +1,5 @@
+import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -20,7 +22,8 @@ android {
         minSdk = 24
         targetSdk = 35
         versionCode = 16
-        versionName = "1.0.0-alpha"
+        versionName = "1.0.0-beta"
+        ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +36,16 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
+            configure<CrashlyticsExtension> {
+                // Enable processing and uploading of native symbols to Firebase servers.
+                // By default, this is disabled to improve build speeds.
+                // This flag must be enabled to see properly-symbolicated native
+                // stack traces in the Crashlytics dashboard.
+                nativeSymbolUploadEnabled = true
+            }
         }
     }
     compileOptions {
@@ -46,6 +59,7 @@ android {
         compose = true
         buildConfig = true
     }
+    ndkVersion = "29.0.13599879 rc2"
 }
 
 dependencies {
@@ -80,6 +94,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
     implementation(libs.firebase.crashlytics)         // Firebase Crashlytics for crash reporting
+    implementation(libs.firebase.crashlytics.ndk)
 
     // Testing Dependencies
     testImplementation(libs.junit)                    // Standard JUnit 4 for local unit tests
