@@ -2,14 +2,17 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -44,16 +47,27 @@ fun BibleChapterScreen(
     val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, selectedLanguage)
     val (prevRoute, nextRoute) = bibleViewModel.getAdjacentChapters(bookIndex, chapterIndex)
     Scaffold(
-        topBar = { TopNavBar(title, navController, onActionClick = { navController.navigate("settings")}) },
+        topBar = { TopNavBar(
+            title,
+            navController
+        ) { navController.navigate("settings") }
+        },
         bottomBar = { SectionNavBar(navController, prevRoute, nextRoute) }
     ) { innerPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp)
-        ) {
-            chapterData?.Verse?.let {
-                items(it.size) { index ->
+        if (chapterData == null ) {
+            Text(
+                "Error in loading Bible content.",
+                Modifier.padding(innerPadding),
+                MaterialTheme.colorScheme.error
+            )
+        }
+        else {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp)
+            ) {
+                items(chapterData.Verse.size) { index ->
                     val verseNumber = (index + 1).toString()
                     val verseText = chapterData.Verse[index].Verse
                     VerseItem(verseNumber, verseText, selectedFontSize.fontSize)
@@ -68,8 +82,8 @@ fun VerseItem(verseNumber: String, verseText: String, fontSize: TextUnit) {
     Row {
         Text(
             text = verseNumber,
-            modifier = Modifier.padding(8.dp),
-            fontSize = fontSize,
+            modifier = Modifier.padding(4.dp).requiredWidth(20.dp),
+            textAlign = TextAlign.Center
         )
         Text(
             text = verseText,

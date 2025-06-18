@@ -19,7 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun TopNavBar(
     title: String = "malankara",
     navController: NavController,
-    onActionClick: (() -> Unit)? = null // Optional Action button{}
+    onSettingsClick: (() -> Unit)? = null // Optional Action button{}
 ) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
@@ -38,8 +38,8 @@ fun TopNavBar(
             }
         },
         actions = {
-            if (onActionClick != null) {
-                IconButton(onClick = onActionClick) {
+            if (onSettingsClick != null) {
+                IconButton(onClick = onSettingsClick) {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = "Settings",
