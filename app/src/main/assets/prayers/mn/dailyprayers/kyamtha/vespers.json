@@ -360,5 +360,9 @@
     {
         "type": "prose",
         "content": "svarggasthanaaya njangalute pithaave (ithyaadi)"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/trisagionSyriac.json"
     }
 ]

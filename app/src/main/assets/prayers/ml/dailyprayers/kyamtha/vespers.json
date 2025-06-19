@@ -360,5 +360,9 @@
     {
         "type": "prose",
         "content": "സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ (ഇത്യാദി)"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/trisagionSyriac.json"
     }
 ]
