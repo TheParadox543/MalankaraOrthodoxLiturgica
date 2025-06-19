@@ -110,6 +110,7 @@ object NavigationTree {
                 prayer("lords", "commonprayers/lords.json", currentRoute, listOf("ml", "mn")),
                 prayer("mary", "commonprayers/mary.json", currentRoute, listOf("ml", "mn")),
                 prayer("kauma", "commonprayers/doxology.json", currentRoute, languages = listOf("ml", "mn")),
+                prayer("kaumaSyriac", "commonprayers/trisagionSyriac.json", currentRoute),
                 prayer("nicene", "commonprayers/nicenecreed.json", currentRoute),
                 prayer("angels", "commonprayers/praiseOfAngels.json", currentRoute),
                 prayer("cherubims", "commonprayers/praiseOfCherubims.json", currentRoute),

@@ -337,7 +337,7 @@ fun Subheading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit =
 @Composable
 fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
     Text(
-        text = text.replace("/t", "    "),
+        text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
         fontSize = fontSize,
         textAlign = TextAlign.Justify,
         modifier = modifier
@@ -361,7 +361,7 @@ fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp
             .border(4.dp, MaterialTheme.colorScheme.outline)
     ) {
         Text(
-            text = text.replace("/t", "    "),
+            text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
             fontSize = fontSize,
             textAlign = TextAlign.Start,
             modifier = Modifier
