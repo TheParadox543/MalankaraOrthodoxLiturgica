@@ -21,8 +21,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 24
         targetSdk = 35
-        versionCode = 16
-        versionName = "1.0.0-beta"
+        versionCode = 17
+        versionName = "1.0.0"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -36,13 +36,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            ndk {
-                debugSymbolLevel = "FULL"
-            }
             configure<CrashlyticsExtension> {
                 // Enable processing and uploading of native symbols to Firebase servers.
                 // By default, this is disabled to improve build speeds.
-                // This flag must be enabled to see properly-symbolicated native
+                // This flag must be enabled to see properly-symbolical native
                 // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled = true
             }
