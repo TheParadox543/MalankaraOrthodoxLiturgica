@@ -16,7 +16,7 @@
         "content": "ജനം:- ബലഹീനരും പാപികളുമായ…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രാരംഭപ്രാർത്ഥന",
         "items": [
             {
@@ -434,7 +434,7 @@
         "content": "സ്തൗമെൻകാലോസ്. കുറിയേലായിസ്സോൻ."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രൊമിയോൻ",
         "items": [
             {
@@ -460,7 +460,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ഹൂസോയോ",
         "items": [
             {
@@ -470,7 +470,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "സെദറാ",
         "items": [
             {
@@ -520,7 +520,7 @@
         "content": "മൊറിയോ…"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "എത്രോ",
         "items": [
             {

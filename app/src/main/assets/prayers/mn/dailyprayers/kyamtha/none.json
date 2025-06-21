@@ -1,0 +1,54 @@
+[
+    {
+        "type": "title",
+        "content": "ompathaam maniyute namaskaaram"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "subheading",
+        "content": "(am sohade breeke)"
+    },
+    {
+        "type": "song",
+        "content": "nin priya sahadenmaarotum ninnute nal kaadeesha maarotum koote\norkkaname njangalkkuttullaa-raam mruthare;\nnin valamaakkittheertthavare\n/thaaleluyyaa - modippikka."
+    },
+    {
+        "type": "subtext",
+        "content": "baarekmor. Shubaho ... Menolam ..."
+    },
+    {
+        "type": "song",
+        "content": "thirusabha makkalkkaayu ninnotettam duakhatthaale\nkeneetunnevam:\n“naathaa! Maamodeesaayaal ni-nne poondor\ntheenarakam pukeetaathe\n/thaaleluyyaa-modikkaname.”"
+    },
+    {
+        "type": "subtext",
+        "content": "moriyo raahemelynu aadaaryn."
+    },
+    {
+        "type": "heading",
+        "content": "maar baalaayiyute bovuso"
+    },
+    {
+        "type": "song",
+        "content": "1. Karuna niranjavane! Punaruththaanatthil\nninnute srushtiye nee puthuthaakkeetaname."
+    },
+    {
+        "type": "song",
+        "content": "2. Ninnil sharanatthaal nidrayilaayu nin്re\nvaravinu kaattheetum mrutharil kaniyaname."
+    },
+    {
+        "type": "song",
+        "content": "3. Avarabaraahatthinteyumisahaakkuteyum\nyaakkobinnuteyum matiyil paarkkaname."
+    },
+    {
+        "type": "song",
+        "content": "4. Vannavanaam varuvonum mruthar thannuyirum\nsthuthanennu shareeraathmaakkal paataname."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

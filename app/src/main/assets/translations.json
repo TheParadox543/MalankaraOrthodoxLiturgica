@@ -16,13 +16,13 @@
     },
     "sleeba": {
         "en": "Sleeba Prayers",
-        "ml": "സ്ലീബ പ്രാർത്ഥന",
-        "mn": "Sleeba Prarthana"
+        "ml": "സ്ലീബ നമസ്ക്കാരം",
+        "mn": "Sleeba Namaskaaram"
     },
     "kyamtha": {
         "en": "Kyamtha Prayers",
-        "ml": "ക്യംതാ പ്രാർത്ഥന",
-        "mn": "Kyamtha Prarthana"
+        "ml": "ക്യംതാ നമസ്ക്കാരം",
+        "mn": "Kyamtha Namaskaram"
     },
     "nineveh": {
         "en": "Nineveh Prayers",
@@ -121,12 +121,12 @@
     },
     "ring": {
         "en": "Ceremony of Blessing of the Ring",
-        "ml": "മോതിരം വാഴ്വിന്റെ ക്രമം",
+        "ml": "മോതിരം വാഴ്​വിന്റെ ക്രമം",
         "mn": "Mothiram Vazhvinthe Kramam"
     },
     "crown": {
         "en": "Ceremony of Blessing of the Crown",
-        "ml": "കിരീടം വാഴ്വിന്റെ ക്രമം",
+        "ml": "കിരീടം വാഴ്​വിന്റെ ക്രമം",
         "mn": "Kireedam Vazhvinthe Kramam"
     },
     "houseWarming": {
@@ -201,8 +201,8 @@
     },
     "sheema": {
         "en": "Shehimo",
-        "ml": "ശ്ഹീമാ",
-        "mn": "Sheema"
+        "ml": "ശ്ഹീമാ നമസ്ക്കാരം",
+        "mn": "Sheema Namaskaaram"
     },
     "commonPrayers": {
         "en": "Common Prayers",
@@ -214,14 +214,19 @@
         "ml": "കൗമ",
         "mn": "Kauma"
     },
+    "kaumaSyriac": {
+        "en": "Kauma (Syriac)",
+        "ml": "കൗമ (സുറിയാനി)",
+        "mn": "Kauma (Syriac)"
+    },
     "lords": {
         "en": "Lord's Prayer",
-        "ml": "കർത്തൃ പ്രാർത്ഥനാ",
+        "ml": "കർത്തൃ പ്രാർത്ഥന",
         "mn": "Karthru Prarthana"
     },
     "mary": {
         "en": "Prayer to St. Mary",
-        "ml": "ദൈവ മാതാവിനോടുള്ള അപേക്ഷാ",
+        "ml": "ദൈവ മാതാവിനോടുള്ള അപേക്ഷ",
         "mn": "Daiva Mathavinodulla Apekshaa"
     },
     "nicene": {
@@ -289,9 +294,24 @@
         "mn": "Ippol Praarthikkam",
         "ml": "ഇപ്പോൾ പ്രാർത്ഥിക്കാം"
     },
-    "bible": {
-        "en": "Bible",
-        "mn": "Bible",
-        "ml": "വേദപുസ്തകം"
+    "contextual": {
+        "en": "Contextual Prayers",
+        "mn": "Sandarbochitha Praarthanakal",
+        "ml": "സന്ദർഭോചിത പ്രാർത്ഥനകൾ"
+    },
+    "beforeFood": {
+        "ml": "ഭക്ഷണം കഴിക്കുന്നതിനു മുമ്പ്",
+        "mn": "Before Food",
+        "en": "Before Food"
+    },
+    "afterFood": {
+        "en": "After Food",
+        "ml": "ഭക്ഷണം കഴിച്ചശേഷം",
+        "mn": "After Food"
+    },
+    "forSick": {
+        "ml": "രോഗികൾക്കുവേണ്ടി",
+        "en": "For the Sick",
+        "mn": "For the Sick"
     }
 }

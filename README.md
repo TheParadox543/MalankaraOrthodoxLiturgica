@@ -1,11 +1,13 @@
 # Malankara Orthodox Church Prayer App
 
 ## Overview  
+
 This mobile app provides a structured collection of prayers from the Malankara Orthodox Syrian Church. It includes daily prayers and sacramental prayers, with support for multiple languages and customizable font sizes.  
 
 ---
 
 ## Features  
+
 - 📖 **Prayer Collection** – Includes Daily Prayers and Sacramental Prayers.  
 - 📂 **Categorized Sections** – Prayers are structured by themes and occasions.  
 - 🔤 **Multilingual Support** – Users can choose between **English, Malayalam, and Manglish**.  
@@ -20,11 +22,13 @@ This mobile app provides a structured collection of prayers from the Malankara O
 ## Technical Details  
 
 ### Architecture  
+
 - **MVVM (Model-View-ViewModel)** – Organizes code for better maintainability.  
 - **Jetpack Compose** – Fully declarative UI implementation.  
 - **DataStore** – Stores language and font size preferences persistently.  
 
 ### Key Components  
+
 📂 `PrayerScreen.kt` – Displays prayers, handles navigation and text adjustments.  
 📂 `SettingsScreen.kt` – Allows users to modify language and font size preferences.  
 📂 `DataStoreManager.kt` – Manages persistent settings storage.  
@@ -33,6 +37,7 @@ This mobile app provides a structured collection of prayers from the Malankara O
 📂 `NodeTree.kt` – Represents the prayer structure and routes as a static tree within the app.
 
 ### 📦 Core Dependencies  
+
 - **Jetpack Compose** – For building declarative UIs.  
 - **Navigation Compose** – For in-app navigation with argument passing.  
 - **Hilt** – For dependency injection and ViewModel management.  
@@ -70,4 +75,3 @@ This mobile app provides a structured collection of prayers from the Malankara O
 - **[Shaun John], [Lisa Shibu George] & [Sabu John]** – Additional Text Translations. Content and Preparation  
 
 🙏 **Glory to God!**  
-

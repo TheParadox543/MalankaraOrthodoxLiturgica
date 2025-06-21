@@ -8,7 +8,7 @@
         "file": "commonprayers/kauma.json"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "പ്രൊമിയോൻ",
         "items": [
             {

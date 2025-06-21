@@ -1,15 +1,11 @@
 [
     {
         "type": "title",
-        "content": "fourthPart"
-    },
-    {
-        "type": "title",
         "content": "naalaam shushroosha"
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/doxology.Json"
+        "file": "commonprayers/doxology.json"
     },
     {
         "type": "heading",
@@ -465,6 +461,6 @@
     },
     {
         "type": "link-collapsible",
-        "file": "praiseOfCherubims.Json"
+        "file": "praiseOfCherubims.json"
     }
 ]

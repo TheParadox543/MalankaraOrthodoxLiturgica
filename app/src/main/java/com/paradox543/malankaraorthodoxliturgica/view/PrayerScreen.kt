@@ -3,20 +3,21 @@ package com.paradox543.malankaraorthodoxliturgica.view
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.detectTransformGestures
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -25,14 +26,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
@@ -44,26 +52,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.navigation.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PrayerScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
-    node: PageNode,
-    modifier: Modifier = Modifier
+    node: PageNode
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
-    val language by prayerViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val songScrollState by settingsViewModel.songScrollState.collectAsState()
     var title = ""
     for (item in node.route.split("_")){
         title += translations[item] + " "
@@ -75,10 +85,39 @@ fun PrayerScreen(
 
     val currentFilename = node.filename?: "NoFileNameFound"
     val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
-    prayerViewModel.loadPrayers(currentFilename, language)
+
+    // State to accumulate zoom gesture delta for triggering discrete steps
+    var cumulativeZoomFactor by remember { mutableFloatStateOf(1f) }
+
+    // Define thresholds for triggering a step up/down (adjust these for sensitivity)
+    val zoomInThreshold = 1.2f  // If accumulated zoom factor exceeds this, step up
+    val zoomOutThreshold = 0.8f // If accumulated zoom factor falls below this, step down
+
+    // Ensure prayers are loaded only when filename changes
+    LaunchedEffect(currentFilename) {
+        prayerViewModel.loadPrayerElements(currentFilename)
+    }
+
+    // Store the initial system bar padding values
+    val initialTopPadding = remember { mutableStateOf(0.dp) }
+    val initialBottomPadding = remember { mutableStateOf(0.dp) }
 
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()
+    }
+
+    // Observe if the LazyColumn has been scrolled to its very end
+    val isScrolledToTheEnd by remember {
+        derivedStateOf {
+            !listState.isScrollInProgress && !listState.canScrollForward // True if there's no more content to scroll down to
+        }
+    }
+
+    // React to the scroll state change
+    LaunchedEffect(isScrolledToTheEnd) {
+        if (isScrolledToTheEnd) {
+            isVisible.value = true // Make bars visible when scrolled to the end
+        }
     }
 
     Scaffold(
@@ -86,6 +125,19 @@ fun PrayerScreen(
             .nestedScroll(nestedScrollConnection)
             .pointerInput(Unit) {
                 detectTapGestures { isVisible.value = !isVisible.value }
+            }
+            .pointerInput(Unit) {
+                detectTransformGestures { _, _, zoom, _ ->
+                    cumulativeZoomFactor *= zoom
+
+                    if (cumulativeZoomFactor >= zoomInThreshold) {
+                        settingsViewModel.stepFontSize(1)
+                        cumulativeZoomFactor = 1f
+                    } else if (cumulativeZoomFactor <= zoomOutThreshold) {
+                        settingsViewModel.stepFontSize(-1)
+                        cumulativeZoomFactor = 1f
+                    }
+                }
             },
         topBar = {
             AnimatedVisibility(
@@ -94,120 +146,154 @@ fun PrayerScreen(
             ) {
                 TopNavBar(
                     title,
-                    navController,
-                    onActionClick = { navController.navigate("settings") }
-                )
+                    navController
+                ) { navController.navigate("settings") }
             }
         },
         bottomBar = {
-            AnimatedVisibility(
-                visible = isVisible.value,
-                modifier = Modifier.zIndex(1f)
-            ) {
-                SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
+            if (prevNodeRoute != null || nextNodeRoute != null) {
+                AnimatedVisibility(
+                    visible = isVisible.value,
+                    modifier = Modifier.zIndex(1f)
+                ) {
+                    SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
+                }
             }
         }
-    ) {
-        Box(
+    ) { innerPadding ->
+
+        // Capture the system window insets once when the composable is first launched
+        LaunchedEffect(innerPadding) {
+            if (initialTopPadding.value == 0.dp){
+                initialTopPadding.value = innerPadding.calculateTopPadding()
+            }
+            if (initialBottomPadding.value == 0.dp) {
+                initialBottomPadding.value = innerPadding.calculateBottomPadding()
+            }
+        }
+
+        LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = if (isLandscape) 40.dp else 20.dp), // Reduce width in landscape
-            contentAlignment = Alignment.Center
+                .padding(horizontal = if (isLandscape) 40.dp else 20.dp),
+//                    .fillMaxWidth(if (isLandscape) 0.8f else 1f), // Limit width in landscape
+            state = listState,
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth(if (isLandscape) 0.8f else 1f) // Limit width in landscape
-                    .fillMaxHeight(0.9f), // Limit height to avoid out of bounds
-                state = listState,
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+            item {
+                Spacer(Modifier.padding(top = initialTopPadding.value))
+            }
+            items(prayers) { prayerElement ->
+                PrayerElementRenderer(
+                    prayerElement,
+                    selectedFontSize,
+                    prayerViewModel,
+                    currentFilename,
+                    songScrollState,
+                )
+            }
+            item {
+                Spacer(Modifier.padding(bottom = initialBottomPadding.value))
+            }
+        }
+    }
+}
+
+@Composable
+fun PrayerElementRenderer(
+    prayerElement: PrayerElement,
+    selectedFontSize: AppFontSize,
+    prayerViewModel: PrayerViewModel,
+    filename: String,
+    isSongHorizontalScroll: Boolean = false,
+) {
+    when (prayerElement) {
+        is PrayerElement.Title -> {
+            Title(
+                text = prayerElement.content,
+                fontSize = selectedFontSize.fontSize
+            )
+        }
+
+        is PrayerElement.Heading -> {
+            Heading(
+                text = prayerElement.content,
+                fontSize = selectedFontSize.fontSize
+            )
+        }
+
+        is PrayerElement.Subheading -> {
+            Subheading(
+                text = prayerElement.content,
+                fontSize = selectedFontSize.fontSize
+            )
+        }
+
+        is PrayerElement.Prose -> {
+            Prose(
+                text = prayerElement.content,
+                fontSize = selectedFontSize.fontSize
+            )
+        }
+
+        is PrayerElement.Song -> {
+            Song(
+                text = prayerElement.content,
+                fontSize = selectedFontSize.fontSize,
+                isHorizontal = isSongHorizontalScroll
+            )
+        }
+
+        is PrayerElement.Subtext -> {
+            Subtext(
+                text = prayerElement.content,
+                fontSize = selectedFontSize.fontSize
+            )
+        }
+
+        is PrayerElement.CollapsibleBlock -> {
+            CollapsibleTextBlock(
+                title = prayerElement.title,
+                fontSize = selectedFontSize.fontSize,
             ) {
-                item {
-                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 32.dp))
-                }
-                items(prayers) { prayer ->
-                    when (prayer["type"]) {
-                        "title" -> {
-                            Title(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "heading" -> {
-                            Heading(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "subheading" -> {
-                            Subheading(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "prose" -> {
-                            Prose(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "song" -> {
-                            Song(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "subtext" -> {
-                            Subtext(
-                                text = (prayer["content"] ?: "").toString(),
-                                fontSize = selectedFontSize
-                            )
-                        }
-
-                        "collapsible-block" -> {
-                            val collapsibleTitle = prayer["title"] as? String ?: "Expandable Section"
-                            val items = prayer["items"] as? List<Map<String, String>> ?: emptyList()
-
-                            CollapsibleTextBlock(
-                                title = collapsibleTitle,
-                                fontSize = selectedFontSize,
-                            ){
-                                Column {
-                                    Spacer(Modifier.padding(8.dp))
-                                    items.forEach {item ->
-                                        when (item["type"]) {
-                                            "heading" -> Heading(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "subheading" -> Subheading(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "prose" -> Prose(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "song" -> Song(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            "subtext" -> Subtext(text = item["content"] ?: "", fontSize = selectedFontSize)
-                                            else -> Text("Unknown collapsible item: ${item["type"]}", color=MaterialTheme.colorScheme.error)
-                                        }
-                                        Spacer(Modifier.padding(4.dp))
-                                    }
-                                }
-                            }
-                        }
-                        "error" -> {
-                            Text("Error: ${prayer["content"]}", color=MaterialTheme.colorScheme.error)
-                        }
-
-                        "newsection" -> {
-                            Text("")
-                        }
-                        else -> {
-                            Text("Unknown prayer element: ${prayer["type"]}", color=MaterialTheme.colorScheme.error)
-                        }
+                Column {
+                    Spacer(Modifier.padding(8.dp))
+                    prayerElement.items.forEach { nestedItem -> // Loop through type-safe items
+                        // Recursively call the renderer for nested items
+                        PrayerElementRenderer(nestedItem, selectedFontSize, prayerViewModel, filename)
+                        Spacer(Modifier.padding(4.dp))
                     }
                 }
-                item {
-                    Spacer(Modifier.padding(if (isLandscape) 40.dp else 44.dp))
-                }
             }
+        }
+
+        is PrayerElement.Error -> {
+            ErrorBlock(
+                "Error: ${prayerElement.content}",
+                prayerViewModel,
+                filename,
+                fontSize = selectedFontSize.fontSize
+            )
+        }
+
+        is PrayerElement.Link -> {
+            // This block indicates that a 'Link' element unexpectedly reached the UI.
+            // Log an error or render a debug message, as it should ideally not happen.
+            ErrorBlock(
+                "UI Error: Unresolved Link element encountered",
+                prayerViewModel,
+                filename,
+                fontSize = selectedFontSize.fontSize
+            )
+        }
+
+        is PrayerElement.LinkCollapsible -> {
+            // Similar to 'Link', this suggests an issue in the data resolution layer.
+            ErrorBlock(
+                "UI Error: Unresolved LinkCollapsible element encountered",
+                prayerViewModel,
+                filename,
+                fontSize = selectedFontSize.fontSize
+            )
         }
     }
 }
@@ -251,7 +337,7 @@ fun Subheading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit =
 @Composable
 fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
     Text(
-        text = text.replace("/t", "    "),
+        text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
         fontSize = fontSize,
         textAlign = TextAlign.Justify,
         modifier = modifier
@@ -260,15 +346,29 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 }
 
 @Composable
-fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
-    Text(
-        text = text.replace("/t", "    "),
-        fontSize = fontSize,
-        textAlign = TextAlign.Start,
+fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp, isHorizontal: Boolean = false) {
+    val horizontalScrollState = rememberScrollState()
+    Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-    )
+            .let { currentModifier ->
+                if (isHorizontal) {
+                    currentModifier.horizontalScroll(horizontalScrollState)
+                } else {
+                    currentModifier
+                }
+            }
+            .border(4.dp, MaterialTheme.colorScheme.outline)
+    ) {
+        Text(
+            text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
+            fontSize = fontSize,
+            textAlign = TextAlign.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp)
+        )
+    }
 }
 
 @Composable
@@ -280,6 +380,24 @@ fun Subtext(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16
         modifier = modifier
             .fillMaxWidth()
     )
+}
+
+@Composable
+fun ErrorBlock(
+    text: String,
+    prayerViewModel: PrayerViewModel,
+    errorLocation: String,
+    fontSize: TextUnit = AppFontSize.Medium.fontSize,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = text,
+        fontSize = fontSize,
+        color = MaterialTheme.colorScheme.error,
+        modifier = modifier
+            .fillMaxWidth()
+    )
+    prayerViewModel.handlePrayerElementError(text, errorLocation)
 }
 
 @Composable
@@ -319,4 +437,23 @@ fun CollapsibleTextBlock(
             }
         }
     }
+}
+
+@Composable
+fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
+    val isVisible = remember { mutableStateOf(true) }
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                if (available.y > 20) {
+                    isVisible.value = true  // Scrolling UP → Show bars
+                } else if (available.y < 0) {
+                    isVisible.value = false // Scrolling DOWN → Hide bars
+                }
+                return Offset.Zero
+            }
+        }
+    }
+    return isVisible to nestedScrollConnection
 }

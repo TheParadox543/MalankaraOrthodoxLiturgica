@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
@@ -31,18 +32,25 @@ class BibleViewModel @Inject constructor(
         }
     }
 
-    fun findBibleBookWithIndex(bookName: String, language: String): Pair<BibleDetails?, Int?> {
+    fun findBibleBookWithIndex(bookName: String, language: AppLanguage): Pair<BibleDetails?, Int?> {
         val currentBooks = _bibleBooks.value
 
         currentBooks.forEachIndexed { index, bibleBook ->
             when(language){
-                "en" -> {
-                    if (bibleBook.book.en == bookName) {
+//                AppLanguage.ENGLISH -> {
+//                    if (bibleBook.book.en == bookName) {
+//                        return Pair(bibleBook, index)
+//                    }
+//                }
+
+                AppLanguage.MALAYALAM -> {
+                    if (bibleBook.book.ml == bookName) {
                         return Pair(bibleBook, index)
                     }
                 }
-                "ml" -> {
-                    if (bibleBook.book.ml == bookName) {
+
+                else -> {
+                    if (bibleBook.book.en == bookName) {
                         return Pair(bibleBook, index)
                     }
                 }
@@ -51,7 +59,7 @@ class BibleViewModel @Inject constructor(
         return Pair(null, null)
     }
 
-    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: String): Chapter? {
+    fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: AppLanguage): Chapter? {
         return bibleRepository.loadBibleChapter(bookNumber, chapterNumber, language)
     }
 

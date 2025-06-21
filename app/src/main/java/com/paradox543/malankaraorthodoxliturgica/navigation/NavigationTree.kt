@@ -21,6 +21,10 @@ object PrayerRoutes {
     const val BAPTISM = "baptism"
     const val ASCENSION = "ascension"
     const val PENTECOST = "pentecost"
+    const val CONTEXTUAL = "contextual"
+    const val AFTER_FOOD = "afterFood"
+    const val BEFORE_FOOD = "beforeFood"
+    const val FOR_SICK = "forSick"
 
 //    Canonical Routes
     const val VESPERS = "vespers"
@@ -91,7 +95,8 @@ object NavigationTree {
             commonPrayersSection(PrayerRoutes.ROOT),
             dailyPrayersSection(PrayerRoutes.ROOT),
             sacramentsSection(PrayerRoutes.ROOT),
-            feastsSection(PrayerRoutes.FEASTS),
+            feastsSection(PrayerRoutes.ROOT),
+            contextualSection(PrayerRoutes.ROOT),
         )
     )
 
@@ -105,6 +110,7 @@ object NavigationTree {
                 prayer("lords", "commonprayers/lords.json", currentRoute, listOf("ml", "mn")),
                 prayer("mary", "commonprayers/mary.json", currentRoute, listOf("ml", "mn")),
                 prayer("kauma", "commonprayers/doxology.json", currentRoute, languages = listOf("ml", "mn")),
+                prayer("kaumaSyriac", "commonprayers/trisagionSyriac.json", currentRoute),
                 prayer("nicene", "commonprayers/nicenecreed.json", currentRoute),
                 prayer("angels", "commonprayers/praiseOfAngels.json", currentRoute),
                 prayer("cherubims", "commonprayers/praiseOfCherubims.json", currentRoute),
@@ -369,6 +375,31 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = children,
+        )
+    }
+
+    private fun contextualSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.CONTEXTUAL
+        return PageNode(
+            route = currentRoute,
+            parent = parentRoute,
+            children = listOf(
+                prayer(
+                    PrayerRoutes.BEFORE_FOOD,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.BEFORE_FOOD}.json",
+                    currentRoute
+                ),
+                prayer(
+                    PrayerRoutes.AFTER_FOOD,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.AFTER_FOOD}.json",
+                    currentRoute
+                ),
+                prayer(
+                    PrayerRoutes.FOR_SICK,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.FOR_SICK}.json",
+                    currentRoute
+                )
+            )
         )
     }
 

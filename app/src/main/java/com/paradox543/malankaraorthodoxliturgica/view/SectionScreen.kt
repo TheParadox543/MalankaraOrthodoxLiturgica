@@ -28,23 +28,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
+    settingsViewModel: SettingsViewModel,
     node: PageNode
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by prayerViewModel.selectedFontSize.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val nodes = node.children
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -121,7 +123,7 @@ private fun SectionCard(
     node: PageNode,
     navController: NavController,
     translations: Map<String, String>,
-    selectedFontSize: TextUnit
+    selectedFontSize: AppFontSize
 ) {
     Card(
         modifier = Modifier
@@ -146,7 +148,7 @@ private fun SectionCard(
         val text = node.route.split("_").last()
         Text(
             text = translations[text] ?: text,
-            fontSize = selectedFontSize,
+            fontSize = selectedFontSize.fontSize,
             modifier = Modifier.padding(16.dp)
         )
     }

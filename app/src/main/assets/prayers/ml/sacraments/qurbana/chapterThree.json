@@ -124,7 +124,7 @@
         "content": "ജനം :- ആമ്മീൻ."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "5-ാം തുബ്‌ദേൻ(മറ്റൊന്ന്)",
         "items": [
             {
@@ -226,7 +226,7 @@
         "content": "8. നന്മനിറ-ഞ്ഞാ-നേ എന്റെ\nഹാലേലുയ്യാ-ഉ-ഹാലേലുയ്യാ\nതിന്മകളെ - നീ- ഓർക്കരുതേ.\nകുറിയേ-ലാ-യിസ്സോൻ."
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "അല്ലെങ്കിൽ(സ്രോപ്പെ ദ്നൂറോ എന്ന പോലെ)",
         "items": [
             {
@@ -268,7 +268,7 @@
         "content": "ജനം :- കുറിയേ-ലായിസ്സോൻ"
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ലുത്തിനിയ",
         "items": [
             {
@@ -346,7 +346,7 @@
         ]
     },
     {
-        "type": "collapsible",
+        "type": "collapsible-block",
         "title": "ജന്മദിന വിവാഹ വാർഷിക സ്തോത്ര പ്രാർത്ഥനകൾ",
         "items": [
             {

@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
 import android.util.Log
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleRoot
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
@@ -27,7 +28,7 @@ class BibleRepository @Inject constructor(
         return try {
             context.assets.open(fileName).use { inputStream ->
                 val jsonString = inputStream.bufferedReader().use { it.readText() }
-                json.decodeFromString<T>(jsonString) // <--- This is where kotlinx.serialization does its magic!
+                json.decodeFromString<T>(jsonString)
             }
         } catch (e: Exception) {
             Log.e("BibleRepository", "Error loading or parsing $fileName: ${e.message}", e)
@@ -53,8 +54,12 @@ class BibleRepository @Inject constructor(
      * @param language The language code (e.g., "ml", "en").
      * @return A map where keys are verse numbers (as String) and values are verse text.
      */
-    fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: String = "ml"): Chapter? {
-        val fileName = "bible-$language.json"
+    fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: AppLanguage = AppLanguage.MALAYALAM): Chapter? {
+        val bibleLanguage = when(language){
+            AppLanguage.MALAYALAM -> "ml"
+            else -> "en"
+        }
+        val fileName = "bible-${bibleLanguage}.json"
 
         // Load or retrieve the cached BibleRoot object for the specific language file
         val bibleRoot = cachedBibleChapterFiles.computeIfAbsent(fileName) {
