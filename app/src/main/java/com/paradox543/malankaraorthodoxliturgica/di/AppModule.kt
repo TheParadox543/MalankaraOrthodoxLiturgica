@@ -51,10 +51,10 @@ object AppModule {
         json: Json
     ): BibleRepository = BibleRepository(context, json)
 
-//    @Provides
-//    @Singleton
-//    fun provideCalendarRepository(
-//        @ApplicationContext context: Context,
-//        json: Json
-//    ): CalendarRepository = CalendarRepository(context, json)
+    @Provides
+    @Singleton
+    fun provideCalendarRepository(
+        @ApplicationContext context: Context,
+        json: Json
+    ): CalendarRepository = CalendarRepository(context, json)
 }
