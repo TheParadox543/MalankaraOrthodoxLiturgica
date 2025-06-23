@@ -39,6 +39,7 @@ fun NavGraph(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val arguments = navBackStackEntry?.arguments
+    val rootNode by navViewModel.rootNode.collectAsState()
     LaunchedEffect(currentRoute, arguments) {
         if (currentRoute != null) {
             settingsViewModel.logScreensVisited(currentRoute, arguments)
@@ -61,14 +62,14 @@ fun NavGraph(
         }
         composable("section/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
-            val node = navViewModel.findNode(navViewModel.rootNode, route)
+            val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, settingsViewModel, node)
             }
         }
         composable("prayerScreen/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
-            val node = navViewModel.findNode(navViewModel.rootNode, route)
+            val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
             }
