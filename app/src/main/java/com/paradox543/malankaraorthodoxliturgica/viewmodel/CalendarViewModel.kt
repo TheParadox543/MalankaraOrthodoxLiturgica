@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +33,9 @@ class CalendarViewModel @Inject constructor(
     // State for the currently viewed month/year in the calendar UI
     private val _currentCalendarViewDate = MutableStateFlow(LocalDate.now())
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
+
+    private val _currentDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
+    val currentDayViewData: StateFlow<List<LiturgicalEventDetails>> = _currentDayViewData.asStateFlow()
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -84,6 +88,10 @@ class CalendarViewModel @Inject constructor(
                 System.err.println("Error loading upcoming week events: ${e.stackTraceToString()}")
             }
         }
+    }
+
+    fun setDayEvents(events: List<LiturgicalEventDetails>) {
+        _currentDayViewData.value = events
     }
 
     fun goToNextMonth() {
