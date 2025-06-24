@@ -27,13 +27,33 @@
         "type": "feast",
         "title": {
             "en": "Second Sunday after Pentecost"
-        }
+        },
+        "bibleReadings": [
+            "Leviticus 19: 1-8",
+            "2 Samuel 5: 1-10",
+            "Song of Songs 2:15 - 3:6",
+            "Daniel 6: 25-28",
+            "Acts 4: 24-28",
+            "Ephesians 2: 11-18",
+            "St. Matthew 10:34 -11: 1"
+        ],
+        "specialSongsKey": "afterResurrection"
     },
     "thirdSundayAfterPentecost": {
         "type": "feast",
         "title": {
             "en": "Third Sunday after Pentecost"
-        }
+        },
+        "bibleReadings": [
+            "Genesis 42: 18-25",
+            "Judges 1: 8-11",
+            "Jeremiah 2:35 - 3:5",
+            "Daniel 3: 21-23",
+            "Acts 13: 26-29",
+            "Galatians 6:10-16",
+            "St. John 6:35-46"
+        ],
+        "specialSongsKey": "afterResurrection"
     },
     "fourthSundayAfterPentecost": {
         "type": "feast",
@@ -53,7 +73,7 @@
             "en": "Sixth Sunday after Pentecost"
         }
     },
-    "seventSundayAfterPentecost": {
+    "seventhSundayAfterPentecost": {
         "type": "feast",
         "title": {
             "en": "Seventh Sunday after Pentecost"
@@ -77,6 +97,15 @@
         "title": {
             "en": "Feast of St. Peter and St. Paul. End of Apostles' Fast"
         },
+        "bibleReadings": [
+            "Genesis 12: 1-9",
+            "Isaiah 43: 1-7",
+            "Daniel 1: 8-21",
+            "Acts 1: 12-26",
+            "1 Corinthians 12:28-13:10",
+            "St. Matthew 16: 13-28"
+        ],
+        "specialSongsKey": "feastOfApostlesFast",
         "date": "06/29"
     },
     "feastOfTwelveApostles": {

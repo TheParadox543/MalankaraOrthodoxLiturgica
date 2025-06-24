@@ -37,6 +37,15 @@ val bottomNavItems = listOf(
         )
     },
     BottomNavItem(
+        "calendar", "Calendar"
+    ) {
+      Icon(
+          painterResource(R.drawable.calendar),
+          "Calendar",
+          Modifier.size(iconSize),
+      )
+    },
+    BottomNavItem(
         "bible", "Bible"
     ) {
         Icon(

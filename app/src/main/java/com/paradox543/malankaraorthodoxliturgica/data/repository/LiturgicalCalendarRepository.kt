@@ -94,14 +94,14 @@ class LiturgicalCalendarRepository @Inject constructor(
      * is not present in liturgical_data.json.
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getEventsForDate(date: LocalDate): Map<EventKey, LiturgicalEventDetails> {
+    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetails> {
         val eventKeys = getEventKeysForDate(date)
-        val eventDetails = mutableMapOf<EventKey, LiturgicalEventDetails>()
+        val eventDetails = mutableListOf<LiturgicalEventDetails>()
 
         for (key in eventKeys) {
             val details = liturgicalData[key]
             if (details != null) {
-                eventDetails[key] = details
+                eventDetails.add(details)
             } else {
                 throw IllegalArgumentException("Could not find event key '$key' in liturgical_data.json.")
             }
@@ -161,7 +161,7 @@ class LiturgicalCalendarRepository @Inject constructor(
             // If it finished mid-week (e.g. month ends on Wednesday), it will contain
             // days from the month and then days from the next month until Sunday.
             while (weekDays.size < 7) {
-                weekDays.add(CalendarDay(currentDay, emptyMap())) // Add placeholder for visual alignment
+                weekDays.add(CalendarDay(currentDay, emptyList())) // Add placeholder for visual alignment
                 currentDay = currentDay.plusDays(1)
             }
             monthData.add(CalendarWeek(weekDays.toList()))

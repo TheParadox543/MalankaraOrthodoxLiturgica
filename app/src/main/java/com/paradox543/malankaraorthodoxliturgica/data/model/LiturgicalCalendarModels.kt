@@ -3,15 +3,21 @@ package com.paradox543.malankaraorthodoxliturgica.data.model
 import kotlinx.serialization.Serializable
 import java.time.LocalDate
 
-// Kotlin equivalents of your Python TypeAlias and TypedDict
 
 typealias EventKey = String // Semantically, good to keep, though technically just String
-typealias TitleStr = Map<String, String> // e.g., {"en": "English Title", "ml": "Malayalam Title"}
+
+@Serializable
+data class TitleStr(
+    val en: String,
+    val ml: String? = null,
+)
 
 @Serializable
 data class LiturgicalEventDetails(
     val type: String,
-    val title: TitleStr
+    val title: TitleStr,
+    val bibleReadings: List<String>? = null,
+    val specialSongsKey: String? = null,
 )
 
 typealias LiturgicalDataStore = Map<String, LiturgicalEventDetails>
@@ -26,7 +32,7 @@ typealias LiturgicalCalendarDates = Map<String, YearEvents> // Maps year (e.g., 
 // Custom data classes for the output of loadMonthData and getUpcomingWeekEvents
 data class CalendarDay(
     val date: LocalDate,
-    val events: Map<EventKey, LiturgicalEventDetails> // Map of EventKey to its details
+    val events: List<LiturgicalEventDetails> // Map of EventKey to its details
 )
 
 data class CalendarWeek(
