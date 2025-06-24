@@ -1,10 +1,151 @@
 {
     "sundayBeforePentecost": {
-        "type": "Sunday",
-        "color": "red"
+        "type": "feast",
+        "title": {
+            "en": "Sunday before Pentecost"
+        }
     },
     "pentecost": {
-        "type": "Sunday",
-        "color": "red"
+        "type": "feast",
+        "title": {
+            "en": "Pentecost"
+        }
+    },
+    "goldenFriday": {
+        "type": "feast",
+        "title": {
+            "en": "Golden Friday (Friday after Pentecost"
+        }
+    },
+    "firstSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "First Sunday after Pentecost"
+        }
+    },
+    "secondSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "Second Sunday after Pentecost"
+        }
+    },
+    "thirdSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "Third Sunday after Pentecost"
+        }
+    },
+    "fourthSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "Fourth Sunday after Pentecost"
+        }
+    },
+    "fifthSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "Fifth Sunday after Pentecost"
+        }
+    },
+    "sixthSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "Sixth Sunday after Pentecost"
+        }
+    },
+    "seventSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "Seventh Sunday after Pentecost"
+        }
+    },
+    "eighthSundayAfterPentecost": {
+        "type": "feast",
+        "title": {
+            "en": "Eighth Sunday after Pentecost"
+        }
+    },
+    "apostlesFastStart": {
+        "type": "event",
+        "title": {
+            "en": "Beginning of Apostles' Fast (13 days Sleeha Fast)"
+        },
+        "date": "06/16"
+    },
+    "feastOfApostlesFast": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of St. Peter and St. Paul. End of Apostles' Fast"
+        },
+        "date": "06/29"
+    },
+    "feastOfTwelveApostles": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of the Twelve Apostles"
+        },
+        "date": "06/30"
+    },
+    "transfiguration": {
+        "type": "feast",
+        "title": {
+            "en": "Transfiguration"
+        },
+        "date": "08/06"
+    },
+    "firstSundayAfterTransfiguration": {
+        "type": "feast",
+        "title": {
+            "en": "First Sunday after Transfiguration"
+        }
+    },
+    "worldEnvironmentDay": {
+        "type": "event",
+        "title": {
+            "en": "World Environment Day"
+        },
+        "date": "06/05"
+    },
+    "stAaron": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of St. Aaron the Monk"
+        },
+        "date": "06/09"
+    },
+    "feastOfStBartholomew": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Bartholomew the Apostle"
+        },
+        "date": "06/11"
+    },
+    "feastOfStJames": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. James, Brother of Jesus and the First Bishop of Jerusalem"
+        },
+        "date": "06/19"
+    },
+    "birthOfStJohn": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of the Birth of St. John the Baptist"
+        },
+        "date": "06/24"
+    },
+    "dukhrono": {
+        "type": "event",
+        "title": {
+            "en": "Dukhrono of St. Thomas (Niram 8)"
+        },
+        "date": "07/03"
+    },
+    "feastOf72Evangelists": {
+        "type": "event",
+        "title": {
+            "en": "Feast of 72 Evangelists"
+        },
+        "date": "07/05"
     }
 }
