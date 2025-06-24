@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
+import com.paradox543.malankaraorthodoxliturgica.view.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
@@ -94,6 +95,9 @@ fun NavGraph(
                 bookIndex.toInt(),
                 chapterIndex.toInt()
             )
+        }
+        composable("calendar") {
+            CalendarScreen(navController)
         }
         composable("settings") {
             SettingsScreen(navController, settingsViewModel)
