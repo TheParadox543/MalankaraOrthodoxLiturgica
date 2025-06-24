@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -30,24 +30,27 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -59,13 +62,15 @@ import java.util.Locale
 fun CalendarScreen(
     navController: NavController,
     calendarViewModel: CalendarViewModel = hiltViewModel(),
+    settingsViewModel: SettingsViewModel = hiltViewModel(),
 ) {
     // Collect the StateFlows from the ViewModel
     val monthCalendarData by calendarViewModel.monthCalendarData.collectAsState()
     val currentCalendarViewDate by calendarViewModel.currentCalendarViewDate.collectAsState()
-    val displayEvents by calendarViewModel.currentDayViewData.collectAsState()
+    val displayEvents by calendarViewModel.selectedDayViewData.collectAsState()
     val isLoading by calendarViewModel.isLoading.collectAsState()
     val error by calendarViewModel.error.collectAsState()
+    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
     Scaffold(
         topBar = { TopNavBar("Calendar", navController) },
@@ -111,22 +116,62 @@ fun CalendarScreen(
                 }
             } else {
                 // Calendar content
-                Column(
-                    modifier = Modifier
-                        .padding(8.dp)
-                ) {
-                    MonthNavigation(calendarViewModel, currentCalendarViewDate)
-                    DayOfWeekHeaders()
-                    CalendarGrid(monthCalendarData, currentCalendarViewDate, calendarViewModel)
-                }
-                if (displayEvents.isNotEmpty()) {
-                    var scrollState = rememberScrollState()
-                    HorizontalDivider(thickness = 8.dp, color = MaterialTheme.colorScheme.primary)
+                val configuration = LocalConfiguration.current
+                val screenWidth = configuration.screenWidthDp.dp
+                if (screenWidth <= 600.dp) {
                     Column(
-                        Modifier.verticalScroll(scrollState)
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .widthIn(max = 400.dp)
                     ) {
-                        displayEvents.forEach { event ->
-                            DisplayEvent(event)
+                        Column {
+                            MonthNavigation(calendarViewModel, currentCalendarViewDate)
+                            DayOfWeekHeaders()
+                            CalendarGrid(
+                                monthCalendarData,
+                                currentCalendarViewDate,
+                                calendarViewModel
+                            )
+                        }
+                    }
+                    if (displayEvents.isNotEmpty()) {
+                        var scrollState = rememberScrollState()
+                        HorizontalDivider(
+                            thickness = 8.dp,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Column(
+                            Modifier.verticalScroll(scrollState)
+                        ) {
+                            displayEvents.forEach { event ->
+                                DisplayEvent(event, selectedLanguage)
+                            }
+                        }
+                    }
+                } else {
+                    Row(Modifier.padding(8.dp)) {
+                        Column(Modifier
+                            .widthIn(max = 400.dp)
+                            .verticalScroll(rememberScrollState())
+                        ) {
+                            MonthNavigation(calendarViewModel, currentCalendarViewDate)
+                            DayOfWeekHeaders()
+                            CalendarGrid(monthCalendarData, currentCalendarViewDate, calendarViewModel)
+
+                        }
+                        if (displayEvents.isNotEmpty()) {
+                            var scrollState = rememberScrollState()
+                            VerticalDivider(
+                                thickness = 8.dp,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Column(
+                                Modifier.verticalScroll(scrollState)
+                            ) {
+                                displayEvents.forEach { event ->
+                                    DisplayEvent(event, selectedLanguage)
+                                }
+                            }
                         }
                     }
                 }
@@ -250,7 +295,7 @@ private fun RowScope.DayItem(
 
     // Determine border color based on hasEvents and if it's the current month
     val borderColor = if (hasEvents) {
-        if (day.events[0].type == "feast")
+        if (day.events.firstOrNull()?.type == "feast")
             Color.Yellow
         else
             Color.Black
@@ -292,11 +337,15 @@ private fun RowScope.DayItem(
 }
 
 @Composable
-fun DisplayEvent(event: LiturgicalEventDetails) {
+fun DisplayEvent(event: LiturgicalEventDetails, selectedLanguage: AppLanguage) {
     ListItem(
         headlineContent = {
+            val textTitle = when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> event.title.ml?: event.title.en
+                else -> event.title.en
+            }
             Text(
-                event.title.en,
+                textTitle,
                 fontWeight = FontWeight.Bold,
             )
         },

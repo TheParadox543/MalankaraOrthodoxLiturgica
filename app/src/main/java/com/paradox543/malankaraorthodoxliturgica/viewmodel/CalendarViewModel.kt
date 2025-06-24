@@ -34,8 +34,8 @@ class CalendarViewModel @Inject constructor(
     private val _currentCalendarViewDate = MutableStateFlow(LocalDate.now())
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
 
-    private val _currentDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
-    val currentDayViewData: StateFlow<List<LiturgicalEventDetails>> = _currentDayViewData.asStateFlow()
+    private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
+    val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> = _selectedDayViewData.asStateFlow()
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -91,7 +91,7 @@ class CalendarViewModel @Inject constructor(
     }
 
     fun setDayEvents(events: List<LiturgicalEventDetails>) {
-        _currentDayViewData.value = events
+        _selectedDayViewData.value = events
     }
 
     fun goToNextMonth() {
