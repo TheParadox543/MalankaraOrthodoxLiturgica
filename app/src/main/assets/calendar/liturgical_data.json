@@ -1,9 +1,294 @@
 {
+    "newYear": {
+        "type": "event",
+        "title": {
+            "en": "New Year"
+        },
+        "date": "01/01"
+    },
+    "circumcision": {
+        "type": "feast",
+        "title": {
+            "en": "Circumcision of our Lord"
+        },
+        "date": "01/01"
+    },
+    "feastOfStBasilAndGregory": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Basil and St. Gregory and All the Holy Fathers"
+        },
+        "date": "01/01"
+    },
+    "commemorationBaseliosGeevargheseII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Geevarghese II Catholicos"
+        },
+        "date": "01/03",
+        "startedYear": 1965
+    },
+    "koonanCrossOathMemorial": {
+        "type": "event",
+        "title": {
+            "en": "Memorial Day of Oath of Koonan Cross"
+        },
+        "date": "01/03"
+    },
+    "secondSundayAfterChristmas": {
+        "type": "feast",
+        "title": {
+            "en": "Second Sunday after Christmas"
+        }
+    },
+    "epiphany": {
+        "type": "feast",
+        "title": {
+            "en": "Epiphany / Danaha (Baptism of our Lord Jesus Christ)"
+        },
+        "date": "01/06"
+    },
+    "beheadingOfStJohn": {
+        "type": "event",
+        "title": {
+            "en": "Feast Commemorating the Beheading of St. John the Baptist"
+        },
+        "date": "01/07"
+    },
+    "martyrdomOfStStephen": {
+        "type": "event",
+        "title": {
+            "en": "Feast Commemorating the Martyrdom of St. Stephen"
+        },
+        "date": "01/08"
+    },
+    "firstSundayAfterEpiphany": {
+        "type": "feast",
+        "title": {
+            "en": "First Sunday after Epiphany"
+        }
+    },
+    "feastOfStMaryForSeeds": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of St. Mary for Seeds"
+        },
+        "date": "01/15"
+    },
+    "commemorationPaulTheMonk": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Paul the Monk"
+        },
+        "date": "01/15"
+    },
+    "feastOfStSamuelSimonAntony": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Samuel, St. Simon and St. Antony"
+        },
+        "date": "01/18"
+    },
+    "secondSundayAfterEpiphany": {
+        "type": "feast",
+        "title": {
+            "en": "Second Sunday after Epiphany"
+        }
+    },
+    "commemorationPhiliposeMarEusebius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Philipose Mar Eusebius Metropolitan"
+        },
+        "date": "01/21",
+        "startedYear": 2009
+    },
+    "commemorationMarthomaVIII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Marthoma VIII"
+        },
+        "date": "01/22",
+        "startedYear": 1817
+    },
+    "commemorationStAugen": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of St. Augen the Monk"
+        },
+        "date": "01/23"
+    },
+    "thirdSundayAfterEpiphany": {
+        "type": "feast",
+        "title": {
+            "en": "Third Sunday after Epiphany"
+        }
+    },
+    "commemorationMathewsII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Marthoma Mathews II Catholicos"
+        },
+        "date": "01/26",
+        "startedYear": 2006
+    },
+    "commemorationPauloseAthanasios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Paulose Mar Athanasios Metropolitan, Kuttikkattil"
+        },
+        "date": "01/26",
+        "startedYear": 1955
+    },
+    "republicDay": {
+        "type": "event",
+        "title": {
+            "en": "Republic Day"
+        },
+        "date": "01/26"
+    },
+
+    "feastOfStJamesZebedee": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of St. James the Apostle (Son of Zebedee)"
+        },
+        "date": "05/01"
+    },
+    "commemorationPauloseICatholicos": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Paulose I Catholicos"
+        },
+        "date": "05/03",
+        "startedYear": 1914
+    },
+    "firstSundayAfterNewSunday": {
+        "type": "feast",
+        "title": {
+            "en": "First Sunday after New Sunday"
+        }
+    },
+    "feastOfStJohnTheApostle": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. John the Apostle"
+        },
+        "date": "05/08"
+    },
+    "commemorationMarthomaV": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Marthoma V"
+        },
+        "date": "05/08",
+        "startedYear": 2006
+    },
+    "feastOfStSimonTheZealot": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Simon the Zealot"
+        },
+        "date": "05/10"
+    },
+    "secondSundayAfterNewSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Second Sunday after New Sunday"
+        }
+    },
+    "feastOfStMaryForHarvest": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of St. Mary for Good Crops & Harvest"
+        },
+        "date": "05/15"
+    },
+    "commemorationStIsaac": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of St. Isaac"
+        },
+        "date": "05/15"
+    },
+    "commemorationSeverios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Yuhanon Mar Severios Metropolitan"
+        },
+        "date": "05/16",
+        "startedYear": 1991
+    },
+    "thirdSundayAfterNewSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Third Sunday after New Sunday"
+        }
+    },
+    "commemorationDionysiusIII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Mar Dionysius III (Punnathra) Metropolitan"
+        },
+        "date": "05/19",
+        "startedYear": 1826
+    },
+    "commemorationConstantineHelen": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of King Constantine and Helen the Queen"
+        },
+        "date": "05/20"
+    },
+    "commemorationEvangelistsAndSynodFathers": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of the 4 Evangelists and All Fathers of the 3 Ecumenical Synods"
+        },
+        "date": "05/20"
+    },
+    "fourthSundayAfterNewSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Fourth Sunday after New Sunday"
+        }
+    },
+    "commemorationDidymosI": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Marthoma Didymus I Catholicos"
+        },
+        "date": "05/26",
+        "startedYear": 2015
+    },
+    "ascension": {
+        "type": "feast",
+        "title": {
+            "en": "Ascension of our Lord (Suloqo)"
+        },
+        "date": "05/29"
+    },
     "sundayBeforePentecost": {
         "type": "feast",
         "title": {
             "en": "Sunday before Pentecost"
         }
+    },
+    "commemorationYuyakimMarIvanios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Yuyakim Mar Ivanios Metropolitan"
+        },
+        "date": "06/06",
+        "startedYear": 1964
+    },
+    "commemorationAugenMarDionysius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Augen I Mar Dionysius Catholicos"
+        },
+        "date": "06/06",
+        "startedYear": 1976
     },
     "pentecost": {
         "type": "feast",
@@ -14,7 +299,7 @@
     "goldenFriday": {
         "type": "feast",
         "title": {
-            "en": "Golden Friday (Friday after Pentecost"
+            "en": "Golden Friday (Friday after Pentecost)"
         }
     },
     "firstSundayAfterPentecost": {
@@ -22,6 +307,13 @@
         "title": {
             "en": "First Sunday after Pentecost"
         }
+    },
+    "feastOfStMaryEstablishmentChurch": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of St. Mary for the Establishment of the First Church"
+        },
+        "date": "06/15"
     },
     "secondSundayAfterPentecost": {
         "type": "feast",
@@ -176,5 +468,752 @@
             "en": "Feast of 72 Evangelists"
         },
         "date": "07/05"
+    },
+    "commemorationMarthomaVII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Marthoma VII Metropolitan"
+        },
+        "date": "07/05",
+        "startedYear": 1809
+    },
+    "commemorationZachariahMarDionysius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Zachariah Mar Dionysius Metropolitan"
+        },
+        "date": "07/07",
+        "startedYear": 1997
+    },
+    "commemorationGregoriusMulanthuruthy": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of St. Gregorius of Parumala (Mulanthuruthy Synod Founder)"
+        },
+        "date": "07/10",
+        "startedYear": 1902
+    },
+    "commemorationJosephMarDionysiusV": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Joseph Mar Dionysius V Metropolitan"
+        },
+        "date": "07/11",
+        "startedYear": 1909
+    },
+    "commemorationPauloseIIMarAthanasios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Paulose II Mar Athanasios Metropolitan"
+        },
+        "date": "07/12",
+        "startedYear": 1953
+    },
+    "assumptionFastStart": {
+        "type": "event",
+        "title": {
+            "en": "Beginning of Assumption (Shoonoyo) Fast"
+        },
+        "date": "08/01"
+    },
+    "feastOfMarthShmuniAndSons": {
+        "type": "event",
+        "title": {
+            "en": "Feast of Martyrs Marth Shmuni, her 7 Children and Eliazar their Teacher"
+        },
+        "date": "08/01"
+    },
+    "commemorationPauloseMarPachomios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Paulose Mar Pachomios Metropolitan"
+        },
+        "date": "08/01",
+        "startedYear": 2013
+    },
+    "commemorationAlexiosMarTheodosios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Alexios Mar Theodosios Metropolitan"
+        },
+        "date": "08/06",
+        "startedYear": 1966
+    },
+    "feastOfStDemetrios": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Demetrios of Thessalonica"
+        },
+        "date": "08/07"
+    },
+    "commemorationFrYounan": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Fr. Younan (Anchal Achen)"
+        },
+        "date": "08/07"
+    },
+    "feastOfStAzazayel": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Azazayel the Martyr"
+        },
+        "date": "08/12"
+    },
+    "commemorationProphetMicah": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Prophet Micah"
+        },
+        "date": "08/13"
+    },
+    "assumption": {
+        "type": "feast",
+        "title": {
+            "en": "Festival of the Assumption of St. Mary (Shoonoyo Perunal)"
+        },
+        "date": "08/15"
+    },
+    "indianIndependenceDay": {
+        "type": "event",
+        "title": {
+            "en": "Indian Independence Day"
+        },
+        "date": "08/15"
+    },
+    "commemorationIgnatiosAbdedMeshihaII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Patriarch Mar Ignatios Abded Meshiha II"
+        },
+        "date": "08/15",
+        "startedYear": 1916
+    },
+    "marthaMariamSamajamDay": {
+        "type": "event",
+        "title": {
+            "en": "Martha Mariam Samajam Day"
+        },
+        "date": "08/15"
+    },
+    "chapelFeastDevalokam": {
+        "type": "feast",
+        "title": {
+            "en": "Kottayam Devalokam Catholicate Aramana Chapel Feast"
+        },
+        "date": "08/15"
+    },
+    "commemorationIvaniosHidayatulla": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Mar Ivanios Hidayatulla Episcopa"
+        },
+        "date": "08/16",
+        "startedYear": 1694
+    },
+    "firstSundayAfterAssumption": {
+        "type": "feast",
+        "title": {
+            "en": "First Sunday after the Assumption of St. Mary"
+        }
+    },
+    "feastOfAllProphets": {
+        "type": "event",
+        "title": {
+            "en": "Feast of All Prophets"
+        },
+        "date": "08/19"
+    },
+    "feastOfStLabbaeus": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Labbaeus (Thaddeus) the Apostle"
+        },
+        "date": "08/19"
+    },
+    "commemorationJosephMarPachomios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Joseph Mar Pachomios Metropolitan"
+        },
+        "date": "08/19",
+        "startedYear": 1992
+    },
+    "commemorationZachariahMarAnthonios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Zachariah Mar Anthonios Metropolitan"
+        },
+        "date": "08/20",
+        "startedYear": 2024
+    },
+    "commemorationProphetSamuel": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Prophet Samuel"
+        },
+        "date": "08/20"
+    },
+    "secondSundayAfterAssumption": {
+        "type": "feast",
+        "title": {
+            "en": "Second Sunday after the Assumption of St. Mary"
+        }
+    },
+    "feastOfStMatthias": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Matthias the Apostle"
+        },
+        "date": "08/24"
+    },
+    "commemorationThomasMarAthanasios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Thomas Mar Athanasios Metropolitan"
+        },
+        "date": "08/24",
+        "startedYear": 2019
+    },
+    "beheadingOfStJohn": {
+        "type": "event",
+        "title": {
+            "en": "Feast of the Beheading of St. John the Baptist"
+        },
+        "date": "08/29"
+    },
+    "thirdSundayAfterAssumption": {
+        "type": "feast",
+        "title": {
+            "en": "Third Sunday after the Assumption of St. Mary"
+        }
+    },
+    "commemorationParetMathewsMarIvanios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Paret Mathews Mar Ivanios Metropolitan"
+        },
+        "date": "08/31",
+        "startedYear": 1981
+    },
+    "commemorationYuyakimMarCoorilos": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Yuyakim Mar Coorilos Metropolitan"
+        },
+        "date": "09/02",
+        "startedYear": 1875
+    },
+    "fourthSundayAfterAssumption": {
+        "type": "feast",
+        "title": {
+            "en": "Fourth Sunday after the Assumption of St. Mary"
+        }
+    },
+    "nativityOfStMary": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of the Birth of St. Mary, Mother of God"
+        },
+        "date": "09/08"
+    },
+    "feastOfStMarysParents": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Mary's Parents, Youyakim and Hanna"
+        },
+        "date": "09/09"
+    },
+    "fifthSundayAfterAssumption": {
+        "type": "feast",
+        "title": {
+            "en": "Fifth Sunday after the Assumption of St. Mary"
+        }
+    },
+    "feastOfHolyCross": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of the Holy Cross (Sleeba Perunal)"
+        },
+        "date": "09/14"
+    },
+    "malankaraCatholicateAnniversary": {
+        "type": "event",
+        "title": {
+            "en": "Anniversary of the Establishment of the Malankara Catholicate"
+        },
+        "date": "09/15",
+        "startedYear": 1912
+    },
+    "firstSundayAfterHolyCross": {
+        "type": "feast",
+        "title": {
+            "en": "First Sunday after the Feast of the Holy Cross"
+        }
+    },
+    "commemorationAntonioMarJulius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Antonio Francisco Xavier Alvarez Mar Julius Metropolitan"
+        },
+        "date": "09/23",
+        "startedYear": 1924
+    },
+    "feastOfStDimeth": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Dimeth of Persia"
+        },
+        "date": "09/24"
+    },
+    "commemorationIgnatiusPeterIII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Patriarch Mar Ignatius Peter III of Antioch"
+        },
+        "date": "09/25",
+        "startedYear": 1895
+    },
+    "secondSundayAfterHolyCross": {
+        "type": "feast",
+        "title": {
+            "en": "Second Sunday after the Feast of the Holy Cross"
+        }
+    },
+    "commemorationPhiliposeMarTheophilos": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Philipose Mar Theophilos Metropolitan"
+        },
+        "date": "09/28",
+        "startedYear": 1998
+    },
+    "feastOfEvangelistAdaiAndMartyrs": {
+        "type": "event",
+        "title": {
+            "en": "Feast of Evangelist Adai, Abahai the Martyr and Mar Malke"
+        },
+        "date": "10/01"
+    },
+    "commemorationKarottuveettilShemavoonDionysius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Karottuveettil Shemavoon Mar Dionysius Metropolitan"
+        },
+        "date": "10/02",
+        "startedYear": 1889
+    },
+    "feastOfBaseliosYeldho": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of St. Baselios Yeldho Catholicos"
+        },
+        "date": "10/03"
+    },
+    "thirdSundayAfterHolyCross": {
+        "type": "feast",
+        "title": {
+            "en": "Third Sunday after the Feast of the Holy Cross"
+        }
+    },
+    "seminaryDay": {
+        "type": "event",
+        "title": {
+            "en": "Seminary Day"
+        },
+        "date": "10/05"
+    },
+    "feastOfMartyrsSargisAndBakos": {
+        "type": "event",
+        "title": {
+            "en": "Feast of Martyrs Sargis and Bakos"
+        },
+        "date": "10/07"
+    },
+    "fourthSundayAfterHolyCross": {
+        "type": "feast",
+        "title": {
+            "en": "Fourth Sunday after the Feast of the Holy Cross"
+        }
+    },
+    "commemorationCheppadPhiliposeDionysiusIV": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Cheppad Philipose Mar Dionysius IV Metropolitan"
+        },
+        "date": "10/12",
+        "startedYear": 1856
+    },
+    "commemorationYuhannonMarAthanasios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Yuhannon Mar Athanasios Episcopa"
+        },
+        "date": "10/12",
+        "startedYear": 1981
+    },
+    "commemorationAthanasiusOfAlexandria": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of St. Athanasios of Alexandria"
+        },
+        "date": "10/14"
+    },
+    "enthronementAnniversaryMathewsIII": {
+        "type": "event",
+        "title": {
+            "en": "Anniversary of the Enthronement of H. H. Baselios Marthoma Mathews III Catholicos"
+        },
+        "date": "10/15",
+        "startedYear": 2021
+    },
+    "feastOfStOsyo": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Osyo the Ascetic"
+        },
+        "date": "10/15"
+    },
+    "feastOfStLuke": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Luke the Evangelist"
+        },
+        "date": "10/18"
+    },
+    "fifthSundayAfterHolyCross": {
+        "type": "feast",
+        "title": {
+            "en": "Fifth Sunday after the Feast of the Holy Cross"
+        }
+    },
+    "commemorationBaseliosShakralla": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Shakralla Catholicos"
+        },
+        "date": "10/22",
+        "startedYear": 1765
+    },
+    "feastOfStJamesAlphaeus": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. James the Apostle, Son of Alphaeus"
+        },
+        "date": "10/22"
+    },
+    "commemorationZachariahMarTheophilos": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Zachariah Mar Theophilos Metropolitan"
+        },
+        "date": "10/24",
+        "startedYear": 2018
+    },
+    "sixthSundayAfterHolyCross": {
+        "type": "feast",
+        "title": {
+            "en": "Sixth Sunday after the Feast of the Holy Cross"
+        }
+    },
+    "feastOfAllSaints": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of All Saints"
+        },
+        "date": "11/01"
+    },
+    "koodoshEethoSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Koodosh Eetho Sunday (Sanctification)"
+        }
+    },
+    "commemorationGregoriosParumala": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of St. Geevarghese Mar Gregorios of Parumala"
+        },
+        "date": "11/02",
+        "startedYear": 1902
+    },
+    "commemorationKadavilPauloseAthanasios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Kadavil Paulose Mar Athanasios Metropolitan"
+        },
+        "date": "11/02",
+        "startedYear": 1907
+    },
+    "commemorationStephanosTheodosius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Stephanos Mar Theodosius Metropolitan"
+        },
+        "date": "11/05",
+        "startedYear": 2008
+    },
+    "commemorationGeevargheseGregorios": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Vayaliparambil Geevarghese Mar Gregorios Metropolitan"
+        },
+        "date": "11/06",
+        "startedYear": 1967
+    },
+    "commemorationMathewsI": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Mar Baselios Marthoma Mathews I Catholicos"
+        },
+        "date": "11/08",
+        "startedYear": 1996
+    },
+    "hoodoshEethoSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Hoodosh Eetho Sunday (Dedication)"
+        }
+    },
+    "commemorationKayamkulamPhiliposeRamban": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Vedarathnam Kayamkulam Philipose Ramban"
+        },
+        "date": "11/12",
+        "startedYear": 1813
+    },
+    "feastOfStJohnChrysostom": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. John Chrysostom"
+        },
+        "date": "11/13"
+    },
+    "feastOfStPhilip": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Philip the Apostle"
+        },
+        "date": "11/14"
+    },
+    "revelationToZachariahSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Sunday of Revelation to Zachariah"
+        }
+    },
+    "commemorationJobPhiloxenos": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Job Mar Philoxenos Metropolitan"
+        },
+        "date": "11/20",
+        "startedYear": 2011
+    },
+    "entryOfStMaryToTemple": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of the Entry of St. Mary to the Temple of Jerusalem"
+        },
+        "date": "11/21"
+    },
+    "annunciationToStMarySunday": {
+        "type": "feast",
+        "title": {
+            "en": "Sunday of Annunciation to St. Mary"
+        }
+    },
+    "commemorationPulikkottilJosephDionysiusII": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Pulikkottil Joseph Mar Dionysius II, Founder of Old Seminary"
+        },
+        "date": "11/24",
+        "startedYear": 1817
+    },
+    "commemorationPauloseGregorius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Paulose Mar Gregorios Metropolitan"
+        },
+        "date": "11/24",
+        "startedYear": 1996
+    },
+    "feastOfJacobBaradaeusAndBarsleebi": {
+        "type": "event",
+        "title": {
+            "en": "Feast of Mar Jacob Baradaeus and Mar Dionysius Barsleebi"
+        },
+        "date": "11/28"
+    },
+    "feastOfJacobSerugh": {
+        "type": "event",
+        "title": {
+            "en": "Feast of Mar Jacob of Serugh"
+        },
+        "date": "11/29"
+    },
+    "stMaryJourneyToElizabethSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Sunday of St. Mary's Journey to Elizabeth"
+        }
+    },
+    "feastOfStAndrew": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Andrew the Apostle"
+        },
+        "date": "11/30"
+    },
+    "nativityFastStart": {
+        "type": "event",
+        "title": {
+            "en": "Beginning of the Fast of the Nativity (25 Days)"
+        },
+        "date": "12/01"
+    },
+    "commemorationThomaMarDionysius": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Thoma Mar Dionysius Metropolitan"
+        },
+        "date": "12/03",
+        "startedYear": 1973
+    },
+    "feastOfBarbaraAndJuliana": {
+        "type": "event",
+        "title": {
+            "en": "Feast of the Martyrs Marth Barbara and Marth Juliana"
+        },
+        "date": "12/04"
+    },
+    "feastOfStNikolas": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Sokhe (Nikolas), Bishop of Myre"
+        },
+        "date": "12/06"
+    },
+    "birthOfJohnSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Sunday of Birth of John the Baptist (Children's Day)"
+        }
+    },
+    "intercessionDay": {
+        "type": "event",
+        "title": {
+            "en": "Intercession Day"
+        },
+        "date": "12/07"
+    },
+    "commemorationBaseliosAugenI": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Mar Augen I Catholicos"
+        },
+        "date": "12/08",
+        "startedYear": 1976
+    },
+    "commemorationMathewsBarnabas": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Mathews Mar Barnabas Metropolitan"
+        },
+        "date": "12/09",
+        "startedYear": 2013
+    },
+    "feastOfBehanamSarahAndPhiloxenos": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Behanam, his sister St. Sarah, Co-Martyrs and Mar Philoxenos of Mabugh"
+        },
+        "date": "12/10"
+    },
+    "commemorationDanielPhiloxenos": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Daniel Mar Philoxenos Metropolitan"
+        },
+        "date": "12/13",
+        "startedYear": 1991
+    },
+    "revelationToJosephSunday": {
+        "type": "feast",
+        "title": {
+            "en": "Sunday of Revelation to St. Joseph"
+        }
+    },
+    "commemorationBaseliosGeevargheseI": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. H. Baselios Mar Geevarghese I Catholicos"
+        },
+        "date": "12/17",
+        "startedYear": 1928
+    },
+    "feastOfStThomas": {
+        "type": "event",
+        "title": {
+            "en": "Feast of St. Thomas the Apostle (Martyrdom by Spear)"
+        },
+        "date": "12/18"
+    },
+    "feastOfIgnatiusNourono": {
+        "type": "event",
+        "title": {
+            "en": "Feast of Mar Ignatius Nourono of Antioch"
+        },
+        "date": "12/20"
+    },
+    "sundayBeforeChristmas": {
+        "type": "feast",
+        "title": {
+            "en": "Sunday before Christmas"
+        }
+    },
+    "dukhronoStThomas": {
+        "type": "event",
+        "title": {
+            "en": "Dukhrono of St. Thomas the Apostle"
+        },
+        "date": "12/21"
+    },
+    "christmas": {
+        "type": "feast",
+        "title": {
+            "en": "Yeldho, Incarnation of our Lord (Christmas)"
+        },
+        "date": "12/25"
+    },
+    "exultationOfStMary": {
+        "type": "feast",
+        "title": {
+            "en": "Feast of the Exultation of St. Mary, Mother of God"
+        },
+        "date": "12/26"
+    },
+    "commemorationYakobPolicarpos": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of H. G. Yakob Mar Policarpos Metropolitan"
+        },
+        "date": "12/26",
+        "startedYear": 1986
+    },
+    "slaughterOfInfants": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of the Slaughter of the Infants"
+        },
+        "date": "12/27"
+    },
+    "firstSundayAfterChristmas": {
+        "type": "feast",
+        "title": {
+            "en": "First Sunday after Christmas"
+        }
     }
 }

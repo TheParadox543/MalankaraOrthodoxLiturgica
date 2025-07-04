@@ -13,17 +13,38 @@ data class TitleStr(
 )
 
 @Serializable
+data class BibleReference(
+    val bookIndex: Int,
+    val startChapter: Int,
+    val startVerse: Int,
+    val endChapter: Int,
+    val endVerse: Int
+)
+
+@Serializable
+data class BibleReadingsMapping(
+    val vespersGospel: List<BibleReference>? =  null,
+    val matinsGospel: List<BibleReference>? = null,
+    val primeGospel: List<BibleReference>? = null,
+    val preparation: List<BibleReference>? = null,
+    val generalEpistle: List<BibleReference>? = null,
+    val paulEpistle: List<BibleReference>? = null,
+    val qurbanaGospel: List<BibleReference>? = null,
+)
+
+@Serializable
 data class LiturgicalEventDetails(
     val type: String,
     val title: TitleStr,
-    val bibleReadings: List<String>? = null,
+    val bibleReadings: BibleReadingsMapping? = null,
     val specialSongsKey: String? = null,
+    val startedYear: Int? = null,
 )
 
 typealias LiturgicalDataStore = Map<String, LiturgicalEventDetails>
 
 // Structure for liturgical_calendar.json
-typealias DayEvents = List<String> // List of EventKeys
+typealias DayEvents = List<EventKey> // List of EventKeys
 typealias MonthEvents = Map<String, DayEvents> // Maps day (e.g., "1") to DayEvents
 typealias YearEvents = Map<String, MonthEvents> // Maps month (e.g., "1") to MonthEvents
 typealias LiturgicalCalendarDates = Map<String, YearEvents> // Maps year (e.g., "2024") to YearEvents
