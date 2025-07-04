@@ -1,23 +1,47 @@
 {
     "2025": {
+        "1": {
+            "1": ["newYear", "circumcision", "feastOfStBasilAndGregory"],
+            "3": ["commemorationBaseliosGeevargheseII", "koonanCrossOathMemorial"],
+            "5": ["secondSundayAfterChristmas"],
+            "6": ["epiphany"],
+            "7": ["beheadingOfStJohn"],
+            "8": ["martyrdomOfStStephen"],
+            "12": ["firstSundayAfterEpiphany"],
+            "15": ["feastOfStMaryForSeeds", "commemorationPaulTheMonk"],
+            "18": ["feastOfStSamuelSimonAntony"],
+            "19": ["secondSundayAfterEpiphany"],
+            "21": ["commemorationPhiliposeMarEusebius"],
+            "22": ["commemorationMarthomaVIII"],
+            "23": ["commemorationStAugen"],
+            "26": ["thirdSundayAfterEpiphany", "commemorationMathewsII", "commemorationPauloseAthanasios", "republicDay"]
+        },
+
         "5": {
+            "1": ["feastOfStJamesZebedee"],
+            "3": ["commemorationPauloseICatholicos"],
             "4": ["firstSundayAfterNewSunday"],
-            "8": ["feastOfStJohnTheApostle"],
+            "8": ["feastOfStJohnTheApostle", "commemorationMarthomaV"],
             "10": ["feastOfStSimonTheZealot"],
             "11": ["secondSundayAfterNewSunday"],
-            "15": ["feastOfStMaryForHarvest"],
+            "15": ["feastOfStMaryForHarvest", "commemorationStIsaac"],
+            "16": ["commemorationSeverios"],
             "18": ["thirdSundayAfterNewSunday"],
+            "19": ["commemorationDionysiusIII"],
+            "20": ["commemorationConstantineHelen", "commemorationEvangelistsAndSynodFathers"],
             "25": ["fourthSundayAfterNewSunday"],
+            "26": ["commemorationDidymosI"],
             "29": ["ascension"]
         },
         "6": {
             "1": ["sundayBeforePentecost"],
             "5": ["worldEnvironmentDay"],
+            "6": ["commemorationYuyakimMarIvanios", "commemorationAugenMarDionysius"],
             "8": ["pentecost"],
             "9": ["stAaron"],
             "11": ["feastOfStBartholomew"],
             "13": ["goldenFriday"],
-            "15": ["firstSundayAfterPentecost"],
+            "15": ["firstSundayAfterPentecost", "feastOfStMaryEstablishmentChurch"],
             "16": ["apostlesFastStart"],
             "19": ["feastOfStJames"],
             "22": ["secondSundayAfterPentecost"],
@@ -27,8 +51,12 @@
         },
         "7": {
             "3": ["dukhrono"],
-            "5": ["feastOf72Evangelists"],
+            "5": ["feastOf72Evangelists", "commemorationMarthomaVII"],
             "6": ["fourthSundayAfterPentecost", "missionSunday"],
+            "7": ["commemorationZachariahMarDionysius"],
+            "10": ["commemorationGregoriusMulanthuruthy"],
+            "11": ["commemorationJosephMarDionysiusV"],
+            "12": ["commemorationPauloseIIMarAthanasios"],
             "13": ["fifthSundayAfterPentecost"],
             "15": ["feastOfStKuriakose"],
             "20": ["sixthSundayAfterPentecost", "feastOfMaryElijah"],
@@ -38,14 +66,135 @@
             "31": ["feastOfMarGregoriosBarHebraeus"]
         },
         "8": {
-            "1": ["shoonoyoFast"],
+            "1": [
+                "assumptionFastStart",
+                "feastOfMarthShmuniAndSons",
+                "commemorationPauloseMarPachomios"
+            ],
             "3": ["eighthSundayAfterPentecost"],
-            "6": ["transfiguration"],
-            "7": ["feastOfStDemetrios"],
+            "6": [
+                "transfiguration",
+                "commemorationAlexiosMarTheodosios"
+            ],
+            "7": [
+                "feastOfStDemetrios",
+                "commemorationFrYounan"
+            ],
             "10": ["firstSundayAfterTransfiguration"],
             "12": ["feastOfStAzazayel"],
-            "13": ["prophetMicha"],
-            "15": ["feastOfStAssumption"]
+            "13": ["commemorationProphetMicah"],
+            "15": [
+                "assumption",
+                "indianIndependenceDay",
+                "commemorationIgnatiosAbdedMeshihaII",
+                "marthaMariamSamajamDay",
+                "chapelFeastDevalokam"
+            ],
+            "16": ["commemorationIvaniosHidayatulla"],
+            "17": ["firstSundayAfterAssumption"],
+            "19": [
+                "feastOfAllProphets",
+                "feastOfStLabbaeus",
+                "commemorationJosephMarPachomios"
+            ],
+            "20": [
+                "commemorationZachariahMarAnthonios",
+                "commemorationProphetSamuel"
+            ],
+            "24": [
+                "secondSundayAfterAssumption",
+                "feastOfStMatthias",
+                "commemorationThomasMarAthanasios"
+            ],
+            "29": ["beheadingOfStJohn"],
+            "31": [
+                "thirdSundayAfterAssumption",
+                "commemorationParetMathewsMarIvanios"
+            ]
+        },
+        "9": {
+            "2": ["commemorationYuyakimMarCoorilos"],
+            "7": ["fourthSundayAfterAssumption"],
+            "8": ["nativityOfStMary"],
+            "9": ["feastOfStMarysParents"],
+            "14": ["fifthSundayAfterAssumption", "feastOfHolyCross"],
+            "15": ["malankaraCatholicateAnniversary"],
+            "21": ["firstSundayAfterHolyCross"],
+            "23": ["commemorationAntonioMarJulius"],
+            "24": ["feastOfStDimeth"],
+            "25": ["commemorationIgnatiusPeterIII"],
+            "28": ["secondSundayAfterHolyCross", "commemorationPhiliposeMarTheophilos"]
+        },
+        "10": {
+            "1": ["feastOfEvangelistAdaiAndMartyrs"],
+            "2": ["commemorationKarottuveettilShemavoonDionysius"],
+            "3": ["feastOfBaseliosYeldho"],
+            "5": ["thirdSundayAfterHolyCross", "seminaryDay"],
+            "7": ["feastOfMartyrsSargisAndBakos"],
+            "12": [
+                "fourthSundayAfterHolyCross",
+                "commemorationCheppadPhiliposeDionysiusIV",
+                "commemorationYuhannonMarAthanasios"
+            ],
+            "14": ["commemorationAthanasiusOfAlexandria"],
+            "15": ["enthronementAnniversaryMathewsIII", "feastOfStOsyo"],
+            "18": ["feastOfStLuke"],
+            "19": ["fifthSundayAfterHolyCross"],
+            "22": [
+                "commemorationBaseliosShakralla",
+                "feastOfStJamesAlphaeus"
+            ],
+            "24": ["commemorationZachariahMarTheophilos"],
+            "26": ["sixthSundayAfterHolyCross"]
+        },
+        "11": {
+            "1": ["feastOfAllSaints"],
+            "2": [
+                "koodoshEethoSunday",
+                "commemorationGregoriosParumala",
+                "commemorationKadavilPauloseAthanasios"
+            ],
+            "5": ["commemorationStephanosTheodosius"],
+            "6": ["commemorationGeevargheseGregorios"],
+            "8": ["commemorationMathewsI"],
+            "9": ["hoodoshEethoSunday"],
+            "12": ["commemorationKayamkulamPhiliposeRamban"],
+            "13": ["feastOfStJohnChrysostom"],
+            "14": ["feastOfStPhilip"],
+            "16": ["revelationToZachariahSunday"],
+            "20": ["commemorationJobPhiloxenos"],
+            "21": ["entryOfStMaryToTemple"],
+            "23": ["annunciationToStMarySunday"],
+            "24": [
+                "commemorationPulikkottilJosephDionysiusII",
+                "commemorationPauloseGregorius"
+            ],
+            "28": ["feastOfJacobBaradaeusAndBarsleebi"],
+            "29": ["feastOfJacobSerugh"],
+            "30": [
+                "stMaryJourneyToElizabethSunday",
+                "feastOfStAndrew"
+            ]
+        },
+        "12": {
+            "1": ["nativityFastStart"],
+            "3": ["commemorationThomaMarDionysius"],
+            "4": ["feastOfBarbaraAndJuliana"],
+            "6": ["feastOfStNikolas"],
+            "7": ["birthOfJohnSunday", "intercessionDay"],
+            "8": ["commemorationBaseliosAugenI"],
+            "9": ["commemorationMathewsBarnabas"],
+            "10": ["feastOfBehanamSarahAndPhiloxenos"],
+            "13": ["commemorationDanielPhiloxenos"],
+            "14": ["revelationToJosephSunday"],
+            "17": ["commemorationBaseliosGeevargheseI"],
+            "18": ["feastOfStThomas"],
+            "20": ["feastOfIgnatiusNourono"],
+            "21": ["sundayBeforeChristmas", "dukhronoStThomas"],
+            "25": ["christmas"],
+            "26": ["exultationOfStMary", "commemorationYakobPolicarpos"],
+            "27": ["slaughterOfInfants"],
+            "28": ["firstSundayAfterChristmas"]
         }
     }
 }
