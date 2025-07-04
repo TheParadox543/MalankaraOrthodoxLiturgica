@@ -90,7 +90,7 @@ object NavigationTree {
 
     private val BASE_TREE = PageNode(
         route = PrayerRoutes.ROOT,
-        languages = listOf("ml", "mn"),
+        languages = listOf("ml", "mn", "en"),
         parent = null,
         children = listOf(
             commonPrayersSection(PrayerRoutes.ROOT),
@@ -105,16 +105,17 @@ object NavigationTree {
         val currentRoute = PrayerRoutes.COMMON_PRAYERS
         return PageNode(
             route = currentRoute,
-            languages = listOf("ml", "mn"),
+            languages = listOf("ml", "mn", "en"),
             parent = parentRoute,
             children = listOf(
-                prayer("lords", "commonprayers/lords.json", currentRoute, listOf("ml", "mn")),
-                prayer("mary", "commonprayers/mary.json", currentRoute, listOf("ml", "mn")),
-                prayer("kauma", "commonprayers/doxology.json", currentRoute, listOf("ml", "mn")),
+                prayer("lords", "commonprayers/lords.json", currentRoute, listOf("ml", "mn", "en")),
+                prayer("mary", "commonprayers/mary.json", currentRoute, listOf("ml", "mn", "en")),
+                prayer("kauma", "commonprayers/doxology.json", currentRoute, listOf("ml", "mn", "en")),
                 prayer("kaumaSyriac", "commonprayers/trisagionSyriac.json", currentRoute, listOf("ml", "mn")),
                 prayer("nicene", "commonprayers/nicenecreed.json", currentRoute, listOf("ml", "mn")),
                 prayer("angels", "commonprayers/praiseOfAngels.json", currentRoute, listOf("ml", "mn")),
                 prayer("cherubims", "commonprayers/praiseOfCherubims.json", currentRoute, listOf("ml", "mn")),
+                prayer("morningPraise", "commonprayers/morningPraise.json", currentRoute, listOf("ml")),
                 prayer("cyclic", "commonprayers/cyclicprayers.json", currentRoute, listOf("ml", "mn"))
             )
         )
