@@ -9,6 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.EventKey
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalCalendarDates
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStr
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -102,8 +103,16 @@ class LiturgicalCalendarRepository @Inject constructor(
             val details = liturgicalData[key]
             if (details != null) {
                 eventDetails.add(details)
+//            } else {
+//                throw IllegalArgumentException("Could not find event key '$key' in liturgical_data.json.")
+//            }
             } else {
-                throw IllegalArgumentException("Could not find event key '$key' in liturgical_data.json.")
+                eventDetails.add(
+                    LiturgicalEventDetails(
+                        type = "event",
+                        title = TitleStr(en=key),
+                    )
+                )
             }
         }
         return eventDetails

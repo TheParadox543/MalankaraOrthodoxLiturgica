@@ -49,6 +49,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import java.time.DayOfWeek
@@ -135,7 +136,7 @@ fun CalendarScreen(
                         }
                     }
                     if (displayEvents.isNotEmpty()) {
-                        var scrollState = rememberScrollState()
+                        val scrollState = rememberScrollState()
                         HorizontalDivider(
                             thickness = 8.dp,
                             color = MaterialTheme.colorScheme.primary
@@ -160,7 +161,7 @@ fun CalendarScreen(
 
                         }
                         if (displayEvents.isNotEmpty()) {
-                            var scrollState = rememberScrollState()
+                            val scrollState = rememberScrollState()
                             VerticalDivider(
                                 thickness = 8.dp,
                                 color = MaterialTheme.colorScheme.primary
@@ -337,7 +338,11 @@ private fun RowScope.DayItem(
 }
 
 @Composable
-fun DisplayEvent(event: LiturgicalEventDetails, selectedLanguage: AppLanguage) {
+fun DisplayEvent(
+    event: LiturgicalEventDetails,
+    selectedLanguage: AppLanguage,
+    bibleViewModel: BibleViewModel = hiltViewModel(),
+) {
     ListItem(
         headlineContent = {
             val textTitle = when (selectedLanguage) {
@@ -350,9 +355,23 @@ fun DisplayEvent(event: LiturgicalEventDetails, selectedLanguage: AppLanguage) {
             )
         },
         supportingContent = {
-            Column {
-                event.bibleReadings?.forEach {
-                    Text(it)
+            if (event.bibleReadings != null) {
+                Column {
+                    if (event.bibleReadings.vespersGospel != null) {
+                        Text(
+                            bibleViewModel.formatBibleReadingEntry(event.bibleReadings.vespersGospel.first())
+                        )
+                    }
+                    if (event.bibleReadings.matinsGospel != null) {
+                        Text(
+                            bibleViewModel.formatBibleReadingEntry(event.bibleReadings.matinsGospel.first())
+                        )
+                    }
+                    if (event.bibleReadings.qurbanaGospel != null) {
+                        Text(
+                            bibleViewModel.formatBibleReadingEntry(event.bibleReadings.qurbanaGospel.first())
+                        )
+                    }
                 }
             }
         }

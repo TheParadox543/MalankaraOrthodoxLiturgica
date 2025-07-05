@@ -13,16 +13,21 @@ data class TitleStr(
 )
 
 @Serializable
-data class BibleReference(
-    val bookIndex: Int,
+data class ReferenceRange(
     val startChapter: Int,
     val startVerse: Int,
     val endChapter: Int,
-    val endVerse: Int
+    val endVerse: Int,
 )
 
 @Serializable
-data class BibleReadingsMapping(
+data class BibleReference(
+    val bookNumber: Int,
+    val ranges: List<ReferenceRange>,
+)
+
+@Serializable
+data class BibleReadings(
     val vespersGospel: List<BibleReference>? =  null,
     val matinsGospel: List<BibleReference>? = null,
     val primeGospel: List<BibleReference>? = null,
@@ -36,7 +41,7 @@ data class BibleReadingsMapping(
 data class LiturgicalEventDetails(
     val type: String,
     val title: TitleStr,
-    val bibleReadings: BibleReadingsMapping? = null,
+    val bibleReadings: BibleReadings? = null,
     val specialSongsKey: String? = null,
     val startedYear: Int? = null,
 )
