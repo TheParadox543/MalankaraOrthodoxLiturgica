@@ -65,6 +65,8 @@ fun NavGraph(
             val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, settingsViewModel, node)
+            } else {
+                navController.navigateUp()
             }
         }
         composable("prayerScreen/{route}") { backStackEntry ->
@@ -72,6 +74,8 @@ fun NavGraph(
             val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
+            } else {
+                navController.navigateUp()
             }
         }
         composable("prayNow") {
