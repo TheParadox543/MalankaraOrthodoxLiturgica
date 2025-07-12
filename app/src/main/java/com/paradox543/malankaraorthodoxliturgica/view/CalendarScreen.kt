@@ -153,10 +153,10 @@ fun CalendarScreen(
                     Row(Modifier.padding(8.dp)) {
                         Column(
                             Modifier
-                            .widthIn(max = 400.dp)
-                            .verticalScroll(rememberScrollState())
-                            .border(4.dp, MaterialTheme.colorScheme.outline)
-                            .padding(4.dp)
+                                .widthIn(max = 400.dp)
+                                .verticalScroll(rememberScrollState())
+                                .border(4.dp, MaterialTheme.colorScheme.outline)
+                                .padding(4.dp)
                         ) {
                             MonthNavigation(calendarViewModel, currentCalendarViewDate)
                             DayOfWeekHeaders()
@@ -498,6 +498,19 @@ fun DisplayEvent(
                                 Modifier.padding(start = 8.dp),
                                 style = MaterialTheme.typography.bodyLarge
                             )
+                        }
+                        if (event.specialSongsKey != null) {
+                            TextButton(
+                                onClick = {
+                                    navController.navigate("prayerScreen/${event.specialSongsKey}")
+                                }
+                            ) {
+                                Text(
+                                    event.specialSongsKey,
+                                    Modifier.padding(start = 8.dp),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                )
+                            }
                         }
                     }
                 }
