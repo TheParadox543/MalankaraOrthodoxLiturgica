@@ -5,32 +5,27 @@ import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.data.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
 import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRange
+import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BibleViewModel @Inject constructor(
-    private val bibleRepository: BibleRepository,
-    private val settingsRepository: SettingsRepository,
+    private val bibleRepository: BibleRepository
 ): ViewModel() {
     private val _bibleBooks = MutableStateFlow<List<BibleDetails>>(emptyList())
     val bibleBooks: StateFlow<List<BibleDetails>> = _bibleBooks
 
-    private val selectedLanguage = MutableStateFlow(AppLanguage.MALAYALAM)
-    init {
-        viewModelScope.launch {
-            settingsRepository.selectedLanguage.collect {
-                selectedLanguage.value = it
-            }
-        }
-    }
+    private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
+    val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
 
     init {
         viewModelScope.launch { loadBibleDetails() }
@@ -122,15 +117,19 @@ class BibleViewModel @Inject constructor(
         return Pair(prevRoute, nextRoute)
     }
 
-    fun getBookName(bookIndex: Int): String {
-        val book = _bibleBooks.value[bookIndex].book
-        val bookName = when (selectedLanguage.value) {
-            AppLanguage.ENGLISH -> book.en
-            AppLanguage.MALAYALAM -> book.ml
-            else -> book.en
-
+    /**
+     * Gets the localized name of a Bible book.
+     * @param bookIndex The numerical index of the book.
+     * @param language The desired AppLanguage for the book name.
+     * @return The localized book name, or "Unknown Book" if not found.
+     */
+    fun getBookName(bookIndex: Int, language: AppLanguage): String {
+        val book = _bibleBooks.value[bookIndex]
+        return when (language) {
+            AppLanguage.ENGLISH -> book.book.en
+            AppLanguage.MALAYALAM -> book.book.ml
+            else -> book.book.en
         }
-        return bookName
     }
 
     /**
@@ -156,9 +155,8 @@ class BibleViewModel @Inject constructor(
      * @param entry The BibleReadingEntry object containing bookNumber and a list of ranges.
      * @return The formatted string for the entire entry.
      */
-    fun formatBibleReadingEntry(entry: BibleReference): String {
-        val languageToUse = selectedLanguage.value
-        val bookName = getBookName(entry.bookNumber-1) // Use bookNumber from entry
+    fun formatBibleReadingEntry(entry: BibleReference, language: AppLanguage): String {
+        val bookName = getBookName(entry.bookNumber-1, language) // Use bookNumber from entry
 
         val formattedRanges = entry.ranges.joinToString(separator = ", ") { range ->
             formatSingleRange(range)
@@ -167,4 +165,35 @@ class BibleViewModel @Inject constructor(
         return "$bookName $formattedRanges"
     }
 
+    fun formatGospelEntry(entries: List<BibleReference>, language: AppLanguage): String {
+        if (entries.isEmpty()) {
+            return ""
+        }
+
+        return entries.joinToString(separator = ", ") { entry ->
+            formatBibleReadingEntry(entry, language)
+        }
+    }
+
+    /**
+     * Sets the selected BibleReference to be displayed on the BibleReaderScreen.
+     * This is called when a user clicks a Bible reading TextButton.
+     */
+    fun setSelectedBibleReference(reference: List<BibleReference>) {
+        _selectedBibleReference.value = reference
+    }
+
+    fun loadBibleReading(bibleReferences: List<BibleReference>, language: AppLanguage): List<Verse> {
+        return try {
+            bibleRepository.loadBibleReading(bibleReferences, language)
+        } catch (e: BookNotFoundException) {
+            // Handle the case where a book or chapter is not found
+            listOf(
+                Verse(
+                    "Error",
+                    "Book or chapter not found: ${e.message}",
+                )
+            )
+        }
+    }
 }

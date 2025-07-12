@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,12 +21,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -38,7 +39,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -51,6 +51,7 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -62,6 +63,7 @@ import java.util.Locale
 @Composable
 fun CalendarScreen(
     navController: NavController,
+    bibleViewModel: BibleViewModel,
     calendarViewModel: CalendarViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel(),
 ) {
@@ -125,7 +127,11 @@ fun CalendarScreen(
                             .padding(8.dp)
                             .widthIn(max = 400.dp)
                     ) {
-                        Column {
+                        Column(
+                            Modifier
+                                .border(4.dp, MaterialTheme.colorScheme.outline)
+                                .padding(4.dp)
+                        ) {
                             MonthNavigation(calendarViewModel, currentCalendarViewDate)
                             DayOfWeekHeaders()
                             CalendarGrid(
@@ -141,24 +147,20 @@ fun CalendarScreen(
                             thickness = 8.dp,
                             color = MaterialTheme.colorScheme.primary
                         )
-                        Column(
-                            Modifier.verticalScroll(scrollState)
-                        ) {
-                            displayEvents.forEach { event ->
-                                DisplayEvent(event, selectedLanguage)
-                            }
-                        }
+                        DisplayEvents(scrollState, displayEvents, selectedLanguage, navController, bibleViewModel)
                     }
                 } else {
                     Row(Modifier.padding(8.dp)) {
-                        Column(Modifier
+                        Column(
+                            Modifier
                             .widthIn(max = 400.dp)
                             .verticalScroll(rememberScrollState())
+                            .border(4.dp, MaterialTheme.colorScheme.outline)
+                            .padding(4.dp)
                         ) {
                             MonthNavigation(calendarViewModel, currentCalendarViewDate)
                             DayOfWeekHeaders()
                             CalendarGrid(monthCalendarData, currentCalendarViewDate, calendarViewModel)
-
                         }
                         if (displayEvents.isNotEmpty()) {
                             val scrollState = rememberScrollState()
@@ -166,13 +168,7 @@ fun CalendarScreen(
                                 thickness = 8.dp,
                                 color = MaterialTheme.colorScheme.primary
                             )
-                            Column(
-                                Modifier.verticalScroll(scrollState)
-                            ) {
-                                displayEvents.forEach { event ->
-                                    DisplayEvent(event, selectedLanguage)
-                                }
-                            }
+                            DisplayEvents(scrollState, displayEvents, selectedLanguage, navController, bibleViewModel)
                         }
                     }
                 }
@@ -338,42 +334,174 @@ private fun RowScope.DayItem(
 }
 
 @Composable
+private fun DisplayEvents(
+    scrollState: ScrollState,
+    displayEvents: List<LiturgicalEventDetails>,
+    selectedLanguage: AppLanguage,
+    navController: NavController,
+    bibleViewModel: BibleViewModel,
+) {
+    Column(
+        Modifier
+            .verticalScroll(scrollState)
+            .padding(12.dp)
+    ) {
+        displayEvents.forEach { event ->
+            DisplayEvent(
+                event,
+                selectedLanguage,
+                navController,
+                bibleViewModel = bibleViewModel,
+            )
+        }
+    }
+}
+
+@Composable
 fun DisplayEvent(
     event: LiturgicalEventDetails,
     selectedLanguage: AppLanguage,
-    bibleViewModel: BibleViewModel = hiltViewModel(),
+    navController: NavController,
+    modifier: Modifier = Modifier,
+    bibleViewModel: BibleViewModel,
+    prayerViewModel: PrayerViewModel = hiltViewModel(),
 ) {
-    ListItem(
-        headlineContent = {
-            val textTitle = when (selectedLanguage) {
-                AppLanguage.MALAYALAM -> event.title.ml?: event.title.en
-                else -> event.title.en
-            }
-            Text(
-                textTitle,
-                fontWeight = FontWeight.Bold,
-            )
-        },
-        supportingContent = {
+    val translations by prayerViewModel.translations.collectAsState()
+    val textTitle = when (selectedLanguage) {
+        AppLanguage.MALAYALAM -> event.title.ml?: event.title.en
+        else -> event.title.en
+    }
+    Card( modifier.padding(8.dp) ) {
+        Column(Modifier.padding(8.dp)) {
+            Text(textTitle, style = MaterialTheme.typography.titleLarge)
             if (event.bibleReadings != null) {
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
                     if (event.bibleReadings.vespersGospel != null) {
-                        Text(
-                            bibleViewModel.formatBibleReadingEntry(event.bibleReadings.vespersGospel.first())
+                        val text = bibleViewModel.formatGospelEntry(
+                            event.bibleReadings.vespersGospel,
+                            selectedLanguage
                         )
+                        Text(
+                            translations["vespers"] ?: "Vespers",
+                            Modifier.padding(start = 4.dp),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        TextButton(
+                            onClick = {
+                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.vespersGospel)
+                                navController.navigate("bibleReaderScreen")
+                            }
+                        ) {
+                            Text(
+                                text,
+                                Modifier.padding(start = 8.dp),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
                     }
                     if (event.bibleReadings.matinsGospel != null) {
-                        Text(
-                            bibleViewModel.formatBibleReadingEntry(event.bibleReadings.matinsGospel.first())
+                        val text = bibleViewModel.formatGospelEntry(
+                            event.bibleReadings.matinsGospel,
+                            selectedLanguage
                         )
+                        Text(
+                            translations["prime"] ?: "Prime",
+                            Modifier.padding(start = 4.dp),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        TextButton(
+                            onClick = {
+                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.matinsGospel)
+                                navController.navigate("bibleReaderScreen")
+                            }
+                        ) {
+                            Text(
+                                text,
+                                Modifier.padding(start = 8.dp),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    }
+                    if (event.bibleReadings.preparation != null) {
+                        Text(
+                            translations["preparation"] ?: "Before Holy Qurbana",
+                            Modifier.padding(start = 4.dp),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        event.bibleReadings.preparation.forEach {entry ->
+                            val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
+                            TextButton(
+                                onClick = {
+                                    bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                    navController.navigate("bibleReaderScreen")
+                                }
+                            ) {
+                                Text(
+                                    text,
+                                    Modifier.padding(start = 8.dp),
+                                    style = MaterialTheme.typography.bodyLarge,
+
+                                )
+                            }
+                        }
                     }
                     if (event.bibleReadings.qurbanaGospel != null) {
                         Text(
-                            bibleViewModel.formatBibleReadingEntry(event.bibleReadings.qurbanaGospel.first())
+                            translations["qurbana"] ?: "Holy Qurbana",
+                            Modifier.padding(start = 4.dp),
+                            style = MaterialTheme.typography.titleMedium
                         )
+                        event.bibleReadings.generalEpistle?.forEach { entry ->
+                            val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
+                            TextButton(
+                                onClick = {
+                                    bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                    navController.navigate("bibleReaderScreen")
+                                }
+                            ) {
+                                Text(
+                                    text,
+                                    Modifier.padding(start = 8.dp),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                )
+                            }
+                        }
+                        event.bibleReadings.paulEpistle?.forEach {  entry ->
+                            val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
+                            TextButton(
+                                onClick = {
+                                    bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                    navController.navigate("bibleReaderScreen")
+                                }
+                            ) {
+                                Text(
+                                    text,
+                                    Modifier.padding(start = 8.dp),
+                                    style = MaterialTheme.typography.bodyLarge,
+                                )
+                            }
+                        }
+                        val text = bibleViewModel.formatGospelEntry(
+                            event.bibleReadings.qurbanaGospel,
+                            selectedLanguage
+                        )
+                        TextButton(
+                            onClick = {
+                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.qurbanaGospel)
+                                navController.navigate("bibleReaderScreen")
+                            }
+                        ) {
+                            Text(
+                                text,
+                                Modifier.padding(start = 8.dp),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
                     }
                 }
             }
         }
-    )
+    }
 }

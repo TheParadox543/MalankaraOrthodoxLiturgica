@@ -2,7 +2,10 @@ package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerLinkDepthExceededException
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerParsingException
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import okio.IOException
@@ -10,9 +13,6 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 // Define custom exceptions for better error handling
-class PrayerContentNotFoundException(message: String) : IOException(message)
-class PrayerParsingException(message: String, cause: Throwable? = null) : Exception(message, cause)
-class PrayerLinkDepthExceededException(message: String) : Exception(message)
 
 class PrayerRepository @Inject constructor(
     @ApplicationContext private val context: Context,
@@ -56,7 +56,6 @@ class PrayerRepository @Inject constructor(
             throw PrayerParsingException("Error parsing JSON in: ${language.code}/$fileName.")
         }
 
-        // ... (rest of your recursive logic remains the same) ...
         val resolvedElements = mutableListOf<PrayerElement>()
         for (element in rawElements) {
             when (element) {
