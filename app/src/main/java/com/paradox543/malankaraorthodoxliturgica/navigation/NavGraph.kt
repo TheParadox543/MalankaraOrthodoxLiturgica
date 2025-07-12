@@ -13,6 +13,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
+import com.paradox543.malankaraorthodoxliturgica.view.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.view.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
@@ -100,8 +101,11 @@ fun NavGraph(
                 chapterIndex.toInt()
             )
         }
+        composable("bibleReaderScreen") {
+            BibleReadingScreen(navController, bibleViewModel, settingsViewModel)
+        }
         composable("calendar") {
-            CalendarScreen(navController)
+            CalendarScreen(navController, bibleViewModel)
         }
         composable("settings") {
             SettingsScreen(navController, settingsViewModel)

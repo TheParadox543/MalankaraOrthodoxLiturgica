@@ -4,8 +4,11 @@ import android.content.Context
 import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleRoot
+import com.paradox543.malankaraorthodoxliturgica.data.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
+import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import java.util.concurrent.ConcurrentHashMap
@@ -62,7 +65,7 @@ class BibleRepository @Inject constructor(
         val fileName = "bible-${bibleLanguage}.json"
 
         // Load or retrieve the cached BibleRoot object for the specific language file
-        val bibleRoot = cachedBibleChapterFiles.computeIfAbsent(fileName) {
+        val bibleRoot: BibleRoot = cachedBibleChapterFiles.computeIfAbsent(fileName) {
             loadJsonAsset<BibleRoot>(fileName)
                 ?: run {
                     Log.e("BibleRepository", "Failed to load Bible file: $fileName")
@@ -74,5 +77,69 @@ class BibleRepository @Inject constructor(
         val book = bibleRoot.Book.getOrNull(bookIndex)
         val chapter = book?.Chapter?.getOrNull(chapterIndex)
         return chapter
+    }
+
+    fun loadBibleReading(bibleReferences: List<BibleReference>, language: AppLanguage): List<Verse> {
+        val bibleLanguage = when(language){
+            AppLanguage.MALAYALAM -> "ml"
+            else -> "en"
+        }
+        val fileName = "bible-${bibleLanguage}.json"
+
+        val bibleRoot: BibleRoot = cachedBibleChapterFiles.computeIfAbsent(fileName) {
+            loadJsonAsset<BibleRoot>(fileName)
+                ?: run {
+                    Log.e("BibleRepository", "Failed to load Bible file: $fileName")
+                    BibleRoot( emptyList()) // Return empty if the file itself can't be loaded
+                }
+        }
+
+        val verses = mutableListOf<Verse>()
+        try {
+            for (bibleReference in bibleReferences) {
+                val book = bibleRoot.Book.getOrNull(bibleReference.bookNumber - 1)
+                if (book == null)
+                    throw BookNotFoundException("Book not found: ${bibleReference.bookNumber}")
+                for (range in bibleReference.ranges) {
+                    var chapter = book.Chapter.getOrNull(range.startChapter - 1)
+                    if (chapter == null) {
+                        throw BookNotFoundException("Chapter not found: ${bibleReference.bookNumber}.${range.startChapter}")
+                    }
+                    if (range.startChapter == range.endChapter) {
+                        Log.d(
+                            "BibleRepository",
+                            "Loading verses from ${bibleReference.bookNumber}.${range.startChapter} ${range.startVerse}-${range.endVerse}"
+                        )
+                        verses.addAll(chapter.Verse.subList(range.startVerse - 1, range.endVerse))
+                    } else {
+                        verses.addAll(
+                            chapter.Verse.subList(
+                                range.startVerse - 1,
+                                chapter.Verse.size
+                            )
+                        )
+                        chapter = book.Chapter.getOrNull(range.endChapter - 1)
+                        if (chapter == null) {
+                            throw BookNotFoundException("Chapter not found: ${bibleReference.bookNumber}.${range.endChapter}")
+                        }
+                        verses.addAll(chapter.Verse.subList(0, range.endVerse))
+                    }
+                }
+                return verses.map { verse ->
+                    val verseId = verse.Verseid.substring(5).toInt() + 1
+                    Verse(
+                        "$verseId",
+                        verse.Verse
+                    )
+                }
+            }
+        } catch (e: IndexOutOfBoundsException) {
+            Log.e("BibleRepository", "Error accessing verses: ${e.message}", e)
+            throw BookNotFoundException("Invalid verse range in the request.")
+        } catch (e: BookNotFoundException) {
+            Log.e("BibleRepository", "Error: ${e.message}", e)
+            throw e // Re-throw to be handled by the caller
+        }
+        return verses
     }
 }

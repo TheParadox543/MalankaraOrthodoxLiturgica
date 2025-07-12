@@ -94,13 +94,19 @@ class CalendarViewModel @Inject constructor(
         _selectedDayViewData.value = events
     }
 
+    private fun clearDayEvents() {
+        _selectedDayViewData.value = emptyList()
+    }
+
     fun goToNextMonth() {
         val nextMonthDate = _currentCalendarViewDate.value.plusMonths(1)
+        clearDayEvents()
         loadMonth(nextMonthDate.monthValue, nextMonthDate.year)
     }
 
     fun goToPreviousMonth() {
         val prevMonthDate = _currentCalendarViewDate.value.minusMonths(1)
+        clearDayEvents()
         loadMonth(prevMonthDate.monthValue, prevMonthDate.year)
     }
 }
