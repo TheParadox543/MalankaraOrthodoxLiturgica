@@ -6758,8 +6758,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "secondSundayAfterPentecost": {
         "type": "feast",
@@ -6867,8 +6866,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "thirdSundayAfterPentecost": {
         "type": "feast",
@@ -6976,8 +6974,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "fourthSundayAfterPentecost": {
         "type": "feast",
@@ -7085,8 +7082,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "fifthSundayAfterPentecost": {
         "type": "feast",
@@ -7194,8 +7190,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "sixthSundayAfterPentecost": {
         "type": "feast",
@@ -7303,8 +7298,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "seventhSundayAfterPentecost": {
         "type": "feast",
@@ -7412,8 +7406,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "eighthSundayAfterPentecost": {
         "type": "feast",
@@ -7521,8 +7514,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "ninthSundayAfterPentecost": {
         "type": "feast",
@@ -7641,8 +7633,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "tenthSundayAfterPentecost": {
         "type": "feast",
@@ -7750,8 +7741,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "eleventhSundayAfterPentecost": {
         "type": "feast",
@@ -7859,8 +7849,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "twelfthSundayAfterPentecost": {
         "type": "feast",
@@ -7968,8 +7957,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterPentecost"
+        }
     },
     "feastOfApostlesFast": {
         "type": "feast",
@@ -8307,7 +8295,8 @@
     "transfiguration": {
         "type": "feast",
         "title": {
-            "en": "Transfiguration"
+            "en": "Transfiguration",
+            "ml": "കൂടാര (മറുരൂപ) പ്പെരുന്നാൾ"
         },
         "bibleReadings": {
             "vespersGospel": [
@@ -8519,8 +8508,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterTransfiguration"
+        }
     },
     "secondSundayAfterTransfiguration": {
         "type": "feast",
@@ -8634,8 +8622,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterTransfiguration"
+        }
     },
     "assumption": {
         "type": "feast",

@@ -307,6 +307,10 @@ object NavigationTree {
                 )
             )
         }
+        children.add(
+            qurbanaSongsSection(currentRoute)
+        )
+
         return PageNode(
             route = currentRoute,
             parent = parentRoute,
@@ -416,6 +420,27 @@ object NavigationTree {
                     currentRoute
                 )
             )
+        )
+    }
+
+    private fun qurbanaSongsSection(parentRoute: String): PageNode {
+        val currentRoute = "qurbanaSongs"
+        val qurbanaSongs = listOf(
+            "transfiguration"
+        )
+        val children = qurbanaSongs.map { song ->
+            prayer(
+                route = song,
+                filename = "qurbanaSongs/${song.replace("_", "/")}.json",
+                parentRoute = currentRoute,
+                languages = listOf("ml", "mn")
+            )
+        }
+        return PageNode(
+            route = currentRoute,
+            parent = parentRoute,
+            children = children,
+            languages = listOf("ml")
         )
     }
 
