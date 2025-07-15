@@ -23,7 +23,7 @@ class BibleRepository @Inject constructor(
 
     // Lazily load and cache the Bible chapters to avoid re-reading the asset
     private val cachedBibleChapters: List<BibleDetails> by lazy {
-        loadJsonAsset<List<BibleDetails>>("bibleBooks.json") ?: emptyList()
+        loadJsonAsset<List<BibleDetails>>("bibleBookMetadata.json") ?: emptyList()
     }
 
     // Generic helper function to load and parse JSON from assets
