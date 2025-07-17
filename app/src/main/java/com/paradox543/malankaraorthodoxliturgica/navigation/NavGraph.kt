@@ -16,6 +16,7 @@ import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.view.CalendarScreen
+import com.paradox543.malankaraorthodoxliturgica.view.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
@@ -68,7 +69,7 @@ fun NavGraph(
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, settingsViewModel, node)
             } else {
-                navController.navigateUp()
+                ContentNotReadyScreen(navController = navController, message = route)
             }
         }
         composable("prayerScreen/{route}") { backStackEntry ->
@@ -77,7 +78,7 @@ fun NavGraph(
             if (node != null) {
                 PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
             } else {
-                navController.navigateUp()
+                ContentNotReadyScreen(navController = navController, message = route)
             }
         }
         composable("prayNow") {
