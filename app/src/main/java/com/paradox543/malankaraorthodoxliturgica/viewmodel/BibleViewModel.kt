@@ -4,9 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReading
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.data.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContent
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
@@ -24,11 +28,21 @@ class BibleViewModel @Inject constructor(
     private val _bibleBooks = MutableStateFlow<List<BibleDetails>>(emptyList())
     val bibleBooks: StateFlow<List<BibleDetails>> = _bibleBooks
 
+    private val _biblePrefaceTemplates = MutableStateFlow(
+        PrefaceTemplates(
+            prophets = PrefaceContent(emptyList(), emptyList()),
+            generalEpistle = PrefaceContent(emptyList(), emptyList()),
+            paulineEpistle = PrefaceContent(emptyList(), emptyList())
+        )
+    )
+    val biblePrefaceTemplates: StateFlow<PrefaceTemplates> = _biblePrefaceTemplates.asStateFlow()
+
     private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
     val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
 
     init {
         viewModelScope.launch { loadBibleDetails() }
+        viewModelScope.launch { loadBiblePrefaceTemplates() }
     }
 
     private fun loadBibleDetails() {
@@ -36,6 +50,16 @@ class BibleViewModel @Inject constructor(
             val bibleChapters = bibleRepository.loadBibleDetails()
             _bibleBooks.value = bibleChapters
         } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    private fun loadBiblePrefaceTemplates() {
+        try {
+            val prefaceTemplates = bibleRepository.loadPrefaceTemplates()
+            _biblePrefaceTemplates.value = prefaceTemplates
+        } catch (e: Exception) {
+            // Handle error if needed
             throw e
         }
     }
@@ -183,15 +207,71 @@ class BibleViewModel @Inject constructor(
         _selectedBibleReference.value = reference
     }
 
-    fun loadBibleReading(bibleReferences: List<BibleReference>, language: AppLanguage): List<Verse> {
+    fun loadBiblePreface(bibleReference: BibleReference, language: AppLanguage): List<PrayerElement>? {
+        val book = _bibleBooks.value[bibleReference.bookNumber - 1]
+        val prefaceContent = book.prefaces
+            ?: when (book.category) {
+                "prophet" -> _biblePrefaceTemplates.value.prophets
+                "generalEpistle" -> _biblePrefaceTemplates.value.generalEpistle
+                "paulineEpistle" -> _biblePrefaceTemplates.value.paulineEpistle
+                else -> return null
+            }
+
+        val sourcePreface: List<PrayerElement> = when (language) {
+            AppLanguage.MALAYALAM -> prefaceContent.ml
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> prefaceContent.en
+        }
+
+        val title = when (language) {
+            AppLanguage.MALAYALAM -> book.book.ml
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> book.book.en
+        }
+        val displayTitle = when (language) {
+            AppLanguage.MALAYALAM -> book.displayTitle?.ml ?: ""
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> book.displayTitle?.en ?: ""
+        }
+        val ordinal = when (language) {
+            AppLanguage.MALAYALAM -> book.ordinal?.ml ?: ""
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> book.ordinal?.en ?: ""
+        }
+
+        // Use .map to create a new list with the replaced content
+        return sourcePreface.map { item ->
+            when (item) {
+                is PrayerElement.Prose -> {
+                    item.copy(
+                        content = item.content
+                            .replace("{title}", title)
+                            .replace("{displayTitle}", displayTitle)
+                            .replace("{ordinal}", ordinal)
+                    )
+                }
+                else -> item
+            }
+        }
+    }
+
+
+    fun loadBibleReading(bibleReferences: List<BibleReference>, language: AppLanguage): BibleReading {
         return try {
-            bibleRepository.loadBibleReading(bibleReferences, language)
+            val bibleReference = bibleReferences.firstOrNull()
+            val preface = if (bibleReference != null) {
+                loadBiblePreface(bibleReference, language)
+            } else {
+                null
+            }
+            BibleReading(
+                preface = preface,
+                verses = bibleRepository.loadBibleReading(bibleReferences, language)
+            )
         } catch (e: BookNotFoundException) {
             // Handle the case where a book or chapter is not found
-            listOf(
-                Verse(
-                    "Error",
-                    "Book or chapter not found: ${e.message}",
+            BibleReading(
+                verses = listOf(
+                    Verse(
+                        "Error",
+                        "Book or chapter not found: ${e.message}",
+                    )
                 )
             )
         }
