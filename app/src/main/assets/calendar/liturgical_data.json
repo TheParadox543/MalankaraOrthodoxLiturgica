@@ -112,7 +112,7 @@
                 }
             ]
         },
-        "specialSongsKey": "koodoshEetho"
+        "specialSongsKey": "koodoshEethoSongs"
     },
     "hoodhoshEetho": {
         "type": "feast",
@@ -232,7 +232,7 @@
                 }
             ]
         },
-        "specialSongsKey": "hoodhoshEetho"
+        "specialSongsKey": "hoodhoshEethoSongs"
     },
     "annunciationToZachariah": {
         "type": "feast",
@@ -385,7 +385,7 @@
                 }
             ]
         },
-        "specialSongsKey": "annunciationToZachariah"
+        "specialSongsKey": "annunciationToZachariahSongs"
     },
     "annunciationToStMary": {
         "type": "feast",
@@ -528,7 +528,7 @@
                 }
             ]
         },
-        "specialSongsKey": "annunciationToStMary"
+        "specialSongsKey": "annunciationToStMarySongs"
     },
     "visitationToElizabeth": {
         "type": "feast",
@@ -694,7 +694,7 @@
                 }
             ]
         },
-        "specialSongsKey": "visitationToElizabeth"
+        "specialSongsKey": "visitationToElizabethSongs"
     },
     "birthOfJohnTheBaptist": {
         "type": "feast",
@@ -842,7 +842,7 @@
                 }
             ]
         },
-        "specialSongsKey": "birthOfJohnTheBaptist"
+        "specialSongsKey": "birthOfJohnTheBaptistSongs"
     },
     "annunciationToJoseph": {
         "type": "feast",
@@ -940,7 +940,7 @@
                 }
             ]
         },
-        "specialSongsKey": "annunciationToJoseph"
+        "specialSongsKey": "annunciationToJosephSongs"
     },
     "sundayBeforeChristmas": {
         "type": "feast",
@@ -1066,7 +1066,7 @@
                 }
             ]
         },
-        "specialSongsKey": "sundayBeforeChristmas"
+        "specialSongsKey": "sundayBeforeChristmasSongs"
     },
     "yeldho": {
         "type": "feast",
@@ -1175,7 +1175,7 @@
                 }
             ]
         },
-        "specialSongsKey": "yeldho"
+        "specialSongsKey": "yeldhoSongs"
     },
     "glorificationOfStMary": {
         "type": "feast",
@@ -1273,7 +1273,7 @@
                 }
             ]
         },
-        "specialSongsKey": "glorificationOfStMary"
+        "specialSongsKey": "glorificationOfStMarySongs"
     },
     "massacreOfTheInfants": {
         "type": "feast",
@@ -1382,7 +1382,7 @@
                 }
             ]
         },
-        "specialSongsKey": "massacreOfTheInfants"
+        "specialSongsKey": "massacreOfTheInfantsSongs"
     },
     "firstSundayAfterChristmas": {
         "type": "feast",
@@ -1497,7 +1497,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterChristmas"
+        "specialSongsKey": "afterChristmasSongs"
     },
     "circumcision": {
         "type": "feast",
@@ -1617,7 +1617,7 @@
                 }
             ]
         },
-        "specialSongsKey": "circumcision"
+        "specialSongsKey": "circumcisionSongs"
     },
     "secondSundayAfterChristmas": {
         "type": "feast",
@@ -1726,7 +1726,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterChristmas"
+        "specialSongsKey": "afterChristmasSongs"
     },
     "epiphany": {
         "type": "feast",
@@ -1892,7 +1892,7 @@
                 }
             }
         ],
-        "specialSongsKey": "epiphany"
+        "specialSongsKey": "epiphanySongs"
     },
     "beheadingOfStJohnTheBaptist": {
         "type": "feast",
@@ -2218,7 +2218,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterEpiphany"
+        "specialSongsKey": "afterEpiphanySongs"
     },
     "secondSundayAfterEpiphany": {
         "type": "feast",
@@ -2331,7 +2331,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterEpiphany"
+        "specialSongsKey": "afterEpiphanySongs"
     },
     "thirdSundayAfterEpiphany": {
         "type": "feast",
@@ -2438,7 +2438,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterEpiphany"
+        "specialSongsKey": "afterEpiphanySongs"
     },
     "fourthSundayAfterEpiphany": {
         "type": "feast",
@@ -2584,7 +2584,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterEpiphany"
+        "specialSongsKey": "afterEpiphanySongs"
     },
     "fifthSundayAfterEpiphany": {
         "type": "feast",
@@ -2691,7 +2691,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterEpiphany"
+        "specialSongsKey": "afterEpiphanySongs"
     },
     "mayaltho": {
         "type": "feast",
@@ -2821,7 +2821,7 @@
                 }
             ]
         },
-        "specialSongsKey": "mayaltho"
+        "specialSongsKey": "mayalthoSongs"
     },
     "allDepartedHolyFathers": {
         "type": "feast",
@@ -2917,7 +2917,7 @@
                 }
             ]
         },
-        "specialSongsKey": "allDepartedHolyFathers"
+        "specialSongsKey": "allDepartedHolyFathersSongs"
     },
     "allDepartedPriests": {
         "type": "feast",
@@ -3024,7 +3024,7 @@
                 }
             ]
         },
-        "specialSongsKey": "allDepartedPriests"
+        "specialSongsKey": "allDepartedPriestsSongs"
     },
     "allDepartedFaithful": {
         "type": "feast",
@@ -3131,7 +3131,7 @@
                 }
             ]
         },
-        "specialSongsKey": "allDepartedFaithful"
+        "specialSongsKey": "allDepartedFaithfulSongs"
     },
     "kothine": {
         "type": "feast",
@@ -3249,7 +3249,7 @@
                 }
             ]
         },
-        "specialSongsKey": "kothine"
+        "specialSongsKey": "kothineSongs"
     },
     "lepersSunday": {
         "type": "feast",
@@ -3391,7 +3391,7 @@
                 }
             ]
         },
-        "specialSongsKey": "lepersSunday"
+        "specialSongsKey": "lepersSundaySongs"
     },
     "palsySunday": {
         "type": "feast",
@@ -3526,7 +3526,7 @@
                 }
             ]
         },
-        "specialSongsKey": "palsySunday"
+        "specialSongsKey": "palsySundaySongs"
     },
     "canaaniteWoman": {
         "type": "feast",
@@ -3633,7 +3633,7 @@
                 }
             ]
         },
-        "specialSongsKey": "canaaniteWoman"
+        "specialSongsKey": "canaaniteWomanSongs"
     },
     "midLent": {
         "type": "feast",
@@ -3740,7 +3740,7 @@
                 }
             ]
         },
-        "specialSongsKey": "midLent"
+        "specialSongsKey": "midLentSongs"
     },
     "crippledWoman": {
         "type": "feast",
@@ -3847,7 +3847,7 @@
                 }
             ]
         },
-        "specialSongsKey": "crippledWoman"
+        "specialSongsKey": "crippledWomanSongs"
     },
     "blindMan": {
         "type": "feast",
@@ -3976,7 +3976,7 @@
                 }
             ]
         },
-        "specialSongsKey": "blindMan"
+        "specialSongsKey": "blindManSongs"
     },
     "fortiethFriday": {
         "type": "feast",
@@ -4083,7 +4083,7 @@
                 }
             ]
         },
-        "specialSongsKey": "fortiethFriday"
+        "specialSongsKey": "fortiethFridaySongs"
     },
     "lazarusSaturday": {
         "type": "feast",
@@ -4185,7 +4185,7 @@
                 }
             ]
         },
-        "specialSongsKey": "lazarusSaturday"
+        "specialSongsKey": "lazarusSaturdaySongs"
     },
     "memoryOfFortyMartyrs": {
         "type": "feast",
@@ -4298,7 +4298,7 @@
                 }
             ]
         },
-        "specialSongsKey": "memoryOfFortyMartyrs"
+        "specialSongsKey": "memoryOfFortyMartyrsSongs"
     },
     "hosanna": {
         "type": "feast",
@@ -4557,7 +4557,7 @@
                 }
             ]
         },
-        "specialSongsKey": "hosanna"
+        "specialSongsKey": "hosannaSongs"
     },
     "easter": {
         "type": "feast",
@@ -4691,7 +4691,7 @@
                 }
             ]
         },
-        "specialSongsKey": "easter"
+        "specialSongsKey": "easterSongs"
     },
     "hevoraeMonday": {
         "type": "feast",
@@ -5482,7 +5482,7 @@
                 }
             ]
         },
-        "specialSongsKey": "newSunday"
+        "specialSongsKey": "newSundaySongs"
     },
     "firstSundayAfterNewSunday": {
         "type": "feast",
@@ -5591,7 +5591,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterNewSunday"
+        "specialSongsKey": "afterNewSundaySongs"
     },
     "secondSundayAfterNewSunday": {
         "type": "feast",
@@ -5700,7 +5700,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterNewSunday"
+        "specialSongsKey": "afterNewSundaySongs"
     },
     "thirdSundayAfterNewSunday": {
         "type": "feast",
@@ -5820,7 +5820,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterNewSunday"
+        "specialSongsKey": "afterNewSundaySongs"
     },
     "fourthSundayAfterNewSunday": {
         "type": "feast",
@@ -5929,7 +5929,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterNewSunday"
+        "specialSongsKey": "afterNewSundaySongs"
     },
     "ascension": {
         "type": "feast",
@@ -6049,7 +6049,7 @@
                 }
             ]
         },
-        "specialSongsKey": "ascension"
+        "specialSongsKey": "ascensionSongs"
     },
     "sundayBeforePentecost": {
         "type": "feast",
@@ -6170,7 +6170,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterNewSunday"
+        "specialSongsKey": "afterNewSundaySongs"
     },
     "pentecost": {
         "type": "feast",
@@ -6313,7 +6313,7 @@
                 }
             ]
         },
-        "specialSongsKey": "pentecost",
+        "specialSongsKey": "pentecostSongs",
         "specialServices": [
             {
                 "title": { "en": "Service of the First Kneeling" },
@@ -6639,7 +6639,7 @@
                 }
             ]
         },
-        "specialSongsKey": "goldenFriday"
+        "specialSongsKey": "goldenFridaySongs"
     },
     "firstSundayAfterPentecost": {
         "type": "feast",
@@ -8066,7 +8066,7 @@
                 }
             ]
         },
-        "specialSongsKey": "feastOfApostlesFast"
+        "specialSongsKey": "feastOfApostlesFastSongs"
     },
     "feastOfTwelveApostles": {
         "type": "feast",
@@ -8181,7 +8181,7 @@
                 }
             ]
         },
-        "specialSongsKey": "feastOfTwelveApostles"
+        "specialSongsKey": "feastOfTwelveApostlesSongs"
     },
     "dukharonoStThomas": {
         "type": "feast",
@@ -8290,7 +8290,7 @@
                 }
             ]
         },
-        "specialSongsKey": "dukharonoStThomas"
+        "specialSongsKey": "dukharonoStThomasSongs"
     },
     "transfiguration": {
         "type": "feast",
@@ -8400,7 +8400,7 @@
                 }
             ]
         },
-        "specialSongsKey": "transfiguration"
+        "specialSongsKey": "transfigurationSongs"
     },
     "firstSundayAfterTransfiguration": {
         "type": "feast",
@@ -8792,7 +8792,7 @@
                 }
             ]
         },
-        "specialSongsKey": "assumption"
+        "specialSongsKey": "assumptionSongs"
     },
     "firstSundayAfterAssumption": {
         "type": "feast",
@@ -8901,7 +8901,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterAssumption"
+        "specialSongsKey": "afterAssumptionSongs"
     },
     "secondSundayAfterAssumption": {
         "type": "feast",
@@ -9010,7 +9010,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterAssumption"
+        "specialSongsKey": "afterAssumptionSongs"
     },
     "thirdSundayAfterAssumption": {
         "type": "feast",
@@ -9119,7 +9119,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterAssumption"
+        "specialSongsKey": "afterAssumptionSongs"
     },
     "fourthSundayAfterAssumption": {
         "type": "feast",
@@ -9234,7 +9234,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterAssumption"
+        "specialSongsKey": "afterAssumptionSongs"
     },
     "fifthSundayAfterAssumption": {
         "type": "feast",
@@ -9343,7 +9343,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterAssumption"
+        "specialSongsKey": "afterAssumptionSongs"
     },
     "feastOfHolyCross": {
         "type": "feast",
@@ -9452,7 +9452,7 @@
                 }
             ]
         },
-        "specialSongsKey": "feastOfHolyCross"
+        "specialSongsKey": "feastOfHolyCrossSongs"
     },
     "firstSundayAfterHolyCross": {
         "type": "feast",
@@ -9561,7 +9561,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterHolyCross"
+        "specialSongsKey": "afterHolyCrossSongs"
     },
     "secondSundayAfterHolyCross": {
         "type": "feast",
@@ -9687,7 +9687,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterHolyCross"
+        "specialSongsKey": "afterHolyCrossSongs"
     },
     "thirdSundayAfterHolyCross": {
         "type": "feast",
@@ -9796,7 +9796,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterHolyCross"
+        "specialSongsKey": "afterHolyCrossSongs"
     },
     "fourthSundayAfterHolyCross": {
         "type": "feast",
@@ -9905,7 +9905,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterHolyCross"
+        "specialSongsKey": "afterHolyCrossSongs"
     },
     "fifthSundayAfterHolyCross": {
         "type": "feast",
@@ -10014,7 +10014,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterHolyCross"
+        "specialSongsKey": "afterHolyCrossSongs"
     },
     "sixthSundayAfterHolyCross": {
         "type": "feast",
@@ -10123,7 +10123,7 @@
                 }
             ]
         },
-        "specialSongsKey": "afterHolyCross"
+        "specialSongsKey": "afterHolyCrossSongs"
     },
     "seventhSundayAfterHolyCross": {
         "type": "feast",
@@ -10232,6 +10232,6 @@
                 }
             ]
         },
-        "specialSongsKey": "afterHolyCross"
+        "specialSongsKey": "afterHolyCrossSongs"
     }
 }

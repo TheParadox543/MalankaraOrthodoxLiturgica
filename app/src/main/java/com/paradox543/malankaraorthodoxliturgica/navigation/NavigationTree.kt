@@ -426,7 +426,7 @@ object NavigationTree {
     private fun qurbanaSongsSection(parentRoute: String): PageNode {
         val currentRoute = "qurbanaSongs"
         val qurbanaSongs = listOf(
-            "transfiguration"
+            "transfigurationSongs"
         )
         val children = qurbanaSongs.map { song ->
             prayer(
