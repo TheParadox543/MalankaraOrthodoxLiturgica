@@ -8,6 +8,9 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleRoot
 import com.paradox543.malankaraorthodoxliturgica.data.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContent
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
@@ -24,6 +27,14 @@ class BibleRepository @Inject constructor(
     // Lazily load and cache the Bible chapters to avoid re-reading the asset
     private val cachedBibleChapters: List<BibleDetails> by lazy {
         loadJsonAsset<List<BibleDetails>>("bibleBookMetadata.json") ?: emptyList()
+    }
+
+    private val cachedPrefaceTemplates: PrefaceTemplates by lazy {
+        loadJsonAsset<PrefaceTemplates>("bible_preface_templates.json") ?: PrefaceTemplates(
+            prophets = PrefaceContent(emptyList(), emptyList()),
+            generalEpistle = PrefaceContent(emptyList(), emptyList()),
+            paulineEpistle = PrefaceContent(emptyList(), emptyList())
+        )
     }
 
     // Generic helper function to load and parse JSON from assets
@@ -141,5 +152,9 @@ class BibleRepository @Inject constructor(
             throw e // Re-throw to be handled by the caller
         }
         return verses
+    }
+
+    fun loadPrefaceTemplates(): PrefaceTemplates {
+        return cachedPrefaceTemplates
     }
 }

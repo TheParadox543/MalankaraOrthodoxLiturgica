@@ -5,7 +5,30 @@
             "ml": "ഉല്പത്തി"
         },
         "verses": 1533,
-        "chapters": 50
+        "chapters": 50,
+        "category": "firstProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the first book of Moses, the first among Prophets. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ഓറൈത്തായുടെ ഒന്നാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- സൃഷ്‌ടികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -13,7 +36,30 @@
             "ml": "പുറപ്പാട്"
         },
         "verses": 1213,
-        "chapters": 40
+        "chapters": 40,
+        "category": "firstProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the second book of Moses, the first among Prophets. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ഓറൈത്തായുടെ രണ്ടാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- സൃഷ്‌ടികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -21,7 +67,30 @@
             "ml": "ലേവ്യപുസ്തകം"
         },
         "verses": 859,
-        "chapters": 27
+        "chapters": 27,
+        "category": "firstProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the third book of Moses, the first of the Prophets. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ഓറൈത്തായുടെ മൂന്നാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- സൃഷ്‌ടികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -29,7 +98,30 @@
             "ml": "സംഖ്യാപുസ്തകം"
         },
         "verses": 1288,
-        "chapters": 36
+        "chapters": 36,
+        "category": "firstProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the fourth book of Moses, the first of the Prophets. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ഓറൈത്തായുടെ നാലാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- സൃഷ്‌ടികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -37,7 +129,30 @@
             "ml": "ആവർത്തനപുസ്തകം"
         },
         "verses": 959,
-        "chapters": 34
+        "chapters": 34,
+        "category": "firstProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the fifth book of Moses, the first of the Prophets. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ഓറൈത്തായുടെ അഞ്ചാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- സൃഷ്‌ടികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -45,7 +160,8 @@
             "ml": "യോശുവ"
         },
         "verses": 658,
-        "chapters": 24
+        "chapters": 24,
+        "category": "prophet"
     },
     {
         "book": {
@@ -53,7 +169,30 @@
             "ml": "ന്യായാധിപന്മാർ"
         },
         "verses": 618,
-        "chapters": 21
+        "chapters": 21,
+        "category": "judge",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the book of Judges, Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Judges, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ന്യായാധിപതിമാരുടെ പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- ന്യായാധിപന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -61,7 +200,30 @@
             "ml": "രൂത്ത്"
         },
         "verses": 85,
-        "chapters": 4
+        "chapters": 4,
+        "category": "righteous",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the book of the righteous Ruth. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the righteous, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ശുദ്ധിമതിയായ റൂത്തിന്റെ  പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- ശുദ്ധിമതികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -69,7 +231,30 @@
             "ml": "1 ശമൂവേൽ"
         },
         "verses": 810,
-        "chapters": 31
+        "chapters": 31,
+        "category": "samuelProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the first book of the Prophet Samuel. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ശമുവേൽ പ്രവാചകന്റെ ഒന്നാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- പ്രവാചകന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -77,7 +262,30 @@
             "ml": "2 ശമൂവേൽ"
         },
         "verses": 695,
-        "chapters": 24
+        "chapters": 24,
+        "category": "samuelProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the second book of the Prophet Samuel. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ശമുവേൽ പ്രവാചകന്റെ രണ്ടാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- പ്രവാചകന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -85,7 +293,30 @@
             "ml": "1 രാജാക്കന്മാർ"
         },
         "verses": 816,
-        "chapters": 22
+        "chapters": 22,
+        "category": "king",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the first book of the Kings. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Kings, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- രാജാക്കന്മാരുടെ ഒന്നാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- രാജാക്കന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -93,7 +324,30 @@
             "ml": "2 രാജാക്കന്മാർ"
         },
         "verses": 719,
-        "chapters": 25
+        "chapters": 25,
+        "category": "king",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the second book of the Kings. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Kings, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- രാജാക്കന്മാരുടെ രണ്ടാം പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- രാജാക്കന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -117,7 +371,8 @@
             "ml": "എസ്രാ"
         },
         "verses": 280,
-        "chapters": 10
+        "chapters": 10,
+        "category": "prophet"
     },
     {
         "book": {
@@ -125,7 +380,8 @@
             "ml": "നെഹെമ്യാവ്"
         },
         "verses": 406,
-        "chapters": 13
+        "chapters": 13,
+        "category": "prophet"
     },
     {
         "book": {
@@ -133,7 +389,30 @@
             "ml": "എസ്ഥേർ"
         },
         "verses": 167,
-        "chapters": 10
+        "chapters": 10,
+        "category": "righteous",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the book of the righteous Esther. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the righteous, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ശുദ്ധിമതിയായ എസ്ഥേറിന്റെ പുസ്തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- ശുദ്ധിമതികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -141,7 +420,30 @@
             "ml": "ഇയ്യോബ്"
         },
         "verses": 1070,
-        "chapters": 42
+        "chapters": 42,
+        "category": "just",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the book of Job, the just. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the just, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- നീതിമാനായ ഈയോബിന്റേ പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- നീതിമാന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -149,7 +451,30 @@
             "ml": "സങ്കീർത്തനങ്ങൾ"
         },
         "verses": 2461,
-        "chapters": 150
+        "chapters": 150,
+        "category": "psalmist",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the Psalms of David, the king and the prophet. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Psalmist, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- രാജാവും നിബിയുമായ ദാവീദിന്റെ സങ്കീർത്തനങ്ങളിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- രാജാക്കന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -157,7 +482,30 @@
             "ml": "സദൃശ്യവാക്യങ്ങൾ"
         },
         "verses": 915,
-        "chapters": 31
+        "chapters": 31,
+        "category": "wise",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the Proverbs of Solomon, the wise among the wise. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the wise, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- ജ്ഞാനിയായ സൊലോമോന്റെ സദൃശ്യവാക്യങ്ങളിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- ജ്ഞാനികളുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -181,7 +529,30 @@
             "ml": "യെശയ്യാവ്"
         },
         "verses": 1292,
-        "chapters": 66
+        "chapters": 66,
+        "category": "greatProphet",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the book of Isaiah, the glorious prophet. Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Prophet, and His mercy be upon us for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- മഹത്വമുള്ള യെശയ്യാവ് പ്രവാചകന്റെ പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- പ്രവാചകന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -189,7 +560,8 @@
             "ml": "യിരെമ്യാവ്"
         },
         "verses": 1364,
-        "chapters": 52
+        "chapters": 52,
+        "category": "prophet"
     },
     {
         "book": {
@@ -205,7 +577,8 @@
             "ml": "യെഹെസ്കേൽ"
         },
         "verses": 1273,
-        "chapters": 48
+        "chapters": 48,
+        "category": "prophet"
     },
     {
         "book": {
@@ -213,7 +586,8 @@
             "ml": "ദാനിയേൽ"
         },
         "verses": 357,
-        "chapters": 12
+        "chapters": 12,
+        "category": "prophet"
     },
     {
         "book": {
@@ -221,7 +595,8 @@
             "ml": "ഹോശേയ"
         },
         "verses": 197,
-        "chapters": 14
+        "chapters": 14,
+        "category": "prophet"
     },
     {
         "book": {
@@ -229,7 +604,8 @@
             "ml": "യോവേൽ"
         },
         "verses": 73,
-        "chapters": 3
+        "chapters": 3,
+        "category": "prophet"
     },
     {
         "book": {
@@ -237,7 +613,8 @@
             "ml": "ആമോസ്"
         },
         "verses": 146,
-        "chapters": 9
+        "chapters": 9,
+        "category": "prophet"
     },
     {
         "book": {
@@ -245,7 +622,8 @@
             "ml": "ഓബദ്യാവ്"
         },
         "verses": 21,
-        "chapters": 1
+        "chapters": 1,
+        "category": "prophet"
     },
     {
         "book": {
@@ -253,7 +631,8 @@
             "ml": "യോനാ"
         },
         "verses": 48,
-        "chapters": 4
+        "chapters": 4,
+        "category": "prophet"
     },
     {
         "book": {
@@ -261,7 +640,8 @@
             "ml": "മീഖാ"
         },
         "verses": 105,
-        "chapters": 7
+        "chapters": 7,
+        "category": "prophet"
     },
     {
         "book": {
@@ -269,7 +649,8 @@
             "ml": "നാഹും"
         },
         "verses": 47,
-        "chapters": 3
+        "chapters": 3,
+        "category": "prophet"
     },
     {
         "book": {
@@ -277,7 +658,8 @@
             "ml": "ഹബക്കൂക്ക്"
         },
         "verses": 56,
-        "chapters": 3
+        "chapters": 3,
+        "category": "prophet"
     },
     {
         "book": {
@@ -285,7 +667,8 @@
             "ml": "സെഫന്യാവ്"
         },
         "verses": 53,
-        "chapters": 3
+        "chapters": 3,
+        "category": "prophet"
     },
     {
         "book": {
@@ -293,7 +676,8 @@
             "ml": "ഹഗ്ഗായി"
         },
         "verses": 38,
-        "chapters": 2
+        "chapters": 2,
+        "category": "prophet"
     },
     {
         "book": {
@@ -301,7 +685,8 @@
             "ml": "സെഖര്യാവ്"
         },
         "verses": 211,
-        "chapters": 14
+        "chapters": 14,
+        "category": "prophet"
     },
     {
         "book": {
@@ -309,7 +694,8 @@
             "ml": "മലാഖി"
         },
         "verses": 55,
-        "chapters": 4
+        "chapters": 4,
+        "category": "prophet"
     },
     {
         "book": {
@@ -317,7 +703,8 @@
             "ml": "മത്തായി"
         },
         "verses": 1071,
-        "chapters": 28
+        "chapters": 28,
+        "category": "gospel"
     },
     {
         "book": {
@@ -325,7 +712,8 @@
             "ml": "മർക്കോസ്"
         },
         "verses": 678,
-        "chapters": 16
+        "chapters": 16,
+        "category": "gospel"
     },
     {
         "book": {
@@ -333,7 +721,8 @@
             "ml": "ലൂക്കോസ്"
         },
         "verses": 1151,
-        "chapters": 24
+        "chapters": 24,
+        "category": "gospel"
     },
     {
         "book": {
@@ -341,7 +730,8 @@
             "ml": "യോഹന്നാൻ"
         },
         "verses": 879,
-        "chapters": 21
+        "chapters": 21,
+        "category": "gospel"
     },
     {
         "book": {
@@ -349,7 +739,30 @@
             "ml": "പ്രവൃത്തികൾ"
         },
         "verses": 1007,
-        "chapters": 28
+        "chapters": 28,
+        "category": "acts",
+        "prefaces": {
+            "en": [
+                {
+                    "type": "prose",
+                    "content": "Reader: The lesson from the Acts of the Holy Apostles. *Habibai, Barekmor."
+                },
+                {
+                    "type": "prose",
+                    "content": "People: Glory be to the Lord of the Apostles, and His mercy be upon us, for ever."
+                }
+            ],
+            "ml": [
+                {
+                    "type": "prose",
+                    "content": "വായനക്കാരൻ:- പരി. ശ്ലീഹന്മാരുടെ നടപ്പുകളുടെ പുസ്‌തകത്തിൽ നിന്നും - ഹാബീബായി ബാറെക്മോർ."
+                },
+                {
+                    "type": "prose",
+                    "content": "ജനം:- ശ്ലീഹന്മാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+                }
+            ]
+        }
     },
     {
         "book": {
@@ -357,7 +770,12 @@
             "ml": "റോമർ"
         },
         "verses": 433,
-        "chapters": 16
+        "chapters": 16,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Romans",
+            "ml": "റോമാർക്ക്"
+        }
     },
     {
         "book": {
@@ -365,7 +783,16 @@
             "ml": "1 കൊരിന്ത്യർ"
         },
         "verses": 437,
-        "chapters": 16
+        "chapters": 16,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Corinthians",
+            "ml": "കൊരിന്ത്യർക്ക്"
+        },
+        "ordinal": {
+            "en": "First ",
+            "ml": "ഒന്നാം "
+        }
     },
     {
         "book": {
@@ -373,7 +800,16 @@
             "ml": "2 കൊരിന്ത്യർ"
         },
         "verses": 257,
-        "chapters": 13
+        "chapters": 13,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Corinthians",
+            "ml": "കൊരിന്ത്യർക്ക്"
+        },
+        "ordinal": {
+            "en": "Second ",
+            "ml": "രണ്ടാം "
+        }
     },
     {
         "book": {
@@ -381,7 +817,12 @@
             "ml": "ഗലാത്യർ"
         },
         "verses": 149,
-        "chapters": 6
+        "chapters": 6,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Galatians",
+            "ml": "ഗലാത്യർക്ക്"
+        }
     },
     {
         "book": {
@@ -389,7 +830,12 @@
             "ml": "എഫെസ്യർ"
         },
         "verses": 155,
-        "chapters": 6
+        "chapters": 6,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Ephesians",
+            "ml": "എഫെസ്യർക്ക്"
+        }
     },
     {
         "book": {
@@ -397,7 +843,12 @@
             "ml": "ഫിലിപ്പിയർ"
         },
         "verses": 104,
-        "chapters": 4
+        "chapters": 4,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Philippians",
+            "ml": "ഫിലിപ്പിയർക്ക്"
+        }
     },
     {
         "book": {
@@ -405,7 +856,12 @@
             "ml": "കൊലോസ്യർ"
         },
         "verses": 95,
-        "chapters": 4
+        "chapters": 4,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Colossians",
+            "ml": "കൊലോസ്യർക്ക്"
+        }
     },
     {
         "book": {
@@ -413,7 +869,16 @@
             "ml": "1 തെസ്സലൊനീക്യർ"
         },
         "verses": 89,
-        "chapters": 5
+        "chapters": 5,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Thessalonians",
+            "ml": "തെസ്സലൊനീക്യർക്ക്"
+        },
+        "ordinal": {
+            "en": "First ",
+            "ml": "ഒന്നാം "
+        }
     },
     {
         "book": {
@@ -421,7 +886,16 @@
             "ml": "2 തെസ്സലൊനീക്യർ"
         },
         "verses": 47,
-        "chapters": 3
+        "chapters": 3,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Thessalonians",
+            "ml": "തെസ്സലൊനീക്യർക്ക്"
+        },
+        "ordinal": {
+            "en": "Second ",
+            "ml": "രണ്ടാം "
+        }
     },
     {
         "book": {
@@ -429,7 +903,16 @@
             "ml": "1 തിമൊഥെയൊസ്"
         },
         "verses": 133,
-        "chapters": 6
+        "chapters": 6,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "Timothy",
+            "ml": "തിമൊഥെയൊസിന്"
+        },
+        "ordinal": {
+            "en": "First ",
+            "ml": "ഒന്നാം "
+        }
     },
     {
         "book": {
@@ -437,7 +920,16 @@
             "ml": "2 തിമൊഥെയൊസ്"
         },
         "verses": 83,
-        "chapters": 4
+        "chapters": 4,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "Timothy",
+            "ml": "തിമൊഥെയൊസിന്"
+        },
+        "ordinal": {
+            "en": "Second ",
+            "ml": "രണ്ടാം "
+        }
     },
     {
         "book": {
@@ -445,7 +937,12 @@
             "ml": "തീത്തൊസ്"
         },
         "verses": 46,
-        "chapters": 3
+        "chapters": 3,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "Titus",
+            "ml": "തീത്തൊസിന്"
+        }
     },
     {
         "book": {
@@ -453,7 +950,12 @@
             "ml": "ഫിലേമോൻ"
         },
         "verses": 25,
-        "chapters": 1
+        "chapters": 1,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "Philemon",
+            "ml": "ഫിലേമോനിനോട്"
+        }
     },
     {
         "book": {
@@ -461,7 +963,12 @@
             "ml": "എബ്രായർ"
         },
         "verses": 303,
-        "chapters": 13
+        "chapters": 13,
+        "category": "paulineEpistle",
+        "displayTitle": {
+            "en": "The Hebrews",
+            "ml": "എബ്രായർക്ക്"
+        }
     },
     {
         "book": {
@@ -469,7 +976,12 @@
             "ml": "യാക്കോബ്"
         },
         "verses": 108,
-        "chapters": 5
+        "chapters": 5,
+        "category": "generalEpistle",
+        "displayTitle": {
+            "en": "James",
+            "ml": "യാക്കോബ്"
+        }
     },
     {
         "book": {
@@ -477,7 +989,16 @@
             "ml": "1 പത്രോസ്"
         },
         "verses": 105,
-        "chapters": 5
+        "chapters": 5,
+        "category": "generalEpistle",
+        "displayTitle": {
+            "en": "Peter",
+            "ml": "പത്രോസ്"
+        },
+        "ordinal": {
+            "en": "First ",
+            "ml": "ഒന്നാം "
+        }
     },
     {
         "book": {
@@ -485,7 +1006,16 @@
             "ml": "2 പത്രോസ്"
         },
         "verses": 61,
-        "chapters": 3
+        "chapters": 3,
+        "category": "generalEpistle",
+        "displayTitle": {
+            "en": "Peter",
+            "ml": "പത്രോസ്"
+        },
+        "ordinal": {
+            "en": "Second ",
+            "ml": "രണ്ടാം "
+        }
     },
     {
         "book": {
@@ -493,7 +1023,16 @@
             "ml": "1 യോഹന്നാൻ"
         },
         "verses": 105,
-        "chapters": 5
+        "chapters": 5,
+        "category": "generalEpistle",
+        "displayTitle": {
+            "en": "John",
+            "ml": "യോഹന്നാൻ"
+        },
+        "ordinal": {
+            "en": "First ",
+            "ml": "ഒന്നാം "
+        }
     },
     {
         "book": {
@@ -501,7 +1040,16 @@
             "ml": "2 യോഹന്നാൻ"
         },
         "verses": 13,
-        "chapters": 1
+        "chapters": 1,
+        "category": "generalEpistle",
+        "displayTitle": {
+            "en": "John",
+            "ml": "യോഹന്നാൻ"
+        },
+        "ordinal": {
+            "en": "Second ",
+            "ml": "രണ്ടാം "
+        }
     },
     {
         "book": {
@@ -509,7 +1057,16 @@
             "ml": "3 യോഹന്നാൻ"
         },
         "verses": 14,
-        "chapters": 1
+        "chapters": 1,
+        "category": "generalEpistle",
+        "displayTitle": {
+            "en": "John",
+            "ml": "യോഹന്നാൻ"
+        },
+        "ordinal": {
+            "en": "Third ",
+            "ml": "മൂന്നാം "
+        }
     },
     {
         "book": {
@@ -517,7 +1074,12 @@
             "ml": "യൂദാ"
         },
         "verses": 25,
-        "chapters": 1
+        "chapters": 1,
+        "category": "generalEpistle",
+        "displayTitle": {
+            "en": "Jude",
+            "ml": "യൂദാ"
+        }
     },
     {
         "book": {
