@@ -4,6 +4,7 @@
         "title": {
             "en": "Koodosh Eetho (Sanctification)"
         },
+        "specialSongsKey": "koodoshEethoSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -111,14 +112,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "koodoshEethoSongs"
+        }
     },
     "hoodhoshEetho": {
         "type": "feast",
         "title": {
             "en": "Hoodhosh Eetho (Dedication of Church)"
         },
+        "specialSongsKey": "hoodhoshEethoSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -231,14 +232,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "hoodhoshEethoSongs"
+        }
     },
     "annunciationToZachariah": {
         "type": "feast",
         "title": {
             "en": "Annunciation to Zachariah (Parents’ day)"
         },
+        "specialSongsKey": "annunciationToZachariahSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -384,14 +385,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "annunciationToZachariahSongs"
+        }
     },
     "annunciationToStMary": {
         "type": "feast",
         "title": {
             "en": "Annunciation to St. Mary, Mother of God"
         },
+        "specialSongsKey": "annunciationToStMarySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -527,14 +528,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "annunciationToStMarySongs"
+        }
     },
     "visitationToElizabeth": {
         "type": "feast",
         "title": {
             "en": "Visitation of St. Mary to Elizabeth"
         },
+        "specialSongsKey": "visitationToElizabethSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -693,14 +694,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "visitationToElizabethSongs"
+        }
     },
     "birthOfJohnTheBaptist": {
         "type": "feast",
         "title": {
             "en": "Birth of John the Baptist (Children’s day)"
         },
+        "specialSongsKey": "birthOfJohnTheBaptistSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -841,14 +842,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "birthOfJohnTheBaptistSongs"
+        }
     },
     "annunciationToJoseph": {
         "type": "feast",
         "title": {
             "en": "Annunciation to St. Joseph"
         },
+        "specialSongsKey": "annunciationToJosephSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -939,14 +940,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "annunciationToJosephSongs"
+        }
     },
     "sundayBeforeChristmas": {
         "type": "feast",
         "title": {
             "en": "Sunday before Christmas"
         },
+        "specialSongsKey": "sundayBeforeChristmasSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1065,14 +1066,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "sundayBeforeChristmasSongs"
+        }
     },
     "yeldho": {
         "type": "feast",
         "title": {
             "en": "Yeldho (Christmas)"
         },
+        "specialSongsKey": "yeldhoSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1174,14 +1175,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "yeldhoSongs"
+        }
     },
     "glorificationOfStMary": {
         "type": "feast",
         "title": {
             "en": "Glorification of St. Mary, Mother of God"
         },
+        "specialSongsKey": "glorificationOfStMarySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1272,14 +1273,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "glorificationOfStMarySongs"
+        }
     },
     "massacreOfTheInfants": {
         "type": "feast",
         "title": {
             "en": "Massacre of the Infants"
         },
+        "specialSongsKey": "massacreOfTheInfantsSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1381,14 +1382,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "massacreOfTheInfantsSongs"
+        }
     },
     "firstSundayAfterChristmas": {
         "type": "feast",
         "title": {
             "en": "First Sunday after Christmas (The Holy Family flee to Egypt)"
         },
+        "specialSongsKey": "afterChristmasSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1496,14 +1497,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterChristmasSongs"
+        }
     },
     "circumcision": {
         "type": "feast",
         "title": {
             "en": "Circumcision (New Year)"
         },
+        "specialSongsKey": "circumcisionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1616,14 +1617,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "circumcisionSongs"
+        }
     },
     "secondSundayAfterChristmas": {
         "type": "feast",
         "title": {
             "en": "Second Sunday after Christmas"
         },
+        "specialSongsKey": "afterChristmasSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1725,14 +1726,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterChristmasSongs"
+        }
     },
     "epiphany": {
         "type": "feast",
         "title": {
             "en": "Epiphany"
         },
+        "specialSongsKey": "epiphanySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1845,58 +1846,13 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "epiphanySongs",
-        "specialServices": [
-            {
-                "title": { "en": "Blessing of the Water" },
-                "bibleReadings": {
-                    "generalEpistle": [
-                        {
-                            "bookNumber": 44,
-                            "ranges": [
-                                {
-                                    "startChapter": 8,
-                                    "startVerse": 35,
-                                    "endChapter": 8,
-                                    "endVerse": 40
-                                }
-                            ]
-                        }
-                    ],
-                    "paulEpistle": [
-                        {
-                            "bookNumber": 58,
-                            "ranges": [
-                                {
-                                    "startChapter": 10,
-                                    "startVerse": 15,
-                                    "endChapter": 10,
-                                    "endVerse": 25
-                                }
-                            ]
-                        }
-                    ],
-                    "qurbanaGospel": [
-                        {
-                            "bookNumber": 43,
-                            "ranges": [
-                                {
-                                    "startChapter": 4,
-                                    "startVerse": 1,
-                                    "endChapter": 4,
-                                    "endVerse": 42
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        ]
+        }
     },
     "beheadingOfStJohnTheBaptist": {
         "type": "feast",
-        "title": { "en": "Beheading of St. John the Baptist" },
+        "title": {
+            "en": "Beheading of St. John the Baptist"
+        },
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2014,7 +1970,9 @@
     },
     "feastOfStStephen": {
         "type": "feast",
-        "title": { "en": "Feast of St. Stephen" },
+        "title": {
+            "en": "Feast of St. Stephen"
+        },
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2109,7 +2067,10 @@
     },
     "firstSundayAfterEpiphany": {
         "type": "feast",
-        "title": { "en": "First Sunday after Epiphany" },
+        "title": {
+            "en": "First Sunday after Epiphany"
+        },
+        "specialSongsKey": "afterEpiphanySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2217,12 +2178,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterEpiphanySongs"
+        }
     },
     "secondSundayAfterEpiphany": {
         "type": "feast",
-        "title": { "en": "Second Sunday after Epiphany" },
+        "title": {
+            "en": "Second Sunday after Epiphany"
+        },
+        "specialSongsKey": "afterEpiphanySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2330,12 +2293,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterEpiphanySongs"
+        }
     },
     "thirdSundayAfterEpiphany": {
         "type": "feast",
-        "title": { "en": "Third Sunday after Epiphany" },
+        "title": {
+            "en": "Third Sunday after Epiphany"
+        },
+        "specialSongsKey": "afterEpiphanySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2437,12 +2402,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterEpiphanySongs"
+        }
     },
     "fourthSundayAfterEpiphany": {
         "type": "feast",
-        "title": { "en": "Fourth Sunday after Epiphany (Sunday for Workers)" },
+        "title": {
+            "en": "Fourth Sunday after Epiphany (Sunday for Workers)"
+        },
+        "specialSongsKey": "afterEpiphanySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2583,12 +2550,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterEpiphanySongs"
+        }
     },
     "fifthSundayAfterEpiphany": {
         "type": "feast",
-        "title": { "en": "Fifth Sunday after Epiphany" },
+        "title": {
+            "en": "Fifth Sunday after Epiphany"
+        },
+        "specialSongsKey": "afterEpiphanySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2690,12 +2659,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterEpiphanySongs"
+        }
     },
     "mayaltho": {
         "type": "feast",
-        "title": { "en": "Mayaltho (Presentation of our Lord in the Temple)" },
+        "title": {
+            "en": "Mayaltho (Presentation of our Lord in the Temple)"
+        },
+        "specialSongsKey": "mayalthoSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2820,12 +2791,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "mayalthoSongs"
+        }
     },
     "allDepartedHolyFathers": {
         "type": "feast",
-        "title": { "en": "All Departed Holy Fathers" },
+        "title": {
+            "en": "All Departed Holy Fathers"
+        },
+        "specialSongsKey": "allDepartedHolyFathersSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2916,12 +2889,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "allDepartedHolyFathersSongs"
+        }
     },
     "allDepartedPriests": {
         "type": "feast",
-        "title": { "en": "All Departed Priests" },
+        "title": {
+            "en": "All Departed Priests"
+        },
+        "specialSongsKey": "allDepartedPriestsSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3023,12 +2998,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "allDepartedPriestsSongs"
+        }
     },
     "allDepartedFaithful": {
         "type": "feast",
-        "title": { "en": "All the Departed Faithful" },
+        "title": {
+            "en": "All the Departed Faithful"
+        },
+        "specialSongsKey": "allDepartedFaithfulSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3130,12 +3107,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "allDepartedFaithfulSongs"
+        }
     },
     "kothine": {
         "type": "feast",
-        "title": { "en": "Kothine" },
+        "title": {
+            "en": "Kothine"
+        },
+        "specialSongsKey": "kothineSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3248,12 +3227,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "kothineSongs"
+        }
     },
     "lepersSunday": {
         "type": "feast",
-        "title": { "en": "Leper's Sunday" },
+        "title": {
+            "en": "Leper's Sunday"
+        },
+        "specialSongsKey": "lepersSundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3390,12 +3371,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "lepersSundaySongs"
+        }
     },
     "palsySunday": {
         "type": "feast",
-        "title": { "en": "Palsy Sunday" },
+        "title": {
+            "en": "Palsy Sunday"
+        },
+        "specialSongsKey": "palsySundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3525,12 +3508,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "palsySundaySongs"
+        }
     },
     "canaaniteWoman": {
         "type": "feast",
-        "title": { "en": "Canaanite Woman" },
+        "title": {
+            "en": "Canaanite Woman"
+        },
+        "specialSongsKey": "canaaniteWomanSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3632,12 +3617,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "canaaniteWomanSongs"
+        }
     },
     "midLent": {
         "type": "feast",
-        "title": { "en": "Mid Lent" },
+        "title": {
+            "en": "Mid Lent"
+        },
+        "specialSongsKey": "midLentSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3739,12 +3726,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "midLentSongs"
+        }
     },
     "crippledWoman": {
         "type": "feast",
-        "title": { "en": "Crippled Woman" },
+        "title": {
+            "en": "Crippled Woman"
+        },
+        "specialSongsKey": "crippledWomanSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3846,12 +3835,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "crippledWomanSongs"
+        }
     },
     "blindMan": {
         "type": "feast",
-        "title": { "en": "Blind Man" },
+        "title": {
+            "en": "Blind Man"
+        },
+        "specialSongsKey": "blindManSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3975,12 +3966,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "blindManSongs"
+        }
     },
     "fortiethFriday": {
         "type": "feast",
-        "title": { "en": "40th Friday" },
+        "title": {
+            "en": "40th Friday"
+        },
+        "specialSongsKey": "fortiethFridaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4082,12 +4075,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "fortiethFridaySongs"
+        }
     },
     "lazarusSaturday": {
         "type": "feast",
-        "title": { "en": "Lazarus’ Saturday" },
+        "title": {
+            "en": "Lazarus’ Saturday"
+        },
+        "specialSongsKey": "lazarusSaturdaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4184,12 +4179,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "lazarusSaturdaySongs"
+        }
     },
     "memoryOfFortyMartyrs": {
         "type": "feast",
-        "title": { "en": "Memory of Forty Martyrs" },
+        "title": {
+            "en": "Memory of Forty Martyrs"
+        },
+        "specialSongsKey": "memoryOfFortyMartyrsSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4297,12 +4294,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "memoryOfFortyMartyrsSongs"
+        }
     },
     "hosanna": {
         "type": "feast",
-        "title": { "en": "Hosanna" },
+        "title": {
+            "en": "Hosanna"
+        },
+        "specialSongsKey": "hosannaSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4317,19 +4316,6 @@
                     ]
                 }
             ],
-            "primeGospel": [
-                {
-                    "bookNumber": 41,
-                    "ranges": [
-                        {
-                            "startChapter": 11,
-                            "startVerse": 1,
-                            "endChapter": 11,
-                            "endVerse": 11
-                        }
-                    ]
-                }
-            ],
             "matinsGospel": [
                 {
                     "bookNumber": 42,
@@ -4339,6 +4325,19 @@
                             "startVerse": 28,
                             "endChapter": 19,
                             "endVerse": 44
+                        }
+                    ]
+                }
+            ],
+            "primeGospel": [
+                {
+                    "bookNumber": 41,
+                    "ranges": [
+                        {
+                            "startChapter": 11,
+                            "startVerse": 1,
+                            "endChapter": 11,
+                            "endVerse": 11
                         }
                     ]
                 }
@@ -4478,92 +4477,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "hosannaSongs",
-        "specialServices": [
-            {
-                "title": { "en": "Procession" },
-                "bibleReadings": [
-                    {
-                        "bookNumber": 42,
-                        "ranges": [
-                            {
-                                "startChapter": 19,
-                                "startVerse": 28,
-                                "endChapter": 19,
-                                "endVerse": 40
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": { "en": "Blessing of Palm Leaves" },
-                "bibleReadings": [
-                    {
-                        "bookNumber": 38,
-                        "ranges": [
-                            {
-                                "startChapter": 9,
-                                "startVerse": 9,
-                                "endChapter": 9,
-                                "endVerse": 12
-                            }
-                        ]
-                    },
-                    {
-                        "bookNumber": 23,
-                        "ranges": [
-                            {
-                                "startChapter": 51,
-                                "startVerse": 9,
-                                "endChapter": 51,
-                                "endVerse": 11
-                            }
-                        ]
-                    },
-                    {
-                        "bookNumber": 62,
-                        "ranges": [
-                            {
-                                "startChapter": 2,
-                                "startVerse": 7,
-                                "endChapter": 2,
-                                "endVerse": 14
-                            }
-                        ]
-                    },
-                    {
-                        "bookNumber": 45,
-                        "ranges": [
-                            {
-                                "startChapter": 11,
-                                "startVerse": 13,
-                                "endChapter": 11,
-                                "endVerse": 24
-                            }
-                        ]
-                    },
-                    {
-                        "bookNumber": 41,
-                        "ranges": [
-                            {
-                                "startChapter": 11,
-                                "startVerse": 1,
-                                "endChapter": 11,
-                                "endVerse": 11
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        }
     },
     "easter": {
         "type": "feast",
         "title": {
             "en": "Easter"
         },
+        "specialSongsKey": "easterSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4578,19 +4499,6 @@
                     ]
                 }
             ],
-            "primeGospel": [
-                {
-                    "bookNumber": 42,
-                    "ranges": [
-                        {
-                            "startChapter": 24,
-                            "startVerse": 1,
-                            "endChapter": 24,
-                            "endVerse": 12
-                        }
-                    ]
-                }
-            ],
             "matinsGospel": [
                 {
                     "bookNumber": 43,
@@ -4600,6 +4508,19 @@
                             "startVerse": 1,
                             "endChapter": 20,
                             "endVerse": 18
+                        }
+                    ]
+                }
+            ],
+            "primeGospel": [
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 24,
+                            "startVerse": 1,
+                            "endChapter": 24,
+                            "endVerse": 12
                         }
                     ]
                 }
@@ -4690,8 +4611,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "easterSongs"
+        }
     },
     "hevoraeMonday": {
         "type": "feast",
@@ -5358,6 +5278,7 @@
         "title": {
             "en": "New Sunday"
         },
+        "specialSongsKey": "newSundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5470,14 +5391,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "newSundaySongs"
+        }
     },
     "firstSundayAfterNewSunday": {
         "type": "feast",
         "title": {
             "en": "First Sunday after New Sunday"
         },
+        "specialSongsKey": "afterNewSundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5568,14 +5489,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterNewSundaySongs"
+        }
     },
     "secondSundayAfterNewSunday": {
         "type": "feast",
         "title": {
             "en": "Second Sunday after New Sunday"
         },
+        "specialSongsKey": "afterNewSundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5677,14 +5598,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterNewSundaySongs"
+        }
     },
     "thirdSundayAfterNewSunday": {
         "type": "feast",
         "title": {
             "en": "Third Sunday after New Sunday"
         },
+        "specialSongsKey": "afterNewSundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5797,14 +5718,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterNewSundaySongs"
+        }
     },
     "fourthSundayAfterNewSunday": {
         "type": "feast",
         "title": {
             "en": "Fourth Sunday after New Sunday"
         },
+        "specialSongsKey": "afterNewSundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5906,14 +5827,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterNewSundaySongs"
+        }
     },
     "ascension": {
         "type": "feast",
         "title": {
             "en": "Ascension"
         },
+        "specialSongsKey": "ascensionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -6026,14 +5947,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "ascensionSongs"
+        }
     },
     "sundayBeforePentecost": {
         "type": "feast",
         "title": {
             "en": "Sunday before Pentecost"
         },
+        "specialSongsKey": "afterNewSundaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -6147,14 +6068,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterNewSundaySongs"
+        }
     },
     "pentecost": {
         "type": "feast",
         "title": {
             "en": "Pentecost"
         },
+        "specialSongsKey": "pentecostSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -6290,231 +6211,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "pentecostSongs",
-        "specialServices": [
-            {
-                "title": { "en": "Service of the First Kneeling" },
-                "bibleReadings": {
-                    "preparation": [
-                        {
-                            "bookNumber": 1,
-                            "ranges": [
-                                {
-                                    "startChapter": 11,
-                                    "startVerse": 1,
-                                    "endChapter": 11,
-                                    "endVerse": 9
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 12,
-                            "ranges": [
-                                {
-                                    "startChapter": 2,
-                                    "startVerse": 14,
-                                    "endChapter": 2,
-                                    "endVerse": 17
-                                }
-                            ]
-                        }
-                    ],
-                    "generalEpistle": [
-                        {
-                            "bookNumber": 44,
-                            "ranges": [
-                                {
-                                    "startChapter": 19,
-                                    "startVerse": 1,
-                                    "endChapter": 19,
-                                    "endVerse": 7
-                                }
-                            ]
-                        }
-                    ],
-                    "paulEpistle": [
-                        {
-                            "bookNumber": 46,
-                            "ranges": [
-                                {
-                                    "startChapter": 14,
-                                    "startVerse": 20,
-                                    "endChapter": 14,
-                                    "endVerse": 25
-                                }
-                            ]
-                        }
-                    ],
-                    "qurbanaGospel": [
-                        {
-                            "bookNumber": 43,
-                            "ranges": [
-                                {
-                                    "startChapter": 14,
-                                    "startVerse": 1,
-                                    "endChapter": 14,
-                                    "endVerse": 17
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                "title": { "en": "Service of the Second Kneeling" },
-                "bibleReadings": {
-                    "preparation": [
-                        {
-                            "bookNumber": 26,
-                            "ranges": [
-                                {
-                                    "startChapter": 37,
-                                    "startVerse": 1,
-                                    "endChapter": 37,
-                                    "endVerse": 14
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 29,
-                            "ranges": [
-                                {
-                                    "startChapter": 2,
-                                    "startVerse": 25,
-                                    "endChapter": 2,
-                                    "endVerse": 32
-                                }
-                            ]
-                        }
-                    ],
-                    "generalEpistle": [
-                        {
-                            "bookNumber": 44,
-                            "ranges": [
-                                {
-                                    "startChapter": 10,
-                                    "startVerse": 34,
-                                    "endChapter": 10,
-                                    "endVerse": 48
-                                }
-                            ]
-                        }
-                    ],
-                    "paulEpistle": [
-                        {
-                            "bookNumber": 46,
-                            "ranges": [
-                                {
-                                    "startChapter": 12,
-                                    "startVerse": 12,
-                                    "endChapter": 12,
-                                    "endVerse": 27
-                                }
-                            ]
-                        }
-                    ],
-                    "qurbanaGospel": [
-                        {
-                            "bookNumber": 43,
-                            "ranges": [
-                                {
-                                    "startChapter": 14,
-                                    "startVerse": 25,
-                                    "endChapter": 14,
-                                    "endVerse": 31
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                "title": { "en": "Service of the Third Kneeling" },
-                "bibleReadings": {
-                    "preparation": [
-                        {
-                            "bookNumber": 7,
-                            "ranges": [
-                                {
-                                    "startChapter": 13,
-                                    "startVerse": 24,
-                                    "endChapter": 14,
-                                    "endVerse": 7
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 26,
-                            "ranges": [
-                                {
-                                    "startChapter": 47,
-                                    "startVerse": 1,
-                                    "endChapter": 47,
-                                    "endVerse": 12
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 23,
-                            "ranges": [
-                                {
-                                    "startChapter": 47,
-                                    "startVerse": 1,
-                                    "endChapter": 47,
-                                    "endVerse": 1
-                                }
-                            ]
-                        }
-                    ],
-                    "generalEpistle": [
-                        {
-                            "bookNumber": 44,
-                            "ranges": [
-                                {
-                                    "startChapter": 2,
-                                    "startVerse": 1,
-                                    "endChapter": 2,
-                                    "endVerse": 21
-                                }
-                            ]
-                        }
-                    ],
-                    "paulEpistle": [
-                        {
-                            "bookNumber": 46,
-                            "ranges": [
-                                {
-                                    "startChapter": 14,
-                                    "startVerse": 20,
-                                    "endChapter": 14,
-                                    "endVerse": 33
-                                }
-                            ]
-                        }
-                    ],
-                    "qurbanaGospel": [
-                        {
-                            "bookNumber": 43,
-                            "ranges": [
-                                {
-                                    "startChapter": 16,
-                                    "startVerse": 1,
-                                    "endChapter": 16,
-                                    "endVerse": 15
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        ]
+        }
     },
     "goldenFriday": {
         "type": "feast",
         "title": {
             "en": "Golden Friday (Friday after Pentecost)"
         },
+        "specialSongsKey": "goldenFridaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -6616,8 +6320,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "goldenFridaySongs"
+        }
     },
     "firstSundayAfterPentecost": {
         "type": "feast",
@@ -7942,6 +7645,7 @@
         "title": {
             "en": "Feast of St. Peter and St. Paul"
         },
+        "specialSongsKey": "feastOfApostlesFastSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -8043,14 +7747,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "feastOfApostlesFastSongs"
+        }
     },
     "feastOfTwelveApostles": {
         "type": "feast",
         "title": {
             "en": "Feast of the Twelve Apostles"
         },
+        "specialSongsKey": "feastOfTwelveApostlesSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -8158,14 +7862,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "feastOfTwelveApostlesSongs"
+        }
     },
     "dukharonoStThomas": {
         "type": "feast",
         "title": {
             "en": "Dukharono of St. Thomas"
         },
+        "specialSongsKey": "dukharonoStThomasSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -8267,8 +7971,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "dukharonoStThomasSongs"
+        }
     },
     "transfiguration": {
         "type": "feast",
@@ -8276,6 +7979,7 @@
             "en": "Transfiguration",
             "ml": "കൂടാര (മറുരൂപ) പ്പെരുന്നാൾ"
         },
+        "specialSongsKey": "transfigurationSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -8377,8 +8081,7 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "transfigurationSongs"
+        }
     },
     "firstSundayAfterTransfiguration": {
         "type": "feast",
@@ -8607,6 +8310,7 @@
         "title": {
             "en": "Assumption of St. Mary"
         },
+        "specialSongsKey": "assumptionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -8769,14 +8473,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "assumptionSongs"
+        }
     },
     "firstSundayAfterAssumption": {
         "type": "feast",
         "title": {
             "en": "First Sunday after the Assumption of St. Mary"
         },
+        "specialSongsKey": "afterAssumptionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -8878,14 +8582,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterAssumptionSongs"
+        }
     },
     "secondSundayAfterAssumption": {
         "type": "feast",
         "title": {
             "en": "Second Sunday after the Assumption of St. Mary"
         },
+        "specialSongsKey": "afterAssumptionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -8987,14 +8691,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterAssumptionSongs"
+        }
     },
     "thirdSundayAfterAssumption": {
         "type": "feast",
         "title": {
             "en": "Third Sunday after the Assumption of St. Mary"
         },
+        "specialSongsKey": "afterAssumptionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9096,14 +8800,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterAssumptionSongs"
+        }
     },
     "fourthSundayAfterAssumption": {
         "type": "feast",
         "title": {
             "en": "Fourth Sunday after the Assumption of St. Mary"
         },
+        "specialSongsKey": "afterAssumptionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9211,14 +8915,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterAssumptionSongs"
+        }
     },
     "fifthSundayAfterAssumption": {
         "type": "feast",
         "title": {
             "en": "Fifth Sunday after the Assumption of St. Mary"
         },
+        "specialSongsKey": "afterAssumptionSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9320,14 +9024,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterAssumptionSongs"
+        }
     },
     "feastOfHolyCross": {
         "type": "feast",
         "title": {
             "en": "Feast of the Holy Cross"
         },
+        "specialSongsKey": "feastOfHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9429,14 +9133,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "feastOfHolyCrossSongs"
+        }
     },
     "firstSundayAfterHolyCross": {
         "type": "feast",
         "title": {
             "en": "First Sunday after the Feast of the Holy Cross"
         },
+        "specialSongsKey": "afterHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9538,14 +9242,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterHolyCrossSongs"
+        }
     },
     "secondSundayAfterHolyCross": {
         "type": "feast",
         "title": {
             "en": "Second Sunday after the Feast of the Holy Cross"
         },
+        "specialSongsKey": "afterHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9664,14 +9368,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterHolyCrossSongs"
+        }
     },
     "thirdSundayAfterHolyCross": {
         "type": "feast",
         "title": {
             "en": "Third Sunday after the Feast of the Holy Cross"
         },
+        "specialSongsKey": "afterHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9773,14 +9477,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterHolyCrossSongs"
+        }
     },
     "fourthSundayAfterHolyCross": {
         "type": "feast",
         "title": {
             "en": "Fourth Sunday after the Feast of the Holy Cross"
         },
+        "specialSongsKey": "afterHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9882,14 +9586,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterHolyCrossSongs"
+        }
     },
     "fifthSundayAfterHolyCross": {
         "type": "feast",
         "title": {
             "en": "Fifth Sunday after the Feast of the Holy Cross"
         },
+        "specialSongsKey": "afterHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -9991,14 +9695,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterHolyCrossSongs"
+        }
     },
     "sixthSundayAfterHolyCross": {
         "type": "feast",
         "title": {
             "en": "Sixth Sunday after the Feast of the Holy Cross"
         },
+        "specialSongsKey": "afterHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -10100,14 +9804,14 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterHolyCrossSongs"
+        }
     },
     "seventhSundayAfterHolyCross": {
         "type": "feast",
         "title": {
             "en": "Seventh Sunday after the Feast of the Holy Cross"
         },
+        "specialSongsKey": "afterHolyCrossSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -10209,7 +9913,6 @@
                     ]
                 }
             ]
-        },
-        "specialSongsKey": "afterHolyCrossSongs"
+        }
     }
 }
