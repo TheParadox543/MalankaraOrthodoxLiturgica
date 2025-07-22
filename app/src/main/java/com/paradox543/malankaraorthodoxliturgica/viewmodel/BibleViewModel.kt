@@ -148,11 +148,17 @@ class BibleViewModel @Inject constructor(
      * @return The localized book name, or "Unknown Book" if not found.
      */
     fun getBookName(bookIndex: Int, language: AppLanguage): String {
-        val book = _bibleBooks.value[bookIndex]
-        return when (language) {
-            AppLanguage.ENGLISH -> book.book.en
-            AppLanguage.MALAYALAM -> book.book.ml
-            else -> book.book.en
+        try {
+            val book = _bibleBooks.value[bookIndex]
+
+            return when (language) {
+                AppLanguage.ENGLISH -> book.book.en
+                AppLanguage.MALAYALAM -> book.book.ml
+                else -> book.book.en
+            }
+        } catch (_: Exception) {
+            System.err.println("Could not find the book")
+            return "Error"
         }
     }
 
