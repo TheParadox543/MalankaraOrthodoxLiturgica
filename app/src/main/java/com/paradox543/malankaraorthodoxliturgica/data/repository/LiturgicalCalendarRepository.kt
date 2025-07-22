@@ -9,6 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.EventKey
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalCalendarDates
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStr
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -118,6 +119,13 @@ class LiturgicalCalendarRepository @Inject constructor(
         return eventDetails
     }
 
+    fun checkMonthDataExists(month: Int, year: Int): Boolean {
+        // Ensure data is initialized
+        if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
+            throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
+        }
+        return liturgicalDates[year.toString()]?.get(month.toString()) is MonthEvents
+    }
 
     /**
      * Loads the calendar data for a specific month and year, structured by weeks.
@@ -166,9 +174,9 @@ class LiturgicalCalendarRepository @Inject constructor(
         if (weekDays.isNotEmpty()) {
             // Pad with empty days from next month if necessary to complete the last week,
             // though the logic above should ensure full weeks are added already.
-            // If the loop finished on Sunday, weekDays would be empty.
+            // If the loop finished on Saturday, weekDays would be empty.
             // If it finished mid-week (e.g. month ends on Wednesday), it will contain
-            // days from the month and then days from the next month until Sunday.
+            // days from the month and then days from the next month until Saturday.
             while (weekDays.size < 7) {
                 weekDays.add(CalendarDay(currentDay, emptyList())) // Add placeholder for visual alignment
                 currentDay = currentDay.plusDays(1)

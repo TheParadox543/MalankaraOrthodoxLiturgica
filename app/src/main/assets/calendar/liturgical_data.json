@@ -18,7 +18,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -133,7 +133,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -253,7 +253,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -406,7 +406,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -549,7 +549,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -715,7 +715,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -863,7 +863,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -961,7 +961,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -1087,7 +1087,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -1196,7 +1196,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -1294,7 +1294,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -1403,7 +1403,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -1518,7 +1518,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -1638,7 +1638,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -1747,7 +1747,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -1846,6 +1846,7 @@
                 }
             ]
         },
+        "specialSongsKey": "epiphanySongs",
         "specialServices": [
             {
                 "title": { "en": "Blessing of the Water" },
@@ -1891,8 +1892,7 @@
                     ]
                 }
             }
-        ],
-        "specialSongsKey": "epiphanySongs"
+        ]
     },
     "beheadingOfStJohnTheBaptist": {
         "type": "feast",
@@ -1917,7 +1917,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -2029,7 +2029,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -2124,7 +2124,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -2237,7 +2237,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -2350,7 +2350,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -2457,7 +2457,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -2603,7 +2603,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -2710,7 +2710,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -2840,7 +2840,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -2936,7 +2936,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -3043,7 +3043,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -3150,7 +3150,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -3268,7 +3268,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -3410,7 +3410,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -3545,7 +3545,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -3652,7 +3652,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -3759,7 +3759,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -3866,7 +3866,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -3995,7 +3995,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -4102,7 +4102,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -4204,7 +4204,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -4317,7 +4317,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -4330,7 +4330,7 @@
                     ]
                 }
             ],
-            "primeGospel": [
+            "matinsGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -4477,87 +4477,87 @@
                         }
                     ]
                 }
-            ],
-            "specialServices": [
-                {
-                    "title": { "en": "Procession" },
-                    "bibleReadings": [
-                        {
-                            "bookNumber": 42,
-                            "ranges": [
-                                {
-                                    "startChapter": 19,
-                                    "startVerse": 28,
-                                    "endChapter": 19,
-                                    "endVerse": 40
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "title": { "en": "Blessing of Palm Leaves" },
-                    "bibleReadings": [
-                        {
-                            "bookNumber": 38,
-                            "ranges": [
-                                {
-                                    "startChapter": 9,
-                                    "startVerse": 9,
-                                    "endChapter": 9,
-                                    "endVerse": 12
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 23,
-                            "ranges": [
-                                {
-                                    "startChapter": 51,
-                                    "startVerse": 9,
-                                    "endChapter": 51,
-                                    "endVerse": 11
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 62,
-                            "ranges": [
-                                {
-                                    "startChapter": 2,
-                                    "startVerse": 7,
-                                    "endChapter": 2,
-                                    "endVerse": 14
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 45,
-                            "ranges": [
-                                {
-                                    "startChapter": 11,
-                                    "startVerse": 13,
-                                    "endChapter": 11,
-                                    "endVerse": 24
-                                }
-                            ]
-                        },
-                        {
-                            "bookNumber": 41,
-                            "ranges": [
-                                {
-                                    "startChapter": 11,
-                                    "startVerse": 1,
-                                    "endChapter": 11,
-                                    "endVerse": 11
-                                }
-                            ]
-                        }
-                    ]
-                }
             ]
         },
-        "specialSongsKey": "hosannaSongs"
+        "specialSongsKey": "hosannaSongs",
+        "specialServices": [
+            {
+                "title": { "en": "Procession" },
+                "bibleReadings": [
+                    {
+                        "bookNumber": 42,
+                        "ranges": [
+                            {
+                                "startChapter": 19,
+                                "startVerse": 28,
+                                "endChapter": 19,
+                                "endVerse": 40
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": { "en": "Blessing of Palm Leaves" },
+                "bibleReadings": [
+                    {
+                        "bookNumber": 38,
+                        "ranges": [
+                            {
+                                "startChapter": 9,
+                                "startVerse": 9,
+                                "endChapter": 9,
+                                "endVerse": 12
+                            }
+                        ]
+                    },
+                    {
+                        "bookNumber": 23,
+                        "ranges": [
+                            {
+                                "startChapter": 51,
+                                "startVerse": 9,
+                                "endChapter": 51,
+                                "endVerse": 11
+                            }
+                        ]
+                    },
+                    {
+                        "bookNumber": 62,
+                        "ranges": [
+                            {
+                                "startChapter": 2,
+                                "startVerse": 7,
+                                "endChapter": 2,
+                                "endVerse": 14
+                            }
+                        ]
+                    },
+                    {
+                        "bookNumber": 45,
+                        "ranges": [
+                            {
+                                "startChapter": 11,
+                                "startVerse": 13,
+                                "endChapter": 11,
+                                "endVerse": 24
+                            }
+                        ]
+                    },
+                    {
+                        "bookNumber": 41,
+                        "ranges": [
+                            {
+                                "startChapter": 11,
+                                "startVerse": 1,
+                                "endChapter": 11,
+                                "endVerse": 11
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     },
     "easter": {
         "type": "feast",
@@ -4578,7 +4578,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -4591,7 +4591,7 @@
                     ]
                 }
             ],
-            "primeGospel": [
+            "matinsGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -4712,7 +4712,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -4826,7 +4826,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -4859,17 +4859,6 @@
                             "startVerse": 6,
                             "endChapter": 6,
                             "endVerse": 21
-                        }
-                    ]
-                },
-                {
-                    "bookNumber": 68,
-                    "ranges": [
-                        {
-                            "startChapter": 1,
-                            "startVerse": 1,
-                            "endChapter": 1,
-                            "endVerse": 18
                         }
                     ]
                 }
@@ -4940,7 +4929,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -5048,7 +5037,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -5167,7 +5156,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -5275,7 +5264,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -5383,7 +5372,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -5503,7 +5492,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -5536,17 +5525,6 @@
                             "startVerse": 9,
                             "endChapter": 6,
                             "endVerse": 21
-                        }
-                    ]
-                },
-                {
-                    "bookNumber": 68,
-                    "ranges": [
-                        {
-                            "startChapter": 1,
-                            "startVerse": 1,
-                            "endChapter": 1,
-                            "endVerse": 8
                         }
                     ]
                 }
@@ -5612,7 +5590,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -5721,7 +5699,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -5841,7 +5819,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -5950,7 +5928,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -6070,7 +6048,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -6191,7 +6169,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -6551,7 +6529,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -6660,7 +6638,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -6779,7 +6757,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -6887,7 +6865,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -6995,7 +6973,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -7103,7 +7081,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -7211,7 +7189,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -7319,7 +7297,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -7427,7 +7405,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -7535,7 +7513,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -7654,7 +7632,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -7762,7 +7740,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -7870,7 +7848,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -7978,7 +7956,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 43,
                     "ranges": [
@@ -8087,7 +8065,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -8202,7 +8180,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -8312,7 +8290,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -8421,7 +8399,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -8529,7 +8507,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -8649,7 +8627,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -8813,7 +8791,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -8922,7 +8900,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -9031,7 +9009,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -9140,7 +9118,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -9255,7 +9233,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -9364,7 +9342,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -9473,7 +9451,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -9588,7 +9566,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -9708,7 +9686,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -9817,7 +9795,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [
@@ -9926,7 +9904,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 40,
                     "ranges": [
@@ -10035,7 +10013,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 41,
                     "ranges": [
@@ -10144,7 +10122,7 @@
                     ]
                 }
             ],
-            "matinsGospel": [
+            "primeGospel": [
                 {
                     "bookNumber": 42,
                     "ranges": [

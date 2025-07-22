@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.aspectRatio
@@ -21,6 +22,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -70,6 +72,9 @@ fun CalendarScreen(
     // Collect the StateFlows from the ViewModel
     val monthCalendarData by calendarViewModel.monthCalendarData.collectAsState()
     val currentCalendarViewDate by calendarViewModel.currentCalendarViewDate.collectAsState()
+    val hasPrevMonth by calendarViewModel.hasPreviousMonth.collectAsState()
+    val hasNextMonth by calendarViewModel.hasNextMonth.collectAsState()
+    val selectedDate by calendarViewModel.selectedDate.collectAsState()
     val displayEvents by calendarViewModel.selectedDayViewData.collectAsState()
     val isLoading by calendarViewModel.isLoading.collectAsState()
     val error by calendarViewModel.error.collectAsState()
@@ -132,12 +137,18 @@ fun CalendarScreen(
                                 .border(4.dp, MaterialTheme.colorScheme.outline)
                                 .padding(4.dp)
                         ) {
-                            MonthNavigation(calendarViewModel, currentCalendarViewDate)
+                            MonthNavigation(
+                                calendarViewModel,
+                                currentCalendarViewDate,
+                                hasPrevMonth,
+                                hasNextMonth
+                            )
                             DayOfWeekHeaders()
                             CalendarGrid(
                                 monthCalendarData,
                                 currentCalendarViewDate,
-                                calendarViewModel
+                                calendarViewModel,
+                                selectedDate
                             )
                         }
                     }
@@ -158,9 +169,19 @@ fun CalendarScreen(
                                 .border(4.dp, MaterialTheme.colorScheme.outline)
                                 .padding(4.dp)
                         ) {
-                            MonthNavigation(calendarViewModel, currentCalendarViewDate)
+                            MonthNavigation(
+                                calendarViewModel,
+                                currentCalendarViewDate,
+                                hasPrevMonth,
+                                hasNextMonth
+                            )
                             DayOfWeekHeaders()
-                            CalendarGrid(monthCalendarData, currentCalendarViewDate, calendarViewModel)
+                            CalendarGrid(
+                                monthCalendarData,
+                                currentCalendarViewDate,
+                                calendarViewModel,
+                                selectedDate
+                            )
                         }
                         if (displayEvents.isNotEmpty()) {
                             val scrollState = rememberScrollState()
@@ -181,7 +202,9 @@ fun CalendarScreen(
 @Composable
 private fun MonthNavigation(
     calendarViewModel: CalendarViewModel,
-    currentCalendarViewDate: LocalDate
+    currentCalendarViewDate: LocalDate,
+    hasPrevMonth: Boolean,
+    hasNextMonth: Boolean,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -190,7 +213,8 @@ private fun MonthNavigation(
     ) {
         IconButton(
             onClick = calendarViewModel::goToPreviousMonth, // Connect to ViewModel
-            modifier = Modifier.weight(0.15f) // Give it some weight for spacing
+            modifier = Modifier.weight(0.15f), // Give it some weight for spacing
+            enabled = hasPrevMonth,
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -210,7 +234,8 @@ private fun MonthNavigation(
         )
         IconButton(
             onClick = calendarViewModel::goToNextMonth, // Connect to ViewModel
-            modifier = Modifier.weight(0.15f) // Give it some weight for spacing
+            modifier = Modifier.weight(0.15f), // Give it some weight for spacing
+            enabled = hasNextMonth,
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
@@ -255,6 +280,7 @@ private fun CalendarGrid(
     monthCalendarData: List<CalendarWeek>,
     currentCalendarViewDate: LocalDate,
     calendarViewModel: CalendarViewModel,
+    selectedDate: LocalDate?,
 ) {
     Column {
         monthCalendarData.forEach { week ->
@@ -264,7 +290,7 @@ private fun CalendarGrid(
             ) {
                 week.days.forEach { day ->
                     // Determine if the day belongs to the current month being viewed
-                    DayItem(currentCalendarViewDate, day, calendarViewModel)
+                    DayItem(currentCalendarViewDate, day, calendarViewModel, selectedDate)
                 }
             }
         }
@@ -277,32 +303,39 @@ private fun RowScope.DayItem(
     currentCalendarViewDate: LocalDate,
     day: CalendarDay,
     calendarViewModel: CalendarViewModel,
+    selectedDate: LocalDate?
 ) {
     val isCurrentMonth = day.date.monthValue == currentCalendarViewDate.monthValue
     val isToday = day.date == LocalDate.now()
-    val textColor = if (isToday) {
-        Color.Blue
-    }
-    else if (isCurrentMonth) {
-        MaterialTheme.colorScheme.onSurface
-    } else {
-        MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f) // Dim for outside days
-    }
     val hasEvents = day.events.isNotEmpty()
+    val isSelected = day.date == selectedDate
 
-    // Determine border color based on hasEvents and if it's the current month
-    val borderColor = if (hasEvents) {
-        if (day.events.firstOrNull()?.type == "feast")
-            Color.Yellow
-        else
-            Color.Black
+    // --- Define colors based on multiple states ---
+    val containerColor = when {
+        isSelected -> MaterialTheme.colorScheme.primary // Filled color for selected day
+        else -> Color.Transparent // Default transparent background
     }
-    else
-        MaterialTheme.colorScheme.surface // Yellow if events, Gray if no events
 
-    TextButton(
+    val contentColor = when {
+        isSelected -> MaterialTheme.colorScheme.onPrimary // High-contrast text for selected day
+        isToday -> MaterialTheme.colorScheme.primary // Special color for today's date
+        isCurrentMonth -> MaterialTheme.colorScheme.onSurface
+        else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f) // Dim for other months
+    }
+
+    // Border only shows if there are events AND the day is not selected
+    val borderColor = if (hasEvents && !isSelected) {
+        if (day.events.firstOrNull()?.type == "feast")
+            MaterialTheme.colorScheme.primary
+        else
+            MaterialTheme.colorScheme.secondary
+    } else {
+        Color.Transparent // No border if selected or no events
+    }
+
+    Button(
         onClick = {
-            calendarViewModel.setDayEvents(day.events)
+            calendarViewModel.setDayEvents(day.events, day.date)
             if (!isCurrentMonth) {
                 calendarViewModel.loadMonth(day.date.monthValue, day.date.year)
             }
@@ -313,23 +346,24 @@ private fun RowScope.DayItem(
             .aspectRatio(1f) // Make buttons square
             .then(
                 if (hasEvents) {
-                    Modifier.border(2.dp, borderColor, CircleShape)
+                    Modifier.border(4.dp, borderColor, CircleShape)
                 } else {
                     Modifier
                 }
             ),
-        enabled = hasEvents // Only enable buttons if there are events
+        enabled = hasEvents, // Only enable buttons if there are events
+        colors = ButtonDefaults.buttonColors(
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = Color.Transparent, // Keep disabled days transparent
+            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+        ),
+        contentPadding = PaddingValues(0.dp) // Remove default padding for better centering
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize(),
-        ) {
             Text(
                 text = day.date.dayOfMonth.toString(),
-                color = textColor,
                 style = MaterialTheme.typography.bodyLarge,
             )
-        }
     }
 }
 
@@ -407,13 +441,36 @@ fun DisplayEvent(
                             selectedLanguage
                         )
                         Text(
-                            translations["prime"] ?: "Prime",
+                            translations["matins"] ?: "Matins",
                             Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.titleMedium
                         )
                         TextButton(
                             onClick = {
                                 bibleViewModel.setSelectedBibleReference(event.bibleReadings.matinsGospel)
+                                navController.navigate("bibleReaderScreen")
+                            }
+                        ) {
+                            Text(
+                                text,
+                                Modifier.padding(start = 8.dp),
+                                style = MaterialTheme.typography.bodyLarge
+                            )
+                        }
+                    }
+                    if (event.bibleReadings.primeGospel != null) {
+                        val text = bibleViewModel.formatGospelEntry(
+                            event.bibleReadings.primeGospel,
+                            selectedLanguage
+                        )
+                        Text(
+                            translations["prime"] ?: "Prime",
+                            Modifier.padding(start = 4.dp),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        TextButton(
+                            onClick = {
+                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.primeGospel)
                                 navController.navigate("bibleReaderScreen")
                             }
                         ) {

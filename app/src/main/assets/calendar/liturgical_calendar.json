@@ -150,21 +150,21 @@
         "11": {
             "1": ["feastOfAllSaints"],
             "2": [
-                "koodoshEethoSunday",
+                "koodoshEetho",
                 "commemorationGregoriosParumala",
                 "commemorationKadavilPauloseAthanasios"
             ],
             "5": ["commemorationStephanosTheodosius"],
             "6": ["commemorationGeevargheseGregorios"],
             "8": ["commemorationMathewsI"],
-            "9": ["hoodoshEethoSunday"],
+            "9": ["hoodoshEetho"],
             "12": ["commemorationKayamkulamPhiliposeRamban"],
             "13": ["feastOfStJohnChrysostom"],
             "14": ["feastOfStPhilip"],
-            "16": ["revelationToZachariahSunday"],
+            "16": ["revelationToZachariah"],
             "20": ["commemorationJobPhiloxenos"],
             "21": ["entryOfStMaryToTemple"],
-            "23": ["annunciationToStMarySunday"],
+            "23": ["annunciationToStMary"],
             "24": [
                 "commemorationPulikkottilJosephDionysiusII",
                 "commemorationPauloseGregorius"
@@ -172,7 +172,7 @@
             "28": ["feastOfJacobBaradaeusAndBarsleebi"],
             "29": ["feastOfJacobSerugh"],
             "30": [
-                "stMaryJourneyToElizabethSunday",
+                "visitationToElizabeth",
                 "feastOfStAndrew"
             ]
         },
@@ -181,12 +181,12 @@
             "3": ["commemorationThomaMarDionysius"],
             "4": ["feastOfBarbaraAndJuliana"],
             "6": ["feastOfStNikolas"],
-            "7": ["birthOfJohnSunday", "intercessionDay"],
+            "7": ["birthOfJohnTheBaptist", "intercessionDay"],
             "8": ["commemorationBaseliosAugenI"],
             "9": ["commemorationMathewsBarnabas"],
             "10": ["feastOfBehanamSarahAndPhiloxenos"],
             "13": ["commemorationDanielPhiloxenos"],
-            "14": ["revelationToJosephSunday"],
+            "14": ["revelationToJoseph"],
             "17": ["commemorationBaseliosGeevargheseI"],
             "18": ["feastOfStThomas"],
             "20": ["feastOfIgnatiusNourono"],

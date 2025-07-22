@@ -34,8 +34,18 @@ class CalendarViewModel @Inject constructor(
     private val _currentCalendarViewDate = MutableStateFlow(LocalDate.now())
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
 
+    private val _hasNextMonth = MutableStateFlow(false)
+    val hasNextMonth: StateFlow<Boolean> = _hasNextMonth.asStateFlow()
+
+    private val _hasPreviousMonth = MutableStateFlow(false)
+    val hasPreviousMonth: StateFlow<Boolean> = _hasPreviousMonth.asStateFlow()
+
     private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
     val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> = _selectedDayViewData.asStateFlow()
+
+    // State for the currently selected date for UI feedback
+    private val _selectedDate = MutableStateFlow<LocalDate?>(null)
+    val selectedDate: StateFlow<LocalDate?> = _selectedDate.asStateFlow()
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -69,6 +79,10 @@ class CalendarViewModel @Inject constructor(
             try {
                 _monthCalendarData.value = liturgicalCalendarRepository.loadMonthData(month, year)
                 _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
+                val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
+                _hasPreviousMonth.value = liturgicalCalendarRepository.checkMonthDataExists(previousMonth.monthValue, previousMonth.year)
+                val nextMonth = _currentCalendarViewDate.value.plusMonths(1)
+                _hasNextMonth.value = liturgicalCalendarRepository.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
             } catch (e: Exception) {
                 _error.value = "Failed to load month data for $month/$year: ${e.message}"
                 System.err.println("Error loading month data: ${e.stackTraceToString()}")
@@ -90,12 +104,14 @@ class CalendarViewModel @Inject constructor(
         }
     }
 
-    fun setDayEvents(events: List<LiturgicalEventDetails>) {
+    fun setDayEvents(events: List<LiturgicalEventDetails>, date: LocalDate) {
         _selectedDayViewData.value = events
+        _selectedDate.value = date // Keep the selected date in sync
     }
 
     private fun clearDayEvents() {
         _selectedDayViewData.value = emptyList()
+        _selectedDate.value = null // Clear the selected date
     }
 
     fun goToNextMonth() {
