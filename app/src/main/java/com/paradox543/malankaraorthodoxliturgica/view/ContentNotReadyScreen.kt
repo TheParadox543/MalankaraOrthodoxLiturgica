@@ -12,13 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 
 @Composable
 fun ContentNotReadyScreen(
@@ -59,10 +56,10 @@ fun ContentNotReadyScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun ContentNotReadyScreenPreview() {
-    MalankaraOrthodoxLiturgicaTheme {
-        ContentNotReadyScreen(navController = rememberNavController())
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun ContentNotReadyScreenPreview() {
+//    MalankaraOrthodoxLiturgicaTheme {
+//        ContentNotReadyScreen(navController = rememberNavController())
+//    }
+//}
