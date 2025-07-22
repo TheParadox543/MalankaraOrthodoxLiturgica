@@ -22,7 +22,7 @@ android {
         minSdk = 24
         targetSdk = 35
         versionCode = 20
-        versionName = "1.0.2-alpha"
+        versionName = "1.1.0-alpha"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -93,8 +93,9 @@ dependencies {
     implementation(libs.firebase.crashlytics)         // Firebase Crashlytics for crash reporting
     implementation(libs.firebase.crashlytics.ndk)
 
-    // For Google In-App Review
+    // For Google Play Core libraries
     implementation(libs.review.ktx)
+    implementation(libs.app.update.ktx)
 
     // Testing Dependencies
     testImplementation(libs.junit)                    // Standard JUnit 4 for local unit tests
