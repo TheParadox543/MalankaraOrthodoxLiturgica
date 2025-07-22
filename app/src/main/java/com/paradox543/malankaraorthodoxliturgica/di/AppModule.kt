@@ -3,9 +3,13 @@ package com.paradox543.malankaraorthodoxliturgica.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
@@ -16,10 +20,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
-import androidx.datastore.preferences.core.Preferences
-import com.google.android.play.core.review.ReviewManager
-import com.google.android.play.core.review.ReviewManagerFactory
-import com.google.android.play.core.review.testing.FakeReviewManager
 import javax.inject.Singleton
 
 @Module
@@ -80,5 +80,11 @@ object AppModule {
     @Provides
     fun provideReviewManager(@ApplicationContext context: Context): ReviewManager {
         return ReviewManagerFactory.create(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppUpdateManager(@ApplicationContext context: Context): AppUpdateManager {
+        return AppUpdateManagerFactory.create(context)
     }
 }
