@@ -356,7 +356,8 @@ private fun RowScope.DayItem(
             containerColor = containerColor,
             contentColor = contentColor,
             disabledContainerColor = Color.Transparent, // Keep disabled days transparent
-            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+            disabledContentColor = contentColor,
+//            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
         ),
         contentPadding = PaddingValues(0.dp) // Remove default padding for better centering
     ) {
