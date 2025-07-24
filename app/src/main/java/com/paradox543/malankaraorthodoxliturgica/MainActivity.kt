@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
@@ -42,6 +43,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MalankaraOrthodoxLiturgicaTheme {
                 NavGraph(
+                    Modifier,
                     settingsViewModel,
                     navViewModel,
                 )
