@@ -6,9 +6,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
@@ -54,24 +65,55 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MalankaraOrthodoxLiturgicaTheme {
-                NavGraph(
-                    settingsViewModel = settingsViewModel,
-                    navViewModel = navViewModel,
-                )
+                // 1. Remember the SnackbarHostState and a coroutine scope.
+                val snackbarHostState = remember { SnackbarHostState() }
+                val scope = rememberCoroutineScope()
+
+                // 2. Collect the state from the manager.
+                val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
+
+                // 3. Use LaunchedEffect to react to the state change.
+                LaunchedEffect(updateDownloaded) {
+                    if (updateDownloaded) {
+                        scope.launch {
+                            val result = snackbarHostState.showSnackbar(
+                                message = "An update has just been downloaded.",
+                                actionLabel = "RESTART",
+                                duration = SnackbarDuration.Indefinite // Stays until dismissed or actioned
+                            )
+                            // 4. Perform action based on user interaction.
+                            if (result == SnackbarResult.ActionPerformed) {
+                                inAppUpdateManager.completeUpdate()
+                            }
+                        }
+                    }
+                }
+
+                // 5. Use Scaffold to provide a host for the Snackbar.
+                Scaffold(
+                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+                ) { innerPadding ->
+                    // Your NavGraph is placed inside the Scaffold's content area.
+                    // The innerPadding can be passed to your NavGraph if needed to prevent overlap.
+                    NavGraph(
+                        Modifier.padding(innerPadding),
+                        settingsViewModel = settingsViewModel,
+                        navViewModel = navViewModel,
+                    )
+                }
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        // Resume the update flow in case the user backgrounded the app
-        // after the download started.
-        inAppUpdateManager.resumeUpdate(this)
+        // The selected code from the Canvas is used here.
+        // It checks if an update was already downloaded while the app was in the background.
+        inAppUpdateManager.resumeUpdate()
     }
 
     override fun onPause() {
         super.onPause()
-        // Clean up the listener when the activity is not in the foreground to prevent leaks.
         inAppUpdateManager.unregisterListener()
     }
 }
