@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,6 +32,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraph(
+    modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
 ) {
