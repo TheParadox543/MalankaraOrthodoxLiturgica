@@ -243,7 +243,8 @@ object NavigationTree {
                     languages = listOf("ml", "mn"),
                 ),
                 funeralSection(currentRoute)
-            )
+            ),
+            languages = listOf("ml", "mn", "en")
         )
     }
 
@@ -292,14 +293,16 @@ object NavigationTree {
                 prayer(
                     route = childNode,
                     filename = "${PrayerRoutes.SACRAMENTS}/${childNode.replace("_", "/")}.json",
-                    currentRoute
+                    parentRoute = currentRoute,
+                    languages = listOf("ml", "mn", "en"),
                 )
             )
         }
         return PageNode(
             route = currentRoute,
             parent = parentRoute,
-            children = children
+            children = children,
+            languages = listOf("ml", "mn", "en"),
         )
     }
 
