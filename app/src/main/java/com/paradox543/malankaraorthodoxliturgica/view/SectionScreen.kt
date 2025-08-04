@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.app.Activity
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -21,12 +22,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -54,6 +57,16 @@ fun SectionScreen(
     for (item in node.route.split("_")){
         title += translations[item] + " "
     }
+
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        // The review flow needs an Activity context.
+        val activity = context as? Activity
+        if (activity != null) {
+            prayerViewModel.onSectionScreenOpened(activity)
+        }
+    }
+
     Scaffold (
         topBar = { TopNavBar(title, navController) },
         bottomBar = { BottomNavBar(navController = navController) }

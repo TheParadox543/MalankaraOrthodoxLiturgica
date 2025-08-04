@@ -99,13 +99,10 @@ fun PrayerScreen(
     LaunchedEffect(currentFilename) {
         prayerViewModel.loadPrayerElements(currentFilename)
     }
-    val context = LocalContext.current
+
+    // Increment count of prayer screen visits for in-app review
     LaunchedEffect(Unit) {
-        // The review flow needs an Activity context.
-        val activity = context as? Activity
-        if (activity != null) {
-            prayerViewModel.onPrayerScreenOpened(activity)
-        }
+        prayerViewModel.onPrayerScreenOpened()
     }
 
     // Store the initial system bar padding values
