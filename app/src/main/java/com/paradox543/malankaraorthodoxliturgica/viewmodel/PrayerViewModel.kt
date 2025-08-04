@@ -83,10 +83,16 @@ class PrayerViewModel @Inject constructor(
         firebaseAnalytics.logEvent("app_error", bundle)
     }
 
-    fun onPrayerScreenOpened(activity: Activity) {
+    fun onPrayerScreenOpened() {
+        viewModelScope.launch {
+            inAppReviewManager.incrementAndGetPrayerScreenVisits()
+        }
+    }
+
+    fun onSectionScreenOpened(activity: Activity) {
         viewModelScope.launch {
             // This is safe to call every time. The manager handles the logic.
-            inAppReviewManager.incrementPrayerScreenVisitAndCheckForReview(activity)
+            inAppReviewManager.checkForReview(activity)
         }
     }
 }
