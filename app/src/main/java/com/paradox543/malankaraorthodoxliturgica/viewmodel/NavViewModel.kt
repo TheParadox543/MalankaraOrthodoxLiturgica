@@ -3,21 +3,38 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree
 import com.paradox543.malankaraorthodoxliturgica.navigation.PrayerRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class NavViewModel @Inject constructor() : ViewModel() {
-
-    val rootNode = NavigationTree.getNavigationTree()
+class NavViewModel @Inject constructor(
+    private val settingsRepository: SettingsRepository,
+) : ViewModel() {
+    val rootNode: StateFlow<PageNode> = settingsRepository.selectedLanguage
+        .map { language ->
+            // Whenever selectedLanguage emits a new 'language',
+            // this block will be re-executed, creating a new navigation tree
+            NavigationTree.getNavigationTree(language.code)
+        }
+        .stateIn(
+            scope = viewModelScope, // Use viewModelScope for UI-related state
+            started = SharingStarted.WhileSubscribed(5000), // Start collecting when UI observes, stop after 5s inactivity
+            initialValue = NavigationTree.getNavigationTree(AppLanguage.MALAYALAM.code) // Initial value for the UI before preferences are loaded
+        )
 
     private val _currentNode = MutableStateFlow<PageNode?>(null)
     val currentNode: StateFlow<PageNode?> = _currentNode
@@ -28,7 +45,7 @@ class NavViewModel @Inject constructor() : ViewModel() {
     fun getAdjacentSiblingRoutes(node: PageNode): Pair<String?, String?> {
         val parentRoute = node.parent
         if (_parentNode.value?.route != parentRoute) {
-            _parentNode.value = findNode(rootNode, parentRoute?:"")
+            _parentNode.value = findNode(rootNode.value, parentRoute?:"")
         }
 
         if (_parentNode.value == null) {
@@ -134,7 +151,7 @@ class NavViewModel @Inject constructor() : ViewModel() {
         val allNodes = mutableListOf<PageNode>()
         val list = prayNow()
         for (item in list) {
-            val node = findNode(rootNode, item)
+            val node = findNode(rootNode.value, item)
             if (node != null) {
                 allNodes.add(node)
             }
