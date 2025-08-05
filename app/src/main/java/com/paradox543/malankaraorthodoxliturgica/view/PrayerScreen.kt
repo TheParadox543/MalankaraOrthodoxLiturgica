@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
@@ -44,6 +45,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -96,6 +98,14 @@ fun PrayerScreen(
     // Ensure prayers are loaded only when filename changes
     LaunchedEffect(currentFilename) {
         prayerViewModel.loadPrayerElements(currentFilename)
+    }
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        // The review flow needs an Activity context.
+        val activity = context as? Activity
+        if (activity != null) {
+            prayerViewModel.onPrayerScreenOpened(activity)
+        }
     }
 
     // Store the initial system bar padding values

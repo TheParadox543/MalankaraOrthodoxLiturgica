@@ -21,8 +21,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 24
         targetSdk = 35
-        versionCode = 19
-        versionName = "1.0.2-alpha"
+        versionCode = 21
+        versionName = "1.1.1-alpha"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -92,6 +92,10 @@ dependencies {
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
     implementation(libs.firebase.crashlytics)         // Firebase Crashlytics for crash reporting
     implementation(libs.firebase.crashlytics.ndk)
+
+    // For Google Play Core libraries
+    implementation(libs.review.ktx)
+    implementation(libs.app.update.ktx)
 
     // Testing Dependencies
     testImplementation(libs.junit)                    // Standard JUnit 4 for local unit tests
