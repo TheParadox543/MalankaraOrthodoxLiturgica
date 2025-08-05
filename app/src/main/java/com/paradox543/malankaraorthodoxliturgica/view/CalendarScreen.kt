@@ -98,7 +98,7 @@ fun CalendarScreen(
                 ) {
                     CircularProgressIndicator()
                 }
-            } else if (error != null) {
+            } else if (error != null || monthCalendarData.isEmpty()) {
                 // Show an error message
                 Box(
                     modifier = Modifier.fillMaxSize(),
@@ -128,29 +128,16 @@ fun CalendarScreen(
                 val screenWidth = configuration.screenWidthDp.dp
                 if (screenWidth <= 600.dp) {
                     Column(
-                        modifier = Modifier
-                            .padding(8.dp)
-                            .widthIn(max = 400.dp)
+                        modifier = Modifier.padding(8.dp)
                     ) {
-                        Column(
-                            Modifier
-                                .border(4.dp, MaterialTheme.colorScheme.outline)
-                                .padding(4.dp)
-                        ) {
-                            MonthNavigation(
-                                calendarViewModel,
-                                currentCalendarViewDate,
-                                hasPrevMonth,
-                                hasNextMonth
-                            )
-                            DayOfWeekHeaders()
-                            CalendarGrid(
-                                monthCalendarData,
-                                currentCalendarViewDate,
-                                calendarViewModel,
-                                selectedDate
-                            )
-                        }
+                        CalendarMainView(
+                            calendarViewModel,
+                            currentCalendarViewDate,
+                            hasPrevMonth,
+                            hasNextMonth,
+                            monthCalendarData,
+                            selectedDate
+                        )
                     }
                     if (displayEvents.isNotEmpty()) {
                         val scrollState = rememberScrollState()
@@ -158,43 +145,77 @@ fun CalendarScreen(
                             thickness = 8.dp,
                             color = MaterialTheme.colorScheme.primary
                         )
-                        DisplayEvents(scrollState, displayEvents, selectedLanguage, navController, bibleViewModel)
+                        DisplayEvents(
+                            scrollState,
+                            displayEvents,
+                            selectedLanguage,
+                            navController,
+                            calendarViewModel,
+                            bibleViewModel
+                        )
                     }
                 } else {
                     Row(Modifier.padding(8.dp)) {
-                        Column(
-                            Modifier
-                                .widthIn(max = 400.dp)
-                                .verticalScroll(rememberScrollState())
-                                .border(4.dp, MaterialTheme.colorScheme.outline)
-                                .padding(4.dp)
-                        ) {
-                            MonthNavigation(
-                                calendarViewModel,
-                                currentCalendarViewDate,
-                                hasPrevMonth,
-                                hasNextMonth
-                            )
-                            DayOfWeekHeaders()
-                            CalendarGrid(
-                                monthCalendarData,
-                                currentCalendarViewDate,
-                                calendarViewModel,
-                                selectedDate
-                            )
-                        }
+                        CalendarMainView(
+                            calendarViewModel,
+                            currentCalendarViewDate,
+                            hasPrevMonth,
+                            hasNextMonth,
+                            monthCalendarData,
+                            selectedDate
+                        )
                         if (displayEvents.isNotEmpty()) {
                             val scrollState = rememberScrollState()
                             VerticalDivider(
                                 thickness = 8.dp,
                                 color = MaterialTheme.colorScheme.primary
                             )
-                            DisplayEvents(scrollState, displayEvents, selectedLanguage, navController, bibleViewModel)
+                            DisplayEvents(
+                                scrollState,
+                                displayEvents,
+                                selectedLanguage,
+                                navController,
+                                calendarViewModel,
+                                bibleViewModel
+                            )
                         }
                     }
                 }
             }
         }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+private fun CalendarMainView(
+    calendarViewModel: CalendarViewModel,
+    currentCalendarViewDate: LocalDate,
+    hasPrevMonth: Boolean,
+    hasNextMonth: Boolean,
+    monthCalendarData: List<CalendarWeek>,
+    selectedDate: LocalDate?
+) {
+    Column(
+        Modifier
+            .widthIn(max = 400.dp)
+            .verticalScroll(rememberScrollState())
+            .border(4.dp, MaterialTheme.colorScheme.outline)
+            .padding(4.dp)
+    ) {
+        MonthNavigation(
+            calendarViewModel,
+            currentCalendarViewDate,
+            hasPrevMonth,
+            hasNextMonth
+        )
+        DayOfWeekHeaders()
+        CalendarGrid(
+            monthCalendarData,
+            currentCalendarViewDate,
+            calendarViewModel,
+            selectedDate
+        )
     }
 }
 
@@ -356,7 +377,8 @@ private fun RowScope.DayItem(
             containerColor = containerColor,
             contentColor = contentColor,
             disabledContainerColor = Color.Transparent, // Keep disabled days transparent
-            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+            disabledContentColor = contentColor,
+//            disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
         ),
         contentPadding = PaddingValues(0.dp) // Remove default padding for better centering
     ) {
@@ -367,12 +389,14 @@ private fun RowScope.DayItem(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun DisplayEvents(
     scrollState: ScrollState,
     displayEvents: List<LiturgicalEventDetails>,
     selectedLanguage: AppLanguage,
     navController: NavController,
+    calendarViewModel: CalendarViewModel,
     bibleViewModel: BibleViewModel,
 ) {
     Column(
@@ -385,26 +409,26 @@ private fun DisplayEvents(
                 event,
                 selectedLanguage,
                 navController,
+                calendarViewModel = calendarViewModel,
                 bibleViewModel = bibleViewModel,
             )
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DisplayEvent(
     event: LiturgicalEventDetails,
     selectedLanguage: AppLanguage,
     navController: NavController,
     modifier: Modifier = Modifier,
+    calendarViewModel: CalendarViewModel,
     bibleViewModel: BibleViewModel,
     prayerViewModel: PrayerViewModel = hiltViewModel(),
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val textTitle = when (selectedLanguage) {
-        AppLanguage.MALAYALAM -> event.title.ml?: event.title.en
-        else -> event.title.en
-    }
+    val textTitle = calendarViewModel.generateDateTitle(event, selectedLanguage)
     Card( modifier.padding(8.dp) ) {
         Column(Modifier.padding(8.dp)) {
             Text(textTitle, style = MaterialTheme.typography.titleLarge)
@@ -481,13 +505,13 @@ fun DisplayEvent(
                             )
                         }
                     }
-                    if (event.bibleReadings.preparation != null) {
+                    if (event.bibleReadings.oldTestament != null) {
                         Text(
-                            translations["preparation"] ?: "Before Holy Qurbana",
+                            translations["oldTestament"] ?: "Before Holy Qurbana",
                             Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.titleMedium
                         )
-                        event.bibleReadings.preparation.forEach {entry ->
+                        event.bibleReadings.oldTestament.forEach {entry ->
                             val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
                             TextButton(
                                 onClick = {
@@ -504,7 +528,7 @@ fun DisplayEvent(
                             }
                         }
                     }
-                    if (event.bibleReadings.qurbanaGospel != null) {
+                    if (event.bibleReadings.gospel != null) {
                         Text(
                             translations["qurbana"] ?: "Holy Qurbana",
                             Modifier.padding(start = 4.dp),
@@ -541,12 +565,12 @@ fun DisplayEvent(
                             }
                         }
                         val text = bibleViewModel.formatGospelEntry(
-                            event.bibleReadings.qurbanaGospel,
+                            event.bibleReadings.gospel,
                             selectedLanguage
                         )
                         TextButton(
                             onClick = {
-                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.qurbanaGospel)
+                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.gospel)
                                 navController.navigate("bibleReaderScreen")
                             }
                         ) {
