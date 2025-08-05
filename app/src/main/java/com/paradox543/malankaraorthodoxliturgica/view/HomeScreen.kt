@@ -1,6 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
@@ -13,6 +15,6 @@ fun HomeScreen(
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
 ) {
-    val rootNode = navViewModel.rootNode
+    val rootNode by navViewModel.rootNode.collectAsState()
     SectionScreen(navController, prayerViewModel, settingsViewModel, rootNode)
 }

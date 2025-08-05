@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +22,8 @@ import javax.inject.Inject
 class PrayerViewModel @Inject constructor(
     private val prayerRepository: PrayerRepository,
     settingsRepository: SettingsRepository,
-    private val firebaseAnalytics: FirebaseAnalytics
+    private val firebaseAnalytics: FirebaseAnalytics,
+    private val inAppReviewManager: InAppReviewManager,
 ) : ViewModel() {
 
     private val selectedLanguage = settingsRepository.selectedLanguage
@@ -78,6 +81,19 @@ class PrayerViewModel @Inject constructor(
             putString("error_location", errorLocation) // Specific to this error source
         }
         firebaseAnalytics.logEvent("app_error", bundle)
+    }
+
+    fun onPrayerScreenOpened() {
+        viewModelScope.launch {
+            inAppReviewManager.incrementAndGetPrayerScreenVisits()
+        }
+    }
+
+    fun onSectionScreenOpened(activity: Activity) {
+        viewModelScope.launch {
+            // This is safe to call every time. The manager handles the logic.
+            inAppReviewManager.checkForReview(activity)
+        }
     }
 }
 
