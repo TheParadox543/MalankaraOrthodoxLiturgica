@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.di
 
 import android.content.Context
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
@@ -51,10 +52,10 @@ object AppModule {
         json: Json
     ): BibleRepository = BibleRepository(context, json)
 
-//    @Provides
-//    @Singleton
-//    fun provideCalendarRepository(
-//        @ApplicationContext context: Context,
-//        json: Json
-//    ): CalendarRepository = CalendarRepository(context, json)
+    @Provides
+    @Singleton
+    fun provideCalendarRepository(
+        @ApplicationContext context: Context,
+        json: Json
+    ): LiturgicalCalendarRepository = LiturgicalCalendarRepository(context, json)
 }
