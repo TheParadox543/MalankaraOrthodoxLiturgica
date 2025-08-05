@@ -104,16 +104,8 @@ class LiturgicalCalendarRepository @Inject constructor(
             val details = liturgicalData[key]
             if (details != null) {
                 eventDetails.add(details)
-//            } else {
-//                throw IllegalArgumentException("Could not find event key '$key' in liturgical_data.json.")
-//            }
             } else {
-                eventDetails.add(
-                    LiturgicalEventDetails(
-                        type = "event",
-                        title = TitleStr(en=key),
-                    )
-                )
+                throw IllegalArgumentException("Could not find event key '$key' in liturgical_data.json.")
             }
         }
         return eventDetails

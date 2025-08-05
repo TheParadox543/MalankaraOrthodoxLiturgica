@@ -31,10 +31,10 @@ data class BibleReadings(
     val vespersGospel: List<BibleReference>? =  null,
     val matinsGospel: List<BibleReference>? = null,
     val primeGospel: List<BibleReference>? = null,
-    val preparation: List<BibleReference>? = null,
+    val oldTestament: List<BibleReference>? = null,
     val generalEpistle: List<BibleReference>? = null,
     val paulEpistle: List<BibleReference>? = null,
-    val qurbanaGospel: List<BibleReference>? = null,
+    val gospel: List<BibleReference>? = null,
 )
 
 @Serializable
