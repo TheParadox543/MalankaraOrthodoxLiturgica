@@ -1,0 +1,68 @@
+{
+    "prophets": {
+        "en": [
+            {
+                "type": "prose",
+                "content": "Reader: The lesson from the book of the Prophet {title}, Barekmor."
+            },
+            {
+                "type": "prose",
+                "content": "People: Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+            }
+        ],
+        "ml": [
+            {
+                "type": "prose",
+                "content": "വായനക്കാരൻ:- {title} ദീർഘദർശിയുടെ പുസ്‌തകത്തിൽ നിന്നും - ബാറെക്മോർ."
+            },
+            {
+                "type": "prose",
+                "content": "ജനം:- ദീർഘദർശിമാരുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+            }
+        ]
+    },
+    "generalEpistle": {
+        "en": [
+            {
+                "type": "prose",
+                "content": "Reader:- The {ordinal}General Epistle Of St. {displayTitle} Habibai. Barekmor."
+            },
+            {
+                "type": "prose",
+                "content": "People:- Glory be to the Lord of the Apostles, and His mercy be upon us, for ever."
+            }
+        ],
+        "ml": [
+            {
+                "type": "prose",
+                "content": "വായനക്കാരൻ:- പരി. {displayTitle} ശ്ലീഹാ - പൊതുവിന് എഴുതിയ {ordinal}ലേഖനത്തിൽ നിന്നും - ആഹായ് ബാറെക്മോർ."
+            },
+            {
+                "type": "prose",
+                "content": "ജനം:- ശ്ലീഹായുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+            }
+        ]
+    },
+    "paulineEpistle": {
+        "en": [
+            {
+                "type": "prose",
+                "content": "Reader:- The {ordinal}lesson from the Epistle of St. Paul, the Apostle, to {displayTitle} — Ahaai Barekmor."
+            },
+            {
+                "type": "prose",
+                "content": "People:- Glory be to the Lord of the Apostle and His mercy be upon us for ever."
+            }
+        ],
+        "ml": [
+            {
+                "type": "prose",
+                "content": "വായനക്കാരൻ:- പരി. പൗലോസ് ശ്ലീഹാ - {displayTitle} എഴുതിയ {ordinal}ലേഖനത്തിൽ നിന്നും - ആഹായ് ബാറെക്മോർ."
+            },
+            {
+                "type": "prose",
+                "content": "ജനം:- ശ്ലീഹായുടെ ഉടയവനു സ്തുതിയും - നമ്മുടെ മേൽ തന്റെ അനുഗ്രഹങ്ങളും - എന്നേക്കുമുണ്ടായിരിക്കട്ടെ."
+            }
+        ]
+    }
+}
