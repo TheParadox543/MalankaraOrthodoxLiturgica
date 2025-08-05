@@ -1,7 +1,16 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
@@ -51,10 +60,31 @@ object AppModule {
         json: Json
     ): BibleRepository = BibleRepository(context, json)
 
-//    @Provides
-//    @Singleton
-//    fun provideCalendarRepository(
-//        @ApplicationContext context: Context,
-//        json: Json
-//    ): CalendarRepository = CalendarRepository(context, json)
+    @Provides
+    @Singleton
+    fun provideCalendarRepository(
+        @ApplicationContext context: Context,
+        json: Json
+    ): LiturgicalCalendarRepository = LiturgicalCalendarRepository(context, json)
+
+    @Singleton
+    @Provides
+    fun providePreferencesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
+            produceFile = { context.preferencesDataStoreFile("app_settings") }
+        )
+    }
+
+    // Hilt will automatically provide the Context and DataStore it needs.
+    @Singleton
+    @Provides
+    fun provideReviewManager(@ApplicationContext context: Context): ReviewManager {
+        return ReviewManagerFactory.create(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppUpdateManager(@ApplicationContext context: Context): AppUpdateManager {
+        return AppUpdateManagerFactory.create(context)
+    }
 }

@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,7 +14,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
+import com.paradox543.malankaraorthodoxliturgica.view.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
+import com.paradox543.malankaraorthodoxliturgica.view.CalendarScreen
+import com.paradox543.malankaraorthodoxliturgica.view.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.view.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
@@ -28,6 +32,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraph(
+    modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
 ) {
@@ -39,6 +44,7 @@ fun NavGraph(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val arguments = navBackStackEntry?.arguments
+    val rootNode by navViewModel.rootNode.collectAsState()
     LaunchedEffect(currentRoute, arguments) {
         if (currentRoute != null) {
             settingsViewModel.logScreensVisited(currentRoute, arguments)
@@ -61,16 +67,20 @@ fun NavGraph(
         }
         composable("section/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
-            val node = navViewModel.findNode(navViewModel.rootNode, route)
+            val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, settingsViewModel, node)
+            } else {
+                ContentNotReadyScreen(navController = navController, message = route)
             }
         }
         composable("prayerScreen/{route}") { backStackEntry ->
             val route = backStackEntry.arguments?.getString("route") ?: ""
-            val node = navViewModel.findNode(navViewModel.rootNode, route)
+            val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
+            } else {
+                ContentNotReadyScreen(navController = navController, message = route)
             }
         }
         composable("prayNow") {
@@ -93,6 +103,12 @@ fun NavGraph(
                 bookIndex.toInt(),
                 chapterIndex.toInt()
             )
+        }
+        composable("bibleReaderScreen") {
+            BibleReadingScreen(navController, bibleViewModel, settingsViewModel)
+        }
+        composable("calendar") {
+            CalendarScreen(navController, bibleViewModel)
         }
         composable("settings") {
             SettingsScreen(navController, settingsViewModel)
