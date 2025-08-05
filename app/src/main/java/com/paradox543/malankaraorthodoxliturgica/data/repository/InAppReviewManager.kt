@@ -6,6 +6,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import com.google.android.play.core.review.ReviewManager
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -24,20 +26,21 @@ class InAppReviewManager @Inject constructor(
      *
      * @param activity The current activity, required to launch the review flow.
      */
-    suspend fun incrementPrayerScreenVisitAndCheckForReview(activity: Activity) {
+    suspend fun checkForReview(activity: Activity) {
         // Increment the stored count and get the new value.
         val currentCount = incrementAndGetPrayerScreenVisits()
 
         // Only trigger the review flow on the 10th, 20th, 30th visit, etc.
-        if (currentCount > 0 && currentCount % 10 == 0) {
+        if (currentCount > 10) {
             launchReviewFlow(activity)
+            clearPrayerScreenVisitCount()
         }
     }
 
     /**
      * Atomically increments the visit count in DataStore and returns the new count.
      */
-    private suspend fun incrementAndGetPrayerScreenVisits(): Int {
+    suspend fun incrementAndGetPrayerScreenVisits(): Int {
         // dataStore.edit returns the updated Preferences object.
         val updatedPreferences = dataStore.edit { settings ->
             val currentCount = settings[prayerScreenVisitCountKey] ?: 0
@@ -45,6 +48,19 @@ class InAppReviewManager @Inject constructor(
         }
         // We then extract the new value from the returned preferences.
         return updatedPreferences[prayerScreenVisitCountKey] ?: 1
+    }
+
+    suspend fun clearPrayerScreenVisitCount() {
+        dataStore.edit { settings ->
+            settings[prayerScreenVisitCountKey] = 0
+        }
+    }
+
+    suspend fun getPrayerScreenVisitCount(): Int {
+        // Retrieve the current visit count from DataStore.
+        return dataStore.data.map { settings ->
+            settings[prayerScreenVisitCountKey] ?: 0
+        }.first() // Use first() to get the value immediately
     }
 
     /**
