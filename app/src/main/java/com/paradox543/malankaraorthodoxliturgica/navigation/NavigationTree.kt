@@ -249,7 +249,7 @@ object NavigationTree {
                 ),
                 funeralSection(currentRoute)
             ),
-            languages = listOf("ml", "mn")
+            languages = listOf("ml", "mn", "en")
         )
     }
 
@@ -303,7 +303,7 @@ object NavigationTree {
                     route = childNode,
                     filename = "${PrayerRoutes.SACRAMENTS}/${childNode.replace("_", "/")}.json",
                     parentRoute = currentRoute,
-                    languages = listOf("ml", "mn"),
+                    languages = listOf("ml", "mn", "en"),
                 )
             )
         }
@@ -315,7 +315,7 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = children,
-            languages = listOf("ml", "mn"),
+            languages = listOf("ml", "mn", "en"),
         )
     }
 

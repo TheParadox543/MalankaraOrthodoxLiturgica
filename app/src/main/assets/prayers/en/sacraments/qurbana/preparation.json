@@ -1,0 +1,268 @@
+[
+    {
+        "type": "title",
+        "content": "Prefatory Prayers"
+    },
+    {
+        "type": "subheading",
+        "content": "(The chancel Remains Veiled)"
+    },
+    {
+        "type": "subheading",
+        "content": "(Everyone entering the Church, shall make the sign of the cross and say)"
+    },
+    {
+        "type": "prose",
+        "content": "In reverence, will I enter Thy house, and offer my vows to Thee."
+    },
+    {
+        "type": "heading",
+        "content": "ENTRANCE INTO THE CHANCEL"
+    },
+    {
+        "type": "subheading",
+        "content": "(The chancel is unveiled)"
+    },
+    {
+        "type": "subheading",
+        "content": "(Prayers For The Priest)"
+    },
+    {
+        "type": "subheading",
+        "content": "(The priest, while entering the Chancel for offering the Holy Qurbana, asks leave of the Congregation thus)"
+    },
+    {
+        "type": "prose",
+        "content": "Priest: Ahai Vu Rabonai, Zalav Alai/Pray for me, my brethren, and my elders etc."
+    },
+    {
+        "type": "subheading",
+        "content": "(And they shall reply)"
+    },
+    {
+        "type": "prose",
+        "content": "People: May the Lord hear your prayers, and be pleased with your offering,and accept your oblation, and make us also partake with you. Amen."
+    },
+    {
+        "type": "subheading",
+        "content": "(The Chancel will then be veiled)"
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Prayers For The Deacons",
+        "items": [
+            {
+                "type": "subheading",
+                "content": "(While entering the chancel, the acolyte shall say)"
+            },
+            {
+                "type": "prose",
+                "content": "Into the Sanctuary of God I come, even to the God, who gives joy to my childness."
+            },
+            {
+                "type": "subheading",
+                "content": "(Proceeding to the altar and bowing before it he says)"
+            },
+            {
+                "type": "prose",
+                "content": "Into Thy house have I entered O God, and before Thy throne have I worshipped, O heavenly king; forgive me all the sins that I have committed against Thee."
+            },
+            {
+                "type": "subheading",
+                "content": "(Going round the altar and kissing its corners he says)"
+            },
+            {
+                "type": "prose",
+                "content": "Bind Thou, O Lord, our assemblies with chains, even to the corners of Thy Sanctuary. Thou art my God, I will give thanks to Thee. Thou art my God, I will glorify Thee."
+            },
+            {
+                "type": "subheading",
+                "content": "(When kissing the hands of Bishops or Priests, he shall say)"
+            },
+            {
+                "type": "prose",
+                "content": "Barekmor. Bless me, my Lord."
+            },
+            {
+                "type": "subheading",
+                "content": "(While Lighting the Candles he shall sing)"
+            },
+            {
+                "type": "prose",
+                "content": "By Thy light we see the light…"
+            },
+            {
+                "type": "subheading",
+                "content": "For the South Side. (Tune:- Hasíyo Kadiso)"
+            },
+            {
+                "type": "prose",
+                "content": "Thou, who dwellest in the lightMansions, holy, pure…"
+            },
+            {
+                "type": "subheading",
+                "content": "(While putting on the surplice- Koothino- he says)"
+            },
+            {
+                "type": "prose",
+                "content": "Clothe me, O Lord God, with an incorruptible surplice, by the power of the Holy Spirit. O Father, Son and Holy Spirit, grant us that by pure and upright lives, we be guided in true faith, all the days of our lives, now and always, for ever. Amen."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "OLD TESTAMENT LESSONS"
+    },
+    {
+        "type": "subheading",
+        "content": "(Soomoro-versicle - before the Old Testament Lessons)"
+    },
+    {
+        "type": "prose",
+        "content": "Deacon: The song of glory and salvation, in the tabernacle of the righteous, the Holy Spirit through David did sing."
+    },
+    {
+        "type": "subheading",
+        "content": "(The reader reads the lessons for the day from the Old Testament, by standing on the northern side, below the chancel, and ends each lesson, saying: Barekmor.)"
+    },
+    {
+        "type": "prose",
+        "content": "Reader: The lesson from the (first) book of Moses, the first among Prophets. Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of the Prophets, and His mercy be upon us for ever."
+    },
+    {
+        "type": "prose",
+        "content": "Reader: -The lesson from the (first) book of the kings. Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of kings, and His mercy be upon us for ever."
+    },
+    {
+        "type": "prose",
+        "content": "Reader: - The lesson from the book of the righteous Ruth. Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of the righteous, and His mercy be upon us for ever."
+    },
+    {
+        "type": "prose",
+        "content": "Reader: - The lesson from the book of Job, the just. Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of the just, and His mercy be upon us for ever."
+    },
+    {
+        "type": "prose",
+        "content": "Reader: - The lesson from the Psalms of David, the king and the prophet. Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of the Psalmist, and His mercy be upon us for ever."
+    },
+    {
+        "type": "prose",
+        "content": "Reader: - The lesson from the Proverbs of Solomon, the wise among the wise. Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of the wise, and His mercy be upon us for ever."
+    },
+    {
+        "type": "prose",
+        "content": "Reader: - The lesson from the book of the Prophet (Name of the prophet) Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of the prophet, and His mercy be upon us for ever."
+    },
+    {
+        "type": "prose",
+        "content": "Reader: - The lesson from the book of Isaiah, the glorious prophet. Barekmor."
+    },
+    {
+        "type": "prose",
+        "content": "People: - Glory be to the Lord of the Prophet, arid His mercy be upon us for ever."
+    },
+    {
+        "type": "heading",
+        "content": "Hymn Before the Public Celebration of the Holy Qurbana"
+    },
+    {
+        "type": "subheading",
+        "content": "Karthave Prarthana Kettarul Answer Lord, And Hear My Plea - Halleluiah"
+    },
+    {
+        "type": "song",
+        "content": "May our incense favour Thee\n/tAs was Aaronís sweet;\nAnd our office like that plea\n/tOf the Ninevites.\nAs Thou didst answer Jona,\nAnswer us who call on Thee."
+    },
+    {
+        "type": "song",
+        "content": "Let My Cry Come Unto Thee - Halleluiah;\n/tMay the incense sent by us\nTo Thy Name so pure,\n/tSweet become, appeasing Thee\nGraciousness evoke\nFavour us, O Lord, in love God of all compassion Thou."
+    },
+    {
+        "type": "song",
+        "content": "Glory to Thy gracious love,\n/tJesus, Lord and God;\nPlenteous are Thy gifts indeed\n/tGivín to all the world.\nThou redeemedst those from wrath -\nNinevites who called on Thee."
+    },
+    {
+        "type": "song",
+        "content": "May our incense favour Thee\n/tAs was Aaronís sweet,\nAs was Zachariahís set\n/tIn the sacred shrine,\nLike the plea of Phinehas\nStaying from the people death."
+    },
+    {
+        "type": "song",
+        "content": "Great One, seated there in state\n/tOn Thy lofty throne,\nWho wert pleased as babe to rock\n/tIn the blessed lap,\nGrant Thy peace, let dwell Thy calm\nIn all quarters of the world."
+    },
+    {
+        "type": "song",
+        "content": "From the flaming glory bright\n/tFlew the angel swift\nUnto Mary, Nazírethís maid,\n/tSaying unto her,\nWith thee is the Lord - from thee\nComes the Saviour of the world."
+    },
+    {
+        "type": "song",
+        "content": "As the fire enflamed the bush\n/tYet did not it burn,\nSo did God come down and dwell\n/tIn the Virginís womb;\nHe incarnate was of her\nLosing not the Virginís seal."
+    },
+    {
+        "type": "song",
+        "content": "What ye say of me is wrong,\n/tMary told the Jews;\nI do keep my seal, am sound,\n/tNor unchaste am I.\nAs the Lord did will, I bore -\nSuckled Him with milk, a Babe."
+    },
+    {
+        "type": "song",
+        "content": "By the pleas of prophets, Lord,\n/tThey who loved Thee much,\nOf Apostles too who preached,\n/tGospel truth to all;\nGrant Thy peace, let dwell Thy calm\nIn all quarters of the world."
+    },
+    {
+        "type": "song",
+        "content": "Holy martyrs clothed with powír\n/tFrom the strength of God,\nCame and stood forth in the fight\n/tWith the kings unjust.\nThey did break the ranks of foes\nAnd received the victorís crown."
+    },
+    {
+        "type": "song",
+        "content": "Martyrs shunned this passing world,\n/tAll possessions spurned;\nLeft their parents, brethren too,\n/tLeft their kith and kin.\nLoved they death for Jesusí sake -\nSolemnly their feasts are held."
+    },
+    {
+        "type": "song",
+        "content": "Martyrs, seeing Jesus hang\n/tOn the cross for them, -\nFrom his lan - ced side there flowed\n/tBlood and water both\nHeartened, they said each to each,\nìCome, weíll die now for the Lord.î"
+    },
+    {
+        "type": "song",
+        "content": "By Thy light we see the light,\n/tJesus, full of light;\nThou, True Light, dost give the light\n/tTo Thy creatures all.\nLighten us with Thy gay light,\nThou, the Fatherís light divine."
+    },
+    {
+        "type": "song",
+        "content": "Thou who dwellest in the light\n/tMansions holy, pure;\nKeep us from all hateful thoughts,\n/tFrom all passions vile,\nGrant us cleanness in our hearts\nDeeds of righteousness to do."
+    },
+    {
+        "type": "song",
+        "content": "God, who didst receive the lamb\n/tBlameless Abel brought,\nWho the gift of Noah took,\n/tAbram,s sacrifice;\nSee our fast and hear our prayír,\nAnswer by Thy grace our pleas."
+    },
+    {
+        "type": "song",
+        "content": "Come, ye sinners, and implore,\n/tSeek forgiveness here;\nTo one knocking at the door\n/tOpeneth the Lord.\nHe that asketh doth receive,\nHe that seeketh, he shall find."
+    },
+    {
+        "type": "song",
+        "content": "Lord, grant good remembrance to\n/tAll the faithful dead;\nThy holy body they took\n/tAnd Thy living blood.\nMay they stand on Thy right side\nOn that day Thy grace shall dawn."
+    }
+]
