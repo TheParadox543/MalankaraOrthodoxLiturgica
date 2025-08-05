@@ -1,9 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
@@ -61,7 +63,7 @@ class CalendarViewModel @Inject constructor(
             _error.value = null
             try {
                 liturgicalCalendarRepository.initialize() // Important: Load JSON data first
-                loadMonth(LocalDate.now().monthValue, LocalDate.now().year)
+                loadMonth(_currentCalendarViewDate.value.monthValue, _currentCalendarViewDate.value.year)
                 loadUpcomingWeekEvents()
             } catch (e: Exception) {
                 _error.value = "Failed to load calendar data: ${e.message}"
@@ -77,6 +79,7 @@ class CalendarViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
+                Log.d("CalendarViewModel", "Loading month data for $month/$year")
                 _monthCalendarData.value = liturgicalCalendarRepository.loadMonthData(month, year)
                 _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
                 val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
@@ -124,5 +127,31 @@ class CalendarViewModel @Inject constructor(
         val prevMonthDate = _currentCalendarViewDate.value.minusMonths(1)
         clearDayEvents()
         loadMonth(prevMonthDate.monthValue, prevMonthDate.year)
+    }
+
+    fun generateYearSuffix(year: Int): String {
+        return when (year % 10) {
+            1 -> if (year % 100 != 11) "st" else "th"
+            2 -> if (year % 100 != 12) "nd" else "th"
+            3 -> if (year % 100 != 13) "rd" else "th"
+            else -> "th"
+        }
+    }
+
+    fun generateDateTitle(event: LiturgicalEventDetails, selectedLanguage: AppLanguage): String {
+        val currentYear = LocalDate.now().year
+        return if (event.startedYear != null) {
+            val yearNumber = currentYear - event.startedYear + 1
+            val baseYearString = "$yearNumber"
+
+            if (selectedLanguage == AppLanguage.MALAYALAM && event.title.ml != null){
+                "$baseYearString-ാം${event.title.ml}"
+            } else {
+                "$baseYearString${generateYearSuffix(yearNumber)} ${event.title.en}"
+            }
+        } else when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
+            else -> event.title.en
+        }
     }
 }
