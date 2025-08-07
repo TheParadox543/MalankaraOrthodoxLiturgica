@@ -42,12 +42,39 @@
                             "startVerse": 5,
                             "endChapter": 33,
                             "endVerse": 11
-                        },
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 11,
+                    "ranges": [
+                        {
+                            "startChapter": 6,
+                            "startVerse": 1,
+                            "endChapter": 6,
+                            "endVerse": 6
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
                         {
                             "startChapter": 31,
                             "startVerse": 22,
                             "endChapter": 31,
                             "endVerse": 26
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 9,
+                            "startVerse": 11,
+                            "endChapter": 9,
+                            "endVerse": 11
                         },
                         {
                             "startChapter": 10,
@@ -159,12 +186,34 @@
                             "startVerse": 1,
                             "endChapter": 6,
                             "endVerse": 8
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 31,
+                            "startVerse": 10,
+                            "endChapter": 31,
+                            "endVerse": 14
                         },
                         {
                             "startChapter": 31,
                             "startVerse": 22,
                             "endChapter": 31,
                             "endVerse": 26
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 9,
+                            "startVerse": 11,
+                            "endChapter": 9,
+                            "endVerse": 11
                         },
                         {
                             "startChapter": 10,
@@ -274,6 +323,17 @@
                         {
                             "startChapter": 8,
                             "startVerse": 1,
+                            "endChapter": 8,
+                            "endVerse": 20
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 11,
+                    "ranges": [
+                        {
+                            "startChapter": 8,
+                            "startVerse": 13,
                             "endChapter": 8,
                             "endVerse": 20
                         }
@@ -518,6 +578,17 @@
                     ]
                 },
                 {
+                    "bookNumber": 2,
+                    "ranges": [
+                        {
+                            "startChapter": 19,
+                            "startVerse": 1,
+                            "endChapter": 19,
+                            "endVerse": 13
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 24,
                     "ranges": [
                         {
@@ -600,6 +671,19 @@
         },
         "specialSongsKey": "birthOfJohnTheBaptistSongs",
         "bibleReadings": {
+            "vespersGospel": [
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 57,
+                            "endChapter": 1,
+                            "endVerse": 80
+                        }
+                    ]
+                }
+            ],
             "primeGospel": [
                 {
                     "bookNumber": 40,
@@ -644,6 +728,17 @@
                             "startVerse": 13,
                             "endChapter": 4,
                             "endVerse": 222
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 62,
+                            "startVerse": 1,
+                            "endChapter": 62,
+                            "endVerse": 12
                         }
                     ]
                 }
@@ -743,6 +838,17 @@
                             "startVerse": 26,
                             "endChapter": 22,
                             "endVerse": 51
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 45,
+                            "startVerse": 18,
+                            "endChapter": 45,
+                            "endVerse": 25
                         },
                         {
                             "startChapter": 46,
@@ -1076,6 +1182,28 @@
                             "endVerse": 8
                         }
                     ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 44,
+                            "startVerse": 1,
+                            "endChapter": 44,
+                            "endVerse": 12
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 8,
+                            "startVerse": 1,
+                            "endChapter": 8,
+                            "endVerse": 10
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -1186,6 +1314,17 @@
                             "endVerse": 17
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 60,
+                            "startVerse": 8,
+                            "endChapter": 60,
+                            "endVerse": 14
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -1289,6 +1428,17 @@
                             "startVerse": 24,
                             "endChapter": 14,
                             "endVerse": 4
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 38,
+                    "ranges": [
+                        {
+                            "startChapter": 8,
+                            "startVerse": 3,
+                            "endChapter": 8,
+                            "endVerse": 8
                         }
                     ]
                 }
@@ -1407,6 +1557,17 @@
                             "endVerse": 34
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 40,
+                            "startVerse": 25,
+                            "endChapter": 40,
+                            "endVerse": 31
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -1457,6 +1618,7 @@
             "ml": "യൽദോയ്ക്ക് ശേഷമുള്ള രണ്ടാം ഞായറാഴ്‌ച"
         },
         "specialSongsKey": "afterChristmasSongs",
+        "niram": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1567,6 +1729,7 @@
             "ml": "ദനഹാ പെരുന്നാൾ"
         },
         "specialSongsKey": "epiphanySongs",
+        "niram": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1664,6 +1827,17 @@
                             "endVerse": 7
                         }
                     ]
+                },
+                {
+                    "bookNumber": 54,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 17,
+                            "endChapter": 1,
+                            "endVerse": 17
+                        }
+                    ]
                 }
             ],
             "gospel": [
@@ -1688,6 +1862,7 @@
             "ml": "ശിരച്ഛേദ"
         },
         "specialSongsKey": "beheadingStJohnSongs",
+        "niram": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1816,6 +1991,7 @@
             "ml": "മാർ സ്തേഫാനോസ് സഹദായുടെ ഓർമ്മാ"
         },
         "specialSongsKey": "feastStStephenSongs",
+        "niram": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1863,6 +2039,17 @@
                             "startVerse": 20,
                             "endChapter": 24,
                             "endVerse": 25
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 37,
+                            "startVerse": 8,
+                            "endChapter": 37,
+                            "endVerse": 20
                         }
                     ]
                 }
@@ -1921,6 +2108,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ള ഒന്നാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
+        "niram": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1957,6 +2145,17 @@
                             "startVerse": 19,
                             "endChapter": 25,
                             "endVerse": 34
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 12,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 13,
+                            "endChapter": 3,
+                            "endVerse": 13
                         },
                         {
                             "startChapter": 3,
@@ -2032,6 +2231,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ളരണ്ടാം രണ്ടാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
+        "niram": 4,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2092,6 +2292,17 @@
                             "endVerse": 8
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 51,
+                            "startVerse": 1,
+                            "endChapter": 51,
+                            "endVerse": 8
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -2142,6 +2353,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ള മൂന്നാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
+        "niram": 5,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2241,6 +2453,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ള നാലാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
+        "niram": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2395,6 +2608,17 @@
                             "endVerse": 9
                         }
                     ]
+                },
+                {
+                    "bookNumber": 19,
+                    "ranges": [
+                        {
+                            "startChapter": 29,
+                            "startVerse": 1,
+                            "endChapter": 29,
+                            "endVerse": 11
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -2483,6 +2707,17 @@
                             "endVerse": 22
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 63,
+                            "startVerse": 7,
+                            "endChapter": 63,
+                            "endVerse": 16
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -2533,6 +2768,7 @@
             "ml": "മായൽത്തോ"
         },
         "specialSongsKey": "mayalthoSongs",
+        "niram": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2704,6 +2940,17 @@
                             "endVerse": 25
                         }
                     ]
+                },
+                {
+                    "bookNumber": 25,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 1,
+                            "endChapter": 3,
+                            "endVerse": 21
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -2754,6 +3001,7 @@
             "ml": "ആചാര്യന്മാരുടെ ഞായറാഴ്ച"
         },
         "specialSongsKey": "allDepartedPriestsSongs",
+        "niram": 7,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2814,6 +3062,28 @@
                             "endVerse": 22
                         }
                     ]
+                },
+                {
+                    "bookNumber": 6,
+                    "ranges": [
+                        {
+                            "startChapter": 24,
+                            "startVerse": 28,
+                            "endChapter": 24,
+                            "endVerse": 33
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 65,
+                            "startVerse": 13,
+                            "endChapter": 65,
+                            "endVerse": 20
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -2864,6 +3134,7 @@
             "ml": "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്ച"
         },
         "specialSongsKey": "allDepartedFaithfulSongs",
+        "niram": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2900,6 +3171,28 @@
                             "startVerse": 1,
                             "endChapter": 34,
                             "endVerse": 12
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 6,
+                    "ranges": [
+                        {
+                            "startChapter": 24,
+                            "startVerse": 29,
+                            "endChapter": 24,
+                            "endVerse": 33
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 37,
+                            "startVerse": 1,
+                            "endChapter": 37,
+                            "endVerse": 14
                         }
                     ]
                 },
@@ -2963,6 +3256,7 @@
             "ml": "കൊത്തിനെ ഞായർ"
         },
         "specialSongsKey": "kothineSongs",
+        "niram": 1,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2999,6 +3293,39 @@
                             "startVerse": 12,
                             "endChapter": 9,
                             "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 2,
+                    "ranges": [
+                        {
+                            "startChapter": 20,
+                            "startVerse": 7,
+                            "endChapter": 20,
+                            "endVerse": 22
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 11,
+                    "ranges": [
+                        {
+                            "startChapter": 18,
+                            "startVerse": 29,
+                            "endChapter": 19,
+                            "endVerse": 46
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 29,
+                    "ranges": [
+                        {
+                            "startChapter": 2,
+                            "startVerse": 12,
+                            "endChapter": 2,
+                            "endVerse": 20
                         }
                     ]
                 },
@@ -3061,6 +3388,7 @@
             "en": "Commomoration of St. Ephrem and Mar Theodorus",
             "ml": "മാർ അപ്രേം, മാർ തേവോദോറോസ് എന്നിവരുടെ ഓർമ്മ"
         },
+        "niram": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3090,13 +3418,46 @@
             ],
             "oldTestament": [
                 {
-                    "bookNumber": 0,
+                    "bookNumber": 1,
                     "ranges": [
                         {
                             "startChapter": 2,
                             "startVerse": 8,
                             "endChapter": 2,
                             "endVerse": 25
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 38,
+                    "ranges": [
+                        {
+                            "startChapter": 7,
+                            "startVerse": 8,
+                            "endChapter": 7,
+                            "endVerse": 14
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 17,
+                            "startVerse": 19,
+                            "endChapter": 17,
+                            "endVerse": 25
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 24,
+                            "endChapter": 1,
+                            "endVerse": 31
                         }
                     ]
                 }
@@ -3149,6 +3510,7 @@
             "ml": "നോമ്പിലെ രണ്ടാം ഞായറാഴ്ച (ഗർബോ-കുഷ്ഠരോഗി)"
         },
         "specialSongsKey": "lepersSundaySongs",
+        "niram": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3202,6 +3564,17 @@
                             "startVerse": 15,
                             "endChapter": 15,
                             "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 33,
+                            "startVerse": 2,
+                            "endChapter": 33,
+                            "endVerse": 9
                         }
                     ]
                 }
@@ -3271,6 +3644,28 @@
                             "endVerse": 7
                         }
                     ]
+                },
+                {
+                    "bookNumber": 9,
+                    "ranges": [
+                        {
+                            "startChapter": 12,
+                            "startVerse": 19,
+                            "endChapter": 12,
+                            "endVerse": 25
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 35,
+                            "startVerse": 1,
+                            "endChapter": 35,
+                            "endVerse": 10
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -3321,6 +3716,7 @@
             "ml": "നോമ്പിലെ മൂന്നാം ഞായറാഴ്ച്‌ച (മ്ശറിയോ-തളർവാതരോഗി)"
         },
         "specialSongsKey": "palsySundaySongs",
+        "niram": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3372,6 +3768,17 @@
                     ]
                 },
                 {
+                    "bookNumber": 14,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 12,
+                            "endChapter": 1,
+                            "endVerse": 17
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 33,
                     "ranges": [
                         {
@@ -3379,6 +3786,28 @@
                             "startVerse": 1,
                             "endChapter": 2,
                             "endVerse": 8
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 5,
+                    "ranges": [
+                        {
+                            "startChapter": 31,
+                            "startVerse": 19,
+                            "endChapter": 31,
+                            "endVerse": 30
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 5,
+                            "startVerse": 20,
+                            "endChapter": 5,
+                            "endVerse": 25
                         }
                     ]
                 }
@@ -3442,6 +3871,28 @@
                             "endVerse": 10
                         }
                     ]
+                },
+                {
+                    "bookNumber": 12,
+                    "ranges": [
+                        {
+                            "startChapter": 4,
+                            "startVerse": 38,
+                            "endChapter": 4,
+                            "endVerse": 44
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 28,
+                    "ranges": [
+                        {
+                            "startChapter": 2,
+                            "startVerse": 18,
+                            "endChapter": 2,
+                            "endVerse": 23
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -3492,6 +3943,7 @@
             "ml": "നോമ്പിലെ നാലാം ഞായറാഴ്‌ച (ാനൊയ‌ത്തോ - ക്ന‌ാനായക്കാരി)"
         },
         "specialSongsKey": "canaaniteWomanSongs",
+        "niram": 4,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3602,6 +4054,7 @@
             "ml": "പകുതിനോമ്പ് ബുധനാഴ്ച"
         },
         "specialSongsKey": "midLentSongs",
+        "niram": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3655,6 +4108,28 @@
                             "startVerse": 5,
                             "endChapter": 7,
                             "endVerse": 12
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 20,
+                    "ranges": [
+                        {
+                            "startChapter": 30,
+                            "startVerse": 1,
+                            "endChapter": 30,
+                            "endVerse": 17
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 19,
+                    "ranges": [
+                        {
+                            "startChapter": 34,
+                            "startVerse": 1,
+                            "endChapter": 34,
+                            "endVerse": 9
                         }
                     ]
                 },
@@ -3735,6 +4210,28 @@
                             "endVerse": 15
                         }
                     ]
+                },
+                {
+                    "bookNumber": 10,
+                    "ranges": [
+                        {
+                            "startChapter": 9,
+                            "startVerse": 1,
+                            "endChapter": 9,
+                            "endVerse": 8
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 55,
+                            "startVerse": 1,
+                            "endChapter": 55,
+                            "endVerse": 11
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -3785,6 +4282,7 @@
             "ml": "നോമ്പിലെ അഞ്ചാം ഞായറാഴ്ച (ക്‌പിപ്ത്തോ-കൂനി)"
         },
         "specialSongsKey": "crippledWomanSongs",
+        "niram": 5,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3895,6 +4393,39 @@
                             "endVerse": 7
                         }
                     ]
+                },
+                {
+                    "bookNumber": 19,
+                    "ranges": [
+                        {
+                            "startChapter": 78,
+                            "startVerse": 1,
+                            "endChapter": 78,
+                            "endVerse": 22
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 20,
+                    "ranges": [
+                        {
+                            "startChapter": 28,
+                            "startVerse": 16,
+                            "endChapter": 28,
+                            "endVerse": 28
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 15,
+                            "startVerse": 1,
+                            "endChapter": 15,
+                            "endVerse": 8
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -3945,6 +4476,7 @@
             "ml": "നോമ്പിലെ ആറാം ഞായറാഴ്‌ച (സമിയോ - കുരുടൻ)"
         },
         "specialSongsKey": "blindManSongs",
+        "niram": 6,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3955,6 +4487,17 @@
                             "startVerse": 32,
                             "endChapter": 9,
                             "endVerse": 35
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 10,
+                            "startVerse": 46,
+                            "endChapter": 10,
+                            "endVerse": 52
                         }
                     ]
                 }
@@ -4002,6 +4545,17 @@
                     ]
                 },
                 {
+                    "bookNumber": 18,
+                    "ranges": [
+                        {
+                            "startChapter": 42,
+                            "startVerse": 1,
+                            "endChapter": 42,
+                            "endVerse": 8
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 11,
                     "ranges": [
                         {
@@ -4009,6 +4563,28 @@
                             "startVerse": 5,
                             "endChapter": 3,
                             "endVerse": 15
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 13,
+                            "startVerse": 1,
+                            "endChapter": 13,
+                            "endVerse": 16
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 51,
+                            "startVerse": 10,
+                            "endChapter": 51,
+                            "endVerse": 19
                         }
                     ]
                 }
@@ -4061,6 +4637,7 @@
             "ml": "നാൽപ്പതാം വെള്ളിയാഴ്ച"
         },
         "specialSongsKey": "fortiethFridaySongs",
+        "niram": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4108,6 +4685,17 @@
                             "startVerse": 10,
                             "endChapter": 7,
                             "endVerse": 17
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 10,
+                    "ranges": [
+                        {
+                            "startChapter": 24,
+                            "startVerse": 18,
+                            "endChapter": 24,
+                            "endVerse": 25
                         }
                     ]
                 },
@@ -4171,6 +4759,7 @@
             "ml": "ലോവോസോറിന്റെ ശനിയാഴ്ച"
         },
         "specialSongsKey": "lazarusSaturdaySongs",
+        "niram": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4194,6 +4783,41 @@
                             "startVerse": 28,
                             "endChapter": 11,
                             "endVerse": 46
+                        }
+                    ]
+                }
+            ],
+            "oldTestament": [
+                {
+                    "bookNumber": 4,
+                    "ranges": [
+                        {
+                            "startChapter": 16,
+                            "startVerse": 42,
+                            "endChapter": 16,
+                            "endVerse": 48
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 12,
+                    "ranges": [
+                        {
+                            "startChapter": 20,
+                            "startVerse": 1,
+                            "endChapter": 20,
+                            "endVerse": 11
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 61,
+                            "startVerse": 1,
+                            "endChapter": 61,
+                            "endVerse": 9
                         }
                     ]
                 }
@@ -4295,6 +4919,17 @@
                             "endVerse": 30
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 30,
+                            "startVerse": 1,
+                            "endChapter": 30,
+                            "endVerse": 5
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -4345,6 +4980,7 @@
             "ml": "ഓശാന ഞായർ"
         },
         "specialSongsKey": "hosannaSongs",
+        "niram": 7,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4409,6 +5045,17 @@
                     ]
                 },
                 {
+                    "bookNumber": 27,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 7,
+                            "endChapter": 3,
+                            "endVerse": 11
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 33,
                     "ranges": [
                         {
@@ -4449,6 +5096,17 @@
                             "startVerse": 18,
                             "endChapter": 30,
                             "endVerse": 22
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 52,
+                            "startVerse": 7,
+                            "endChapter": 52,
+                            "endVerse": 12
                         }
                     ]
                 }
@@ -4520,6 +5178,30 @@
                     ]
                 }
             ],
+            "primeGospel": [
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 22,
+                            "startVerse": 1,
+                            "endChapter": 22,
+                            "endVerse": 12
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 40,
+                    "ranges": [
+                        {
+                            "startChapter": 26,
+                            "startVerse": 19,
+                            "endChapter": 26,
+                            "endVerse": 19
+                        }
+                    ]
+                }
+            ],
             "oldTestament": [
                 {
                     "bookNumber": 2,
@@ -4529,6 +5211,39 @@
                             "startVerse": 1,
                             "endChapter": 12,
                             "endVerse": 11
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 9,
+                    "ranges": [
+                        {
+                            "startChapter": 10,
+                            "startVerse": 17,
+                            "endChapter": 10,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 18,
+                            "startVerse": 18,
+                            "endChapter": 18,
+                            "endVerse": 23
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 24,
+                            "startVerse": 16,
+                            "endChapter": 24,
+                            "endVerse": 18
                         },
                         {
                             "startChapter": 50,
@@ -4598,6 +5313,39 @@
                             "endVerse": 61
                         }
                     ]
+                },
+                {
+                    "bookNumber": 41,
+                    "ranges": [
+                        {
+                            "startChapter": 15,
+                            "startVerse": 42,
+                            "endChapter": 16,
+                            "endVerse": 1
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 23,
+                            "startVerse": 50,
+                            "endChapter": 24,
+                            "endVerse": 12
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 43,
+                    "ranges": [
+                        {
+                            "startChapter": 19,
+                            "startVerse": 31,
+                            "endChapter": 19,
+                            "endVerse": 42
+                        }
+                    ]
                 }
             ],
             "oldTestament": [
@@ -4609,6 +5357,39 @@
                             "startVerse": 1,
                             "endChapter": 8,
                             "endVerse": 12
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 38,
+                    "ranges": [
+                        {
+                            "startChapter": 12,
+                            "startVerse": 11,
+                            "endChapter": 13,
+                            "endVerse": 7
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 38,
+                            "startVerse": 3,
+                            "endChapter": 38,
+                            "endVerse": 13
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 59,
+                            "startVerse": 13,
+                            "endChapter": 59,
+                            "endVerse": 18
                         }
                     ]
                 }
@@ -4637,6 +5418,17 @@
                             "endVerse": 11
                         }
                     ]
+                },
+                {
+                    "bookNumber": 58,
+                    "ranges": [
+                        {
+                            "startChapter": 13,
+                            "startVerse": 20,
+                            "endChapter": 13,
+                            "endVerse": 21
+                        }
+                    ]
                 }
             ],
             "gospel": [
@@ -4648,6 +5440,39 @@
                             "startVerse": 57,
                             "endChapter": 27,
                             "endVerse": 61
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 41,
+                    "ranges": [
+                        {
+                            "startChapter": 15,
+                            "startVerse": 42,
+                            "endChapter": 16,
+                            "endVerse": 1
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 23,
+                            "startVerse": 50,
+                            "endChapter": 24,
+                            "endVerse": 12
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 43,
+                    "ranges": [
+                        {
+                            "startChapter": 19,
+                            "startVerse": 31,
+                            "endChapter": 19,
+                            "endVerse": 42
                         }
                     ]
                 }
@@ -4710,6 +5535,39 @@
                             "startVerse": 17,
                             "endChapter": 40,
                             "endVerse": 23
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 4,
+                    "ranges": [
+                        {
+                            "startChapter": 10,
+                            "startVerse": 1,
+                            "endChapter": 10,
+                            "endVerse": 10
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 9,
+                    "ranges": [
+                        {
+                            "startChapter": 21,
+                            "startVerse": 2,
+                            "endChapter": 21,
+                            "endVerse": 7
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 60,
+                            "startVerse": 11,
+                            "endChapter": 60,
+                            "endVerse": 16
                         },
                         {
                             "startChapter": 61,
@@ -4814,6 +5672,50 @@
                             "startVerse": 41,
                             "endChapter": 41,
                             "endVerse": 46
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 4,
+                    "ranges": [
+                        {
+                            "startChapter": 7,
+                            "startVerse": 84,
+                            "endChapter": 7,
+                            "endVerse": 89
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 11,
+                    "ranges": [
+                        {
+                            "startChapter": 18,
+                            "startVerse": 36,
+                            "endChapter": 18,
+                            "endVerse": 40
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 7,
+                    "ranges": [
+                        {
+                            "startChapter": 8,
+                            "startVerse": 13,
+                            "endChapter": 8,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 4,
+                            "endChapter": 1,
+                            "endVerse": 12
                         }
                     ]
                 },
@@ -4925,6 +5827,17 @@
                             "endVerse": 16
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 63,
+                            "startVerse": 8,
+                            "endChapter": 63,
+                            "endVerse": 14
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -5034,6 +5947,17 @@
                             "endVerse": 8
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 65,
+                            "startVerse": 1,
+                            "endChapter": 65,
+                            "endVerse": 7
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -5130,6 +6054,17 @@
                             "startVerse": 28,
                             "endChapter": 20,
                             "endVerse": 30
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 33,
+                    "ranges": [
+                        {
+                            "startChapter": 4,
+                            "startVerse": 1,
+                            "endChapter": 4,
+                            "endVerse": 7
                         }
                     ]
                 },
@@ -5263,6 +6198,28 @@
                             "endVerse": 11
                         }
                     ]
+                },
+                {
+                    "bookNumber": 29,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 16,
+                            "endChapter": 3,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 26,
+                            "startVerse": 1,
+                            "endChapter": 26,
+                            "endVerse": 8
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -5370,6 +6327,17 @@
                             "startVerse": 21,
                             "endChapter": 23,
                             "endVerse": 25
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 44,
+                            "startVerse": 23,
+                            "endChapter": 44,
+                            "endVerse": 28
                         }
                     ]
                 }
@@ -5484,6 +6452,28 @@
                     ]
                 },
                 {
+                    "bookNumber": 7,
+                    "ranges": [
+                        {
+                            "startChapter": 8,
+                            "startVerse": 13,
+                            "endChapter": 8,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 4,
+                            "endChapter": 1,
+                            "endVerse": 12
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 23,
                     "ranges": [
                         {
@@ -5543,6 +6533,7 @@
             "ml": "പുതു ഞായറാഴ്ചക്കു ശേഷം ഒന്നാം ഞായർ"
         },
         "specialSongsKey": "afterNewSundaySongs",
+        "niram": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5590,6 +6581,17 @@
                             "startVerse": 9,
                             "endChapter": 6,
                             "endVerse": 16
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 63,
+                            "startVerse": 8,
+                            "endChapter": 63,
+                            "endVerse": 14
                         }
                     ]
                 }
@@ -5642,6 +6644,7 @@
             "ml": "പുതു ഞായറാഴ്ചക്കു ശേഷം രണ്ടാം ഞായർ"
         },
         "specialSongsKey": "afterNewSundaySongs",
+        "niram": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5702,6 +6705,17 @@
                             "endVerse": 8
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 65,
+                            "startVerse": 1,
+                            "endChapter": 65,
+                            "endVerse": 7
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -5752,6 +6766,7 @@
             "ml": "പുതു ഞായറാഴ്ചക്കു ശേഷം മൂന്നാം ഞായർ"
         },
         "specialSongsKey": "afterNewSundaySongs",
+        "niram": 4,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5799,6 +6814,17 @@
                             "startVerse": 28,
                             "endChapter": 20,
                             "endVerse": 30
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 33,
+                    "ranges": [
+                        {
+                            "startChapter": 4,
+                            "startVerse": 1,
+                            "endChapter": 4,
+                            "endVerse": 7
                         }
                     ]
                 },
@@ -5933,6 +6959,28 @@
                             "endVerse": 11
                         }
                     ]
+                },
+                {
+                    "bookNumber": 29,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 16,
+                            "endChapter": 3,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 26,
+                            "startVerse": 1,
+                            "endChapter": 26,
+                            "endVerse": 8
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -6030,6 +7078,17 @@
                             "startVerse": 15,
                             "endChapter": 10,
                             "endVerse": 1
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 31,
+                            "startVerse": 31,
+                            "endChapter": 31,
+                            "endVerse": 34
                         }
                     ]
                 },
@@ -6153,6 +7212,28 @@
                             "endVerse": 22
                         }
                     ]
+                },
+                {
+                    "bookNumber": 12,
+                    "ranges": [
+                        {
+                            "startChapter": 23,
+                            "startVerse": 21,
+                            "endChapter": 23,
+                            "endVerse": 25
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 44,
+                            "startVerse": 23,
+                            "endChapter": 44,
+                            "endVerse": 28
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -6258,6 +7339,28 @@
                             "endVerse": 17
                         }
                     ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 11,
+                            "startVerse": 17,
+                            "endChapter": 11,
+                            "endVerse": 20
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 42,
+                            "startVerse": 6,
+                            "endChapter": 42,
+                            "endVerse": 16
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -6282,6 +7385,17 @@
                             "startVerse": 1,
                             "endChapter": 12,
                             "endVerse": 11
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 47,
+                    "ranges": [
+                        {
+                            "startChapter": 13,
+                            "startVerse": 11,
+                            "endChapter": 13,
+                            "endVerse": 13
                         }
                     ]
                 }
@@ -6355,6 +7469,39 @@
                             "startVerse": 16,
                             "endChapter": 16,
                             "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 11,
+                    "ranges": [
+                        {
+                            "startChapter": 8,
+                            "startVerse": 1,
+                            "endChapter": 8,
+                            "endVerse": 6
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 27,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 1,
+                            "endChapter": 1,
+                            "endVerse": 9
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 43,
+                            "startVerse": 1,
+                            "endChapter": 43,
+                            "endVerse": 14
                         }
                     ]
                 }
@@ -6468,7 +7615,7 @@
                     ]
                 },
                 {
-                    "bookNumber": 0,
+                    "bookNumber": 33,
                     "ranges": [
                         {
                             "startChapter": 3,
@@ -6481,6 +7628,17 @@
                             "startVerse": 4,
                             "endChapter": 4,
                             "endVerse": 5
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 29,
+                            "startVerse": 10,
+                            "endChapter": 29,
+                            "endVerse": 16
                         }
                     ]
                 }
@@ -6589,13 +7747,35 @@
                     ]
                 },
                 {
-                    "bookNumber": 0,
+                    "bookNumber": 22,
                     "ranges": [
                         {
                             "startChapter": 2,
                             "startVerse": 15,
                             "endChapter": 3,
                             "endVerse": 6
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 27,
+                    "ranges": [
+                        {
+                            "startChapter": 6,
+                            "startVerse": 25,
+                            "endChapter": 6,
+                            "endVerse": 28
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 61,
+                            "startVerse": 10,
+                            "endChapter": 61,
+                            "endVerse": 11
                         }
                     ]
                 }
@@ -6694,6 +7874,17 @@
                             "startVerse": 8,
                             "endChapter": 1,
                             "endVerse": 11
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 2,
+                            "startVerse": 35,
+                            "endChapter": 3,
+                            "endVerse": 5
                         }
                     ]
                 },
@@ -6805,6 +7996,28 @@
                             "endVerse": 18
                         }
                     ]
+                },
+                {
+                    "bookNumber": 28,
+                    "ranges": [
+                        {
+                            "startChapter": 5,
+                            "startVerse": 11,
+                            "endChapter": 6,
+                            "endVerse": 1
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 65,
+                            "startVerse": 8,
+                            "endChapter": 65,
+                            "endVerse": 12
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -6894,13 +8107,35 @@
                     ]
                 },
                 {
-                    "bookNumber": 0,
+                    "bookNumber": 38,
                     "ranges": [
                         {
                             "startChapter": 6,
                             "startVerse": 1,
                             "endChapter": 6,
                             "endVerse": 8
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 28,
+                    "ranges": [
+                        {
+                            "startChapter": 14,
+                            "startVerse": 6,
+                            "endChapter": 14,
+                            "endVerse": 9
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 40,
+                            "startVerse": 27,
+                            "endChapter": 40,
+                            "endVerse": 31
                         }
                     ]
                 }
@@ -7001,6 +8236,28 @@
                             "endVerse": 37
                         }
                     ]
+                },
+                {
+                    "bookNumber": 10,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 17,
+                            "endChapter": 3,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 14,
+                            "startVerse": 22,
+                            "endChapter": 14,
+                            "endVerse": 27
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -7097,6 +8354,17 @@
                             "startVerse": 18,
                             "endChapter": 4,
                             "endVerse": 22
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 28,
+                    "ranges": [
+                        {
+                            "startChapter": 5,
+                            "startVerse": 1,
+                            "endChapter": 5,
+                            "endVerse": 5
                         }
                     ]
                 },
@@ -7206,6 +8474,17 @@
                             "startVerse": 1,
                             "endChapter": 23,
                             "endVerse": 7
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 7,
+                            "startVerse": 21,
+                            "endChapter": 7,
+                            "endVerse": 25
                         }
                     ]
                 },
@@ -7609,6 +8888,19 @@
                     ]
                 }
             ],
+            "primeGospel": [
+                {
+                    "bookNumber": 43,
+                    "ranges": [
+                        {
+                            "startChapter": 4,
+                            "startVerse": 19,
+                            "endChapter": 4,
+                            "endVerse": 26
+                        }
+                    ]
+                }
+            ],
             "oldTestament": [
                 {
                     "bookNumber": 2,
@@ -7618,6 +8910,28 @@
                             "startVerse": 30,
                             "endChapter": 36,
                             "endVerse": 7
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 39,
+                            "startVerse": 25,
+                            "endChapter": 39,
+                            "endVerse": 29
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 14,
+                            "endChapter": 3,
+                            "endVerse": 25
                         }
                     ]
                 }
@@ -7717,6 +9031,28 @@
                             "startVerse": 1,
                             "endChapter": 8,
                             "endVerse": 6
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 16,
+                            "startVerse": 16,
+                            "endChapter": 16,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 27,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 1,
+                            "endChapter": 1,
+                            "endVerse": 9
                         }
                     ]
                 },
@@ -7831,6 +9167,28 @@
                     ]
                 },
                 {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 16,
+                            "startVerse": 16,
+                            "endChapter": 16,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 27,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 1,
+                            "endChapter": 1,
+                            "endVerse": 9
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 23,
                     "ranges": [
                         {
@@ -7941,6 +9299,28 @@
                     ]
                 },
                 {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 16,
+                            "startVerse": 16,
+                            "endChapter": 16,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 27,
+                    "ranges": [
+                        {
+                            "startChapter": 1,
+                            "startVerse": 1,
+                            "endChapter": 1,
+                            "endVerse": 9
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 23,
                     "ranges": [
                         {
@@ -8047,6 +9427,39 @@
                             "startVerse": 24,
                             "endChapter": 20,
                             "endVerse": 6
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 6,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 1,
+                            "endChapter": 3,
+                            "endVerse": 17
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 38,
+                    "ranges": [
+                        {
+                            "startChapter": 14,
+                            "startVerse": 16,
+                            "endChapter": 14,
+                            "endVerse": 19
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 60,
+                            "startVerse": 12,
+                            "endChapter": 60,
+                            "endVerse": 15
                         },
                         {
                             "startChapter": 61,
@@ -8153,6 +9566,17 @@
                             "endVerse": 36
                         }
                     ]
+                },
+                {
+                    "bookNumber": 26,
+                    "ranges": [
+                        {
+                            "startChapter": 7,
+                            "startVerse": 1,
+                            "endChapter": 7,
+                            "endVerse": 4
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -8251,6 +9675,17 @@
                             "endVerse": 18
                         }
                     ]
+                },
+                {
+                    "bookNumber": 28,
+                    "ranges": [
+                        {
+                            "startChapter": 11,
+                            "startVerse": 1,
+                            "endChapter": 11,
+                            "endVerse": 5
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -8313,6 +9748,28 @@
                             "endVerse": 35
                         }
                     ]
+                },
+                {
+                    "bookNumber": 40,
+                    "ranges": [
+                        {
+                            "startChapter": 12,
+                            "startVerse": 43,
+                            "endChapter": 12,
+                            "endVerse": 45
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 11,
+                            "startVerse": 27,
+                            "endChapter": 11,
+                            "endVerse": 32
+                        }
+                    ]
                 }
             ],
             "primeGospel": [
@@ -8324,6 +9781,17 @@
                             "startVerse": 32,
                             "endChapter": 2,
                             "endVerse": 51
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 40,
+                    "ranges": [
+                        {
+                            "startChapter": 12,
+                            "startVerse": 46,
+                            "endChapter": 12,
+                            "endVerse": 50
                         }
                     ]
                 }
@@ -9007,6 +10475,17 @@
                     ]
                 },
                 {
+                    "bookNumber": 4,
+                    "ranges": [
+                        {
+                            "startChapter": 21,
+                            "startVerse": 4,
+                            "endChapter": 21,
+                            "endVerse": 9
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 6,
                     "ranges": [
                         {
@@ -9018,6 +10497,17 @@
                     ]
                 },
                 {
+                    "bookNumber": 9,
+                    "ranges": [
+                        {
+                            "startChapter": 17,
+                            "startVerse": 37,
+                            "endChapter": 17,
+                            "endVerse": 53
+                        }
+                    ]
+                },
+                {
                     "bookNumber": 27,
                     "ranges": [
                         {
@@ -9025,6 +10515,17 @@
                             "startVerse": 21,
                             "endChapter": 7,
                             "endVerse": 28
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 65,
+                            "startVerse": 1,
+                            "endChapter": 65,
+                            "endVerse": 7
                         }
                     ]
                 }
@@ -9124,6 +10625,28 @@
                             "startVerse": 1,
                             "endChapter": 5,
                             "endVerse": 5
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 27,
+                    "ranges": [
+                        {
+                            "startChapter": 4,
+                            "startVerse": 4,
+                            "endChapter": 4,
+                            "endVerse": 9
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 57,
+                            "startVerse": 14,
+                            "endChapter": 57,
+                            "endVerse": 20
                         }
                     ]
                 }
@@ -9341,6 +10864,28 @@
                             "endVerse": 9
                         }
                     ]
+                },
+                {
+                    "bookNumber": 24,
+                    "ranges": [
+                        {
+                            "startChapter": 31,
+                            "startVerse": 7,
+                            "endChapter": 31,
+                            "endVerse": 9
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 54,
+                            "startVerse": 1,
+                            "endChapter": 54,
+                            "endVerse": 4
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -9442,13 +10987,24 @@
                     ]
                 },
                 {
-                    "bookNumber": 0,
+                    "bookNumber": 38,
                     "ranges": [
                         {
                             "startChapter": 8,
                             "startVerse": 1,
                             "endChapter": 8,
                             "endVerse": 4
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 54,
+                            "startVerse": 5,
+                            "endChapter": 54,
+                            "endVerse": 8
                         }
                     ]
                 }
@@ -9526,6 +11082,17 @@
                             "endVerse": 46
                         }
                     ]
+                },
+                {
+                    "bookNumber": 42,
+                    "ranges": [
+                        {
+                            "startChapter": 20,
+                            "startVerse": 45,
+                            "endChapter": 20,
+                            "endVerse": 57
+                        }
+                    ]
                 }
             ],
             "oldTestament": [
@@ -9548,6 +11115,28 @@
                             "startVerse": 1,
                             "endChapter": 6,
                             "endVerse": 10
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 10,
+                    "ranges": [
+                        {
+                            "startChapter": 3,
+                            "startVerse": 17,
+                            "endChapter": 3,
+                            "endVerse": 21
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 40,
+                            "startVerse": 27,
+                            "endChapter": 40,
+                            "endVerse": 31
                         }
                     ]
                 }
@@ -9647,6 +11236,28 @@
                             "startVerse": 28,
                             "endChapter": 10,
                             "endVerse": 36
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 38,
+                    "ranges": [
+                        {
+                            "startChapter": 6,
+                            "startVerse": 1,
+                            "endChapter": 6,
+                            "endVerse": 8
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 43,
+                            "startVerse": 16,
+                            "endChapter": 43,
+                            "endVerse": 25
                         }
                     ]
                 }
@@ -9759,6 +11370,17 @@
                             "endVerse": 22
                         }
                     ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 52,
+                            "startVerse": 1,
+                            "endChapter": 52,
+                            "endVerse": 15
+                        }
+                    ]
                 }
             ],
             "generalEpistle": [
@@ -9845,6 +11467,17 @@
                             "startVerse": 1,
                             "endChapter": 17,
                             "endVerse": 7
+                        }
+                    ]
+                },
+                {
+                    "bookNumber": 23,
+                    "ranges": [
+                        {
+                            "startChapter": 65,
+                            "startVerse": 1,
+                            "endChapter": 65,
+                            "endVerse": 6
                         }
                     ]
                 }
@@ -10742,7 +12375,8 @@
         "type": "commemoration",
         "title": {
             "en": "Commemoration of H. G. Paulose Mar Gregorios Metroplitan. (Old Seminary, Kottayam)"
-        }
+        },
+        "startedYear": 1997
     },
     "feastMarJacobBaradaeus": {
         "type": "feastSaint",
