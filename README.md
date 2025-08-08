@@ -15,7 +15,8 @@ This mobile app provides a structured collection of prayers from the Malankara O
 - 📜 **Scrollable & Navigable** – Easily navigate between prayer sections with next/previous buttons.  
 - 📱 **Landscape Mode for Larger Text** – If the font size is large, the screen switches to landscape mode for better visibility.  
 - 🕰️ **Pray Now** – Automatically navigate to the appropriate prayer based on the current time of day.
-- 📖 **Bible Integration** – Read Bible passages and excerpts within the app, alongside prayers where relevant.  
+- 📖 **Bible Integration** – Read Bible passages and excerpts within the app, alongside prayers where relevant.
+- 📅 **Liturgical Calendar Integration** - View the Malankara Orthodox Church's liturgical calendar for feasts, fasts, and special occasions.
 
 ---
 
@@ -54,9 +55,6 @@ This mobile app provides a structured collection of prayers from the Malankara O
 - 📑 **Bookmarks & Favorites**  
   Quickly access and save frequently used prayers for easy reference.
 
-- 📅 **Liturgical Calendar Integration**  
-  View the Malankara Orthodox Church's liturgical calendar for feasts, fasts, and special occasions.
-
 - 🔍 **Search Bar**  
   Search for prayers or sections by keywords and instantly jump to them within the app.
 
@@ -70,8 +68,8 @@ This mobile app provides a structured collection of prayers from the Malankara O
 
 ## 📜 Credits & Contributors  
 
-- **[Samuel Alex Koshy]** – Development, Implementation, UI Design, and Text Translations  
-- **[Shriganesh Keshrimal Purohit]** – Guidance, Structural Planning, and Development Insights  
-- **[Shaun John], [Lisa Shibu George] & [Sabu John]** – Additional Text Translations. Content and Preparation  
+- **[Samuel Alex Koshy]** – Development, Implementation, UI Design, and Text Translations.  
+- **[Shriganesh Keshrimal Purohit]** – Guidance, Structural Planning, and Development Insights.  
+- **[Shaun John], [Lisa Shibu George], [Sabu John], [Saira Susan Koshy], [Sunitha Mathew], & [Nohan George]** – Additional Text Translations, Content and Preparation.  
 
 🙏 **Glory to God!**  
