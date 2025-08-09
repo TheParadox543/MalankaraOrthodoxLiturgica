@@ -75,35 +75,30 @@ class CalendarViewModel @Inject constructor(
     }
 
     fun loadMonth(month: Int, year: Int) {
-        viewModelScope.launch {
-            _isLoading.value = true
-            _error.value = null
-            try {
-                Log.d("CalendarViewModel", "Loading month data for $month/$year")
-                _monthCalendarData.value = liturgicalCalendarRepository.loadMonthData(month, year)
-                _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
-                val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
-                _hasPreviousMonth.value = liturgicalCalendarRepository.checkMonthDataExists(previousMonth.monthValue, previousMonth.year)
-                val nextMonth = _currentCalendarViewDate.value.plusMonths(1)
-                _hasNextMonth.value = liturgicalCalendarRepository.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
-            } catch (e: Exception) {
-                _error.value = "Failed to load month data for $month/$year: ${e.message}"
-                System.err.println("Error loading month data: ${e.stackTraceToString()}")
-            } finally {
-                _isLoading.value = false
-            }
+        _isLoading.value = true
+        _error.value = null
+        try {
+            Log.d("CalendarViewModel", "Loading month data for $month/$year")
+            _monthCalendarData.value = liturgicalCalendarRepository.loadMonthData(month, year)
+            _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
+            val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
+            _hasPreviousMonth.value = liturgicalCalendarRepository.checkMonthDataExists(previousMonth.monthValue, previousMonth.year)
+            val nextMonth = _currentCalendarViewDate.value.plusMonths(1)
+            _hasNextMonth.value = liturgicalCalendarRepository.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
+        } catch (e: Exception) {
+            _error.value = "Failed to load month data for $month/$year: ${e.message}"
+            System.err.println("Error loading month data: ${e.stackTraceToString()}")
+        } finally {
+            _isLoading.value = false
         }
     }
 
     fun loadUpcomingWeekEvents() {
-        viewModelScope.launch {
-            _error.value = null // Clear previous errors for this operation
-            try {
-                _upcomingWeekEvents.value = liturgicalCalendarRepository.getUpcomingWeekEvents()
-            } catch (e: Exception) {
-                _error.value = "Failed to load upcoming week events: ${e.message}"
-                System.err.println("Error loading upcoming week events: ${e.stackTraceToString()}")
-            }
+        try {
+            _upcomingWeekEvents.value = liturgicalCalendarRepository.getUpcomingWeekEvents()
+        } catch (e: Exception) {
+            _error.value = "Failed to load upcoming week events: ${e.message}"
+            System.err.println("Error loading upcoming week events: ${e.stackTraceToString()}")
         }
     }
 
