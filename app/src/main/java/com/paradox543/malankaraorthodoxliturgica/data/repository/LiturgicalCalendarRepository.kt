@@ -186,14 +186,14 @@ class LiturgicalCalendarRepository @Inject constructor(
      * Only days with events will have non-empty event maps.
      */
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getUpcomingWeekEvents(): List<CalendarDay> {
+    fun getUpcomingWeekEvents(): List<LiturgicalEventDetails> {
         // Ensure data is initialized
         if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
             throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
         }
 
         val today = LocalDate.now()
-        val weekEvents = mutableListOf<CalendarDay>()
+        val weekEvents = mutableListOf<LiturgicalEventDetails>()
 
         for (i in 0 until 7) {
             val day = today.plusDays(i.toLong())
@@ -201,7 +201,7 @@ class LiturgicalCalendarRepository @Inject constructor(
             // Python's code appended only if event_details != {}, but here we append
             // CalendarDay regardless for consistent list size, and the `events` map
             // will be empty if no events are found, similar to the month data.
-            weekEvents.add(CalendarDay(day, eventDetails))
+            weekEvents.addAll(eventDetails)
         }
         return weekEvents
     }

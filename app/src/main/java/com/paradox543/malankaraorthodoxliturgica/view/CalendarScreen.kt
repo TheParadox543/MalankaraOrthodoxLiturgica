@@ -71,6 +71,7 @@ fun CalendarScreen(
 ) {
     // Collect the StateFlows from the ViewModel
     val monthCalendarData by calendarViewModel.monthCalendarData.collectAsState()
+    val upcomingWeekEvents by calendarViewModel.upcomingWeekEvents.collectAsState()
     val currentCalendarViewDate by calendarViewModel.currentCalendarViewDate.collectAsState()
     val hasPrevMonth by calendarViewModel.hasPreviousMonth.collectAsState()
     val hasNextMonth by calendarViewModel.hasNextMonth.collectAsState()
@@ -153,6 +154,8 @@ fun CalendarScreen(
                             calendarViewModel,
                             bibleViewModel
                         )
+                    } else {
+                        UpcomingWeekView(upcomingWeekEvents, calendarViewModel, selectedLanguage)
                     }
                 } else {
                     Row(Modifier.padding(8.dp)) {
@@ -178,10 +181,27 @@ fun CalendarScreen(
                                 calendarViewModel,
                                 bibleViewModel
                             )
+                        } else {
+                            UpcomingWeekView(upcomingWeekEvents, calendarViewModel, selectedLanguage)
                         }
                     }
                 }
             }
+        }
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@Composable
+private fun UpcomingWeekView(
+    upcomingWeekEvents: List<LiturgicalEventDetails>,
+    calendarViewModel: CalendarViewModel,
+    selectedLanguage: AppLanguage
+) {
+    Column {
+        upcomingWeekEvents.forEach { eventDetails ->
+            Text(calendarViewModel.generateDateTitle(eventDetails, selectedLanguage))
+            HorizontalDivider()
         }
     }
 }

@@ -29,8 +29,8 @@ class CalendarViewModel @Inject constructor(
     val monthCalendarData: StateFlow<List<CalendarWeek>> = _monthCalendarData.asStateFlow()
 
     // State for upcoming week's events
-    private val _upcomingWeekEvents = MutableStateFlow<List<CalendarDay>>(emptyList())
-    val upcomingWeekEvents: StateFlow<List<CalendarDay>> = _upcomingWeekEvents.asStateFlow()
+    private val _upcomingWeekEvents = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
+    val upcomingWeekEvents: StateFlow<List<LiturgicalEventDetails>> = _upcomingWeekEvents.asStateFlow()
 
     // State for the currently viewed month/year in the calendar UI
     private val _currentCalendarViewDate = MutableStateFlow(LocalDate.now())

@@ -54,7 +54,7 @@ fun NavGraph(
     NavHost(
         navController,
         startDestination = if (onboardingStatus) {
-            "home"
+            "calendar"
         } else {
             "onboarding"
         }
