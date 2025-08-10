@@ -13,9 +13,19 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+//    primary = Purple40,
+//    secondary = PurpleGrey40,
+//    tertiary = Pink40
+    primary = Primary,
+    onPrimary = OnPrimary,
+    primaryContainer = PrimaryContainer,
+    onPrimaryContainer = OnPrimaryContainer,
+    secondary = Secondary,
+    onSecondary = OnSecondary,
+    secondaryContainer = SecondaryContainer,
+    onSecondaryContainer = OnSecondaryContainer,
+    background = Background,
+    onBackground = OnBackground,
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -32,7 +42,6 @@ private val LightColorScheme = lightColorScheme(
 fun MalankaraOrthodoxLiturgicaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
