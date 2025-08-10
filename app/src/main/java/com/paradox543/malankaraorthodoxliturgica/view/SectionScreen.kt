@@ -7,8 +7,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,6 +33,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
@@ -72,24 +75,15 @@ fun SectionScreen(
         bottomBar = { BottomNavBar(navController = navController) }
     ){ innerPadding ->
         Box{
-            Image(
-                painter = painterResource(R.drawable.home),
-                "icon",
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .requiredWidth(400.dp)
-                    .fillMaxSize(),
-                alignment = Alignment.TopStart,
-                contentScale = ContentScale.Crop
-            )
             if (screenWidth > 600.dp) {
-                Row {
-                    Spacer(Modifier.padding(horizontal = 160.dp))
+                Row(
+                    Modifier.padding(innerPadding)
+                ) {
+                    DisplayIconography("row")
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(innerPadding)
                             .padding(horizontal = 20.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
@@ -105,13 +99,14 @@ fun SectionScreen(
                 }
             }
             else {
-                Column {
-                    Spacer(Modifier.weight(0.4f))
+                Column(
+                    Modifier.padding(innerPadding)
+                ) {
+                    DisplayIconography("column")
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(innerPadding)
                             .padding(horizontal = 20.dp)
                             .weight(0.6f),
                         horizontalArrangement = Arrangement.SpaceEvenly
@@ -132,6 +127,21 @@ fun SectionScreen(
 }
 
 @Composable
+private fun DisplayIconography(orientation: String) {
+    Image(
+        painter = painterResource(R.drawable.transfigurationicon),
+        contentDescription = "icon",
+        modifier = if (orientation == "row") {
+            Modifier.fillMaxHeight()
+        } else {
+            Modifier.fillMaxWidth()
+        },
+        alignment = Alignment.TopStart,
+        contentScale = ContentScale.Crop
+    )
+}
+
+@Composable
 private fun SectionCard(
     node: PageNode,
     navController: NavController,
@@ -141,7 +151,7 @@ private fun SectionCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(4.dp)
             .clickable {
                 if (node.children.isNotEmpty()) {
                     navController.navigate("section/${node.route}")
@@ -152,8 +162,8 @@ private fun SectionCard(
                 }
             },
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         ),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(4.dp)
@@ -161,8 +171,9 @@ private fun SectionCard(
         val text = node.route.split("_").last()
         Text(
             text = translations[text] ?: text,
-            fontSize = selectedFontSize.fontSize,
-            modifier = Modifier.padding(16.dp)
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(30.dp).fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
     }
 }
