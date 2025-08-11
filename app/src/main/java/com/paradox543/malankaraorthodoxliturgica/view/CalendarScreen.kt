@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -429,7 +431,15 @@ fun DisplayEvent(
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val textTitle = calendarViewModel.generateDateTitle(event, selectedLanguage)
-    Card( modifier.padding(8.dp) ) {
+    Card(
+        modifier
+            .padding(8.dp)
+            .fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        )
+    ) {
         Column(Modifier.padding(8.dp)) {
             Text(textTitle, style = MaterialTheme.typography.titleLarge)
             if (event.bibleReadings != null) {
@@ -446,17 +456,20 @@ fun DisplayEvent(
                             Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.titleMedium
                         )
-                        TextButton(
-                            onClick = {
-                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.vespersGospel)
-                                navController.navigate("bibleReaderScreen")
+                        Row {
+                            Spacer(Modifier.padding(8.dp))
+                            TextButton(
+                                onClick = {
+                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.vespersGospel)
+                                    navController.navigate("bibleReaderScreen")
+                                }
+                            ) {
+                                Text(
+                                    text,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.secondary,
+                                )
                             }
-                        ) {
-                            Text(
-                                text,
-                                Modifier.padding(start = 8.dp),
-                                style = MaterialTheme.typography.bodyLarge
-                            )
                         }
                     }
                     if (event.bibleReadings.matinsGospel != null) {
@@ -469,17 +482,20 @@ fun DisplayEvent(
                             Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.titleMedium
                         )
-                        TextButton(
-                            onClick = {
-                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.matinsGospel)
-                                navController.navigate("bibleReaderScreen")
+                        Row {
+                            Spacer(Modifier.padding(8.dp))
+                            TextButton(
+                                onClick = {
+                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.matinsGospel)
+                                    navController.navigate("bibleReaderScreen")
+                                }
+                            ) {
+                                Text(
+                                    text,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.secondary,
+                                )
                             }
-                        ) {
-                            Text(
-                                text,
-                                Modifier.padding(start = 8.dp),
-                                style = MaterialTheme.typography.bodyLarge
-                            )
                         }
                     }
                     if (event.bibleReadings.primeGospel != null) {
@@ -492,17 +508,20 @@ fun DisplayEvent(
                             Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.titleMedium
                         )
-                        TextButton(
-                            onClick = {
-                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.primeGospel)
-                                navController.navigate("bibleReaderScreen")
+                        Row {
+                            Spacer(Modifier.padding(8.dp))
+                            TextButton(
+                                onClick = {
+                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.primeGospel)
+                                    navController.navigate("bibleReaderScreen")
+                                }
+                            ) {
+                                Text(
+                                    text,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.secondary,
+                                )
                             }
-                        ) {
-                            Text(
-                                text,
-                                Modifier.padding(start = 8.dp),
-                                style = MaterialTheme.typography.bodyLarge
-                            )
                         }
                     }
                     if (event.bibleReadings.oldTestament != null) {
@@ -513,18 +532,21 @@ fun DisplayEvent(
                         )
                         event.bibleReadings.oldTestament.forEach {entry ->
                             val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
-                            TextButton(
-                                onClick = {
-                                    bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                    navController.navigate("bibleReaderScreen")
-                                }
-                            ) {
-                                Text(
-                                    text,
-                                    Modifier.padding(start = 8.dp),
-                                    style = MaterialTheme.typography.bodyLarge,
+                            Row {
+                                Spacer(Modifier.padding(8.dp))
+                                TextButton(
+                                    onClick = {
+                                        bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                        navController.navigate("bibleReaderScreen")
+                                    }
+                                ) {
+                                    Text(
+                                        text,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.secondary,
 
-                                )
+                                        )
+                                }
                             }
                         }
                     }
@@ -536,49 +558,58 @@ fun DisplayEvent(
                         )
                         event.bibleReadings.generalEpistle?.forEach { entry ->
                             val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
-                            TextButton(
-                                onClick = {
-                                    bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                    navController.navigate("bibleReaderScreen")
+                            Row {
+                                Spacer(Modifier.padding(8.dp))
+                                TextButton(
+                                    onClick = {
+                                        bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                        navController.navigate("bibleReaderScreen")
+                                    }
+                                ) {
+                                    Text(
+                                        text,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.secondary,
+                                    )
                                 }
-                            ) {
-                                Text(
-                                    text,
-                                    Modifier.padding(start = 8.dp),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                )
                             }
                         }
                         event.bibleReadings.paulEpistle?.forEach {  entry ->
                             val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
-                            TextButton(
-                                onClick = {
-                                    bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                    navController.navigate("bibleReaderScreen")
+                            Row {
+                                Spacer(Modifier.padding(8.dp))
+                                TextButton(
+                                    onClick = {
+                                        bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                        navController.navigate("bibleReaderScreen")
+                                    }
+                                ) {
+                                    Text(
+                                        text,
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = MaterialTheme.colorScheme.secondary,
+                                    )
                                 }
-                            ) {
-                                Text(
-                                    text,
-                                    Modifier.padding(start = 8.dp),
-                                    style = MaterialTheme.typography.bodyLarge,
-                                )
                             }
                         }
                         val text = bibleViewModel.formatGospelEntry(
                             event.bibleReadings.gospel,
                             selectedLanguage
                         )
-                        TextButton(
-                            onClick = {
-                                bibleViewModel.setSelectedBibleReference(event.bibleReadings.gospel)
-                                navController.navigate("bibleReaderScreen")
+                        Row {
+                            Spacer(Modifier.padding(8.dp))
+                            TextButton(
+                                onClick = {
+                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.gospel)
+                                    navController.navigate("bibleReaderScreen")
+                                }
+                            ) {
+                                Text(
+                                    text,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.secondary,
+                                )
                             }
-                        ) {
-                            Text(
-                                text,
-                                Modifier.padding(start = 8.dp),
-                                style = MaterialTheme.typography.bodyLarge
-                            )
                         }
                         if (event.specialSongsKey != null) {
                             TextButton(

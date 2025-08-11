@@ -30,6 +30,8 @@ import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -213,7 +215,11 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         "About the App",
                         style = MaterialTheme.typography.bodyMedium,
                     )
-                }
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    headlineColor = MaterialTheme.colorScheme.onBackground,
+                )
             )
 
             Spacer(Modifier.height(16.dp))
@@ -236,7 +242,11 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         contentDescription = "Share App",
                         tint = MaterialTheme.colorScheme.onTertiaryContainer,
                     )
-                }
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    headlineColor = MaterialTheme.colorScheme.onBackground,
+                )
             )
 
             if (BuildConfig.DEBUG) {

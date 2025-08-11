@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -48,7 +49,6 @@ fun SectionScreen(
     node: PageNode
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontScale.collectAsState()
     val nodes = node.children
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -128,9 +128,13 @@ private fun DisplayIconography(orientation: String) {
         painter = painterResource(R.drawable.transfigurationicon),
         contentDescription = "icon",
         modifier = if (orientation == "row") {
-            Modifier.fillMaxHeight()
+            Modifier
+                .requiredWidthIn(min = 200.dp, max = 400.dp)
+                .fillMaxHeight()
         } else {
-            Modifier.fillMaxWidth()
+            Modifier
+                .requiredWidthIn(max = 400.dp)
+//                .fillMaxWidth()
         },
         alignment = Alignment.TopStart,
         contentScale = ContentScale.Crop

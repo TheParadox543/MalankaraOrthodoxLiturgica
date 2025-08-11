@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -30,6 +31,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
@@ -47,7 +49,8 @@ fun OnboardingScreen(
 ) {
     // Current selections (will be saved when "Get Started" is clicked)
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
-    var selectedFontScale by remember { mutableStateOf(AppFontScale.Medium) } // Default medium size, adjust as needed
+//    var selectedFontScale by remember { mutableStateOf(AppFontScale.Medium) } // Default medium size, adjust as needed
+    val selectedFontScale by settingsViewModel.selectedFontScale.collectAsState()
 
     // State for language dropdown menu
     var languageExpanded by remember { mutableStateOf(false) }
@@ -73,8 +76,9 @@ fun OnboardingScreen(
         ) {
             Text(
                 text = "Welcome to Liturgica!",
+                textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
             )
             Text(
                 text = "Please choose your preferred language and font size.",
@@ -127,18 +131,17 @@ fun OnboardingScreen(
             Slider(
                 value = selectedFontScale.scaleFactor,
                 onValueChange = { sliderPositionFloat ->
-                    selectedFontScale = AppFontScale.fromScale(sliderPositionFloat)
+                    settingsViewModel.setFontScaleFromSettings(AppFontScale.fromScale(sliderPositionFloat))
+//                    selectedFontScale = AppFontScale.fromScale(sliderPositionFloat)
                 },
                 modifier = Modifier.width(240.dp),
-                valueRange = 8f..24f,
+                valueRange = 0.7f..1.4f,
                 steps = 3
             )
 
-            Spacer(Modifier.height(20.dp))
-
             if (!prayers.isEmpty()) {
                 Column(
-                    modifier = Modifier.height(300.dp)
+                    modifier = Modifier.padding(vertical=28.dp)
                 ) {
                     Text(
                         "Sample Prayer",
@@ -147,8 +150,6 @@ fun OnboardingScreen(
                     PrayerElementRenderer(prayers[1], prayerViewModel, filename)
                 }
             }
-
-            Spacer(Modifier.height(32.dp))
 
             // --- Get Started Button ---
             Button(

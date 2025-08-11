@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -21,6 +23,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
@@ -88,8 +91,8 @@ fun SectionCard(title: String) {
             .fillMaxWidth()
             .height(60.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         )
     ) {
         Column(
@@ -118,8 +121,8 @@ fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, navCont
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         ),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
@@ -129,7 +132,12 @@ fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, navCont
             verticalArrangement = Arrangement.Center
         )
         {
-            Text(bookName, style = MaterialTheme.typography.bodyMedium)
+            Text(
+                bookName,
+                maxLines = 1,
+                style = MaterialTheme.typography.bodyMedium,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }

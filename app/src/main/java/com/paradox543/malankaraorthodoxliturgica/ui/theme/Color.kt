@@ -18,7 +18,7 @@ val OnPrimaryContainer = Color(0xFFFFF3CC) // Soft gold/ivory text on primary co
 
 val Secondary = Color(0xFFD4AF37)     // Optional secondary brand color
 val OnSecondary = Color.Black
-val SecondaryContainer = Color(0xE6FFF0CF) // Lighter gold tone for filled sections
+val SecondaryContainer = Color(0xF0FFF0CF) // Lighter gold tone for filled sections
 val OnSecondaryContainer = Color(0xFF1A1A1A) // Dark text for contrast
 
 // Backgrounds
