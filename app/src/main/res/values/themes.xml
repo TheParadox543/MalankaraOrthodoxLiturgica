@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="Theme.MalankaraOrthodoxLiturgica" parent="android:Theme.Material.Light.NoActionBar" />
-
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/gold_container</item>
+        <item name="windowSplashScreenBackground">@color/launcher_icon_background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/stthomasicon</item>
-        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
         <item name="postSplashScreenTheme">@style/Theme.MalankaraOrthodoxLiturgica</item>
     </style>
 
