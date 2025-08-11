@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -68,7 +69,7 @@ fun PrayNowScreen(
                     .requiredWidth(400.dp)
                     .fillMaxSize(),
                 alignment = Alignment.TopStart,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Fit
             )
             if (screenWidth > 600.dp) {
                 Row {
@@ -96,22 +97,27 @@ fun PrayNowScreen(
                             }
                         }
                     } else {
-                        Column(Modifier.padding(innerPadding)) {
+                        Column(
+                            Modifier.padding(innerPadding),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
                             Text("No prayers found for this time.")
                         }
                     }
                 }
             } else {
-                Column {
-                    Spacer(Modifier.weight(0.4f))
+                Column(
+                    Modifier.fillMaxSize().padding(top = 32.dp),
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                ) {
                     if (nodes.isNotEmpty()) {
                         LazyVerticalGrid(
                             columns = GridCells.Adaptive(240.dp),
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(innerPadding)
-                                .padding(horizontal = 20.dp)
-                                .weight(0.6f),
+                                .padding(horizontal = 20.dp),
+//                                .weight(0.6f),
                             horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             items(nodes) { node ->
@@ -128,8 +134,20 @@ fun PrayNowScreen(
                             }
                         }
                     } else {
-                        Column(Modifier.padding(innerPadding)) {
-                            Text("No prayers found for this time.")
+                        Card(
+                            Modifier
+                                .padding(innerPadding)
+                                .padding(horizontal = 20.dp)
+                                .fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            ),
+                        ) {
+                            Text(
+                                "No prayers found for this time.",
+                                Modifier.fillMaxWidth().padding(8.dp)
+                            )
                         }
                     }
 
@@ -162,12 +180,14 @@ private fun PrayNowCard(
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         ),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
-        Column {
+        Column(
+            Modifier.requiredHeightIn(min=60.dp)
+        ) {
             Text(
                 translatedParts,
                 style = MaterialTheme.typography.bodyLarge,

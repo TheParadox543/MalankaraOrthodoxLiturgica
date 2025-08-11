@@ -106,19 +106,6 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    /**
-     * Call this function from your gesture detector to update the font scale by one step.
-     * It updates the UI immediately and triggers a debounced save to DataStore.
-     * @param direction 1 for next scale, -1 for previous scale.
-     */
-    // New: Public method for stepping font scale, triggering the debounced save
-//    fun stepFontScale(direction: Int) { // 1 for next, -1 for previous
-//        val current = selectedFontScale.value // Get the current value from the publicly exposed StateFlow
-//        val newScale = if (direction > 0) current.next() else current.prev()
-//        // Update the internal _pendingFontScaleUpdate, which then triggers the debounced save
-//        _pendingFontScaleUpdate.value = newScale
-//    }
-
     suspend fun saveOnboardingStatus(completed: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[hasCompletedOnboardingKey] = completed

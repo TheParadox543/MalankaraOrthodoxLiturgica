@@ -44,7 +44,6 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -207,38 +206,27 @@ fun PrayerElementRenderer(
 ) {
     when (prayerElement) {
         is PrayerElement.Title -> {
-            Title(text = prayerElement.content)
+            Title(prayerElement.content)
         }
 
         is PrayerElement.Heading -> {
-            Heading(
-                text = prayerElement.content
-            )
+            Heading(prayerElement.content)
         }
 
         is PrayerElement.Subheading -> {
-            Subheading(
-                text = prayerElement.content
-            )
+            Subheading(prayerElement.content)
         }
 
         is PrayerElement.Prose -> {
-            Prose(
-                text = prayerElement.content
-            )
+            Prose(prayerElement.content)
         }
 
         is PrayerElement.Song -> {
-            Song(
-                text = prayerElement.content,
-                isHorizontal = isSongHorizontalScroll
-            )
+            Song(prayerElement.content, isHorizontal = isSongHorizontalScroll)
         }
 
         is PrayerElement.Subtext -> {
-            Subtext(
-                text = prayerElement.content
-            )
+            Subtext(prayerElement.content)
         }
 
         is PrayerElement.CollapsibleBlock -> {
@@ -289,7 +277,7 @@ fun PrayerElementRenderer(
 fun Title(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        style = MaterialTheme.typography.titleLarge,
+        style = MaterialTheme.typography.headlineSmall,
         textAlign = TextAlign.Center,
         textDecoration = TextDecoration.Underline,
         modifier = modifier
@@ -301,7 +289,7 @@ fun Title(text: String, modifier: Modifier = Modifier) {
 fun Heading(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        style = MaterialTheme.typography.titleMedium,
+        style = MaterialTheme.typography.titleLarge,
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
@@ -312,7 +300,7 @@ fun Heading(text: String, modifier: Modifier = Modifier) {
 fun Subheading(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        style = MaterialTheme.typography.bodyLarge,
+        style = MaterialTheme.typography.titleMedium,
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
@@ -323,7 +311,7 @@ fun Subheading(text: String, modifier: Modifier = Modifier) {
 fun Prose(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Justify,
         modifier = modifier
             .fillMaxWidth()
@@ -338,16 +326,18 @@ fun Song(text: String, modifier: Modifier = Modifier, isHorizontal: Boolean = fa
             .fillMaxWidth()
             .let { currentModifier ->
                 if (isHorizontal) {
-                    currentModifier.horizontalScroll(horizontalScrollState)
+                    currentModifier
+                        .horizontalScroll(horizontalScrollState)
+                        .border(4.dp, MaterialTheme.colorScheme.outline)
                 } else {
                     currentModifier
                 }
             }
-            .border(4.dp, MaterialTheme.colorScheme.outline)
+//            .border(4.dp, MaterialTheme.colorScheme.outline)
     ) {
         Text(
             text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .fillMaxWidth()
@@ -360,7 +350,7 @@ fun Song(text: String, modifier: Modifier = Modifier, isHorizontal: Boolean = fa
 fun Subtext(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        style = MaterialTheme.typography.bodySmall,
+        style = MaterialTheme.typography.bodyMedium,
         textAlign = TextAlign.End,
         modifier = modifier
             .fillMaxWidth()
@@ -376,7 +366,7 @@ fun ErrorBlock(
 ) {
     Text(
         text = text,
-        style = MaterialTheme.typography.bodyMedium,
+        style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.error,
         modifier = modifier
             .fillMaxWidth()
@@ -403,7 +393,7 @@ fun CollapsibleTextBlock(
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f)
             )

@@ -45,9 +45,9 @@ class SettingsViewModel @Inject constructor(
     init {
         // 1. Initialize _currentAppFontSize from DataStore when ViewModel starts
         viewModelScope.launch {
+            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
             _selectedAppFontScale.value = settingsRepository.getFontScale()
             _songScrollState.value = settingsRepository.getSongScrollState()
-            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
         }
 
         // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
@@ -102,6 +102,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun setOnboardingCompleted(status: Boolean = true) {
+        _hasCompletedOnboarding.value = status
         viewModelScope.launch {
             settingsRepository.saveOnboardingStatus(status)
             if (status) {
@@ -111,6 +112,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun setSongScrollState(isHorizontal: Boolean) {
+        _songScrollState.value = isHorizontal
         viewModelScope.launch {
             settingsRepository.saveSongScrollState(isHorizontal)
         }
