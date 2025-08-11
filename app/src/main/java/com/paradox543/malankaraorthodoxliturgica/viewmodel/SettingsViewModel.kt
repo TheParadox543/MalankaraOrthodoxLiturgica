@@ -11,6 +11,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,18 +30,24 @@ class SettingsViewModel @Inject constructor(
     private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
     val selectedFontScale = _selectedAppFontScale.asStateFlow()
 
-    val hasCompletedOnboarding = settingsRepository.hasCompletedOnboarding
-    val songScrollState = settingsRepository.songScrollState
+    private val _hasCompletedOnboarding = MutableStateFlow(false)
+    val hasCompletedOnboarding = _hasCompletedOnboarding.asStateFlow()
+
+    private val _songScrollState = MutableStateFlow(false)
+    val songScrollState = _songScrollState.asStateFlow()
 
     // Internal MutableStateFlow to track AppFontSize changes for debounced saving
     private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
 
+    // Debounce state
+    private var debounceJob: Job? = null
+
     init {
         // 1. Initialize _currentAppFontSize from DataStore when ViewModel starts
         viewModelScope.launch {
-            settingsRepository.selectedFontScale.collectLatest { storedFontScale ->
-                _debouncedAppFontScale.value = storedFontScale // Sync the debounced state
-            }
+            _selectedAppFontScale.value = settingsRepository.getFontScale()
+            _songScrollState.value = settingsRepository.getSongScrollState()
+            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
         }
 
         // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
@@ -72,7 +79,22 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun stepFontScale(direction: Int) {
-        settingsRepository.stepFontScale(direction)
+        if (direction > 0) {
+            _selectedAppFontScale.value = _selectedAppFontScale.value.next()
+        } else if (direction < 0) {
+            _selectedAppFontScale.value = _selectedAppFontScale.value.prev()
+        }
+        updateFontScaleWithDebounce(_selectedAppFontScale.value)
+    }
+
+    fun updateFontScaleWithDebounce(newScale: AppFontScale) {
+        _selectedAppFontScale.value = newScale
+
+        debounceJob?.cancel()
+        debounceJob = viewModelScope.launch {
+            delay(300) // Example debounce time
+            settingsRepository.setFontScale(newScale)
+        }
     }
 
     fun logTutorialStart() {

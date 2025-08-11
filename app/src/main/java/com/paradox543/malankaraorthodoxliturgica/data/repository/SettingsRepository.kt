@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -50,36 +51,21 @@ class SettingsRepository @Inject constructor(
             initialValue = AppLanguage.MALAYALAM // Initial value is also an AppLanguage enum
         )
 
-    val selectedFontScale: StateFlow<AppFontScale> = context.dataStore.data // Using the injected dataStore
-        .map { preferences ->
-            val scaleFloat = preferences[fontScaleKey] ?: 1.0f // Default to basic scale
-            AppFontScale.fromScale(scaleFloat) // Convert to TextUnit
-        }
-        .stateIn(
-            scope = repositoryScope, // Use the long-lived scope for the repository
-            started = SharingStarted.Eagerly, // Start collecting eagerly when the StateFlow is created
-            initialValue = AppFontScale.Medium // Provide an initial value that will be emitted immediately
-        )
+    suspend fun getFontScale(): AppFontScale {
+        val prefs = context.dataStore.data.first()
+        val scaleFloat = prefs[fontScaleKey] ?: 1.0f
+        return AppFontScale.fromScale(scaleFloat)
+    }
 
-    val hasCompletedOnboarding: StateFlow<Boolean> = context.dataStore.data
-        .map { preferences ->
-            preferences[hasCompletedOnboardingKey] == true // Default to false if not set
-        }
-        .stateIn(
-            scope = repositoryScope,
-            started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
-            initialValue = false // Initial value for the StateFlow
-        )
+    suspend fun getOnboardingComplete(): Boolean {
+        val prefs = context.dataStore.data.first()
+        return prefs[hasCompletedOnboardingKey] == true
+    }
 
-    val songScrollState: StateFlow<Boolean> = context.dataStore.data
-        .map { preferences ->
-            preferences[songScrollStateKey] == true // Default to false if not set
-        }
-        .stateIn(
-            scope = repositoryScope,
-            started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
-            initialValue = false // Initial value for the StateFlow
-        )
+    suspend fun getSongScrollState(): Boolean {
+        val prefs = context.dataStore.data.first()
+        return prefs[songScrollStateKey] == true
+    }
 
     // --- Debouncing for Font Scale ---
     // Internal MutableStateFlow to trigger debounced saves for font scale.
@@ -101,11 +87,11 @@ class SettingsRepository @Inject constructor(
 
         // Initialize _pendingFontScaleUpdate with the current stored font scale when the repository starts.
         // This ensures debouncing starts from the correct state.
-        repositoryScope.launch {
-            selectedFontScale.collectLatest { currentScale ->
-                _pendingFontScaleUpdate.value = currentScale
-            }
-        }
+//        repositoryScope.launch {
+//            selectedFontScale.collectLatest { currentScale ->
+//                _pendingFontScaleUpdate.value = currentScale
+//            }
+//        }
     }
 
     suspend fun saveLanguage(language: AppLanguage) {
@@ -126,12 +112,12 @@ class SettingsRepository @Inject constructor(
      * @param direction 1 for next scale, -1 for previous scale.
      */
     // New: Public method for stepping font scale, triggering the debounced save
-    fun stepFontScale(direction: Int) { // 1 for next, -1 for previous
-        val current = selectedFontScale.value // Get the current value from the publicly exposed StateFlow
-        val newScale = if (direction > 0) current.next() else current.prev()
-        // Update the internal _pendingFontScaleUpdate, which then triggers the debounced save
-        _pendingFontScaleUpdate.value = newScale
-    }
+//    fun stepFontScale(direction: Int) { // 1 for next, -1 for previous
+//        val current = selectedFontScale.value // Get the current value from the publicly exposed StateFlow
+//        val newScale = if (direction > 0) current.next() else current.prev()
+//        // Update the internal _pendingFontScaleUpdate, which then triggers the debounced save
+//        _pendingFontScaleUpdate.value = newScale
+//    }
 
     suspend fun saveOnboardingStatus(completed: Boolean) {
         context.dataStore.edit { preferences ->
