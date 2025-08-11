@@ -33,7 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -47,7 +47,7 @@ fun OnboardingScreen(
 ) {
     // Current selections (will be saved when "Get Started" is clicked)
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
-    var selectedFontSize by remember { mutableStateOf(AppFontSize.Medium) } // Default medium size, adjust as needed
+    var selectedFontScale by remember { mutableStateOf(AppFontScale.Medium) } // Default medium size, adjust as needed
 
     // State for language dropdown menu
     var languageExpanded by remember { mutableStateOf(false) }
@@ -121,13 +121,13 @@ fun OnboardingScreen(
 
             // --- Font Size Selection ---
             Text(
-                text = "Font Size: ${selectedFontSize.displayName}",
-                fontSize = selectedFontSize.fontSize
+                text = "Font Size: ${selectedFontScale.displayName}",
+                style = MaterialTheme.typography.bodyLarge
             )
             Slider(
-                value = selectedFontSize.intValue.toFloat(),
+                value = selectedFontScale.scaleFactor,
                 onValueChange = { sliderPositionFloat ->
-                    selectedFontSize = AppFontSize.fromInt(sliderPositionFloat.toInt())
+                    selectedFontScale = AppFontScale.fromScale(sliderPositionFloat)
                 },
                 modifier = Modifier.width(240.dp),
                 valueRange = 8f..24f,
@@ -144,7 +144,7 @@ fun OnboardingScreen(
                         "Sample Prayer",
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
-                    PrayerElementRenderer(prayers[1], selectedFontSize, prayerViewModel, filename)
+                    PrayerElementRenderer(prayers[1], prayerViewModel, filename)
                 }
             }
 
@@ -154,7 +154,7 @@ fun OnboardingScreen(
             Button(
                 onClick = {
                     settingsViewModel.setLanguage(selectedLanguage)
-                    settingsViewModel.setFontSizeFromSettings(selectedFontSize)
+                    settingsViewModel.setFontScaleFromSettings(selectedFontScale)
                     settingsViewModel.setOnboardingCompleted()
                     // Navigate to the home screen
                     navController.navigate("home") { // Define your main app route

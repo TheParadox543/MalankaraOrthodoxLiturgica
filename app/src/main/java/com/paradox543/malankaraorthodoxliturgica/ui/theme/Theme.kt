@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.rememberAppTypography
 
@@ -43,14 +44,14 @@ private val LightColorScheme = lightColorScheme(
 fun MalankaraOrthodoxLiturgicaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     language: AppLanguage = AppLanguage.MALAYALAM,
-    textScale: Float = 1f,
+    textScale: AppFontScale = AppFontScale.Medium,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
-    val typography = rememberAppTypography(language, textScale)
+    val typography = rememberAppTypography(language, textScale.scaleFactor)
 
     MaterialTheme(
         colorScheme = colorScheme,

@@ -35,7 +35,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -52,7 +51,6 @@ fun PrayNowScreen(
     navViewModel: NavViewModel
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val nodes = navViewModel.getAllPrayerNodes()
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -93,8 +91,7 @@ fun PrayNowScreen(
                                     node,
                                     navController,
                                     translatedParts,
-                                    prayerViewModel,
-                                    selectedFontSize
+                                    prayerViewModel
                                 )
                             }
                         }
@@ -126,8 +123,7 @@ fun PrayNowScreen(
                                     node,
                                     navController,
                                     translatedParts,
-                                    prayerViewModel,
-                                    selectedFontSize
+                                    prayerViewModel
                                 )
                             }
                         }
@@ -148,8 +144,7 @@ private fun PrayNowCard(
     node: PageNode,
     navController: NavController,
     translatedParts: String,
-    prayerViewModel: PrayerViewModel,
-    selectedFontSize: AppFontSize
+    prayerViewModel: PrayerViewModel
 ) {
     var errorState = remember { false }
     Card(
@@ -175,7 +170,7 @@ private fun PrayNowCard(
         Column {
             Text(
                 translatedParts,
-                fontSize = selectedFontSize.fontSize,
+                style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(16.dp)
             )
             if (errorState) {

@@ -23,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
@@ -39,7 +38,6 @@ fun BibleScreen(
 ) {
     val bibleChapters by bibleViewModel.bibleBooks.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
 
     val oldTestamentChapters = bibleChapters.take(39)
     val newTestamentChapters = bibleChapters.drop(39)
@@ -67,7 +65,7 @@ fun BibleScreen(
                 }
             }
             items(oldTestamentChapters.size) { index ->
-                BibleCard (oldTestamentChapters[index], selectedLanguage, selectedFontSize, navController)
+                BibleCard (oldTestamentChapters[index], selectedLanguage, navController)
             }
             item(span = {GridItemSpan(this.maxLineSpan)}) {
                 when(selectedLanguage){
@@ -76,7 +74,7 @@ fun BibleScreen(
                 }
             }
             items(newTestamentChapters.size) {index ->
-                BibleCard(newTestamentChapters[index], selectedLanguage, selectedFontSize, navController)
+                BibleCard(newTestamentChapters[index], selectedLanguage, navController)
             }
         }
     }
@@ -105,7 +103,7 @@ fun SectionCard(title: String) {
 }
 
 @Composable
-fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, selectedFontSize: AppFontSize, navController: NavController){
+fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, navController: NavController){
     val bookName = when(selectedLanguage) {
         AppLanguage.MALAYALAM -> bibleDetails.book.ml
         else -> bibleDetails.book.en
@@ -131,7 +129,7 @@ fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, selecte
             verticalArrangement = Arrangement.Center
         )
         {
-            Text(bookName, fontSize = selectedFontSize.fontSize)
+            Text(bookName, style = MaterialTheme.typography.bodyMedium)
         }
     }
 }

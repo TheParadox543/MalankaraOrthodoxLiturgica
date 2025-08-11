@@ -7,12 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedState
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,26 +25,29 @@ class SettingsViewModel @Inject constructor(
 ): ViewModel() {
 
     val selectedLanguage = settingsRepository.selectedLanguage
-    val selectedFontSize = settingsRepository.selectedFontSize
+
+    private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
+    val selectedFontScale = _selectedAppFontScale.asStateFlow()
+
     val hasCompletedOnboarding = settingsRepository.hasCompletedOnboarding
     val songScrollState = settingsRepository.songScrollState
 
     // Internal MutableStateFlow to track AppFontSize changes for debounced saving
-    private val _debouncedAppFontSize = MutableStateFlow(AppFontSize.Medium)
+    private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
 
     init {
         // 1. Initialize _currentAppFontSize from DataStore when ViewModel starts
         viewModelScope.launch {
-            settingsRepository.selectedFontSize.collectLatest { storedFontSize ->
-                _debouncedAppFontSize.value = storedFontSize // Sync the debounced state
+            settingsRepository.selectedFontScale.collectLatest { storedFontScale ->
+                _debouncedAppFontScale.value = storedFontScale // Sync the debounced state
             }
         }
 
         // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
         viewModelScope.launch {
-            _debouncedAppFontSize.collectLatest { fontSizeToSave ->
+            _debouncedAppFontScale.collectLatest { fontScaleToSave ->
                 delay(500L) // Wait for 500ms for more gesture events to stop
-                settingsRepository.saveFontSize(fontSizeToSave) // Then save the enum
+                settingsRepository.setFontScale(fontScaleToSave) // Then save the enum
             }
         }
     }
@@ -60,14 +64,15 @@ class SettingsViewModel @Inject constructor(
     }
 
     // Function to set (and save) font size
-    fun setFontSizeFromSettings(size: AppFontSize) {
+    fun setFontScaleFromSettings(scale: AppFontScale) {
+        _selectedAppFontScale.value = scale
         viewModelScope.launch {
-            settingsRepository.saveFontSize(size) // Convert TextUnit back to Int for DataStore
+            settingsRepository.setFontScale(scale) // Convert TextUnit back to Int for DataStore
         }
     }
 
-    fun stepFontSize(direction: Int) {
-        settingsRepository.stepFontSize(direction)
+    fun stepFontScale(direction: Int) {
+        settingsRepository.stepFontScale(direction)
     }
 
     fun logTutorialStart() {
