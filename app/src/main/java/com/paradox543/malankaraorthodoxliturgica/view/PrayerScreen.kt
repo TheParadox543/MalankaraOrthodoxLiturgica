@@ -1,7 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
@@ -45,16 +44,12 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
@@ -74,7 +69,6 @@ fun PrayerScreen(
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     var title = ""
     for (item in node.route.split("_")){
@@ -138,10 +132,10 @@ fun PrayerScreen(
                     cumulativeZoomFactor *= zoom
 
                     if (cumulativeZoomFactor >= zoomInThreshold) {
-                        settingsViewModel.stepFontSize(1)
+                        settingsViewModel.stepFontScale(1)
                         cumulativeZoomFactor = 1f
                     } else if (cumulativeZoomFactor <= zoomOutThreshold) {
-                        settingsViewModel.stepFontSize(-1)
+                        settingsViewModel.stepFontScale(-1)
                         cumulativeZoomFactor = 1f
                     }
                 }
@@ -192,7 +186,6 @@ fun PrayerScreen(
             items(prayers) { prayerElement ->
                 PrayerElementRenderer(
                     prayerElement,
-                    selectedFontSize,
                     prayerViewModel,
                     currentFilename,
                     songScrollState,
@@ -208,65 +201,55 @@ fun PrayerScreen(
 @Composable
 fun PrayerElementRenderer(
     prayerElement: PrayerElement,
-    selectedFontSize: AppFontSize,
     prayerViewModel: PrayerViewModel,
     filename: String,
     isSongHorizontalScroll: Boolean = false,
 ) {
     when (prayerElement) {
         is PrayerElement.Title -> {
-            Title(
-                text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize
-            )
+            Title(text = prayerElement.content)
         }
 
         is PrayerElement.Heading -> {
             Heading(
-                text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize
+                text = prayerElement.content
             )
         }
 
         is PrayerElement.Subheading -> {
             Subheading(
-                text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize
+                text = prayerElement.content
             )
         }
 
         is PrayerElement.Prose -> {
             Prose(
-                text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize
+                text = prayerElement.content
             )
         }
 
         is PrayerElement.Song -> {
             Song(
                 text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize,
                 isHorizontal = isSongHorizontalScroll
             )
         }
 
         is PrayerElement.Subtext -> {
             Subtext(
-                text = prayerElement.content,
-                fontSize = selectedFontSize.fontSize
+                text = prayerElement.content
             )
         }
 
         is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
                 title = prayerElement.title,
-                fontSize = selectedFontSize.fontSize,
             ) {
                 Column {
                     Spacer(Modifier.padding(8.dp))
                     prayerElement.items.forEach { nestedItem -> // Loop through type-safe items
                         // Recursively call the renderer for nested items
-                        PrayerElementRenderer(nestedItem, selectedFontSize, prayerViewModel, filename)
+                        PrayerElementRenderer(nestedItem, prayerViewModel, filename)
                         Spacer(Modifier.padding(4.dp))
                     }
                 }
@@ -277,8 +260,7 @@ fun PrayerElementRenderer(
             ErrorBlock(
                 "Error: ${prayerElement.content}",
                 prayerViewModel,
-                filename,
-                fontSize = selectedFontSize.fontSize
+                filename
             )
         }
 
@@ -288,8 +270,7 @@ fun PrayerElementRenderer(
             ErrorBlock(
                 "UI Error: Unresolved Link element encountered",
                 prayerViewModel,
-                filename,
-                fontSize = selectedFontSize.fontSize
+                filename
             )
         }
 
@@ -298,19 +279,17 @@ fun PrayerElementRenderer(
             ErrorBlock(
                 "UI Error: Unresolved LinkCollapsible element encountered",
                 prayerViewModel,
-                filename,
-                fontSize = selectedFontSize.fontSize
+                filename
             )
         }
     }
 }
 
 @Composable
-fun Title(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+fun Title(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        fontSize = fontSize * 5 / 4,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleLarge,
         textAlign = TextAlign.Center,
         textDecoration = TextDecoration.Underline,
         modifier = modifier
@@ -319,11 +298,10 @@ fun Title(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 }
 
 @Composable
-fun Heading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+fun Heading(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        fontSize = fontSize * 5 / 4,
-        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.titleMedium,
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
@@ -331,10 +309,10 @@ fun Heading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16
 }
 
 @Composable
-fun Subheading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+fun Subheading(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        fontSize = fontSize,
+        style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Center,
         modifier = modifier
             .fillMaxWidth()
@@ -342,10 +320,10 @@ fun Subheading(text: String, modifier: Modifier = Modifier, fontSize: TextUnit =
 }
 
 @Composable
-fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+fun Prose(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
-        fontSize = fontSize,
+        style = MaterialTheme.typography.bodyMedium,
         textAlign = TextAlign.Justify,
         modifier = modifier
             .fillMaxWidth()
@@ -353,7 +331,7 @@ fun Prose(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.s
 }
 
 @Composable
-fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp, isHorizontal: Boolean = false) {
+fun Song(text: String, modifier: Modifier = Modifier, isHorizontal: Boolean = false) {
     val horizontalScrollState = rememberScrollState()
     Row(
         modifier = modifier
@@ -369,7 +347,7 @@ fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp
     ) {
         Text(
             text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
-            fontSize = fontSize,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .fillMaxWidth()
@@ -379,10 +357,10 @@ fun Song(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp
 }
 
 @Composable
-fun Subtext(text: String, modifier: Modifier = Modifier, fontSize: TextUnit = 16.sp) {
+fun Subtext(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text,
-        fontSize = fontSize,
+        style = MaterialTheme.typography.bodySmall,
         textAlign = TextAlign.End,
         modifier = modifier
             .fillMaxWidth()
@@ -394,12 +372,11 @@ fun ErrorBlock(
     text: String,
     prayerViewModel: PrayerViewModel,
     errorLocation: String,
-    fontSize: TextUnit = AppFontSize.Medium.fontSize,
     modifier: Modifier = Modifier,
 ) {
     Text(
         text = text,
-        fontSize = fontSize,
+        style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.error,
         modifier = modifier
             .fillMaxWidth()
@@ -410,7 +387,6 @@ fun ErrorBlock(
 @Composable
 fun CollapsibleTextBlock(
     title: String,
-    fontSize: TextUnit = 16.sp,
     content: @Composable () -> Unit // Changed content to Composable Lambda
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -427,8 +403,7 @@ fun CollapsibleTextBlock(
         ) {
             Text(
                 text = title,
-                fontSize = fontSize * 5 / 4,
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f)
             )

@@ -25,7 +25,6 @@ fun BibleReadingScreen(
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     prayerViewModel: PrayerViewModel = hiltViewModel(),
 ) {
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val bibleReadings by bibleViewModel.selectedBibleReference.collectAsState()
 
@@ -68,7 +67,6 @@ fun BibleReadingScreen(
                     items(bibleReading.preface.size) { index ->
                         PrayerElementRenderer(
                             prayerElement = bibleReading.preface[index],
-                            selectedFontSize = selectedFontSize,
                             prayerViewModel = prayerViewModel,
                             filename = title,
                         )
@@ -87,7 +85,6 @@ fun BibleReadingScreen(
                     VerseItem(
                         verseNumber,
                         verseText,
-                        selectedFontSize.fontSize,
                     )
                 }
             }

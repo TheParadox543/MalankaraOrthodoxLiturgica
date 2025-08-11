@@ -7,14 +7,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,7 +34,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -52,7 +48,7 @@ fun SectionScreen(
     node: PageNode
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val selectedFontSize by settingsViewModel.selectedFontScale.collectAsState()
     val nodes = node.children
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -91,8 +87,7 @@ fun SectionScreen(
                             SectionCard(
                                 nodes[index],
                                 navController,
-                                translations,
-                                selectedFontSize
+                                translations
                             )
                         }
                     }
@@ -102,7 +97,6 @@ fun SectionScreen(
                 Column(
                     Modifier.padding(innerPadding)
                 ) {
-                    DisplayIconography("column")
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier
@@ -111,12 +105,14 @@ fun SectionScreen(
                             .weight(0.6f),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
+                        item {
+                            DisplayIconography("column")
+                        }
                         items(nodes.size) { index ->
                             SectionCard(
                                 nodes[index],
                                 navController,
-                                translations,
-                                selectedFontSize
+                                translations
                             )
                         }
                     }
@@ -145,8 +141,7 @@ private fun DisplayIconography(orientation: String) {
 private fun SectionCard(
     node: PageNode,
     navController: NavController,
-    translations: Map<String, String>,
-    selectedFontSize: AppFontSize
+    translations: Map<String, String>
 ) {
     Card(
         modifier = Modifier
