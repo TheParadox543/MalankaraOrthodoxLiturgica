@@ -3,10 +3,10 @@ package com.paradox543.malankaraorthodoxliturgica.data.repository
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ class SettingsRepository @Inject constructor(
     private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val languageKey = stringPreferencesKey("selected_language")
-    private val fontSizeKey = intPreferencesKey("font_size")
+    private val fontScaleKey = floatPreferencesKey("font_scale")
     private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
     private val songScrollStateKey = booleanPreferencesKey("song_scroll_state")
 
@@ -50,62 +51,47 @@ class SettingsRepository @Inject constructor(
             initialValue = AppLanguage.MALAYALAM // Initial value is also an AppLanguage enum
         )
 
-    val selectedFontSize: StateFlow<AppFontSize> = context.dataStore.data // Using the injected dataStore
-        .map { preferences ->
-            val sizeInt = preferences[fontSizeKey] ?: 16 // Default to basic size
-            AppFontSize.fromInt(sizeInt) // Convert to TextUnit
-        }
-        .stateIn(
-            scope = repositoryScope, // Use the long-lived scope for the repository
-            started = SharingStarted.Eagerly, // Start collecting eagerly when the StateFlow is created
-            initialValue = AppFontSize.Medium // Provide an initial value that will be emitted immediately
-        )
+    suspend fun getFontScale(): AppFontScale {
+        val prefs = context.dataStore.data.first()
+        val scaleFloat = prefs[fontScaleKey] ?: 1.0f
+        return AppFontScale.fromScale(scaleFloat)
+    }
 
-    val hasCompletedOnboarding: StateFlow<Boolean> = context.dataStore.data
-        .map { preferences ->
-            preferences[hasCompletedOnboardingKey] == true // Default to false if not set
-        }
-        .stateIn(
-            scope = repositoryScope,
-            started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
-            initialValue = false // Initial value for the StateFlow
-        )
+    suspend fun getOnboardingComplete(): Boolean {
+        val prefs = context.dataStore.data.first()
+        return prefs[hasCompletedOnboardingKey] == true
+    }
 
-    val songScrollState: StateFlow<Boolean> = context.dataStore.data
-        .map { preferences ->
-            preferences[songScrollStateKey] == true // Default to false if not set
-        }
-        .stateIn(
-            scope = repositoryScope,
-            started = SharingStarted.Eagerly, // Eagerly start collecting this vital preference
-            initialValue = false // Initial value for the StateFlow
-        )
+    suspend fun getSongScrollState(): Boolean {
+        val prefs = context.dataStore.data.first()
+        return prefs[songScrollStateKey] == true
+    }
 
-    // --- Debouncing for Font Size ---
-    // Internal MutableStateFlow to trigger debounced saves for font size.
-    private val _pendingFontSizeUpdate = MutableStateFlow(AppFontSize.Medium)
+    // --- Debouncing for Font Scale ---
+    // Internal MutableStateFlow to trigger debounced saves for font scale.
+    private val _pendingFontScaleUpdate = MutableStateFlow(AppFontScale.Medium)
     private var debounceJob: Job? = null // Holds reference to the current debounce coroutine
 
     init {
-        // Collect from the _pendingFontSizeUpdate flow and debounce writes to DataStore
+        // Collect from the _pendingFontScaleUpdate flow and debounce writes to DataStore
         repositoryScope.launch {
-            _pendingFontSizeUpdate.collectLatest { fontSizeToSave ->
+            _pendingFontScaleUpdate.collectLatest { fontScaleToSave ->
                 debounceJob?.cancel() // Cancel any previous pending save
                 debounceJob = launch {
                     delay(200L) // Wait for 200ms after the last update
-                    // Directly call your existing saveFontSize function
-                    saveFontSize(fontSizeToSave)
+                    // Directly call your existing setFontScale function
+                    setFontScale(fontScaleToSave)
                 }
             }
         }
 
-        // Initialize _pendingFontSizeUpdate with the current stored font size when the repository starts.
+        // Initialize _pendingFontScaleUpdate with the current stored font scale when the repository starts.
         // This ensures debouncing starts from the correct state.
-        repositoryScope.launch {
-            selectedFontSize.collectLatest { currentSize ->
-                _pendingFontSizeUpdate.value = currentSize
-            }
-        }
+//        repositoryScope.launch {
+//            selectedFontScale.collectLatest { currentScale ->
+//                _pendingFontScaleUpdate.value = currentScale
+//            }
+//        }
     }
 
     suspend fun saveLanguage(language: AppLanguage) {
@@ -114,23 +100,10 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    suspend fun saveFontSize(fontSize: AppFontSize) {
+    suspend fun setFontScale(fontScale: AppFontScale) {
         context.dataStore.edit { preferences ->
-            preferences[fontSizeKey] = fontSize.intValue
+            preferences[fontScaleKey] = fontScale.scaleFactor
         }
-    }
-
-    /**
-     * Call this function from your gesture detector to update the font size by one step.
-     * It updates the UI immediately and triggers a debounced save to DataStore.
-     * @param direction 1 for next size, -1 for previous size.
-     */
-    // New: Public method for stepping font size, triggering the debounced save
-    fun stepFontSize(direction: Int) { // 1 for next, -1 for previous
-        val current = selectedFontSize.value // Get the current value from the publicly exposed StateFlow
-        val newSize = if (direction > 0) current.next() else current.prev()
-        // Update the internal _pendingFontSizeUpdate, which then triggers the debounced save
-        _pendingFontSizeUpdate.value = newSize
     }
 
     suspend fun saveOnboardingStatus(completed: Boolean) {
