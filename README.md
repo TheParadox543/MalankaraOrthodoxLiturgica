@@ -69,7 +69,8 @@ This mobile app provides a structured collection of prayers from the Malankara O
 ## 📜 Credits & Contributors  
 
 - **[Samuel Alex Koshy]** – Development, Implementation, UI Design, and Text Translations.  
-- **[Shriganesh Keshrimal Purohit]** – Guidance, Structural Planning, and Development Insights.  
-- **[Shaun John], [Lisa Shibu George], [Sabu John], [Saira Susan Koshy], [Sunitha Mathew], & [Nohan George]** – Additional Text Translations, Content and Preparation.  
+- **[Shriganesh Keshrimal Purohit]** – Guidance, Structural Planning, and Development Insights.
+- **[Jerin M George]** – Assistance with Color Theme Fixes and Image Selection.  
+- **[Shaun John], [Lisa Shibu George], [Sabu John], [Saira Susan Koshy], [Sunitha Mathew], [Nohan George] & [Anoop Alex Koshy]** – Additional Text Translations, Content and Preparation.  
 
 🙏 **Glory to God!**  

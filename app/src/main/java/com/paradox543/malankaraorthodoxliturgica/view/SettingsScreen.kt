@@ -469,6 +469,10 @@ fun AboutAppDialogContent() {
             style = MaterialTheme.typography.bodyLarge,
         )
         Text(
+            "- Jerin M George – Assistance with Color Theme Fixes and Image Selection.",
+            style = MaterialTheme.typography.bodyLarge,
+        )
+        Text(
             "- Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, " +
                     "Nohan George & Anoop Alex Koshy– Additional Text Translations and Preparation",
             style = MaterialTheme.typography.bodyLarge,
