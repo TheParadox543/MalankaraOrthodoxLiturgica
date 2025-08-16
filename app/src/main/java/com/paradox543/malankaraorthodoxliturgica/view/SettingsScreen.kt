@@ -30,6 +30,8 @@ import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
@@ -50,13 +52,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -66,7 +66,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 @Composable
 fun SettingsScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
+    val selectedFontScale by settingsViewModel.selectedFontScale.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     val context = LocalContext.current
     val scrollState = rememberScrollState()
@@ -109,12 +109,10 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 ) {
                     Text(
                         text = "Select Language",
-                        fontSize = selectedFontSize.fontSize,
-                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyLarge,
                     )
                     LanguageDropdownMenu(
                         selectedOption = selectedLanguage,
-                        selectedFontSize = selectedFontSize.fontSize,
                         onOptionSelected = { settingsViewModel.setLanguage(it) }
                     )
                 }
@@ -129,8 +127,8 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     .padding(8.dp),
                 shape = RoundedCornerShape(8.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 ),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
@@ -143,13 +141,12 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 ) {
                     Text(
                         text = "Select Font Size",
-                        fontSize = selectedFontSize.fontSize,
-                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.weight(1f),
                     )
-                    FontSizeDropdownMenu(
-                        selectedFontSize = selectedFontSize,
-                        onOptionSelected = { settingsViewModel.setFontSizeFromSettings(it) }
+                    FontScaleDropdownMenu(
+                        selectedFontScale = selectedFontScale,
+                        onOptionSelected = { settingsViewModel.setFontScaleFromSettings(it) }
                     )
                 }
             }
@@ -163,8 +160,8 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     .padding(8.dp),
                 shape = RoundedCornerShape(8.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
                 ),
                 elevation = CardDefaults.cardElevation(4.dp)
             ) {
@@ -180,8 +177,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     ) {
                         Text(
                             text = "Text Layout for Songs",
-                            fontSize = selectedFontSize.fontSize,
-                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.bodyLarge,
                             modifier = Modifier.weight(1f),
                         )
                         Switch(
@@ -192,12 +188,12 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     if (songScrollState) {
                         Text(
                             "Long lines will extend off-screen and can be scrolled horizontally",
-                            fontSize = selectedFontSize.fontSize
+                            style = MaterialTheme.typography.labelMedium,
                         )
                     } else {
                         Text(
                             "Lines stay within the screen",
-                            fontSize = selectedFontSize.fontSize,
+                            style = MaterialTheme.typography.labelMedium,
                         )
                     }
                 }
@@ -214,7 +210,16 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         tint = MaterialTheme.colorScheme.tertiary
                     )
                 },
-                headlineContent = { Text("About the App", fontSize = selectedFontSize.fontSize) }
+                headlineContent = {
+                    Text(
+                        "About the App",
+                        style = MaterialTheme.typography.bodyMedium,
+                    )
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    headlineColor = MaterialTheme.colorScheme.onBackground,
+                )
             )
 
             Spacer(Modifier.height(16.dp))
@@ -224,8 +229,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 headlineContent = {
                     Text(
                         "Share this App",
-                        fontSize = selectedFontSize.fontSize,
-                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleSmall,
                     )
                 },
                 modifier = Modifier
@@ -238,7 +242,11 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         contentDescription = "Share App",
                         tint = MaterialTheme.colorScheme.onTertiaryContainer,
                     )
-                }
+                },
+                colors = ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    headlineColor = MaterialTheme.colorScheme.onBackground,
+                )
             )
 
             if (BuildConfig.DEBUG) {
@@ -265,7 +273,10 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         modifier = Modifier.padding(8.dp),
                         tint = MaterialTheme.colorScheme.primary
                     )
-                    Text("About the App", fontSize = selectedFontSize.fontSize * 1.2f)
+                    Text(
+                        "About the App",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
                 }
             },
             text = {
@@ -273,7 +284,10 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
             },
             confirmButton = {
                 Button(onClick = { showAboutAppDialog = false }) {
-                    Text("Close", fontSize = selectedFontSize.fontSize)
+                    Text(
+                        "Close",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
                 }
             }
         )
@@ -360,7 +374,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
 @Composable
 fun LanguageDropdownMenu(
     selectedOption: AppLanguage,
-    selectedFontSize: TextUnit,
     onOptionSelected: (AppLanguage) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -372,7 +385,7 @@ fun LanguageDropdownMenu(
             Text(
                 selectedOption.displayName.split(" ")[0],
                 textAlign = TextAlign.Center,
-                fontSize = selectedFontSize,
+                style = MaterialTheme.typography.bodyLarge,
             )
         }
 
@@ -395,12 +408,12 @@ fun LanguageDropdownMenu(
 }
 
 @Composable
-fun FontSizeDropdownMenu(
-    selectedFontSize: AppFontSize,
-    onOptionSelected: (AppFontSize) -> Unit
+fun FontScaleDropdownMenu(
+    selectedFontScale: AppFontScale,
+    onOptionSelected: (AppFontScale) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(selectedFontSize) }
+    var selectedText by remember { mutableStateOf(selectedFontScale) }
 
     Box {
         OutlinedButton(
@@ -410,10 +423,13 @@ fun FontSizeDropdownMenu(
                 MaterialTheme.colorScheme.onTertiary,
             ),
         ) {
-            Text(selectedText.displayName, fontSize = selectedFontSize.fontSize)
+            Text(
+                selectedText.displayName,
+                style = MaterialTheme.typography.bodyLarge,
+            )
         }
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            AppFontSize.entries.forEach { appFontSize ->
+            AppFontScale.entries.forEach { appFontSize ->
                 DropdownMenuItem(
                     text = { Text(appFontSize.displayName) },
                     onClick = {
@@ -421,7 +437,7 @@ fun FontSizeDropdownMenu(
                         onOptionSelected(appFontSize)
                         expanded = false
                     },
-                    enabled = appFontSize != selectedFontSize
+                    enabled = appFontSize != selectedFontScale
                 )
             }
         }
@@ -429,7 +445,7 @@ fun FontSizeDropdownMenu(
 }
 
 @Composable
-fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
+fun AboutAppDialogContent() {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -437,32 +453,30 @@ fun AboutAppDialogContent(selectedFontSize: TextUnit = 16.sp) {
     ) {
         Text(
             "This app is designed to provide prayers and religious content for the Malankara Orthodox Syrian Church.",
-            fontSize = selectedFontSize
+            style = MaterialTheme.typography.bodyLarge,
         )
         Spacer(Modifier.height(16.dp))
         Text(
             "📜 Credits & Contributors",
             style = MaterialTheme.typography.headlineMedium,
-            fontSize = selectedFontSize * 1.2f
         )
         Text(
             "- Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations",
-            fontSize = selectedFontSize
+                    style = MaterialTheme.typography.bodyLarge,
         )
         Text(
             "- Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights",
-            fontSize = selectedFontSize
+            style = MaterialTheme.typography.bodyLarge,
         )
         Text(
-            "- Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew & " +
-                    "Nohan George– Additional Text Translations and Preparation",
-            fontSize = selectedFontSize
+            "- Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, " +
+                    "Nohan George & Anoop Alex Koshy– Additional Text Translations and Preparation",
+            style = MaterialTheme.typography.bodyLarge,
         )
         Spacer(Modifier.height(16.dp))
         Text(
             "Version: ${BuildConfig.VERSION_NAME}",
             style = MaterialTheme.typography.bodySmall,
-            fontSize = selectedFontSize * 0.8f
         )
     }
 }

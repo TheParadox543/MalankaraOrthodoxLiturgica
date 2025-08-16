@@ -8,11 +8,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,10 +31,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontSize
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -49,7 +49,6 @@ fun SectionScreen(
     node: PageNode
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val nodes = node.children
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -72,24 +71,15 @@ fun SectionScreen(
         bottomBar = { BottomNavBar(navController = navController) }
     ){ innerPadding ->
         Box{
-            Image(
-                painter = painterResource(R.drawable.home),
-                "icon",
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .requiredWidth(400.dp)
-                    .fillMaxSize(),
-                alignment = Alignment.TopStart,
-                contentScale = ContentScale.Crop
-            )
             if (screenWidth > 600.dp) {
-                Row {
-                    Spacer(Modifier.padding(horizontal = 160.dp))
+                Row(
+                    Modifier.padding(innerPadding)
+                ) {
+                    DisplayIconography("row")
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(innerPadding)
                             .padding(horizontal = 20.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
@@ -97,31 +87,32 @@ fun SectionScreen(
                             SectionCard(
                                 nodes[index],
                                 navController,
-                                translations,
-                                selectedFontSize
+                                translations
                             )
                         }
                     }
                 }
             }
             else {
-                Column {
-                    Spacer(Modifier.weight(0.4f))
+                Column(
+                    Modifier.padding(innerPadding)
+                ) {
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(innerPadding)
                             .padding(horizontal = 20.dp)
                             .weight(0.6f),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
+                        item {
+                            DisplayIconography("column")
+                        }
                         items(nodes.size) { index ->
                             SectionCard(
                                 nodes[index],
                                 navController,
-                                translations,
-                                selectedFontSize
+                                translations
                             )
                         }
                     }
@@ -132,16 +123,34 @@ fun SectionScreen(
 }
 
 @Composable
+private fun DisplayIconography(orientation: String) {
+    Image(
+        painter = painterResource(R.drawable.transfigurationicon),
+        contentDescription = "icon",
+        modifier = if (orientation == "row") {
+            Modifier
+                .requiredWidthIn(min = 200.dp, max = 400.dp)
+                .fillMaxHeight()
+        } else {
+            Modifier
+                .requiredWidthIn(max = 400.dp)
+//                .fillMaxWidth()
+        },
+        alignment = Alignment.TopStart,
+        contentScale = ContentScale.Crop
+    )
+}
+
+@Composable
 private fun SectionCard(
     node: PageNode,
     navController: NavController,
-    translations: Map<String, String>,
-    selectedFontSize: AppFontSize
+    translations: Map<String, String>
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(4.dp)
             .clickable {
                 if (node.children.isNotEmpty()) {
                     navController.navigate("section/${node.route}")
@@ -152,8 +161,8 @@ private fun SectionCard(
                 }
             },
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         ),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(4.dp)
@@ -161,8 +170,9 @@ private fun SectionCard(
         val text = node.route.split("_").last()
         Text(
             text = translations[text] ?: text,
-            fontSize = selectedFontSize.fontSize,
-            modifier = Modifier.padding(16.dp)
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(20.dp).fillMaxWidth(),
+            textAlign = TextAlign.Center
         )
     }
 }

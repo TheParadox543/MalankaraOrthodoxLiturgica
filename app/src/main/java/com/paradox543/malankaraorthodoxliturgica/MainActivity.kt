@@ -64,7 +64,10 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            MalankaraOrthodoxLiturgicaTheme {
+            val language by settingsViewModel.selectedLanguage.collectAsState()
+            val scaleFactor by settingsViewModel.selectedFontScale.collectAsState()
+
+            MalankaraOrthodoxLiturgicaTheme(language = language, textScale = scaleFactor) {
                 // 1. Remember the SnackbarHostState and a coroutine scope.
                 val snackbarHostState = remember { SnackbarHostState() }
                 val scope = rememberCoroutineScope()

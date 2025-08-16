@@ -13,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
@@ -30,7 +29,6 @@ fun BibleChapterScreen(
     bookIndex: Int,
     chapterIndex: Int
 ) {
-    val selectedFontSize by settingsViewModel.selectedFontSize.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
     val bibleBook = bibleBooks[bookIndex]
@@ -70,7 +68,7 @@ fun BibleChapterScreen(
                 items(chapterData.Verse.size) { index ->
                     val verseNumber = (index + 1).toString()
                     val verseText = chapterData.Verse[index].Verse
-                    VerseItem(verseNumber, verseText, selectedFontSize.fontSize)
+                    VerseItem(verseNumber, verseText)
                 }
             }
         }
@@ -78,7 +76,7 @@ fun BibleChapterScreen(
 }
 
 @Composable
-fun VerseItem(verseNumber: String, verseText: String, fontSize: TextUnit) {
+fun VerseItem(verseNumber: String, verseText: String) {
     Row {
         Text(
             text = verseNumber,
@@ -88,7 +86,6 @@ fun VerseItem(verseNumber: String, verseText: String, fontSize: TextUnit) {
         Text(
             text = verseText,
             modifier = Modifier.padding(4.dp),
-            fontSize = fontSize,
         )
     }
     HorizontalDivider()

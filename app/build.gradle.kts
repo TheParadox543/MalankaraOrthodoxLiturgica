@@ -21,8 +21,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 24
         targetSdk = 35
-        versionCode = 23
-        versionName = "1.2.2"
+        versionCode = 25
+        versionName = "1.2.4"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -96,6 +96,9 @@ dependencies {
     // For Google Play Core libraries
     implementation(libs.review.ktx)
     implementation(libs.app.update.ktx)
+
+    // Google Fonts
+    implementation(libs.androidx.ui.text.google.fonts)
 
     // Testing Dependencies
     testImplementation(libs.junit)                    // Standard JUnit 4 for local unit tests
