@@ -328,12 +328,12 @@ fun Song(text: String, modifier: Modifier = Modifier, isHorizontal: Boolean = fa
                 if (isHorizontal) {
                     currentModifier
                         .horizontalScroll(horizontalScrollState)
-                        .border(4.dp, MaterialTheme.colorScheme.outline)
+//                        .border(4.dp, MaterialTheme.colorScheme.outline)
                 } else {
                     currentModifier
                 }
             }
-//            .border(4.dp, MaterialTheme.colorScheme.outline)
+            .border(4.dp, MaterialTheme.colorScheme.outline)
     ) {
         Text(
             text = text.replace("/t", "    ").replace("/u200b", "\u200b"),

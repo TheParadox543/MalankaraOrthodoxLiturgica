@@ -170,8 +170,8 @@ private fun SectionCard(
         val text = node.route.split("_").last()
         Text(
             text = translations[text] ?: text,
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(30.dp).fillMaxWidth(),
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.padding(20.dp).fillMaxWidth(),
             textAlign = TextAlign.Center
         )
     }

@@ -18,7 +18,7 @@ val OnPrimaryContainer = Color(0xFFFFF3CC) // Soft gold/ivory text on primary co
 
 val Secondary = Color(0xFFD4AF37)     // Optional secondary brand color
 val OnSecondary = Color.Black
-val SecondaryContainer = Color(0xF0FFF0CF) // Lighter gold tone for filled sections
+val SecondaryContainer = Color(0xF0FFDE8A) // Lighter gold tone for filled sections
 val OnSecondaryContainer = Color(0xFF1A1A1A) // Dark text for contrast
 
 // Backgrounds
@@ -35,7 +35,7 @@ val OnPrimaryContainerDark = Color(0xFFFFE8B0) // Soft gold text for readability
 val SecondaryDark = Color(0xFFE6C76E)        // Muted gold tone for secondary brand color
 val OnSecondaryDark = Color(0xFF1A1A1A)      // Dark text on gold
 
-val SecondaryContainerDark = Color(0xFF5A4A1E) // Dark gold-brown container
+val SecondaryContainerDark = Color(0xFF8F7E27) // Dark gold-brown container
 val OnSecondaryContainerDark = Color(0xFFFFEFC2) // Light ivory text
 
 // Backgrounds
