@@ -26,6 +26,8 @@ object PrayerRoutes {
     const val AFTER_FOOD = "afterFood"
     const val BEFORE_FOOD = "beforeFood"
     const val FOR_SICK = "forSick"
+    const val HOME_PRAYERS = "homePrayers"
+    const val EMBRACING_THE_HAND_SONGS = "embracingTheHandSongs"
 
 //    Canonical Routes
     const val VESPERS = "vespers"
@@ -127,10 +129,40 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = listOf(
+                homePrayersSection(currentRoute),
                 sleebaSection(currentRoute),
                 kyamthaSection(currentRoute),
                 sheemaSection(currentRoute),
 //                greatLentSection(currentRoute)
+            ),
+            languages = listOf("ml", "mn")
+        )
+    }
+
+    private fun homePrayersSection(parentRoute: String): PageNode {
+        val currentRoute = PrayerRoutes.HOME_PRAYERS
+        return PageNode(
+            route = currentRoute,
+            parent = parentRoute,
+            children = listOf(
+                prayer(
+                    "${currentRoute}_vespers",
+                    "${PrayerRoutes.DAILY_PRAYERS}/$currentRoute/${PrayerRoutes.VESPERS}.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    "${currentRoute}_matins",
+                    "${PrayerRoutes.DAILY_PRAYERS}/$currentRoute/${PrayerRoutes.MATINS}.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    "${currentRoute}_prime",
+                    "${PrayerRoutes.DAILY_PRAYERS}/$currentRoute/${PrayerRoutes.PRIME}.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
             ),
             languages = listOf("ml", "mn")
         )
@@ -202,13 +234,13 @@ object NavigationTree {
 //        return PageNode(
 //            route = currentRoute,
 //            children = listOf(
-//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.VE), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.SANDHYA}.json".lowercase()),
-//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.SOOTHARA), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.SOOTHARA}.json".lowercase()),
-//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.RATHRI), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.RATHRI}.json".lowercase()),
-//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.PRABHATHAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.PRABHATHAM}.json".lowercase()),
-//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.MOONAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.MOONAM}.json".lowercase()),
-//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.AARAAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.AARAAM}.json".lowercase()),
-//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.ONBATHAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.ONBATHAM}.json".lowercase())
+//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.VE), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.SANDHYA}.json"),
+//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.SOOTHARA), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.SOOTHARA}.json"),
+//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.RATHRI), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.RATHRI}.json"),
+//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.PRABHATHAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.PRABHATHAM}.json"),
+//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.MOONAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.MOONAM}.json"),
+//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.AARAAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.AARAAM}.json"),
+//                prayer(createCompleteRoute(currentRoute, PrayerRoutes.ONBATHAM), "${PrayerRoutes.DAILY_PRAYERS}/${PrayerRoutes.GREAT_LENT}/$day/${PrayerRoutes.ONBATHAM}.json")
 //            )
 //        )
 //    }
@@ -219,10 +251,10 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = listOf(
-                prayer("sheemaMary", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/mary.json".lowercase(), currentRoute),
-                prayer("sheemaSleeba", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/sleeba.json".lowercase(), currentRoute),
-                prayer("sheemaSaints", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/saints.json".lowercase(), currentRoute),
-                prayer("sheemaApostle", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/apostle.json".lowercase(), currentRoute)
+                prayer("sheemaMary", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/mary.json", currentRoute),
+                prayer("sheemaSleeba", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/sleeba.json", currentRoute),
+                prayer("sheemaSaints", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/saints.json", currentRoute),
+                prayer("sheemaApostle", "${PrayerRoutes.DAILY_PRAYERS}/${currentRoute.replace("_", "/")}/apostle.json", currentRoute)
             )
         )
     }
@@ -405,6 +437,11 @@ object NavigationTree {
             parent = parentRoute,
             children = listOf(
                 prayer(
+                    PrayerRoutes.EMBRACING_THE_HAND_SONGS,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.EMBRACING_THE_HAND_SONGS}.json",
+                    currentRoute
+                ),
+                prayer(
                     PrayerRoutes.BEFORE_FOOD,
                     "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.BEFORE_FOOD}.json",
                     currentRoute
@@ -463,7 +500,7 @@ object NavigationTree {
             children.add(
                 prayer(
                     childNode,
-                    "$extraRoute/${childNode.replace("_", "/")}.json".lowercase(),
+                    "$extraRoute/${childNode.replace("_", "/")}.json",
                     currentRoute,
                     languages,
                 )
