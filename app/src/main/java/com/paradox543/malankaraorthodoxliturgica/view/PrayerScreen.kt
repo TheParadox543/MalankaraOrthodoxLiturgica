@@ -312,7 +312,7 @@ fun Prose(text: String, modifier: Modifier = Modifier) {
     Text(
         text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
         style = MaterialTheme.typography.bodyLarge,
-        textAlign = TextAlign.Justify,
+        textAlign = TextAlign.Left,
         modifier = modifier
             .fillMaxWidth()
     )
