@@ -453,7 +453,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/nicenecreed.json"
+        "file": "commonPrayers/nicenecreed.json"
     },
     {
         "type": "heading",

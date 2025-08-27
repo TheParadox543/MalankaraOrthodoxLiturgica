@@ -41,7 +41,7 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/praiseOfCherubims.json"
+        "file": "commonPrayers/praiseOfCherubims.json"
     },
     {
         "type": "collapsible-block",
@@ -214,14 +214,6 @@
             {
                 "type": "song",
                 "content": "കർത്താവേ! സ്തോത്രം\nകർത്താവേ! സ്തോത്രം\nനിത്യവുമാശ്രയമേ! സ്തോത്രം. ബാറെക്മോർ.+"
-            },
-            {
-                "type": "prose",
-                "content": "സ്വർഗ്ഗസ്ഥനായ ഞങ്ങളുടെ പിതാവേ! ..."
-            },
-            {
-                "type": "prose",
-                "content": "കൃപ നിറഞ്ഞ മറിയമേ!"
             }
         ]
     },
@@ -235,7 +227,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/nicenecreed.json"
+        "file": "commonPrayers/nicenecreed.json"
     },
     {
         "type": "prose",

@@ -5,7 +5,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.json"
+        "file": "commonPrayers/kauma.json"
     },
     {
         "type": "collapsible-block",
@@ -99,6 +99,6 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.json"
+        "file": "commonPrayers/kauma.json"
     }
 ]

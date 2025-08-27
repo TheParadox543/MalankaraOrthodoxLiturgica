@@ -5,7 +5,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/doxology.json"
+        "file": "commonPrayers/doxology.json"
     },
     {
         "type": "collapsible-block",
@@ -187,7 +187,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/nicenecreed.json"
+        "file": "commonPrayers/nicenecreed.json"
     },
     {
         "type": "subheading",
@@ -195,6 +195,6 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/cyclicprayers.json"
+        "file": "commonPrayers/cyclicprayers.json"
     }
 ]

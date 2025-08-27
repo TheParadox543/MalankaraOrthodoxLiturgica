@@ -5,7 +5,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.json"
+        "file": "commonPrayers/kauma.json"
     },
     {
         "type": "heading",
@@ -167,7 +167,7 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/complinecommon.json"
+        "file": "commonPrayers/complinecommon.json"
     },
     {
         "type": "prose",
@@ -175,6 +175,6 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/cyclicprayers.json"
+        "file": "commonPrayers/cyclicprayers.json"
     }
 ]

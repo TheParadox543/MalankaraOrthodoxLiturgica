@@ -41,7 +41,7 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/praiseOfCherubims.json"
+        "file": "commonPrayers/praiseOfCherubims.json"
     },
     {
         "type": "collapsible-block",
@@ -227,7 +227,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/nicenecreed.json"
+        "file": "commonPrayers/nicenecreed.json"
     },
     {
         "type": "prose",

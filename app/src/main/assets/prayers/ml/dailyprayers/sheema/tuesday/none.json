@@ -29,10 +29,10 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/karunaniranjavane.json"
+        "file": "commonPrayers/karunaniranjavane.json"
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.json"
+        "file": "commonPrayers/kauma.json"
     }
 ]
