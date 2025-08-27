@@ -5,11 +5,11 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/doxology.json"
+        "file": "commonPrayers/doxology.json"
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/urakkumilatta.json"
+        "file": "commonPrayers/urakkumilatta.json"
     },
     {
         "type": "link-collapsible",
@@ -145,7 +145,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/praiseOfCherubims.json"
+        "file": "commonPrayers/praiseOfCherubims.json"
     },
     {
         "type": "heading",
@@ -221,7 +221,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/praiseOfCherubims.json"
+        "file": "commonPrayers/praiseOfCherubims.json"
     },
     {
         "type": "heading",
@@ -293,7 +293,7 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/nightfourthkauma.json"
+        "file": "commonPrayers/nightfourthkauma.json"
     },
     {
         "type": "heading",
@@ -345,10 +345,10 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/praiseOfAngels.json"
+        "file": "commonPrayers/praiseOfAngels.json"
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.json"
+        "file": "commonPrayers/kauma.json"
     }
 ]

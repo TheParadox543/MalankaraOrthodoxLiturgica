@@ -5,7 +5,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/doxology.json"
+        "file": "commonPrayers/doxology.json"
     },
     {
         "type": "prose",
@@ -247,7 +247,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/mavoorba.json"
+        "file": "commonPrayers/mavoorba.json"
     },
     {
         "type": "heading",

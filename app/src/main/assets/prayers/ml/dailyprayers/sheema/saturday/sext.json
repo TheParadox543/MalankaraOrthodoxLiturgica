@@ -5,7 +5,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.json"
+        "file": "commonPrayers/kauma.json"
     },
     {
         "type": "heading",
@@ -69,7 +69,7 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/janani.json"
+        "file": "commonPrayers/janani.json"
     },
     {
         "type": "prose",
@@ -77,7 +77,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/nicenecreed.json"
+        "file": "commonPrayers/nicenecreed.json"
     },
     {
         "type": "prose",

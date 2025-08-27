@@ -5,7 +5,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/doxology.json"
+        "file": "commonPrayers/doxology.json"
     },
     {
         "type": "prose",
@@ -363,6 +363,6 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/trisagionSyriac.json"
+        "file": "commonPrayers/trisagionSyriac.json"
     }
 ]

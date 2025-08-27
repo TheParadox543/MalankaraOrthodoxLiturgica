@@ -5,7 +5,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.json"
+        "file": "commonPrayers/kauma.json"
     },
     {
         "type": "heading",
@@ -41,6 +41,6 @@
     },
     {
         "type": "link",
-        "file": "commonprayers/marbaalaayibovooso.json"
+        "file": "commonPrayers/marbaalaayibovooso.json"
     }
 ]

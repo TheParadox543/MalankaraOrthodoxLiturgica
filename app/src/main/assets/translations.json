@@ -318,5 +318,15 @@
         "ml": "പ്രഭാത സ്തുതിപ്പ്",
         "en": "Morning Praise",
         "mn": "Morning Praise"
+    },
+    "homePrayers": {
+        "ml": "വീട്ടിൽ പ്രാർത്ഥനകൾ",
+        "en": "Home Prayers",
+        "mn": "Home Prayers"
+    },
+    "embracingTheHandSongs": {
+        "ml": "കൈമുത്ത് പാട്ടുകൾ",
+        "en": "Embracing The Hand Songs",
+        "mn": "Embracing The Hand Songs"
     }
 }
