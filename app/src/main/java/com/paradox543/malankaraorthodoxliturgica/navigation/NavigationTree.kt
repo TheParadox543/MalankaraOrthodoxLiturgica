@@ -291,6 +291,7 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = listOf(
+                christmasSection(currentRoute),
                 prayer(
                     PrayerRoutes.ASCENSION,
                     "${PrayerRoutes.FEASTS}/${PrayerRoutes.ASCENSION}.json",
@@ -303,6 +304,28 @@ object NavigationTree {
         )
     }
 
+    private fun christmasSection(parentRoute: String): PageNode {
+        val currentRoute = "christmas"
+        return PageNode(
+            route = currentRoute,
+            parent = parentRoute,
+            children = listOf(
+                prayer(
+                    createCompleteRoute(currentRoute, "vespers"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/vespers.json",
+                    currentRoute,
+                    listOf("ml", "mn"),
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "compline"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/compline.json",
+                    currentRoute,
+                    listOf("ml", "mn"),
+                ),
+            ),
+            languages = listOf("ml", "mn"),
+        )
+    }
     private fun pentecostSection(parentRoute: String): PageNode {
         val currentRoute = PrayerRoutes.PENTECOST
         val children = mutableListOf<PageNode>()
