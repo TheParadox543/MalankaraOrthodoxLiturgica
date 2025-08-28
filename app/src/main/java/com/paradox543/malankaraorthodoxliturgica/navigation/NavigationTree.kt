@@ -314,14 +314,26 @@ object NavigationTree {
                     createCompleteRoute(currentRoute, "vespers"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/vespers.json",
                     currentRoute,
-                    listOf("ml", "mn"),
+                    listOf("ml"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "compline"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/compline.json",
                     currentRoute,
-                    listOf("ml", "mn"),
+                    listOf("ml"),
                 ),
+                prayer(
+                    createCompleteRoute(currentRoute, "matins"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/matins.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "worshipOfCross"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/worshipOfCross.json",
+                    currentRoute,
+                    listOf("ml"),
+                )
             ),
             languages = listOf("ml", "mn"),
         )

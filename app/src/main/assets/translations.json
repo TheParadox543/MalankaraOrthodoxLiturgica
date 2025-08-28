@@ -328,5 +328,20 @@
         "ml": "കൈമുത്ത് പാട്ടുകൾ",
         "en": "Embracing The Hand Songs",
         "mn": "Embracing The Hand Songs"
+    },
+    "oldTestament": {
+        "ml": "പഴമ വായന",
+        "en": "Old Testament",
+        "mn": "Old Testament"
+    },
+    "christmas": {
+        "ml": "ജനനപെരുന്നാൾ",
+        "en": "Christmas",
+        "mn": "Christmas"
+    },
+    "worshipOfCross": {
+        "ml": "സ്ലീബാ ആഘോഷം",
+        "en": "Worship of the Cross",
+        "mn": "Worship of the Cross"
     }
 }
