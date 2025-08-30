@@ -30,8 +30,8 @@ class SettingsViewModel @Inject constructor(
     private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
     val selectedFontScale = _selectedAppFontScale.asStateFlow()
 
-    private val _hasCompletedOnboarding = MutableStateFlow(false)
-    val hasCompletedOnboarding = _hasCompletedOnboarding.asStateFlow()
+//    private val _hasCompletedOnboarding = MutableStateFlow(false)
+    val hasCompletedOnboarding = settingsRepository.hasCompletedOnboarding
 
     private val _songScrollState = MutableStateFlow(false)
     val songScrollState = _songScrollState.asStateFlow()
@@ -45,7 +45,7 @@ class SettingsViewModel @Inject constructor(
     init {
         // 1. Initialize _currentAppFontSize from DataStore when ViewModel starts
         viewModelScope.launch {
-            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
+//            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
             _selectedAppFontScale.value = settingsRepository.getFontScale()
             _songScrollState.value = settingsRepository.getSongScrollState()
         }
@@ -102,7 +102,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun setOnboardingCompleted(status: Boolean = true) {
-        _hasCompletedOnboarding.value = status
+//        _hasCompletedOnboarding.value = status
         viewModelScope.launch {
             settingsRepository.saveOnboardingStatus(status)
             if (status) {

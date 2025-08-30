@@ -21,8 +21,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 24
         targetSdk = 35
-        versionCode = 26
-        versionName = "1.2.5-alpha"
+        versionCode = 27
+        versionName = "1.2.6-alpha"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

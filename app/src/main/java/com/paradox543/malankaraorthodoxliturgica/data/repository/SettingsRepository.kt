@@ -57,10 +57,19 @@ class SettingsRepository @Inject constructor(
         return AppFontScale.fromScale(scaleFloat)
     }
 
-    suspend fun getOnboardingComplete(): Boolean {
-        val prefs = context.dataStore.data.first()
-        return prefs[hasCompletedOnboardingKey] == true
-    }
+//    suspend fun getOnboardingComplete(): Boolean {
+//        val prefs = context.dataStore.data.first()
+//        return prefs[hasCompletedOnboardingKey] == true
+//    }
+    val hasCompletedOnboarding: StateFlow<Boolean> = context.dataStore.data
+        .map { preferences ->
+            preferences[hasCompletedOnboardingKey] == true
+        }
+        .stateIn(
+            scope = repositoryScope,
+            started = SharingStarted.Eagerly,
+            initialValue = false
+        )
 
     suspend fun getSongScrollState(): Boolean {
         val prefs = context.dataStore.data.first()
