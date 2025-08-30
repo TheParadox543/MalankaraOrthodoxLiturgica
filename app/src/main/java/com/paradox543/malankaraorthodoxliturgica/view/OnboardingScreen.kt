@@ -55,7 +55,7 @@ fun OnboardingScreen(
     // State for language dropdown menu
     var languageExpanded by remember { mutableStateOf(false) }
     val prayers by prayerViewModel.prayers.collectAsState()
-    val filename = "commonprayers/lords.json"
+    val filename = "commonPrayers/lords.json"
     LaunchedEffect(selectedLanguage) {
         prayerViewModel.loadPrayerElements(filename, selectedLanguage)
     }
