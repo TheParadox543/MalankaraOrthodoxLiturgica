@@ -21,7 +21,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/mavoorba.json"
+        "file": "commonprayers/mavoorba.Json"
     },
     {
         "type": "heading",
@@ -125,7 +125,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "psalms/psalm148149150.json"
+        "file": "psalms/psalm148149150.Json"
     },
     {
         "type": "subtext",
@@ -285,10 +285,10 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/praiseOfAngels.json"
+        "file": "commonprayers/praiseOfAngels.Json"
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/kauma.json"
+        "file": "commonprayers/kauma.Json"
     }
 ]
