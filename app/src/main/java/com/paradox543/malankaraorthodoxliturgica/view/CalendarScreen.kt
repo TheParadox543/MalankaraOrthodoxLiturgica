@@ -369,8 +369,8 @@ private fun RowScope.DayItem(
         },
         modifier = Modifier
             .weight(1f) // Distribute equally
-            .padding(4.dp)
             .aspectRatio(1f) // Make buttons square
+            .padding(2.dp)
             .then(
                 if (hasEvents) {
                     Modifier.border(4.dp, borderColor, CircleShape)
