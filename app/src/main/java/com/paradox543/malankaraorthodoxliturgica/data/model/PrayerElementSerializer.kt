@@ -46,15 +46,20 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
         // 3. Use a when expression to dispatch to the correct deserializer
         return try {
             when (type) {
+                // Simple types
                 "title" -> json.decodeFromJsonElement(PrayerElement.Title.serializer(), element)
                 "heading" -> json.decodeFromJsonElement(PrayerElement.Heading.serializer(), element)
                 "subheading" -> json.decodeFromJsonElement(PrayerElement.Subheading.serializer(), element)
                 "prose" -> json.decodeFromJsonElement(PrayerElement.Prose.serializer(), element)
                 "song" -> json.decodeFromJsonElement(PrayerElement.Song.serializer(), element)
                 "subtext" -> json.decodeFromJsonElement(PrayerElement.Subtext.serializer(), element)
+                "source" -> json.decodeFromJsonElement(PrayerElement.Source.serializer(), element)
+
+                // Complex types
                 "collapsible-block" -> json.decodeFromJsonElement(PrayerElement.CollapsibleBlock.serializer(), element)
                 "link" -> json.decodeFromJsonElement(PrayerElement.Link.serializer(), element)
                 "link-collapsible" -> json.decodeFromJsonElement(PrayerElement.LinkCollapsible.serializer(), element)
+
                 // If you explicitly serialize PrayerElement.Error in your JSON, handle it:
                 "error" -> json.decodeFromJsonElement(PrayerElement.Error.serializer(), element)
 
@@ -85,6 +90,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
             is PrayerElement.Prose -> json.encodeToJsonElement(PrayerElement.Prose.serializer(), value)
             is PrayerElement.Song -> json.encodeToJsonElement(PrayerElement.Song.serializer(), value)
             is PrayerElement.Subtext -> json.encodeToJsonElement(PrayerElement.Subtext.serializer(), value)
+            is PrayerElement.Source -> json.encodeToJsonElement(PrayerElement.Source.serializer(), value)
             is PrayerElement.CollapsibleBlock -> json.encodeToJsonElement(PrayerElement.CollapsibleBlock.serializer(), value)
             is PrayerElement.Link -> json.encodeToJsonElement(PrayerElement.Link.serializer(), value)
             is PrayerElement.LinkCollapsible -> json.encodeToJsonElement(PrayerElement.LinkCollapsible.serializer(), value)
