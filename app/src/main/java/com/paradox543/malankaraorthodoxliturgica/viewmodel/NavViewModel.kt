@@ -82,7 +82,6 @@ class NavViewModel @Inject constructor(
         return null
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun prayNow(now: LocalDateTime? = null): List<String> {
         val currentDateTime = now ?: LocalDateTime.now() // Explicitly use IST
         val prayerList = mutableListOf<String>()
@@ -146,7 +145,6 @@ class NavViewModel @Inject constructor(
         return prayerList.distinct()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getAllPrayerNodes(): List<PageNode> {
         val allNodes = mutableListOf<PageNode>()
         val list = prayNow()

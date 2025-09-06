@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
-import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 
 object PrayerRoutes {
@@ -27,7 +26,7 @@ object PrayerRoutes {
     const val BEFORE_FOOD = "beforeFood"
     const val FOR_SICK = "forSick"
     const val HOME_PRAYERS = "homePrayers"
-    const val EMBRACING_THE_HAND_SONGS = "embracingTheHandSongs"
+    const val BENEDICTION_SONGS = "benedictionSongs"
 
 //    Canonical Routes
     const val VESPERS = "vespers"
@@ -110,15 +109,15 @@ object NavigationTree {
             languages = listOf("ml", "mn", "en"),
             parent = parentRoute,
             children = listOf(
-                prayer("lords", "commonprayers/lords.json", currentRoute, listOf("ml", "mn", "en")),
-                prayer("mary", "commonprayers/mary.json", currentRoute, listOf("ml", "mn", "en")),
-                prayer("kauma", "commonprayers/doxology.json", currentRoute, listOf("ml", "mn", "en")),
-                prayer("kaumaSyriac", "commonprayers/trisagionSyriac.json", currentRoute, listOf("ml", "mn")),
-                prayer("nicene", "commonprayers/nicenecreed.json", currentRoute, listOf("ml", "mn")),
-                prayer("angels", "commonprayers/praiseOfAngels.json", currentRoute, listOf("ml", "mn")),
-                prayer("cherubims", "commonprayers/praiseOfCherubims.json", currentRoute, listOf("ml", "mn")),
-                prayer("morningPraise", "commonprayers/morningPraise.json", currentRoute, listOf("ml")),
-                prayer("cyclic", "commonprayers/cyclicprayers.json", currentRoute, listOf("ml", "mn"))
+                prayer("lords", "${PrayerRoutes.COMMON_PRAYERS}/lords.json", currentRoute, listOf("ml", "mn", "en")),
+                prayer("mary", "${PrayerRoutes.COMMON_PRAYERS}/mary.json", currentRoute, listOf("ml", "mn", "en")),
+                prayer("kauma", "${PrayerRoutes.COMMON_PRAYERS}/doxology.json", currentRoute, listOf("ml", "mn", "en")),
+                prayer("kaumaSyriac", "${PrayerRoutes.COMMON_PRAYERS}/trisagionSyriac.json", currentRoute, listOf("ml", "mn")),
+                prayer("nicene", "${PrayerRoutes.COMMON_PRAYERS}/niceneCreed.json", currentRoute, listOf("ml", "mn")),
+                prayer("angels", "${PrayerRoutes.COMMON_PRAYERS}/praiseOfAngels.json", currentRoute, listOf("ml", "mn")),
+                prayer("cherubims", "${PrayerRoutes.COMMON_PRAYERS}/praiseOfCherubims.json", currentRoute, listOf("ml", "mn")),
+                prayer("morningPraise", "${PrayerRoutes.COMMON_PRAYERS}/morningPraise.json", currentRoute, listOf("ml")),
+                prayer("cyclic", "${PrayerRoutes.COMMON_PRAYERS}/cyclicPrayers.json", currentRoute, listOf("ml", "mn"))
             )
         )
     }
@@ -333,7 +332,25 @@ object NavigationTree {
                     "${PrayerRoutes.FEASTS}/${currentRoute}/worshipOfCross.json",
                     currentRoute,
                     listOf("ml"),
-                )
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "prime"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/prime.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "terce"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/terce.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "sext"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/sext.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
             ),
             languages = listOf("ml", "mn"),
         )
@@ -472,8 +489,8 @@ object NavigationTree {
             parent = parentRoute,
             children = listOf(
                 prayer(
-                    PrayerRoutes.EMBRACING_THE_HAND_SONGS,
-                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.EMBRACING_THE_HAND_SONGS}.json",
+                    PrayerRoutes.BENEDICTION_SONGS,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.BENEDICTION_SONGS}.json",
                     currentRoute
                 ),
                 prayer(

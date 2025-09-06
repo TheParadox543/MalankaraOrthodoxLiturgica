@@ -46,6 +46,12 @@ sealed interface PrayerElement {
         val content: String
     ): PrayerElement
 
+    @Serializable
+    @SerialName("source")
+    data class Source(
+        val content: String
+    ): PrayerElement
+
     // Complex data classes
 
     @Serializable

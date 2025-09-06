@@ -75,7 +75,6 @@ class LiturgicalCalendarRepository @Inject constructor(
     /**
      * Internal helper to get event keys for a specific date.
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun getEventKeysForDate(day: LocalDate): List<EventKey> {
         // Ensure data is initialized before accessing
         if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
@@ -95,7 +94,6 @@ class LiturgicalCalendarRepository @Inject constructor(
      * @throws IllegalArgumentException if an event key found in liturgical_calendar.json
      * is not present in liturgical_data.json.
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetails> {
         val eventKeys = getEventKeysForDate(date)
         val eventDetails = mutableListOf<LiturgicalEventDetails>()
@@ -126,7 +124,6 @@ class LiturgicalCalendarRepository @Inject constructor(
      * @param year The year. Defaults to current year if null.
      * @return A list of CalendarWeek objects, each containing 7 CalendarDay objects.
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     fun loadMonthData(month: Int? = null, year: Int? = null): List<CalendarWeek> {
         // Ensure data is initialized
         if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
@@ -185,7 +182,6 @@ class LiturgicalCalendarRepository @Inject constructor(
      * @return A list of CalendarDay objects for the next 7 days, including their events.
      * Only days with events will have non-empty event maps.
      */
-    @RequiresApi(Build.VERSION_CODES.O)
     fun getUpcomingWeekEvents(): List<CalendarDay> {
         // Ensure data is initialized
         if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {

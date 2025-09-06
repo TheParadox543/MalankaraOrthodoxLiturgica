@@ -229,6 +229,10 @@ fun PrayerElementRenderer(
             Subtext(prayerElement.content)
         }
 
+        is PrayerElement.Source -> {
+            Source(prayerElement.content)
+        }
+
         is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
                 title = prayerElement.title,
@@ -354,6 +358,18 @@ fun Subtext(text: String, modifier: Modifier = Modifier) {
         textAlign = TextAlign.End,
         modifier = modifier
             .fillMaxWidth()
+    )
+}
+
+@Composable
+fun Source(text: String, modifier: Modifier = Modifier) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.labelSmall,
+        textAlign = TextAlign.Center,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp, bottom = 16.dp)
     )
 }
 

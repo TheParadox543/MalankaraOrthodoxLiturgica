@@ -1,7 +1,7 @@
 [
     {
         "type": "link-collapsible",
-        "file": "psalms/psalm91121.json"
+        "file": "psalms/psalm91121.Json"
     },
     {
         "type": "heading",
@@ -41,7 +41,7 @@
     },
     {
         "type": "link",
-        "file": "commonPrayers/praiseOfCherubims.json"
+        "file": "commonprayers/praiseOfCherubims.Json"
     },
     {
         "type": "collapsible-block",
@@ -227,7 +227,7 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/nicenecreed.json"
+        "file": "commonprayers/niceneCreed.Json"
     },
     {
         "type": "prose",
