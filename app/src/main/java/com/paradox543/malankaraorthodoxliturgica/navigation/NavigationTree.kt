@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
-import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 
 object PrayerRoutes {
@@ -27,7 +26,7 @@ object PrayerRoutes {
     const val BEFORE_FOOD = "beforeFood"
     const val FOR_SICK = "forSick"
     const val HOME_PRAYERS = "homePrayers"
-    const val EMBRACING_THE_HAND_SONGS = "embracingTheHandSongs"
+    const val BENEDICTION_SONGS = "benedictionSongs"
 
 //    Canonical Routes
     const val VESPERS = "vespers"
@@ -333,7 +332,25 @@ object NavigationTree {
                     "${PrayerRoutes.FEASTS}/${currentRoute}/worshipOfCross.json",
                     currentRoute,
                     listOf("ml"),
-                )
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "prime"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/prime.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "terce"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/terce.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    createCompleteRoute(currentRoute, "sext"),
+                    "${PrayerRoutes.FEASTS}/${currentRoute}/sext.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
             ),
             languages = listOf("ml", "mn"),
         )
@@ -472,8 +489,8 @@ object NavigationTree {
             parent = parentRoute,
             children = listOf(
                 prayer(
-                    PrayerRoutes.EMBRACING_THE_HAND_SONGS,
-                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.EMBRACING_THE_HAND_SONGS}.json",
+                    PrayerRoutes.BENEDICTION_SONGS,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.BENEDICTION_SONGS}.json",
                     currentRoute
                 ),
                 prayer(
