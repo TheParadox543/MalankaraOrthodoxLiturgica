@@ -15,17 +15,18 @@ plugins {
 
 android {
     namespace = "com.paradox543.malankaraorthodoxliturgica"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
-        minSdk = 24
-        targetSdk = 35
-        versionCode = 27
-        versionName = "1.2.6-alpha"
+        minSdk = 26
+        targetSdk = 36
+        versionCode = 28
+        versionName = "1.3.0"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        versionNameSuffix = "alpha.1"
     }
 
     buildTypes {
@@ -57,6 +58,7 @@ android {
         buildConfig = true
     }
     ndkVersion = "29.0.13599879 rc2"
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {

@@ -29,7 +29,6 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraph(
     modifier: Modifier = Modifier,
