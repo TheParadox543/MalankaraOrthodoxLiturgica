@@ -66,7 +66,6 @@ import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
@@ -192,7 +191,6 @@ fun CalendarScreen(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun CalendarMainView(
     calendarViewModel: CalendarViewModel,
@@ -225,7 +223,6 @@ private fun CalendarMainView(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun MonthNavigation(
     calendarViewModel: CalendarViewModel,
@@ -272,7 +269,6 @@ private fun MonthNavigation(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun DayOfWeekHeaders() {
     Row(
@@ -301,7 +297,6 @@ private fun DayOfWeekHeaders() {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun CalendarGrid(
     monthCalendarData: List<CalendarWeek>,
@@ -324,7 +319,6 @@ private fun CalendarGrid(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun RowScope.DayItem(
     currentCalendarViewDate: LocalDate,
@@ -395,7 +389,6 @@ private fun RowScope.DayItem(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 private fun DisplayEvents(
     scrollState: ScrollState,
@@ -422,7 +415,6 @@ private fun DisplayEvents(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DisplayEvent(
     event: LiturgicalEventDetails,
