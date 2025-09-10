@@ -155,7 +155,7 @@ private fun SectionCard(
             .clickable {
                 if (node.children.isNotEmpty()) {
                     Log.d("SectionCard", "Navigating to section: ${node.route}")
-                    navController.navigate(Screen.Section(node.route).route)
+                    navController.navigate(Screen.Section.createRoute(node.route))
                 } else if (node.filename != null) {
                     navController.navigate(Screen.Prayer.createRoute(node.route))
                 } else {

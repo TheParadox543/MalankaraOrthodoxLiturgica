@@ -118,7 +118,7 @@ fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, navCont
             .fillMaxSize()
             .height(48.dp)
             .clickable {
-                navController.navigate(Screen.BibleBook(bookName).route)
+                navController.navigate(Screen.BibleBook.createRoute(bookName))
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
