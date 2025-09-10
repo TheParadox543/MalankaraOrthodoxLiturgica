@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.paradox543.malankaraorthodoxliturgica.view.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleReadingScreen
@@ -111,6 +112,9 @@ fun NavGraph(
         }
         composable("settings") {
             SettingsScreen(navController, settingsViewModel)
+        }
+        composable("about") {
+            AboutScreen(navController)
         }
     }
 }
