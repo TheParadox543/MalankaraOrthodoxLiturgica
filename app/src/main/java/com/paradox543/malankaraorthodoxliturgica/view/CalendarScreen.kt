@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +13,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -23,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -44,13 +42,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
@@ -465,11 +461,9 @@ fun DisplayEvent(
                                     style = MaterialTheme.typography.bodyLarge,
                                     textDecoration = TextDecoration.Underline,
                                 )
-                                Spacer(Modifier.padding(4.dp))
                                 Icon(
-                                    painterResource(R.drawable.right_thin_chevron),
-                                    contentDescription = "Right Chevron",
-                                    modifier = Modifier.size(16.dp),
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    contentDescription = "Go to Bible Reading",
                                 )
                             }
                         }
@@ -497,11 +491,9 @@ fun DisplayEvent(
                                     style = MaterialTheme.typography.bodyLarge,
                                     textDecoration = TextDecoration.Underline,
                                 )
-                                Spacer(Modifier.padding(4.dp))
                                 Icon(
-                                    painterResource(R.drawable.right_thin_chevron),
-                                    contentDescription = "Right Chevron",
-                                    modifier = Modifier.size(16.dp),
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    contentDescription = "Go to Bible Reading",
                                 )
                             }
                         }
@@ -529,11 +521,9 @@ fun DisplayEvent(
                                     style = MaterialTheme.typography.bodyLarge,
                                     textDecoration = TextDecoration.Underline,
                                 )
-                                Spacer(Modifier.padding(4.dp))
                                 Icon(
-                                    painterResource(R.drawable.right_thin_chevron),
-                                    contentDescription = "Right Chevron",
-                                    modifier = Modifier.size(16.dp),
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    contentDescription = "Go to Bible Reading",
                                 )
                             }
                         }
@@ -559,11 +549,9 @@ fun DisplayEvent(
                                         style = MaterialTheme.typography.bodyLarge,
                                         textDecoration = TextDecoration.Underline,
                                     )
-                                    Spacer(Modifier.padding(4.dp))
                                     Icon(
-                                        painterResource(R.drawable.right_thin_chevron),
-                                        contentDescription = "Right Chevron",
-                                        modifier = Modifier.size(16.dp),
+                                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                        contentDescription = "Go to Bible Reading",
                                     )
                                 }
                             }
@@ -590,11 +578,9 @@ fun DisplayEvent(
                                         style = MaterialTheme.typography.bodyLarge,
                                         textDecoration = TextDecoration.Underline,
                                     )
-                                    Spacer(Modifier.padding(4.dp))
                                     Icon(
-                                        painterResource(R.drawable.right_thin_chevron),
-                                        contentDescription = "Right Chevron",
-                                        modifier = Modifier.size(16.dp),
+                                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                        contentDescription = "Go to Bible Reading",
                                     )
                                 }
                             }
@@ -614,11 +600,9 @@ fun DisplayEvent(
                                         style = MaterialTheme.typography.bodyLarge,
                                         textDecoration = TextDecoration.Underline,
                                     )
-                                    Spacer(Modifier.padding(4.dp))
                                     Icon(
-                                        painterResource(R.drawable.right_thin_chevron),
-                                        contentDescription = "Right Chevron",
-                                        modifier = Modifier.size(16.dp),
+                                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                        contentDescription = "Go to Bible Reading",
                                     )
                                 }
                             }
@@ -640,11 +624,9 @@ fun DisplayEvent(
                                     style = MaterialTheme.typography.bodyLarge,
                                     textDecoration = TextDecoration.Underline,
                                 )
-                                Spacer(Modifier.padding(4.dp))
                                 Icon(
-                                    painterResource(R.drawable.right_thin_chevron),
-                                    contentDescription = "Right Chevron",
-                                    modifier = Modifier.size(16.dp),
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    contentDescription = "Go to Bible Reading",
                                 )
                             }
                         }
@@ -660,11 +642,9 @@ fun DisplayEvent(
                                     style = MaterialTheme.typography.bodyLarge,
                                     textDecoration = TextDecoration.Underline
                                 )
-                                Spacer(Modifier.padding(4.dp))
                                 Icon(
-                                    painterResource(R.drawable.right_thin_chevron),
-                                    contentDescription = "Right Chevron",
-                                    modifier = Modifier.size(16.dp),
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    contentDescription = "Go to Bible Reading",
                                 )
                             }
                         }
