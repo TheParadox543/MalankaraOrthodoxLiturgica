@@ -88,6 +88,9 @@ dependencies {
     // Data Storage
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
 
+    // QR generation
+    implementation(libs.zxing.android.embedded)
+
     // Firebase Services
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
