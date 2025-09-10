@@ -6,10 +6,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.view.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
@@ -58,7 +61,10 @@ fun NavGraph(
             Screen.Onboarding.route
         }
     ) {
-        composable(Screen.Home.route) {
+        composable(
+            Screen.Home.route,
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Home.deepLink!! } )
+        ) {
             HomeScreen(navController, prayerViewModel, settingsViewModel, navViewModel)
         }
 
@@ -76,13 +82,17 @@ fun NavGraph(
             }
         }
 
-        composable("${Screen.Prayer.baseRoute}/{${Screen.Prayer.argRoute}}") { backStackEntry ->
-            val route = backStackEntry.arguments?.getString(Screen.Prayer.argRoute) ?: ""
-            val node = navViewModel.findNode(rootNode, route)
+        composable(
+            route = Screen.Prayer.route,
+            arguments = listOf(navArgument(Screen.Prayer.argRoute) { type = NavType.StringType }),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Prayer.deepLinkPattern })
+        ) { backStackEntry ->
+            val prayerRoute = backStackEntry.arguments?.getString(Screen.Prayer.argRoute) ?: ""
+            val node = navViewModel.findNode(rootNode, prayerRoute)
             if (node != null) {
                 PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
             } else {
-                ContentNotReadyScreen(navController, modifier, message = route)
+                ContentNotReadyScreen(navController, message = prayerRoute)
             }
         }
 
@@ -90,7 +100,10 @@ fun NavGraph(
             PrayNowScreen(navController, settingsViewModel, prayerViewModel, navViewModel)
         }
 
-        composable(Screen.Bible.route) {
+        composable(
+            Screen.Bible.route,
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Bible.deepLink!! })
+        ) {
             BibleScreen(navController, settingsViewModel, bibleViewModel)
         }
 
@@ -109,15 +122,24 @@ fun NavGraph(
             BibleReadingScreen(navController, bibleViewModel, settingsViewModel)
         }
 
-        composable(Screen.Calendar.route) {
+        composable(
+            Screen.Calendar.route,
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Calendar.deepLink!! })
+        ) {
             CalendarScreen(navController, bibleViewModel)
         }
 
-        composable(Screen.Settings.route) {
+        composable(
+            Screen.Settings.route,
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Settings.deepLink!! })
+        ) {
             SettingsScreen(navController, settingsViewModel)
         }
 
-        composable(Screen.About.route) {
+        composable(
+            Screen.About.route,
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.About.deepLink!! })
+        ) {
             AboutScreen(navController)
         }
     }

@@ -157,7 +157,7 @@ private fun SectionCard(
                     Log.d("SectionCard", "Navigating to section: ${node.route}")
                     navController.navigate(Screen.Section(node.route).route)
                 } else if (node.filename != null) {
-                    navController.navigate(Screen.Prayer(node.route).route)
+                    navController.navigate(Screen.Prayer.createRoute(node.route))
                 } else {
                     Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
                 }

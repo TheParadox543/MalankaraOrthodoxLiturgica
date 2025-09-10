@@ -172,7 +172,7 @@ private fun PrayNowCard(
             .clickable {
                 if (node.filename != null) {
                     prayerViewModel.logPrayNowItemSelection(translatedParts, node.route)
-                    navController.navigate(Screen.Prayer(node.route).route)
+                    navController.navigate(Screen.Prayer.createRoute(node.route))
                 } else {
                     Log.w("PrayNowScreen", "No file found")
                     errorState = true
