@@ -19,8 +19,10 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -187,6 +189,7 @@ fun PrayerScreen(
                     prayerElement,
                     prayerViewModel,
                     currentFilename,
+                    navController,
                     songScrollState,
                 )
             }
@@ -202,8 +205,10 @@ fun PrayerElementRenderer(
     prayerElement: PrayerElement,
     prayerViewModel: PrayerViewModel,
     filename: String,
+    navController: NavController,
     isSongHorizontalScroll: Boolean = false,
 ) {
+    val translations by prayerViewModel.translations.collectAsState()
     when (prayerElement) {
         is PrayerElement.Title -> {
             Title(prayerElement.content)
@@ -229,6 +234,14 @@ fun PrayerElementRenderer(
             Subtext(prayerElement.content)
         }
 
+        is PrayerElement.Button -> {
+            PrayerButton(
+                prayerButton = prayerElement,
+                navController = navController,
+                translations = translations,
+            )
+        }
+
         is PrayerElement.Source -> {
             Source(prayerElement.content)
         }
@@ -241,7 +254,12 @@ fun PrayerElementRenderer(
                     Spacer(Modifier.padding(8.dp))
                     prayerElement.items.forEach { nestedItem -> // Loop through type-safe items
                         // Recursively call the renderer for nested items
-                        PrayerElementRenderer(nestedItem, prayerViewModel, filename)
+                        PrayerElementRenderer(
+                            nestedItem,
+                            prayerViewModel,
+                            filename,
+                            navController
+                        )
                         Spacer(Modifier.padding(4.dp))
                     }
                 }
@@ -359,6 +377,43 @@ fun Subtext(text: String, modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxWidth()
     )
+}
+
+@Composable
+fun PrayerButton(
+    prayerButton: PrayerElement.Button,
+    navController: NavController,
+    translations: Map<String, String>,
+    modifier: Modifier = Modifier,
+) {
+    val displayText : String = prayerButton.label
+        ?: prayerButton.link.split("_").mapNotNull { word ->
+            translations[word]
+        }.joinToString(" ").ifEmpty { "Error" }
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Button(
+            onClick = { navController.navigate("prayerScreen/${prayerButton.link}"){
+                if (prayerButton.replace) {
+                    navController.popBackStack()
+                }
+            } },
+        ) {
+            Text(
+                text = displayText,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = modifier.padding(vertical = 8.dp)
+            )
+            Icon(
+                Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = "Go to $displayText",
+            )
+        }
+    }
 }
 
 @Composable

@@ -112,5 +112,10 @@
     {
         "type": "link-collapsible",
         "file": "commonPrayers/kauma.json"
+    },
+    {
+        "type": "button",
+        "link": "kyamtha_sext",
+        "replace": true
     }
 ]

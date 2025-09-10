@@ -69,6 +69,7 @@ fun BibleReadingScreen(
                             prayerElement = bibleReading.preface[index],
                             prayerViewModel = prayerViewModel,
                             filename = title,
+                            navController = navController,
                         )
                     }
                     item("Divider") {

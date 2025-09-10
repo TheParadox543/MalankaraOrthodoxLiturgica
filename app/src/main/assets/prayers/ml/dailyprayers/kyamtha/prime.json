@@ -700,5 +700,10 @@
     {
         "type": "prose",
         "content": "കൃപ നിറഞ്ഞ മറിയമേ…"
+    },
+    {
+        "type": "button",
+        "link": "kyamtha_terce",
+        "replace": true
     }
 ]
