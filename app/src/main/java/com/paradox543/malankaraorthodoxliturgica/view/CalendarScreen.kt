@@ -51,6 +51,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
@@ -453,7 +454,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(event.bibleReadings.vespersGospel)
-                                    navController.navigate("bibleReaderScreen")
+                                    navController.navigate(Screen.BibleReader.route)
                                 }
                             ) {
                                 Text(
@@ -483,7 +484,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(event.bibleReadings.matinsGospel)
-                                    navController.navigate("bibleReaderScreen")
+                                    navController.navigate(Screen.BibleReader.route)
                                 }
                             ) {
                                 Text(
@@ -513,7 +514,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(event.bibleReadings.primeGospel)
-                                    navController.navigate("bibleReaderScreen")
+                                    navController.navigate(Screen.BibleReader.route)
                                 }
                             ) {
                                 Text(
@@ -541,7 +542,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate("bibleReaderScreen")
+                                        navController.navigate(Screen.BibleReader.route)
                                     }
                                 ) {
                                     Text(
@@ -570,7 +571,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate("bibleReaderScreen")
+                                        navController.navigate(Screen.BibleReader.route)
                                     }
                                 ) {
                                     Text(
@@ -592,7 +593,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate("bibleReaderScreen")
+                                        navController.navigate(Screen.BibleReader.route)
                                     }
                                 ) {
                                     Text(
@@ -616,7 +617,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(event.bibleReadings.gospel)
-                                    navController.navigate("bibleReaderScreen")
+                                    navController.navigate(Screen.BibleReader.route)
                                 }
                             ) {
                                 Text(
@@ -633,7 +634,7 @@ fun DisplayEvent(
                         if (event.specialSongsKey != null) {
                             TextButton(
                                 onClick = {
-                                    navController.navigate("prayerScreen/${event.specialSongsKey}")
+                                    navController.navigate(Screen.Prayer(event.specialSongsKey).route)
                                 }
                             ) {
                                 Text(

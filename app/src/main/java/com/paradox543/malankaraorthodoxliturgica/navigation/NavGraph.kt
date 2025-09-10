@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -12,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.view.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
@@ -54,66 +53,71 @@ fun NavGraph(
     NavHost(
         navController,
         startDestination = if (onboardingStatus) {
-            "home"
+            Screen.Home.route
         } else {
-            "onboarding"
+            Screen.Onboarding.route
         }
     ) {
-        composable("home") {
+        composable(Screen.Home.route) {
             HomeScreen(navController, prayerViewModel, settingsViewModel, navViewModel)
         }
-        composable("onboarding") {
+
+        composable(Screen.Onboarding.route) {
             OnboardingScreen(navController, settingsViewModel, prayerViewModel)
         }
-        composable("section/{route}") { backStackEntry ->
-            val route = backStackEntry.arguments?.getString("route") ?: ""
+
+        composable("${Screen.Section.baseRoute}/{${Screen.Section.argRoute}}") { backStackEntry ->
+            val route = backStackEntry.arguments?.getString(Screen.Section.argRoute) ?: ""
             val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, settingsViewModel, node)
             } else {
-                ContentNotReadyScreen(navController = navController, message = route)
+                ContentNotReadyScreen(navController, modifier, message = route)
             }
         }
-        composable("prayerScreen/{route}") { backStackEntry ->
-            val route = backStackEntry.arguments?.getString("route") ?: ""
+
+        composable("${Screen.Prayer.baseRoute}/{${Screen.Prayer.argRoute}}") { backStackEntry ->
+            val route = backStackEntry.arguments?.getString(Screen.Prayer.argRoute) ?: ""
             val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
             } else {
-                ContentNotReadyScreen(navController = navController, message = route)
+                ContentNotReadyScreen(navController, modifier, message = route)
             }
         }
-        composable("prayNow") {
+
+        composable(Screen.PrayNow.route) {
             PrayNowScreen(navController, settingsViewModel, prayerViewModel, navViewModel)
         }
-        composable("bible") {
+
+        composable(Screen.Bible.route) {
             BibleScreen(navController, settingsViewModel, bibleViewModel)
         }
-        composable("bible/{bookName}") {backStackEntry ->
-            val book = backStackEntry.arguments?.getString("bookName") ?: ""
+
+        composable("${Screen.BibleBook.baseRoute}/{${Screen.BibleBook.argBook}}") { backStackEntry ->
+            val book = backStackEntry.arguments?.getString(Screen.BibleBook.argBook) ?: ""
             BibleBookScreen(navController, settingsViewModel, bibleViewModel, book)
         }
-        composable("bible/{bookIndex}/{chapterIndex}") {backStackEntry ->
-            val bookIndex = backStackEntry.arguments?.getString("bookIndex") ?: ""
-            val chapterIndex = backStackEntry.arguments?.getString("chapterIndex") ?: ""
-            BibleChapterScreen(
-                navController,
-                settingsViewModel,
-                bibleViewModel,
-                bookIndex.toInt(),
-                chapterIndex.toInt()
-            )
+
+        composable("${Screen.BibleChapter.baseRoute}/{${Screen.BibleChapter.argBookIndex}}/{${Screen.BibleChapter.argChapterIndex}}") { backStackEntry ->
+            val bookIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.argBookIndex)?.toIntOrNull() ?: 0
+            val chapterIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.argChapterIndex)?.toIntOrNull() ?: 0
+            BibleChapterScreen(navController, settingsViewModel, bibleViewModel, bookIndex, chapterIndex)
         }
-        composable("bibleReaderScreen") {
+
+        composable(Screen.BibleReader.route) {
             BibleReadingScreen(navController, bibleViewModel, settingsViewModel)
         }
-        composable("calendar") {
+
+        composable(Screen.Calendar.route) {
             CalendarScreen(navController, bibleViewModel)
         }
-        composable("settings") {
+
+        composable(Screen.Settings.route) {
             SettingsScreen(navController, settingsViewModel)
         }
-        composable("about") {
+
+        composable(Screen.About.route) {
             AboutScreen(navController)
         }
     }

@@ -53,6 +53,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
@@ -149,7 +150,7 @@ fun PrayerScreen(
                 TopNavBar(
                     title,
                     navController
-                ) { navController.navigate("settings") }
+                ) { navController.navigate(Screen.Settings) }
             }
         },
         bottomBar = {
@@ -395,7 +396,7 @@ fun PrayerButton(
         horizontalArrangement = Arrangement.Center,
     ) {
         Button(
-            onClick = { navController.navigate("prayerScreen/${prayerButton.link}"){
+            onClick = { navController.navigate(Screen.Prayer(prayerButton.link).route){
                 if (prayerButton.replace) {
                     navController.popBackStack()
                 }

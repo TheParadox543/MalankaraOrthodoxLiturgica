@@ -56,6 +56,7 @@ import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -200,7 +201,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
 
             // About the app option
             ListItem(
-                modifier = Modifier.clickable { navController.navigate("about") },
+                modifier = Modifier.clickable { navController.navigate(Screen.About.route) },
                 leadingContent = {
                     Icon(
                         Icons.Filled.Info,
