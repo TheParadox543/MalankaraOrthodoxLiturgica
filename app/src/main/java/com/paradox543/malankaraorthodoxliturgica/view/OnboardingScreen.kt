@@ -36,6 +36,7 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
@@ -162,8 +163,8 @@ fun OnboardingScreen(
                     settingsViewModel.setFontScaleFromSettings(selectedFontScale)
                     settingsViewModel.setOnboardingCompleted()
                     // Navigate to the home screen
-                    navController.navigate("home") { // Define your main app route
-                        popUpTo("onboarding") { // Remove onboarding from back stack
+                    navController.navigate(Screen.Home.route) { // Define your main app route
+                        popUpTo(Screen.Onboarding.route) { // Remove onboarding from back stack
                             inclusive = true
                         }
                     }

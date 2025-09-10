@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
@@ -171,7 +172,7 @@ private fun PrayNowCard(
             .clickable {
                 if (node.filename != null) {
                     prayerViewModel.logPrayNowItemSelection(translatedParts, node.route)
-                    navController.navigate("prayerScreen/${node.route}")
+                    navController.navigate(Screen.Prayer(node.route).route)
                 } else {
                     Log.w("PrayNowScreen", "No file found")
                     errorState = true

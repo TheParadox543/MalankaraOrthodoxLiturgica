@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
@@ -117,7 +118,7 @@ fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, navCont
             .fillMaxSize()
             .height(48.dp)
             .clickable {
-                navController.navigate("bible/${bookName}")
+                navController.navigate(Screen.BibleBook(bookName).route)
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
