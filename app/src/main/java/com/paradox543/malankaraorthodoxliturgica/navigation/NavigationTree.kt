@@ -19,6 +19,9 @@ object PrayerRoutes {
     const val WOMEN = "women"
     const val WEDDING = "wedding"
     const val BAPTISM = "baptism"
+    // Feasts
+    const val CHRISTMAS = "christmas"
+    const val EPIPHANY = "epiphany"
     const val ASCENSION = "ascension"
     const val PENTECOST = "pentecost"
     const val CONTEXTUAL = "contextual"
@@ -292,6 +295,12 @@ object NavigationTree {
             children = listOf(
                 christmasSection(currentRoute),
                 prayer(
+                    PrayerRoutes.EPIPHANY,
+                    "${PrayerRoutes.FEASTS}/${PrayerRoutes.EPIPHANY}.json",
+                    currentRoute,
+                    listOf("ml")
+                ),
+                prayer(
                     PrayerRoutes.ASCENSION,
                     "${PrayerRoutes.FEASTS}/${PrayerRoutes.ASCENSION}.json",
                     currentRoute,
@@ -304,7 +313,7 @@ object NavigationTree {
     }
 
     private fun christmasSection(parentRoute: String): PageNode {
-        val currentRoute = "christmas"
+        val currentRoute = PrayerRoutes.CHRISTMAS
         return PageNode(
             route = currentRoute,
             parent = parentRoute,
