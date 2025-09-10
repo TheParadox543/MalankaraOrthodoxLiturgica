@@ -4,21 +4,21 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed class Screen(val route: String, val deepLink: String? = null) {
-    data object Home : Screen("home", "app://liturgica/home")
-    data object Onboarding : Screen("onboarding")
-    data object PrayNow : Screen("prayNow")
-    data object Bible : Screen("bible", "app://liturgica/bible")
-    data object BibleReader : Screen("bibleReader")
-    data object Calendar : Screen("calendar", "app://liturgica/calendar")
-    data object Settings : Screen("settings", "app://liturgica/settings")
-    data object About : Screen("about", "app://liturgica/about")
+    object Home : Screen("home", "app://liturgica/home")
+    object Onboarding : Screen("onboarding")
+    object PrayNow : Screen("prayNow")
+    object Bible : Screen("bible", "app://liturgica/bible")
+    object BibleReader : Screen("bibleReader")
+    object Calendar : Screen("calendar", "app://liturgica/calendar")
+    object Settings : Screen("settings", "app://liturgica/settings")
+    object About : Screen("about", "app://liturgica/about")
 
+    object Section : Screen("section/{route}") {
+        const val argRoute = "route"
+        const val deepLinkPattern = "app://liturgica/section/{$argRoute}"
 
-    data class Section(val sectionRoute: String) : Screen("section/$sectionRoute") {
-        companion object {
-            const val baseRoute = "section"
-            const val argRoute = "route"
-        }
+        fun createRoute(sectionRoute: String) = "section/$sectionRoute"
+        fun createDeepLink(sectionRoute: String) = "app://liturgica/section/$sectionRoute"
     }
 
     object Prayer : Screen("prayer/{route}") {
@@ -29,20 +29,20 @@ sealed class Screen(val route: String, val deepLink: String? = null) {
         fun createDeepLink(prayerRoute: String) = "app://liturgica/prayer/$prayerRoute"
     }
 
-    data class BibleBook(val bookName: String) : Screen("bible/$bookName") {
-        companion object {
-            const val baseRoute = "bible"
-            const val argBook = "bookName"
-        }
+    object BibleBook : Screen("bible/{bookName}") {
+        const val argBook = "bookName"
+        const val deepLinkPattern = "app://liturgica/bible/{$argBook}"
+
+        fun createRoute(bookName: String) = "bible/$bookName"
+        fun createDeepLink(bookName: String) = "app://liturgica/bible/$bookName"
     }
 
+    object BibleChapter : Screen("bible/{bookIndex}/{chapterIndex}") {
+        const val argBookIndex = "bookIndex"
+        const val argChapterIndex = "chapterIndex"
+        const val deepLinkPattern = "app://liturgica/bible/{$argBookIndex}/{$argChapterIndex}"
 
-    data class BibleChapter(val bookIndex: Int, val chapterIndex: Int) :
-        Screen("bible/$bookIndex/$chapterIndex") {
-        companion object {
-            const val baseRoute = "bible"
-            const val argBookIndex = "bookIndex"
-            const val argChapterIndex = "chapterIndex"
-        }
+        fun createRoute(bookIndex: Int, chapterIndex: Int) = "bible/$bookIndex/$chapterIndex"
+        fun createDeepLink(bookIndex: Int, chapterIndex: Int) = "app://liturgica/bible/$bookIndex/$chapterIndex"
     }
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree
 import com.paradox543.malankaraorthodoxliturgica.navigation.PrayerRoutes
@@ -66,8 +67,8 @@ class NavViewModel @Inject constructor(
         val nextSiblingRoute: String? = nextSiblingNode?.takeIf { it.filename != null }?.route
 
         // Generate the required routes
-        val prevRoute = prevSiblingRoute?.let { "prayerScreen/$prevSiblingRoute" }
-        val nextRoute = nextSiblingRoute?.let { "prayerScreen/$nextSiblingRoute" }
+        val prevRoute = prevSiblingRoute?.let { Screen.Prayer.createRoute(prevSiblingRoute) }
+        val nextRoute = nextSiblingRoute?.let { Screen.Prayer.createRoute(nextSiblingRoute) }
 
         // Return the pair of nullable String routes
         return Pair(prevRoute, nextRoute)

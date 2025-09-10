@@ -72,7 +72,7 @@ fun BibleChapterCard(navController: NavController, bookIndex: Int, chapterIndex:
             .fillMaxSize()
             .aspectRatio(1f)
             .clickable {
-                navController.navigate(Screen.BibleChapter(bookIndex, chapterIndex).route)
+                navController.navigate(Screen.BibleChapter.createRoute(bookIndex, chapterIndex))
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(

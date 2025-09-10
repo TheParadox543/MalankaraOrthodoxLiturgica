@@ -72,7 +72,11 @@ fun NavGraph(
             OnboardingScreen(navController, settingsViewModel, prayerViewModel)
         }
 
-        composable("${Screen.Section.baseRoute}/{${Screen.Section.argRoute}}") { backStackEntry ->
+        composable(
+            route = Screen.Section.route,
+            arguments = listOf(navArgument(Screen.Section.argRoute) { type = NavType.StringType }),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Section.deepLinkPattern })
+        ) { backStackEntry ->
             val route = backStackEntry.arguments?.getString(Screen.Section.argRoute) ?: ""
             val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
@@ -107,12 +111,22 @@ fun NavGraph(
             BibleScreen(navController, settingsViewModel, bibleViewModel)
         }
 
-        composable("${Screen.BibleBook.baseRoute}/{${Screen.BibleBook.argBook}}") { backStackEntry ->
+        composable(
+            route = Screen.BibleBook.route,
+            arguments = listOf(navArgument(Screen.BibleBook.argBook) { type = NavType.StringType }),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleBook.deepLinkPattern })
+        ) { backStackEntry ->
             val book = backStackEntry.arguments?.getString(Screen.BibleBook.argBook) ?: ""
             BibleBookScreen(navController, settingsViewModel, bibleViewModel, book)
         }
 
-        composable("${Screen.BibleChapter.baseRoute}/{${Screen.BibleChapter.argBookIndex}}/{${Screen.BibleChapter.argChapterIndex}}") { backStackEntry ->
+        composable(
+            route = Screen.BibleChapter.route,
+            arguments = listOf(
+                navArgument(Screen.BibleChapter.argBookIndex) { type = NavType.StringType }
+            ),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleChapter.deepLinkPattern })
+        ) { backStackEntry ->
             val bookIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.argBookIndex)?.toIntOrNull() ?: 0
             val chapterIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.argChapterIndex)?.toIntOrNull() ?: 0
             BibleChapterScreen(navController, settingsViewModel, bibleViewModel, bookIndex, chapterIndex)
