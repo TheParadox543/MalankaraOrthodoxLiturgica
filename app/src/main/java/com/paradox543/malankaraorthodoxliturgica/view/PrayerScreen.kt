@@ -396,7 +396,7 @@ fun PrayerButton(
         horizontalArrangement = Arrangement.Center,
     ) {
         Button(
-            onClick = { navController.navigate(Screen.Prayer(prayerButton.link).route){
+            onClick = { navController.navigate(Screen.Prayer.createRoute(prayerButton.link)){
                 if (prayerButton.replace) {
                     navController.popBackStack()
                 }

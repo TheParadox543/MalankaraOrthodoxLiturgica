@@ -634,7 +634,7 @@ fun DisplayEvent(
                         if (event.specialSongsKey != null) {
                             TextButton(
                                 onClick = {
-                                    navController.navigate(Screen.Prayer(event.specialSongsKey).route)
+                                    navController.navigate(Screen.Prayer.createRoute(event.specialSongsKey))
                                 }
                             ) {
                                 Text(
