@@ -195,6 +195,6 @@
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/cyclicprayers.json"
+        "file": "commonPrayers/cyclicPrayers.json"
     }
 ]
