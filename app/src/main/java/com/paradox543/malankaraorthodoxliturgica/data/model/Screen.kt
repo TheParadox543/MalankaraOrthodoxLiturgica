@@ -10,6 +10,7 @@ sealed class Screen(val route: String, val deepLink: String? = null) {
     object Bible : Screen("bible", "app://liturgica/bible")
     object BibleReader : Screen("bibleReader")
     object Calendar : Screen("calendar", "app://liturgica/calendar")
+    object QrScanner : Screen("qrScanner")
     object Settings : Screen("settings", "app://liturgica/settings")
     object About : Screen("about", "app://liturgica/about")
 

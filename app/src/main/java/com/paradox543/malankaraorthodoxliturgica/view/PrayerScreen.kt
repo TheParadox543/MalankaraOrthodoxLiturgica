@@ -2,7 +2,6 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -57,7 +56,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.qr.QrFab
+import com.paradox543.malankaraorthodoxliturgica.qr.QrFabGenerate
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -166,11 +165,10 @@ fun PrayerScreen(
             }
         },
         floatingActionButton = {
-            QrFab(
+            QrFabGenerate(
                 navController,
                 Screen.Prayer.createDeepLink(node.route),
             )
-            Log.d("PrayerScreen", "FAB deep link: ${Screen.Prayer.createDeepLink(node.route)}")
         }
     ) { innerPadding ->
 

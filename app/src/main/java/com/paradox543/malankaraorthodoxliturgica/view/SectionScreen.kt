@@ -39,6 +39,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
@@ -69,7 +70,8 @@ fun SectionScreen(
 
     Scaffold (
         topBar = { TopNavBar(title, navController) },
-        bottomBar = { BottomNavBar(navController = navController) }
+        bottomBar = { BottomNavBar(navController = navController) },
+        floatingActionButton = { QrFabScan(navController) }
     ){ innerPadding ->
         Box{
             if (screenWidth > 600.dp) {

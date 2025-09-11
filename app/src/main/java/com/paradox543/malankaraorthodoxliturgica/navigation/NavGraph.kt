@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.view.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
@@ -141,6 +142,12 @@ fun NavGraph(
             deepLinks = listOf(navDeepLink { uriPattern = Screen.Calendar.deepLink!! })
         ) {
             CalendarScreen(navController, bibleViewModel)
+        }
+
+        composable(
+            Screen.QrScanner.route
+        ) {
+            QrScannerView(navController)
         }
 
         composable(
