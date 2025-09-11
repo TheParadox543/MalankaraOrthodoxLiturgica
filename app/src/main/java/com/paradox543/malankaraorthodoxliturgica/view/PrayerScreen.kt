@@ -40,6 +40,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -57,6 +58,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabGenerate
+import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -165,10 +167,27 @@ fun PrayerScreen(
             }
         },
         floatingActionButton = {
-            QrFabGenerate(
-                navController,
-                Screen.Prayer.createDeepLink(node.route),
-            )
+            AnimatedVisibility(
+                visible = isVisible.value,
+                enter = androidx.compose.animation.fadeIn(),
+                exit = androidx.compose.animation.shrinkOut(),
+            ) {
+                Column(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    QrFabScan(
+                        navController,
+                        Modifier.scale(0.8f).padding(start = 12.dp),
+                        false,
+                    )
+                    QrFabGenerate(
+                        Screen.Prayer.createDeepLink(node.route),
+                        Modifier.scale(1.2f),
+                    )
+                }
+            }
         }
     ) { innerPadding ->
 
