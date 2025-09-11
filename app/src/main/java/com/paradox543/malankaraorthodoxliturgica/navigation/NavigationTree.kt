@@ -22,8 +22,11 @@ object PrayerRoutes {
     // Feasts
     const val CHRISTMAS = "christmas"
     const val EPIPHANY = "epiphany"
+    const val RECONCILIATION_SERVICE = "reconciliationService"
+    const val HALF_LENT = "halfLent"
     const val ASCENSION = "ascension"
     const val PENTECOST = "pentecost"
+
     const val CONTEXTUAL = "contextual"
     const val AFTER_FOOD = "afterFood"
     const val BEFORE_FOOD = "beforeFood"
@@ -300,6 +303,18 @@ object NavigationTree {
                     "${PrayerRoutes.FEASTS}/${PrayerRoutes.EPIPHANY}.json",
                     currentRoute,
                     listOf("ml")
+                ),
+                prayer(
+                    PrayerRoutes.RECONCILIATION_SERVICE,
+                    "${PrayerRoutes.FEASTS}/${PrayerRoutes.RECONCILIATION_SERVICE}.json",
+                    currentRoute,
+                    listOf("ml"),
+                ),
+                prayer(
+                    PrayerRoutes.HALF_LENT,
+                    "${PrayerRoutes.FEASTS}/${PrayerRoutes.HALF_LENT}.json",
+                    currentRoute,
+                    listOf("ml"),
                 ),
                 prayer(
                     PrayerRoutes.ASCENSION,

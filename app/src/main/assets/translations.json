@@ -353,5 +353,15 @@
         "ml": "ദനഹാ",
         "en": "Epiphany",
         "mn": "Epiphany"
+    },
+    "reconciliationService": {
+        "en": "Reconciliation Service",
+        "mn": "Reconciliation Service",
+        "ml": "ശുബ്ക്കോനൊ"
+    },
+    "halfLent": {
+        "en": "Half Lent",
+        "mn": "Half Lent",
+        "ml": "പാതിനോമ്പ്"
     }
 }
