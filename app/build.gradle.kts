@@ -90,6 +90,12 @@ dependencies {
 
     // QR generation
     implementation(libs.zxing.android.embedded)
+    implementation(libs.zxing.core)
+
+    // Camera Scanning
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
 
     // Firebase Services
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency
