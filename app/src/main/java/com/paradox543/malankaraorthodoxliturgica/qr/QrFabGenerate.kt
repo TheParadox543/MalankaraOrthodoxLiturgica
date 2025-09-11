@@ -28,7 +28,7 @@ import com.paradox543.malankaraorthodoxliturgica.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QrFabGenerate(
-    currentDeepLink: String,
+    routeProvider: () -> String, // Pass the onClick String from parent
     modifier: Modifier = Modifier,
 ) {
     var showDialog by remember { mutableStateOf(false) }
@@ -50,7 +50,7 @@ fun QrFabGenerate(
     ) {
         FloatingActionButton(
             onClick = {
-                qrBitmap = generateQrBitmap(currentDeepLink)
+                qrBitmap = generateQrBitmap(routeProvider())
                 showDialog = true
             },
             modifier = modifier,

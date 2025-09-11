@@ -15,33 +15,34 @@ sealed class Screen(val route: String, val deepLink: String? = null) {
     object About : Screen("about", "app://liturgica/about")
 
     object Section : Screen("section/{route}") {
-        const val argRoute = "route"
-        const val deepLinkPattern = "app://liturgica/section/{$argRoute}"
+        const val ARG_ROUTE = "route"
+        const val DEEP_LINK_PATTERN = "app://liturgica/section/{$ARG_ROUTE}"
 
         fun createRoute(sectionRoute: String) = "section/$sectionRoute"
         fun createDeepLink(sectionRoute: String) = "app://liturgica/section/$sectionRoute"
     }
 
-    object Prayer : Screen("prayer/{route}") {
-        const val argRoute = "route"
-        const val deepLinkPattern = "app://liturgica/prayer/{$argRoute}"
+    object Prayer : Screen("prayer/{route}/{scroll}") {
+        const val ARG_ROUTE = "route"
+        const val ARG_SCROLL = "scroll"
+        const val DEEP_LINK_PATTERN = "app://liturgica/prayer/{$ARG_ROUTE}/{$ARG_SCROLL}"
 
-        fun createRoute(prayerRoute: String) = "prayer/$prayerRoute"
-        fun createDeepLink(prayerRoute: String) = "app://liturgica/prayer/$prayerRoute"
+        fun createRoute(prayerRoute: String) = "prayer/$prayerRoute/0"
+        fun createDeepLink(prayerRoute: String, scroll: Int = 0) = "app://liturgica/prayer/$prayerRoute/$scroll"
     }
 
     object BibleBook : Screen("bible/{bookName}") {
-        const val argBook = "bookName"
-        const val deepLinkPattern = "app://liturgica/bible/{$argBook}"
+        const val ARG_BOOK = "bookName"
+        const val DEEP_LINK_PATTERN = "app://liturgica/bible/{$ARG_BOOK}"
 
         fun createRoute(bookName: String) = "bible/$bookName"
         fun createDeepLink(bookName: String) = "app://liturgica/bible/$bookName"
     }
 
     object BibleChapter : Screen("bible/{bookIndex}/{chapterIndex}") {
-        const val argBookIndex = "bookIndex"
-        const val argChapterIndex = "chapterIndex"
-        const val deepLinkPattern = "app://liturgica/bible/{$argBookIndex}/{$argChapterIndex}"
+        const val ARG_BOOK_INDEX = "bookIndex"
+        const val ARG_CHAPTER_INDEX = "chapterIndex"
+        const val DEEP_LINK_PATTERN = "app://liturgica/bible/{$ARG_BOOK_INDEX}/{$ARG_CHAPTER_INDEX}"
 
         fun createRoute(bookIndex: Int, chapterIndex: Int) = "bible/$bookIndex/$chapterIndex"
         fun createDeepLink(bookIndex: Int, chapterIndex: Int) = "app://liturgica/bible/$bookIndex/$chapterIndex"

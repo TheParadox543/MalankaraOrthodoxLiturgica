@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.qr
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.util.Log
 import android.util.Size
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -143,14 +144,29 @@ fun QrScannerView(navController: NavController) {
                                 .padding(32.dp)
                         )
                     }
+                } else {
+                    Card {
+                        Text(
+                            text = "QR Code detected! Navigating...",
+                            color = MaterialTheme.colorScheme.primary,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(32.dp)
+                        )
+                    }
                 }
                 if (code.startsWith("app://liturgica/")) {
                     LaunchedEffect(key1 = code) {
-                        delay(100)
                         val route = code.replace("app://liturgica/", "")
-                        navController.navigate(route) {
-                            launchSingleTop = true
-                            navController.popBackStack(Screen.QrScanner.route, true)
+                        Log.d("QR Scanner View", "Navigating to $route")
+//                        delay(100)
+                        if (route.isNotEmpty()) {
+                            navController.navigate(route) {
+                                launchSingleTop = true
+                                navController.popBackStack(Screen.QrScanner.route, true)
+                            }
                         }
                     }
                 } else if (code.isNotEmpty()){
