@@ -36,8 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
@@ -68,7 +70,8 @@ fun SectionScreen(
 
     Scaffold (
         topBar = { TopNavBar(title, navController) },
-        bottomBar = { BottomNavBar(navController = navController) }
+        bottomBar = { BottomNavBar(navController = navController) },
+        floatingActionButton = { QrFabScan(navController) }
     ){ innerPadding ->
         Box{
             if (screenWidth > 600.dp) {
@@ -153,9 +156,10 @@ private fun SectionCard(
             .padding(4.dp)
             .clickable {
                 if (node.children.isNotEmpty()) {
-                    navController.navigate("section/${node.route}")
+                    Log.d("SectionCard", "Navigating to section: ${node.route}")
+                    navController.navigate(Screen.Section.createRoute(node.route))
                 } else if (node.filename != null) {
-                    navController.navigate("prayerScreen/${node.route}")
+                    navController.navigate(Screen.Prayer.createRoute(node.route))
                 } else {
                     Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
                 }

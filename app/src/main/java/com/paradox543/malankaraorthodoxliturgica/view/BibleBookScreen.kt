@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
@@ -37,8 +38,8 @@ fun BibleBookScreen(
 
     val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, selectedLanguage)
     if (bibleBook == null){
-        navController.navigate("bible") {
-            popUpTo("bible") { inclusive = true }
+        navController.navigate(Screen.Bible.route) {
+            popUpTo(Screen.Bible.route) { inclusive = true }
         }
     }
     val chapters = bibleBook?.chapters ?: 1
@@ -71,7 +72,7 @@ fun BibleChapterCard(navController: NavController, bookIndex: Int, chapterIndex:
             .fillMaxSize()
             .aspectRatio(1f)
             .clickable {
-                navController.navigate("bible/$bookIndex/$chapterIndex")
+                navController.navigate(Screen.BibleChapter.createRoute(bookIndex, chapterIndex))
             },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(

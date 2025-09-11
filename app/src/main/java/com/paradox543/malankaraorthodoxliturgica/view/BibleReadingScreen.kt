@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
@@ -46,7 +47,7 @@ fun BibleReadingScreen(
         topBar = { TopNavBar(
             title,
             navController
-        ) { navController.navigate("settings") }
+        ) { navController.navigate(Screen.Settings.route) }
         },
     ) { innerPadding ->
         if (bibleReadings.isEmpty() ) {
@@ -69,6 +70,7 @@ fun BibleReadingScreen(
                             prayerElement = bibleReading.preface[index],
                             prayerViewModel = prayerViewModel,
                             filename = title,
+                            navController = navController,
                         )
                     }
                     item("Divider") {

@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -19,8 +20,10 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -38,6 +41,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -51,11 +55,15 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.qr.QrFabGenerate
+import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import kotlinx.coroutines.delay
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -64,7 +72,8 @@ fun PrayerScreen(
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
-    node: PageNode
+    node: PageNode,
+    scrollIndex: Int = 0,
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
@@ -105,6 +114,15 @@ fun PrayerScreen(
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()
     }
+//    LaunchedEffect(Unit) {
+//        if (scrollIndex > 0) {
+//            while (listState.firstVisibleItemIndex != scrollIndex) {
+//                Log.d("QR in Prayer Screen", "Detected scroll from Qr: $scrollIndex")
+//                listState.scrollToItem(scrollIndex)
+//                Log.d("QR in Prayer Screen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
+//            }
+//        }
+//    }
 
     // Observe if the LazyColumn has been scrolled to its very end
     val isScrolledToTheEnd by remember {
@@ -147,7 +165,7 @@ fun PrayerScreen(
                 TopNavBar(
                     title,
                     navController
-                ) { navController.navigate("settings") }
+                ) { navController.navigate(Screen.Settings.route) }
             }
         },
         bottomBar = {
@@ -157,6 +175,37 @@ fun PrayerScreen(
                     modifier = Modifier.zIndex(1f)
                 ) {
                     SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
+                }
+            }
+        },
+        floatingActionButton = {
+            AnimatedVisibility(
+                visible = isVisible.value,
+                enter = androidx.compose.animation.fadeIn(),
+                exit = androidx.compose.animation.shrinkOut(),
+            ) {
+                Column(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.Start,
+                ) {
+                    QrFabScan(
+                        navController,
+                        Modifier
+                            .scale(0.8f)
+                            .padding(start = 12.dp),
+                        false,
+                    )
+                    QrFabGenerate(
+//                        Screen.Prayer.createDeepLink(node.route, listState.firstVisibleItemIndex),
+                        routeProvider = {
+                            Screen.Prayer.createDeepLink(
+                                node.route,
+                                listState.firstVisibleItemIndex
+                            )
+                        },
+                        Modifier.scale(1.2f),
+                    )
                 }
             }
         }
@@ -169,6 +218,16 @@ fun PrayerScreen(
             }
             if (initialBottomPadding.value == 0.dp) {
                 initialBottomPadding.value = innerPadding.calculateBottomPadding()
+            }
+        }
+        LaunchedEffect(Unit) {
+            if (scrollIndex > 0) {
+                while (listState.firstVisibleItemIndex != scrollIndex) {
+                    Log.d("QR in Prayer Screen", "Detected scroll from Qr: $scrollIndex")
+                    listState.scrollToItem(scrollIndex)
+                    Log.d("QR in Prayer Screen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
+                    delay(100) // Small delay to allow UI to update
+                }
             }
         }
 
@@ -187,6 +246,7 @@ fun PrayerScreen(
                     prayerElement,
                     prayerViewModel,
                     currentFilename,
+                    navController,
                     songScrollState,
                 )
             }
@@ -202,8 +262,10 @@ fun PrayerElementRenderer(
     prayerElement: PrayerElement,
     prayerViewModel: PrayerViewModel,
     filename: String,
+    navController: NavController,
     isSongHorizontalScroll: Boolean = false,
 ) {
+    val translations by prayerViewModel.translations.collectAsState()
     when (prayerElement) {
         is PrayerElement.Title -> {
             Title(prayerElement.content)
@@ -229,6 +291,14 @@ fun PrayerElementRenderer(
             Subtext(prayerElement.content)
         }
 
+        is PrayerElement.Button -> {
+            PrayerButton(
+                prayerButton = prayerElement,
+                navController = navController,
+                translations = translations,
+            )
+        }
+
         is PrayerElement.Source -> {
             Source(prayerElement.content)
         }
@@ -241,7 +311,12 @@ fun PrayerElementRenderer(
                     Spacer(Modifier.padding(8.dp))
                     prayerElement.items.forEach { nestedItem -> // Loop through type-safe items
                         // Recursively call the renderer for nested items
-                        PrayerElementRenderer(nestedItem, prayerViewModel, filename)
+                        PrayerElementRenderer(
+                            nestedItem,
+                            prayerViewModel,
+                            filename,
+                            navController
+                        )
                         Spacer(Modifier.padding(4.dp))
                     }
                 }
@@ -359,6 +434,43 @@ fun Subtext(text: String, modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxWidth()
     )
+}
+
+@Composable
+fun PrayerButton(
+    prayerButton: PrayerElement.Button,
+    navController: NavController,
+    translations: Map<String, String>,
+    modifier: Modifier = Modifier,
+) {
+    val displayText : String = prayerButton.label
+        ?: prayerButton.link.split("_").mapNotNull { word ->
+            translations[word]
+        }.joinToString(" ").ifEmpty { "Error" }
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Button(
+            onClick = { navController.navigate(Screen.Prayer.createRoute(prayerButton.link)){
+                if (prayerButton.replace) {
+                    navController.popBackStack()
+                }
+            } },
+        ) {
+            Text(
+                text = displayText,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onPrimary,
+                modifier = modifier.padding(vertical = 8.dp)
+            )
+            Icon(
+                Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = "Go to $displayText",
+            )
+        }
+    }
 }
 
 @Composable

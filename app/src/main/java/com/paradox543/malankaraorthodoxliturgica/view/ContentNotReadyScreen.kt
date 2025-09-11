@@ -19,8 +19,8 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 
 @Composable
 fun ContentNotReadyScreen(
-    modifier: Modifier = Modifier,
     navController: NavController,
+    modifier: Modifier = Modifier,
     message: String? = null,
 ) {
     Scaffold(

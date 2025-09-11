@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -37,6 +36,7 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
@@ -147,7 +147,12 @@ fun OnboardingScreen(
                         "Sample Prayer",
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     )
-                    PrayerElementRenderer(prayers[1], prayerViewModel, filename)
+                    PrayerElementRenderer(
+                        prayers[1],
+                        prayerViewModel,
+                        filename,
+                        navController
+                    )
                 }
             }
 
@@ -158,8 +163,8 @@ fun OnboardingScreen(
                     settingsViewModel.setFontScaleFromSettings(selectedFontScale)
                     settingsViewModel.setOnboardingCompleted()
                     // Navigate to the home screen
-                    navController.navigate("home") { // Define your main app route
-                        popUpTo("onboarding") { // Remove onboarding from back stack
+                    navController.navigate(Screen.Home.route) { // Define your main app route
+                        popUpTo(Screen.Onboarding.route) { // Remove onboarding from back stack
                             inclusive = true
                         }
                     }

@@ -54,6 +54,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
                 "song" -> json.decodeFromJsonElement(PrayerElement.Song.serializer(), element)
                 "subtext" -> json.decodeFromJsonElement(PrayerElement.Subtext.serializer(), element)
                 "source" -> json.decodeFromJsonElement(PrayerElement.Source.serializer(), element)
+                "button" -> json.decodeFromJsonElement(PrayerElement.Button.serializer(), element)
 
                 // Complex types
                 "collapsible-block" -> json.decodeFromJsonElement(PrayerElement.CollapsibleBlock.serializer(), element)
@@ -91,6 +92,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
             is PrayerElement.Song -> json.encodeToJsonElement(PrayerElement.Song.serializer(), value)
             is PrayerElement.Subtext -> json.encodeToJsonElement(PrayerElement.Subtext.serializer(), value)
             is PrayerElement.Source -> json.encodeToJsonElement(PrayerElement.Source.serializer(), value)
+            is PrayerElement.Button -> json.encodeToJsonElement(PrayerElement.Button.serializer(), value)
             is PrayerElement.CollapsibleBlock -> json.encodeToJsonElement(PrayerElement.CollapsibleBlock.serializer(), value)
             is PrayerElement.Link -> json.encodeToJsonElement(PrayerElement.Link.serializer(), value)
             is PrayerElement.LinkCollapsible -> json.encodeToJsonElement(PrayerElement.LinkCollapsible.serializer(), value)

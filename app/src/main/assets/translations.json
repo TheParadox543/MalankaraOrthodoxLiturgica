@@ -329,6 +329,11 @@
         "en": "Benediction Songs",
         "mn": "Benediction Songs"
     },
+    "intercessionToMary": {
+        "ml": "ദൈവമാതാവിനോടുള്ള മദ്ധ്യസ്ഥപ്രാർത്ഥന",
+        "en": "Intercession to St. Mary",
+        "mn": "Intercession to St. Mary"
+    },
     "oldTestament": {
         "ml": "പഴമ വായന",
         "en": "Old Testament",
@@ -343,5 +348,10 @@
         "ml": "സ്ലീബാ ആഘോഷം",
         "en": "Worship of the Cross",
         "mn": "Worship of the Cross"
+    },
+    "epiphany": {
+        "ml": "ദനഹാ",
+        "en": "Epiphany",
+        "mn": "Epiphany"
     }
 }
