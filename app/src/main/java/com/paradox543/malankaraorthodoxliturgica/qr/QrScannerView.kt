@@ -156,8 +156,6 @@ fun QrScannerView(navController: NavController) {
                                 .padding(32.dp)
                         )
                     }
-                }
-                if (code.startsWith("app://liturgica/")) {
                     LaunchedEffect(key1 = code) {
                         val route = code.replace("app://liturgica/", "")
                         Log.d("QR Scanner View", "Navigating to $route")
@@ -169,15 +167,6 @@ fun QrScannerView(navController: NavController) {
                             }
                         }
                     }
-                } else if (code.isNotEmpty()){
-                    Text(
-                        text = "Not a valid QR Code for this app",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(32.dp)
-                    )
                 }
             }
         }
