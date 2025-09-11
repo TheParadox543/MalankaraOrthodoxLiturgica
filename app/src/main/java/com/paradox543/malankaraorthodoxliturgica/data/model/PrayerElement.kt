@@ -52,6 +52,14 @@ sealed interface PrayerElement {
         val content: String
     ): PrayerElement
 
+    @Serializable
+    @SerialName("button")
+    data class Button(
+        val link: String,
+        val label: String? = null,
+        val replace: Boolean = false,
+    ): PrayerElement
+
     // Complex data classes
 
     @Serializable

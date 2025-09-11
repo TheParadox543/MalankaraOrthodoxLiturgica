@@ -30,7 +30,6 @@ import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
@@ -50,7 +49,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -58,6 +56,7 @@ import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -71,7 +70,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     val bottomSheetState = rememberModalBottomSheetState()
-    var showAboutAppDialog by remember { mutableStateOf(false) }
     var showQrCodeDialog by remember { mutableStateOf(false) }
     var showShareAppBottomSheet by remember { mutableStateOf(false) }
 
@@ -201,8 +199,9 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
 
             Spacer(Modifier.height(16.dp))
 
+            // About the app option
             ListItem(
-                modifier = Modifier.clickable { showAboutAppDialog = true },
+                modifier = Modifier.clickable { navController.navigate(Screen.About.route) },
                 leadingContent = {
                     Icon(
                         Icons.Filled.Info,
@@ -260,37 +259,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 }
             }
         }
-    }
-
-    if (showAboutAppDialog) {
-        AlertDialog(
-            onDismissRequest = { showAboutAppDialog = false },
-            title = {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        Icons.Filled.Info,
-                        contentDescription = "About App Icon",
-                        modifier = Modifier.padding(8.dp),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    Text(
-                        "About the App",
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                }
-            },
-            text = {
-                AboutAppDialogContent()
-            },
-            confirmButton = {
-                Button(onClick = { showAboutAppDialog = false }) {
-                    Text(
-                        "Close",
-                        style = MaterialTheme.typography.bodySmall,
-                    )
-                }
-            }
-        )
     }
 
     if (showQrCodeDialog) {
@@ -443,48 +411,6 @@ fun FontScaleDropdownMenu(
         }
     }
 }
-
-@Composable
-fun AboutAppDialogContent() {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-    ) {
-        Text(
-            "This app is designed to provide prayers and religious content for the Malankara Orthodox Syrian Church.",
-            style = MaterialTheme.typography.bodyLarge,
-        )
-        Spacer(Modifier.height(16.dp))
-        Text(
-            "📜 Credits & Contributors",
-            style = MaterialTheme.typography.headlineMedium,
-        )
-        Text(
-            "- Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations",
-                    style = MaterialTheme.typography.bodyLarge,
-        )
-        Text(
-            "- Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights",
-            style = MaterialTheme.typography.bodyLarge,
-        )
-        Text(
-            "- Jerin M George – Assistance with Color Theme Fixes and Image Selection.",
-            style = MaterialTheme.typography.bodyLarge,
-        )
-        Text(
-            "- Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, " +
-                    "Nohan George & Anoop Alex Koshy– Additional Text Translations and Preparation",
-            style = MaterialTheme.typography.bodyLarge,
-        )
-        Spacer(Modifier.height(16.dp))
-        Text(
-            "Version: ${BuildConfig.VERSION_NAME}",
-            style = MaterialTheme.typography.bodySmall,
-        )
-    }
-}
-
 
 @Composable
 fun QrCodeShareDialog( onDismissRequest: () -> Unit ) {

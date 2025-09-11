@@ -21,8 +21,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 28
-        versionName = "1.3.0-beta.1"
+        versionCode = 29
+        versionName = "1.3.0-beta.2"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -87,6 +87,15 @@ dependencies {
 
     // Data Storage
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
+
+    // QR generation
+    implementation(libs.zxing.android.embedded)
+    implementation(libs.zxing.core)
+
+    // Camera Scanning
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
 
     // Firebase Services
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency

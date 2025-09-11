@@ -364,5 +364,10 @@
     {
         "type": "link-collapsible",
         "file": "commonPrayers/trisagionSyriac.json"
+    },
+    {
+        "type": "button",
+        "link": "kyamtha_compline",
+        "replace": true
     }
 ]
