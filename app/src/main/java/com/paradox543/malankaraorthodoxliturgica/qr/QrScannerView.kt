@@ -26,7 +26,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -76,7 +75,9 @@ fun QrScannerView(navController: NavController) {
                 .padding(innerPadding)
         ) {
             if (hasCamPermission) {
-                Box {
+                Box(
+                    Modifier.weight(0.5f)
+                ) {
                     AndroidView(
                         factory = { context ->
                             val previewView = PreviewView(context)
@@ -118,34 +119,29 @@ fun QrScannerView(navController: NavController) {
                     QrScannerOverlay(
                         isDetected = code.startsWith("app://liturgica/")
                     )
-
-                    if (code.isEmpty()) {
-                        Card(
-                            Modifier.align(Alignment.BottomCenter)
-                        ) {
-                            Text(
-                                text = "Point the camera at a QR Code",
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(32.dp)
-                            )
-                        }
-                    } else if (!code.startsWith("app://liturgica/")) {
-                        Card(
-                            Modifier.align(Alignment.BottomCenter)
-                        ) {
-                            Text(
-                                text = "Not a valid QR Code for this app",
-                                color = MaterialTheme.colorScheme.error,
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(32.dp)
-                            )
-                        }
+                }
+                if (code.isEmpty()) {
+                    Card {
+                        Text(
+                            text = "Point the camera at a QR Code",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(32.dp)
+                        )
+                    }
+                } else if (!code.startsWith("app://liturgica/")) {
+                    Card {
+                        Text(
+                            text = "Not a valid QR Code for this app",
+                            color = MaterialTheme.colorScheme.error,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(32.dp)
+                        )
                     }
                 }
                 if (code.startsWith("app://liturgica/")) {

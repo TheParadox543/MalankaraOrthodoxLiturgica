@@ -153,7 +153,7 @@ fun PrayerScreen(
                 TopNavBar(
                     title,
                     navController
-                ) { navController.navigate(Screen.Settings) }
+                ) { navController.navigate(Screen.Settings.route) }
             }
         },
         bottomBar = {
