@@ -30,6 +30,7 @@ object PrayerRoutes {
     const val FOR_SICK = "forSick"
     const val HOME_PRAYERS = "homePrayers"
     const val BENEDICTION_SONGS = "benedictionSongs"
+    const val INTERCESSION_TO_MARY = "intercessionToMary"
 
 //    Canonical Routes
     const val VESPERS = "vespers"
@@ -500,7 +501,12 @@ object NavigationTree {
                 prayer(
                     PrayerRoutes.BENEDICTION_SONGS,
                     "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.BENEDICTION_SONGS}.json",
-                    currentRoute
+                    currentRoute,
+                ),
+                prayer(
+                    PrayerRoutes.INTERCESSION_TO_MARY,
+                    "${PrayerRoutes.CONTEXTUAL}/${PrayerRoutes.INTERCESSION_TO_MARY}.json",
+                    currentRoute,
                 ),
                 prayer(
                     PrayerRoutes.BEFORE_FOOD,
