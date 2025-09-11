@@ -75,10 +75,10 @@ fun NavGraph(
 
         composable(
             route = Screen.Section.route,
-            arguments = listOf(navArgument(Screen.Section.argRoute) { type = NavType.StringType }),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Section.deepLinkPattern })
+            arguments = listOf(navArgument(Screen.Section.ARG_ROUTE) { type = NavType.StringType }),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Section.DEEP_LINK_PATTERN })
         ) { backStackEntry ->
-            val route = backStackEntry.arguments?.getString(Screen.Section.argRoute) ?: ""
+            val route = backStackEntry.arguments?.getString(Screen.Section.ARG_ROUTE) ?: ""
             val node = navViewModel.findNode(rootNode, route)
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, settingsViewModel, node)
@@ -89,13 +89,21 @@ fun NavGraph(
 
         composable(
             route = Screen.Prayer.route,
-            arguments = listOf(navArgument(Screen.Prayer.argRoute) { type = NavType.StringType }),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Prayer.deepLinkPattern })
+            arguments = listOf(navArgument(Screen.Prayer.ARG_ROUTE) { type = NavType.StringType }),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Prayer.DEEP_LINK_PATTERN })
         ) { backStackEntry ->
-            val prayerRoute = backStackEntry.arguments?.getString(Screen.Prayer.argRoute) ?: ""
+            val prayerRoute = backStackEntry.arguments?.getString(Screen.Prayer.ARG_ROUTE) ?: ""
+            val scrollIndex = backStackEntry.arguments?.getString(Screen.Prayer.ARG_SCROLL)?.toIntOrNull() ?: 0
             val node = navViewModel.findNode(rootNode, prayerRoute)
             if (node != null) {
-                PrayerScreen(navController, prayerViewModel, settingsViewModel, navViewModel, node)
+                PrayerScreen(
+                    navController,
+                    prayerViewModel,
+                    settingsViewModel,
+                    navViewModel,
+                    node,
+                    scrollIndex
+                )
             } else {
                 ContentNotReadyScreen(navController, message = prayerRoute)
             }
@@ -114,22 +122,22 @@ fun NavGraph(
 
         composable(
             route = Screen.BibleBook.route,
-            arguments = listOf(navArgument(Screen.BibleBook.argBook) { type = NavType.StringType }),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleBook.deepLinkPattern })
+            arguments = listOf(navArgument(Screen.BibleBook.ARG_BOOK) { type = NavType.StringType }),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleBook.DEEP_LINK_PATTERN })
         ) { backStackEntry ->
-            val book = backStackEntry.arguments?.getString(Screen.BibleBook.argBook) ?: ""
+            val book = backStackEntry.arguments?.getString(Screen.BibleBook.ARG_BOOK) ?: ""
             BibleBookScreen(navController, settingsViewModel, bibleViewModel, book)
         }
 
         composable(
             route = Screen.BibleChapter.route,
             arguments = listOf(
-                navArgument(Screen.BibleChapter.argBookIndex) { type = NavType.StringType }
+                navArgument(Screen.BibleChapter.ARG_BOOK_INDEX) { type = NavType.StringType }
             ),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleChapter.deepLinkPattern })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleChapter.DEEP_LINK_PATTERN })
         ) { backStackEntry ->
-            val bookIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.argBookIndex)?.toIntOrNull() ?: 0
-            val chapterIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.argChapterIndex)?.toIntOrNull() ?: 0
+            val bookIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.ARG_BOOK_INDEX)?.toIntOrNull() ?: 0
+            val chapterIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.ARG_CHAPTER_INDEX)?.toIntOrNull() ?: 0
             BibleChapterScreen(navController, settingsViewModel, bibleViewModel, bookIndex, chapterIndex)
         }
 

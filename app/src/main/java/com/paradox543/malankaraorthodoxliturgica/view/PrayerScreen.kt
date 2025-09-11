@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -62,6 +63,7 @@ import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import kotlinx.coroutines.delay
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -70,7 +72,8 @@ fun PrayerScreen(
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
-    node: PageNode
+    node: PageNode,
+    scrollIndex: Int = 0,
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
@@ -111,6 +114,15 @@ fun PrayerScreen(
     val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
         LazyListState()
     }
+//    LaunchedEffect(Unit) {
+//        if (scrollIndex > 0) {
+//            while (listState.firstVisibleItemIndex != scrollIndex) {
+//                Log.d("QR in Prayer Screen", "Detected scroll from Qr: $scrollIndex")
+//                listState.scrollToItem(scrollIndex)
+//                Log.d("QR in Prayer Screen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
+//            }
+//        }
+//    }
 
     // Observe if the LazyColumn has been scrolled to its very end
     val isScrolledToTheEnd by remember {
@@ -179,11 +191,19 @@ fun PrayerScreen(
                 ) {
                     QrFabScan(
                         navController,
-                        Modifier.scale(0.8f).padding(start = 12.dp),
+                        Modifier
+                            .scale(0.8f)
+                            .padding(start = 12.dp),
                         false,
                     )
                     QrFabGenerate(
-                        Screen.Prayer.createDeepLink(node.route),
+//                        Screen.Prayer.createDeepLink(node.route, listState.firstVisibleItemIndex),
+                        routeProvider = {
+                            Screen.Prayer.createDeepLink(
+                                node.route,
+                                listState.firstVisibleItemIndex
+                            )
+                        },
                         Modifier.scale(1.2f),
                     )
                 }
@@ -198,6 +218,16 @@ fun PrayerScreen(
             }
             if (initialBottomPadding.value == 0.dp) {
                 initialBottomPadding.value = innerPadding.calculateBottomPadding()
+            }
+        }
+        LaunchedEffect(Unit) {
+            if (scrollIndex > 0) {
+                while (listState.firstVisibleItemIndex != scrollIndex) {
+                    Log.d("QR in Prayer Screen", "Detected scroll from Qr: $scrollIndex")
+                    listState.scrollToItem(scrollIndex)
+                    Log.d("QR in Prayer Screen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
+                    delay(100) // Small delay to allow UI to update
+                }
             }
         }
 
