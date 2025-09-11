@@ -48,7 +48,6 @@ class QrCodeAnalyzer(
                 onQrCodeScanned(result.text)
             } catch(e: Exception) {
                 onQrCodeScanned("")
-                e.printStackTrace()
             } finally {
                 image.close()
             }
