@@ -59,6 +59,15 @@ class PrayerRepository @Inject constructor(
         val resolvedElements = mutableListOf<PrayerElement>()
         for (element in rawElements) {
             when (element) {
+
+                is PrayerElement.Title -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
+                is PrayerElement.Heading -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
+                is PrayerElement.Subheading -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
+                is PrayerElement.Prose -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
+                is PrayerElement.Song -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
+                is PrayerElement.Subtext -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
+                is PrayerElement.Source -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
+
                 is PrayerElement.Link -> {
                     try {
                         resolvedElements.addAll(
@@ -70,6 +79,7 @@ class PrayerRepository @Inject constructor(
                         resolvedElements.add(PrayerElement.Error("Failed to load linked file: ${language.code}/${element.file}."))
                     }
                 }
+
                 is PrayerElement.LinkCollapsible -> {
                     try {
                         resolvedElements.add(
@@ -85,6 +95,7 @@ class PrayerRepository @Inject constructor(
                         resolvedElements.add(PrayerElement.Error("Failed to load collapsible link: ${language.code}/${element.file}."))
                     }
                 }
+
                 is PrayerElement.CollapsibleBlock -> {
                     val resolvedItems = mutableListOf<PrayerElement>()
                     element.items.forEach { nestedItem ->
@@ -103,7 +114,11 @@ class PrayerRepository @Inject constructor(
                     }
                     resolvedElements.add(element.copy(items = resolvedItems))
                 }
-                else -> resolvedElements.add(element)
+
+                else -> {
+                    // Check if the element has a property content
+                    resolvedElements.add(element)
+                }
             }
         }
         return resolvedElements
@@ -161,4 +176,8 @@ class PrayerRepository @Inject constructor(
             items = itemsForCollapsibleBlock
         )
     }
+
+    private fun String.applyPrayerReplacements(): String =
+        this.replace("/t", "    ")
+            .replace("/u200b", "\u200b")
 }
