@@ -389,7 +389,7 @@ fun Subheading(text: String, modifier: Modifier = Modifier) {
 @Composable
 fun Prose(text: String, modifier: Modifier = Modifier) {
     Text(
-        text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
+        text = text,
         style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Left,
         modifier = modifier
@@ -412,15 +412,19 @@ fun Song(text: String, modifier: Modifier = Modifier, isHorizontal: Boolean = fa
                     currentModifier
                 }
             }
-            .border(4.dp, MaterialTheme.colorScheme.outline)
+            .border(
+                4.dp,
+                MaterialTheme.colorScheme.outline,
+                MaterialTheme.shapes.medium,
+            )
     ) {
         Text(
-            text = text.replace("/t", "    ").replace("/u200b", "\u200b"),
+            text = text,
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 4.dp)
+                .padding(8.dp)
         )
     }
 }
