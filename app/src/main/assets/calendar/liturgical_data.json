@@ -12166,12 +12166,6 @@
             "en": "Feast of St. Mary's Parents, Youyakim and Hanna"
         }
     },
-    "feastHolyCross": {
-        "type": "feast",
-        "title": {
-            "en": "Feast of the Holy Cross "
-        }
-    },
     "catholicate": {
         "type": "event",
         "title": {
