@@ -4,11 +4,9 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -49,7 +46,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
@@ -60,6 +56,13 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabGenerate
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.ui.components.Heading
+import com.paradox543.malankaraorthodoxliturgica.ui.components.Prose
+import com.paradox543.malankaraorthodoxliturgica.ui.components.Song
+import com.paradox543.malankaraorthodoxliturgica.ui.components.Source
+import com.paradox543.malankaraorthodoxliturgica.ui.components.Subheading
+import com.paradox543.malankaraorthodoxliturgica.ui.components.Subtext
+import com.paradox543.malankaraorthodoxliturgica.ui.components.Title
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -353,94 +356,6 @@ fun PrayerElementRenderer(
 }
 
 @Composable
-fun Title(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.headlineSmall,
-        textAlign = TextAlign.Center,
-        textDecoration = TextDecoration.Underline,
-        modifier = modifier
-            .fillMaxWidth()
-    )
-}
-
-@Composable
-fun Heading(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleLarge,
-        textAlign = TextAlign.Center,
-        modifier = modifier
-            .fillMaxWidth()
-    )
-}
-
-@Composable
-fun Subheading(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleMedium,
-        textAlign = TextAlign.Center,
-        modifier = modifier
-            .fillMaxWidth()
-    )
-}
-
-@Composable
-fun Prose(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.bodyLarge,
-        textAlign = TextAlign.Left,
-        modifier = modifier
-            .fillMaxWidth()
-    )
-}
-
-@Composable
-fun Song(text: String, modifier: Modifier = Modifier, isHorizontal: Boolean = false) {
-    val horizontalScrollState = rememberScrollState()
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .let { currentModifier ->
-                if (isHorizontal) {
-                    currentModifier
-                        .horizontalScroll(horizontalScrollState)
-//                        .border(4.dp, MaterialTheme.colorScheme.outline)
-                } else {
-                    currentModifier
-                }
-            }
-            .border(
-                4.dp,
-                MaterialTheme.colorScheme.outline,
-                MaterialTheme.shapes.medium,
-            )
-    ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Start,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        )
-    }
-}
-
-@Composable
-fun Subtext(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.bodyMedium,
-        textAlign = TextAlign.End,
-        modifier = modifier
-            .fillMaxWidth()
-    )
-}
-
-@Composable
 fun PrayerButton(
     prayerButton: PrayerElement.Button,
     navController: NavController,
@@ -475,18 +390,6 @@ fun PrayerButton(
             )
         }
     }
-}
-
-@Composable
-fun Source(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.labelSmall,
-        textAlign = TextAlign.Center,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp, bottom = 16.dp)
-    )
 }
 
 @Composable
