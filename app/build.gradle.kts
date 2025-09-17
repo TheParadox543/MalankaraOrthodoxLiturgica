@@ -22,7 +22,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 31
-        versionName = "1.3.1-dev.1"
+        versionName = "1.3.1-alpha.1"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -45,7 +45,6 @@ android {
             }
         }
         debug {
-//            applicationIdSuffix = ".testing"
             versionNameSuffix = "-testing"
         }
     }
