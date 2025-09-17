@@ -21,8 +21,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 30
-        versionName = "1.3.0"
+        versionCode = 31
+        versionName = "1.3.1-dev.1"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -43,6 +43,10 @@ android {
                 // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled = true
             }
+        }
+        debug {
+//            applicationIdSuffix = ".testing"
+            versionNameSuffix = "-testing"
         }
     }
     compileOptions {
@@ -88,9 +92,10 @@ dependencies {
     // Data Storage
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
 
-    // QR generation
+    // QR generation and scanning
     implementation(libs.zxing.android.embedded)
     implementation(libs.zxing.core)
+    implementation(libs.barcode.scanning)
 
     // Camera Scanning
     implementation(libs.androidx.camera.camera2)

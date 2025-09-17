@@ -11,7 +11,7 @@ import com.google.zxing.PlanarYUVLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 import java.nio.ByteBuffer
 
-class QrCodeAnalyzer(
+class ZxingQrCodeAnalyzer(
     private val onQrCodeScanned: (String) -> Unit
 ): ImageAnalysis.Analyzer {
 
@@ -47,10 +47,13 @@ class QrCodeAnalyzer(
                 }.decode(binaryBmp)
                 onQrCodeScanned(result.text)
             } catch(e: Exception) {
-                onQrCodeScanned("")
+                onQrCodeScanned("Not decodable. ${e.message}")
             } finally {
                 image.close()
             }
+        } else {
+            onQrCodeScanned("QR in supported format not detected.")
+            image.close()
         }
     }
 

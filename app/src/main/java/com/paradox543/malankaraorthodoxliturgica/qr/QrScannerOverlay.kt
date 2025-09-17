@@ -15,6 +15,14 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+/**
+ * Overlay composable to guide users during QR code scanning.
+ * Displays a centered square with L-shaped corners and a dimmed background.
+ * The border color animates to green when a QR code is detected.
+ *
+ * @param modifier Modifier to be applied to the overlay.
+ * @param isDetected Boolean indicating if a QR code has been detected.
+ */
 @Composable
 fun QrScannerOverlay(
     modifier: Modifier = Modifier,
