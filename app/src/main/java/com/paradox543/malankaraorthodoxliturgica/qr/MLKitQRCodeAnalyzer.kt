@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.qr
 
+import android.util.Log
 import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
@@ -16,10 +17,18 @@ class MLKitQRCodeAnalyzer(private val onCodeScanned: (String) -> Unit) : ImageAn
         val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
         scanner.process(image)
             .addOnSuccessListener { barcodes ->
-                barcodes.forEach { barcode ->
-                    barcode.rawValue?.let { onCodeScanned(it) }
+                if (barcodes.isNotEmpty()) {
+                    barcodes.forEach { barcode ->
+                        barcode.rawValue?.let {
+                            Log.d("MLKitQRCodeAnalyzer", "QR Code detected: $it")
+                            onCodeScanned(it)
+                        }
+                    }
+                } else {
+                    onCodeScanned("")
                 }
             }
+            .addOnFailureListener { onCodeScanned("") }
             .addOnCompleteListener { imageProxy.close() }
     }
 }

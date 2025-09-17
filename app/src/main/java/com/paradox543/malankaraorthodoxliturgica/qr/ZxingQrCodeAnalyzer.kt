@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.qr
 
 import android.graphics.ImageFormat
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.zxing.BarcodeFormat
@@ -45,14 +46,15 @@ class ZxingQrCodeAnalyzer(
                         )
                     )
                 }.decode(binaryBmp)
+                Log.d("ZxingQrCodeAnalyzer", "QR Code detected: ${result.text}")
                 onQrCodeScanned(result.text)
             } catch(e: Exception) {
-                onQrCodeScanned("Not decodable. ${e.message}")
+                onQrCodeScanned("")
             } finally {
                 image.close()
             }
         } else {
-            onQrCodeScanned("QR in supported format not detected.")
+            onQrCodeScanned("")
             image.close()
         }
     }
