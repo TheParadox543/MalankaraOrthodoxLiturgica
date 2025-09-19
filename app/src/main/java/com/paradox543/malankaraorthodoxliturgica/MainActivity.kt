@@ -1,11 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica
 
-import android.os.Build
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -22,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
@@ -49,7 +49,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Check for app updates as soon as the app starts.
-        inAppUpdateManager.checkForUpdate(this)
+        if (!BuildConfig.DEBUG) {
+            inAppUpdateManager.checkForUpdate(this)
+        }
 
         // Keep the splash screen active until the initial data is loaded.
         var isInitialDataLoaded by mutableStateOf(false)
@@ -92,15 +94,16 @@ class MainActivity : ComponentActivity() {
                 }
 
                 // 5. Use Scaffold to provide a host for the Snackbar.
+                @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
                 Scaffold(
                     snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
                 ) { innerPadding ->
                     // Your NavGraph is placed inside the Scaffold's content area.
                     // The innerPadding can be passed to your NavGraph if needed to prevent overlap.
                     NavGraph(
-                        Modifier.padding(innerPadding),
                         settingsViewModel = settingsViewModel,
                         navViewModel = navViewModel,
+                        Modifier.padding(innerPadding),
                     )
                 }
             }

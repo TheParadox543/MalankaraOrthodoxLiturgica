@@ -35,9 +35,9 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun NavGraph(
-    modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
+    modifier: Modifier = Modifier,
 ) {
     val prayerViewModel: PrayerViewModel = hiltViewModel()
     val bibleViewModel: BibleViewModel = hiltViewModel()

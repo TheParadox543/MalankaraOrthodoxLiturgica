@@ -225,20 +225,20 @@ class BibleViewModel @Inject constructor(
 
         val sourcePreface: List<PrayerElement> = when (language) {
             AppLanguage.MALAYALAM -> prefaceContent.ml
-            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> prefaceContent.en
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> prefaceContent.en
         }
 
         val title = when (language) {
             AppLanguage.MALAYALAM -> book.book.ml
-            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> book.book.en
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> book.book.en
         }
         val displayTitle = when (language) {
             AppLanguage.MALAYALAM -> book.displayTitle?.ml ?: ""
-            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> book.displayTitle?.en ?: ""
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> book.displayTitle?.en ?: ""
         }
         val ordinal = when (language) {
             AppLanguage.MALAYALAM -> book.ordinal?.ml ?: ""
-            AppLanguage.ENGLISH, AppLanguage.MANGLISH -> book.ordinal?.en ?: ""
+            AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> book.ordinal?.en ?: ""
         }
 
         // Use .map to create a new list with the replaced content

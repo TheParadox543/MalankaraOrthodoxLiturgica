@@ -17,6 +17,7 @@ fun rememberAppTypography(
         AppLanguage.MALAYALAM -> MalayalamTypography
         AppLanguage.ENGLISH -> EnglishTypography
         AppLanguage.MANGLISH -> EnglishTypography
+        AppLanguage.INDIC -> EnglishTypography
     }
 
     // Apply scale factor

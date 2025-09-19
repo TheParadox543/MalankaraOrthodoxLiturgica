@@ -22,7 +22,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 31
-        versionName = "1.3.1-dev.1"
+        versionName = "1.3.1-alpha.1"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -32,6 +32,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            resValue("string", "app_name", "Liturgica")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -43,6 +44,11 @@ android {
                 // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled = true
             }
+        }
+        debug {
+            applicationIdSuffix = ".testing"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "Liturgica (Dev)")
         }
     }
     compileOptions {

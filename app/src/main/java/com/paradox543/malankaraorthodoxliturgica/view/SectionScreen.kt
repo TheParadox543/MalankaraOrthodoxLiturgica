@@ -48,7 +48,8 @@ fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
-    node: PageNode
+    node: PageNode,
+    modifier: Modifier = Modifier,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val nodes = node.children
