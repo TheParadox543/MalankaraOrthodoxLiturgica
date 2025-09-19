@@ -1,39 +1,39 @@
 [
     {
         "type": "title",
-        "content": "sootthaaraa namaskaaram"
+        "content": "Sootthaaraa namaskaaram"
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/kauma.json"
+        "file": "commonprayers/kauma.json"
     },
     {
         "type": "heading",
-        "content": "kolo"
+        "content": "Kolo"
     },
     {
         "type": "subheading",
-        "content": "(men houby mor dohel no)"
+        "content": "(men haubai mor dohel no)"
     },
     {
         "type": "song",
-        "content": "parishuddhanmaarkkaayu kaakka-\nppetumudyaanam-pookaayvaanenne\n/tveli-kkoppam nerkkunnen'\n/tkatamo-rtthundu bhayam naathaa!\nNarakattheennenneyetti\npaarppikkuka nin-hithamotthaa dikkil."
+        "content": "Parishuddhanmaarkkaayu kaakka-\nPpedumudyaanam-pookaayvaanenne\n/tveli-kkoppam nerkkunnen\n/tkadamo-rtthundu bhayam naathhaa!\nNarakattheennenneyetti\nPaarppikkuka nin-hithamotthaa dikkil."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho ... Menu olam ..."
+        "content": "Baarekmor. Shubaho... Menolam..."
     },
     {
         "type": "song",
-        "content": "rakshakaneshu mahaaraajaa!\nSthuthi cheyyunnen-anuthaapakkaar mun\n/tnin vaa-thil thuranneetunnu\n/tellaa-nanmayumekum nin-\nnanthuniyaavaanenne nin-\nnalvarameki-santhoshippikka."
+        "content": "Rakshakaneshu mahaaraajaa!\nsthuthi cheyyunnen-anuthaapakkaar mun\n/tnin vaa-thil thuranneedunnu\n/tellaa-nanmayumekum nin-\nNantuniyaavaanenne nin-\nNalvarameki-santoshippikka."
     },
     {
         "type": "subtext",
-        "content": "moriyo raahemmelynu aadaaryn."
+        "content": "Moriyo raahemmelainu aadaarain."
     },
     {
         "type": "heading",
-        "content": "maar baalaayiyute bovooso"
+        "content": "Maar baalaayiyude bovooso"
     },
     {
         "type": "subheading",
@@ -41,136 +41,140 @@
     },
     {
         "type": "song",
-        "content": "1. Dushtanmaaril kaa-runyam poondone!\nKaarunyam cheyu nin-nyaaya-ttheerppin naal."
+        "content": "1. Dushdanmaaril kaa-runyam poondone!\nKaarunyam cheyu nin-nyaaya-ttheerppin naall."
     },
     {
         "type": "song",
-        "content": "2. Duakham poondor nin-vaathil muttunnu\nkaarunyatthaal nal-kenam yaachanaye"
+        "content": "2. Duഃkham poondor nin-vaathil muttunnu\nKaarunyatthaal nal-kenam yaachanaye"
     },
     {
         "type": "song",
-        "content": "3. Svarggasthan thaathaa! Praarththikkunnatiyaar\nkykkondikkarmmam-kaarunyam cheyka."
+        "content": "3. Svargasthhan thaathaa! Praarththhikkunnadiyaar\nKaikkondikkarmmam-kaarunyam cheyka."
     },
     {
         "type": "song",
-        "content": "4. Vinnavar than naathaa!- manmayaraashayume!\nKykkondikkarmmam-kaarunyam cheyka."
+        "content": "4. Vinnavar than naathhaa!- manmayaraashayume!\nKaikkondikkarmmam-kaarunyam cheyka."
     },
     {
         "type": "collapsible-block",
-        "title": "(allenkil)maar apreminte bovooso",
+        "title": "(allengkil)maar apreminte bovooso",
         "items": [
             {
                 "type": "song",
-                "content": "kartthaave! Krupa cheyyaname\nkykkondatiyaarute karmmam\nporuthi ayaccharulaname nin\narayeennalivumanugrahavum."
+                "content": "Kartthaave! Krpa cheyyaname\nKaikkondadiyaarude karmmam\nPoruthi ayacharullaname nin\nArayeennalivumanugrahavum."
             },
             {
                 "type": "song",
-                "content": "Nidra vetinjittunarvvotu njaan\nnin mun nilkkaaraakaname.\nVeendumurangilathil paapam\ntheendukayum cheyyaruthe njaan."
+                "content": "Nidra vedinyittunarvvodu nyaan\nNin mun nilkkaaraakaname.\nVeendumurangilathil paapam\nTheendukayum cheyyaruthe nyaan."
             },
             {
                 "type": "song",
-                "content": "Akramamunarvvil cheykil njaan\npokkaname naathaa! Krupayaal\nnidrayil njaan pizha cheythenkil\nnin krupa mochanamarulaname."
+                "content": "Akramamunarvvil cheykil nyaan\nPokkaname naathhaa! Krpayaal\nNidrayil nyaan pizha cheythengkil\nNin krpa mochanamarullaname."
             },
             {
                 "type": "song",
-                "content": "Elimayezhum nin kurishineyor-\ntthekanamatiyanu sukhanidra\nmaayaaroopakkaazhchakalil\npaayaathenne rakshikka."
+                "content": "Ellimayezhum nin kurishineyor-\nTthekanamadiyanu sukhanidra\nMaayaaroopakkaazhchakallil\nPaayaathenne rakshikka."
             },
             {
                 "type": "song",
-                "content": "Svachchhandamurangunneram\ndushchinthakal dushtanmaarum\nenne vannu bharikkaayvaan\nee raavil kaakkanamenne."
+                "content": "Svachchhandamurangunneram\nDushchintakall dushdanmaarum\nEnne vannu bharikkaayvaan\nEe raavil kaakkanamenne."
             },
             {
                 "type": "song",
-                "content": "En dehamashesham kaappaan\nekuka velivin doothane nee.\nNin meyu njaan bhakshicchathinaal\ndurmmohe veezharuthe njaan."
+                "content": "En dehamashesham kaappaan\nEkuka vellivin doothane nee.\nNin meyu nyaan bhakshichathinaal\nDurmmohe veezharuthe nyaan."
             },
             {
                 "type": "song",
-                "content": "Aashvaasatthoturangumeni-\nkkaavuka nin raktham kaaval\nee nin sadrushamathaam srushti-\nkkekaname nin svaathanthuyam."
+                "content": "Aashvaasatthodurangumeni-\nKkaavuka nin raktham kaaval\nEe nin sadrshamathaam srshdi-\nKkekaname nin svaathantyam."
             },
             {
                 "type": "song",
-                "content": "Nin kyvelayathaam meynmel\nnin്re valamky mevaname\nparichaykkoppam kaakkuka\nnin-karunakkotta valanjenne."
+                "content": "Nin kaivelayathaam meynmel\nNinte valamkai mevaname\nParichaykkoppam kaakkuka\nNin-karunakkotta vallanyenne."
             },
             {
                 "type": "song",
-                "content": "Meyyithurangumpol kaaval\ncheyyaname ninnute shakthi\nelkkaname nal dhoopam pol\nenteyurakkam thirumumpil."
+                "content": "Meyyithurangumpoll kaaval\nCheyyaname ninnude shakthi\nElkkaname nal dhoopam pol\nEnteyurakkam thirumumpil."
             },
             {
                 "type": "song",
-                "content": "Nin maathrupraarththanayaalen\nshayyaykkanayaruthe dushtan\nsaatthaan himsikkaathenne nin\nbaliyavane vilakkaname."
+                "content": "Nin maathrpraarththhanayaalen\nShayyaykkanayaruthe dushdan\nSaatthaan himsikkaathenne nin\nBaliyavane vilakkaname."
             },
             {
                 "type": "song",
-                "content": "Nin vaakkennil nivartthikka\nnin kurishennuyir kaatthituka\nenne thaangiya ninnanpaal\nninne unarvvil sthuthi cheyaan"
+                "content": "Nin vaakkennil nivartthikka\nNin kurishennuyir kaatthiduka\nEnne thaangiya ninnanpaal\nninne unarvvil sthuthi cheyaan"
             },
             {
                 "type": "song",
-                "content": "ninnishtam kettathine njaan\nanuvartthippaan kartthaave!\nNeethiyezhunnoru raavumeni-\nkkekaname nal sandhyayathum."
+                "content": "Ninnishdam kettathine nyaan\nAnuvartthippaan kartthaave!\nNeethiyezhunnoru raavumeni-\nKkekaname nal sandhyayathum."
             },
             {
                 "type": "song",
-                "content": "Velivaam mashihaa rakshakaa nin\nveliviltthanne nin vaasam\nvelivin puthranmaar ninne-\ntthanne vandiccheetunnu."
+                "content": "Vellivaam mashihaa rakshakaa nin\nVelliviltthanne nin vaasam\nVellivin puthranmaar ninne-\nTthanne vandicheedunnu."
             },
             {
                 "type": "song",
-                "content": "/tvelivil vasikkunnulakatthin\n/trakshakanaameesho sthothram.\n/tihaparalokangalil ninte\n/tkrupa njangalilundaakaname."
+                "content": "/tvellivil vasikkunnulakatthin\n/trakshakanaameesho sthothram.\n/tihaparalokangallil ninte\n/tkrpa nyangallilundaakaname."
             },
             {
                 "type": "song",
-                "content": "Sthothram sthothram kartthaave!\nSthothramathaayiramaayiramaayu\nanavadhiyaayu sthothram naathaa!\nKrupa venam njangalilennum."
+                "content": "Sthothram sthothram kartthaave!\nSthothramathaayiramaayiramaayu\nAnavadhiyaayu sthothram naathhaa!\nKrpa venam nyangallilennum."
             },
             {
                 "type": "song",
-                "content": "/tsthothram! Maalaakhakal shushroo-\n/tshiccheerayar vandippavane!\n/tpraarththana kelkkeerayaruteyum\n/tmaalaakhakaluteyum naathaa!"
+                "content": "/tsthothram! Maalaakhakall shushroo-\n/tshicheerayar vandippavane!\n/tpraarththhana kellkkeerayarudeyum\n/tmaalaakhakalludeyum naathhaa!"
             },
             {
                 "type": "song",
-                "content": "Thrithvekathvavumekathva-\nthrithvavumaayi sthithi cheyyum\npithrusutha parishuddhaathmaavaam\nsathyekaparannaayu sthothram."
+                "content": "Thrithvekathvavumekathva-\nThrithvavumaayi sthhithi cheyyum\nPithrsutha parishuddhaathmaavaam\nSathyekaparannaayu sthothram."
             },
             {
                 "type": "song",
-                "content": "/tbalaheena janapraarththanaye\n/tkelpponum kaazhchakal pole\n/tanuthaapam poondor kanneer\n/tkykkollunnavanum sthothram."
+                "content": "/tbalaheena janapraarththhanaye\n/tkellpponum kaazhchakall pole\n/tanuthaapam poondor kanneer\n/tkaikkollllunnavanum sthothram."
             },
             {
                 "type": "song",
-                "content": "Eerayar shushrooshippone!\nMaalaakhakal vaazhtthunnone!\nVrukshadala'tthin samkhyayil man-\nmayar ninne sthuthi cheyyunnu."
+                "content": "Eerayar shushrooshippone!\nMaalaakhakall vaazhtthunnone!\nVrkshadala'tthin samkhyayil man-\nMayar ninne sthuthi cheyyunnu."
             },
             {
                 "type": "song",
-                "content": "/tpithrusuthaparishuddhaathmakanaam\n/tsathyekaparannaayu sthothram\n/tcheytheetenam naam sathya-\n/tjnjaanavivekatthotu kooti."
+                "content": "/tpithrsuthaparishuddhaathmakanaam\n/tsathyekaparannaayu sthothram\n/tcheytheedenam naam sathya-\n/tjnyaanavivekatthodu koodi."
             },
             {
                 "type": "song",
-                "content": "Mruthikara vishamaam pon velli\ndhanamayyo netaruthe nee\nthetuka sukhakaramupadesham\nninne naathan snehippaan."
+                "content": "Mrthikara vishamaam pon velllli\nDhanamayyo nedaruthe nee\nTheduka sukhakaramupadesham\nNinne naathhan snehippaan."
             },
             {
                 "type": "song",
-                "content": "/tnaalpathu nompathu nokkuka nee\n/t theettuka theenillaatthavare\n/teeshaayisuthanoppam nee\n/tpraarththikkuka dinamezhoozham."
+                "content": "/tnaalpathu nompathu nokkuka nee\n/t theettuka theenillaatthavare\n/teeshaayisuthanoppam nee\n/tpraarththhikkuka dinamezhoozham."
             },
             {
                 "type": "song",
-                "content": "Naalpathu naalinnupavaasam\nmoosha kazhiccheleeyaayum,\nnaathan shathruvine vennu\nnaalpathu naalupavaasatthaal."
+                "content": "Naalpathu naallinnupavaasam\nMoosha kazhicheleeyaayum,\nnaathhan shathruvine vennu\nNaalpathu naallupavaasatthaal."
             },
             {
                 "type": "song",
-                "content": "/tkatal kuzhi agnicchoolakalil\n/tninnu kareriya praarththanakal\n/tatiyaarute praarththanakalkkum\n/tkrupayaal vaathil thurakkaname."
+                "content": "/tkadal kuzhi agnichoollakallil\n/tninnu kareriya praarththhanakall\n/tadiyaarude praarththhanakallkkum\n/tkrpayaal vaathil thurakkaname."
             },
             {
                 "type": "song",
-                "content": "Praarththana ketteetunnavane!\nYaachana nalkeetunnavane!\nPraarththana kettu nirappaayi\nkrupayaal yaachana nalkaname."
+                "content": "Praarththhana ketteedunnavane!\nYaachana nalkeedunnavane!\npraarththhana kettu nirappaayi\nKrpayaal yaachana nalkaname."
             }
         ]
     },
     {
         "type": "prose",
-        "content": "kuriye… kuriye… kuriye…"
+        "content": "Kuriye… kuriye… kuriye…"
     },
     {
         "type": "link",
-        "file": "commonPrayers/complineCommon.json"
+        "file": "commonprayers/complinecommon.json"
+    },
+    {
+        "type": "prose",
+        "content": "/T(pattakkaarundengkil thudarnnu dhoopapraarththhanakall nadatthunnu. Illaatthapaksham kuriyelaayistton .. Kuri.. Kuri.. Nyangallude kartthaave! Nyangalludemel anugraham cheyyunname ennathum kartthu praarththhanayum cholli avasaanippikkunnu.)"
     },
     {
         "type": "link",
-        "file": "commonPrayers/cyclicPrayers.json"
+        "file": "commonprayers/cyclicprayers.json"
     }
 ]

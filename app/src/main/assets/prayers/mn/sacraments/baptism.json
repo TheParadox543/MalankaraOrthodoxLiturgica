@@ -1,170 +1,818 @@
 [
     {
         "type": "title",
-        "content": "Maamoodheesa"
+        "content": "Maamoodeesaa"
     },
     {
         "type": "prose",
-        "content": "(Thala thodunnayāl - purushanŭ purushan; sthreekku sthree. Kuttiyey mukham thekkottākki idathukayyil thalabhāgam thāṅṅi eduthukondu kizhakkottu thirinnu nilkkunnu.)"
+        "content": "(thala thodunnayaall - purushanu purushan; sthreekku sthree."
     },
     {
         "type": "prose",
-        "content": "Pattakāran: Pithāvinuṃ Puthranum Parishuddha Rūhāykkum sthuthi."
+        "content": "Kuttiye mukham thekkottaakki idathukayyil thalabhaagam thaangi edutthukondu kizhakkottu thirinyu nilkkunnu.)"
     },
     {
         "type": "prose",
-        "content": "Janam: Balahīnaruṃ pāpikalaaya ñangalute mēl karuṇayum kripayum randu lokangalilum enneykkum uṇṭāyirikkatte."
+        "content": "Pattakkaaran: - pithaavinum puthranum parishuddha roohaaykkum sthuthi."
+    },
+    {
+        "type": "prose",
+        "content": "Janam: - balaheenarum paapikallumaaya nyangalludemel karunayum krpayum randulokangallilum enneykkum undaayirikkatte."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Praarambhapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "/T daivamaaya kartthaave! Agniyaalum aathmaavaalum jnyaanasnaanam nalkuvaanvendi ninte vishuddhashleehanmaare nee vishvaasapoorvvam bharamelpicha aathmeeya paurohithya shushrooshaykku nyangalle yogyaraakkaname. Kartthaave! Ippoll snaanatthinum veendum jananatthinumaayi adutthuvarunna ee paithalinte aathmaavinu paapikallaaya nyangallude maaddhyasthham moolam raksha labhikkukayum ivan (ivall) anugrahangallum karunayum praapikkukayum cheyyuvaan samgathiyaakkaname. Hosho…"
+            }
+        ]
     },
     {
         "type": "heading",
-        "content": "Prārambha Prārthanā"
-    },
-    {
-        "type": "prose",
-        "content": "/t Daivamāya Karttāvē! Agniyālum āthmāvālum jñānasnānam nalkuvānvendiy niṟe vishuddha shlīhanmāre nī vishwāsa-poorvvaṃ bharamēlpicha āthmeeya paurōhitya shushrooshaykkŭ ñangale yōgya rākkaname."
-    },
-    {
-        "type": "prose",
-        "content": "Karttāvē! ippōl snānathinŭṃ veendum jananathinumāyi adutthuvarunna ee paithalinte āthmāvinu pāpikalaaya ñangadeya mādhyastham mūlam raksha labhikkukayum ivan (ival) anugrahangaḷum karuṇayum prāpikkukayum cheyyuvān saṅgathiyākkaname. Hōshō…"
-    },
-    {
-        "type": "heading",
-        "content": "Kukkiliyōn 2-ām rāgam"
+        "content": "Kukkiliyon 2-aam raagam"
     },
     {
         "type": "subheading",
-        "content": "(Purushanmarkkŭ)"
+        "content": "(purushanmaarkk)"
     },
     {
         "type": "song",
-        "content": "āṇ paithangale Nāthanŭ nalkin - Hālē -\nStuthiyodumānam Nāthanŭ nalkin."
+        "content": "Aan paithangalle naathhanu nalkin-haale-\nSthuthiyodumaanam naathhanu nalkin."
     },
     {
         "type": "song",
-        "content": "Bahumānippin thirunāmathe - Hālē -\nVimalālayamathiluṭayōne vandippin."
+        "content": "Bahumaanippin thirunaamatthe-haale-\nVimalaalayamathiludayone vandippin."
     },
     {
         "type": "song",
-        "content": "Nāthan thannādam neerinmeethe - Hālē -\nMēghadhvani mahithan Daivamuyarthi."
+        "content": "Naathhan thannaadam neerinmeethe - haale-\nMeghaddhvani mahithan daivamuyartthi."
     },
     {
         "type": "song",
-        "content": "Vāridhi meethe Nāthanute - Hālē - nādamuyarnnathigambhīram."
+        "content": "Vaaridhi meethe naathhanude - haale-\nNaadamuyarnnathigambheeram."
     },
     {
         "type": "subheading",
-        "content": "(Sthreekalkkŭ)"
+        "content": "(sthreekallkk)"
     },
     {
         "type": "song",
-        "content": "Ninnu mahimayodā rājakumāri - Hālē -\nValathuvashathāy rājeshwariyum."
+        "content": "Ninnu mahimayodaa raajakumaari-haale-\nValathuvashatthaayu raajeshvariyum."
     },
     {
         "type": "song",
-        "content": "Ophir thangaththukilaṅkiyaṇiññōlē! - Hālē -\nKēḷkkuka nōkkuka chevichāyikka."
+        "content": "Ophir thangkatthukilangkiyaninyolle!-haale-\nKellkkuka nokkuka chevichaayikka."
     },
     {
         "type": "song",
-        "content": "Subhagatha narapathi kāmkshippān - Hālē -\nSwajanagrihangale nī viḍuka."
+        "content": "Subhagatha narapathi kaamkshippaan-haale-\nSvajanagrhangalle nee viduka."
     },
     {
         "type": "song",
-        "content": "Prāṇapriyaney praṇamikkā - Hālē -\nSurin makaley! praṇamikkā."
+        "content": "Praanapriyane pranamikka -haale-\nSoorin makalle! Pranamikka."
     },
     {
         "type": "subtext",
-        "content": "Bārekmōr - Shubahō........"
+        "content": "Baarekmor. Shubaho…"
     },
     {
         "type": "prose",
-        "content": "/t Snānārthikkarike ninnothunnāthmāv il Dāveedēvam - dāhippōrē! Nāthāntikamārnnu balappeṭuvin - nipathichoru nirdhanan Ādam neṭuveerppōṭavane viḷichchān - nadiyōrddānil Karttāvavanuttaramaruḷi - munnam jarjjaranāyōne nootha-nanākki."
-    },
-    {
-        "type": "subtext",
-        "content": "Menōlam………"
+        "content": "/Tsnaanaarththhikkarike ninnothunnaathmaavil daaveedevam-"
     },
     {
         "type": "prose",
-        "content": "Vāthilpaṭimēl pooshiya raktam Israēline rakshichchathupōl - Daivika vum jīvanēzhunathumām veendum snānaththin kripayāl - śaraṇaṁ thēḍum vishwāsikalām nammalekkellām - kripayude Rūshmā samrakshakanāyththīraṭṭe - ee nithyaprabha mūlam nām thrithwatthe darshikkunnu."
+        "content": "Daahippore! Naathhaantikamaarnnu balappeduvin-"
+    },
+    {
+        "type": "prose",
+        "content": "Nipathichoru nirddhanan aadam neduveerppodavane villichaan-"
+    },
+    {
+        "type": "prose",
+        "content": "Nadiyorddaanil kartthaavavanuttharamarulli-"
+    },
+    {
+        "type": "prose",
+        "content": "Munnam jarjaranaayone nootha-nanaa-kki."
     },
     {
         "type": "subtext",
-        "content": "Moriyō………"
+        "content": "Menaolam........"
+    },
+    {
+        "type": "prose",
+        "content": "Vaathilppadimel pooshiya raktham israayeline rakshichathupol-"
+    },
+    {
+        "type": "prose",
+        "content": "Daivikavum jeevanezhunnathumaam veendum snaanatthin krpayaal-"
+    },
+    {
+        "type": "prose",
+        "content": "Sharanam thedum vishvaasikallaam nammallkkellaam-"
+    },
+    {
+        "type": "prose",
+        "content": "Krpayude rooshmaa samrakshakanaayttheeratte-"
+    },
+    {
+        "type": "prose",
+        "content": "Ee nithyaprabha moolam naam thrithvatthe darshi-kku-nnu."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo..."
     },
     {
         "type": "subheading",
-        "content": "(Allenkil)"
+        "content": "(allengkil)"
     },
     {
         "type": "prose",
-        "content": "Dāveed Māmoodeesā kaikkoḷḷunnavanṭe aṭukkal, āthmāv ilninnukoṇḍu ipprakāram paṟayunnu. “Dāhikkunna sarvarumē, Daivamāya Karttā viṅkalēkku adutthuvaruka; shakthi dharikkuka.” Veeṇu poya ariṣhṭanāya Ādam duḥkhithanāyi avane viḷichchapēkshichchu. Daivamāya Karttāv avanōṭu uttaramaruḷukayum cheythu. Avan Yōrddān nadiyuṭe ozhukkilēkku vannappōl mumpu nāśaththil veeṇa vanāya Ādamine thān puthiya vanākki theerthu."
+        "content": "Daaveedu maamodeesa kaikkollllunnavante adukkal, aathmaavilninnukondu iprakaaram parayunnu. “daahikkunna sarvarume. Daivamaaya kartthaavingkalekku adutthuvaruka; shakthi dharikkuka.\" veenupoya arishdanaaya aadam duഃkhithanaayi avane villichapekshichu. Daivamaaya kartthaavu avanodu uttharamarullukayum cheythu. Avan yorddaan nadiyude ozhukkilekku vannappoll mumpu naashatthil veenavanaaya aadamine thaan puthiyavanaakkittheertthu."
     },
     {
         "type": "subtext",
-        "content": "Bārekmōr. Shubahō… Menōlam…"
+        "content": "Baarekmor. Shubaho... Menaolam..."
     },
     {
         "type": "prose",
-        "content": "Kripayude mudra vishwāsikalāya ñaṅṅaḷkku kāval āyirikkānamē. Kaṭṭaḷappaṭimēl thaḷikkappeṭṭa raktaththāl samhārakanilninnu Ebrāyakkār rakshichchappēālē jīvanullathum daivikavumāya punarsnānaththinṟe kripayāl ithil abhayam prāpikunnavarāya ñaṅṅaḷkkum rakshay uṇṭākānāmē. Enthukonṭennāl maṅṅippōkātha veḷichchamākunna ithumūlam thrithwatthe ñaṅṅaḷ kāṇunnu."
+        "content": "Krpayude mudra vishvaasikallaaya nyangallkku kaaval aayirikkaname. Kattallappadimel thallikkappetta rakthatthaal samhaarakanilninnu ebraayakkaar rakshikkappettathupole jeevanullllathum daivikavumaaya punarsnaanatthinte krpayaal ithil abhayam praapikkunnavaraaya nyangallkkum rakshayundaakaname. Entukondennaal mangippokaattha vellichamaakunna ithumoolam thrithvatthe nyangall kaanunnu."
     },
     {
         "type": "heading",
-        "content": "Prārthanā"
+        "content": "Praarththhana"
     },
     {
         "type": "prose",
-        "content": "Mēluḷḷa sainyangṅaḷuṭe Daivamāya Karttāvē! Divyōpadēśam svīkarikkunna ee paithaline anugrahikkukayum ee lōkavyarthathaye grahikkaththakka vaṇṇam ivante (ivaḷuṭe) manōnayanangale prakāśippikkukayum cheyyānāmē. Maraṇakaramāya sakala pravr̥ththikaḷum veṭiññukoṇḍu ninnēyum ninṟe Pithāvineyum Parishuddhāthmāvineyum ivan (ivaḷ) sthuthikkukayum cheyyumārrākānāmē. Hōshō……"
+        "content": "Melulllla sainyangallude daivamaaya kartthaave! Divyopadesham sveekarikkunna ee paithaline anugrahikkukayum ee lokavyarththhathaye grahikkatthakkavannam ivante (ivallude) manonayanangalle prakaashippikkukayum cheyyaname. Maranakaramaaya sakala pravrtthikallum vedinyukondu ninneyum ninte pithaavineyum parishuddhaathmaavineyum ivan (ivall) sthuthikkukayum cheyyumaaraakaname. Hosho......."
     },
     {
         "type": "subheading",
-        "content": "(Yūhānōn Sōvō)"
+        "content": "(yoohaanon sovo)"
     },
     {
         "type": "prose",
-        "content": "Karttāv enne mēyikkum. Enikku ñerukkamuṇṭāvukayilla. Avan puṣṭiyuḷḷa mēchchilir enne pārppikkum."
-    },
-    {
-        "type": "prose",
-        "content": "Songs: Yū-hā-nōn ñetti, - Yōrddān bhramamārnnu."
-    },
-    {
-        "type": "prose",
-        "content": "Sāppēnmār pāṭi: Māmoodeesāykkāgathanām"
-    },
-    {
-        "type": "prose",
-        "content": "Daivam - shuddhan shuddhan Parishuddhan."
-    },
-    {
-        "type": "prose",
-        "content": "Shāntajalaththinre arikilēkk avanenna nayikkum. Ente āthmāvine thirichchu neethiyuṭe ūṭuvazhikaḷil enne naṭaththum."
+        "content": "Kartthaavenne meyikkum. Enikku nyerukkamundaavukayilla. Avan pushdiyulllla mechilil enne paarppikkum."
     },
     {
         "type": "song",
-        "content": "Nī-rathe vāzhththīṭṭā - Dāmyarkkāyi\nNīrāthmasnānāl, punarām janmam nalkkituvaan\nSrōppēnmārkku vishuddhi koṭuppōn\nSnānaththinneththi"
-    },
-    {
-        "type": "subtext",
-        "content": "Bārekmōr - Shubahō… Menōlam……"
-    },
-    {
-        "type": "song",
-        "content": "Pāpaththāl hatarām; Ādāmin suthare\nNīrāthma snānāl; Daivikashakthyā\nPuthuthākkīṭum Tāthanumēkasuthannum\nRūhāykkum - sthōthram."
-    },
-    {
-        "type": "subtext",
-        "content": "Sthowmenkā…."
-    },
-    {
-        "type": "heading",
-        "content": "Prūmiyōn"
+        "content": "Yoo-haa-non nyetti, -yo-rddaan bhramamaarnnu.\nSro-ppe-nmaar paadi: Maamoodeesaaykkaagathanaam\nDaivam-shuddhan shuddhan parishuddhan."
     },
     {
         "type": "prose",
-        "content": "Mahanīyamāya tannṟe divyajñānaththāl tannṟe āthmeeya āṭṭiṅkoottināyi Māmoodeesā enna kūdāsha ēṟppatuththi athine shuddhīkarichcha avarṇanīya satya prakāśamāya Karttāvinu sthuthi. Thannikke ee nēraththilum……….."
+        "content": "Shaantajalatthinte arikilekku avanenne nayikkum. Ente aathmaavine thirichu neethiyude ooduvazhikallil enne nadatthum."
+    },
+    {
+        "type": "song",
+        "content": "Nee-ra-tthe vaazhttheettaa-daa-myarkkaayi\nNee-raathmasnaanaal, punaraam janmam nalkiduvaan\nSroppenmaarkku vishuddhi koduppon\nSnaanatthi-nne-tthi"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor. Shubaho... Menaolam..."
+    },
+    {
+        "type": "song",
+        "content": "Paa-pa-tthaal hatharaam; aa-daa-min suthare\nNee-raa-thma snaanaal; daivikashakthyaa\nPuthuthaakkeedum thaathanumekasuthannum\nRoohaaykkum-stho-thram."
+    },
+    {
+        "type": "subtext",
+        "content": "Sthaumenkaa...."
     },
     {
         "type": "heading",
-        "content": "Sedarā"
+        "content": "Prumiyon"
+    },
+    {
+        "type": "prose",
+        "content": "Mahaneeyamaaya thante divyajnyaanatthaal thante aathmeeya aattinkoottatthinaayi maamodeesaa enna koodaasha erppedutthi athine shuddheekaricha avarnnaneeya sathyaprakaashamaaya kartthaavinu sthuthi. Thanikku ee neratthilum..........."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Sedaraa",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Paapachintakallil ninnu nyangalle pintirippikkukayum thante vishuddha kalppanakallude aacharanatthinaayi nyangalle kshanikkukayum thante aathmeeyamaaya thozhutthilekku nyangalle praveshippikkukayum rakshaajalapravaahangallilekkum jeevante uravingkalekkum nyangalle aakarshichukond. “ningall kullichu vedippullllavaraayittheeruvin, hrdayangallil ninnu dushdathakall kazhukikkallayuveen\" ennu jeevakaramaaya shabdatthil arullicheyyukayum cheythavanaaya nyangallude daivamaaya mashihaa! Ee daasane (daasiye) thante kaavalinu vendi jeevamudrapraapikkuvaan adutthu vannirikkunna ivane (ivalle) anugrahikkaname. + ninte aattinkuttatthil ivaneyum (ivalleyum) ullppedutthaname. Thirumukhashobha ivanil (ivallil) prathibimbippikkaname. Ivane (ivalle) ninte janakanu puthran (puthri) aakkittheerkkaname. Veendum jananatthinu ivane (ivalle) yogyanaakkaname (yogyayaakkaname). Pazhaya manushyane ivanil (ivallil) ninnu urinyu kallayaname. Naasharahithamaaya vasthram ivane (ivalle) dharippikkaname. Aashvaasakaravum shaantavumaaya jeevithatthaal nalla avasaanatthinum kristheeyamaaya antyatthinum arhatha labhikkatthakkavannam nalla samrakshanayilum poornnavallarchayilum ivane (ivalle) etthikkaname. Nyangallum ivanum (ivallum) ninakkum ninte pithaavinum parishuddhaathmaavinum sthuthiyum sthothravum samarppikkukayum cheyyumaaraakaname. Hosho......"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(naatthar moraan)"
+    },
+    {
+        "type": "song",
+        "content": "Kaa-kkuka naa-thhaa! Sleebaayaal\nU-nnikalle - snaanaa - rththhikalle"
+    },
+    {
+        "type": "song",
+        "content": "Ee - snaana-tthe mun - nirtthi\nMun - chonnaan - skariyaa - thanayan\nNal-kunnen - neeril - snaanam\nVannee-du-nnonaa-thmaa-vil."
+    },
+    {
+        "type": "song",
+        "content": "Ninnaan-va-nnaattin-vakkil\nYo-hannaan-skriyaa-thanayan\nAa-gathanaayu maamoo-deesaa-\nYkkee-rerkkum-maravaam-shakthi."
+    },
+    {
+        "type": "song",
+        "content": "Snaa-natthi-nnetthee-naathhan\nSaa-kshippaan-yoha-nnaanum\nVa-thsalana-ndananaa-nivane-\nNnaar-tthaan vaa-natthil-thaathan-"
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo...."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Ethro",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Kartthaave! Parishuddha maamoodeesaaykku orungi vannirikkunna ee ninte daasanu (daasikku) vendi ee sugandhadhoopam ninte karunaabaahulyatthingkal nyangall samarppikkunnu. Ivan (ivall) jeevangkalekku ninnaal mudra kutthappedukayum ninte bhavanaavakaashatthinu etthicherukayum ninte vishuddha kalppanakalle pinthudarukayum cheyyumaaraakaname. Nyangall ninakkum ninte pithaavinum....."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "Summoro"
+    },
+    {
+        "type": "prose",
+        "content": "Neertthodinu maanuzhalumpo-le"
+    },
+    {
+        "type": "prose",
+        "content": "Vaanychhikkunnennaathmam ninperkken naa-thhaa!"
+    },
+    {
+        "type": "heading",
+        "content": "Shleehaa vaayana"
+    },
+    {
+        "type": "subheading",
+        "content": "(romar 5:20-6:4)"
+    },
+    {
+        "type": "prose",
+        "content": "Nyaayapramaanatthinte praveshanam paapam varddhippaan kaaranamaayittheernnu. Paapam varddhichidatthu thanne krpayum varddhichu. Athu maranatthil paapam vaanathu pole thanne-nammude kartthaavaaya yeshumashihaa moolam nithyajeevangkalekku-neethiyil krpayum vaazhuvaanaayittaayirunnu. Aayathukondu naam entaanu parayendath? krpa varddhippaanaayittu paapatthil thanne irikkanamenno? orikkalum paadilla. Entukondennaal paapatthinte drshdiyil mrtharaaya naam pinneyum athil thanne jeevikkunnathengine? allengkil yeshumishihaayil maamoodeesaa mungiyavaraaya naam addehatthinte maranatthilaakunnu. Maamoodeesaa mungiyathennu ningall ariyunnillayo? yeshumashihaa pithaavinte prabhaavatthodu koodi marichavarude idayil ninnu punaruththhaanam cheytha prakaaram thanne naamum puthiya jeevanil sancharippaanaayittu maamoodeesaa roopamaaya maranatthaal - avidatthodorumichu samskkarikkappedukayum cheythu."
+    },
+    {
+        "type": "heading",
+        "content": "Pethgomo"
+    },
+    {
+        "type": "song",
+        "content": "Poo-shuka ninsoppaayaal nyaan nirmmalanaa-kaan-\nThoo-manyilumaniyum nyaan-venma-haale......"
+    },
+    {
+        "type": "heading",
+        "content": "Evangeliyon"
+    },
+    {
+        "type": "subheading",
+        "content": "(lookkosu 3:15-16 yoha. 3:5-6)"
+    },
+    {
+        "type": "prose",
+        "content": "Yohannaanekkurichu iddeham mishihaayaayirikkumo ennu samshayichu janamellaam ullllil chintichu kondirikkumpoll yohannaan uttharamaayittu avarodu paranyu: “nyaan ithaa ningallkku vellllamkondu maamoodeesaa nalkunnu. Ennaal ennekkaall balavaanaayavan varunnund. Addehatthinte cheruppukallude vaarukallazhippaanpolum nyaan yogyanalla. Addeham parishuddhaathmaavukondum agnikondum ningallkku maamoodeesaa nalkum.” (yohannaan 3:5-6) \"oruvan vellllam kondum aathmaavukondum veendum janikkaathirunnaal avanu daivaraajyatthil praveshippaan kazhiyukayilla ennu sathya - maayum ninnodu parayunnu. Jadatthilninnum janikkunnathu jadavum aathmaavilninnu janikkunnathu aathmaavumaakunnu.”"
+    },
+    {
+        "type": "heading",
+        "content": "Maaneeso"
+    },
+    {
+        "type": "prose",
+        "content": "Paadeyen thinmakallekkazhukuka naathhaa-"
+    },
+    {
+        "type": "prose",
+        "content": "Enpaapam nirmmalamaakkaan soppaayethum mathiyaakaa-"
+    },
+    {
+        "type": "prose",
+        "content": "Nizhalaayppolum shuddhivarutthaan niyamajalatthinnelluthalla-"
+    },
+    {
+        "type": "prose",
+        "content": "Daivika maamoodeesaayin sechanamathinum-"
+    },
+    {
+        "type": "prose",
+        "content": "Ninnude nirupama karunaykkum-saa-ddhyam."
+    },
+    {
+        "type": "subheading",
+        "content": "Allengkil"
+    },
+    {
+        "type": "prose",
+        "content": "Ente anyaayatthil ninnu enne nannaayi kazhukaname. Nyaan pravartthichittulllla paapatthe kazhukikkallayunnathinu soppaaykku gunam mathiyaayirikkunnilla. Drshdaantaroopenayulllla nyaayapramaana sambandhamaaya vellllatthinum athine thudachu vedippaakkuvaan saaddhyamalla. Ennaal daivikamaaya snaanatthinte thallippinum parishodhanaykkum bahulamaaya avante krpaadhanatthinum maathram athu kazhiyunnathaakunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran: - kuriye........."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Rahasyapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Prakaashadaathaavum aathmashareerangalle prakaashippikkunnavanum andhakaaratthil ninnum prakaasham udikkuvaan arullicheyyukayum nyangallude hrdayangallil udikkukayum cheythavanum saubhaagyakaramaaya vellllammoolam rakshaakaramaaya nirmmalathayum vishuddha thailaabhishekam moolam daivikamaaya vishuddhiyum thirushareerarakthangallilulllla sambandham moolam kartthaaveshumishihaayodulllla aikyavum nalkiyavanum aaya karunayulllla kartthaave! Vishuddhamaaya aahvaanatthaal andhakaaratthilninnum maargabhramshatthil ninnum ninte yathhaarththha jnyaanatthilekku nee ippoll villichirikkunna ee daasante (daasi yude) naamam ninte jeevagranthhatthil ezhuthaname. Ninne aaraadhikkunnavarude koottatthil ivaneyum (ivalleyum) ennukayum ninte mukhashobha ivanil (ivallil) prathibimbippikkukayum cheyyaname. Ninte mishihaayude sleebaa ivante (ivallude) hrdayatthilum manassilum pathikkaname. Shathruvinte sakala dushthayilninnum ivane (ivalle) rakshikkaname. Ee lokavyarththhathayil ninnum ivan (ivall) odi rakshapettu ninte vishuddha kalppanakallude maargatthil charikkayum cheyyumaaraakaname."
+            }
+        ]
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Praarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Ninte ekaputhran vishuddha shishyanmaaril oothiyathaaya daivikashvaasam kartthaave! Ivanu (ivallkk) nalkaname. (maamodisa mungunnayaallinte mukhatthu sleebaa aakrthiyil pattakkaaran oothunnu) vishuddhaathma sveekaranatthinu ivane (ivalle) orukkikkondu vigrahaaraadhanayude sakala avashishdattheyum ivante (ivallude) manassil ninnu dooreekarikkaname. Veendum jananasnaanatthinu ivane (ivalle) yogyanaakkaname (yogyayaakkaname). Nyangallude kartthaavum rakshakanumaaya yeshumishihaa enna ninte ekaputhran mukhaantiram paapamochanatthinu ivane (ivalle) arhanaakkaname (arhayaakkaname). Ninakkum ninte ekajaathanum parishuddha roohaaykkum sthuthiyum bahumaanavum aadhipathyavum ippozhum ellaa samayatthum enneykkum yogyamaakunnu. Hosho..."
+            }
+        ]
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran maamoodeesaa mungunnayaallinte nere thirinyu nettiyil moonnu praavashyam thailamkoodaathe mudrakutthunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Pithaavinteyum + puthranteyum + jeevanulllla vishuddha roohaayudeyum + naamatthil.. .Nithyajeevanaayi mudrakutthappedunnu. - baarekmor."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran: Kuriye..."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Rahasyapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Sarvvaadhipathiyaaya daivamaaya kartthaave! Sakala duraathmaakkalludeyum bahishkaranatthinum prathi koolamaaya sakala adrshya vyaapaarangalludeyum nishkaa sanatthinumvendi nyangallude kartthaavum daivavumaaya ninte ekaputhran yeshumishihaa mukhaantiram ninne nyaan villikkunnu. Ninne sameepikkunna ee aathmaa vine ninte vishuddhaathmaavinte aavaasammoolam vedi ppodum vishuddhiyodum koode sveekarikkaname. Kartthaave! Nee vellippettu vyarththhamaaya adharangallaalalla-ninte krpayaalum dushdanilninnu lokatthe uddhari kkunna shakthiyaalum - samsaarikkatthakkavannam thirunaa matthil nyangall ucharikkunna vishvaasa vachanatthinu shakthi nalkaname."
+            }
+        ]
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran padinyaarottu snaanaarththhiyude nereyum, snaanaarththhi kizhakkottum thirinyu nilkkunnu. Pattakkaaran shapathham cheyyikkunna ee praarththhana chollikkondu avantemel rooshmaa cheyyunnu.)"
+    },
+    {
+        "type": "subheading",
+        "content": "Colapsible: Praarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Drshyavum adrshyavumaaya sakalatthinteyum srashdaavaaya daivamaaya kartthaave! Ee ninte srshdi yudemel nyangall kaivaykkukayum' ninte srshdiyum svaroopavum kaippaniyumaaya ivanil (ivallil) ninnu sakala pishaachukkallum dushdarum ashuddharumaaya ellaa aathmaakkallum ozhinyumaaripokuvaanvendi sakala tthilum vishuddhamaaya ninte naamatthil avaye mudra idu kayum cheythukondu nyangall ninne villikkunnu: Kartthaave! Nyangalle shraddhichu avaye nirodhikkukayum ethiraalliyude sarvvavidhamaaya vyaapaarangallilninnum ee ninte daasane (daasiye) rakshikkukayum cheyyana me. Ee daivasrshdiye alattunna vashallanum ashu ddhanum ahangkaariyumaayavane! Nee kettukollka + sakala neethikkum shathruvum niyamalamghakanumaayavane! Valiyavanaaya raajaavinte mahimayekkondu nyaan ninne shapathham + cheyyikkunnu. Bhayannu maarikkollka. Svakalppa nayaal bhoomiye vellllatthinmel sthhaapichurappikkukayum samudratthinu manal athirtthiyaayi nishchayikkukayum cheytha bhayangkaranaaya kartthaavinu keezhppedukayum cheyka. Aaraal, sakalathum srshdikkappettu paripaalikkappedunnu vo, aaraal svargatthilullllavar nilanilkkukayum bhoomiyilullllavar shakthi praapikkukayum cheyyunnuvo, aa svargatthilum bhoomiyilum sarvva adhikaaravumullllava nekkondu nyaan ninne shapathham cheyyikkunnu. + pishaa chukkallude legiyone pannikallilkoodi agaadhatthi lekku ayaykkukayum kadhinahrdayanaaya pharaone avante rathhangallodum kuthirappadayodumkoode mukkikkalla yukayum cheythavanekkondu nyaan ninne shapathham cheyyikkunnu. + chekidanum oomanumaaya aathmaavinodu “ee manushyanilninnu povuka, ini avanil prave shikkaruth\" ennu daivashakthiyodum adhikaaratthodum koode paranyavanaal nyaan ninne shapathham + cheyyikku nnu. Maalaakhamaar pradhaanamaalaakhamaar aadiyaaya sarvva srshdikallum thanne bhayappettu viraykkukayum thante mumpil sakala shakthikallum shushrooshakanmaarum bhayannu nilkkukayum thante nere nokkuvaanpolum kroobe nmaarum sroppenmaarum dhairyappedaathirikkukayum thante mumpil aakaasham illakukayum aazhangall viraykkukayum cheyyunnavane nee bhayappettukollka. Onnaamatthe mathsara kkaarane andhakaarashrmkhalakallaal bandhichu agaadhasthha latthekkayachavanaaya daivatthinte bhayangkaranaamatthe nee bhayappettukollka + varuvaanirikkunna nyaayavidhiye bhayannu vegatthil maarikkollka + daivasrshdiye nee sameepikkaruth. Daivasrshdiye nee upadravikkaruth. Daivasrshdiyil adhivasikkukayumaruth. Athu pishaa chukkallude vaasasthhalamalla. Jeevanulllla daivatthinte aala yamaan. “nyaan avaril vasikkukayum avaril sancha rikkukayum avarkku daivamaayirikkukayum avar enikku vishuddhajanamaayirikkukayum cheyyum\" ennu avidunnu arullicheythittund. Neechanum nindyanumaaya ashuddhaathmaave! Ninne agnikkirayaayi nishchayichiri kkunnu. Vishuddhanum vijayiyum nirmmalanumaaya pithr puthra parishuddhaathmaavaaya daivatthekkondu nyaan ninne shapathham cheyyikkunnu. Daivabhyathyaril ninnu aka nnukollka. Sanchaarayogyamallaatthathum vellllamillaattha thumaaya pradeshatthekkumaarikkollka. Ninte sthhaanamathaa n. Dhrthippeduka, mathsarikkaruth. Nee samoolam maanyu nashi chupokatte. Shapikkappettavanum ashuddhaathmaavum vancha kanum agnikkirayumaayavane! Daivasrshdiyilninnu athivegatthil maarikkollka, mathsarikkaruth. Pithrpu thraparishuddhaathmaavaam Daivam thante sakala srshika llilninnum ninne bahishkarichum kedaattha theeyil ninne dahippichum ninne samoolam nashippikkum. Thante kaippaniyaaya ivaneyaakatte rakshaadivasam vare kaatthukollllukayum cheyyum. Shakthiyum aadhipathyavum adhikaaravum avidatthekkullllathaakunnu. Avidatthekku nyangall sthuthi karettukayum cheyyunnu. Hosho…"
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Mattoru praarththhana (sandarbhaanusaranam ethengkilum upayogikkaam.)",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Daivamaaya kartthaave! Ninte kaippaniyaaya ee ninte srshdiyil ninnu thirunaamatthil mudrayittukondu sakala ashuddha dushdaathmaakkalleyum nyaan bahishkarikkunnu. Vakrabuddhiyum ahangkaariyumaayavane, nee shaasichu +++ ninte daasane (daasiye) vanchakaathmaakkallil ninnu svathantranaakkaname (svathantrayaakkaname). Allayo ashuddhaathmaave! Varuvaanirikkunna nyaayavidhiye nee bhayappettukollka +++ daivasrshdiye nee sameepikkaruth. Entennaal athu pishaachukkallude adhivaasasthhalamalla; daivatthinte aalayamaakunnu. Pithrputhraparishuddhaathmaavaam daivatthekkondu nyaan ninne shapathham cheyyikkunnu. +++ ashuddhaathmaave! Nee samoolam-vegatthil-nishshesham neengippovuka, mathsarikkaruth."
+            }
+        ]
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran kizhakkottum snaanaarththhi padinyaarottum thirinyu ninnukondu saatthaane moonnupraavashyam thallllipparayikkunnu. Thalathodunnayaall idathu kaikondu snaanaarththhiyude idathukaiyyil pidichukondu snaanaarththhikkuvendi ee upekshana vaachakam chollunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Maamoodeesaa mungunna… (maamodisaa per) nyaan, saatthaane! Ninneyum, ninte sakala sainyangalleyum, doothanmaareyum, ninnilulllla sakala bhayattheyum, ninte sakala vanchanayeyum, upekshikkunnu."
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran padinyaarottum snaanaarththhi kizhakkottum thirinyu nilkkunnu. Thalathodunnayaall valathukaikondu snaanaarththhiyude valathukaiyil pidichukondu ee vishvaasavaachakam moonnupraavashyam chollunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Maamoodeesaa mungunna…(maamodisaa per) nyaan mishihaa thampuraane! Ninnilum, parishuddha nibiyanmaarum, shleehanmaarum, pithaakkanmaarum mukhaantiram, daivikamaayi nee bharamelpichittulllla sakala upadeshangallilum chernnu vishvasikkunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Saatthaane nyaan upekshikkunnu mashihaaye nyaan sveekarikkunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Saatthaane nyaan upekshikkunnu mashihaaye nyaan sveekarikkunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Saatthaane nyaan poornnamaayi upekshichu mashihaaye nyaan poornamaayi sveekarikkunnu."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/nicenecreed.json"
+    },
+    {
+        "type": "subheading",
+        "content": "(anantaram maamoodeesaa muriyilekku praveshichu snaanaarththhiyude vasthrangall urinyu kallayunnu.)"
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Rahasyapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Thante vishuddhaathmaavine ayachu ivane (ivalle) shoonyathayil ninnu srshdikkukayum manushyasnehatthode vishuddha maamodeesaaykku arhanaakki (arhayaakki) ttheerkkukayum cheytha kartthaave! Vishuddha shleehanmaarude adisthhaanatthinmel ivane (ivalle) urappikkaname. Vishuddha sabhayil oru sathyanaduthalaayi ivane (ivalle) sthhaapikkaname. Koodaashaaparamaaya abhishekatthinu arhanaa(arhayaa)katthakkavannam ninte vishuddhaathmaavine ivanil (ivallil) ayaykkaname. Ninte daivikadaanangallaal ivane (ivalle) niraykkaname. Paapatthinte adimathvatthil ninnu svathantranaa (svathantrayaa)kuvaanvendi ee ninte aaraadhakante (aaraadhakayude) hrdayatthil ninte prakaasham udippikkaname."
+            }
+        ]
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran peruviral abhisheka thailatthil mukki snaanaarththhiyude nettiyil mudrayidunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Veendum jananatthaal puthrasveekaaryatthinu arhanaayi(arhayaayi)ttheeruvaan vendi santoshathailatthaal...Pithaavinteyum + puthraneyum + jeevanulllla parishu ddharoohaayudeyum + naamatthil nithyajeevanaayi mudrakutthappedunnu."
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran maamoodeesaa thotti thurannu valathukai idathukaiyude mukallilaayi-kaikall kurishupole pidichittu valathukaiyil chooduvellllavum idathukaiyil pachavellllavum edutthu randum thammil kalartthikkondu ee praarththhana uchatthil chollunnu.)"
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Praarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Daivamaaya kartthaave! Nyangallude balaheenamaaya madhyasthhathayaal ee vellllam aathmeeya udaravum naashamillaaymaye vaarkkunna mooshayum aayittheeratthakkavannam ninte vishuddhaathmashakthiyum vyaapaaravum ithil kalartthaname: Ithil maamoodeesaa mungunna ninte daasanu (daasikk) ninte thiruvishdatthaalum ninte ekaputhrante manushyasnehatthaalum ninte parishuddhaathmaavinte vyaapaaratthaalum ithu naasharahithamaaya aathmeeya vasthravum paapabandhanangallil ninnulllla mochanavum aayittheeruvaan krpayarullukayum cheyyaname. Hosho..."
+            }
+        ]
+    },
+    {
+        "type": "subheading",
+        "content": "(maamoodeesaa thottiyil kurishu vachashesham shoshappaakondu maamoodeesaa thotti moodunnu.)"
+    },
+    {
+        "type": "subheading",
+        "content": "(kookkoyo)"
+    },
+    {
+        "type": "song",
+        "content": "Kellppin - bhoothalajaathikalle - haaleluyyaa.\nChertthu-salilam yohannaan snaana-tthinnaay\nMungi-shuddheekaranam cheythathinullllil ma-shihaa\n/tneeril ninnum-theerattherumpoll\n/tavane maanichavaniyumambaravum\nKathiro-n kathirukall chaayichu thaara-kallkoo-ppi\nAattin-nirayoduttukalle vaazhtthiya daiva-tthe\n/thaaleluyyaa-u-haaleluyyaa."
+    },
+    {
+        "type": "song",
+        "content": "Varuvin-kellppin nyaan chollaam-ha......\nParipaa-vanamaamoodeesaa thirusabhayenne-vam\nAzhake-reedum sodarimaar mattengamaru-nnu.\n/tnavyaathmeeya-paithangalleyoruvall\n/tpetteedunnu-mattavall pottunnu\nMaamoodeesaayaathmeeyan shishuvine neeri-nnum\nPrasavicheedum, sabhayathine kaikkondarppi-kkum\n/thaaleluyyaa-kartthaavin pakkal"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor. Shubaho…"
+    },
+    {
+        "type": "song",
+        "content": "Aachaa-ryan maamoodeesaatthotti thurakku mpoll\nKooru-nneere doothanmaaraashcharyam vaa-nil\n/tmanmayanerithee-jvaalopari ninni-\n/tttaaroohaaye-cheyyunnahvaanam\nRoohaa-sathvaramuttharavaayishdam nirave-tti\nPaa-patthin parihaarththham paavanamaakku-nnu.\n/thaaleluyyaa-maamoodeesaaye."
+    },
+    {
+        "type": "subtext",
+        "content": "Menaolam…"
+    },
+    {
+        "type": "song",
+        "content": "Uyirin-neeruravaam snaanatthotti thuranna-ppoll\nJanakaa-thmaja roohaayathinepparipaavanamaa-kki\n/tvathsala suthane-nnaartthaanatthaathan\n/tthan thala thaazhtthi-ttaathmajatthil mungi\nPraavin-vadivil roohkkudishaa thanayanmel thaa-nu\nJeevan-jagathikkarullidum mahitha thrithva-tthil\n/thaaleluyyaa-kollllunnabhayam naam."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran:- kuriye........."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Rahasyapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Kartthaave! Paapatthinte sakala kallangkavum maalinyavum neekkikkallayunna yathhaarththhamaaya nairmmalyatthinte neerurava nee nyangallkku nalkiyirikkunnu. Kartthaave! Paapikallaaya nyangallude maddhyasthhathayaal ninte eka puthran thante vishuddha shishyanmaaril oothiya shvaasam ippoll nalkaname."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "Praarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Kartthaave! Nee rakshithaavum vedippaakkunnavanum sarvvavidha nanmakallum pradaanam cheyyunnavanumaakayaal ninakkum ninte ekaputhranum ninte parishuddha roohaaykkum sthuthiyum sthothravum nyangall karettunnu. Hosho.."
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran: - kartthaave! Ee vellllatthinte nere thirinyu ithine shuddheekarikkaname."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran: - kuriye..."
+    },
+    {
+        "type": "subheading",
+        "content": "(ee rahasyapraarththhana chollikkondu pattakkaaran vellllatthil padinyaaruninnu kizhakkottum thekku ninnu vadakkottum kurishaakrthiyil moonnu praavashyam oothunnu.)"
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Rahasyapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Kartthaave! Manushyane kollunnavanaaya aa mahaasarppatthinte thala ninte sleebaayude + adayaallatthinkeezhil chathaykkappedumaaraakaname. + antareekshatthile adrshyangallaaya nizhalukall odimaarukayum cheyyaname. Kartthaave! Ninnodu nyangall praarththhikkunnu. Andhakaaratthinadutthavanaaya + aa pishaachu ee vellllatthil ollichirikkukayo dushdavichaarangallum manashchaanchalyavum ullavaakkunna aa andhakaaramayanaaya dushdaathmaavu maamoodeesaa mungunna ivante (ivallude) koottatthil irangukayo cheyyuvaanidayaakaruthe. Aakalkkarusaayude vyaapaaram ivanil (ivallil) ninnu maanyupokuvaan nee krpacheyyaname."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "Praarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Ninte sleebaayaal rakshikkappettathaaya ninte sabhayum aattinkoottavum yorddaan nadeepravaahatthingkal ninnu kondu ninnodum nee mukhaantiravum ninnodukoodeyum ninte pithaavinodum manovedanayode apekshikkunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Janam: - sarvvashakthiyulllla pithaavaaya daivame! Nyangallodu karuna cheyyaname."
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran: - kartthaave! Balaheenarum paapikallumaaya ninte daasaraaya nyangallum ninakku nandiparayukayum sakalattheprathiyum sakalatthinu vendiyum ulllla ninte dayaye sthothram cheyyukayum cheyyunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran: - baarekmor, ente vaathsalyamullllavare! Jeevanulllla parishuddharoohaa svargeeya mahonnathangallil ninnu prathaapatthodukoodi irangi ee maamodeesaa vellllatthinmel aavasichu athine shuddheekarikkunnathaaya ee naazhika ethra bhayangkaravum ee samayam ethra sambhramajanakavumaakunnu. Ningall adakkatthodum bhakthi yodum ninnukondu praarththhippin."
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran randu kaikallum aavasippichukondu pari shuddhaathmavilliyude rahasyapraarththhana chollunnu.)"
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Rahasyapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Sarvvaadhipathiyaaya pithaavaam daivame! Nyangallil karuna thonni, knamaaykkadutthavanum unnathanum kartthaavum jeevadaayakanum, nyaayapramaanavum deerghadarshimaarum shleehanmaarum mukhaantiram samsaari chavanum, ellaayidatthum sameepasthhanum sakala ttheyum poorttheekarikkunnavanum, thaan priyappedunnavaril svantaishdaprakaaram, bhrthyaneppoleyalla adhikaariyeppole vishuddhatha pravartthikkunnavanum prakrthyaa nirmmalanum vividha vyaapaarangallodu koodiyavanum daivikadaanangallude uravidavum saaraamshatthil ninnodu onnaayirikkunnavanum ninnilninnu purappedukayum ninte puthranilninnu edukkukayum cheyyunnavanum ninteyum, nyangallude kartthaavum daivavum rakshakanumaaya ninte ekaputhran yeshumishihaayudeyum raajyatthile padaviyil thulyanumaaya ninte parishuddha roohaaye orukkappe ttathaaya ninte vaasasthhalatthu ninnum nisseemamaaya ninte madiyil ninnum nyangalludemelum, shuddheekarikkappedunna ee vellllatthinmelum ayaykkaname."
+            }
+        ]
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran:-kartthaave! Ennoduttharamarullaname,"
+    },
+    {
+        "type": "prose",
+        "content": "Kartthaave! Ennoduttharamarullaname,"
+    },
+    {
+        "type": "prose",
+        "content": "kartthaave! Uttharamarullicheythu dayathonni ennodu karuna cheyyaname."
+    },
+    {
+        "type": "subheading",
+        "content": ":(pattakkaaran thaazheyulllla oro khandika chollumpozhum vellllatthinmel oro kurishadayaallam varaykkunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Sarvvaadhipathiyaakunna daivamaaya kartthaave! Ee vellllatthe aashvaasajalavum, santoshakaravum aanandakaravumaaya vellllavum ninte ekaputhrante maranattheyum punaruththhaanattheyum drshttaantappedutthunna vellllavum vedippaakkunna vellllavum aakkeettheerkkaname. + aammeen."
+    },
+    {
+        "type": "prose",
+        "content": "Ee jalatthe aathmashareerangallude maalinyatthe shuddheekarikkunnathum bandhanangalle azhikkunnathum pizhakalle kshamikkunnathum aathmashareerangalle prakaashippikkunnathum aakkeettheerkkaname. + aammeen."
+    },
+    {
+        "type": "prose",
+        "content": "Ee jalatthe veendum jananatthil snaanavum puthrasveekaaryatthin nalvaravum naasharahithamaaya vasthravum vishuddhaathmaavin puthukkavum aakkeettheerkkaname + aammeen."
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran mooronpaathram kaiyyiledutthu moonnupraavashyam kurishaakrthiyil aaghoshichukond.)"
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran:- daivame! Vellllam ninne kandu. Kartthaave! Vellllam ninne kandu bhayappettu."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakan: - haaleluyyaa"
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran: - kartthaavinte shabdam vellllatthinmel muzhangi. Mahathvamulllla daivamaaya kartthaavu peruvellllatthinmeethe garjichu."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran: - haaleluyyaa"
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran: - pithaavinum puthranum parishuddharoohaaykkum aadimuthal ennennekkum sthuthi."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran: - aammeen."
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran thaazhekaanunna praarththhana cholli maamoodeesaa thottiyil kurishaakrthiyil mooron ozhikkunnu)"
+    },
+    {
+        "type": "prose",
+        "content": "Ee maamoodeesaa vellllatthaal pazhaya manushyan puthuthaakkappettu naveekarikkappeduvaan vendi pithaavinteyum + puthranteyum + parishuddha roohaayudeyum + naamatthil parishuddha mooron ithil nyangall ozhikkunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Shushrooshakkaaran: - kuriye.."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "Rahasyapraarththhana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Thante parishuddhaathmaavine praavinte roopatthil ayachu yorddaan nadeepravaahatthe shuddheekaricha daivamaaya kartthaave! Maamoodeesaa mungunna ee ninte daasane (daasiye) poorttheekarichu rakshaakaramaaya ninte snaanammoolam ivane (ivalle) nirmmalanaakki (nirmmalayaakki) ninte mishihaayodu sambandhamullllavanaakki (sambandhamullllavallaakki)ttheerkkaname."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "Praarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Ivan (ivall) ithinaal puthukkappettu shreshdhanaayi(shreshdhayaayi)ttheerukayum ninte krpayaal nirayukayum ninte divyakalpanakall paalikkukayum nyangallum ivanum (ivallum) koodi ninakkum ninte eka puthranum parishuddha roohaaykkum sthuthiyum sthothravum karettukayum cheyyumaaraakaname."
+    },
+    {
+        "type": "prose",
+        "content": "Janam: - aammeen"
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran: - ningallkkellaavarkkum samaadhaanam......."
+    },
+    {
+        "type": "prose",
+        "content": "Janam: - avidutthe aathmaavinum undaayirikkatte."
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran kai aavasippichashesham valathukai neetti rooshaa cheythukondu uchatthil chollunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Nithyajeevanuvendi jeevanulllla pithaavinte + naamatthilum, nithyajeevanuvendi jeevanulllla puthrante + naamatthilum; nithyajeevanuvendi jeevanulllla parishuddha + roohaayude naamatthilum ee vellllam divyasnaanatthinum veendum jananatthinumaayi bhavikkuvaan vendi aasheervadikkappettirikkunnu."
+    },
+    {
+        "type": "subheading",
+        "content": "(anantaram snaanaarththhiye kizhakkottu mukhamaayi maamoodeesaathottiyil irakki irutthunnu. Pattakkaaran thottiyude kizhakkuvashatthu padinyaarottu thirinyu snaanaarththhikkabhi mukhamaayi nilkkunnu. Pattakkaaran thante valathukai snaanaarththhiyude thalayil vachukondu idathukaikondu vellllam kori snaanaarththhiyude thalayil ozhikkunnu. Aadyam snaanaarththhiyude mumpilninnum, randaamathu pinpilninnum, moonnaamathu valathuvashatthu ninnum idathuvashatthu ninnum vellllam koriyozhichukondu chollunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Jeevanteyum paapamochanatthinteyum prathyaashayil nithyajeevanuvendi pithaavinteyum + puthranteyum + jeevanulllla parishuddha roohaayudeyum + naamatthil maamoodeesaa mungunnu."
+    },
+    {
+        "type": "subheading",
+        "content": "(pattakkaaran snaanaarththhiye thottiyilninnu edutthu thalathodunnayaalle elpikkunnu. Shushrooshakkaaran ee geetham chollunnu.)"
+    },
+    {
+        "type": "subheading",
+        "content": "(thraihoon olme)"
+    },
+    {
+        "type": "song",
+        "content": "Ninnumahimayodaaraajakumaari.\nMaamoodee-saayin-neeri-\nNnaa-thmaavaal-jaatham-cheytho\nRee-thangka-kunyaa-dine nee-\nYe-lkkuka paavanayaam sabhaye!"
+    },
+    {
+        "type": "song",
+        "content": "Enmakalle kellkkuka nokkuka chevichaayikka.\nEe snaana-tthe mun-nirtthi\nMun-chonnaan-skkariyaa-puthran\nNal-kunnen-snaanam-neeril\nVa-nneedu-nnonaa-thmaavil."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor. Shubaho..."
+    },
+    {
+        "type": "song",
+        "content": "Thri-thvatthin-thirunaamatthil\nNee-ril sam-jaathaa! Navamaam\nKu-nyaade-snaanaa-thmajane!\nSvaa-gathamo-thunnen-varika"
+    },
+    {
+        "type": "subtext",
+        "content": "Menaolam…"
+    },
+    {
+        "type": "song",
+        "content": "Po-rinnaa-llukalle-kootti\nTho-yatthil-ninnum-gidayon\nTha-nnaaradhakare-mashihaa\nSnaanatthin-neeri-nnettu."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "(pattakkaaran mooronkuppiyedutthu pidichukondu praarththhana)",
+        "items": [
+            {
+                "type": "prose",
+                "content": "Kartthaave! Maamoodeesaayilulllla vishvaasam moolam ninte bhadanmaarude koottatthil ennappettirikkunna ee ninte daasan (daasi) ee parishuddhamaaya mudrayum adayaallavum ninte naamatthil praapikkumaaraakaname. Ee mooron thailatthaal aathmeeyamaaya sakalavidha parimalla vaasanakallaalum ivan (ivall) nirayukayum prathikoola sainyangallkku keezhadangaatthavanaayi (keezhadangaatthavallaayi)ttheerukayum cheyyaname. Ini ivan (ivall) dushprabhukkalleyo andhakaarashakthikalleyo bhayappeduvaanidayaakaathe ninte thejassil thanne nadakkukayum prakaasha puthranaayi(puthriyaayi)ttheerukayum ninnilkoodi sancharichukondu thirusannidhiyil etthicherukayum cheyyaname."
+            }
+        ]
+    },
+    {
+        "type": "subheading",
+        "content": "(anantaram pattakkaaran thante peruviralil mooron purattikkondu snaanaarththhiyude nere thirinyu avante nettiyil moonnupraavashyam kurishaakrthiyil mudrayidunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Mishihaayude parimalla vaasanayum sathyavishvaasatthinte adayaallavum mudrayum vishuddhaathma nalvaratthinte poorttheekaranavumaaya vi. Mooronaal. .Nithyajeevanuvendi pithaavinteyum + puthranteyum + jeevanulllla parishuddha roohaayudeyum + naamatthil mudrakutthappedunnu."
+    },
+    {
+        "type": "subheading",
+        "content": "(anantaram snaanaarththhiyude thalamuthal kaaluvare shareeram muzhuvanum mooron pooshikkondu ee geetham chollunnu.)"
+    },
+    {
+        "type": "subheading",
+        "content": "(eshaayaal unesaashaan)"
+    },
+    {
+        "type": "prose",
+        "content": "Thavahrdayam balamaarnneedatte-kaarunyatthin snaanatthaale-thejogollasamaanam bhoomaubhaasippo ne-sampaadikkuka svargeeyabalam nee roohaayaal-vanchana nirayum moharasatthaal jeernnichavanaam poorvvamanushyane vidveshikka-jeevanezhum vachanam thavasha ranamavishvaasikallude samsargatthil-vishvaasikallude vaagdatthamathaam varuvaanulllloru navajeevangkal paayunnu nee-nijakaruna aa sampatthinnanusaranam nee neduka yogyatha mashihaa sahitham vaaneedaan"
+    },
+    {
+        "type": "heading",
+        "content": "Allengkil"
+    },
+    {
+        "type": "subheading",
+        "content": "(meshaho dkudisho)"
+    },
+    {
+        "type": "song",
+        "content": "Dai-vam-cho-nnaan, a-haro-ne pooshuka\nPaavananaavaa-n, paavana thailatthaal\nPoo-shu-nnippoll, snaa-nam-praapipporu\nKunyaadineyee-paavana thailatthaal"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor. Shubaho…"
+    },
+    {
+        "type": "song",
+        "content": "Maa-mu-deesaa-ye-lkkum-kunyaadine\nVellivaayu pooshum-thailavumithuthanne\nRoo-haa-goo-dham, rooshmaa-cheythampodu\nDaivikamaayu vaa-niva(ne) vaazhtthunnu."
+    },
+    {
+        "type": "subheading",
+        "content": "(anantaram snaanaarththhiye kireedam dharippichukondu praarththhikkunnu. Madbahaayil praveshippichu thudarnnu moonnu praavashyam thronosinu pradakshinam veypikkunnu.)"
+    },
+    {
+        "type": "heading",
+        "content": "Praarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Pithaavum puthranum parishuddha roohaayumaaya daivamaaya kartthaave! Ee ninte daasane (daasiye) prabhakondum mahathvamkondum kireedam dharippikkukayum ivante (ivallude) jeevitham ninte karthrthvatthinu preethikaravum thirunaamamahathvatthinu anuyojyavum aayittheerukayum cheyyaname."
+    },
+    {
+        "type": "heading",
+        "content": "Sugeeso"
+    },
+    {
+        "type": "song",
+        "content": "Nrparum-mohichoru makudam-nee chaartthi\nNikhile-shaathmajane sthuthiche-yyuka sahajaa\nHimamennonam ninvasanam-minnunnu\nYorddaa-n nadiyekkaall hrdyam-ninkaanti.\nRoohaa-thanbalamodoru maa-laakhasamam\nMaamoodeesaayil ninnum-nee kayari.\nVaadaa-tthoru makudam thalamel-nee choodi\nAadaam-grhamahimaaveenaall-nee-nedi\nSahajaa!-svargeeyam bhaagyam-neeyaarnnu\nKaruthee-duka dushdan moshdichee-daayu vaan\nAachaa-ryan vazhiyaayaadyam-nalkiyathaam\nMakudam-yogyam nin vasanam-ramaneeyam"
+    },
+    {
+        "type": "subheading",
+        "content": "(snaanaarththhikku vi.Kurbaana kodukkunnu.)"
+    },
+    {
+        "type": "song",
+        "content": "Parudee-sayilaadaam ruchinokkaa-tthaphalam\nSaamodam-vaykkunneenaall nin vaayil.\nSnaana-tthin shishuve! Sashubham povuka nee\nNathiche-yyuka ninnekaakkum-sleebaaye.\nJanakaa-samsthuthithe thanayaa-sthothram the-\nVimalaa-thmaave!-the nathiyum keertthanavum."
+    },
+    {
+        "type": "heading",
+        "content": "Hootthomo"
+    },
+    {
+        "type": "prose",
+        "content": "Pithaavaam Daivam ninnodukoode undaayirikkatte. Vandyanaaya puthran ninne kaatthukollllatte. Nee dharichirikkunna parishuddha roohaa ninne poorttheekarichu upadravangallilninnu ninne rakshikkatte. Nee sveekarichirikkunna maamoodeesaa ennenneykkum ninnil vasikkukayum cheyyumaaraakatte."
+    },
+    {
+        "type": "subheading",
+        "content": "(anantaram yaathra ayachukondu )"
+    },
+    {
+        "type": "prose",
+        "content": "Ennenneykkum nammude daivamaaya mishihaayude paapaparihaarapradamaaya maamoodeesaayil ninnu nee praapichirikkunna parishuddha mooronodu koode, parishuddha thrithvatthinte krpayakkum karunaykkum ninne nyangall samarppichirikkunna ee samayatthu nee samaadhaanatthode povuka."
+    },
+    {
+        "type": "heading",
+        "content": "Kireedam azhikkumpoll praarththhana"
+    },
+    {
+        "type": "subheading",
+        "content": "(mumpu ithu ezhu divasangallkku sheshamaayirunnu.)"
+    },
+    {
+        "type": "prose",
+        "content": "Kartthaave! Ninte puthrasveekaaryamaakunna aathmeeya maathaavil ninnu ninte ekajaathanu sahodaranaayi (sahodariyaayi) nee poorttheekarichittulllla ee ninte daasane (daasiye) jeevadaayakamaaya ninte vivekashakthi moolam suvisheshaparamaaya nadapadikallilekku nee nayichukollllaname. Nalla avasaanam praapikkunnavarkkaayi sookshichuvachirikkunna ee kireedam ninte svargaraajyatthil vachu ivan (ivall) praapikkumaaraakaname. Ee kireedam neekkappedunnathodukoode ninte valathukaiyude sahaayam ivanu (ivallkk) nashdappedaathe athilthanne ivan (ivall) urachu shakthipraapichu vallarukayum cheythu ninneyum ninte ekaputhraneyum saaraamshatthil ninnodu onnaayirikkunna parishuddharoohaayeyum sthuthikkumaaraakaname. Hosho…"
     }
 ]

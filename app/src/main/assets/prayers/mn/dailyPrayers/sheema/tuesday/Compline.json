@@ -1,0 +1,62 @@
+[
+    {
+        "type": "title",
+        "content": "Sootthaaraa"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(kattheelodakktthaal)"
+    },
+    {
+        "type": "song",
+        "content": "Aadattheyaho-konnoru dushdan mrthiyivare\nThan kolayaale-konnon naathhaa!\nEnneyamartthiya paapatthe konneedaname\n/tnalloridayaa!-vazhithettippoyo-\n/traadineyaaraa-nyuzharichennone!\nEnnaashatthe sthreeyude thangkakkaashathupol\nAaraayaname-nee gathare kandetthunnon\nDaasanmaare thirike varutthunnon sthuthyan\nHaaleluyyaa-ennaarkkum nyaan."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho-menaolam..."
+    },
+    {
+        "type": "song",
+        "content": "Naathhanthan hitha-mentennariyunnon daasa-\nNnunarvvillengkil-neethi kadhoram\nDandippichidumennevam-rakshakanarulli\n/tarivillaatthon-laghudandanamelkkum\n/tundarivennaa-lonnum cheyyaattha\nNyangalleyayyo-laukikaraam mannavarekkaall\nRookshathayoda-ngelppichu nee neethikkaayu\nDaaveedineyaa-shaulinnennonam kanivaal\nHaaleluyyaa-samrakshikka."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo."
+    },
+    {
+        "type": "heading",
+        "content": "Bovooso"
+    },
+    {
+        "type": "subheading",
+        "content": "(maar yaakkobinte)"
+    },
+    {
+        "type": "song",
+        "content": "Eeshaa naathhaa! Varika thunappaan villikoottunnu\nPraarththhana kettittaathmaakkallmel krpacheyyenam."
+    },
+    {
+        "type": "song",
+        "content": "Baashpam moolam mukhamathyantam pangkilamaakki\nVingikkezhum paathaki paartthaal haa! Kamaneeyan\nMoolyam koodum rathnatthekkaall paaram kaamyam\nThaapatthaalepaathakithookum kanneer thulllli"
+    },
+    {
+        "type": "song",
+        "content": "Neeyanuthaapam chithramathaakkaan nokkunnengkil\nVarnnachaayam kaikkollllendaa, kanneerelkkoo\nThaapatthin vanperunnaallallo kanneervarsham\nKanneeraale mochanamaarjichaanandikkoo."
+    },
+    {
+        "type": "song",
+        "content": "Devaa! Devaa! Uttharamarullikkaarunyam che-\nYthekeedenam manujaathmaakkallkkanuthaapam nee"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "type": "title",
+        "content": "vyāḻaṁ maddhyāhnaṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(b‌sāppaṟo hasāvuy)"
+    },
+    {
+        "type": "song",
+        "content": "daivattiṉ mātāvāyōḷ\npāvanakanyakamaṟiyāmmi-\n/tnnuṇṭākaṭṭe lōkattil\n/tdiśakaḷileṅṅuṁ nallōṟmma\ndaivaṁ talsmr̥ti valutākki\ntal prāṟtthana ñaṅṅaḷkkabhayaṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śubaho....."
+    },
+    {
+        "type": "song",
+        "content": "daṟśakanivahaṁ ślīhagaṇaṁ\nniṉ śaraṇē mr̥tiyēŧŧōrāṁ\n/tsahadēnmāṟ pariśuddhanmāṟ\n/tviśvāsikaḷāṁ malppāṉmāṟ\nennivaṟ tal prāṟtthanayāle\npāril śānti pulaṟttaṇame."
+    },
+    {
+        "type": "subtext",
+        "content": "menaōlaṁ...."
+    },
+    {
+        "type": "song",
+        "content": "kaṟttāvē! niṉ jīvaravaṁ\nmaṇṇāyttīṟnna mr̥tanmāre\n/tkabaṟīnnuṁ paṟudīsayilē-\n/tykkāhvānaṁ ceytēŧŧaṇame.\nsajana sahitaṁ nēṭaṇame\nśāśvatajīvaṉ mr̥talōkaṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/marbaalaayibovooso.json"
+    }
+]

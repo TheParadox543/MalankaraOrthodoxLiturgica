@@ -24,7 +24,11 @@ class PrayerRepository @Inject constructor(
         val translationMap = mutableMapOf<String, String>()
         for (key in jsonObject.keys()) {
             val innerObject = jsonObject.getJSONObject(key)
-            translationMap[key] = innerObject.getString(language.code)
+            val code = when(language){
+                AppLanguage.MALAYALAM -> AppLanguage.MALAYALAM.code
+                AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> AppLanguage.ENGLISH.code
+            }
+            translationMap[key] = innerObject.getString(code)
         }
         return translationMap
     }

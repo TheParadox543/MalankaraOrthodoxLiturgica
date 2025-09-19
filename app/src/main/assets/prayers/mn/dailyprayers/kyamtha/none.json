@@ -1,11 +1,11 @@
 [
     {
         "type": "title",
-        "content": "ompathaam maniyute namaskaaram"
+        "content": "Ompathaam maniyude namaskaaram"
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/doxology.json"
+        "file": "commonprayers/doxology.json"
     },
     {
         "type": "subheading",
@@ -13,42 +13,42 @@
     },
     {
         "type": "song",
-        "content": "nin priya sahadenmaarotum ninnute nal kaadeesha maarotum koote\norkkaname njangalkkuttullaa-raam mruthare;\nnin valamaakkittheertthavare\n/thaaleluyyaa - modippikka."
+        "content": "Nin priya sahadenmaarodum ninnude nal kaadeesha maarodum koode\nOrkkaname nyangallkkuttullllaa-raam mrthare;\nNin valamaakkittheertthavare\n/thaaleluyyaa - modippikka."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho ... Menolam ..."
+        "content": "Baarekmor. Shubaho ... Menolam ..."
     },
     {
         "type": "song",
-        "content": "thirusabha makkalkkaayu ninnotettam duakhatthaale\nkeneetunnevam:\n“naathaa! Maamodeesaayaal ni-nne poondor\ntheenarakam pukeetaathe\n/thaaleluyyaa-modikkaname.”"
+        "content": "Thirusabha makkallkkaayu ninnodettam duഃkhatthaale\nKeneedunnevam:\n“naathhaa! Maamodeesaayaal ni-nne poondor\nTheenarakam pukeedaathe\n/thaaleluyyaa-modikkaname.”"
     },
     {
         "type": "subtext",
-        "content": "moriyo raahemelynu aadaaryn."
+        "content": "Moriyo raahemelainu aadaarain."
     },
     {
         "type": "heading",
-        "content": "maar baalaayiyute bovuso"
+        "content": "Maar baalaayiyude bovuso"
     },
     {
         "type": "song",
-        "content": "1. Karuna niranjavane! Punaruththaanatthil\nninnute srushtiye nee puthuthaakkeetaname."
+        "content": "1. Karuna niranyavane! Punaruththhaanatthil\nNinnude srshdiye nee puthuthaakkeedaname."
     },
     {
         "type": "song",
-        "content": "2. Ninnil sharanatthaal nidrayilaayu nin്re\nvaravinu kaattheetum mrutharil kaniyaname."
+        "content": "2. Ninnil sharanatthaal nidrayilaayu ninte\nVaravinu kaattheedum mrtharil kaniyaname."
     },
     {
         "type": "song",
-        "content": "3. Avarabaraahatthinteyumisahaakkuteyum\nyaakkobinnuteyum matiyil paarkkaname."
+        "content": "3. Avarabaraahatthinteyumisahaakkudeyum\nYaakkobinnudeyum madiyil paarkkaname."
     },
     {
         "type": "song",
-        "content": "4. Vannavanaam varuvonum mruthar thannuyirum\nsthuthanennu shareeraathmaakkal paataname."
+        "content": "4. Vannavanaam varuvonum mrthar thannuyirum\nSthuthanennu shareeraathmaakkall paadaname."
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/kauma.json"
+        "file": "commonprayers/kauma.json"
     }
 ]

@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "ompatāṁmaṇi"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(bāṟūbtto bīśīs)"
+    },
+    {
+        "type": "song",
+        "content": "putranilēŧŧupaṟaññājñakaḷ niṟavēŧŧi\nviśvāsaṁ kāttōṟ-mr̥taṟ niṉ varaviṅkal\nsvaṟggavumaḻivaŧŧa-jīvanumāṟjjikkuṁ\nhālē........uhālē......avarānandikkuṁ"
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śūbaho-"
+    },
+    {
+        "type": "song",
+        "content": "daivasutāgamanaṁ-minnal piṇaroppaṁ\npiḷaruṁ kallaṟakaḷ-mr̥tigatareḻunnēlkkuṁ\npunarutthānakanāṁ-kaṟttāvine vāḻtti\nhālē.......hālē......stutigītaṁ pāṭuṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

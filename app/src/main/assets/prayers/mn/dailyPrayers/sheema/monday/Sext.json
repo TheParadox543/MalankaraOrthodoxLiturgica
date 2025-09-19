@@ -1,0 +1,50 @@
+[
+    {
+        "type": "title",
+        "content": "Maddhyaahnam"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(amsohade)"
+    },
+    {
+        "type": "song",
+        "content": "Daivatthin jeevaathmajane kaikallilenti-\nJanamaddhye nilppumariyaam-aamgyatthaaleelokatthe\nPaalippone-paaloottunnu thalpraarththhana\nHaale......... Nammodukoode"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho....."
+    },
+    {
+        "type": "song",
+        "content": "Sahadenmaare! Ningallude smaranadinatthil\nBhoosvargangallilamarunnor-divyaasthhikallude veeryatthe\nKeertthikkunnu-ningade praarththhanayennennum\nHaale........ Nyangallkkabhayam"
+    },
+    {
+        "type": "subtext",
+        "content": "Menaolam…"
+    },
+    {
+        "type": "song",
+        "content": "Baabelileyerutheekkuzhiyil chennunnikalle\nSamrakshichoru panimanyee-mrtharettheenarakattheennum\nRakshikkatte-sampaadikkanamavaroduvil\nHaale......... Shaashvatha jeevan"
+    },
+    {
+        "type": "subtext",
+        "content": "Moriye........"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/janani.json"
+    },
+    {
+        "type": "prose",
+        "content": "(vi. Kurbaanayillengkil maar severiyosinte maaneesa (peju 80) vishvaasapramaanam, kukkiliyonukall muthalaayava cholli avasaanippikkanam.)"
+    }
+]

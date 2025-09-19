@@ -1,0 +1,66 @@
+[
+    {
+        "type": "title",
+        "content": "Shani sootthaaraa"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(aaleppain moriyo)"
+    },
+    {
+        "type": "song",
+        "content": "Sheelippikkenne-naathhaa!Nin kalppanayellaam\nNyaan kaatthiha nin-krpayil jeevippaan\nNinvarabhandaaram-kavaraayvaan nirttheedename\nKaavalkkaare-meyyin vaathilkkal."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho."
+    },
+    {
+        "type": "song",
+        "content": "Deerghakshama kaattum-naathhan samsthyan nyangall\nThinmaye vediyaan-nokkippaarkkunnon\nDeenanmaar nyangall-lokavinaasham vaathilkkal\nNilkkunnunde nnorkkunnillullllil."
+    },
+    {
+        "type": "subtext",
+        "content": "Mori ......."
+    },
+    {
+        "type": "heading",
+        "content": "Bovooso"
+    },
+    {
+        "type": "subheading",
+        "content": "(maar yaakkobinte)"
+    },
+    {
+        "type": "song",
+        "content": "Eeshaa! Naathhaa! Varika thunappaan villikoottunnu\nPraarththhana kettittaathmaakkallmel krpa cheyyenam."
+    },
+    {
+        "type": "song",
+        "content": "Antyam kaalam vannetthumpoll bhoovinunaasham\nAnyaayatthin maalinyatthil muzhukum lokam\nEettinnovaal sthreeyennonam kezhum dhaathri\nShandhakallaalum porukallaalum veezhaaraakum."
+    },
+    {
+        "type": "song",
+        "content": "Neengippokum shushrooshakallum balikallumellaam\nAagrahamerum kutthikkavarum dravyam nedaan\nAnnaallayyo thammilethirkkum maanavalokam\nNaadukallellaam mudiyum purikall virakondeedum."
+    },
+    {
+        "type": "song",
+        "content": "Dayaadevaalayamivayeennum nin maahaathmyam\nNaathhaa! Maayum dinamaasannam krpathonnenam."
+    },
+    {
+        "type": "subtext",
+        "content": "Kuriye...Kuriye.. Kuriye…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

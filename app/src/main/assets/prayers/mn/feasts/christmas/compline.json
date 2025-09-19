@@ -1,0 +1,50 @@
+[
+    {
+        "type": "title",
+        "content": "Sootthaaraa praarththhana"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonPrayers/kauma.json"
+    },
+    {
+        "type": "subheading",
+        "content": "(menhaubaar)"
+    },
+    {
+        "type": "song",
+        "content": "Nyaananchunnen paapatthaal\nShuddharkkekum-modappoongkaavil\n/tvelikkotthenne naathhaa!\n/ten paapam rodhikkalle;\nRakshichenne narakatthee-\nNnekuka vaasam-thiruhithamaam sthhaane."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor. Shubaho... Menaolam..."
+    },
+    {
+        "type": "song",
+        "content": "Sthuthiyanuthaapakkaar mumpil\nVaathil thurakkum raajaavaameesho!\n/tpaathakiyaam nyaanarththhippoo-\n/tnalvaradaanatthaal modam\nNalkuka bhaavuka daathaave!\nTheeraname nyaan-ninnude kinnaramaay"
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo...."
+    },
+    {
+        "type": "heading",
+        "content": "Maar baalaayiyude bovooso"
+    },
+    {
+        "type": "song",
+        "content": "Paapam cheythoro-daardrathayullllaane!\nAnpundaakaname-nin vidhidivasatthil"
+    },
+    {
+        "type": "song",
+        "content": "Aartthanmaar vaathil-muttunnu krpaalo\nKanivoda-rththhanakall-kkuttharamarullaname"
+    },
+    {
+        "type": "song",
+        "content": "Vaanavanaam thaathaa!Yaachikkunnadiyaa-\nReeshushrooshayeye-ttaardratha thonnenam."
+    },
+    {
+        "type": "song",
+        "content": "Vaanavar thanneeshaa!-maanavar thangathiye\nEe shushrooshayeye-ttaardratha thonnenam."
+    }
+]

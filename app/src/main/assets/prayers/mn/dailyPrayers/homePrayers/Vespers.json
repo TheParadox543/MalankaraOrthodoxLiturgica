@@ -1,0 +1,142 @@
+[
+    {
+        "type": "title",
+        "content": "Sandhyayude namaskaaram"
+    },
+    {
+        "type": "subheading",
+        "content": "Praarambham"
+    },
+    {
+        "type": "prose",
+        "content": "Pithaavinum puthranum parishuddha roohaayumaaya sathyeka daivatthinte thirunaamatthil thanikku sthuthi. Aadimuthal ennekkum thanne aammeen."
+    },
+    {
+        "type": "prose",
+        "content": "Thante sthuthikallaal aakaashavum bhoomiyum niranyirikkunna balavaanaaya daivamthampuraan parishuddhan, parishuddhan, parishuddhan uyarangallil sthuthi. Daivamaaya kartthaavinte thirunaamatthil vannavanum varuvaanirikkunnavanum aayavan vaazhtthappettavanaakunnu. Uyarangallil sthuthi."
+    },
+    {
+        "type": "heading",
+        "content": "Kaumaa"
+    },
+    {
+        "type": "prose",
+        "content": "Daivame nee parishuddhanaakunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Balavaane nee parishuddhanaakunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Maranamillaatthavane nee parishuddhanaakunnu."
+    },
+    {
+        "type": "prose",
+        "content": "Nyangallkku vendi kurishikkappettavane + nyangallodu karunayundaakename."
+    },
+    {
+        "type": "subheading",
+        "content": "(ithu moonnu praavashyam cholliyashesham)"
+    },
+    {
+        "type": "prose",
+        "content": "Nyangallude kartthaave nyangallodu karunayundaakename. Nyangallude kartthaave krpa cheythu nyangallodu karunayundaakename. Nyangallude kartthaave nyangallude shushrooshakallum namaskaarangallum kaikkondu nyangallodu karunayundaakename."
+    },
+    {
+        "type": "prose",
+        "content": "Daivame ninakku sthuthi. Srashdaave ninakku sthuthi. Paapikallaaya ninte adiyaarodu karuna cheyyunna mishihaa raajaave ninakku sthuthi. Baarekmor"
+    },
+    {
+        "type": "heading",
+        "content": "Kartthrpraarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Svargasthhanaaya nyangallude pithaave, ninte thirunaamam parishuddhamaakkappedaname. Ninte raajyam varename. Ninte thiruvishdam svargatthileppole bhoomiyilum aakaname. Nyangallkkaavashyamulllla appam innum nyangallkku tharename. Nyangallude kadakkaarodu nyangall kshamichirikkunnathupole nyangallude kadangallum paapangallum nyangallodu kshamikkename. Pareekshayilekku nyangalle praveshippikkaruthe. Pinneyo dushdanil ninnum nyangalle rakshichu kollllename. Entukondennaal  raajyavum shakthiyum mahathvavum ennekkum ninakkullllathaakunnu."
+    },
+    {
+        "type": "subtext",
+        "content": "Aammeen"
+    },
+    {
+        "type": "prose",
+        "content": "Krpaniranya mariyame ninakku samaadhaanam. Nammude kartthaavu ninnodu koode. Nee sthreekallil vaazhtthappettavall. Ninte udaraphalamaaya nammude kartthaaveeshomishihaa vaazhtthappettavanaakunnu. Daivamaathaavaaya vishuddha kanyakamartthamariyame thampuraante amme paapikallaaya nyangallkkuvendi ippozhum eppozhum nyangallude maranasamayatthum Daivam thampuraanodu apekshichukollllaname. Aammeen."
+    },
+    {
+        "type": "subheading",
+        "content": "Maar baalaayiyude bovusaa"
+    },
+    {
+        "type": "prose",
+        "content": "Anugrahangall niranyirikkunnavane anukoolatthinte divasatthil ninte srshdiye nee puthuthaakki anukoolamaakkename."
+    },
+    {
+        "type": "prose",
+        "content": "Kartthaave ninte aashrayatthekkurichu marichu ninte varavine nokkippaarkkunna nyangallude marichupoyavare nee punyamaakkename."
+    },
+    {
+        "type": "prose",
+        "content": "Abrahaaminteyum isahaakkinteyum yaakkobinteyum madiyil avare paarppikkename."
+    },
+    {
+        "type": "prose",
+        "content": "Vannavanum varunnavanum marichavare anukoolamaakkunnavanumaayavan vaazhtthappettavanaakunnu ennu shareerangallum aathmaakkallum shariyaayittu nilavillichu parayumaaraakename."
+    },
+    {
+        "type": "subtext",
+        "content": "Aammeen"
+    },
+    {
+        "type": "subheading",
+        "content": "(randu kaumaa namaskkarikkanam)"
+    },
+    {
+        "type": "heading",
+        "content": "Praarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Moraan yeshumashihaa ninte ninte anugrahangallude vaathil nyangallude mukhangallkku nere nee adaykkaruthe. Kartthaave nyangall paapikallaakunnu ennu nyangall ettuparayunnu. Nyangallodu karunayundaakaname."
+    },
+    {
+        "type": "prose",
+        "content": "Kartthaave ninte maranatthaal nyangallude maranam maanyupokuvaanaayittu ninte sneham ninte sthhaanatthu ninnu nyangallude adukkalekku ninne irakki nyangallodu karunayundaakaname."
+    },
+    {
+        "type": "subheading",
+        "content": "(randu kaumaa)"
+    },
+    {
+        "type": "link",
+        "file": "psalms/psalm91121.json"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/marSeveriosApeksha.json"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/praiseOfCherubims.json"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/nicenecreed.json"
+    },
+    {
+        "type": "heading",
+        "content": "Apeksha"
+    },
+    {
+        "type": "prose",
+        "content": "Pattaangappetta Daivam thampuraane nyangalle nee rakshichu kollllename. Thinmakall okkeyil ninnum doshangall okkeyil ninnum thinmappetta manassokkeyil ninnum - veshyaadosha chintayil ninnum-shathrukkallokkeyil ninnum - chathivinude snehakaaril ninnum-pishaachukkallude pareekshayil ninnum - dushdamanushyarude thinmakallil ninnum - ashuddhamaakkappetta vikaarangallil ninnum - mllechchhathappetta moha ngallil ninnum - saatthaanaduttha vichaarangallil ninnum - thinmappetta svapnangallil ninnum - ollikkappetta kanikallil ninnum minukkidappetta vachanangallil ninnum - vanchathivukallil ninnum - thinmappetta uttharippil ninnum - ihalokatthinaduttha sakala pareekshakallil ninnum nyangalle nee rakshichukollllaname."
+    },
+    {
+        "type": "prose",
+        "content": "Arishatthinnude vadiyil ninnum - pettennulllla maranatthil ninnum- kopatthil ninnum - dveshathayil ninnum - minnalukallil ninnum - idikallil ninnum - vasantakallil ninnum - theenarakatthil ninnum - kadumappetta dushkarmmangallil ninnum - chaakaattha puzhuvil ninnum - kedaattha theeyil ninnum - pallukadiyil ninnum - karachil ninnum - kaypu petta bhavithatthil ninnum - thinmappetta naazhikayil ninnum - upadravikkunnathaaya mushkarathvatthil ninnum - panyatthil ninnum - pediyil ninnum - illakkatthil ninnum - sahippaan vahiyaattha - shikshakall okkeyil ninnum - 'pokuvin ningalle nyaan ariyunnilla' ennulllla thiruvachanatthil ninnum ninnil ninnum nyangalle akattunnathaaya sakalatthil ninnum nee rakshichu kollllaname - aammeen."
+    },
+    {
+        "type": "subheading",
+        "content": "(sandhyaa namaskkaaram thikanyu)"
+    }
+]

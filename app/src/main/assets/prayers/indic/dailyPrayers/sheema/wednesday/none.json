@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "budhaṉ ompatāṁmaṇi"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(ānidē daśkkal)"
+    },
+    {
+        "type": "song",
+        "content": "rakṣakanāṁ nāthā! niṉmey bhakṣicc\nraktaṁ pānaṁ cey‌taṅṅaye-nōkkippāṟkkuṁ\nmr̥tarekkabaṟukaḷī-nnaḻivillātuyirō-\nṭeḻunnēlppiccaṇiyikkaṇame-śōbhana vasanaṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ.......śubaho........"
+    },
+    {
+        "type": "song",
+        "content": "mēghavibhūṣitanāy-rājakumāranahō\njīvaṉ vigataṟkkēkiṭuvāṉ-ghōṣamōṭettuṁ\nkompoliyannaṇiyil-kēḷkkuṁ śiṣṭajanaṁ\nmahimāṁbaramāṟnnetirēlppā-nuḻaṟiccelluṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo…."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

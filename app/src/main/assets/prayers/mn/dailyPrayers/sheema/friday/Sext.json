@@ -1,0 +1,46 @@
+[
+    {
+        "type": "title",
+        "content": "Velllli maddhyaahnam"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(sohadau aatthoon)"
+    },
+    {
+        "type": "song",
+        "content": "Baalyatthil thaane-ttudayon nin\nSmrthi valuthaakki-mariyam nee dhanya\nDevaagaare meshayil vacho-\nRappatthaal nee-pariposhithayaayi.\n/tninne vaidika-maalaakhamaar maanichu\nNivasichu Daivam ninnil."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor.... Shubaho......"
+    },
+    {
+        "type": "song",
+        "content": "Koottam koottam mashihaa bhakthanmaa-\nRaam sahader-vidhigeham pooki\nVaallaalavare-himsichappoll\nGhaathakarude-mel raktham paanyozhuki\n/tnaathhan kshamaka-ndaniyichaanavare makudam\nThal praarththhana nammallkkabhayam."
+    },
+    {
+        "type": "subtext",
+        "content": "Menaolam..."
+    },
+    {
+        "type": "song",
+        "content": "Naathhan nammall-kkuththhaanatthe prathi\nNallaashayu-mulldhairyavumeki\nVaangippoyor-naadam kellkkum\nShishdanmaar nava-jeevan nedaanum\n/tdushdanmaar vidhi-yetteedaanumuyartthidume-\nNnevam kalppichaanudayon."
+    },
+    {
+        "type": "subtext",
+        "content": "Mori…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/janani.json"
+    }
+]

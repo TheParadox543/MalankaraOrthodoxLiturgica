@@ -1,27 +1,27 @@
 [
     {
         "type": "title",
-        "content": "naalaam kaumaa"
+        "content": "Naalaam kaumaa"
     },
     {
         "type": "prose",
-        "content": "/thaaleluyyaa, uhaaleluyyaa, uhaaleluyyaa, dyvame! Ninakku sthuthi. Haaleluyyaa, uhaaleluyyaa, uhaaleluyyaa, dyvame! Ninakku sthuthi. Haaleluyyaa, uhaaleluyyaa, uhaaleluyyaa dyvame! Ninakku sthuthi."
+        "content": "/Thaaleluyyaa, uhaaleluyyaa, uhaaleluyyaa, daivame! Ninakku sthuthi. Haaleluyyaa, uhaaleluyyaa, uhaaleluyyaa, daivame! Ninakku sthuthi. Haaleluyyaa, uhaaleluyyaa, uhaaleluyyaa daivame! Ninakku sthuthi."
     },
     {
         "type": "prose",
-        "content": "/tkarunayulla dyvame! Nin്re karunayaal njangalotu karuna cheyyaname."
+        "content": "/tkarunayulllla daivame! Ninte karunayaal nyangallodu karuna cheyyaname."
     },
     {
         "type": "prose",
-        "content": "/tnaam dyvaputhranmaaraayittheeruvaan / jeevicchirunnappol namme padtippicchavaraaya/ nammute pithaakkanmaare, / kurbaanakalilum praarththanakalilum naam orkkanam. / azhivillaattha lokamaaya svarggaraajyatthil / neethimaanmaarotum punyavaanmaarotumkoote / dyvaputhran avare aashvasippikkatte."
+        "content": "/tnaam daivaputhranmaaraayittheeruvaan / jeevichirunnappoll namme padhippichavaraaya/ nammude pithaakkanmaare, / kurbaanakallilum praarththhanakallilum naam orkkanam. / Azhivillaattha lokamaaya svargaraajyatthil / neethimaanmaarodum punyavaanmaarodumkoode / daivaputhran avare aashvasippikkatte."
     },
     {
         "type": "subtext",
-        "content": "moriyo......"
+        "content": "Moriyo......"
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/mavoorba.Json"
+        "file": "commonprayers/mavoorba.json"
     },
     {
         "type": "heading",
@@ -29,139 +29,139 @@
     },
     {
         "type": "prose",
-        "content": "/tsahodaranmaar otthorumicchu vasikkunnathu / ethra nanmayum ethra saundaryavumaakunnu."
+        "content": "/Tsahodaranmaar otthorumichu vasikkunnathu / ethra nanmayum ethra saundaryavumaakunnu."
     },
     {
         "type": "prose",
-        "content": "/tathu aharon്re thalayinmelum / avan്re ankiyute nenchinmel veenukitakkunna thaatiyaaya avan്re thaatiyinmelum / olikkunna thylampoleyum / sehiyon malamel pozhiyunna hermon manjupoleyum aakunnu."
+        "content": "/tathu aharonte thalayinmelum / avante angkiyude nenchinmel veenukidakkunna thaadiyaaya avante thaadiyinmelum / olikkunna thailampoleyum / sehiyon malamel pozhiyunna hermon manyupoleyum aakunnu."
     },
     {
         "type": "prose",
-        "content": "/tenthennaal avite kartthaavu enneykkum anugrahattheyum jeevaneyum kalppicchu."
+        "content": "/tentennaal avide kartthaavu enneykkum anugrahattheyum jeevaneyum kalppichu."
     },
     {
         "type": "prose",
-        "content": "/tdyvame! Sthuthi ninakku yogyamaakunnu."
+        "content": "/tdaivame! Sthuthi ninakku yogyamaakunnu."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho… menaolam......"
+        "content": "Baarekmor. Shubaho… menaolam......"
     },
     {
         "type": "heading",
-        "content": "eniyono"
+        "content": "Eniyono"
     },
     {
         "type": "prose",
-        "content": "/tdyvamaathaavinu ormmayum / avalute praarththanayaal namukku sahaayangalum undaakatte."
+        "content": "/Tdaivamaathaavinu ormmayum / avallude praarththhanayaal namukku sahaayangallum undaakatte."
     },
     {
         "type": "prose",
-        "content": "/tneethimaanmaarkku ormmayum / avarute praarththanakalaal namukku sahaayangalum undaakatte."
+        "content": "/tneethimaanmaarkku ormmayum / avarude praarththhanakallaal namukku sahaayangallum undaakatte."
     },
     {
         "type": "prose",
-        "content": "/tdeerghadarshimaaruteyum, shleehanmaaruteyum, sahadenmaaruteyum praarththana / namukku kottayaayirikkatte."
+        "content": "/tdeerghadarshimaarudeyum, shleehanmaarudeyum, sahadenmaarudeyum praarththhana / namukku kottayaayirikkatte."
     },
     {
         "type": "prose",
-        "content": "/tkartthaave! Ninte sahadenmaarute thuramukhatthinum / ninte snehithanmaarute kootaarangalkkum njangale yogyaraakka ."
+        "content": "/tkartthaave! Ninte sahadenmaarude thuramukhatthinum / ninte snehithanmaarude koodaarangallkkum nyangalle yogyaraakka ."
     },
     {
         "type": "prose",
-        "content": "/tdayayullavanum, karuna niranjirikkunnavanumaayullove! Ninte nyaayavisthaaradivasatthil / njangalotu karuna cheyyaname."
+        "content": "/tdayayullllavanum, karuna niranyirikkunnavanumaayullllove! Ninte nyaayavisthaaradivasatthil / nyangallodu karuna cheyyaname."
     },
     {
         "type": "prose",
-        "content": "/tthanne vilikkunna paapikalilninnu / than്re karunaye virodhikkaatthavan vaazhtthappettavanaakunnu. Baarekmor."
+        "content": "/tthanne villikkunna paapikallilninnu / thante karunaye virodhikkaatthavan vaazhtthappettavanaakunnu. Baarekmor."
     },
     {
         "type": "prose",
-        "content": "/tshubaho… kartthaave! Vishvaasamulla sabhayute makkalkku nalla ormma undaakkaname."
+        "content": "/tshubaho… kartthaave! Vishvaasamulllla sabhayude makkallkku nalla ormma undaakkaname."
     },
     {
         "type": "prose",
-        "content": "/tmenaolam… ninte shreshdtatha udikkunna divasatthil avar ninte valatthubhaagatthu nilkkumaaraakaname."
+        "content": "/tmenaolam… ninte shreshdhatha udikkunna divasatthil avar ninte valatthubhaagatthu nilkkumaaraakaname."
     },
     {
         "type": "heading",
-        "content": "mattoru eniyono"
+        "content": "Mattoru eniyono"
     },
     {
         "type": "prose",
-        "content": "/tkanyakayaaya dyvamaathaave! Ellaakaalatthum / ellaanera tthum ninte praarththana njangalkku kottayaayirikkaname."
+        "content": "/Tkanyakayaaya daivamaathaave! Ellaakaalatthum / ellaanera tthum ninte praarththhana nyangallkku kottayaayirikkaname."
     },
     {
         "type": "prose",
-        "content": "/t(kartthaave!) ellaanaazhikayilum / njangalkkaayi kenikal vaykkunna / dushtane, nin്re parishuddhanmaarute praarththanayaal / njangalil ninnu maayicchukalayaname."
+        "content": "/t(kartthaave!) ellaanaazhikayilum / nyangallkkaayi kenikall vaykkunna / dushdane, ninte parishuddhanmaarude praarththhanayaal / nyangallil ninnu maayichukallayaname."
     },
     {
         "type": "prose",
-        "content": "/tnjangalute kartthaavaaya yeshumishihaa! Nin്re sleebaa njangalkku kottayaayirikkukayum / athinakatthu njangal maraykkappetukayum cheyyaname."
+        "content": "/tnyangallude kartthaavaaya yeshumishihaa! Ninte sleebaa nyangallkku kottayaayirikkukayum / athinakatthu nyangall maraykkappedukayum cheyyaname."
     },
     {
         "type": "prose",
-        "content": "/tvachanamaaya yeshuthampuraane! Jeevanotirikkunnavare nin്re sleebaayaal kaatthukollukayum / maricchupoyavare nin്re karunayaal punyappetutthukayum cheyyaname."
+        "content": "/tvachanamaaya yeshuthampuraane! Jeevanodirikkunnavare ninte sleebaayaal kaatthukollllukayum / marichupoyavare ninte karunayaal punyappedutthukayum cheyyaname."
     },
     {
         "type": "prose",
-        "content": "/tnaam jeevanotirikkunna naal okkeyum / ellaayppozhum / pithaavineyum, puthraneyum, vishuddharoohaayeyum sthuthicchu vandicchu mahathvappetutthanam."
+        "content": "/tnaam jeevanodirikkunna naall okkeyum / ellaayppozhum / pithaavineyum, puthraneyum, vishuddharoohaayeyum sthuthichu vandichu mahathvappedutthanam."
     },
     {
         "type": "prose",
-        "content": "/tettavum karunayullavanaaya njangalute dyvame! Nee ezhunnellunna aa nin്re valiya divasatthil / nin്re valatthu bhaagatthu njangale nirutthaname."
+        "content": "/tettavum karunayullllavanaaya nyangallude daivame! Nee ezhunnellllunna aa ninte valiya divasatthil / ninte valatthu bhaagatthu nyangalle nirutthaname."
     },
     {
         "type": "prose",
-        "content": "/tee samayatthu ninakku sthuthipaatuvaan/njangale nee yogyaraakkiyirikkakondu / nin്re raajyam anubhavippaanum njangale yogyaraakkaname."
+        "content": "/tee samayatthu ninakku sthuthipaaduvaan/nyangalle nee yogyaraakkiyirikkakondu / ninte raajyam anubhavippaanum nyangalle yogyaraakkaname."
     },
     {
         "type": "prose",
-        "content": "/tnjangalute maranatthinteyum jeevan്reyum naathanaaya kartthaave! Nin്re krupa njangalutemel undaayi / njangaluteyum njangalute maricchupoyavaruteyum / aathmaakkalinmel karuna cheyyaname."
+        "content": "/tnyangallude maranatthinteyum jeevanteyum naathhanaaya kartthaave! Ninte krpa nyangalludemel undaayi / nyangalludeyum nyangallude marichupoyavarudeyum / aathmaakkallinmel karuna cheyyaname."
     },
     {
         "type": "prose",
-        "content": "/tkartthaave! Krupacheythu sahaayikkaname."
+        "content": "/tkartthaave! Krpacheythu sahaayikkaname."
     },
     {
         "type": "link-collapsible",
-        "file": "psalms/psalm148149150.Json"
+        "file": "psalms/psalm148149150.json"
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho… menaolam…"
+        "content": "Baarekmor. Shubaho… menaolam…"
     },
     {
         "type": "prose",
-        "content": "/tthrithvatthinu sthuthi / thrithvatthinu sthuthi, sthuthikkappettathum / unayaayathum aadiyum anthavumillaatthathumaaya thrithvatthe njangal sthuthikkunnu / dyvame! Ellaaneratthum sthuthi ninakku yogyamaakunnu."
+        "content": "/Tthrithvatthinu sthuthi / thrithvatthinu sthuthi, sthuthikkappettathum / unayaayathum aadiyum antavumillaatthathumaaya thrithvatthe nyangall sthuthikkunnu / daivame! Ellaaneratthum sthuthi ninakku yogyamaakunnu."
     },
     {
         "type": "title",
-        "content": "kukkiliyonukal"
+        "content": "Kukkiliyonukall"
     },
     {
         "type": "heading",
-        "content": "(dyvamaathaavu)"
+        "content": "(daivamaathaav)"
     },
     {
         "type": "song",
-        "content": "ninnaal sthuthiyotu raajamakal-haa...Haa....\nNinvalamaayu raajabhaaminiyum.\n/tninnazhakarachan mohippaan-haa...Haa....\n/tnin janamorkkaaykku pithrugruhavum."
+        "content": "Ninnaall sthuthiyodu raajamakall-haa...Haa....\nNinvalamaayu raajabhaaminiyum.\n/tninnazhakarachan mohippaan-haa...Haa....\n/tnin janamorkkaaykku pithrgrhavum."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho… menaolam..."
+        "content": "Baarekmor. Shubaho… menaolam..."
     },
     {
         "type": "subheading",
-        "content": "ekbo"
+        "content": "Ekbo"
     },
     {
         "type": "song",
-        "content": "bhakthar pukazhchaa bhaajaname!\nNinniludicchorekasuthan\nthrukkaral njangalilalivaan than\npakkalapekshayanakkenam."
+        "content": "Bhakthar pukazhchaa bhaajaname!\nNinniludichorekasuthan\nThrkkarall nyangallilalivaan than\nPakkalapekshayanakkenam."
     },
     {
         "type": "subtext",
-        "content": "sthaumenkaalos…"
+        "content": "Sthaumenkaalos…"
     },
     {
         "type": "subheading",
@@ -169,126 +169,126 @@
     },
     {
         "type": "song",
-        "content": "dyvatthin maathaa-mariyaaminnum nibiya-\nnmaarkkum shleehanmaarkkum nal sahadenmaarkkum\nsabhayin makkalkko-kkekkum kaalam thorum\nennekkum nallo-rormmayathundaakatte."
+        "content": "Daivatthin maathaa-mariyaaminnum nibiya-\nNmaarkkum shleehanmaarkkum nal sahadenmaarkkum\nSabhayin makkallkko-kkekkum kaalam thorum\nEnnekkum nallo-rormmayathundaakatte."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho…"
+        "content": "Baarekmor. Shubaho…"
     },
     {
         "type": "song",
-        "content": "thiruvullatthaal ka-nyakayaam mariyaaminnul\njaathanathaayu jaathi-kkaare vazhi neraakki,\nrakshicchaval thannor-mmaykkounnathyam cherttha\nsuthanaayu sthothram, praarththikkattaval njangalkkaayu."
+        "content": "Thiruvullllatthaal ka-nyakayaam mariyaaminnull\nJaathanathaayu jaathi-kkaare vazhi neraakki,\nRakshichavall thannor-mmaykkaunnathyam cherttha\nSuthanaayu sthothram, praarththhikkattavall nyangallkkaay."
     },
     {
         "type": "heading",
-        "content": "parishuddhanmaar"
+        "content": "Parishuddhanmaar"
     },
     {
         "type": "song",
-        "content": "nayavaan panapole thalirtthitume. Haa...Haa...\nValarumavan lebanon kaarakil pol\n/tvruddhathayilumavar thalirittu thazhacchitume, haa...Haa...\n/tvarddhikkumavarkkuthushti pushtikalum"
+        "content": "Nayavaan panapole thallirtthidume. Haa...Haa...\nVallarumavan lebanon kaarakil pol\n/tvrddhathayilumavar thallirittu thazhachidume, haa...Haa...\n/tvarddhikkumavarkkuthushdi pushdikallum"
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho… menaolam…"
+        "content": "Baarekmor. Shubaho… menaolam…"
     },
     {
         "type": "heading",
-        "content": "ekbo"
+        "content": "Ekbo"
     },
     {
         "type": "song",
-        "content": "orupolingum maar (maartthomaa)\nunda melum ninnormma\nuthakaname nin praarththana nin-\normmaye bahumaanicchorkkaayu."
+        "content": "Orupolingum maar (maartthomaa)\nUnda melum ninnormma\nUthakaname nin praarththhana nin-\nOrmmaye bahumaanichorkkaay."
     },
     {
         "type": "subtext",
-        "content": "sthaumenkaalosu...."
+        "content": "Sthaumenkaalos...."
     },
     {
         "type": "subheading",
-        "content": "kolo (moredramsho)"
+        "content": "Kolo (moredramsho)"
     },
     {
         "type": "song",
-        "content": "praarththanayin samayamithallo (maartthommaa)\npathivinpati ninkoottatthalayaayu praarththikka\nimpamezhum nin paattil shraddhiccheetum nin\naatukale moosheppol thrukky vaazhtthanam."
+        "content": "Praarththhanayin samayamithallo (maartthommaa)\nPathivinpadi ninkoottatthalayaayu praarththhikka\nImpamezhum nin paattil shraddhicheedum nin\nAadukalle moosheppol thrkkai vaazhtthanam."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho ..."
+        "content": "Baarekmor. Shubaho ..."
     },
     {
         "type": "song",
-        "content": "ninne varicchoru thaathannum (maartthommaa)\nninnormmaye bahumaaniccha suthanum sthothram\nninne muti chooteetunna roohaa vandyan;\nnin praarththana krupayettatte njangalkkennum."
+        "content": "Ninne varichoru thaathannum (maartthommaa)\nNinnormmaye bahumaanicha suthanum sthothram\nNinne mudi choodeedunna roohaa vandyan;\nNin praarththhana krpayettatte nyangallkkennum."
     },
     {
         "type": "heading",
-        "content": "parethar"
+        "content": "Parethar"
     },
     {
         "type": "song",
-        "content": "makkalilappan krupacheythupole-haa...Haa.....\nBhakthanmaaril dyvam krupa cheyyum.\n/tpullinuthulyam naranute naalkalaho-haa…uhaa…\n/tpookkunnithu vayalil pooccheti pole."
+        "content": "Makkallilappan krpacheythupole-haa...Haa.....\nBhakthanmaaril Daivam krpa cheyyum.\n/tpullinuthulyam naranude naallkallaho-haa…uhaa…\n/tpookkunnithu vayalil poochedi pole."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho… menaolam…"
+        "content": "Baarekmor. Shubaho… menaolam…"
     },
     {
         "type": "subheading",
-        "content": "ekbo"
+        "content": "Ekbo"
     },
     {
         "type": "song",
-        "content": "sharanatthaale nin krupayil\nmaranamatanjoru daasare nin\njeevasvaramathunartthaname\nkabarinnoodyaanatthinnaayu"
+        "content": "Sharanatthaale nin krpayil\nMaranamadanyoru daasare nin\nJeevasvaramathunartthaname\nKabarinnoodyaanatthinnaay"
     },
     {
         "type": "subtext",
-        "content": "sthaumenkaalos…"
+        "content": "Sthaumenkaalos…"
     },
     {
         "type": "subheading",
-        "content": "kolo (moredu sho)"
+        "content": "Kolo (moredu sho)"
     },
     {
         "type": "song",
-        "content": "rakshakane! Nin gaathratthe bhakshicchum nin\nvilayerum rakthakkaasaa paanam cheythum\nmrutharaayore naasham neekki jeevippi-\ncchaniyenam ninne nokkunnavaril kaanthi."
+        "content": "Rakshakane! Nin gaathratthe bhakshichum nin\nVilayerum rakthakkaasaa paanam cheythum\nMrtharaayore naasham neekki jeevippi-\nChaniyenam ninne nokkunnavaril kaanti."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho ..."
+        "content": "Baarekmor. Shubaho ..."
     },
     {
         "type": "song",
-        "content": "mruthare jeevippippaanezhunnallum raajaa\nmukilazhakin melaaghoshithanaayeetunnu.\nNayavaanmaar than mun kompin naadam ketti-\nttenkiyaninjethirelpaanaayu poyeetunnu."
+        "content": "Mrthare jeevippippaanezhunnallllum raajaa\nMukilazhakin melaaghoshithanaayeedunnu.\nNayavaanmaar than mun kompin naadam ketti-\nTtengkiyaninyethirelpaanaayu poyeedunnu."
     },
     {
         "type": "subtext",
-        "content": "moriyo…"
+        "content": "Moriyo…"
     },
     {
         "type": "heading",
-        "content": "maar apremin്re pothuvaaya bovuso"
+        "content": "Maar apreminte pothuvaaya bovuso"
     },
     {
         "type": "song",
-        "content": "1. Kartthaave! Krupa cheyyaname\nmaathru vishuddha praarththanayaal"
+        "content": "1. Kartthaave! Krpa cheyyaname\nMaathr vishuddha praarththhanayaal"
     },
     {
         "type": "song",
-        "content": "2. Mariyaaminnaayu shlommo va-\nnnariyicchoraa maalaakha\ndyvam yojippaayennaayu\nvannarivingekeetenam."
+        "content": "2. Mariyaaminnaayu shlommo va-\nNnariyichoraa maalaakha\nDaivam yojippaayennaayu\nVannarivingekeedenam."
     },
     {
         "type": "song",
-        "content": "3. Panineer haananiyaadyar mel\nveezhtthiyoraa maalaakhaa thaan\nmruthar thannasthikkoottatthil\nkrupayaam neer veezhttheetenam."
+        "content": "3. Panineer haananiyaadyar mel\nVeezhtthiyoraa maalaakhaa thaan\nMrthar thannasthhikkoottatthil\nKrpayaam neer veezhttheedenam."
     },
     {
         "type": "song",
-        "content": "4. Kartthaave! Krupa cheyyaname\nmaathru vishuddhaabhyarththanayaal\npunyam njangalkkum vaangi-\nppoyorkkum nalkeetenam."
+        "content": "4. Kartthaave! Krpa cheyyaname\nMaathr vishuddhaabhyarththhanayaal\nPunyam nyangallkkum vaangi-\nPpoyorkkum nalkeedenam."
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/praiseOfAngels.Json"
+        "file": "commonprayers/praiseOfAngels.json"
     },
     {
         "type": "link-collapsible",
-        "file": "commonprayers/kauma.Json"
+        "file": "commonprayers/kauma.json"
     }
 ]
