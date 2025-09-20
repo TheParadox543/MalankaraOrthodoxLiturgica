@@ -82,7 +82,7 @@ fun PrayerScreen(
     val translations by prayerViewModel.translations.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     var title = ""
-    for (item in node.route.split("_")){
+    for (item in node.route.split("_")) {
         title += translations[item] + " "
     }
 
@@ -90,7 +90,7 @@ fun PrayerScreen(
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
-    val currentFilename = node.filename?: "NoFileNameFound"
+    val currentFilename = node.filename ?: "NoFileNameFound"
     val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
 
     // State to accumulate zoom gesture delta for triggering discrete steps
@@ -114,9 +114,13 @@ fun PrayerScreen(
     val initialTopPadding = remember { mutableStateOf(0.dp) }
     val initialBottomPadding = remember { mutableStateOf(0.dp) }
 
-    val listState = rememberSaveable(saver = LazyListState.Saver, key=currentFilename){
-        LazyListState()
-    }
+    val listState =
+        rememberSaveable(
+            saver = LazyListState.Saver,
+            key = currentFilename,
+        ) {
+            LazyListState()
+        }
 //    LaunchedEffect(Unit) {
 //        if (scrollIndex > 0) {
 //            while (listState.firstVisibleItemIndex != scrollIndex) {
@@ -142,32 +146,31 @@ fun PrayerScreen(
     }
 
     Scaffold(
-        modifier = Modifier
-            .nestedScroll(nestedScrollConnection)
-            .pointerInput(Unit) {
-                detectTapGestures { isVisible.value = !isVisible.value }
-            }
-            .pointerInput(Unit) {
-                detectTransformGestures { _, _, zoom, _ ->
-                    cumulativeZoomFactor *= zoom
+        modifier =
+            Modifier
+                .nestedScroll(nestedScrollConnection)
+                .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } }
+                .pointerInput(Unit) {
+                    detectTransformGestures { _, _, zoom, _ ->
+                        cumulativeZoomFactor *= zoom
 
-                    if (cumulativeZoomFactor >= zoomInThreshold) {
-                        settingsViewModel.stepFontScale(1)
-                        cumulativeZoomFactor = 1f
-                    } else if (cumulativeZoomFactor <= zoomOutThreshold) {
-                        settingsViewModel.stepFontScale(-1)
-                        cumulativeZoomFactor = 1f
+                        if (cumulativeZoomFactor >= zoomInThreshold) {
+                            settingsViewModel.stepFontScale(1)
+                            cumulativeZoomFactor = 1f
+                        } else if (cumulativeZoomFactor <= zoomOutThreshold) {
+                            settingsViewModel.stepFontScale(-1)
+                            cumulativeZoomFactor = 1f
+                        }
                     }
-                }
-            },
+                },
         topBar = {
             AnimatedVisibility(
                 visible = isVisible.value,
-                modifier = Modifier.zIndex(1f)
+                modifier = Modifier.zIndex(1f),
             ) {
                 TopNavBar(
                     title,
-                    navController
+                    navController,
                 ) { navController.navigate(Screen.Settings.route) }
             }
         },
@@ -175,7 +178,7 @@ fun PrayerScreen(
             if (prevNodeRoute != null || nextNodeRoute != null) {
                 AnimatedVisibility(
                     visible = isVisible.value,
-                    modifier = Modifier.zIndex(1f)
+                    modifier = Modifier.zIndex(1f),
                 ) {
                     SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
                 }
@@ -204,19 +207,19 @@ fun PrayerScreen(
                         routeProvider = {
                             Screen.Prayer.createDeepLink(
                                 node.route,
-                                listState.firstVisibleItemIndex
+                                listState.firstVisibleItemIndex,
                             )
                         },
                         Modifier.scale(1.2f),
                     )
                 }
             }
-        }
+        },
     ) { innerPadding ->
 
         // Capture the system window insets once when the composable is first launched
         LaunchedEffect(innerPadding) {
-            if (initialTopPadding.value == 0.dp){
+            if (initialTopPadding.value == 0.dp) {
                 initialTopPadding.value = innerPadding.calculateTopPadding()
             }
             if (initialBottomPadding.value == 0.dp) {
@@ -235,11 +238,12 @@ fun PrayerScreen(
         }
 
         LazyColumn(
-            modifier = Modifier
-                .padding(horizontal = if (isLandscape) 40.dp else 20.dp),
+            modifier =
+                Modifier
+                    .padding(horizontal = if (isLandscape) 40.dp else 20.dp),
 //                    .fillMaxWidth(if (isLandscape) 0.8f else 1f), // Limit width in landscape
             state = listState,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             item {
                 Spacer(Modifier.padding(top = initialTopPadding.value))
@@ -312,13 +316,14 @@ fun PrayerElementRenderer(
             ) {
                 Column {
                     Spacer(Modifier.padding(8.dp))
-                    prayerElement.items.forEach { nestedItem -> // Loop through type-safe items
+                    prayerElement.items.forEach { nestedItem ->
+                        // Loop through type-safe items
                         // Recursively call the renderer for nested items
                         PrayerElementRenderer(
                             nestedItem,
                             prayerViewModel,
                             filename,
-                            navController
+                            navController,
                         )
                         Spacer(Modifier.padding(4.dp))
                     }
@@ -330,9 +335,12 @@ fun PrayerElementRenderer(
             ErrorBlock(
                 "Error: ${prayerElement.content}",
                 prayerViewModel,
-                filename
+                filename,
             )
         }
+
+        is PrayerElement.DynamicContent -> DynamicContentUI(prayerElement)
+        is PrayerElement.DynamicSong -> DynamicSongUI(prayerElement)
 
         is PrayerElement.Link -> {
             // This block indicates that a 'Link' element unexpectedly reached the UI.
@@ -340,7 +348,7 @@ fun PrayerElementRenderer(
             ErrorBlock(
                 "UI Error: Unresolved Link element encountered",
                 prayerViewModel,
-                filename
+                filename,
             )
         }
 
@@ -349,7 +357,7 @@ fun PrayerElementRenderer(
             ErrorBlock(
                 "UI Error: Unresolved LinkCollapsible element encountered",
                 prayerViewModel,
-                filename
+                filename,
             )
         }
     }
@@ -362,32 +370,64 @@ fun PrayerButton(
     translations: Map<String, String>,
     modifier: Modifier = Modifier,
 ) {
-    val displayText : String = prayerButton.label
-        ?: prayerButton.link.split("_").mapNotNull { word ->
-            translations[word]
-        }.joinToString(" ").ifEmpty { "Error" }
+    val displayText: String =
+        prayerButton
+            .label
+            ?: prayerButton
+                .link
+                .split("_")
+                .mapNotNull { word -> translations[word] }
+                .joinToString(" ")
+                .ifEmpty { "Error" }
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
     ) {
         Button(
-            onClick = { navController.navigate(Screen.Prayer.createRoute(prayerButton.link)){
-                if (prayerButton.replace) {
-                    navController.popBackStack()
+            onClick = {
+                navController.navigate(Screen.Prayer.createRoute(prayerButton.link)) {
+                    if (prayerButton.replace) {
+                        navController.popBackStack()
+                    }
                 }
-            } },
+            },
         ) {
             Text(
                 text = displayText,
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onPrimary,
-                modifier = modifier.padding(vertical = 8.dp)
+                modifier = modifier.padding(vertical = 8.dp),
             )
             Icon(
                 Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = "Go to $displayText",
             )
+        }
+    }
+}
+
+@Composable
+fun DynamicContentUI(dynamicContent: PrayerElement.DynamicContent) {
+    Column {
+        Text("Dynamic Content Placeholder")
+        Text(dynamicContent.timeKey)
+        dynamicContent.items.forEach { DynamicSongUI(it)}
+    }
+}
+
+@Composable
+fun DynamicSongUI(dynamicSong: PrayerElement.DynamicSong) {
+    Column {
+        Text("Dynamic Song Placeholder")
+        Text(dynamicSong.eventKey)
+        Text(dynamicSong.timeKey)
+        dynamicSong.items.forEach { item ->
+            when (item) {
+                is PrayerElement.Subheading -> Subheading(item.content)
+                is PrayerElement.Song -> Song(item.content)
+                else -> Text("Unexpected item in DynamicSong: $item")
+            }
         }
     }
 }
@@ -403,8 +443,7 @@ fun ErrorBlock(
         text = text,
         style = MaterialTheme.typography.titleSmall,
         color = MaterialTheme.colorScheme.error,
-        modifier = modifier
-            .fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
     )
     prayerViewModel.handlePrayerElementError(text, errorLocation)
 }
@@ -412,34 +451,32 @@ fun ErrorBlock(
 @Composable
 fun CollapsibleTextBlock(
     title: String,
-    content: @Composable () -> Unit // Changed content to Composable Lambda
+    content: @Composable () -> Unit, // Changed content to Composable Lambda
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { expanded = !expanded }
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
         ) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
             )
             Icon(
                 imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                contentDescription = if (expanded) "Collapse" else "Expand"
+                contentDescription = if (expanded) "Collapse" else "Expand",
             )
         }
 
         AnimatedVisibility(visible = expanded) {
-            Column{
+            Column {
                 content()
             }
         }
@@ -450,17 +487,21 @@ fun CollapsibleTextBlock(
 fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
     val isVisible = remember { mutableStateOf(true) }
 
-    val nestedScrollConnection = remember {
-        object : NestedScrollConnection {
-            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-                if (available.y > 20) {
-                    isVisible.value = true  // Scrolling UP → Show bars
-                } else if (available.y < 0) {
-                    isVisible.value = false // Scrolling DOWN → Hide bars
+    val nestedScrollConnection =
+        remember {
+            object : NestedScrollConnection {
+                override fun onPreScroll(
+                    available: Offset,
+                    source: NestedScrollSource,
+                ): Offset {
+                    if (available.y > 20) {
+                        isVisible.value = true  // Scrolling UP → Show bars
+                    } else if (available.y < 0) {
+                        isVisible.value = false // Scrolling DOWN → Hide bars
+                    }
+                    return Offset.Zero
                 }
-                return Offset.Zero
             }
         }
-    }
     return isVisible to nestedScrollConnection
 }
