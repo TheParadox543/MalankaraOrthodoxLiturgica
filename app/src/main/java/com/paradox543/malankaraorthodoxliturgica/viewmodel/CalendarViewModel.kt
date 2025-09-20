@@ -1,13 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +20,6 @@ import javax.inject.Inject
 class CalendarViewModel @Inject constructor(
     private val liturgicalCalendarRepository: LiturgicalCalendarRepository
 ) : ViewModel() {
-
     // State for the currently displayed month's calendar data
     private val _monthCalendarData = MutableStateFlow<List<CalendarWeek>>(emptyList())
     val monthCalendarData: StateFlow<List<CalendarWeek>> = _monthCalendarData.asStateFlow()
@@ -54,7 +51,6 @@ class CalendarViewModel @Inject constructor(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
-
     init {
         // Initialize the repository and load initial data
         viewModelScope.launch {
@@ -73,7 +69,10 @@ class CalendarViewModel @Inject constructor(
         }
     }
 
-    fun loadMonth(month: Int, year: Int) {
+    fun loadMonth(
+        month: Int,
+        year: Int,
+    ) {
         _isLoading.value = true
         _error.value = null
         try {
@@ -101,7 +100,10 @@ class CalendarViewModel @Inject constructor(
         }
     }
 
-    fun setDayEvents(events: List<LiturgicalEventDetails>, date: LocalDate) {
+    fun setDayEvents(
+        events: List<LiturgicalEventDetails>,
+        date: LocalDate,
+    ) {
         _selectedDayViewData.value = events
         _selectedDate.value = date // Keep the selected date in sync
     }
@@ -123,29 +125,33 @@ class CalendarViewModel @Inject constructor(
         loadMonth(prevMonthDate.monthValue, prevMonthDate.year)
     }
 
-    fun generateYearSuffix(year: Int): String {
-        return when (year % 10) {
+    fun generateYearSuffix(year: Int): String =
+        when (year % 10) {
             1 -> if (year % 100 != 11) "st" else "th"
             2 -> if (year % 100 != 12) "nd" else "th"
             3 -> if (year % 100 != 13) "rd" else "th"
             else -> "th"
         }
-    }
 
-    fun generateDateTitle(event: LiturgicalEventDetails, selectedLanguage: AppLanguage): String {
+    fun generateDateTitle(
+        event: LiturgicalEventDetails,
+        selectedLanguage: AppLanguage,
+    ): String {
         val currentYear = LocalDate.now().year
         return if (event.startedYear != null) {
             val yearNumber = currentYear - event.startedYear + 1
             val baseYearString = "$yearNumber"
 
-            if (selectedLanguage == AppLanguage.MALAYALAM && event.title.ml != null){
+            if (selectedLanguage == AppLanguage.MALAYALAM && event.title.ml != null) {
                 "$baseYearString-ാം${event.title.ml}"
             } else {
                 "$baseYearString${generateYearSuffix(yearNumber)} ${event.title.en}"
             }
-        } else when (selectedLanguage) {
-            AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
-            else -> event.title.en
+        } else {
+            when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
+                else -> event.title.en
+            }
         }
     }
 }

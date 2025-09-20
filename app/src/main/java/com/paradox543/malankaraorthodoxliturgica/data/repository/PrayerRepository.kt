@@ -12,22 +12,27 @@ import okio.IOException
 import org.json.JSONObject
 import javax.inject.Inject
 
-// Define custom exceptions for better error handling
-
 class PrayerRepository @Inject constructor(
     @ApplicationContext private val context: Context,
     private val json: Json,
+    private val calendarRepository: LiturgicalCalendarRepository,
 ) {
     fun loadTranslations(language: AppLanguage): Map<String, String> {
-        val json = context.assets.open("translations.json").bufferedReader().use { it.readText() }
+        val json =
+            context
+                .assets
+                .open("translations.json")
+                .bufferedReader()
+                .use { it.readText() }
         val jsonObject = JSONObject(json)
         val translationMap = mutableMapOf<String, String>()
         for (key in jsonObject.keys()) {
             val innerObject = jsonObject.getJSONObject(key)
-            val code = when(language){
-                AppLanguage.MALAYALAM -> AppLanguage.MALAYALAM.code
-                AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> AppLanguage.ENGLISH.code
-            }
+            val code =
+                when (language) {
+                    AppLanguage.MALAYALAM -> AppLanguage.MALAYALAM.code
+                    AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> AppLanguage.ENGLISH.code
+                }
             translationMap[key] = innerObject.getString(code)
         }
         return translationMap
@@ -42,28 +47,28 @@ class PrayerRepository @Inject constructor(
     suspend fun loadPrayerElements(
         fileName: String,
         language: AppLanguage,
-        currentDepth: Int = 0
+        currentDepth: Int = 0,
     ): List<PrayerElement> {
         if (currentDepth > maxLinkDepth) {
             throw PrayerLinkDepthExceededException(
-                "Exceeded maximum link depth ($maxLinkDepth) while loading ${language.code}/$fileName"
+                "Exceeded maximum link depth ($maxLinkDepth) while loading ${language.code}/$fileName",
             )
         }
 
-        val rawElements: List<PrayerElement> = try {
-            val inputStream = context.assets.open("prayers/${language.code}/$fileName")
-            val jsonString = inputStream.bufferedReader().use { it.readText() }
-            json.decodeFromString<List<PrayerElement>>(jsonString) // Use the injected 'json'
-        } catch (e: IOException) {
-            throw PrayerContentNotFoundException("Error loading file: ${language.code}/$fileName.")
-        } catch (e: Exception) {
-            throw PrayerParsingException("Error parsing JSON in: ${language.code}/$fileName.")
-        }
+        val rawElements: List<PrayerElement> =
+            try {
+                val inputStream = context.assets.open("prayers/${language.code}/$fileName")
+                val jsonString = inputStream.bufferedReader().use { it.readText() }
+                json.decodeFromString<List<PrayerElement>>(jsonString) // Use the injected 'json'
+            } catch (_: IOException) {
+                throw PrayerContentNotFoundException("Error loading file: ${language.code}/$fileName.")
+            } catch (_: Exception) {
+                throw PrayerParsingException("Error parsing JSON in: ${language.code}/$fileName.")
+            }
 
         val resolvedElements = mutableListOf<PrayerElement>()
         for (element in rawElements) {
             when (element) {
-
                 is PrayerElement.Title -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
                 is PrayerElement.Heading -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
                 is PrayerElement.Subheading -> resolvedElements.add(element.copy(content = element.content.applyPrayerReplacements()))
@@ -75,11 +80,11 @@ class PrayerRepository @Inject constructor(
                 is PrayerElement.Link -> {
                     try {
                         resolvedElements.addAll(
-                            loadPrayerElements(element.file, language, currentDepth + 1)
+                            loadPrayerElements(element.file, language, currentDepth + 1),
                         )
-                    } catch (e1: PrayerContentNotFoundException) {
+                    } catch (_: PrayerContentNotFoundException) {
                         resolvedElements.add(PrayerElement.Error("Failed to find linked file: ${language.code}/${element.file}."))
-                    } catch (e2: Exception) {
+                    } catch (_: Exception) {
                         resolvedElements.add(PrayerElement.Error("Failed to load linked file: ${language.code}/${element.file}."))
                     }
                 }
@@ -90,12 +95,12 @@ class PrayerRepository @Inject constructor(
                             loadPrayerAsCollapsibleBlock(
                                 element.file,
                                 language,
-                                currentDepth + 1 // Increment depth as we're loading a new file
-                            )
+                                currentDepth + 1, // Increment depth as we're loading a new file
+                            ),
                         )
-                    } catch (e1: PrayerContentNotFoundException) {
+                    } catch (_: PrayerContentNotFoundException) {
                         resolvedElements.add(PrayerElement.Error("Failed to find collapsible link: ${language.code}/${element.file}."))
-                    } catch (e2: Exception) {
+                    } catch (_: Exception) {
                         resolvedElements.add(PrayerElement.Error("Failed to load collapsible link: ${language.code}/${element.file}."))
                     }
                 }
@@ -107,9 +112,10 @@ class PrayerRepository @Inject constructor(
                             is PrayerElement.Link -> { // Handle nested links
                                 try {
                                     resolvedItems.addAll(loadPrayerElements(nestedItem.file, language, currentDepth + 1))
-                                } catch (e1: PrayerContentNotFoundException) {
-                                    resolvedElements.add(PrayerElement.Error("Failed to find nested link: ${language.code}/${nestedItem.file}."))
-                                } catch (e: Exception) {
+                                } catch (_: PrayerContentNotFoundException) {
+                                    resolvedElements
+                                        .add(PrayerElement.Error("Failed to find nested link: ${language.code}/${nestedItem.file}."))
+                                } catch (_: Exception) {
                                     resolvedItems.add(PrayerElement.Error("Failed to load nested link: ${nestedItem.file}."))
                                 }
                             }
@@ -119,8 +125,11 @@ class PrayerRepository @Inject constructor(
                     resolvedElements.add(element.copy(items = resolvedItems))
                 }
 
+                is PrayerElement.DynamicContent -> {
+                    resolvedElements.add(loadDynamicSongs(language, element))
+                }
+
                 else -> {
-                    // Check if the element has a property content
                     resolvedElements.add(element)
                 }
             }
@@ -143,7 +152,7 @@ class PrayerRepository @Inject constructor(
     private suspend fun loadPrayerAsCollapsibleBlock(
         fileName: String,
         language: AppLanguage,
-        currentDepth: Int
+        currentDepth: Int,
     ): PrayerElement.CollapsibleBlock {
         // Load the elements of the target file using the main loader
         val elementsOfLinkedFile = loadPrayerElements(fileName, language, currentDepth)
@@ -172,16 +181,46 @@ class PrayerRepository @Inject constructor(
 
         // Ensure the file had actual content
         if (itemsForCollapsibleBlock.isEmpty()) {
-            throw PrayerContentNotFoundException("Linked file ${language.code}/$fileName contained no valid displayable items for a collapsible block.")
+            throw PrayerContentNotFoundException(
+                "Linked file ${language.code}/$fileName contained no valid displayable items for a collapsible block.",
+            )
         }
 
         return PrayerElement.CollapsibleBlock(
             title = collapsibleBlockTitle ?: "Expandable Block",
-            items = itemsForCollapsibleBlock
+            items = itemsForCollapsibleBlock,
         )
     }
 
+    suspend fun loadDynamicSongs(
+        language: AppLanguage,
+        dynamicContent: PrayerElement.DynamicContent,
+    ): PrayerElement.DynamicContent {
+        calendarRepository.initialize()
+        val weekEvents = calendarRepository.getUpcomingWeekEventItems()
+
+        weekEvents.forEach { event ->
+            if (event.specialSongsKey != null) {
+                val songElements =
+                    try {
+                        loadPrayerElements(event.specialSongsKey, language)
+                    } catch (e: Exception) {
+                        listOf(PrayerElement.Error("Failed to load dynamic song: ${e.message}"))
+                    }
+                dynamicContent.items.add(
+                    PrayerElement.DynamicSong(
+                        eventKey = event.specialSongsKey,
+                        timeKey = dynamicContent.timeKey,
+                        items = songElements,
+                    ),
+                )
+            }
+        }
+        return dynamicContent
+    }
+
     private fun String.applyPrayerReplacements(): String =
-        this.replace("/t", "    ")
+        this
+            .replace("/t", "    ")
             .replace("/u200b", "\u200b")
 }

@@ -222,6 +222,14 @@
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
+        "type": "heading",
+        "content": "Testing Dynamic Content"
+    },
+    {
+        "type": "dynamic-content",
+        "timeKey": "eveningGospel"
+    },
+    {
         "type": "subheading",
         "content": "(ഹാലേ... ഉ... ഹാലേ... ഉ ...)"
     },

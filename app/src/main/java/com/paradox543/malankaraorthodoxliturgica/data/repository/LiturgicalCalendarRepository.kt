@@ -201,4 +201,13 @@ class LiturgicalCalendarRepository @Inject constructor(
         }
         return weekEvents
     }
+
+    fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
+        val weekEvents = getUpcomingWeekEvents()
+        val eventItems = mutableListOf<LiturgicalEventDetails>()
+        weekEvents.forEach { day ->
+            eventItems.addAll(day.events)
+        }
+        return eventItems
+    }
 }

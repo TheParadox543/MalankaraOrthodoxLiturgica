@@ -45,7 +45,7 @@ object AppModule {
     @Singleton
     fun providePrayerRepository(
         @ApplicationContext context: Context
-    ): PrayerRepository = PrayerRepository(context, Json)
+    ): PrayerRepository = PrayerRepository(context, Json, LiturgicalCalendarRepository(context, Json))
 
     @Provides
     @Singleton
