@@ -1,0 +1,4 @@
+# noinspection EditorConfigKeyCorrectness
+[*.{kt,kts}]
+ktlint_standard_no-multi-spaces = disabled
+ktlint_standard_final-newline = disabled

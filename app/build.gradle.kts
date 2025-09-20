@@ -1,9 +1,12 @@
 import com.google.firebase.crashlytics.buildtools.gradle.CrashlyticsExtension
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    // Linter plugin
+    alias(libs.plugins.ktlint)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
@@ -35,7 +38,7 @@ android {
             resValue("string", "app_name", "Liturgica")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             configure<CrashlyticsExtension> {
                 // Enable processing and uploading of native symbols to Firebase servers.
@@ -64,6 +67,15 @@ android {
     }
     ndkVersion = "29.0.13599879 rc2"
     buildToolsVersion = "35.0.0"
+}
+
+ktlint {
+    android = true
+    ignoreFailures = false
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
+    }
 }
 
 dependencies {
@@ -124,7 +136,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4) // Compose testing rules for JUnit 4
 
     // Debugging & Development Tools (only for debug builds)
-    debugImplementation(libs.androidx.ui.tooling)     // Compose tooling for previews and inspection
+    debugImplementation(libs.androidx.ui.tooling) // Compose tooling for previews and inspection
     debugImplementation(libs.androidx.ui.test.manifest) // Compose test manifest for UI testing
 }
 
