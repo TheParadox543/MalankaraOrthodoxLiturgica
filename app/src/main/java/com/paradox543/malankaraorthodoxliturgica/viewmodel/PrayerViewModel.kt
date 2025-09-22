@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -53,8 +53,12 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    fun loadPrayerElements(filename: String, passedLanguage: AppLanguage? = null) {
-        viewModelScope.launch { // Launch in ViewModelScope for async operation
+    fun loadPrayerElements(
+        filename: String,
+        passedLanguage: AppLanguage? = null,
+    ) {
+        viewModelScope.launch {
+            // Launch in ViewModelScope for async operation
             try {
                 // Access the current language from SettingsViewModel
                 val language = passedLanguage ?: selectedLanguage.value
@@ -72,20 +76,28 @@ class PrayerViewModel @Inject constructor(
         _dynamicSongIndex.value = index
     }
 
-    fun logPrayNowItemSelection(prayerName: String, prayerId: String) {
-        val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.ITEM_ID, prayerId) // Use ITEM_ID for specific items
-            putString(FirebaseAnalytics.Param.ITEM_NAME, prayerName)
-            putString(FirebaseAnalytics.Param.CONTENT_TYPE, "prayNow") // Custom parameter
-        }
+    fun logPrayNowItemSelection(
+        prayerName: String,
+        prayerId: String,
+    ) {
+        val bundle =
+            Bundle().apply {
+                putString(FirebaseAnalytics.Param.ITEM_ID, prayerId) // Use ITEM_ID for specific items
+                putString(FirebaseAnalytics.Param.ITEM_NAME, prayerName)
+                putString(FirebaseAnalytics.Param.CONTENT_TYPE, "prayNow") // Custom parameter
+            }
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
     }
 
-    fun handlePrayerElementError(errorMessage: String, errorLocation: String) {
-        val bundle = Bundle().apply {
-            putString("error_description", errorMessage)
-            putString("error_location", errorLocation) // Specific to this error source
-        }
+    fun handlePrayerElementError(
+        errorMessage: String,
+        errorLocation: String,
+    ) {
+        val bundle =
+            Bundle().apply {
+                putString("error_description", errorMessage)
+                putString("error_location", errorLocation) // Specific to this error source
+            }
         firebaseAnalytics.logEvent("app_error", bundle)
     }
 
