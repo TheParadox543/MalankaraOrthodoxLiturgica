@@ -201,12 +201,15 @@ class PrayerRepository @Inject constructor(
         calendarRepository.initialize()
         val weekEvents = calendarRepository.getUpcomingWeekEventItems()
 
+        if (dynamicContent.defaultContent != null) {
+            dynamicContent.items.add(dynamicContent.defaultContent)
+        }
         weekEvents.forEach { event ->
             if (event.specialSongsKey != null) {
                 val songElements =
                     try {
                         loadPrayerElements(
-                            "qurbanaSongs/${event.specialSongsKey.split("Songs")[0]}/${dynamicContent.timeKey}.json",
+                            "qurbanaSongs/${event.specialSongsKey.removeSuffix("Songs")}/${dynamicContent.timeKey}.json",
                             language,
                         )
                     } catch (e: Exception) {
@@ -221,12 +224,6 @@ class PrayerRepository @Inject constructor(
                     ),
                 )
             }
-        }
-        if (dynamicContent.defaultContent != null) {
-            dynamicContent.items.add(
-                0,
-                dynamicContent.defaultContent,
-            )
         }
         return dynamicContent
     }

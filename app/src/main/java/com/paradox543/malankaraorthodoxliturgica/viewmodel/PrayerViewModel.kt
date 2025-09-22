@@ -25,14 +25,16 @@ class PrayerViewModel @Inject constructor(
     private val firebaseAnalytics: FirebaseAnalytics,
     private val inAppReviewManager: InAppReviewManager,
 ) : ViewModel() {
-
-    private val selectedLanguage = settingsRepository.selectedLanguage
+    val selectedLanguage = settingsRepository.selectedLanguage
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
     private val _prayers = MutableStateFlow<List<PrayerElement>>(emptyList())
     val prayers: StateFlow<List<PrayerElement>> = _prayers
+
+    private val _dynamicSongIndex = MutableStateFlow(1)
+    val dynamicSongIndex: StateFlow<Int> = _dynamicSongIndex.asStateFlow()
 
     init {
         // Observe language from SettingsViewModel and trigger translation loading
@@ -64,6 +66,10 @@ class PrayerViewModel @Inject constructor(
                 _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
             }
         }
+    }
+
+    fun setDynamicSongIndex(index: Int) {
+        _dynamicSongIndex.value = index
     }
 
     fun logPrayNowItemSelection(prayerName: String, prayerId: String) {

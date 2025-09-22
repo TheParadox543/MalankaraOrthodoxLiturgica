@@ -24,11 +24,16 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -53,6 +58,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
@@ -421,6 +427,7 @@ fun PrayerButton(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DynamicContentUI(
     dynamicContent: PrayerElement.DynamicContent,
@@ -430,29 +437,70 @@ fun DynamicContentUI(
     isSongHorizontalScroll: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    Card {
-        Column(modifier.padding(4.dp)) {
-            Row {
-                Spacer(Modifier.weight(1f))
-                IconButton(
-                    onClick = {},
-                    Modifier.weight(0.1f),
+    val dynamicSongIndex by prayerViewModel.dynamicSongIndex.collectAsState()
+    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
+
+    val dynamicSong = dynamicContent.items.getOrNull(dynamicSongIndex) ?: return
+    // For dropdown menu
+    val songs = dynamicContent.items
+    var expanded by remember { mutableStateOf(false) }
+
+    val titles =
+        songs.map { song ->
+            when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
+                else -> song.eventTitle.en
+            }
+        }
+    val selectedTitle = titles.getOrNull(dynamicSongIndex) ?: ""
+    Card(modifier) {
+        Column(Modifier.padding(4.dp)) {
+            Row(
+                Modifier
+                    .fillMaxWidth(),
+//                    .padding(horizontal = 4.dp, vertical = 2.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                ExposedDropdownMenuBox(
+                    expanded = expanded,
+                    onExpandedChange = { expanded = !expanded },
+//                    modifier = Modifier.weight(0.9f),
                 ) {
-                    Icon(
-                        Icons.Default.KeyboardArrowDown,
-                        contentDescription = "Expand",
+                    TextField(
+                        value = selectedTitle,
+                        onValueChange = {},
+                        readOnly = true,
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                        modifier =
+                            Modifier
+                                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                                .fillMaxWidth(),
                     )
+
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                    ) {
+                        titles.forEachIndexed { index, title ->
+                            DropdownMenuItem(
+                                text = { Text(title) },
+                                onClick = {
+                                    prayerViewModel.setDynamicSongIndex(index)
+                                    expanded = false
+                                },
+                            )
+                        }
+                    }
                 }
             }
-            dynamicContent.items.forEach {
-                DynamicSongUI(
-                    it,
-                    prayerViewModel,
-                    filename,
-                    navController,
-                    isSongHorizontalScroll,
-                )
-            }
+
+            DynamicSongUI(
+                dynamicSong,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
         }
     }
 }
@@ -464,10 +512,10 @@ fun DynamicSongUI(
     filename: String,
     navController: NavController,
     isSongHorizontalScroll: Boolean,
+    modifier: Modifier = Modifier,
 ) {
-    Column {
+    Column(modifier.padding(vertical = 12.dp)) {
         dynamicSong.items.forEach { item ->
-            Subheading(dynamicSong.eventKey)
             PrayerElementRenderer(
                 item,
                 prayerViewModel,
