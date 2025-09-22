@@ -11,12 +11,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun VerseItem(verseNumber: String, verseText: String) {
+fun VerseItem(
+    verseNumber: String,
+    verseText: String,
+) {
     Row {
         Text(
             text = verseNumber,
             modifier = Modifier.padding(4.dp).requiredWidth(20.dp),
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
         Text(
             text = verseText,

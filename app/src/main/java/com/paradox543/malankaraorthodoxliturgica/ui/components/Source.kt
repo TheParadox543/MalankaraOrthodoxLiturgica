@@ -10,13 +10,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Source(text: String, modifier: Modifier = Modifier) {
+fun Source(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = text,
         style = MaterialTheme.typography.labelSmall,
         textAlign = TextAlign.Companion.Center,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(top = 8.dp, bottom = 16.dp)
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp, bottom = 16.dp),
     )
 }

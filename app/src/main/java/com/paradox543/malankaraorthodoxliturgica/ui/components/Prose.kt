@@ -6,6 +6,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import com.paradox543.malankaraorthodoxliturgica.data.repository.applyPrayerReplacements
 
 @Composable
 fun Prose(
@@ -19,8 +20,3 @@ fun Prose(
         modifier = modifier.fillMaxWidth(),
     )
 }
-
-private fun String.applyPrayerReplacements(): String =
-    this
-        .replace("/t", "    ")
-        .replace("/u200b", "\u200b")
