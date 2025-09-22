@@ -218,20 +218,18 @@
         "content": "ഖേദം വേണ്ടാ മശിഹായിൽ മൃതി പൂണ്ടോരേ!\nആസന്നം പ്രതിഫലമേകും പുനരുത്ഥാനദിനം.\nകേടെന്യേ കബറുകളീന്നും നിങ്ങളെഴുന്നേ\nറ്റതിവേഗം രാജാത്മജനെ എതിരേൽപ്പാനെത്തും.\n/tമഹിമാവിൻ നീരാളം ചാർത്തി\n/tതിരുമുമ്പിൽ സ്തുതിപാടും നിങ്ങൾ\nകനിവാലാദാം സുത ജീവപ്രദനേ -കൃപ ചെയ്ക."
     },
     {
-        "type": "subheading",
+        "type": "heading",
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
-        "type": "heading",
-        "content": "Testing Dynamic Content"
-    },
-    {
         "type": "dynamic-content",
-        "timeKey": "eveningGospel"
-    },
-    {
-        "type": "subheading",
-        "content": "(ഹാലേ... ഉ... ഹാലേ... ഉ ...)"
+        "timeKey": "eveningGospel",
+        "defaultContent": [
+            {
+                "type": "subheading",
+                "content": "(ഹാലേ... ഉ... ഹാലേ... ഉ ...)"
+            }
+        ]
     },
     {
         "type": "subheading",

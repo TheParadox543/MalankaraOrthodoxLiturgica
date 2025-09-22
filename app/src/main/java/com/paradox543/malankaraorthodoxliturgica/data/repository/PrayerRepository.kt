@@ -11,7 +11,9 @@ import kotlinx.serialization.json.Json
 import okio.IOException
 import org.json.JSONObject
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class PrayerRepository @Inject constructor(
     @ApplicationContext private val context: Context,
     private val json: Json,
@@ -196,14 +198,16 @@ class PrayerRepository @Inject constructor(
         language: AppLanguage,
         dynamicContent: PrayerElement.DynamicContent,
     ): PrayerElement.DynamicContent {
-        calendarRepository.initialize()
         val weekEvents = calendarRepository.getUpcomingWeekEventItems()
 
         weekEvents.forEach { event ->
             if (event.specialSongsKey != null) {
                 val songElements =
                     try {
-                        loadPrayerElements(event.specialSongsKey, language)
+                        loadPrayerElements(
+                            "qurbanaSongs/${event.specialSongsKey.split("Songs")[0]}/${dynamicContent.timeKey}.json",
+                            language,
+                        )
                     } catch (e: Exception) {
                         listOf(PrayerElement.Error("Failed to load dynamic song: ${e.message}"))
                     }

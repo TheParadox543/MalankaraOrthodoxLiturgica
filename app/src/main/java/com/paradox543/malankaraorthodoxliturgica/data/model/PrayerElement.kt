@@ -94,6 +94,7 @@ sealed interface PrayerElement {
     data class DynamicContent(
         val timeKey: String, // The time context for the content (e.g., "afterGospel", "hoothomo")
         val items: MutableList<DynamicSong> = mutableListOf(), // The dynamic songs for this time context
+        val defaultContent: List<PrayerElement> = emptyList(), // Fallback content if no dynamic songs match
     ) : PrayerElement
 
     // You might also want an "error" element for robust error handling,
