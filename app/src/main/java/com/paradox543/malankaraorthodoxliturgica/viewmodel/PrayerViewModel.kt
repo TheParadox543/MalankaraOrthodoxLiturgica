@@ -33,8 +33,8 @@ class PrayerViewModel @Inject constructor(
     private val _prayers = MutableStateFlow<List<PrayerElement>>(emptyList())
     val prayers: StateFlow<List<PrayerElement>> = _prayers
 
-    private val _dynamicSongIndex = MutableStateFlow(1)
-    val dynamicSongIndex: StateFlow<Int> = _dynamicSongIndex.asStateFlow()
+    private val _dynamicSongKey = MutableStateFlow<String?>(null)
+    val dynamicSongKey: StateFlow<String?> = _dynamicSongKey.asStateFlow()
 
     init {
         // Observe language from SettingsViewModel and trigger translation loading
@@ -42,6 +42,11 @@ class PrayerViewModel @Inject constructor(
             selectedLanguage.collect { language ->
                 // When the language changes (from DataStore), load translations
                 loadTranslations(language)
+            }
+        }
+        viewModelScope.launch {
+            prayers.collect {
+                _dynamicSongKey.value = getSongKeyPriority()
             }
         }
     }
@@ -72,8 +77,10 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    fun setDynamicSongIndex(index: Int) {
-        _dynamicSongIndex.value = index
+    suspend fun getSongKeyPriority(): String = prayerRepository.getSongKeyPriority()
+
+    fun setDynamicSongKey(key: String) {
+        _dynamicSongKey.value = key
     }
 
     fun logPrayNowItemSelection(

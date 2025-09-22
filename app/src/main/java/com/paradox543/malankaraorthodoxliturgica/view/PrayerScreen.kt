@@ -437,10 +437,12 @@ fun DynamicContentUI(
     isSongHorizontalScroll: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    val dynamicSongIndex by prayerViewModel.dynamicSongIndex.collectAsState()
+    val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
 
-    val dynamicSong = dynamicContent.items.getOrNull(dynamicSongIndex) ?: return
+    val dynamicSong =
+        dynamicContent.items.find{ it.eventKey == dynamicSongKey }
+            ?: dynamicContent.items.firstOrNull()
     // For dropdown menu
     val songs = dynamicContent.items
     var expanded by remember { mutableStateOf(false) }
@@ -452,7 +454,12 @@ fun DynamicContentUI(
                 else -> song.eventTitle.en
             }
         }
-    val selectedTitle = titles.getOrNull(dynamicSongIndex) ?: ""
+    val selectedTitle = dynamicSong?.let { song ->
+        when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
+            else -> song.eventTitle.en
+        }
+    } ?: "Error"
     Card(modifier) {
         Column(Modifier.padding(4.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(
@@ -482,11 +489,16 @@ fun DynamicContentUI(
                         expanded = expanded,
                         onDismissRequest = { expanded = false },
                     ) {
-                        titles.forEachIndexed { index, title ->
+                        songs.forEach { song ->
+                            val title =
+                                when (selectedLanguage) {
+                                    AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
+                                    else -> song.eventTitle.en
+                                }
                             DropdownMenuItem(
                                 text = { Text(title) },
                                 onClick = {
-                                    prayerViewModel.setDynamicSongIndex(index)
+                                    prayerViewModel.setDynamicSongKey(song.eventKey)
                                     expanded = false
                                 },
                             )
@@ -495,13 +507,15 @@ fun DynamicContentUI(
                 }
             }
 
-            DynamicSongUI(
-                dynamicSong,
-                prayerViewModel,
-                filename,
-                navController,
-                isSongHorizontalScroll,
-            )
+            if (dynamicSong != null) {
+                DynamicSongUI(
+                    dynamicSong,
+                    prayerViewModel,
+                    filename,
+                    navController,
+                    isSongHorizontalScroll,
+                )
+            }
         }
     }
 }

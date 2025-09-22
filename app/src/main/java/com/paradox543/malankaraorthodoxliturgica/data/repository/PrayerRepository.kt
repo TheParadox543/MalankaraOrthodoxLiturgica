@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
@@ -213,8 +214,14 @@ class PrayerRepository @Inject constructor(
                             language,
                         )
                     } catch (e: Exception) {
-                        listOf(PrayerElement.Error("Failed to load dynamic song: ${e.message}"))
+//                        listOf(PrayerElement.Error("Failed to load dynamic song: ${e.message}"))
+                        Log.d(
+                            "PrayerRepository",
+                            "Failed to load dynamic song: ${event.specialSongsKey}/${dynamicContent.timeKey}. ${e.message}",
+                        )
+                        emptyList()
                     }
+                if (songElements.isEmpty()) return@forEach
                 dynamicContent.items.add(
                     PrayerElement.DynamicSong(
                         eventKey = event.specialSongsKey,
@@ -226,6 +233,17 @@ class PrayerRepository @Inject constructor(
             }
         }
         return dynamicContent
+    }
+
+    suspend fun getSongKeyPriority(): String {
+        calendarRepository.initialize()
+        val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
+        for (item in weekEventItems) {
+            if (item.specialSongsKey != null) {
+                return item.specialSongsKey
+            }
+        }
+        return "default"
     }
 }
 
