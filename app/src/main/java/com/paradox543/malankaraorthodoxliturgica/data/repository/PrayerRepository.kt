@@ -198,6 +198,7 @@ class PrayerRepository @Inject constructor(
         language: AppLanguage,
         dynamicContent: PrayerElement.DynamicContent,
     ): PrayerElement.DynamicContent {
+        calendarRepository.initialize()
         val weekEvents = calendarRepository.getUpcomingWeekEventItems()
 
         weekEvents.forEach { event ->
@@ -214,11 +215,18 @@ class PrayerRepository @Inject constructor(
                 dynamicContent.items.add(
                     PrayerElement.DynamicSong(
                         eventKey = event.specialSongsKey,
+                        eventTitle = event.title,
                         timeKey = dynamicContent.timeKey,
                         items = songElements,
                     ),
                 )
             }
+        }
+        if (dynamicContent.defaultContent != null) {
+            dynamicContent.items.add(
+                0,
+                dynamicContent.defaultContent,
+            )
         }
         return dynamicContent
     }

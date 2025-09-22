@@ -222,11 +222,13 @@ fun PrayerScreen(
             }
         }
         LaunchedEffect(Unit) {
+            var retryCount = 0
             if (scrollIndex > 0) {
-                while (listState.firstVisibleItemIndex != scrollIndex) {
+                while (listState.firstVisibleItemIndex != scrollIndex && retryCount < 10) {
                     Log.d("QR in Prayer Screen", "Detected scroll from Qr: $scrollIndex")
                     listState.scrollToItem(scrollIndex)
                     Log.d("QR in Prayer Screen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
+                    retryCount++
                     delay(100) // Small delay to allow UI to update
                 }
             }
@@ -441,15 +443,6 @@ fun DynamicContentUI(
                         contentDescription = "Expand",
                     )
                 }
-            }
-            dynamicContent.defaultContent.forEach {
-                PrayerElementRenderer(
-                    it,
-                    prayerViewModel,
-                    filename,
-                    navController,
-                    isSongHorizontalScroll,
-                )
             }
             dynamicContent.items.forEach {
                 DynamicSongUI(

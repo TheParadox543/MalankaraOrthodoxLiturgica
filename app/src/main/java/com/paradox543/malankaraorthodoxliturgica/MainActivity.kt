@@ -37,6 +37,7 @@ class MainActivity : ComponentActivity() {
     // Inject the update manager for handling in-app updates.
     @Inject
     lateinit var inAppUpdateManager: InAppUpdateManager
+
     @Inject
     lateinit var calendarRepository: LiturgicalCalendarRepository
 

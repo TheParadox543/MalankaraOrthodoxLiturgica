@@ -26,11 +26,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun provideSettingsRepository(
-        @ApplicationContext context: Context
-    ): SettingsRepository = SettingsRepository(context)
+//    @Provides
+//    @Singleton
+//    fun provideSettingsRepository(
+//        @ApplicationContext context: Context
+//    ): SettingsRepository = SettingsRepository(context)
 
     @Provides
     @Singleton // Ensure only one instance of Json is created
