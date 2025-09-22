@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
@@ -21,7 +23,9 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -121,15 +125,6 @@ fun PrayerScreen(
         ) {
             LazyListState()
         }
-//    LaunchedEffect(Unit) {
-//        if (scrollIndex > 0) {
-//            while (listState.firstVisibleItemIndex != scrollIndex) {
-//                Log.d("QR in Prayer Screen", "Detected scroll from Qr: $scrollIndex")
-//                listState.scrollToItem(scrollIndex)
-//                Log.d("QR in Prayer Screen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
-//            }
-//        }
-//    }
 
     // Observe if the LazyColumn has been scrolled to its very end
     val isScrolledToTheEnd by remember {
@@ -187,8 +182,8 @@ fun PrayerScreen(
         floatingActionButton = {
             AnimatedVisibility(
                 visible = isVisible.value,
-                enter = androidx.compose.animation.fadeIn(),
-                exit = androidx.compose.animation.shrinkOut(),
+                enter = fadeIn(),
+                exit = shrinkOut(),
             ) {
                 Column(
                     modifier = Modifier.padding(vertical = 8.dp),
@@ -339,8 +334,25 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElement.DynamicContent -> DynamicContentUI(prayerElement)
-        is PrayerElement.DynamicSong -> DynamicSongUI(prayerElement)
+        is PrayerElement.DynamicContent -> {
+            DynamicContentUI(
+                prayerElement,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
+        }
+
+        is PrayerElement.DynamicSong -> {
+            DynamicSongUI(
+                prayerElement,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
+        }
 
         is PrayerElement.Link -> {
             // This block indicates that a 'Link' element unexpectedly reached the UI.
@@ -408,26 +420,68 @@ fun PrayerButton(
 }
 
 @Composable
-fun DynamicContentUI(dynamicContent: PrayerElement.DynamicContent) {
-    Column {
-        Text("Dynamic Content Placeholder")
-        Text(dynamicContent.timeKey)
-        dynamicContent.items.forEach { DynamicSongUI(it)}
+fun DynamicContentUI(
+    dynamicContent: PrayerElement.DynamicContent,
+    prayerViewModel: PrayerViewModel,
+    filename: String,
+    navController: NavController,
+    isSongHorizontalScroll: Boolean,
+    modifier: Modifier = Modifier,
+) {
+    Card {
+        Column(modifier.padding(4.dp)) {
+            Row {
+                Spacer(Modifier.weight(1f))
+                IconButton(
+                    onClick = {},
+                    Modifier.weight(0.1f),
+                ) {
+                    Icon(
+                        Icons.Default.KeyboardArrowDown,
+                        contentDescription = "Expand",
+                    )
+                }
+            }
+            dynamicContent.defaultContent.forEach {
+                PrayerElementRenderer(
+                    it,
+                    prayerViewModel,
+                    filename,
+                    navController,
+                    isSongHorizontalScroll,
+                )
+            }
+            dynamicContent.items.forEach {
+                DynamicSongUI(
+                    it,
+                    prayerViewModel,
+                    filename,
+                    navController,
+                    isSongHorizontalScroll,
+                )
+            }
+        }
     }
 }
 
 @Composable
-fun DynamicSongUI(dynamicSong: PrayerElement.DynamicSong) {
+fun DynamicSongUI(
+    dynamicSong: PrayerElement.DynamicSong,
+    prayerViewModel: PrayerViewModel,
+    filename: String,
+    navController: NavController,
+    isSongHorizontalScroll: Boolean,
+) {
     Column {
-        Text("Dynamic Song Placeholder")
-        Text(dynamicSong.eventKey)
-        Text(dynamicSong.timeKey)
         dynamicSong.items.forEach { item ->
-            when (item) {
-                is PrayerElement.Subheading -> Subheading(item.content)
-                is PrayerElement.Song -> Song(item.content)
-                else -> Text("Unexpected item in DynamicSong: $item")
-            }
+            Subheading(dynamicSong.eventKey)
+            PrayerElementRenderer(
+                item,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
         }
     }
 }

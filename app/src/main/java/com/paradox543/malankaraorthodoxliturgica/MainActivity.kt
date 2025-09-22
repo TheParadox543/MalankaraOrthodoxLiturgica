@@ -21,8 +21,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
@@ -34,10 +34,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     // Inject the update manager for handling in-app updates.
     @Inject
     lateinit var inAppUpdateManager: InAppUpdateManager
+    @Inject
+    lateinit var calendarRepository: LiturgicalCalendarRepository
 
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
@@ -61,6 +62,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             settingsViewModel.hasCompletedOnboarding.first() // Await its first value
             navViewModel.getInitialNode() // Ensure initial node logic is run and ready
+            calendarRepository.initialize() // Load calendar data
             isInitialDataLoaded = true // Signal that data is loaded
         }
 
