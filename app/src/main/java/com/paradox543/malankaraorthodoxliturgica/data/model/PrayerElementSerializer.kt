@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.model
 
+import android.util.Log
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -62,13 +63,11 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
                 "collapsible-block" -> json.decodeFromJsonElement(PrayerElement.CollapsibleBlock.serializer(), element)
                 "link" -> json.decodeFromJsonElement(PrayerElement.Link.serializer(), element)
                 "link-collapsible" -> json.decodeFromJsonElement(PrayerElement.LinkCollapsible.serializer(), element)
+                "dynamic-song" -> json.decodeFromJsonElement(PrayerElement.DynamicSong.serializer(), element)
                 "dynamic-content" -> json.decodeFromJsonElement(PrayerElement.DynamicContent.serializer(), element)
 
                 // If you explicitly serialize PrayerElement.Error in your JSON, handle it:
                 "error" -> json.decodeFromJsonElement(PrayerElement.Error.serializer(), element)
-
-                // Handle dynamic song, which should not exist in static JSON
-                "dynamic-song" -> PrayerElement.Error("DynamicSong cannot be deserialized from static JSON.")
 
                 // --- Fallback for unknown types ---
                 else -> {
@@ -79,6 +78,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
         } catch (_: Exception) {
             // Catch any serialization exceptions that might occur even for known types
             // (e.g., missing required fields, type mismatch for a property)
+            Log.d("PrayerElementSerializer", "Error parsing PrayerElement: $element")
             PrayerElement.Error("Error parsing PrayerElement: ${element.toString().substring(0, 10)}")
         }
     }

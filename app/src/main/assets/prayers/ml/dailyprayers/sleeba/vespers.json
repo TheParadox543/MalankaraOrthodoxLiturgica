@@ -224,12 +224,20 @@
     {
         "type": "dynamic-content",
         "timeKey": "eveningGospel",
-        "defaultContent": [
-            {
-                "type": "subheading",
-                "content": "(ഹാലേ... ഉ... ഹാലേ... ഉ ...)"
-            }
-        ]
+        "defaultContent": {
+            "eventKey": "default",
+            "eventTitle": {
+                "en": "General Songs",
+                "ml": "പൊതുവിലുള ഗീതങ്ങൾ"
+            },
+            "timeKey": "eveningGospel",
+            "items": [
+                {
+                    "type": "subheading",
+                    "content": "ഹാലേ... ഉ... ഹാലേ..."
+                }
+            ]
+        }
     },
     {
         "type": "subheading",
