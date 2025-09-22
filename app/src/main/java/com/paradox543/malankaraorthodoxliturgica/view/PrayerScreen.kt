@@ -343,13 +343,15 @@ fun PrayerElementRenderer(
         }
 
         is PrayerElement.DynamicContent -> {
-            DynamicContentUI(
-                prayerElement,
-                prayerViewModel,
-                filename,
-                navController,
-                isSongHorizontalScroll,
-            )
+            if (prayerElement.items.isNotEmpty()) {
+                DynamicContentUI(
+                    prayerElement,
+                    prayerViewModel,
+                    filename,
+                    navController,
+                    isSongHorizontalScroll,
+                )
+            }
         }
 
         is PrayerElement.DynamicSong -> {
@@ -441,7 +443,7 @@ fun DynamicContentUI(
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
 
     val dynamicSong =
-        dynamicContent.items.find{ it.eventKey == dynamicSongKey }
+        dynamicContent.items.find { it.eventKey == dynamicSongKey }
             ?: dynamicContent.items.firstOrNull()
     // For dropdown menu
     val songs = dynamicContent.items
@@ -454,12 +456,13 @@ fun DynamicContentUI(
                 else -> song.eventTitle.en
             }
         }
-    val selectedTitle = dynamicSong?.let { song ->
-        when (selectedLanguage) {
-            AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
-            else -> song.eventTitle.en
-        }
-    } ?: "Error"
+    val selectedTitle =
+        dynamicSong?.let { song ->
+            when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
+                else -> song.eventTitle.en
+            }
+        } ?: "Error"
     Card(modifier) {
         Column(Modifier.padding(4.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(
