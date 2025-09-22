@@ -46,7 +46,9 @@ class PrayerViewModel @Inject constructor(
         }
         viewModelScope.launch {
             prayers.collect {
-                _dynamicSongKey.value = getSongKeyPriority()
+                if (_dynamicSongKey.value == null) {
+                    _dynamicSongKey.value = getSongKeyPriority()
+                }
             }
         }
     }

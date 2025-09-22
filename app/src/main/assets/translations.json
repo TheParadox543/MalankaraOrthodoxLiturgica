@@ -293,7 +293,11 @@
     },
     "qurbanaSongs": {
         "en": "Qurbana Songs",
-        "ml": "കുർബാന പാട്ടുകൾ"
+        "ml": "കുർബാന ഗാനങ്ങൾ"
+    },
+    "allDepartedFaithfulSongs": {
+        "en": "All Departed Faithful",
+        "ml": "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്‌ച"
     },
     "transfigurationSongs": {
         "en": "Transfiguration",
