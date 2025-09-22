@@ -290,5 +290,17 @@
     "halfLent": {
         "en": "Half Lent",
         "ml": "പാതിനോമ്പ്"
+    },
+    "qurbanaSongs": {
+        "en": "Qurbana Songs",
+        "ml": "കുർബാന പാട്ടുകൾ"
+    },
+    "transfigurationSongs": {
+        "en": "Transfiguration",
+        "ml": "കൂടാര (മറുരൂപ) പ്പെരുന്നാൾ"
+    },
+    "afterHolyCrossSongs": {
+        "en": "Sundays after Holy Cross Sunday",
+        "ml": "സ്ലീബായുടെ ശേഷമുള്ള ഞായറാച്ചകൾ"
     }
 }

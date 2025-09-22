@@ -454,23 +454,24 @@ fun DynamicContentUI(
         }
     val selectedTitle = titles.getOrNull(dynamicSongIndex) ?: ""
     Card(modifier) {
-        Column(Modifier.padding(4.dp)) {
+        Column(Modifier.padding(4.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(
-                Modifier
-                    .fillMaxWidth(),
-//                    .padding(horizontal = 4.dp, vertical = 2.dp),
+                Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 ExposedDropdownMenuBox(
                     expanded = expanded,
                     onExpandedChange = { expanded = !expanded },
-//                    modifier = Modifier.weight(0.9f),
                 ) {
                     TextField(
                         value = selectedTitle,
                         onValueChange = {},
                         readOnly = true,
-                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                        trailingIcon = {
+                            if (titles.size > 1) {
+                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                            }
+                        },
                         modifier =
                             Modifier
                                 .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
@@ -514,15 +515,23 @@ fun DynamicSongUI(
     isSongHorizontalScroll: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier.padding(vertical = 12.dp)) {
+    Column(modifier.padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         dynamicSong.items.forEach { item ->
-            PrayerElementRenderer(
-                item,
-                prayerViewModel,
-                filename,
-                navController,
-                isSongHorizontalScroll,
-            )
+            when (item) {
+                is PrayerElement.Song,
+                is PrayerElement.Subheading,
+                is PrayerElement.CollapsibleBlock,
+                -> {
+                    PrayerElementRenderer(
+                        item,
+                        prayerViewModel,
+                        filename,
+                        navController,
+                        isSongHorizontalScroll,
+                    )
+                }
+                else -> {}
+            }
         }
     }
 }

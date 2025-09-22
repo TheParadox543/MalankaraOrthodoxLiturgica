@@ -14,33 +14,42 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Song(text: String, modifier: Modifier = Modifier, isHorizontal: Boolean = false) {
+fun Song(
+    text: String,
+    modifier: Modifier = Modifier,
+    isHorizontal: Boolean = false,
+) {
     val horizontalScrollState = rememberScrollState()
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .let { currentModifier ->
-                if (isHorizontal) {
-                    currentModifier
-                        .horizontalScroll(horizontalScrollState)
-//                        .border(4.dp, MaterialTheme.colorScheme.outline)
-                } else {
-                    currentModifier
-                }
-            }
-            .border(
-                4.dp,
-                MaterialTheme.colorScheme.outline,
-                MaterialTheme.shapes.medium,
-            )
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .let { currentModifier ->
+                    if (isHorizontal) {
+                        currentModifier
+                            .horizontalScroll(horizontalScrollState)
+                    } else {
+                        currentModifier
+                    }
+                }.border(
+                    4.dp,
+                    MaterialTheme.colorScheme.outline,
+                    MaterialTheme.shapes.medium,
+                ),
     ) {
         Text(
-            text = text,
+            text = text.applyPrayerReplacements(),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Start,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
         )
     }
 }
+
+private fun String.applyPrayerReplacements(): String =
+    this
+        .replace("/t", "    ")
+        .replace("/u200b", "\u200b")
