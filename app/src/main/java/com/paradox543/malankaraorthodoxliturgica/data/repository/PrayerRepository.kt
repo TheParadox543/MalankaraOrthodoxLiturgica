@@ -227,9 +227,9 @@ class PrayerRepository @Inject constructor(
         }
         return dynamicContent
     }
-
-    private fun String.applyPrayerReplacements(): String =
-        this
-            .replace("/t", "    ")
-            .replace("/u200b", "\u200b")
 }
+
+fun String.applyPrayerReplacements(): String =
+    this
+        .replace("/t", "    ")
+        .replace("/u200b", "\u200b")
