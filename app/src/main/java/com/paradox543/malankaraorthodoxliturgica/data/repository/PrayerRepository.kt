@@ -7,6 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoun
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerParsingException
+import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStr
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import okio.IOException
@@ -214,7 +215,6 @@ class PrayerRepository @Inject constructor(
                             language,
                         )
                     } catch (e: Exception) {
-//                        listOf(PrayerElement.Error("Failed to load dynamic song: ${e.message}"))
                         Log.d(
                             "PrayerRepository",
                             "Failed to load dynamic song: ${event.specialSongsKey}/${dynamicContent.timeKey}. ${e.message}",
@@ -228,6 +228,32 @@ class PrayerRepository @Inject constructor(
                         eventTitle = event.title,
                         timeKey = dynamicContent.timeKey,
                         items = songElements,
+                    ),
+                )
+            }
+        }
+
+        // Adding prayers for the departed at the end
+        if (dynamicContent.items.any { it.eventKey != "allDepartedFaithful" }) {
+            val departedSongElements =
+                try {
+                    loadPrayerElements(
+                        "qurbanaSongs/allDepartedFaithful/${dynamicContent.timeKey}.json",
+                        language,
+                    )
+                } catch (_: Exception) {
+                    emptyList()
+                }
+            if (departedSongElements.isNotEmpty()) {
+                dynamicContent.items.add(
+                    PrayerElement.DynamicSong(
+                        "allDepartedFaithful",
+                        TitleStr(
+                            "All Departed Faithful",
+                            "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്\u200Cച",
+                        ),
+                        dynamicContent.timeKey,
+                        departedSongElements,
                     ),
                 )
             }
