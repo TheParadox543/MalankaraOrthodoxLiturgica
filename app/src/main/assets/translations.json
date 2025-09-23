@@ -1,367 +1,310 @@
 {
     "malankara": {
         "en": "Liturgica",
-        "ml": "ലിറ്റർജിക്ക",
-        "mn": "Liturgica"
+        "ml": "ലിറ്റർജിക്ക"
     },
     "dailyPrayers": {
         "en": "Daily Prayers",
-        "ml": "നിത്യ പ്രാർത്ഥന",
-        "mn": "Nitya Prarthana"
+        "ml": "നിത്യ പ്രാർത്ഥന"
     },
     "sacraments": {
         "en": "Sacramental Prayers",
-        "ml": "കൂദാശകൾ ",
-        "mn": "Koodashakal"
+        "ml": "കൂദാശകൾ "
     },
     "sleeba": {
         "en": "Sleeba Prayers",
-        "ml": "സ്ലീബ നമസ്ക്കാരം",
-        "mn": "Sleeba Namaskaaram"
+        "ml": "സ്ലീബ നമസ്ക്കാരം"
     },
     "kyamtha": {
         "en": "Kyamtha Prayers",
-        "ml": "ക്യംതാ നമസ്ക്കാരം",
-        "mn": "Kyamtha Namaskaram"
+        "ml": "ക്യംതാ നമസ്ക്കാരം"
     },
     "nineveh": {
         "en": "Nineveh Prayers",
-        "ml": "നിനവ പ്രാർത്ഥന",
-        "mn": "Nineveh Prarthana"
+        "ml": "നിനവ പ്രാർത്ഥന"
     },
     "greatLent": {
         "en": "Great Lent",
-        "ml": "വലിയ നോമ്പ്",
-        "mn": "Valiya Nombu"
+        "ml": "വലിയ നോമ്പ്"
     },
     "qurbana": {
         "en": "Holy Qurbana",
-        "ml": "വി. കുർബാന",
-        "mn": "Vi. Qurbana"
+        "ml": "വി. കുർബാന"
     },
     "baptism": {
         "en": "Baptism",
-        "ml": "മാമോദീസ",
-        "mn": "Mamodeesa"
+        "ml": "മാമോദീസ"
     },
     "wedding": {
         "en": "Wedding",
-        "ml": "വിവാഹം",
-        "mn": "Vivaham"
+        "ml": "വിവാഹം"
     },
     "funeral": {
         "en": "Funeral",
-        "ml": "ശവസംസ്ക്കാരം",
-        "mn": "Funeral"
+        "ml": "ശവസംസ്ക്കാരം"
     },
     "monday": {
         "en": "Monday",
-        "ml": "തിങ്കളാഴ്ച",
-        "mn": "Thingalazhcha"
+        "ml": "തിങ്കളാഴ്ച"
     },
     "tuesday": {
         "en": "Tuesday",
-        "ml": "ചൊവ്വാഴ്ച",
-        "mn": "Chovvazhcha"
+        "ml": "ചൊവ്വാഴ്ച"
     },
     "wednesday": {
         "en": "Wednesday",
-        "ml": "ബുധനാഴ്ച",
-        "mn": "Budhanazhcha"
+        "ml": "ബുധനാഴ്ച"
     },
     "thursday": {
         "en": "Thursday",
-        "ml": "വ്യാഴാഴ്ച",
-        "mn": "Vyazhazhcha"
+        "ml": "വ്യാഴാഴ്ച"
     },
     "friday": {
         "en": "Friday",
-        "ml": "വെള്ളിയാഴ്ച",
-        "mn": "Velliyaazhcha"
+        "ml": "വെള്ളിയാഴ്ച"
     },
     "saturday": {
         "en": "Saturday",
-        "ml": "ശനി",
-        "mn": "Shani"
+        "ml": "ശനി"
     },
     "vespers": {
         "en": "Vespers",
-        "ml": "സന്ധ്യാ",
-        "mn": "Sandhya"
+        "ml": "സന്ധ്യാ"
     },
     "compline": {
         "en": "Compline",
-        "ml": "സൂത്താറാ",
-        "mn": "Soothara"
+        "ml": "സൂത്താറാ"
     },
     "matins": {
         "en": "Matins",
-        "ml": "രാത്രി",
-        "mn": "Raathri"
+        "ml": "രാത്രി"
     },
     "prime": {
         "en": "Prime",
-        "ml": "പ്രഭാതം",
-        "mn": "Prabhatham"
+        "ml": "പ്രഭാതം"
     },
     "terce": {
         "en": "Terce",
-        "ml": "മൂന്നാം മണി",
-        "mn": "Moonnam Mani"
+        "ml": "മൂന്നാം മണി"
     },
     "sext": {
         "en": "Sext",
-        "ml": "ആറാം മണി",
-        "mn": "Aaram Mani"
+        "ml": "ആറാം മണി"
     },
     "none": {
         "en": "None",
-        "ml": "ഒൻപതാം മണി",
-        "mn": "Onpathaam Mani"
+        "ml": "ഒൻപതാം മണി"
     },
     "ring": {
         "en": "Ceremony of Blessing of the Ring",
-        "ml": "മോതിരം വാഴ്​വിന്റെ ക്രമം",
-        "mn": "Mothiram Vazhvinthe Kramam"
+        "ml": "മോതിരം വാഴ്​വിന്റെ ക്രമം"
     },
     "crown": {
         "en": "Ceremony of Blessing of the Crown",
-        "ml": "കിരീടം വാഴ്​വിന്റെ ക്രമം",
-        "mn": "Kireedam Vazhvinthe Kramam"
+        "ml": "കിരീടം വാഴ്​വിന്റെ ക്രമം"
     },
     "houseWarming": {
         "en": "House Warming",
-        "ml": "ഭവനശുദ്ധീകരണം",
-        "mn": "Bhavanashudhikaranam"
+        "ml": "ഭവനശുദ്ധീകരണം"
     },
     "preparation": {
         "en": "Preparation",
-        "ml": "പ്രാരംഭം",
-        "mn": "Prarambham"
+        "ml": "പ്രാരംഭം"
     },
     "partOne": {
         "en": "Part I",
-        "ml": "ഒന്നാം ഭാഗം",
-        "mn": "Onnaam Bhaaagam"
+        "ml": "ഒന്നാം ഭാഗം"
     },
     "chapterOne": {
         "en": "Part II Chapter 1",
-        "ml": "രണ്ടാം ഭാഗം ഒന്നാം അദ്ധ്യായം",
-        "mn": "Randaam Bhaagam Onnaam Adhyaayam"
+        "ml": "രണ്ടാം ഭാഗം ഒന്നാം അദ്ധ്യായം"
     },
     "chapterTwo": {
         "en": "Part II Chapter 2",
-        "ml": "രണ്ടാം ഭാഗം രണ്ടാം അദ്ധ്യായം",
-        "mn": "Randaam Bhaagam Randaam Adhyaayam"
+        "ml": "രണ്ടാം ഭാഗം രണ്ടാം അദ്ധ്യായം"
     },
     "chapterThree": {
         "en": "Part II Chapter 3",
-        "ml": "രണ്ടാം ഭാഗം മൂന്നാം അദ്ധ്യായം",
-        "mn": "Randaam Bhaagam Moonnaam Adhyaayam"
+        "ml": "രണ്ടാം ഭാഗം മൂന്നാം അദ്ധ്യായം"
     },
     "chapterFour": {
         "en": "Part II Chapter 4",
-        "ml": "രണ്ടാം ഭാഗം നാലാം അദ്ധ്യായം",
-        "mn": "Randaam Bhaagam Naalaam Adhyaayam"
+        "ml": "രണ്ടാം ഭാഗം നാലാം അദ്ധ്യായം"
     },
     "chapterFive": {
         "en": "Part II Chapter 5",
-        "ml": "രണ്ടാം ഭാഗം അഞ്ചാം അദ്ധ്യായം",
-        "mn": "Randaam Bhaagam Anjaam Adhyaayam"
+        "ml": "രണ്ടാം ഭാഗം അഞ്ചാം അദ്ധ്യായം"
     },
     "men": {
         "en": "Men",
-        "ml": "പുരുഷന്മാർ",
-        "mn": "Men"
+        "ml": "പുരുഷന്മാർ"
     },
     "women": {
         "en": "Women",
-        "ml": "സ്ത്രീകൾ",
-        "mn": "Women"
+        "ml": "സ്ത്രീകൾ"
     },
     "firstPart": {
         "en": "Part One",
-        "ml": "ഒന്നാം ശുശ്രൂഷ",
-        "mn": "Part One"
+        "ml": "ഒന്നാം ശുശ്രൂഷ"
     },
     "secondPart": {
         "en": "Part Two",
-        "ml": "രണ്ടാം ശുശ്രൂഷ",
-        "mn": "Part Two"
+        "ml": "രണ്ടാം ശുശ്രൂഷ"
     },
     "thirdPart": {
         "en": "Part Three",
-        "ml": "മൂന്നാം ശുശ്രൂഷ",
-        "mn": "Part Three"
+        "ml": "മൂന്നാം ശുശ്രൂഷ"
     },
     "fourthPart": {
         "en": "Part Four",
-        "ml": "നാലാം ശുശ്രൂഷ",
-        "mn": "Part Four"
+        "ml": "നാലാം ശുശ്രൂഷ"
     },
     "sheema": {
         "en": "Shehimo",
-        "ml": "ശ്ഹീമാ നമസ്ക്കാരം",
-        "mn": "Sheema Namaskaaram"
+        "ml": "ശ്ഹീമാ നമസ്ക്കാരം"
     },
     "commonPrayers": {
         "en": "Common Prayers",
-        "ml": "പൊതുവായ പ്രാർത്ഥനകൾ",
-        "mn": "Pothuvaaya Praarthanakal"
+        "ml": "പൊതുവായ പ്രാർത്ഥനകൾ"
     },
     "kauma": {
         "en": "Kauma",
-        "ml": "കൗമ",
-        "mn": "Kauma"
+        "ml": "കൗമ"
     },
     "kaumaSyriac": {
         "en": "Kauma (Syriac)",
-        "ml": "കൗമ (സുറിയാനി)",
-        "mn": "Kauma (Syriac)"
+        "ml": "കൗമ (സുറിയാനി)"
     },
     "lords": {
         "en": "Lord's Prayer",
-        "ml": "കർത്തൃ പ്രാർത്ഥന",
-        "mn": "Karthru Prarthana"
+        "ml": "കർത്തൃ പ്രാർത്ഥന"
     },
     "mary": {
         "en": "Prayer to St. Mary",
-        "ml": "ദൈവ മാതാവിനോടുള്ള അപേക്ഷ",
-        "mn": "Daiva Mathavinodulla Apekshaa"
+        "ml": "ദൈവ മാതാവിനോടുള്ള അപേക്ഷ"
     },
     "nicene": {
         "en": "Nicene Creed",
-        "ml": "വിശ്വാസപ്രമാണം",
-        "mn": "Vishaavasapramaanam"
+        "ml": "വിശ്വാസപ്രമാണം"
     },
     "angels": {
         "en": "Praise of Angels",
-        "ml": "മാലാഖമാരുടെ സ്തുതി ",
-        "mn": "Malakhamarude Stuthi"
+        "ml": "മാലാഖമാരുടെ സ്തുതി"
     },
     "cherubims": {
         "en": "Praise of Cherubims",
-        "ml": "ക്രോബേന്മാരുടെ സ്തുതി",
-        "mn": "Cherubimaarude Stuthi"
+        "ml": "ക്രോബേന്മാരുടെ സ്തുതി"
     },
     "promiyon": {
         "en": "Promiyon",
-        "ml": "പ്രുമിയോൻ",
-        "mn": "Promiyon"
+        "ml": "പ്രുമിയോൻ"
     },
     "sheemaMary": {
-        "en": "",
-        "ml": "വി. ദൈവമാതാവിൻ്റെ ഓർമ്മയിൽ",
-        "mn": "St. Mary's"
+        "en": "For St. Mary",
+        "ml": "വി. ദൈവമാതാവിൻ്റെ ഓർമ്മയിൽ"
     },
     "sheemaSleeba": {
         "ml": "വി. സ്ലീബായുടെ",
-        "mn": "",
-        "en": ""
+        "en": "For the Holy Cross"
     },
     "sheemaSaints": {
         "ml": "പരിശുദ്ധന്മാരുടെ ഓർമ്മയിൽ",
-        "en": "",
-        "mn": ""
+        "en": "For the Saints"
     },
     "sheemaApostle": {
         "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ",
-        "en": "",
-        "mn": ""
+        "en": "For the Apostles"
     },
     "cyclic": {
         "ml": "ധൂപപ്രാർത്ഥനകൾ",
-        "en": "Cyclic prayers",
-        "mn": "Kukiliyonukal"
+        "en": "Cyclic prayers"
     },
     "feasts": {
         "en": "Feasts",
-        "ml": "പെരുന്നാളുകൾ",
-        "mn": "Perunnalukal"
+        "ml": "പെരുന്നാളുകൾ"
     },
     "ascension": {
         "ml": "സ്വർഗ്ഗാരോഹണ പെരുന്നാൾ",
-        "en": "Feast of Ascension",
-        "mn": "Swargarohanna Perunnal"
+        "en": "Feast of Ascension"
     },
     "pentecost": {
         "ml": "പെന്തികൊസ്തി പെരുന്നാൾ",
-        "en": "Pentecost",
-        "mn": "Pentecosti Perunnal"
+        "en": "Pentecost"
     },
     "prayNow": {
         "en": "Pray Now",
-        "mn": "Ippol Praarthikkam",
         "ml": "ഇപ്പോൾ പ്രാർത്ഥിക്കാം"
     },
     "contextual": {
         "en": "Contextual Prayers",
-        "mn": "Sandarbochitha Praarthanakal",
         "ml": "സന്ദർഭോചിത പ്രാർത്ഥനകൾ"
     },
     "beforeFood": {
         "ml": "ഭക്ഷണം കഴിക്കുന്നതിനു മുമ്പ്",
-        "mn": "Before Food",
         "en": "Before Food"
     },
     "afterFood": {
         "en": "After Food",
-        "ml": "ഭക്ഷണം കഴിച്ചശേഷം",
-        "mn": "After Food"
+        "ml": "ഭക്ഷണം കഴിച്ചശേഷം"
     },
     "forSick": {
         "ml": "രോഗികൾക്കുവേണ്ടി",
-        "en": "For the Sick",
-        "mn": "For the Sick"
+        "en": "For the Sick"
     },
     "morningPraise": {
         "ml": "പ്രഭാത സ്തുതിപ്പ്",
-        "en": "Morning Praise",
-        "mn": "Morning Praise"
+        "en": "Morning Praise"
     },
     "homePrayers": {
         "ml": "വീട്ടിൽ പ്രാർത്ഥനകൾ",
-        "en": "Home Prayers",
-        "mn": "Home Prayers"
+        "en": "Home Prayers"
     },
     "benedictionSongs": {
         "ml": "കൈമുത്ത് പാട്ടുകൾ",
-        "en": "Benediction Songs",
-        "mn": "Benediction Songs"
+        "en": "Benediction Songs"
     },
     "intercessionToMary": {
         "ml": "ദൈവമാതാവിനോടുള്ള മദ്ധ്യസ്ഥപ്രാർത്ഥന",
-        "en": "Intercession to St. Mary",
-        "mn": "Intercession to St. Mary"
+        "en": "Intercession to St. Mary"
     },
     "oldTestament": {
         "ml": "പഴമ വായന",
-        "en": "Old Testament",
-        "mn": "Old Testament"
+        "en": "Old Testament"
     },
     "christmas": {
         "ml": "ജനനപെരുന്നാൾ",
-        "en": "Christmas",
-        "mn": "Christmas"
+        "en": "Christmas"
     },
     "worshipOfCross": {
         "ml": "സ്ലീബാ ആഘോഷം",
-        "en": "Worship of the Cross",
-        "mn": "Worship of the Cross"
+        "en": "Worship of the Cross"
     },
     "epiphany": {
         "ml": "ദനഹാ",
-        "en": "Epiphany",
-        "mn": "Epiphany"
+        "en": "Epiphany"
     },
     "reconciliationService": {
         "en": "Reconciliation Service",
-        "mn": "Reconciliation Service",
         "ml": "ശുബ്ക്കോനൊ"
     },
     "halfLent": {
         "en": "Half Lent",
-        "mn": "Half Lent",
         "ml": "പാതിനോമ്പ്"
+    },
+    "qurbanaSongs": {
+        "en": "Qurbana Songs",
+        "ml": "കുർബാന ഗാനങ്ങൾ"
+    },
+    "allDepartedFaithfulSongs": {
+        "en": "All Departed Faithful",
+        "ml": "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്‌ച"
+    },
+    "transfigurationSongs": {
+        "en": "Transfiguration",
+        "ml": "കൂടാര (മറുരൂപ) പ്പെരുന്നാൾ"
+    },
+    "afterHolyCrossSongs": {
+        "en": "Sundays after Holy Cross Sunday",
+        "ml": "സ്ലീബായുടെ ശേഷമുള്ള ഞായറാച്ചകൾ"
     }
 }

@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MalankaraOrthodoxLiturgica"
         tools:targetApi="33">
+<!--        <meta-data-->
+<!--            android:name="firebase_crashlytics_collection_enabled"-->
+<!--            android:value="false" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true"

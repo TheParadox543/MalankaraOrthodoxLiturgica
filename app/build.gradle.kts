@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    // Linter plugin
+    alias(libs.plugins.ktlint)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
@@ -21,8 +23,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 30
-        versionName = "1.3.0"
+        versionCode = 32
+        versionName = "1.4.0-alpha.1"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -32,9 +34,10 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            resValue("string", "app_name", "Liturgica")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
             configure<CrashlyticsExtension> {
                 // Enable processing and uploading of native symbols to Firebase servers.
@@ -43,6 +46,11 @@ android {
                 // stack traces in the Crashlytics dashboard.
                 nativeSymbolUploadEnabled = true
             }
+        }
+        debug {
+            applicationIdSuffix = ".testing"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "Liturgica (Dev)")
         }
     }
     compileOptions {
@@ -88,9 +96,10 @@ dependencies {
     // Data Storage
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
 
-    // QR generation
+    // QR generation and scanning
     implementation(libs.zxing.android.embedded)
     implementation(libs.zxing.core)
+    implementation(libs.barcode.scanning)
 
     // Camera Scanning
     implementation(libs.androidx.camera.camera2)
@@ -118,7 +127,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4) // Compose testing rules for JUnit 4
 
     // Debugging & Development Tools (only for debug builds)
-    debugImplementation(libs.androidx.ui.tooling)     // Compose tooling for previews and inspection
+    debugImplementation(libs.androidx.ui.tooling) // Compose tooling for previews and inspection
     debugImplementation(libs.androidx.ui.test.manifest) // Compose test manifest for UI testing
 }
 

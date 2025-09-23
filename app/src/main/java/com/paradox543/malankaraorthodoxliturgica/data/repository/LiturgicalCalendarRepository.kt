@@ -21,10 +21,12 @@ import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LiturgicalCalendarRepository @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val json: Json // Inject kotlinx.serialization.Json for parsing
+    private val json: Json, // Inject kotlinx.serialization.Json for parsing
 ) {
     // Lazy initialization ensures files are read only when first accessed
     private lateinit var liturgicalDates: LiturgicalCalendarDates
@@ -40,6 +42,10 @@ class LiturgicalCalendarRepository @Inject constructor(
         }
     }
 
+    /**
+     * Reads and parses liturgical_calendar.json from assets.
+     * This should be called once during initialization.
+     */
     private suspend fun readLiturgicalDates() = withContext(Dispatchers.IO) {
         val filename = "calendar/liturgical_calendar.json"
         try {
@@ -200,5 +206,14 @@ class LiturgicalCalendarRepository @Inject constructor(
             weekEvents.add(CalendarDay(day, eventDetails))
         }
         return weekEvents
+    }
+
+    fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
+        val weekEvents = getUpcomingWeekEvents()
+        val eventItems = mutableListOf<LiturgicalEventDetails>()
+        weekEvents.forEach { day ->
+            eventItems.addAll(day.events)
+        }
+        return eventItems
     }
 }
