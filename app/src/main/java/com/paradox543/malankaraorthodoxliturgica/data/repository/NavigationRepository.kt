@@ -1,7 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
-import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree.BASE_TREE
@@ -14,8 +13,19 @@ import javax.inject.Singleton
 class NavigationRepository @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
+    /**
+     * The base navigation tree enriched with available languages for each node.
+     */
     val navTree = enrichLanguages(context, BASE_TREE)
 
+    /**
+     * Checks the app's assets to determine which languages have the specified file.
+     *
+     * @param context The application context used to access assets.
+     * @param baseFilename The filename to check for (e.g., "index.md").
+     * @param extensions The list of AppLanguage enums to check against. Defaults to all available languages.
+     * @return A list of language codes (e.g., ["ml", "en"]) that have the specified file in their respective directories.
+     */
     private fun getAvailableLanguages(
         context: Context,
         baseFilename: String,
@@ -30,6 +40,15 @@ class NavigationRepository @Inject constructor(
             }
         }
 
+    /**
+     * Recursively enriches a PageNode tree with the languages available for each node.
+     *
+     * For file nodes, it checks directly for the file's existence in each language directory.
+     * For folder nodes, it aggregates the languages from its children.
+     * @param context The application context used to access assets.
+     * @param node The current PageNode to enrich.
+     * @return A new PageNode instance with the languages property populated.
+     */
     fun enrichLanguages(
         context: Context,
         node: PageNode,
@@ -44,10 +63,6 @@ class NavigationRepository @Inject constructor(
                 // Folder → union of children’s languages
                 enrichedChildren.flatMap { it.languages }.distinct()
             }
-        Log.d("NavigationRepository",
-            "Enriching languages for node: ${node.route}" +
-                ", detected: $detectedLanguages, original: ${node.languages}",
-        )
 
         return node.copy(
             languages = detectedLanguages,

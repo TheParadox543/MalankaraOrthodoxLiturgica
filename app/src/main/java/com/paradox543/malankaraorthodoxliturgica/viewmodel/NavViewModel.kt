@@ -24,6 +24,9 @@ class NavViewModel @Inject constructor(
     private val navigationRepository: NavigationRepository,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
+    /**
+     * The root node of the navigation tree, dynamically updated based on the selected language.
+     */
     val rootNode: StateFlow<PageNode> =
         settingsRepository.selectedLanguage
             .map { language ->
@@ -42,6 +45,12 @@ class NavViewModel @Inject constructor(
     private val _parentNode = MutableStateFlow<PageNode?>(null)
     val parentNode: StateFlow<PageNode?> = _parentNode
 
+    /**
+     * Gets the sibling nodes for the current prayers as a pair.
+     *
+     * @param node The current prayer node.
+     * @return A Pair containing the previous and next sibling routes, or null if they don't exist or have no filename.
+     */
     fun getAdjacentSiblingRoutes(node: PageNode): Pair<String?, String?> {
         val parentRoute = node.parent
         if (_parentNode.value?.route != parentRoute) {
@@ -73,6 +82,13 @@ class NavViewModel @Inject constructor(
         return Pair(prevRoute, nextRoute)
     }
 
+    /**
+     * Finds a node in the navigation tree by its route.
+     *
+     * @param node The current node to search within.
+     * @param route The route to search for.
+     * @return The PageNode if found, or null if not found.
+     */
     fun findNode(
         node: PageNode,
         route: String,
