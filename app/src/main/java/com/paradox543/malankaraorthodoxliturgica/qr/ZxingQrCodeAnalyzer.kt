@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.qr
 
 import android.graphics.ImageFormat
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.zxing.BarcodeFormat
@@ -11,7 +12,7 @@ import com.google.zxing.PlanarYUVLuminanceSource
 import com.google.zxing.common.HybridBinarizer
 import java.nio.ByteBuffer
 
-class QrCodeAnalyzer(
+class ZxingQrCodeAnalyzer(
     private val onQrCodeScanned: (String) -> Unit
 ): ImageAnalysis.Analyzer {
 
@@ -45,12 +46,16 @@ class QrCodeAnalyzer(
                         )
                     )
                 }.decode(binaryBmp)
+                Log.d("ZxingQrCodeAnalyzer", "QR Code detected: ${result.text}")
                 onQrCodeScanned(result.text)
             } catch(e: Exception) {
                 onQrCodeScanned("")
             } finally {
                 image.close()
             }
+        } else {
+            onQrCodeScanned("")
+            image.close()
         }
     }
 
