@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "śani ompatāṁmaṇi"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(ēnōnonnuhaṟo)"
+    },
+    {
+        "type": "song",
+        "content": "mēghattiṉ gaṁbhīraddhvanipōl\nkāhaḷanādaṁ poṅṅumpōḷ\nśēṣikkillādāmyaṉmāṟ taṉ\npoṭipōluṁ pātāḷattil\n/tādāmyaṉmārāśabdaṁ\n/tkēḷkkuṁ mātrayileḻunnēlkkuṁ\n/t pāṟkkilanitya śarīramahō\nennuṁ navajīvaṉ tannil\nnityataye prāpiccīṭuṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubaho…"
+    },
+    {
+        "type": "song",
+        "content": "svaṟggattiṉ rājāvē! stutitē\nsakala parēta pratyāśē!\nkaṟmmaṅṅaḷkkanusr̥tamāyoṭuvil\nsakalaṟkkuṁ pratiphalamēkāṉ\n/tnīyeḻunnaḷḷumpōḷ nāthā!\n/tduṣṭaṉ tī narakaṁ nēṭuṁ\n/tśiṣṭanmāṟ svaṟggaṁ nēṭuṁ\nannāḷāṟdratayāl nāthā!\nñaṅṅaḷe valamāy niṟttēṇaṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo.........."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

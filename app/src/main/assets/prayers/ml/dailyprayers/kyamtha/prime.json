@@ -562,12 +562,26 @@
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
-        "type": "subheading",
-        "content": "പെസ്ഗോമോ"
-    },
-    {
-        "type": "song",
-        "content": "ഹാലേ ഉ ഹാ ... ഉ ഹാ\nനാഥനുണർന്നിതുറക്കക്കാരനെയും തൻ\nവീഞ്ഞിൻലഹരി വെടിഞ്ഞൊരു പുരുഷനെയും പോലെ - ഹാലേലുയ്യാ"
+        "type": "dynamic-content",
+        "timeKey": "morningGospel",
+        "defaultContent": {
+            "eventKey": "default",
+            "eventTitle": {
+                "en": "General Songs",
+                "ml": "പൊതുവിലുള ഗീതങ്ങൾ"
+            },
+            "timeKey": "morningGospel",
+            "items": [
+                {
+                    "type": "subheading",
+                    "content": "പെസ്ഗോമോ"
+                },
+                {
+                    "type": "song",
+                    "content": "ഹാലേ ഉ ഹാ ... ഉ ഹാ\nനാഥനുണർന്നിതുറക്കക്കാരനെയും തൻ\nവീഞ്ഞിൻലഹരി വെടിഞ്ഞൊരു പുരുഷനെയും പോലെ - ഹാലേലുയ്യാ"
+                }
+            ]
+        }
     },
     {
         "type": "subheading",

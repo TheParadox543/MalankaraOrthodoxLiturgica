@@ -1,0 +1,46 @@
+[
+    {
+        "type": "title",
+        "content": "Vyaazham maddhyaahnam"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(bsaapparo hasaavuy)"
+    },
+    {
+        "type": "song",
+        "content": "Daivatthin maathaavaayoll\nPaavanakanyakamariyaammi-\n/tnnundaakatte lokatthil\n/tdishakallilengum nallormma\nDaivam thalsmrthi valuthaakki\nThal praarththhana nyangallkkabhayam."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho....."
+    },
+    {
+        "type": "song",
+        "content": "Darshakanivaham shleehaganam\nNin sharane mrthiyettoraam\n/tsahadenmaar parishuddhanmaar\n/tvishvaasikallaam malppaanmaar\nEnnivar thal praarththhanayaale\nPaaril shaanti pulartthaname."
+    },
+    {
+        "type": "subtext",
+        "content": "Menaolam...."
+    },
+    {
+        "type": "song",
+        "content": "Kartthaave! Nin jeevaravam\nMannaayttheernna mrthanmaare\n/tkabareennum parudeesayile-\n/tykkaahvaanam cheythettaname.\nSajana sahitham nedaname\nShaashvathajeevan mrthalokam."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/marbaalaayibovooso.json"
+    }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "type": "title",
+        "content": "veḷḷi maddhyāhnaṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(sohadau āttūṉ)"
+    },
+    {
+        "type": "song",
+        "content": "bālyattil tānē-ŧŧuṭayōṉ niṉ\nsmr̥ti valutākki-maṟiyaṁ nī dhanya\ndēvāgāre mēśayil vaccō-\nrappattāl nī-paripōṣitayāyi.\n/tninne vaidika-mālākhamāṟ māniccu\nnivasiccu daivaṁ ninnil."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ.... śubaho......"
+    },
+    {
+        "type": "song",
+        "content": "kūṭṭaṁ kūṭṭaṁ maśihā bhaktanmā-\nrāṁ sahadēṟ-vidhigēhaṁ pūki\nvāḷālavare-hiṁsiccappōḷ\nghātakaruṭe-mēl raktaṁ pāññoḻuki\n/tnāthaṉ kṣamaka-ṇṭaṇiyiccānavare makuṭaṁ\ntal prāṟtthana nammaḷkkabhayaṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "menaōlaṁ..."
+    },
+    {
+        "type": "song",
+        "content": "nāthaṉ nammaḷ-kkutthānatte prati\nnallāśayu-muḷdhairyavumēki\nvāṅṅippōyōṟ-nādaṁ kēḷkkuṁ\nśiṣṭanmāṟ nava-jīvaṉ nēṭānuṁ\n/tduṣṭanmāṟ vidhi-yēŧŧīṭānumuyaṟttiṭume-\nnnēvaṁ kalppiccānuṭayōṉ."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟi…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/janani.json"
+    }
+]

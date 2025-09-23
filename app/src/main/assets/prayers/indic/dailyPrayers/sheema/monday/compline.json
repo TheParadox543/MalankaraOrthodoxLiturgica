@@ -1,0 +1,62 @@
+[
+    {
+        "type": "title",
+        "content": "sūttāṟā"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(lat hūmod haimōnūso)"
+    },
+    {
+        "type": "song",
+        "content": "ēkātmajadēvā!-ñāṉ niṉ\nkr̥payuṭe kaṭalil nōkkunnēṉ\neṉkaṭamēṟi-pāpaṁ perutāyi\nniṉ sōppāyeṉmēl pūśī-\nṭṭeṉ miḻinīrāl veṇ‌mayeḻāṉ\nkēḻunnēṉ niṉ-janakasnēhattāl\neṉ vairikaḷ mōdiccīṭā\ntanutāpameḻuṁ pātakiyil\ndūtasamūhaṁ-mōdiccōtaṭṭe\npaścāttāpamiyannōrē\nrāpakal vātil tuṟannēŧŧuṁ\nhālēluyyā -nāthaṉ vāḻttuṭayōṉ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śubaho-menaō........"
+    },
+    {
+        "type": "song",
+        "content": "mūlyamitā taraṇaṁ tailaṁ\nvyāpāriyoṭēvaṁ paṟayuṁ\npāpini tanđe-nādaṁ bahumadhuraṁ\nnalkuka mēttaramāṁ tailaṁ\nñānatileṉ miḻinīṟ cēṟtti-\nṭṭēkātmajane-yabhiṣēkikkaṭṭe\nipparimaḷa tailattāl ñāṉ\npāpavimōcana māṟnniṭume\nnneṉ daivattil pratyāśikkunnēṉ\navaḷ tailaṁ vāṅṅiccennāḷ\nviśvāsaṁ daṟśiccuṭayōṉ\nhālēluyya........... pāpakṣama nalki."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyō......."
+    },
+    {
+        "type": "heading",
+        "content": "bōvūsā"
+    },
+    {
+        "type": "subheading",
+        "content": "(māṟ aprēminđe)"
+    },
+    {
+        "type": "song",
+        "content": "āṟdrata tōnnaṇamē nāthā!\nikkaṟmmaṁ kaikkoḷḷaṇame\nmōcanavuṁ kr̥payuṁ vāḻvuṁ\nninnaṟiyīnnēkīṭaṇame."
+    },
+    {
+        "type": "song",
+        "content": "prāṟtthippāṉ nī nilkkumpōḷ\nsantāpattōṭēkāgraṁ\ncintakaḷekkaṭiññāṇiṭṭ\ncittattil niṟttiṭēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "niṉ vāy dhūpattiṉ kalaśaṁ\nninnadharaṁ dhūpaṁ hr̥dyaṁ\ndaivatte prīṇippikkuṁ\nnāvō śuśrūṣakkāraṉ"
+    },
+    {
+        "type": "song",
+        "content": "prāṟtthana kēṭṭīṭunnōnē!\nyācana nalkīṭunnōnē!\nprāṟtthana kēṭṭ nirannaṉpāl\nyācanaye nalkīṭaṇamē."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

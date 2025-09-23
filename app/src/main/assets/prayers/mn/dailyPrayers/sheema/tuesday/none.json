@@ -1,0 +1,38 @@
+[
+    {
+        "type": "title",
+        "content": "Chovaa ompathaammani"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(lokku moriyo)"
+    },
+    {
+        "type": "song",
+        "content": "Khedam vendaa mashihaayil-mrthi poondore!\nAasannam prathiphalamekum-punuruththhaana dinam\nKedane kabarukalleennum ningallezhunne-\nTtathivegam raajaathmajane yethirelppaanetthum\n/tmahimaavin-neeraallam chaartthi\n/tthirumumpil-sthuthipaadum ningall\nKanivaalaadaam suthajeeva-pradane! Krpacheytha"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarek......Shubaho. . Menaolam..."
+    },
+    {
+        "type": "song",
+        "content": "Moonnaam naall mrthigathare prathi-dhoopam vaykkum\nPathivundaayathu neethipara-nmaarkkangaadimuthal\nMoraanaameeshothan shava-samskkaaratthil\nRuhkkudishaayaaleerayarum-nararum kabaringkal\n/taadamine mannaal nirmmicha\n/tjeevamaya-arppichu dhoopam\nDhoopithadaasarkkarullaname-kanivaalaashvaasam"
+    },
+    {
+        "type": "subtext",
+        "content": "Moriye......"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

@@ -1,0 +1,66 @@
+[
+    {
+        "type": "title",
+        "content": "Sootthaaraa"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(moriyolo bgu sokk)"
+    },
+    {
+        "type": "song",
+        "content": "En kartthaave! Kopatthaal shaasikkaruthe\nShikshikkayumaruthennevam keertthichaan daaveedu\nThankaiyaal nirmmitharoopam paazhaayu pokaan\nKaivediyaathe kanivennum Daivam kaanikkum."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho...."
+    },
+    {
+        "type": "song",
+        "content": "Praarththhippaan aalayamaarnnon dosham neekki\nThandehatthodu dehiyeyum samrakshichennaal\nThalpraarththhanayum yaachanayum naathhan kellkkum\nNyaayattheerppin naallingkal cheyyum kaarunyam."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo......"
+    },
+    {
+        "type": "heading",
+        "content": "Bovooso"
+    },
+    {
+        "type": "subheading",
+        "content": "(maar yaakkobinte)"
+    },
+    {
+        "type": "song",
+        "content": "Eeshaa! Naathhaa! Varika thunappaan villikoottunnu\nPraarththhana kettittaathmaakkallmel krpa cheyyenam."
+    },
+    {
+        "type": "song",
+        "content": "Daivasuthan sheelippichoraa praarththhana ramyam\nUllllilathetti dhyaanikkunnon dhanyan thanne\nThaalpparyatthodaa praarththhanayil muzhukeedunnon\nKandettheedum sampoornnathathan bhamgikallellaam."
+    },
+    {
+        "type": "song",
+        "content": "Paapamashesham pokkanamennaa thaathanodothaan\nDivyarahasyatthinsutharetthaan sheelippichu\nThante kadakkaarodu porukkaan dhairyam nalki\nMukthikkaayittarththhicheedaanupadeshichu."
+    },
+    {
+        "type": "song",
+        "content": "Sarvvam kettittabhyarththhanaye kaikkollvone!\nPraarththhana kettittaathmaakkallmel krpa cheyyenam."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

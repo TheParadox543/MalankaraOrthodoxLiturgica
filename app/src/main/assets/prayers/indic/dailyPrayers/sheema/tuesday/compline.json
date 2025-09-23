@@ -1,0 +1,62 @@
+[
+    {
+        "type": "title",
+        "content": "sūttāṟā"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(kattīlodakkttāl)"
+    },
+    {
+        "type": "song",
+        "content": "ādatteyahō-konnoru duṣṭaṉ mr̥tiyivare\ntaṉ kolayāle-konnōṉ nāthā!\nenneyamaṟttiya pāpatte konnīṭaṇamē\n/tnallōriṭayā!-vaḻiteŧŧippōyō-\n/trāṭineyārā-ññuḻaṟiccennōnē!\neṉnāśatte strīyuṭe taṅkakkāśatupōl\nārāyaṇame-nī gatare kaṇṭettunnōṉ\ndāsanmāre tirike varuttunnōṉ stutyaṉ\nhālēluyyā-ennāṟkkuṁ ñāṉ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śubaho-menaōlaṁ..."
+    },
+    {
+        "type": "song",
+        "content": "nāthaṉtaṉ hita-mentennaṟiyunnōṉ dāsa-\nnnuṇaṟvvilleṅkil-nīti kaṭhōraṁ\ndaṇḍippicciṭumennēvaṁ-rakṣakanaruḷi\n/taṟivillāttōṉ-laghudaṇḍanamēlkkuṁ\n/tuṇṭaṟivennā-lonnuṁ ceyyātta\nñaṅṅaḷeyayyō-laൗkikarāṁ mannavarekkāḷ\nrūkṣatayōṭa-ṅṅēlppiccu nī nītikkāy\ndāvīdineyā-śaൗlinnennōṇaṁ kanivāl\nhālēluyyā-saṁrakṣikka."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo."
+    },
+    {
+        "type": "heading",
+        "content": "bōvūso"
+    },
+    {
+        "type": "subheading",
+        "content": "(māṟ yākkōbinđe)"
+    },
+    {
+        "type": "song",
+        "content": "īśā nāthā! varika tuṇappāṉ viḷikūṭṭunnu\nprāṟtthana kēṭṭiṭṭātmākkaḷmēl kr̥paceyyēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "bāṣpaṁ mūlaṁ mukhamatyantaṁ paṅkilamākki\nviṅṅikkēḻuṁ pātaki pāṟttāl hā! kamanīyaṉ\nmūlyaṁ kūṭuṁ ratnattekkāḷ pāraṁ kāmyaṁ\ntāpattālēpātakitūkuṁ kaṇṇīṟ tuḷḷi"
+    },
+    {
+        "type": "song",
+        "content": "nīyanutāpaṁ citramatākkāṉ nōkkunneṅkil\nvaṟṇṇaccāyaṁ kaikkoḷḷēṇṭā, kaṇṇīrēlkkū\ntāpattiṉ vaṉperunnāḷallō kaṇṇīṟvaṟṣaṁ\nkaṇṇīrālē mōcanamāṟjjiccānandikkū."
+    },
+    {
+        "type": "song",
+        "content": "dēvā! dēvā! uttaramaruḷikkāruṇyaṁ ce-\nytēkīṭēṇaṁ manujāt‌mākkaḷkkanutāpaṁ nī"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

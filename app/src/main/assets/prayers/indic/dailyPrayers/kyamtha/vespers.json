@@ -1,0 +1,368 @@
+[
+    {
+        "type": "title",
+        "content": "sandhyā namaskkāraṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "prose",
+        "content": "paṭṭakkāraṉ:-  śubahō lābō vabṟō valṟūhō kādīśō."
+    },
+    {
+        "type": "prose",
+        "content": "janaṁ: - balahīnaruṁ pāpikaḷumāya ñaṅṅaḷuṭemēl anugrahaṅṅaḷuṁ karuṇayuṁ, raṇṭu lōkaṅṅaḷiluṁ ennumennēkkuṁ coriyappeṭumāṟākaṇamē. āmmīṉ."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "prāraṁbha prāṟtthana",
+        "items": [
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- daivamāya kaṟttāvē! paripākatayuḷḷa naṭapaṭikaḷāl ñaṅṅaḷ tirumumpāke praśōbhiccukoṇṭ, ninneyuṁ niṉṟe pitāvineyuṁ ninđe viśuddhaṟūhāyeyuṁ, iṭaviṭāte s‌tutikkuvāṉ takkavaṇṇaṁ, ī ninđe mūnnāṁdivasatte uyiṟtteḻunnēlpiṉnāḷine, svaṟggasēnakaḷōṭukūṭe veṭippiluṁ viśuddhiyiluṁ pukaḻttuvāṉ, ñaṅṅaḷe yōgyarākkaṇamē."
+            },
+            {
+                "type": "subtext",
+                "content": "hōśō ... āmmīṉ."
+            }
+        ]
+    },
+    {
+        "type": "link-collapsible",
+        "file": "psalms/psalm51.json"
+    },
+    {
+        "type": "heading",
+        "content": "eniyōnō"
+    },
+    {
+        "type": "subheading",
+        "content": "(hattīs lōk hōyeṉ lhāttōye)"
+    },
+    {
+        "type": "song",
+        "content": "1. ī niṉ utthānattiṉ nāḷ\nvaṁśattalayāṁ-ādaṁ mōdikkuṁ\n/tnāthā! saṟvvēśā! kr̥pa ceytennil."
+    },
+    {
+        "type": "song",
+        "content": "2. ninne mr̥tanāyavaṟ kabaṟil\nmudrakkalluṁ kāvalumāy vaccāṟ\n/tnāthā…"
+    },
+    {
+        "type": "song",
+        "content": "3. maśihā! viṇmaṇvāsikaḷe\nutthānattāl-mōdippiccavanē!\n/tnāthā…"
+    },
+    {
+        "type": "song",
+        "content": "4. saൗrabhyakūṭṭumeṭuttā-\nśiṣyastrīkaḷ-cennāṟ niṉ kabaṟil,\n/tnāthā…"
+    },
+    {
+        "type": "song",
+        "content": "5. yōhannānuṁ kīppāyuṁ\nsantōṣattāl-ōṭi kabaṟetti.\n/tnāthā…"
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō... menaōlaṁ..."
+    },
+    {
+        "type": "song",
+        "content": "6. dēvā! s‌tuti niṉ karuṇaykkuṁ\nrakṣakanē! niṉ-kr̥payatinuṁ nityaṁ.\n/tnāthā…"
+    },
+    {
+        "type": "subtext",
+        "content": "kuṟiyēlāyissōṉ."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "psalms/psalm140141118116.json"
+    },
+    {
+        "type": "heading",
+        "content": "eniyōnō"
+    },
+    {
+        "type": "subheading",
+        "content": "(slī moṟiyo bṟahamma)"
+    },
+    {
+        "type": "song",
+        "content": "eṉ nāthā! niṉ kr̥pa ninne\nippāpikaḷil cāyiccu.\nniṉ slībācciṟakil tūṅṅuṁ\nniṉ sabhamēl kr̥pa tōnnēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "atiśakti mahattvaṅṅaḷatāl\nmr̥tariṭayīnnēŧŧōṉ maśihā!\nduritakkaṭalīnnāṭiyāre\nkaruṇayoṭeḻunnēlpikkēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "ninnutthānattinđe viśu-\nddhōtsavamāmī divasattil\nniṉ kr̥paye stōtraṁ cey/u200bvāṉ\nñaṅṅaṭe pāpaṁ mōcikka."
+    },
+    {
+        "type": "song",
+        "content": "krōbakaḷ jīvamarattōṭṭaṁ\nkāttīṟayaṟ maśihākkabaṟuṁ\npaḷḷikaḷ dayaṟākaḷuminnī\nutthānaṁ koṇṭāṭunnu."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō... meṉōlaṁ ..."
+    },
+    {
+        "type": "song",
+        "content": "śaraṇattāle uṟaṅṅīṭuṁ\nmr̥tare mōdippiccavanē!\nmōdippiccaṭiyāre niṉ\nvalamākkaṇamutthānattāl."
+    },
+    {
+        "type": "subtext",
+        "content": "staൗmeṉkālōs kuṟiyēlāyissōṉ."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "promiyōṉ",
+        "items": [
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- nāṁ ellāvaruṁ prāṟtthicc kaṟttāvinōṭ karuṇayuṁ dayavuṁ yācikkaṇaṁ."
+            },
+            {
+                "type": "prose",
+                "content": "janaṁ:- kāruṇyavānāya kaṟttāvē! ñaṅṅaḷōṭ karuṇa cey‌t ñaṅṅaḷe sahāyikkaṇamē."
+            },
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- stutiyuṁ stōtravuṁ, prābhavavuṁ pukaḻ‌cayuṁ, māññupōkātta nalla unnatiyuṁ, ellāypōḻuṁ iṭaviṭāte karēŧŧuvāṉ ñaṅṅaḷ yōgyarāyittīraṇamē."
+            },
+            {
+                "type": "prose",
+                "content": "tiruviṣṭattāl maraṇattināyi varukayuṁ, snēhādhikyattāl kabaṟilēkk pravēśikkukayuṁ cey‌ta nalla uṭayavanuṁ, manuṣyarekkuṟicc snēhamuḷḷavanuṁ sakalattil ninnuṁ uyaṟnnirikkunna atyunnatanuṁ, svabhāvattil adr̥śyanuṁ, nānādhanaṅṅaḷuṁ vāri eṭukkappeṭunna bhaṇḍāramuḷḷa dhanavānuṁ, ellā bhāgaṅṅa ḷilēkkuṁ svantanikṣēpaṅṅaḷe vibhajiccu koṭukkunnavanumāya maśihātampurānē! ninakku stuti. sandhyā prāṟtthanayuṭe ī samayattuṁ, sakala perunnāḷukaḷiluṁ, nēraṅṅaḷiluṁ, nāḻikakaḷiluṁ, ñaṅṅaḷuṭe āyuṣkālamokkeyiluṁ stutiyuṁ bahumānavuṁ ārādhanayuṁ ninakk yōgyamākunnu. b‌kulahūṉ ..."
+            },
+            {
+                "type": "prose",
+                "content": "janaṁ:- āmmīṉ."
+            },
+            {
+                "type": "heading",
+                "content": "hūsōyō"
+            },
+            {
+                "type": "subheading",
+                "content": "(mhasiyōnō hōkkil)"
+            },
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- pāpaparihāraṁ nalkunnavanuṁ ..."
+            },
+            {
+                "type": "heading",
+                "content": "sedaṟā"
+            },
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- ñaṅṅaḷuṭe daivamāya maśihā! niṉṟe rakṣākaramāya naṭapaṭiyāluṁ manuṣyarekkuṟiccuḷḷa niṉṟe divya snēhattāluṁ, kātōlikavuṁ, glaihikavumāya niṉṟe sabhaye sakala puṟajātikaḷil ninnuṁ teraññeṭutt, atine niṉṟe viśuddharaktattāl vilaykk vāṅṅi, mahattvamuḷḷa maṇavāṭṭiyākkittīṟttu. ñaṅṅaḷe ninđe makkaḷuṁ avakāśavumākkittīṟkkukayuṁ, maraṇattinđeyuṁ sāttāṉṟeyuṁ aṭimayil ninn svātantyappeṭutti rakṣikkukayuṁ, ninnekkuṟiccuḷḷa aṟivinđe yōgyatayuḷḷa prakāśattāl praśōbhippikkukayuṁ ceytirikkunnu. kaṟttāvē! ñaṅṅaḷuṁ ninđe makkaḷ ellāvaruṁ niṉṟe divyakalppanakaḷ ācarikkukayuṁ, avaye dhyānikkukayuṁ, rāvuṁ pakaluṁ ninđe pramāṇaṅṅaḷiṉ prakāraṁ naṭann, ninnil santōṣikkukayuṁ ceyyumāṟākaṇamē. jīvippikkunnatāya ninđe suviśēṣaṁ ñaṅṅaḷ prasaṁgikkukayuṁ, anyajātikaḷuṭeyuṁ svajātikaḷuṭeyuṁ iṭayil niṉṟe ēvaṉgēliyōṉ vahikkukayuṁ, viśuddha ślīhanmāruṁ aṟiyippukārāya dīṟghadaṟśimāruṁ ñaṅṅaḷkk orukkittanniṭṭuḷḷa māṟggattōṭu cēṟnn atilkūṭi naṭakkukayuṁ, avaruṭe covuḷḷa kālaṭikaḷ pintuṭarukayuṁ ceyyumāṟākaṇamē. ninđe divya tiruviṣ‌ṭattāl ñaṅṅaḷellāvaruṁ pūṟṇṇatappeṭukayuṁ, nī avaṟkk koṭuttiṭṭuḷḷa mahattvattil ñaṅṅaḷ kirīṭaṁ dharippikkappeṭukayuṁ ceyyumāṟākaṇamē. viśvāsikaḷāya niṉṟe janaṅṅaḷkk niṉṟe kalppanakaḷuṭe rahasyaṁ ñaṅṅaḷ kāṇiccukoṭukkayuṁ, jīvanđeyuṁ santōṣattinđeyuṁ vacanaṁ avarōṭ prasaṁgikkukayuṁ, ninđe mahimayuṭe prakāśattāl ñaṅṅaḷ praśōbhikkukayuṁ, niṉṟe ātmiya uṟavayil ninn ñaṅṅaḷ dhārāḷamāyi puṣṭippeṭukayuṁ, niṉṟe jīvapānīyattāl ñaṅṅaḷ pūṟṇṇamāyi saṁtr̥p‌tarākukayuṁ ceyyumāṟākaṇamē. ñaṅṅaḷ nityavuṁ mādhuryamuḷḷa gānaṅṅaḷuṁ cēṟccayuḷḷa s‌tutikaḷuṁ, kabaṟilninnuḷḷa niṉṟe uyiṟtteḻunnēlp‌piṉṟe mahattvakaramāya perunnāḷil ninakku karēŧŧumāṟākaṇamē. ellā nēravuṁ iṭaviṭāte ānandakaramāya stōtraṅṅaḷ ninakkuṁ pratyēkaṁ mahattvamuḷḷatuṁ, atbhutaṁ niṟaññirikkunnatuṁ, visma‌yanīyaṅṅaḷuṁ, mahimayuḷḷa atiśayapravaṟttanaṅṅaḷōṭukūṭiyatumāya niṉṟe uyiṟtteḻunnēlpa‌inuṁ, aṇaykkumāṟākaṇamē, niṉṟe karuṇaykkāyi nōkkippāṟkkukayuṁ, niṉṟe kuriśilttaṟappine ēŧŧupaṟayukayuṁ, ninđe daivatvattil viśvasikkukayuṁ ceyyunna ninđe iṭavakaykk samādhānavuṁ niṉṟe sabhaykk nirappuṁ saൗjanyamāyi nalkaṇamē. satyaviśvāsattōṭu kūṭe atilninn yātra puṟappeṭṭirikkunna viśvāsikaḷāya mariccupōyavaṟkk svaṟggattilninnuḷḷa ninđe eḻunnaḷḷattudivasattil niṉṟe valatubhāgattuḷḷa impavuṁ ānandavuṁ koṭukkaṇamē. ñaṅṅaḷuṁ viśvāsamuḷḷa sabhayuṭe makkaḷ ellāvaruṁ ninakkuṁ niṉṟe pitāvinuṁ, viśuddhaṟūhāykkuṁ, ippōḻuṁ eppōḻuṁ ennēkkuṁ, stutiyuṁ stōtravuṁ karēŧŧumāṟākaṇamē."
+            },
+            {
+                "type": "subtext",
+                "content": "hōśō…"
+            },
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- daivattilninn kaṭaṅṅaḷkku parihāravuṁ, pāpaṅṅaḷkku mōcanavuṁ, raṇṭu lōkaṅṅaḷiluṁ ennēkkuṁ nāṁ kaikkoḷḷumāṟākaṭṭe."
+            },
+            {
+                "type": "prose",
+                "content": "janaṁ: - āmmīṉ."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "kōlō - dhūpagītaṁ"
+    },
+    {
+        "type": "subheading",
+        "content": "(lok moṟiyō kōṟēnāṉ)"
+    },
+    {
+        "type": "song",
+        "content": "1. nāthaṉ mr̥tariṭayiluṟappi-ccādatte\n“khēdikkēṇṭā niṉ pāpatte-ōṟ-ttiniyuṁ nī\nnī kuŧŧaṁ cey‌tatinallō ñāṉ koṇṭaṭikaḷ\nēdaṉkani nī tinnatināy kayppuṁ-kuṭiccēṉ ñāṉ\n/tnagnatayāl-nī ilakaḷ cāṟtti\n/tnagnatayōṭenneyavaṟ tūkki\nñāṉ cintiya raktattāl pōy kōpaṁ tātaṉṟe."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō… hālēluyyā"
+    },
+    {
+        "type": "song",
+        "content": "2. mōdikka viśuddhasabhē! nammuṭe nāthaṉ\nmūnnāṁ nāḷil jīvicca-kkabeṟī-nneḻunnēŧŧāṉ\npāpatte kolayāl konnāṉ-mr̥tiye mr̥tiyāl\nkrōbakaḷ kuntaṁ tānēŧŧakkunta-ttāl nīkki\n/t taṉ kabaṟāl-tīṟttāṉ kabaṟnāśaṁ\n/ttannutthā-nāliṅṅuyirēki\nēŧŧiva tāṉ pōkki vaḻitteŧŧellāṁ ñaṅṅaḷuṭe."
+    },
+    {
+        "type": "subtext",
+        "content": "menōlaṁ... hālēluyyā."
+    },
+    {
+        "type": "song",
+        "content": "3. taṉ śuddhaśarīraṁ bhakṣi-ccuyirēkuṁ\nraktaṁ pānaṁ ceyta mr̥taṟkkāy nāṁ-prāṟtthikka\naḻivillā lōkattavaṟ taṉ dēhikaḷ mēluṁ\npāpatamassātmākkaḷiluṁ-vāḻāy-vāṉ tanne.\n/tavarātmā-kkaḷe nīkkiya nāthā!\n/tēŧŧavaṟ co-nnāṟ niṉ s/u200bkīppāye\nniṉ valabhāgattu niṟuttī-ṭēṇaṁ-nīyavare."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyō ṟāhēmmēlainu ādāṟaiṉ."
+    },
+    {
+        "type": "collapsible-block",
+        "title": "etrō",
+        "items": [
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- gōgulttāyuṭe mukaḷil kāḻcayaṇaykkappeṭukayuṁ, s‌kīppāyilēkkuḷḷa karēŧŧattāl lōkattiṉṟe anyāyaṁ pariharikkukayuṁ cey‌ta puṇyappeṭuttunna baliyuṁ, saṁyōjippuṇṭākunna dhūpakalaśavumāya eṉṟe kaṟttāvē! balahīnarāya niṉṟe aṭiyārāya ñaṅṅaḷ aṟppiccirikkunna nissāramāya ī dhūpaṁ manuṣyarōṭuḷḷa niṉṟe snēhaṁ mūlaṁ kaikkoḷḷaṇamē at niṉṟe bahumānattiṉṟe mahāśuddhasthalattēkk pravēśikkumāṟākaṇamē. niṉṟe aṭukkal ninn ñaṅṅaḷuṭe kaṭaṅṅaḷkkuṁ pāpaṅṅaḷkkuṁ parihāravuṁ mōcanavuṁ ayaccutarukayuṁ, niṉṟe manuṣyasnēhaṁ mūlaṁ ñaṅṅaḷuṭe mariccupōyavare āśvasippikkukayuṁ ceyyaṇamē. mōṟāṉ vālōhāṉ l‌olmīṉ. āmmīṉ"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "kōlō dhūpānantaragītaṁ"
+    },
+    {
+        "type": "subheading",
+        "content": "(kūkkōyō)"
+    },
+    {
+        "type": "song",
+        "content": "niṉ muṟivukaḷīnnēŧŧēṉ mū-ṟōṉ maṇameṉ nāthā!\nninnadharaṅṅaḷahō paṭṭiṉ-nūlōṭottuḷḷū\n/tkāṇmāṉ vannō-nenne bhaṭaṟ cuŧŧi\n/tgōgulttāyi-kkavare viṭṭōṭi,\nniṉ māṟvvu tuṟannuṁ, raktaṁ-vāṟnnuṁ kaṇṭēṉ ñāṉ.\nkuriśālaṭiyāre kākkuṁ-nāthannāy stōtraṁ\n/thālēluyyā-aṭṭahasikkunnēṉ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō... hālēluyyā."
+    },
+    {
+        "type": "song",
+        "content": "enne mayakki niṉ nal saൗ-ndaryā-ścaryaṅṅaḷ.\nniṉstu‌ti daivasutā pāṭāṉ-svaramivanillonnuṁ\n/tpitr̥valamāy ni-nne kaṇṭaṉ mēlil\n/tkaḷḷanmāṟ taṉ iṭayilumāḻattil\nniṉ śayya mariccōṟ maddhyē-svaṟggaṁ niṉ pīṭhaṁ\nīṟayaṟ mēluṁ naraṟ kīḻuṁ-nāthannāy stōtraṁ\n/thālēluyyā-aṭṭahasikkunnu."
+    },
+    {
+        "type": "subtext",
+        "content": "menōlaṁ... hālēluyyā."
+    },
+    {
+        "type": "song",
+        "content": "ñaṅṅaḷ taṉ mr̥tare nīyō-ṟttēkīṭāśvāsaṁ.\ncāṟtti s‌nānē madbahāyil ninne uḷ-kkoṇṭōṟ\n/tniṉ śuddhaśarī-ratte bhakṣicc\n/tniṉ raktakkā-sā pānaṁ ceytōṟ\nabaṟāhattoṭu niṉ rājya-ttānandiccāṟttuṁ,\nniṉ valamāy ninnuṁ, ninne stōtraṁ ceyyēṇaṁ.\n/thālēluyyā-nalkīṭāśvāsaṁ."
+    },
+    {
+        "type": "heading",
+        "content": "ēvaṉgēliyōṉ"
+    },
+    {
+        "type": "subheading",
+        "content": "pesgōmō"
+    },
+    {
+        "type": "song",
+        "content": "hālē... hālē... svaṟggaṁ santōṣikkuṁ bhūvānandikkuṁ\nmaśihārājaṉ tannutthānattil. hālēluyyā."
+    },
+    {
+        "type": "subheading",
+        "content": "(ēvaṉgēliyōṉ vāyicca śēṣaṁ)"
+    },
+    {
+        "type": "heading",
+        "content": "dhūpaprāṟtthana"
+    },
+    {
+        "type": "subheading",
+        "content": "kukkiliyōṉ"
+    },
+    {
+        "type": "song",
+        "content": "makkaḷilappaṉ kr̥pa cey‌/u200bvatu pōle hā… hā…\nbhaktanmāril daivaṁ kr̥pa ceyyuṁ.\n/tpullinu tulyaṁ naranuṭe nāḷkaḷahō hā… hā…\n/tpūkkunnitu vayalil pūcceṭi pōle."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō... menōlaṁ…"
+    },
+    {
+        "type": "subheading",
+        "content": "ekbō"
+    },
+    {
+        "type": "song",
+        "content": "śaraṇattāle niṉ kr̥payil\nmaraṇamaṭaññoru dāsare niṉ\njīvasvaramatuṇaṟttaṇamē\nkabaṟīnnudyānattinnāy."
+    },
+    {
+        "type": "subtext",
+        "content": "staൗmeṉkālōs kuṟiyēlāyissōṉ."
+    },
+    {
+        "type": "subheading",
+        "content": "kōlō"
+    },
+    {
+        "type": "song",
+        "content": "rakṣakanē! niṉ gātratte-bhakṣiccuṁ niṉ\nvilayēṟuṁ raktakkāsā-pānaṁ cey‌tuṁ\nmr̥tarāyōre nāśaṁ nī-kki jīvippi-\nccaṇiyēṇaṁ ninne nōkku-nnavaril kānti."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō..."
+    },
+    {
+        "type": "song",
+        "content": "mr̥tare jīvippippāneḻu-nnaḷḷuṁ rājā\nmukilaḻakiṉ mēlāghōṣita-nāyīṭunnu.\nnayavānmāṟ taṉ muṉkompiṉ-nādaṁ kēṭṭi-\nṭṭeṅkiyaṇiññetirēlpānāy pōyīṭunnu."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyō ṟāhē…"
+    },
+    {
+        "type": "heading",
+        "content": "māṟ yākkōbiṉṟe bōvusō"
+    },
+    {
+        "type": "song",
+        "content": "1. utthānattāl taṉsabhaye vīṇṭōnāṁ putrā!\nniṉ śainō nalki taṉ prajaye kākkēṇaṁ nī."
+    },
+    {
+        "type": "song",
+        "content": "2 ānandameḻunnīṭumatiṉṟe kōṇukaḷil niṉ\nśainō kōṭṭaykkoppaṁ mēvi kāttīṭēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "3. niṉ ślōmmō taṉ vātilu kākkēṇaṁ niṉ śainō\nvannaṅṅaṭi veppōrellāruṁ kaṇṭīṭēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "4. s‌tutyaṉ sabhaye tīṟttatine kāttīṭuṁ tātaṉ\nvandyaṉ kolayāl-sadyayatinnē-kīṭuṁ putraṉ"
+    },
+    {
+        "type": "song",
+        "content": "5. kabaṟī-nnuyiṟ pūṇṭoru sutanāy ellā- jāti-\nkkāril-ninnuṁ-vandana-kūṭṭuṁ-ṟūhā s‌tu-tyaṉ."
+    },
+    {
+        "type": "song",
+        "content": "6. viṇmaṇ lōkaṟkkaikyaṁ nalkīṭuṁ śai-nō niṉ\nutthānattāl niṉ sabhayil śainō nalkēṇaṁ."
+    },
+    {
+        "type": "heading",
+        "content": "kaൗmā"
+    },
+    {
+        "type": "song",
+        "content": "śuddhaṉ nī ālōhō!\nśuddhaṉ nī balavānē!\nkrūśēŧŧōnē! mr̥tihīnā! pariśuddhaṉ nī kr̥pa ceytīṭaṇamē. +"
+    },
+    {
+        "type": "subtext",
+        "content": "(mūnnu prāvaśyaṁ)"
+    },
+    {
+        "type": "song",
+        "content": "nāthā! kr̥pa ceytīṭaṇamē\nnāthā! kanivāl kr̥pa ceyka\nnāthā! kaṟmmavumaṟtthanakaḷumēŧŧiṭṭavayāl kr̥pa ceytīṭaṇamē."
+    },
+    {
+        "type": "song",
+        "content": "stōtraṁ tē dēvēśā!\nstōtraṁ tē sraṣṭāvē!\nstōtraṁ pāpikaḷaṭiyāril-kr̥pa ceytīṭuṁ maśihā rājāvē!"
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. +"
+    },
+    {
+        "type": "prose",
+        "content": "svaṟggasthanāya ñaṅṅaḷuṭe pitāvē (ityādi)"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/trisagionSyriac.json"
+    }
+]

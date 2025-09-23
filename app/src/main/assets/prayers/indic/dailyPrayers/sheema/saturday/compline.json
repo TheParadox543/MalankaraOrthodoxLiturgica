@@ -1,0 +1,66 @@
+[
+    {
+        "type": "title",
+        "content": "śani sūttāṟā"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(ālēppaiṉ moṟiyo)"
+    },
+    {
+        "type": "song",
+        "content": "śīlippikkenne-nāthā!niṉ kalppanayellāṁ\nñāṉ kāttiha niṉ-kr̥payil jīvippāṉ\nniṉvarabhaṇḍāraṁ-kavarāy‌vāṉ niṟttīṭēṇamē\nkāvalkkāre-meyyiṉ vātilkkal."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śubaho."
+    },
+    {
+        "type": "song",
+        "content": "dīṟghakṣama kāṭṭuṁ-nāthaṉ saṁs‌tyaṉ ñaṅṅaḷ\ntiṉmaye veṭiyāṉ-nōkkippāṟkkunnōṉ\ndīnaṉmāṟ ñaṅṅaḷ-lōkavināśaṁ vātilkkal\nnilkkunnuṇṭe nnōṟkkunnilluḷḷil."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟi ......."
+    },
+    {
+        "type": "heading",
+        "content": "bōvūso"
+    },
+    {
+        "type": "subheading",
+        "content": "(māṟ yākkōbinđe)"
+    },
+    {
+        "type": "song",
+        "content": "īśā! nāthā! varika tuṇappāṉ viḷikūṭṭunnu\nprāṟtthana kēṭṭiṭṭātmākkaḷmēl kr̥pa ceyyēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "antyaṁ kālaṁ vannettumpōḷ bhūvinunāśaṁ\nanyāyattiṉ mālinyattil muḻukuṁ lōkaṁ\nīŧŧiṉnōvāl strīyennōṇaṁ kēḻuṁ dhātri\nśaṇṭhakaḷāluṁ pōrukaḷāluṁ vīḻāṟākuṁ."
+    },
+    {
+        "type": "song",
+        "content": "nīṅṅippōkuṁ śuśrūṣakaḷuṁ balikaḷumellāṁ\nāgrahamēṟuṁ kuttikkavaruṁ dravyaṁ nēṭāṉ\nannāḷayyō tammiletiṟkkuṁ mānavalōkaṁ\nnāṭukaḷellāṁ muṭiyuṁ purikaḷ viṟakoṇṭīṭuṁ."
+    },
+    {
+        "type": "song",
+        "content": "dayādēvālayamivayīnnuṁ niṉ māhātmyaṁ\nnāthā! māyuṁ dinamāsannaṁ kr̥patōnnēṇaṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "kuṟiyē...kuṟiyē.. kuṟiyē…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

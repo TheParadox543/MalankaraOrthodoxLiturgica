@@ -1,0 +1,66 @@
+[
+    {
+        "type": "title",
+        "content": "Velllli sootthaaraa"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(yodaeenan mor)"
+    },
+    {
+        "type": "song",
+        "content": "Ninnodu paapam cheythudayone!\nKopippichu-malinathayaal nyangall\nNeethiyaho vaalloorunnaakil\nNyangallkkaayu nin-krpa nilakollllatte\nKaalam theeraaraayengkil nyangadeyantyam\nNinnaardrathayathilaakaname."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho…"
+    },
+    {
+        "type": "song",
+        "content": "Daasan kuttam cheythonudayon\nThalsnehithare-abhayam praapichaal\nAbhyarththhanayum yaachanayum ko-\nNdavanudayon maa-ppekidumennaakil\nNin sleebaaye abhayam sampraapichoraam\nNyangallodalivundaakaname."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "heading",
+        "content": "Bovooso"
+    },
+    {
+        "type": "subheading",
+        "content": "(maar yaakkobinte)"
+    },
+    {
+        "type": "song",
+        "content": "Eeshaa! Naathhaa! Varika thunappaan villikoottunnu\nPraarththhana kettittaathmaakkall mel krpacheyyenam."
+    },
+    {
+        "type": "song",
+        "content": "Thaan parudeesin velliyil povaankaaranamente-\nNaadaam thaathan makkalle nannaayu bodhippichu\nMunnadhikaaram naanamkedaal vannoru veezhcha\nThottattheennulllluchaadanamenniva varnnichu."
+    },
+    {
+        "type": "song",
+        "content": "Paanyumaratthe praapichoraappaazhpaadangall\nKkillavakaasham divyapadatthe sparshicheedaan\nEdan thottakkaniyentiyoraa kaikallkkethum\nYogyathayillatthirubaliyin melarppicheedaan."
+    },
+    {
+        "type": "song",
+        "content": "Sanchaaratthaal mashihaa mannin mullllukall neekki\nThallllappettonaadam veendum parudeesaarnnu."
+    },
+    {
+        "type": "subtext",
+        "content": "Kuriye........ Kuriye........Kuriye....."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

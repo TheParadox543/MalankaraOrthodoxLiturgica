@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "Ompathaammani"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(haveelolanapsho)"
+    },
+    {
+        "type": "song",
+        "content": "Snaanam thannilninneyaninyiha ninmeyu rakthangall\nKaikkondoraayu ninnude sharane mrtharaayorkkormma\nBhoosvargangallilekaname aathmaakkallkkaashvaasamathum\n/tnaathhaa! Nalkaname."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho-menaolam"
+    },
+    {
+        "type": "song",
+        "content": "Aadaamudayonaadaam nandananaadaamin janakan\nThaazhmayodaadatthe sandarshichaan paathaallatthil\nMrthiyeneekki ninakkekum nyaanohariyenna\n/trulliyathaam vaagdaanam pole"
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "type": "title",
+        "content": "Budhan maddhyaahnam"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(thurodseenaay)"
+    },
+    {
+        "type": "song",
+        "content": "Mosha chamachoraa-pedakadrshdaantam\nMariyaame! Shlomo-jeevajalatthin munkuriyaam\nRoohaa than shoshappaa shlom\nAishaayan daaveeduktham\nSthhiramaam purame! Shlomo ni-\nNnudaratthee-nnudayam cheytheeshan."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho...."
+    },
+    {
+        "type": "song",
+        "content": "Sleebaayenti-saatthaanodelppaan\nSahadenmaar chennu khadgatthaal mrthiyettorum\nTheeyaal venneeraayorum\nPoril kaattiya veeryatthaal\nSaatthaan kopaakulanaayi\nNalkuka thal-praarththhanayaal punyam."
+    },
+    {
+        "type": "subtext",
+        "content": "Menaolam....."
+    },
+    {
+        "type": "song",
+        "content": "Naathhaa! Nin meyyum-rakthavumettoraam\nMrthare siddharkkaay-pandu sajeekrthamaakum\nPantikkanpodirutthaname\nNin sharana maranam poondor\nNinneyettoraamavare\nElkkaname thaathangkal neeyum."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/marbaalaayibovooso.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

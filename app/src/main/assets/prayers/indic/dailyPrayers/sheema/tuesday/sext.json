@@ -1,0 +1,54 @@
+[
+    {
+        "type": "title",
+        "content": "covā maddhyāhnaṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(ślōmedābō)"
+    },
+    {
+        "type": "song",
+        "content": "kaṭuminnalppiṇarinnoppaṁ\nkaṇṭāḷ mālākhaye maṟiyāṁ\n/tconnāṉ mr̥duvāy maṟiyāmē!\n/tślōṁ nāthaṉ ninnōṭukūṭe\natyunnatanamaruṁ ninnil\nvāḻuṁ ninnil ṟuhkkudiśā."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ.... śubaho....."
+    },
+    {
+        "type": "song",
+        "content": "duṣṭappaṭayinnuṁ kākkuṁ\nkōṭṭakaḷākaṭṭe niṅṅaḷ\n/tnibiślīhā! sahadēnmārē!\n/tasthikaḷe bahumāniccōṟ\nprāṟtthana mūlamanugrahamē-\nŧŧavakāśikkaṇamē rājyaṁ"
+    },
+    {
+        "type": "subtext",
+        "content": "menaōlaṁ…"
+    },
+    {
+        "type": "song",
+        "content": "vigataṟkkōṟmma bhavikkaṭṭe\nśaraṇaṁ jīvita janataykkuṁ\n/tkanivēṟuṁ tātaṉ daivaṁ\n/tsaṁstutyaṉ bahumānāṟhaṉ\nkaṟttāvāṁ nammuṭeyuṭayōṉ\nśaraṇaṁ raṇṭulakaṅṅaḷkkuṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo…"
+    },
+    {
+        "type": "heading",
+        "content": "bōvūsō"
+    },
+    {
+        "type": "link",
+        "file": "lcommonprayers/marbaalaayibovooso.json"
+    },
+    {
+        "type": "prose",
+        "content": "(vi. kuṟbānayilleṅkil māṟ sēvēṟiyōsinđe mānīsa (pēj 80) viśvāsapramāṇaṁ, kukkiliyōnukaḷ mutalāyava colli avasānippikkaṇaṁ.)"
+    }
+]

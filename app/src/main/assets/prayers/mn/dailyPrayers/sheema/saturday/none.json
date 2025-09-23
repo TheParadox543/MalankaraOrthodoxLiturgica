@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "Shani ompathaammani"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(enononnuharo)"
+    },
+    {
+        "type": "song",
+        "content": "Meghatthin gambheeraddhvanipol\nkaahallanaadam pongumpoll\nsheshikkillaadaamyanmaar than\npodipolum paathaallatthil\n/taadaamyanmaaraashabdam\n/tkellkkum maathrayilezhunnelkkum\n/t paarkkilanithya shareeramaho\nEnnum navajeevan thannil\nNithyathaye praapicheedum."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor. Shubaho…"
+    },
+    {
+        "type": "song",
+        "content": "Svargatthin raajaave! Sthuthithe\nSakala paretha prathyaashe!\nKarmmangallkkanusrthamaayoduvil\nSakalarkkum prathiphalamekaan\n/tneeyezhunnallllumpoll naathhaa!\n/tdushdan thee narakam nedum\n/tshishdanmaar svargam nedum\nannaallaardrathayaal naathhaa!\nNyangalle valamaayu nirtthenam."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo.........."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

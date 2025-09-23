@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "Budhan ompathaammani"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(aanide dashkkal)"
+    },
+    {
+        "type": "song",
+        "content": "Rakshakanaam naathhaa! Ninmeyu bhakshichu\nRaktham paanam cheythangaye-nokkippaarkkum\nMrtharekkabarukallee-nnazhivillaathuyiro-\nDezhunnelppichaniyikkaname-shobhana vasanam."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor.......Shubaho........"
+    },
+    {
+        "type": "song",
+        "content": "Meghavibhooshithanaay-raajakumaaranaho\nJeevan vigatharkkekiduvaan-ghoshamodetthum\nKompoliyannaniyil-kellkkum shishdajanam\nMahimaambaramaarnnethirelppaa-nuzharichellum."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

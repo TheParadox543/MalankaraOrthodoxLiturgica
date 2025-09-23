@@ -26,11 +26,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun provideSettingsRepository(
-        @ApplicationContext context: Context
-    ): SettingsRepository = SettingsRepository(context)
+//    @Provides
+//    @Singleton
+//    fun provideSettingsRepository(
+//        @ApplicationContext context: Context
+//    ): SettingsRepository = SettingsRepository(context)
 
     @Provides
     @Singleton // Ensure only one instance of Json is created
@@ -41,11 +41,11 @@ object AppModule {
             isLenient = true        // Allows for some non-strict JSON (e.g., unquoted keys if needed)
         }
     }
-    @Provides
-    @Singleton
-    fun providePrayerRepository(
-        @ApplicationContext context: Context
-    ): PrayerRepository = PrayerRepository(context, Json)
+//    @Provides
+//    @Singleton
+//    fun providePrayerRepository(
+//        @ApplicationContext context: Context
+//    ): PrayerRepository = PrayerRepository(context, Json, LiturgicalCalendarRepository(context, Json))
 
     @Provides
     @Singleton
@@ -60,12 +60,12 @@ object AppModule {
         json: Json
     ): BibleRepository = BibleRepository(context, json)
 
-    @Provides
-    @Singleton
-    fun provideCalendarRepository(
-        @ApplicationContext context: Context,
-        json: Json
-    ): LiturgicalCalendarRepository = LiturgicalCalendarRepository(context, json)
+//    @Provides
+//    @Singleton
+//    fun provideCalendarRepository(
+//        @ApplicationContext context: Context,
+//        json: Json
+//    ): LiturgicalCalendarRepository = LiturgicalCalendarRepository(context, json)
 
     @Singleton
     @Provides

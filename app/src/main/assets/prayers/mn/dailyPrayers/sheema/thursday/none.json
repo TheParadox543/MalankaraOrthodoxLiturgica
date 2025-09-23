@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "Ompathaammani"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(baaroobttho beeshees)"
+    },
+    {
+        "type": "song",
+        "content": "Puthranilettuparanyaajnyakall niravetti\nVishvaasam kaatthor-mrthar nin varavingkal\nSvargavumazhivatta-jeevanumaarjikkum\nHaale........Uhaale......Avaraanandikkum"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shoobaho-"
+    },
+    {
+        "type": "song",
+        "content": "Daivasuthaagamanam-minnal pinaroppam\nPillarum kallarakall-mrthigatharezhunnelkkum\nPunaruththhaanakanaam-kartthaavine vaazhtthi\nHaale.......Haale......Sthuthigeetham paadum."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

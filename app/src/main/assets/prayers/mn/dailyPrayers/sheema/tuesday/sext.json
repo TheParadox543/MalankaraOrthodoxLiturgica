@@ -1,0 +1,54 @@
+[
+    {
+        "type": "title",
+        "content": "Chovaa maddhyaahnam"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(shlomedaabo)"
+    },
+    {
+        "type": "song",
+        "content": "Kaduminnalppinarinnoppam\nKandaall maalaakhaye mariyaam\n/tchonnaan mrduvaayu mariyaame!\n/tshlom naathhan ninnodukoode\nAthyunnathanamarum ninnil\nVaazhum ninnil ruhkkudishaa."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor.... Shubaho....."
+    },
+    {
+        "type": "song",
+        "content": "Dushdappadayinnum kaakkum\nKottakallaakatte ningall\n/tnibishleehaa! Sahadenmaare!\n/tasthhikalle bahumaanichor\nPraarththhana moolamanugrahame-\nTtavakaashikkaname raajyam"
+    },
+    {
+        "type": "subtext",
+        "content": "Menaolam…"
+    },
+    {
+        "type": "song",
+        "content": "Vigatharkkormma bhavikkatte\nSharanam jeevitha janathaykkum\n/tkaniverum thaathan Daivam\n/tsamsthuthyan bahumaanaarhan\nKartthaavaam nammudeyudayon\nSharanam randulakangallkkum."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "heading",
+        "content": "Bovooso"
+    },
+    {
+        "type": "link",
+        "file": "lcommonprayers/marbaalaayibovooso.json"
+    },
+    {
+        "type": "prose",
+        "content": "(vi. Kurbaanayillengkil maar severiyosinte maaneesa (peju 80) vishvaasapramaanam, kukkiliyonukall muthalaayava cholli avasaanippikkanam.)"
+    }
+]

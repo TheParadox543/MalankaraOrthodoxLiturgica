@@ -1,75 +1,79 @@
 [
     {
         "type": "title",
-        "content": "maddhyaahna namaskkaaram"
+        "content": "Maddhyaahna namaskkaaram"
     },
     {
         "type": "link-collapsible",
-        "file": "commonPrayers/kauma.json"
+        "file": "commonprayers/kauma.json"
     },
     {
         "type": "heading",
-        "content": "kolokal"
+        "content": "Kolokall"
     },
     {
         "type": "subheading",
-        "content": "(thooro dseenaayu)"
+        "content": "(thooro dseenaay)"
     },
     {
         "type": "song",
-        "content": "mosha chamacchoraa-petakadrushtaantham\nmariyaame! Shlommo-jeevajalatthin munkuriyaam\nroohaa than shoshappaa shlom\naishaayan daaveeduktham\nsthiramaam purame shlommo nin\nudaratthee-nnudayam cheytheeshan."
+        "content": "Mosha chamachoraa-pedakadrshdaantam\nMariyaame! Shlommo-jeevajalatthin munkuriyaam\nRoohaa than shoshappaa shlom\naishaayan daaveeduktham\nSthhiramaam purame shlommo nin\nUdaratthee-nnudayam cheytheeshan."
     },
     {
         "type": "subtext",
-        "content": "baarekmor. Shubaho ..."
+        "content": "Baarekmor. Shubaho ..."
     },
     {
         "type": "song",
-        "content": "slee-baayenthi, saatthaanotelppaan\nsahadenmaar chennu-khadgatthaal mruthiyettorum\ntheeyaal venneeraayorum\nporil kaattiya veeryatthaal\nsaatthaan kopaakulanaayi\nnalkuka thal praarththanayaal punyam."
+        "content": "Slee-baayenti, saatthaanodelppaan\nSahadenmaar chennu-khadgatthaal mrthiyettorum\nTheeyaal venneeraayorum\nPoril kaattiya veeryatthaal\nSaatthaan kopaakulanaayi\nNalkuka thal praarththhanayaal punyam."
     },
     {
         "type": "subtext",
-        "content": "menaolam…"
+        "content": "Menaolam…"
     },
     {
         "type": "song",
-        "content": "naathaa! Nin meyyum -rakthavumettoraam\nmruthare siddharkkaay-pande sajjeekruthamaakum\npanthikkanpo-tirutthaname.\nNin sharane maranam poondor\nninne ettoraamavare\nelkkaname - thaathankal neeyum"
+        "content": "Naathhaa! Nin meyyum -rakthavumettoraam\nmrthare siddharkkaay-pande sajeekrthamaakum\nPantikkanpo-dirutthaname.\nNin sharane maranam poondor\nninne ettoraamavare\nElkkaname - thaathangkal neeyum"
     },
     {
         "type": "subtext",
-        "content": "moriyoraahem melyn …"
+        "content": "Moriyoraahem melain …"
     },
     {
         "type": "heading",
-        "content": "maar baalaayiyute bovuso"
+        "content": "Maar baalaayiyude bovuso"
     },
     {
         "type": "subheading",
-        "content": "(basu yoletthoku)"
+        "content": "(baslusu yoletthok)"
     },
     {
         "type": "song",
-        "content": "1. Janani, parishuddha-praarththanayaal naathaa!\nPunyam njangalkkum vigathar'kkum nalka."
+        "content": "Janani, parishuddha-praarththhanayaal naathhaa!\nPunyam nyangallkkum vigatharkkum nalka."
     },
     {
         "type": "song",
-        "content": "2. Mariyaamin maranam-varadaayakamaaka\nthal praarththana njangal-kkaathmaavinu kotta."
+        "content": "Mariyaamin smaranam-varadaayakamaaka\nThal praarththhana nyangall-kkaathmaavinu kotta."
     },
     {
         "type": "song",
-        "content": "3. Parishuddha shleehaa-nibi, sahadenmaare!\nYaachippin krupaye-njangalkkaayu ningal."
+        "content": "Parishuddha shleehaa-nibi, sahadenmaare!\nYaachippin krpaye-nyangallkkaayu ningall."
     },
     {
         "type": "song",
-        "content": "4. Nin sharane mrutharaam-thaatha sahodararil\nchoriyaname moda-ppanineeran naathaa!"
+        "content": "Nin sharane mrtharaam-thaatha sahodararil\nChoriyaname moda-ppanineeren naathhaa!"
     },
     {
         "type": "song",
-        "content": "5. Susmruthi jananikkum-vishruthi siddharkkum\njeevan vigatharkkum-cherppone! Sthothram!\n6. Janani, parishuddha-praarththanayaal naathaa!\nPunyam njangalkkum-vigatharkkum nalka."
+        "content": "Susmrthi jananikkum-vishruthi siddharkkum\nJeevan vigatharkkum-cherppone! Sthothram!"
+    },
+    {
+        "type": "song",
+        "content": "Janani, parishuddha-praarththhanayaal naathhaa!\nPunyam nyangallkkum-vigatharkkum nalka."
     },
     {
         "type": "prose",
-        "content": "vaayanakkaaran:- neethimaanmaarute kootaaratthil mahatthuvatthinreyum, rakshayuteyum shabdam ennu daaveedu mukhaa tharam parishuddharoohaa-paati."
+        "content": "Vaayanakkaaran:- neethimaanmaarude koodaaratthil /mahatthvatthinteyum, rakshayudeyum shabdam ennu /daaveedu mukhaantaram parishuddharoohaa-paadi."
     },
     {
         "type": "subheading",

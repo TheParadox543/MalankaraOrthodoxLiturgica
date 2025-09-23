@@ -1,0 +1,54 @@
+[
+    {
+        "type": "title",
+        "content": "ompatāṁ maṇiyuṭe namas‌kāraṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "subheading",
+        "content": "(aṁ sōhade brīke)"
+    },
+    {
+        "type": "song",
+        "content": "niṉ priya sahadēnmārōṭuṁ ninnuṭe nal kādīśa mārōṭuṁ kūṭe\nōṟkkaṇamē ñaṅṅaḷkkuŧŧuḷḷā-rāṁ mr̥tare;\nniṉ valamākkittīṟttavare\n/thālēluyyā - mōdippikka."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō ... menōlaṁ ..."
+    },
+    {
+        "type": "song",
+        "content": "tirusabha makkaḷkkāy ninnōṭēŧŧaṁ duḥkhattāle\nkēṇīṭunnēvaṁ:\n“nāthā! māmōdīsāyāl ni-nne pūṇṭōṟ\ntīnarakaṁ pukīṭāte\n/thālēluyyā-mōdikkaṇamē.”"
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyō ṟāhēmēlainu ādāṟaiṉ."
+    },
+    {
+        "type": "heading",
+        "content": "māṟ bālāyiyuṭe bōvusō"
+    },
+    {
+        "type": "song",
+        "content": "1. karuṇa niṟaññavanē! punarutthānattil\nninnuṭe sr̥ṣṭa‌iye nī pututākkīṭaṇamē."
+    },
+    {
+        "type": "song",
+        "content": "2. ninnil śaraṇattāl nidrayilāy niṉṟe\nvaravinu kāttīṭuṁ mr̥taril kaniyaṇamē."
+    },
+    {
+        "type": "song",
+        "content": "3. avarabaṟāhattinđeyumisahākkuṭeyuṁ\nyākkōbinnuṭeyuṁ maṭiyil pāṟkkaṇamē."
+    },
+    {
+        "type": "song",
+        "content": "4. vannavanāṁ varuvōnuṁ mr̥taṟ tannuyiruṁ\nstutanenn śarīrātmākkaḷ pāṭaṇamē."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

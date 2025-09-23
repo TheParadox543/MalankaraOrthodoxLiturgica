@@ -1,0 +1,466 @@
+[
+    {
+        "type": "title",
+        "content": "Vyaazham prabhaatham"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/doxology.json"
+    },
+    {
+        "type": "heading",
+        "content": "Praarambhapraarththhana"
+    },
+    {
+        "type": "prose",
+        "content": "Pattakkaaran:- shubaho........."
+    },
+    {
+        "type": "prose",
+        "content": "Janam :- balaheenarum paapikallumaaya.."
+    },
+    {
+        "type": "prose",
+        "content": "/tprabhaathatthinte srashdaavum, andhakaaratthe maayichukallanyu srshdikallkku prakaasham nalki santoshippikkunnavanumaaya kartthaave! Nyangallil paripaakathayulllla nadapadikall srshdich, paapaandhakaaratthe nyangallilninnu poornnamaayi neekkikkallayename. Nyangallude kartthaavum nithya daivavume! Ninte krpayude mahaneeyakiranangallaal nyangalle prashobhippichu santoshippikkukayum cheyyaname."
+    },
+    {
+        "type": "prose",
+        "content": "Moraanvaalohaan… aammeen"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "psalms/psalm51.json"
+    },
+    {
+        "type": "prose",
+        "content": "Karunayulllla daivame! Ninte karunayaal nyangallodu karuna cheyyaname."
+    },
+    {
+        "type": "subtext",
+        "content": "Mori ..."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "psalms/psalm63.json"
+    },
+    {
+        "type": "heading",
+        "content": "Eniyono"
+    },
+    {
+        "type": "subheading",
+        "content": "(lvosttokku mkaademno)"
+    },
+    {
+        "type": "prose",
+        "content": "Mumperaayu thirumumpil"
+    },
+    {
+        "type": "prose",
+        "content": "Yaachanayodu praarththhikkunnen"
+    },
+    {
+        "type": "prose",
+        "content": "Udayone! Neeyanpudayon"
+    },
+    {
+        "type": "prose",
+        "content": "Kshamayen pizhakallkkarullaname"
+    },
+    {
+        "type": "prose",
+        "content": "Paathakiyaamennodu-krpa thonnaname."
+    },
+    {
+        "type": "prose",
+        "content": "Aazhiyilennonam nyaan"
+    },
+    {
+        "type": "prose",
+        "content": "Paapatthin baahulyatthil"
+    },
+    {
+        "type": "prose",
+        "content": "Sarvveshaa! Muzhukippoyi ennekkaraketteedaname-"
+    },
+    {
+        "type": "prose",
+        "content": "Paathakiyaa....."
+    },
+    {
+        "type": "prose",
+        "content": "Thaalantaal vyaapaaram"
+    },
+    {
+        "type": "prose",
+        "content": "Cheyyaanyonu samaanan nyaan"
+    },
+    {
+        "type": "prose",
+        "content": "Thaalusairandatton than"
+    },
+    {
+        "type": "prose",
+        "content": "Cheriyilennecherkkaname-"
+    },
+    {
+        "type": "prose",
+        "content": "Paathakiyaa..."
+    },
+    {
+        "type": "prose",
+        "content": "Chungkakkaaran choran"
+    },
+    {
+        "type": "prose",
+        "content": "Paapiniyennivar villikootti"
+    },
+    {
+        "type": "prose",
+        "content": "Naathhaa! Neeyuttharamarulli"
+    },
+    {
+        "type": "prose",
+        "content": "Nyaanum ninne villikkunnu-"
+    },
+    {
+        "type": "prose",
+        "content": "Paathakiyaa....."
+    },
+    {
+        "type": "prose",
+        "content": "Ente kadam varddhichu"
+    },
+    {
+        "type": "prose",
+        "content": "Paapam peruki thalaykkupari"
+    },
+    {
+        "type": "prose",
+        "content": "Karunakkadale! Nalkaname"
+    },
+    {
+        "type": "prose",
+        "content": "Enpaapatthinu parihaaram-"
+    },
+    {
+        "type": "prose",
+        "content": "Paathakiya........"
+    },
+    {
+        "type": "prose",
+        "content": "Anpudayone! Munpaayu"
+    },
+    {
+        "type": "prose",
+        "content": "Srshdikall ninne vanangunnu"
+    },
+    {
+        "type": "prose",
+        "content": "Nin vaathilkkal muttunnu"
+    },
+    {
+        "type": "prose",
+        "content": "Krpayoduttharamarullaname"
+    },
+    {
+        "type": "prose",
+        "content": "Paathakiyaa…"
+    },
+    {
+        "type": "prose",
+        "content": "Jeevapradanaam ninne"
+    },
+    {
+        "type": "prose",
+        "content": "Mrthigathar nokkippaarkkunnu"
+    },
+    {
+        "type": "prose",
+        "content": "Ninnaadatthaalavare villi-"
+    },
+    {
+        "type": "prose",
+        "content": "Chettaname parudeesayathil-"
+    },
+    {
+        "type": "prose",
+        "content": "Paathakiyaa......"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho menaolam...."
+    },
+    {
+        "type": "song",
+        "content": "Svargeeyam sainyaganam\nNin sthuthigeetham paadunnu\nBhaumikar nyangallumannirayil\nNin prabhuthaye samskrthichey-\nPaathakiyaa...."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "psalms/psalms113.json"
+    },
+    {
+        "type": "heading",
+        "content": "Ekkbo"
+    },
+    {
+        "type": "subheading",
+        "content": "(aaloho aadaarain)"
+    },
+    {
+        "type": "song",
+        "content": "Udayone! Thunacheyka-paapatthin veechikallum\nChuzhalikallum choozhunneeyenne\nShaantitthuramukhamaavuka nee\nMungaayvaan nyaaneevaaridhiyil\nKaatthidunnenanuthaapatthinnaayu\nPathrosinnennonam thrkkai neetti\nCheyyuka kaarunyam"
+    },
+    {
+        "type": "subtext",
+        "content": "Sthaumenkaalosu kuriye......."
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(btharaokku moraan)"
+    },
+    {
+        "type": "song",
+        "content": "Pethgomo- thal praarththhana nyangallkkabhayam\nPauraanika dharmmishdanmaar\nNin karunaykkaayarppichu dhoopam\nPhinahaasin praarththhanayaale baadhayozhinyu\nDhoopatthaal janapaapamozhi-\nChaharon nedi-daivatthin preethi"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho-menao........"
+    },
+    {
+        "type": "song",
+        "content": "Sthuthiyaamgyatthaal srshdikalle\nHanta nayipponellaa pulariyilum\nPaarum vaanum nirayunnonava nissaaram\nSajana hrdayam nisseemam\nNaathhaneyanisham-vandippon dhanyan."
+    },
+    {
+        "type": "subheading",
+        "content": "Daivamaathaav"
+    },
+    {
+        "type": "song",
+        "content": "Sundaratharunan shlemmone!\nVelikkullllil kanyaamudrayezhum\nThoppennaare nee vaazhtthi mariyaamineyaa\nVannudayam cheythaanavallil\nThottakkaaran- parudeesaa natton"
+    },
+    {
+        "type": "song",
+        "content": "Eeredoothan kanyakayo-\nDevam chonnaan krpa nirayunnolle!\nShlommo naathhan ninnodukoodennennekkum\nRaajaavaayi viraajippon\nNinniludikkum-parama pavithrathayil."
+    },
+    {
+        "type": "subheading",
+        "content": "Parishuddhanmaar"
+    },
+    {
+        "type": "song",
+        "content": "Thaathan than thoppil paniyaan\nThanayan vittu pulariyilaallukalle\nNibiyare munnam pinnaale shleehanmaare\nManipathinonnil parudeesin\nThaakkolekee-parichodu choraneyum."
+    },
+    {
+        "type": "song",
+        "content": "Naathhan bhaagyam nernnore!\nVimalanmaare! Dhanyanmaar ningall\nIhalokatthin mohangalle ningall vedinyu\nVaanilithaa nanmanavarayum\nDivyavirunnum ningallkkaaysajam."
+    },
+    {
+        "type": "subheading",
+        "content": "Prabhaatham"
+    },
+    {
+        "type": "song",
+        "content": "Raahel thanayan yauseppaam\nBaalaneyannaall pulari vidarnnappoll\nMidiyaan vartthakar kuzhiyeennum-karayathiletti\nVaangi vilaykkaa, misaremil\nChennathha chernnon raajaavaayu vaanu."
+    },
+    {
+        "type": "subheading",
+        "content": "Anuthaapam"
+    },
+    {
+        "type": "song",
+        "content": "Naathhaa! Vaathilil muttunnen\nNidhinilayattheennanparththhikkunnen\nNedunaallaayu nyaan ninvazhi kaivittoru paapi\nPaapamupekshichangatthe\nKrpayil vaazhaan-krpa cheytheedaname."
+    },
+    {
+        "type": "song",
+        "content": "Janakaathmajavimalaathmaave!\nNyangallodelkkum dushdaathmappadayil\nNyangallkkaavuka vanmathilum-sharanamathum nee\nSatthamaretthirayum neram\nKarunachirakil-cherkkuka nyangalle nee."
+    },
+    {
+        "type": "subheading",
+        "content": "Parethar"
+    },
+    {
+        "type": "song",
+        "content": "Naathhaa! Susmrthi nalkaname\nNinnidavakaye kaatthoridayarkkum\nNibishleehaa sahadaa satthama kahanenmaarkkum\nThalamura thalamurayennumezhum\nNirmmala sabhathan santaanangallkkum."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(bsapparohasaavuy)"
+    },
+    {
+        "type": "song",
+        "content": "Pethgomo-moraan yeshumishihaa!\nUdaye kadalinnudayone\nKarayil kandu shishyanmaar\nUdaye padakilurangippoyu\nNidraykkamaraatthunarvvallllaan\nUdaye koolivillichekum\nDharmmishdanmaarkkaayu naathhan."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho-menaomlam......"
+    },
+    {
+        "type": "song",
+        "content": "Udaye sthothram pallllikallil\nDayaraakallilo sthuthinaadam\nUdaye myagathathi pakshikallum\nMadhuram naadamuyartthunnu\nUdaye kadalum dveepukallum\nJanavum ninne vandippoo."
+    },
+    {
+        "type": "subheading",
+        "content": "Daivamaathaav"
+    },
+    {
+        "type": "song",
+        "content": "Mukilaal vellllamozhukkunnon\nMazhayaal dharaye nanaykkunnon\nPaanam cheythaanaashcharyam\nMaathaamariyaamin sthanyam\nMaathaavathyathbhuthapoorvvam suthane paaram laallichu."
+    },
+    {
+        "type": "song",
+        "content": "Laallikkunnu chirantananaam\nPauraanikane paithal pol\nYohaan nrtthamodethirettaan\nShishuvennonam thullllunnu\nPoorvvikanaaya vayodhikane\nKaitthandilithaa laallippoo."
+    },
+    {
+        "type": "subheading",
+        "content": "Parishuddhanmaar"
+    },
+    {
+        "type": "song",
+        "content": "Shlommoyaa nibiyanmaarkkum\nShlommoyaa shleehanmaarkkum\nShlommoyaa naathhan thanne\nSnehichoraam sahaderkkum\nShlommothan santaanangall\nMaruvum sabhayaallkkum shlommo."
+    },
+    {
+        "type": "song",
+        "content": "Sahadenmaare! Samaratthil\nSahabhadanaayu ninnuthsaaham\nNingallkkarulliyoraanaathhan\nSathyasneham thrkkanpaar-\nTthaadarapoorvvam valuthaakki\nNingall than perunnaallukalle."
+    },
+    {
+        "type": "subheading",
+        "content": "Ekaparishuddhan"
+    },
+    {
+        "type": "song",
+        "content": "Thaathaa maartthommaa shleehaa!\nVegam koodum thoovalinaal\nPrathidaanam nedichirakaal\nPaarippongum nee vaanil\nNin sukrthatthaaludayone\nEthirelppaan nee chennetthum."
+    },
+    {
+        "type": "subheading",
+        "content": "Prabhaatham"
+    },
+    {
+        "type": "song",
+        "content": "Udaye praarththhichaallevam\nVishvaasiniyaakum shmooni\nSimhattheppol garjichen\nPuthranmaarekkolacheyyum\nRaajaavaamantyokhassee-\nNnenne rakshicheedaname."
+    },
+    {
+        "type": "subheading",
+        "content": "Anuthaapam"
+    },
+    {
+        "type": "song",
+        "content": "Devaa! Krpa cheytheedaname\nNin krpayin pathivinnoppam\nKeniyanavaratham nyangallkkaayu\nVaykkum kudilaneyodikka\nNin sleebaa kaaval nyangall-\nKkathinaalaavatharaam nyangall."
+    },
+    {
+        "type": "song",
+        "content": "Paapam cheythathinaal naathhaa!\nPeedhakallaal shikshikkaruthe\nThaathanu samanaamaathmajane\nNibishleehanmaar nirmmalaraam\nSahadenmaarennivareyor-\nTthaliyaname ninnidavaka mel."
+    },
+    {
+        "type": "subheading",
+        "content": "Parethar"
+    },
+    {
+        "type": "song",
+        "content": "Rakshaka! Ninmeyu rakthangall\nKaikkondoraayu haashaaye\nSaakshichorkkundaakaname\nEngum susmrthi madbahaayil\nSleebaayaal jeevitharekkaa-\nTthanpaal mukthi mrtharkkarulluka."
+    },
+    {
+        "type": "heading",
+        "content": "Kukkiliyon"
+    },
+    {
+        "type": "subheading",
+        "content": "(lavosokku moriyo)"
+    },
+    {
+        "type": "song",
+        "content": "Ennaathmaavine ningkaluyartthunnen naathhaa! Haa.......Haa\nNeeyen sharanam lajikkaruthe nyaan\nDoshikall naanikkum paazhppaniyil-haale.......Haale.....\nNaathhaa! Ninpaathakallennekkaattiduka,"
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor. Shubaho...Menaolam..."
+    },
+    {
+        "type": "heading",
+        "content": "Ekkbo"
+    },
+    {
+        "type": "subheading",
+        "content": "(sogedu lokku moriyo)"
+    },
+    {
+        "type": "song",
+        "content": "Prabha ninne vandikkunnu\nNaathhaa! Vaanor vaazhtthunnu\nNin prabha thannudayatthingkal\nSrshdikall ninne vandippoo"
+    },
+    {
+        "type": "subtext",
+        "content": "Sthaumenkaalosu kuriye…."
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(bsapparohasaavuy)"
+    },
+    {
+        "type": "song",
+        "content": "Udayatthingkalunarnnappoll\nYaakkobathbhuthameekshichu\nDharamel naattiya govanitha\nNnagram vaanilurummunnu\nVaanoreeredoothanmaa-\nRathilooderippokunnu."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaahe....."
+    },
+    {
+        "type": "song",
+        "content": "Chonnaan sheemonudayatthil\nKartthaave! Nyaan ninnarikil\nEtthaanarullanamennevam\nChollee naathhan thirayinmel\nNadakollkenne nampunnon\nPedicheedendonnineyum."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "heading",
+        "content": "Bovooso"
+    },
+    {
+        "type": "subheading",
+        "content": "(maar yaakkobinte)"
+    },
+    {
+        "type": "song",
+        "content": "Kartthaave! Ninnaardrathanirayum vaathil thurannee\nPraarththhana kettittaathmaakkallilanpundaakenam."
+    },
+    {
+        "type": "song",
+        "content": "Goodham veettil praarththhippathilaanudayonishdam\nShabdatthaalallaarnnathubhaagyam dharmmishdanmaar\nSaumyan mosha praarththhanamoolam bhaagichaazhi-\nKkoottam neengi, dushdan pharavon mungippoyi."
+    },
+    {
+        "type": "song",
+        "content": "Daaveedin praarththhana ketteeshannaardratha thonni\nPaapam mochichekee veendum pravachana shakthi\nChoollaykkullllil haananiyanmaar praarththhichappoll\nTheekkundatthinnavare Daivam samrakshichu."
+    },
+    {
+        "type": "song",
+        "content": "Niryaanam nyaayatthin peedham narakam moonnum\nBheeyetteedunnen kartthaave! Ennullllatthil."
+    },
+    {
+        "type": "prose",
+        "content": "/Tkartthaave! Ninne sthothram cheyyunnathum / unnathamaaya ninte naamatthinu sthuthipaadunnathum / prabhaatha samayatthu ninte krpayeyum / raathrikaalangallil ninte vishvaasattheyum ariyi kkunnathum ethra nallathaakunnu / kartthaave! Prabhaatha samayatthu ente shabdam nee kellkkename."
+    },
+    {
+        "type": "prose",
+        "content": "/tprabhaatha samayatthu nyaan orukkatthode ninakku kaana ppedumaaraakaname / kartthaave! Ninte janangallodu karuna cheyyaname / kartthaave! Nyangallellaavarudeyum paapangall pariharichu kshamikkename / parishuddhanaayullllaave! / Ninte valathukai nyangalludemel aashvasippichu / thirunaamam nimittham nyangallude paaparogatthil ninnu / nyangalle sukhappedutthaname."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

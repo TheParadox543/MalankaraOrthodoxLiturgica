@@ -1,0 +1,104 @@
+[
+    {
+        "type": "title",
+        "content": "mūnnāṁ maṇiyuṭe namas‌kāraṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "collapsible-block",
+        "title": "promiyōṉ",
+        "items": [
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:-nāmellāvaruṁ prāṟtthicc ..."
+            },
+            {
+                "type": "prose",
+                "content": "janaṁ:- kāruṇyavānāya kaṟttāvē! ñaṅṅaḷōṭ karuṇa cey‌t‌ ñaṅṅaḷe sahāyikkaṇamē."
+            },
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:-s‌tutiyuṁ, stōtravuṁ…"
+            },
+            {
+                "type": "prose",
+                "content": "pariśuddhanmāril sthiticeyyunna pariśuddhanuṁ, adyaśyanāya nityanuṁ, prakr̥tyā nallavanuṁ, pūṟṇṇaprabalanuṁ, prābalyamuḷḷa adhikāriyuṁ, taṉṟe pitāvinōṭu sārāṁśattil onnāyi sthiticeyyunnavanuṁ, tanne prasavicca mātāvine uyaṟttukayuṁ, tanne snēhicca śuddhimānmāreyuṁ, śuddhimatikaḷeyuṁ vaḷaṟttukayuṁ ceyta saṟvvaśaktanumāya kaṟttāvinu s‌tuti. tanikk ... b‌kulahūṉ ... āmmīṉ."
+            },
+            {
+                "type": "subheading",
+                "content": "sedaṟā"
+            },
+            {
+                "type": "prose",
+                "content": "karuṇayuḷḷa kaṟttāvē! niṉṟe mātāvinđeyuṁ pariśuddhanmāruṭeyuṁ prāṟtthanakaḷ mūlaṁ, pāpikaḷāya ñaṅṅaḷkk pāpamōcanaṁ nalkaṇamē. ātmaśarīraṅṅaḷuṭe kaṟakaḷilninn ñaṅṅaḷe veṭippākkaṇamē. niṉṟe atyunnatamāya daivatvattinu prītikaramāyirikkunna sakalatteyuṁ, ninnōṭuḷḷa bhakti mūlaṁ veṭippiluṁ viśuddhiyiluṁ anuṣṭhippāṉ ñaṅṅaḷe paṭhippikkaṇamē. ninđe pariśuddhanmāruṭe avakāśattil ñaṅṅaḷe cēṟttukoḷḷaṇamē. avarōṭonnicc ninakku ñaṅṅaḷ kīṟttanaṅṅaḷ pāṭukayuṁ, nītiyiṉ kirīṭaṅṅaḷāl pratidānanā mukaḷil alaṅkarikkappeṭukayuṁ ceyyaṇamē. kuññāṭukaḷe niṉṟe valatubhāgattuṁ, paḷḷāṭukaḷe niṉṟe iṭatu bhāgattuṁ niṟttumpōḷ, ñaṅṅaḷeyuṁ ñaṅṅaḷuṭe mariccupōyavareyuṁ, niṉṟe kuññāṭukaḷōṭonnicc cēṟkkaṇamē. ñaṅṅaḷuṭe mātāpitākkaḷkkuṁ, sahōdarī sahōdaraṅṅaḷkkuṁ, gurukkanmāṟkkuṁ, viśvāsikaḷāya ellā mariccupōyavaṟkkuṁ nalla ōṟmmayuṇṭākkaṇamē. ñaṅṅaḷuṁ avaruṁ ninđe valatubhāgattu ninn ninne kāṇukayuṁ, ninakkuṁ, niṉṟe pitāvinuṁ, jīvaṉ nalkunna viśuddhaṟūhāykkuṁ, ippōḻuṁ ellāyppōḻuṁ stutiyuṁ stōtravuṁ samaṟppikkukayuṁ ceyyumāṟā kaṇamē. hōśō ... āmmīṉ."
+            },
+            {
+                "type": "prose",
+                "content": "paṭṭakkāraṉ:- daivattil ninn kaṭaṅṅaḷkku parihāravuṁ…"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "content": "kōlōkaḷ"
+    },
+    {
+        "type": "subheading",
+        "content": "(ēnōnō nuhaṟō)"
+    },
+    {
+        "type": "song",
+        "content": "daivatte peŧŧoru mātāvāṁ\nmaṟiyāmēŧŧaṁ vāḻ‌/u200bvēŧŧōḷ\ndaivika kuññāṭineyāścaryaṁ\ntaṉ maṭiyil tālōliccāḷ\n/tghōrāgniprabhayuṁ tīkṣ‌ṇa\n/tjvālayumēśāya‌/u200bvāṉ īśaṉ\n/tvīryattālavaḷe tāṅṅi\nkrōbēdūtarathattinmēl\nēṟīṭunnōne ēŧŧāḷ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śubahō… menaōlaṁ …"
+    },
+    {
+        "type": "song",
+        "content": "atbhutamāṁ phalamēkuṁ vr̥kṣaṁ\nkaṟkkaśamāṁ śila mīnēvaṁ\npāṣāṇḍaṟkketirē dr̥ṣṭāntaṁ\nmūnneṇṇaṁ sabha kāṭṭunnu.\n/tkuññāṭine vr̥kṣaṁ nalki.\n/ttīkkalppāṟa jalaṁ nalki,\n/tes‌tīṟā matsyavumēki;\nkanyākṣēpakare mūnnuṁ\nparihāsattoṭu vīkṣippu."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyōṟāhēṁ mēlaiṉ...."
+    },
+    {
+        "type": "heading",
+        "content": "māṟ yākkōbiṉṟe bōvusō"
+    },
+    {
+        "type": "subheading",
+        "content": "(s‌lūsēkk āmāṉ ombāṟaktō)"
+    },
+    {
+        "type": "song",
+        "content": "dhanyē! niṉ prāṟtthana mēvaṭṭe ñaṅṅaḷōṭonni\nccaṟtthana kēṭṭiṭṭēkīṭaṭṭe puṇyaṁ nāthaṉ."
+    },
+    {
+        "type": "song",
+        "content": "entaൗnnatyaṁ bhaൗmika putrikkuṇṭāyenn\nconnīṭuṁ ñāṉ saṁbhramamāṟnniṭṭatbhutapūṟvvaṁ."
+    },
+    {
+        "type": "song",
+        "content": "tr̥kkāruṇyaṁ sutane tāḻtti savidhē cēṟttu;\ndaivasutaṉ taṉ mātāvākāṉ tiruhitamāṟnnāḷ."
+    },
+    {
+        "type": "song",
+        "content": "saൗmyarilallāteṅṅamaruṁ ñāṉ ennura ceytōṉ\njātarilēŧŧaṁ tāḻ‌mappeṭṭuḷḷavaḷil pāṟttāṉ"
+    },
+    {
+        "type": "song",
+        "content": "ārumuyaṟttappeṭṭillitupōlatināl s‌paṣṭaṁ\nmaṟiyāmēppōlāruṁ tāḻmappeṭṭiṭṭilla."
+    },
+    {
+        "type": "song",
+        "content": "ompatu māsaṁ ninne ēŧŧōḷ taṉ prāṟtthanayāl\ndaivātmajanē! kōpattiṉ daṇḍoḻivākkēṇaṁ."
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

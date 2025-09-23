@@ -1,0 +1,50 @@
+[
+    {
+        "type": "title",
+        "content": "maddhyāhnaṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(aṁsohade)"
+    },
+    {
+        "type": "song",
+        "content": "daivattiṉ jīvātmajane kaikaḷilēnti-\njanamaddhyē nilppumaṟiyāṁ-āṁgyattālīlōkatte\npālippōne-pālūṭṭunnu talprāṟtthana\nhālē......... nammōṭukūṭe"
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śubaho....."
+    },
+    {
+        "type": "song",
+        "content": "sahadēnmāre! niṅṅaḷuṭe s‌maraṇadinattil\nbhūsvaṟggaṅṅaḷilamarunnōṟ-divyās‌thikaḷuṭe vīryatte\nkīṟttikkunnu-niṅṅaṭe prāṟtthanayennennuṁ\nhālē........ ñaṅṅaḷkkabhayaṁ"
+    },
+    {
+        "type": "subtext",
+        "content": "menaōlaṁ…"
+    },
+    {
+        "type": "song",
+        "content": "bābēlileyerutīkkuḻiyil cennuṇṇikaḷe\nsaṁrakṣiccoru panimaññī-mr̥tarettīnarakattīnnuṁ\nrakṣikkaṭṭe-sampādikkaṇamavaroṭuvil\nhālē......... śāśvata jīvaṉ"
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiye........"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/janani.json"
+    },
+    {
+        "type": "prose",
+        "content": "(vi. kuṟbānayilleṅkil māṟ sēvēṟiyōsinđe mānīsa (pēj 80) viśvāsapramāṇaṁ, kukkiliyōnukaḷ mutalāyava colli avasānippikkaṇaṁ.)"
+    }
+]

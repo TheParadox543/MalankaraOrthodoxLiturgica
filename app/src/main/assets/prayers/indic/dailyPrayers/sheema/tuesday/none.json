@@ -1,0 +1,38 @@
+[
+    {
+        "type": "title",
+        "content": "covā ompatāṁmaṇi"
+    },
+    {
+        "type": "heading",
+        "content": "kōlō"
+    },
+    {
+        "type": "subheading",
+        "content": "(lōkk moṟiyo)"
+    },
+    {
+        "type": "song",
+        "content": "khēdaṁ vēṇṭā maśihāyil-mr̥ti pūṇṭōrē!\nāsannaṁ pratiphalamēkuṁ-punurutthāna dinaṁ\nkēṭanē kabaṟukaḷīnnuṁ niṅṅaḷeḻunnē-\nŧŧativēgaṁ rājātmajanē yetirēlppānettuṁ\n/tmahimāviṉ-nīrāḷaṁ cāṟtti\n/ttirumumpil-stutipāṭuṁ niṅṅaḷ\nkanivālādāṁ sutajīva-pradanē! kr̥paceyta"
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟek......śubaho. . menaōlaṁ..."
+    },
+    {
+        "type": "song",
+        "content": "mūnnāṁ nāḷ mr̥tigatare prati-dhūpaṁ vaykkuṁ\npativuṇṭāyatu nītipara-ṉmāṟkkaṅṅādimutal\nmōṟānāmīśōtaṉ śava-saṁskkārattil\nṟuhkkudiśāyālīṟayaruṁ-nararuṁ kabaṟiṅkal\n/tādamine maṇṇāl niṟmmicca\n/tjīvamaya-aṟppiccu dhūpaṁ\ndhūpitadāsaṟkkaruḷaṇame-kanivālāśvāsaṁ"
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiye......"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

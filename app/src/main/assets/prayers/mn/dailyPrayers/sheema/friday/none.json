@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "Velllli ompathaammani"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(thaihoon olmma)"
+    },
+    {
+        "type": "song",
+        "content": "Naathhaa! Thaavakamiru lokam-\nNinnadhikaaram thaanengum\nSleebaayaal jeevitharekkaa-\nTthanpaal mukthi mrtharkkeka."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor....... Shubaho."
+    },
+    {
+        "type": "song",
+        "content": "Sthothram mrthajeevapradane!-\nKabareennetteedunnone!\nNin prekshakathaathanumamalan-\nRoohaaykkum haaleluyyaa."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/karunaniranjavane.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

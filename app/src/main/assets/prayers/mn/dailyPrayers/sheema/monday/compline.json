@@ -1,0 +1,62 @@
+[
+    {
+        "type": "title",
+        "content": "Sootthaaraa"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "Kolo"
+    },
+    {
+        "type": "subheading",
+        "content": "(lathu hoomodu haimonooso)"
+    },
+    {
+        "type": "song",
+        "content": "Ekaathmajadevaa!-nyaan nin\nKrpayude kadalil nokkunnen\nEnkadameri-paapam peruthaayi\nNin soppaayenmel pooshee-\nTten mizhineeraal venmayezhaan\nKezhunnen nin-janakasnehatthaal\nEn vairikall modicheedaa\nThanuthaapamezhum paathakiyil\nDoothasamooham-modichothatte\nPashchaatthaapamiyannore\nRaapakal vaathil thurannettum\nHaaleluyyaa -naathhan vaazhtthudayon."
+    },
+    {
+        "type": "subtext",
+        "content": "Baarekmor-shubaho-menao........"
+    },
+    {
+        "type": "song",
+        "content": "Moolyamithaa tharanam thailam\nVyaapaariyodevam parayum\nPaapini thante-naadam bahumadhuram\nNalkuka mettharamaam thailam\nNyaanathilen mizhineer chertthi-\nTtekaathmajane-yabhishekikkatte\nIpparimalla thailatthaal nyaan\nPaapavimochana maarnnidume\nNnen daivatthil prathyaashikkunnen\nAvall thailam vaangichennaall\nVishvaasam darshichudayon\nHaaleluyya........... Paapakshama nalki."
+    },
+    {
+        "type": "subtext",
+        "content": "Moriyo......."
+    },
+    {
+        "type": "heading",
+        "content": "Bovoosaa"
+    },
+    {
+        "type": "subheading",
+        "content": "(maar apreminte)"
+    },
+    {
+        "type": "song",
+        "content": "Aardratha thonnaname naathhaa!\nIkkarmmam kaikkollllaname\nMochanavum krpayum vaazhvum\nNinnariyeennekeedaname."
+    },
+    {
+        "type": "song",
+        "content": "Praarththhippaan nee nilkkumpoll\nSantaapatthodekaagram\nChintakallekkadinyaanittu\nChitthatthil nirtthidenam."
+    },
+    {
+        "type": "song",
+        "content": "Nin vaayu dhoopatthin kalasham\nNinnadharam dhoopam hrdyam\nDaivatthe preenippikkum\nNaavo shushrooshakkaaran"
+    },
+    {
+        "type": "song",
+        "content": "Praarththhana ketteedunnone!\nYaachana nalkeedunnone!\nPraarththhana kettu nirannanpaal\nYaachanaye nalkeedaname."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

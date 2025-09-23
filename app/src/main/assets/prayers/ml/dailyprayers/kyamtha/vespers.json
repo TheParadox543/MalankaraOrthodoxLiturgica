@@ -246,12 +246,26 @@
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
-        "type": "subheading",
-        "content": "പെസ്ഗോമോ"
-    },
-    {
-        "type": "song",
-        "content": "ഹാലേ... ഹാലേ... സ്വർഗ്ഗം സന്തോഷിക്കും ഭൂവാനന്ദിക്കും\nമശിഹാരാജൻ തന്നുത്ഥാനത്തിൽ. ഹാലേലുയ്യാ."
+        "type": "dynamic-content",
+        "timeKey": "eveningGospel",
+        "defaultContent": {
+            "eventKey": "default",
+            "eventTitle": {
+                "en": "General Songs",
+                "ml": "പൊതുവിലുള ഗീതങ്ങൾ"
+            },
+            "timeKey": "eveningGospel",
+            "items": [
+                {
+                    "type": "subheading",
+                    "content": "പെസ്ഗോമോ"
+                },
+                {
+                    "type": "song",
+                    "content": "ഹാലേ... ഹാലേ... സ്വർഗ്ഗം സന്തോഷിക്കും ഭൂവാനന്ദിക്കും\nമശിഹാരാജൻ തന്നുത്ഥാനത്തിൽ. ഹാലേലുയ്യാ."
+                }
+            ]
+        }
     },
     {
         "type": "subheading",

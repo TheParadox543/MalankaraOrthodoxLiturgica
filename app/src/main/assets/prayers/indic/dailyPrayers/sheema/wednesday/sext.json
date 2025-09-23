@@ -1,0 +1,50 @@
+[
+    {
+        "type": "title",
+        "content": "budhaṉ maddhyāhnaṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(tuṟod‌sīnāy)"
+    },
+    {
+        "type": "song",
+        "content": "mōśa camaccōrā-pēṭakadr̥ṣ‌ṭāntaṁ\nmaṟiyāmē! ślōmō-jīvajalattiṉ muṉkuṟiyāṁ\nṟūhā taṉ śōśappā ślōṁ\naiśāyaṉ dāvīduktaṁ\nsthiramāṁ puramē! ślōmō ni-\nnnudarattī-nnudayaṁ ceytīśaṉ."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śubaho...."
+    },
+    {
+        "type": "song",
+        "content": "slībāyēnti-sāttānōṭēlppāṉ\nsahadēnmāṟ cennu khaḍgattāl mr̥tiyēŧŧōruṁ\ntīyāl veṇṇīṟāyōruṁ\npōril kāṭṭiya vīryattāl\nsāttāṉ kōpākulanāyi\nnalkuka tal-prāṟtthanayāl puṇyaṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "menaōlaṁ....."
+    },
+    {
+        "type": "song",
+        "content": "nāthā! niṉ meyyuṁ-raktavumēŧŧōrāṁ\nmr̥tare siddhaṟkkāy-paṇṭ sajjīkr̥tamākuṁ\npantikkaṉpōṭiruttaṇamē\nniṉ śaraṇa maraṇaṁ pūṇṭōṟ\nninneyēŧŧōrāmavare\nēlkkaṇamē tātaṅkal nīyuṁ."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/marbaalaayibovooso.json"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    }
+]

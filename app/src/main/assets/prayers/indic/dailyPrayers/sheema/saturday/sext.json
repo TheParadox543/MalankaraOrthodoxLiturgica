@@ -1,0 +1,90 @@
+[
+    {
+        "type": "title",
+        "content": "śani maddhyāhnaṁ"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(patahlīta edahanōnōkk)"
+    },
+    {
+        "type": "song",
+        "content": "kanyakamaṟiyaminekkaṇṭu\nnūtanavāniṭamāy viśvaṁ\nlōkaṅṅaḷkkuṁ mumpāy pē-\nruḷḷoru nītimahāsūryaṉ\n/tmaṟiyāmmīnnudayaṁ ceytu\n/tvañcanayāmiruḷ māyiccu\ndhanyaṉ tal smaraṇa-\nykkunnatiyēŧŧaṁ kalppiccōṉ,"
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ. śūbaho...."
+    },
+    {
+        "type": "song",
+        "content": "viśvāsattiṉ śilppikaḷāṁ\nnibiyaṉmāṟkkāyi ślōmō\nsabhataṉ keṭṭupaṇikkārāṁ\nślīhanmāṟkkāyi ślōmō\n/tślōmō taṉ nāthaṉ tanne\n/t snēhiccōrāṁ sahadēṟkkuṁ\navare mānikkuṁ\npariśuddhasabhaykkuṁ ślōmō"
+    },
+    {
+        "type": "subtext",
+        "content": "menaōlaṁ…"
+    },
+    {
+        "type": "subtext",
+        "content": "nāthā! kr̥payāl mātāvāṁ"
+    },
+    {
+        "type": "subtext",
+        "content": "maṟiyāṁ nibiślīhā sahadēṟ"
+    },
+    {
+        "type": "subtext",
+        "content": "dhaṟmmiṣṭanmārennivaṟtaṉ"
+    },
+    {
+        "type": "subtext",
+        "content": "ōṟmmaye viśrutamākkaṇamē"
+    },
+    {
+        "type": "subtext",
+        "content": "/tniṉ tirumey bhakṣiccōrāy"
+    },
+    {
+        "type": "subtext",
+        "content": "/tniṉ śaraṇē mr̥tiyāṟnnōrāṁ"
+    },
+    {
+        "type": "subtext",
+        "content": "vāṅṅippōyōre"
+    },
+    {
+        "type": "subtext",
+        "content": "ā nirayil cēṟttiṭēṇamē."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo…"
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/janani.json"
+    },
+    {
+        "type": "prose",
+        "content": "niṉ mātāvu viśuddhanmāṟ…"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/nicenecreed.json"
+    },
+    {
+        "type": "prose",
+        "content": "śuśrūṣakkāraṉ:- bāṟekmōṟ. staൗmeṉkālōs"
+    },
+    {
+        "type": "prose",
+        "content": "janaṁ:- kuṟiyēlāyissōṉ."
+    }
+]

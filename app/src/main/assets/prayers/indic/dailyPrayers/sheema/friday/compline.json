@@ -1,0 +1,66 @@
+[
+    {
+        "type": "title",
+        "content": "veḷḷi sūttāṟā"
+    },
+    {
+        "type": "link-collapsible",
+        "file": "commonprayers/kauma.json"
+    },
+    {
+        "type": "heading",
+        "content": "kōlo"
+    },
+    {
+        "type": "subheading",
+        "content": "(yodaīnaṉ mōṟ)"
+    },
+    {
+        "type": "song",
+        "content": "ninnoṭu pāpaṁ ceytuṭayōne!\nkōpippiccu-malinatayāl ñaṅṅaḷ\nnītiyahō vāḷūrunnākil\nñaṅṅaḷkkāy niṉ-kr̥pa nilakoḷḷaṭṭe\nkālaṁ tīrāṟāyeṅkil ñaṅṅaṭeyantyaṁ\nninnāṟdratayatilākaṇamē."
+    },
+    {
+        "type": "subtext",
+        "content": "bāṟekmōṟ-śubaho…"
+    },
+    {
+        "type": "song",
+        "content": "dāsaṉ kuŧŧaṁ ceytōnuṭayōṉ\ntalsnēhitarē-abhayaṁ prāpiccāl\nabhyaṟtthanayuṁ yācanayuṁ ko-\nṇṭavanuṭayōṉ mā-ppēkiṭumennākil\nniṉ slībāye abhayaṁ saṁprāpiccōrāṁ\nñaṅṅaḷoṭalivuṇṭākaṇame."
+    },
+    {
+        "type": "subtext",
+        "content": "moṟiyo…"
+    },
+    {
+        "type": "heading",
+        "content": "bōvūso"
+    },
+    {
+        "type": "subheading",
+        "content": "(māṟ yākkōbinđe)"
+    },
+    {
+        "type": "song",
+        "content": "īśā! nāthā! varika tuṇappāṉ viḷikūṭṭunnu\nprāṟtthana kēṭṭiṭṭātmākkaḷ mēl kr̥paceyyēṇaṁ."
+    },
+    {
+        "type": "song",
+        "content": "tāṉ paṟudīsiṉ veḷiyil pōvāṉkāraṇamente-\nnādāṁ tātaṉ makkaḷe nannāy bōdhippiccu\nmunnadhikāraṁ nāṇaṁkēṭāl vannoru vīḻca\ntōṭṭattīnnuḷḷuccāṭanamenniva vaṟṇṇiccu."
+    },
+    {
+        "type": "song",
+        "content": "pāññumaratte prāpiccōrāppāḻ‌pādaṅṅaḷ\nkkillavakāśaṁ divyapadatte spaṟśiccīṭāṉ\nēdaṉ tōṭṭakkaniyēntiyorā kaikaḷkkētuṁ\nyōgyatayillattirubaliyiṉ mēlaṟppiccīṭāṉ."
+    },
+    {
+        "type": "song",
+        "content": "sañcārattāl maśihā manniṉ muḷḷukaḷ nīkki\ntaḷḷappeṭṭōnādaṁ vīṇṭuṁ paṟudīsāṟnnu."
+    },
+    {
+        "type": "subtext",
+        "content": "kuṟiyē........ kuṟiyē........kuṟiyē....."
+    },
+    {
+        "type": "link",
+        "file": "commonprayers/complinecommon.json"
+    }
+]

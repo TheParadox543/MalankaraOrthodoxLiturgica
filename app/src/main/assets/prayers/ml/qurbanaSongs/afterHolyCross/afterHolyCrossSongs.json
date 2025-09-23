@@ -1,0 +1,26 @@
+[
+    {
+        "type": "title",
+        "content": "സ്ലീബായുടെ ശേഷമുള്ള ഞായറാച്ചകൾ"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterHolyCross/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterHolyCross/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterHolyCross/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterHolyCross/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterHolyCross/hoothomo.json"
+    }
+]
