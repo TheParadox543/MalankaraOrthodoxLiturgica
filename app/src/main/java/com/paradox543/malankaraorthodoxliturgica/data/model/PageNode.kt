@@ -8,9 +8,5 @@ data class PageNode(
     val filename: String? = null,
     val parent: String?,
     val children: List<PageNode> = emptyList(),
-    val languages: List<String> = listOf(
-        AppLanguage.MALAYALAM.code,
-        AppLanguage.MANGLISH.code,
-        AppLanguage.INDIC.code,
-    ),
+    val languages: List<String> = listOf(),
 )

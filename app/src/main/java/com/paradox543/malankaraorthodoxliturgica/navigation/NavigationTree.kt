@@ -96,9 +96,8 @@ val PentecostParts = listOf(
 
 object NavigationTree {
 
-    private val BASE_TREE = PageNode(
+    val BASE_TREE = PageNode(
         route = PrayerRoutes.ROOT,
-        languages = listOf("ml", "mn", "en", "indic"),
         parent = null,
         children = listOf(
             commonPrayersSection(PrayerRoutes.ROOT),
@@ -113,18 +112,17 @@ object NavigationTree {
         val currentRoute = PrayerRoutes.COMMON_PRAYERS
         return PageNode(
             route = currentRoute,
-            languages = listOf("ml", "mn", "en", "indic"),
             parent = parentRoute,
             children = listOf(
-                prayer("lords", "${PrayerRoutes.COMMON_PRAYERS}/lords.json", currentRoute, listOf("ml", "mn", "en", "indic")),
-                prayer("mary", "${PrayerRoutes.COMMON_PRAYERS}/mary.json", currentRoute, listOf("ml", "mn", "en", "indic")),
-                prayer("kauma", "${PrayerRoutes.COMMON_PRAYERS}/doxology.json", currentRoute, listOf("ml", "mn", "en", "indic")),
-                prayer("kaumaSyriac", "${PrayerRoutes.COMMON_PRAYERS}/trisagionSyriac.json", currentRoute, listOf("ml", "mn", "indic")),
-                prayer("nicene", "${PrayerRoutes.COMMON_PRAYERS}/niceneCreed.json", currentRoute, listOf("ml", "mn", "indic")),
-                prayer("angels", "${PrayerRoutes.COMMON_PRAYERS}/praiseOfAngels.json", currentRoute, listOf("ml", "mn", "indic")),
-                prayer("cherubims", "${PrayerRoutes.COMMON_PRAYERS}/praiseOfCherubims.json", currentRoute, listOf("ml", "mn", "indic")),
-                prayer("morningPraise", "${PrayerRoutes.COMMON_PRAYERS}/morningPraise.json", currentRoute, listOf("ml", "mn", "indic")),
-                prayer("cyclic", "${PrayerRoutes.COMMON_PRAYERS}/cyclicPrayers.json", currentRoute, listOf("ml", "mn", "indic"))
+                prayer("lords", "${PrayerRoutes.COMMON_PRAYERS}/lords.json", currentRoute),
+                prayer("mary", "${PrayerRoutes.COMMON_PRAYERS}/mary.json", currentRoute),
+                prayer("kauma", "${PrayerRoutes.COMMON_PRAYERS}/doxology.json", currentRoute),
+                prayer("kaumaSyriac", "${PrayerRoutes.COMMON_PRAYERS}/trisagionSyriac.json", currentRoute),
+                prayer("nicene", "${PrayerRoutes.COMMON_PRAYERS}/niceneCreed.json", currentRoute),
+                prayer("angels", "${PrayerRoutes.COMMON_PRAYERS}/praiseOfAngels.json", currentRoute),
+                prayer("cherubims", "${PrayerRoutes.COMMON_PRAYERS}/praiseOfCherubims.json", currentRoute),
+                prayer("morningPraise", "${PrayerRoutes.COMMON_PRAYERS}/morningPraise.json", currentRoute),
+                prayer("cyclic", "${PrayerRoutes.COMMON_PRAYERS}/cyclicPrayers.json", currentRoute)
             )
         )
     }
@@ -141,7 +139,6 @@ object NavigationTree {
                 sheemaSection(currentRoute),
 //                greatLentSection(currentRoute)
             ),
-            languages = listOf("ml", "mn", "indic")
         )
     }
 
@@ -155,22 +152,18 @@ object NavigationTree {
                     "${currentRoute}_vespers",
                     "${PrayerRoutes.DAILY_PRAYERS}/$currentRoute/${PrayerRoutes.VESPERS}.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     "${currentRoute}_matins",
                     "${PrayerRoutes.DAILY_PRAYERS}/$currentRoute/${PrayerRoutes.MATINS}.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     "${currentRoute}_prime",
                     "${PrayerRoutes.DAILY_PRAYERS}/$currentRoute/${PrayerRoutes.PRIME}.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
             ),
-//            languages = listOf("ml", "mn")
         )
     }
 
@@ -184,7 +177,6 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = children,
-//            languages = listOf("ml", "mn")
         )
     }
 
@@ -198,7 +190,6 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = children,
-//            languages = listOf("ml", "mn")
         )
     }
 
@@ -282,18 +273,15 @@ object NavigationTree {
                     PrayerRoutes.BAPTISM,
                     "${PrayerRoutes.SACRAMENTS}/${PrayerRoutes.BAPTISM}.json",
                     currentRoute,
-//                    languages = listOf("ml", "mn"),
                 ),
                 weddingSection(currentRoute),
                 prayer(
                     "houseWarming",
                     "${PrayerRoutes.SACRAMENTS}/housewarming.json",
                     currentRoute,
-//                    languages = listOf("ml", "mn"),
                 ),
                 funeralSection(currentRoute)
             ),
-            languages = listOf("ml", "mn", "en", "indic")
         )
     }
 
@@ -308,29 +296,24 @@ object NavigationTree {
                     PrayerRoutes.EPIPHANY,
                     "${PrayerRoutes.FEASTS}/${PrayerRoutes.EPIPHANY}.json",
                     currentRoute,
-//                    listOf("ml")
                 ),
                 prayer(
                     PrayerRoutes.RECONCILIATION_SERVICE,
                     "${PrayerRoutes.FEASTS}/${PrayerRoutes.RECONCILIATION_SERVICE}.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     PrayerRoutes.HALF_LENT,
                     "${PrayerRoutes.FEASTS}/${PrayerRoutes.HALF_LENT}.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     PrayerRoutes.ASCENSION,
                     "${PrayerRoutes.FEASTS}/${PrayerRoutes.ASCENSION}.json",
                     currentRoute,
-//                    listOf("ml", "mn")
                 ),
                 pentecostSection(currentRoute),
             ),
-            languages = listOf("ml", "mn", "indic")
         )
     }
 
@@ -344,46 +327,38 @@ object NavigationTree {
                     createCompleteRoute(currentRoute, "vespers"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/vespers.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "compline"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/compline.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "matins"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/matins.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "worshipOfCross"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/worshipOfCross.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "prime"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/prime.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "terce"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/terce.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "sext"),
                     "${PrayerRoutes.FEASTS}/${currentRoute}/sext.json",
                     currentRoute,
-//                    listOf("ml"),
                 ),
             ),
-//            languages = listOf("ml", "mn"),
         )
     }
     private fun pentecostSection(parentRoute: String): PageNode {
@@ -396,7 +371,6 @@ object NavigationTree {
                     route = childNode,
                     filename = "${PrayerRoutes.FEASTS}/${childNode.replace("_", "/")}.json",
                     currentRoute,
-//                    listOf("ml", "mn"),
                 )
             )
         }
@@ -404,7 +378,6 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = children,
-//            languages = listOf("ml", "mn"),
         )
     }
 
@@ -418,7 +391,6 @@ object NavigationTree {
                     route = childNode,
                     filename = "${PrayerRoutes.SACRAMENTS}/${childNode.replace("_", "/")}.json",
                     parentRoute = currentRoute,
-                    languages = listOf("ml", "mn", "en", "indic"),
                 )
             )
         }
@@ -430,7 +402,6 @@ object NavigationTree {
             route = currentRoute,
             parent = parentRoute,
             children = children,
-            languages = listOf("ml", "mn", "en", "indic"),
         )
     }
 
@@ -444,13 +415,11 @@ object NavigationTree {
                     createCompleteRoute(currentRoute, "ring"),
                     "${PrayerRoutes.SACRAMENTS}/$currentRoute/ring.json",
                     currentRoute,
-//                    languages = listOf("ml", "mn"),
                 ),
                 prayer(
                     createCompleteRoute(currentRoute, "crown"),
                     "${PrayerRoutes.SACRAMENTS}/$currentRoute/crown.json",
                     currentRoute,
-//                    languages = listOf("ml", "mn")
                 )
             ),
         )
@@ -566,18 +535,18 @@ object NavigationTree {
         )
     }
 
-    private fun prayer(route: String, filename: String, parentRoute: String, languages: List<String> = listOf("ml", "mn", "indic")) = PageNode(
-        route = route,
-        parent = parentRoute,
-        languages = languages,
-        filename = filename
-    )
+    private fun prayer(route: String, filename: String, parentRoute: String) =
+        PageNode(
+            route = route,
+            parent = parentRoute,
+            filename = filename,
+        )
 
     private fun createCompleteRoute(parentRoute: String, childRoute: String): String {
         return "${parentRoute}_$childRoute"
     }
 
-    private fun prayerNodesDailyCanonicalHours(currentRoute: String, extraRoute: String = "", languages: List<String> = listOf("ml", "mn", "indic")): MutableList<PageNode> {
+    private fun prayerNodesDailyCanonicalHours(currentRoute: String, extraRoute: String = ""): MutableList<PageNode> {
         val children = mutableListOf<PageNode>()
         for (item in CanonicalHours) {
             if (item == PrayerRoutes.NONE && currentRoute == PrayerRoutes.SLEEBA) continue
@@ -587,67 +556,9 @@ object NavigationTree {
                     childNode,
                     "$extraRoute/${childNode.replace("_", "/")}.json",
                     currentRoute,
-                    languages,
                 )
             )
         }
         return children
-    }
-
-
-    /**
-     * Filters the base navigation tree to include only nodes that support the target language.
-     *
-     * @param targetLanguage The language code (e.g., "ml" for Malayalam, "en" for English) to filter by.
-     * @return A new PageNode tree containing only the nodes (and their valid children)
-     * that support the specified language. If the root node itself doesn't
-     * support the language, an empty root node (with no children) is returned.
-     */
-    fun getNavigationTree(targetLanguage: String): PageNode {
-        // Start filtering from the BASE_TREE's children.
-        // We assume the root node itself is a universal container, or its languages list defines
-        // if *any* part of the app is available for this language.
-        // If the root node must also be language-dependent, you can check it here too.
-        // For simplicity, we'll always return a root node, but its children will be filtered.
-
-        // If the root node is meant to be skipped if its own language list doesn't contain the target,
-        // you might return null from here and handle it upstream, or return BASE_TREE.copy(children = emptyList())
-        // if no content is found for the language.
-        if (!BASE_TREE.languages.contains(targetLanguage)) {
-            // If the root node itself isn't available in the target language,
-            // return an empty tree (root with no children).
-            return BASE_TREE.copy(children = emptyList())
-        }
-
-        val filteredChildren = BASE_TREE.children.mapNotNull { childNode ->
-            filterNodeByLanguageRecursive(childNode, targetLanguage)
-        }
-        // Return a new copy of the root node with only the filtered children
-        return BASE_TREE.copy(children = filteredChildren)
-    }
-
-    /**
-     * Recursively filters a PageNode and its children based on the target language.
-     *
-     * @param node The current PageNode to evaluate.
-     * @param targetLanguage The language code to filter by.
-     * @return A new PageNode instance with only the children that support the language,
-     * or null if the current node itself does not support the target language.
-     */
-    private fun filterNodeByLanguageRecursive(node: PageNode, targetLanguage: String): PageNode? {
-        // Step 1: Check if the current node supports the target language
-        if (!node.languages.contains(targetLanguage)) {
-            return null // If not, this node and its entire subtree are excluded
-        }
-
-        // Step 2: Recursively filter the children of the current node
-        val filteredChildren = node.children.mapNotNull { childNode ->
-            filterNodeByLanguageRecursive(childNode, targetLanguage)
-        }
-
-        // Step 3: If the current node supports the language,
-        // return a NEW PageNode instance with its original properties
-        // but with the newly filtered list of children.
-        return node.copy(children = filteredChildren)
     }
 }
