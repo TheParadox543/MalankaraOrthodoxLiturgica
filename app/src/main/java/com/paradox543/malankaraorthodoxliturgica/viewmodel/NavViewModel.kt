@@ -1,14 +1,12 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree
 import com.paradox543.malankaraorthodoxliturgica.navigation.PrayerRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,19 +21,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NavViewModel @Inject constructor(
+    private val navigationRepository: NavigationRepository,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
-    val rootNode: StateFlow<PageNode> = settingsRepository.selectedLanguage
-        .map { language ->
-            // Whenever selectedLanguage emits a new 'language',
-            // this block will be re-executed, creating a new navigation tree
-            NavigationTree.getNavigationTree(language.code)
-        }
-        .stateIn(
-            scope = viewModelScope, // Use viewModelScope for UI-related state
-            started = SharingStarted.WhileSubscribed(5000), // Start collecting when UI observes, stop after 5s inactivity
-            initialValue = NavigationTree.getNavigationTree(AppLanguage.MALAYALAM.code) // Initial value for the UI before preferences are loaded
-        )
+    val rootNode: StateFlow<PageNode> =
+        settingsRepository.selectedLanguage
+            .map { language ->
+                // Whenever selectedLanguage emits a new 'language',
+                // this block will be re-executed, creating a new navigation tree
+                navigationRepository.getNavigationTree(language.code)
+            }.stateIn(
+                scope = viewModelScope, // Use viewModelScope for UI-related state
+                started = SharingStarted.WhileSubscribed(5000), // Start collecting when UI observes, stop after 5s inactivity
+                initialValue = navigationRepository.getNavigationTree(AppLanguage.MALAYALAM.code), // Initial value in Malayalam
+            )
 
     private val _currentNode = MutableStateFlow<PageNode?>(null)
     val currentNode: StateFlow<PageNode?> = _currentNode
@@ -46,7 +45,7 @@ class NavViewModel @Inject constructor(
     fun getAdjacentSiblingRoutes(node: PageNode): Pair<String?, String?> {
         val parentRoute = node.parent
         if (_parentNode.value?.route != parentRoute) {
-            _parentNode.value = findNode(rootNode.value, parentRoute?:"")
+            _parentNode.value = findNode(rootNode.value, parentRoute ?: "")
         }
 
         if (_parentNode.value == null) {
@@ -74,7 +73,10 @@ class NavViewModel @Inject constructor(
         return Pair(prevRoute, nextRoute)
     }
 
-    fun findNode(node: PageNode, route: String): PageNode? {
+    fun findNode(
+        node: PageNode,
+        route: String,
+    ): PageNode? {
         if (node.route == route) return node
         node.children.forEach { child ->
             val result = findNode(child, route)
