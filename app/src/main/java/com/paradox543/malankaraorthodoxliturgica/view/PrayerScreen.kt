@@ -315,23 +315,12 @@ fun PrayerElementRenderer(
 
         is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
-                title = prayerElement.title,
-            ) {
-                Column {
-                    Spacer(Modifier.padding(8.dp))
-                    prayerElement.items.forEach { nestedItem ->
-                        // Loop through type-safe items
-                        // Recursively call the renderer for nested items
-                        PrayerElementRenderer(
-                            nestedItem,
-                            prayerViewModel,
-                            filename,
-                            navController,
-                        )
-                        Spacer(Modifier.padding(4.dp))
-                    }
-                }
-            }
+                prayerElement,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
         }
 
         is PrayerElement.Error -> {
@@ -571,8 +560,11 @@ fun ErrorBlock(
 
 @Composable
 fun CollapsibleTextBlock(
-    title: String,
-    content: @Composable () -> Unit, // Changed content to Composable Lambda
+    prayerElement: PrayerElement.CollapsibleBlock,
+    prayerViewModel: PrayerViewModel,
+    filename: String,
+    navController: NavController,
+    isSongHorizontalScroll: Boolean,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -584,10 +576,8 @@ fun CollapsibleTextBlock(
                     .fillMaxWidth()
                     .clickable { expanded = !expanded },
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge,
-                textAlign = TextAlign.Center,
+            Heading(
+                text = prayerElement.title,
                 modifier = Modifier.weight(1f),
             )
             Icon(
@@ -598,7 +588,21 @@ fun CollapsibleTextBlock(
 
         AnimatedVisibility(visible = expanded) {
             Column {
-                content()
+                Column {
+                    Spacer(Modifier.padding(8.dp))
+                    prayerElement.items.forEach { nestedItem ->
+                        // Loop through type-safe items
+                        // Recursively call the renderer for nested items
+                        PrayerElementRenderer(
+                            nestedItem,
+                            prayerViewModel,
+                            filename,
+                            navController,
+                            isSongHorizontalScroll,
+                        )
+                        Spacer(Modifier.padding(4.dp))
+                    }
+                }
             }
         }
     }
