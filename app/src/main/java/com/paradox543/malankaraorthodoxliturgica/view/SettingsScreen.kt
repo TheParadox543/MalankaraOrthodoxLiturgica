@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -119,8 +120,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 }
             }
 
-//            Spacer(modifier = Modifier.height(16.dp))
-
             // Font Size Selection
             Card(
                 modifier = Modifier
@@ -165,28 +164,34 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     ),
                 elevation = CardDefaults.cardElevation(4.dp),
             ) {
-                Column {
-                    Text("Sound Mode")
-                    listOf(SoundMode.OFF, SoundMode.SILENT, SoundMode.DND).forEach { mode ->
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .clickable { settingsViewModel.setSoundMode(mode) }
-                                    .padding(8.dp),
-                        ) {
-                            RadioButton(
-                                selected = (soundMode == mode),
-                                onClick = { settingsViewModel.setSoundMode(mode) },
-                            )
-                            Text(text = mode.name)
+                Row(
+                    Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text("Sound Mode", Modifier.weight(1f))
+                    Column {
+                        listOf(SoundMode.OFF, SoundMode.SILENT, SoundMode.DND).forEach { mode ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier =
+                                    Modifier
+//                                        .fillMaxWidth()
+                                        .clickable { settingsViewModel.setSoundMode(mode) }
+                                        .padding(8.dp),
+                            ) {
+                                RadioButton(
+                                    selected = (soundMode == mode),
+                                    onClick = { settingsViewModel.setSoundMode(mode) },
+                                )
+                                Text(text = mode.name)
+                            }
                         }
                     }
                 }
             }
-
-//            Spacer(modifier = Modifier.height(16.dp))
 
             // Song Scroll State
             Card(
@@ -222,7 +227,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     }
                     if (songScrollState) {
                         Text(
-                            "Long lines will extend off-screen and can be scrolled horizontally",
+                            "Long lines will extend off-screen",
                             style = MaterialTheme.typography.labelMedium,
                         )
                     } else {
@@ -233,8 +238,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     }
                 }
             }
-
-//            Spacer(Modifier.height(16.dp))
 
             // About the app option
             ListItem(
@@ -257,8 +260,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     headlineColor = MaterialTheme.colorScheme.onBackground,
                 )
             )
-
-//            Spacer(Modifier.height(16.dp))
 
             // Share App
             ListItem(
@@ -286,7 +287,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
             )
 
             if (BuildConfig.DEBUG) {
-//                Spacer(Modifier.padding(16.dp))
 
                 ElevatedButton(
                     onClick = { settingsViewModel.setOnboardingCompleted(false) },

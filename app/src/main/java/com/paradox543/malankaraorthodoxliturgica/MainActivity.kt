@@ -3,6 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
@@ -78,6 +79,33 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun setSilentMode() {
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+    }
+
+    private fun restoreNormalMode() {
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+        setDndMode(false)
+    }
+
+    private fun setSilentOnChange(soundMode: SoundMode) {
+        when (soundMode) {
+            SoundMode.OFF -> {
+                restoreNormalMode()
+            }
+
+            SoundMode.SILENT -> {
+                setSilentMode()
+            }
+
+            SoundMode.DND -> {
+                setDndMode(true)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install the splash screen.
         val splashScreen = installSplashScreen()
@@ -134,13 +162,12 @@ class MainActivity : ComponentActivity() {
                     if (soundMode != SoundMode.OFF) {
                         requestDndPermission()
                     }
+                    restoreNormalMode()
+                    setSilentOnChange(soundMode)
                 }
 
                 // 5. Use Scaffold to provide a host for the Snackbar.
-                @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-                Scaffold(
-                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
-                ) { innerPadding ->
+                Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
                     // Your NavGraph is placed inside the Scaffold's content area.
                     // The innerPadding can be passed to your NavGraph if needed to prevent overlap.
                     NavGraph(
@@ -159,13 +186,17 @@ class MainActivity : ComponentActivity() {
         // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
         val soundMode = settingsViewModel.soundMode.value
-        setDndMode(true)
+        setSilentOnChange(soundMode)
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
         val soundMode = settingsViewModel.soundMode.value
-        setDndMode(false)
+        when (soundMode) {
+            SoundMode.OFF -> {} // do nothing
+            SoundMode.SILENT -> restoreNormalMode()
+            SoundMode.DND -> setDndMode(false)
+        }
     }
 }
