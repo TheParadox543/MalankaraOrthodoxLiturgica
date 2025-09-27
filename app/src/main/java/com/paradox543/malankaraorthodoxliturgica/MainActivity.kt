@@ -51,14 +51,26 @@ class MainActivity : ComponentActivity() {
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val navViewModel: NavViewModel by viewModels()
 
+    private fun hasGrantedDndPermission(): Boolean {
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
+        return notificationManager.isNotificationPolicyAccessGranted
+    }
+
     private fun requestDndPermission() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (!notificationManager.isNotificationPolicyAccessGranted) {
+            Toast.makeText(this, "Please grant DND permission in Settings.", Toast.LENGTH_LONG).show()
             val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
             startActivity(intent)
         }
         if (!notificationManager.isNotificationPolicyAccessGranted) {
-            Toast.makeText(this, "Please grant DND permission in Settings.", Toast.LENGTH_LONG).show()
+            Toast
+                .makeText(
+                    this,
+                    "DND permissions not granted in Settings. Please enable to make use of features.",
+                    Toast.LENGTH_LONG,
+                ).show()
             return
         }
     }
@@ -80,17 +92,20 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun setSilentMode() {
+        if (!hasGrantedDndPermission()) return
         val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
         audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
     }
 
     private fun restoreNormalMode() {
+        if (!hasGrantedDndPermission()) return
         val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
         audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
         setDndMode(false)
     }
 
     private fun setSilentOnChange(soundMode: SoundMode) {
+        if (!hasGrantedDndPermission()) return
         when (soundMode) {
             SoundMode.OFF -> {
                 restoreNormalMode()

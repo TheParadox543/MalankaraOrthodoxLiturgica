@@ -25,7 +25,6 @@ class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
     private val firebaseAnalytics: FirebaseAnalytics,
 ) : ViewModel() {
-
     val selectedLanguage = settingsRepository.selectedLanguage
 
     private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
@@ -39,6 +38,9 @@ class SettingsViewModel @Inject constructor(
 
     private val _soundMode = MutableStateFlow(SoundMode.OFF)
     val soundMode = _soundMode.asStateFlow()
+
+    private val _hasDndPermission = MutableStateFlow(false)
+    val hasDndPermission = _hasDndPermission.asStateFlow()
 
     // Internal MutableStateFlow to track AppFontSize changes for debounced saving
     private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
@@ -125,8 +127,26 @@ class SettingsViewModel @Inject constructor(
 
     fun setSoundMode(permissionState: SoundMode) {
         _soundMode.value = permissionState
+//        if (!hasGrantedDndPermission()) {
+//            _soundMode.value = SoundMode.OFF
+//            return
+//        }
         viewModelScope.launch {
             settingsRepository.setSoundMode(permissionState)
+        }
+    }
+
+    fun hasGrantedDndPermission(): Boolean {
+        return _hasDndPermission.value
+    }
+
+    fun setDndPermissionStatus(granted: Boolean) {
+        _hasDndPermission.value = granted
+        if (!granted) {
+            _soundMode.value = SoundMode.OFF
+            viewModelScope.launch {
+                settingsRepository.setSoundMode(SoundMode.OFF)
+            }
         }
     }
 
