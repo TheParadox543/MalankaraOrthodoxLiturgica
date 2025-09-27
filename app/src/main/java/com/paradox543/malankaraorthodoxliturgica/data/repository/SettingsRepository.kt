@@ -41,7 +41,7 @@ class SettingsRepository @Inject constructor(
     private val fontScaleKey = floatPreferencesKey("font_scale")
     private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
     private val songScrollStateKey = booleanPreferencesKey("song_scroll_state")
-    private val dndPermissionKey = stringPreferencesKey("dnd_permission")
+    private val soundModePreferencesKey = stringPreferencesKey("sound_mode")
 
     val selectedLanguage: StateFlow<AppLanguage> =
         context.dataStore.data
@@ -82,7 +82,7 @@ class SettingsRepository @Inject constructor(
 
     suspend fun getSoundMode(): SoundMode {
         val prefs = context.dataStore.data.first()
-        return when (prefs[dndPermissionKey]) {
+        return when (prefs[soundModePreferencesKey]) {
             "SILENT" -> SoundMode.SILENT
             "DND" -> SoundMode.DND
             else -> SoundMode.OFF
@@ -142,7 +142,7 @@ class SettingsRepository @Inject constructor(
 
     suspend fun setSoundMode(permissionState: SoundMode) {
         context.dataStore.edit { preferences ->
-            preferences[dndPermissionKey] = permissionState.name
+            preferences[soundModePreferencesKey] = permissionState.name
         }
     }
 }
