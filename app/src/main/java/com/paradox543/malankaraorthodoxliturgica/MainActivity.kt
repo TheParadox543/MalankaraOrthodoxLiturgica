@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica
 
-import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Intent
 import android.media.AudioManager
@@ -160,11 +159,12 @@ class MainActivity : ComponentActivity() {
                 LaunchedEffect(updateDownloaded) {
                     if (updateDownloaded) {
                         scope.launch {
-                            val result = snackbarHostState.showSnackbar(
-                                message = "An update has just been downloaded.",
-                                actionLabel = "RESTART",
-                                duration = SnackbarDuration.Indefinite // Stays until dismissed or actioned
-                            )
+                            val result =
+                                snackbarHostState.showSnackbar(
+                                    message = "An update has just been downloaded.",
+                                    actionLabel = "RESTART",
+                                    duration = SnackbarDuration.Indefinite, // Stays until dismissed or actioned
+                                )
                             // 4. Perform action based on user interaction.
                             if (result == SnackbarResult.ActionPerformed) {
                                 inAppUpdateManager.completeUpdate()

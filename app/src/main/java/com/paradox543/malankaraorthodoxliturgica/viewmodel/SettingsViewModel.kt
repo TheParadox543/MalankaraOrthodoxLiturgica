@@ -144,8 +144,9 @@ class SettingsViewModel @Inject constructor(
         _hasDndPermission.value = granted
         if (!granted) {
             _soundMode.value = SoundMode.OFF
+        } else {
             viewModelScope.launch {
-                settingsRepository.setSoundMode(SoundMode.OFF)
+                _soundMode.value = settingsRepository.getSoundMode()
             }
         }
     }
