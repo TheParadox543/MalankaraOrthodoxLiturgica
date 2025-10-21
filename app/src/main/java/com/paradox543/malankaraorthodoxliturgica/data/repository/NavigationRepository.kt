@@ -1,11 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
-import com.paradox543.malankaraorthodoxliturgica.navigation.NavigationTree.BASE_TREE
 import dagger.hilt.android.qualifiers.ApplicationContext
-import java.io.IOException
+import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,61 +11,18 @@ import javax.inject.Singleton
 class NavigationRepository @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
-    /**
-     * The base navigation tree enriched with available languages for each node.
-     */
-    val navTree = enrichLanguages(context, BASE_TREE)
+    val navTree: PageNode by lazy {
+        loadNavigationTree(context)
+    }
 
-    /**
-     * Checks the app's assets to determine which languages have the specified file.
-     *
-     * @param context The application context used to access assets.
-     * @param baseFilename The filename to check for (e.g., "index.md").
-     * @param extensions The list of AppLanguage enums to check against. Defaults to all available languages.
-     * @return A list of language codes (e.g., ["ml", "en"]) that have the specified file in their respective directories.
-     */
-    private fun getAvailableLanguages(
-        context: Context,
-        baseFilename: String,
-        extensions: List<AppLanguage> = AppLanguage.entries,
-    ): List<String> =
-        extensions.mapNotNull { lang ->
-            try {
-                context.assets.open("prayers/${lang.code}/$baseFilename").close()
-                lang.code
-            } catch (_: IOException) {
-                null
-            }
-        }
-
-    /**
-     * Recursively enriches a PageNode tree with the languages available for each node.
-     *
-     * For file nodes, it checks directly for the file's existence in each language directory.
-     * For folder nodes, it aggregates the languages from its children.
-     * @param context The application context used to access assets.
-     * @param node The current PageNode to enrich.
-     * @return A new PageNode instance with the languages property populated.
-     */
-    fun enrichLanguages(
-        context: Context,
-        node: PageNode,
-    ): PageNode {
-        val enrichedChildren = node.children.map { enrichLanguages(context, it) }
-
-        val detectedLanguages =
-            if (node.filename != null) {
-                // File → detect directly
-                getAvailableLanguages(context, node.filename)
-            } else {
-                // Folder → union of children’s languages
-                enrichedChildren.flatMap { it.languages }.distinct()
-            }
-
-        return node.copy(
-            languages = detectedLanguages,
-            children = node.children.map { enrichLanguages(context, it) },
-        )
+    private fun loadNavigationTree(context: Context): PageNode {
+        val jsonString =
+            context
+                .assets
+                .open("prayers/prayers_tree.json")
+                .bufferedReader()
+                .use { it.readText() }
+        return Json.decodeFromString(jsonString)
     }
 
     /**
