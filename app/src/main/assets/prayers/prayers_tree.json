@@ -156,15 +156,23 @@
                         {
                             "route": "matins",
                             "parent": "homePrayers",
-                            "filename": "homePrayers/matins.json",
-                            "languages": [],
+                            "filename": "dailyPrayers/homePrayers/matins.json",
+                            "languages": [
+                                "ml",
+                                "mn",
+                                "indic"
+                            ],
                             "children": []
                         },
                         {
                             "route": "prime",
                             "parent": "homePrayers",
-                            "filename": "homePrayers/prime.json",
-                            "languages": [],
+                            "filename": "dailyPrayers/homePrayers/prime.json",
+                            "languages": [
+                                "ml",
+                                "mn",
+                                "indic"
+                            ],
                             "children": []
                         }
                     ]

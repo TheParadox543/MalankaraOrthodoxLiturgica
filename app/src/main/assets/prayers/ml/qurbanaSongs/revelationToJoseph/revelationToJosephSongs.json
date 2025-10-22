@@ -9,22 +9,22 @@
     },
     {
         "type": "link",
-        "file": "qurbanaSongs/visitationToElizabeth/eveningGospel.json"
+        "file": "qurbanaSongs/revelationToJoseph/eveningGospel.json"
     },
     {
         "type": "link",
-        "file": "qurbanaSongs/visitationToElizabeth/morningGospel.json"
+        "file": "qurbanaSongs/revelationToJoseph/morningGospel.json"
     },
     {
         "type": "link",
-        "file": "qurbanaSongs/visitationToElizabeth/qurbanaGospel.json"
+        "file": "qurbanaSongs/revelationToJoseph/qurbanaGospel.json"
     },
     {
         "type": "link",
-        "file": "qurbanaSongs/visitationToElizabeth/kasolikki.json"
+        "file": "qurbanaSongs/revelationToJoseph/kasolikki.json"
     },
     {
         "type": "link",
-        "file": "qurbanaSongs/visitationToElizabeth/hoothomo.json"
+        "file": "qurbanaSongs/revelationToJoseph/hoothomo.json"
     }
 ]
