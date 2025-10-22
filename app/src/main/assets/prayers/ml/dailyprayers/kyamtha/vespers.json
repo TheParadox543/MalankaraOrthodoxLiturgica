@@ -246,7 +246,7 @@
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
-        "type": "dynamic-content",
+        "type": "dynamic-songs-block",
         "timeKey": "eveningGospel",
         "defaultContent": {
             "eventKey": "default",

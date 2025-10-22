@@ -190,7 +190,7 @@
         "content": "ജനം:- (കാസോലിക്കി)"
     },
     {
-        "type": "dynamic-content",
+        "type": "dynamic-songs-block",
         "timeKey": "kasolikki",
         "defaultContent": {
             "eventKey": "default",

@@ -222,14 +222,11 @@
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
-        "type": "dynamic-content",
+        "type": "dynamic-songs-block",
         "timeKey": "eveningGospel",
         "defaultContent": {
             "eventKey": "default",
-            "eventTitle": {
-                "en": "General Songs",
-                "ml": "പൊതുവിലുള ഗീതങ്ങൾ"
-            },
+            "eventTitle": "പൊതുവിലുള ഗീതങ്ങൾ",
             "timeKey": "eveningGospel",
             "items": [
                 {

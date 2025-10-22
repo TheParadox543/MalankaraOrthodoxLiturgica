@@ -208,14 +208,11 @@
         "content": "ജനം :- (അതാതുദിവസത്തെ ഗീതമോ താഴെ ചേർത്തിരിക്കുന്ന ഏതെങ്കിലും ഒരു ഗീതമോ ചൊല്ലുന്നു.)"
     },
     {
-        "type": "dynamic-content",
+        "type": "dynamic-songs-block",
         "timeKey": "qurbanaGospel",
         "defaultContent": {
             "eventKey": "default",
-            "eventTitle": {
-                "en": "General Songs",
-                "ml": "പൊതുവിലുള ഗീതങ്ങൾ"
-            },
+            "eventTitle": "പൊതുവിലുള ഗീതങ്ങൾ",
             "timeKey": "eveningGospel",
             "items": [
                 {

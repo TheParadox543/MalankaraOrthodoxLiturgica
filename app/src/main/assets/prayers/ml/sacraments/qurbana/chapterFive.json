@@ -48,7 +48,7 @@
         "content": "ജനം:- (അതാതു ദിവസത്തെ ഗീതം)"
     },
     {
-        "type": "dynamic-content",
+        "type": "dynamic-songs-block",
         "timeKey": "hoothomo",
         "defaultContent": {
             "eventKey": "default",

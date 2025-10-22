@@ -64,7 +64,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
                 "link" -> json.decodeFromJsonElement(PrayerElement.Link.serializer(), element)
                 "link-collapsible" -> json.decodeFromJsonElement(PrayerElement.LinkCollapsible.serializer(), element)
                 "dynamic-song" -> json.decodeFromJsonElement(PrayerElement.DynamicSong.serializer(), element)
-                "dynamic-content" -> json.decodeFromJsonElement(PrayerElement.DynamicContent.serializer(), element)
+                "dynamic-songs-block" -> json.decodeFromJsonElement(PrayerElement.DynamicSongsBlock.serializer(), element)
 
                 // If you explicitly serialize PrayerElement.Error in your JSON, handle it:
                 "error" -> json.decodeFromJsonElement(PrayerElement.Error.serializer(), element)
@@ -108,7 +108,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
                 is PrayerElement.Link -> json.encodeToJsonElement(PrayerElement.Link.serializer(), value)
                 is PrayerElement.LinkCollapsible -> json.encodeToJsonElement(PrayerElement.LinkCollapsible.serializer(), value)
                 is PrayerElement.DynamicSong -> json.encodeToJsonElement(PrayerElement.DynamicSong.serializer(), value)
-                is PrayerElement.DynamicContent -> json.encodeToJsonElement(PrayerElement.DynamicContent.serializer(), value)
+                is PrayerElement.DynamicSongsBlock -> json.encodeToJsonElement(PrayerElement.DynamicSongsBlock.serializer(), value)
                 is PrayerElement.Error -> json.encodeToJsonElement(PrayerElement.Error.serializer(), value)
             }
         jsonEncoder.encodeJsonElement(jsonElement)

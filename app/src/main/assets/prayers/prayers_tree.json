@@ -3,10 +3,10 @@
     "parent": null,
     "filename": null,
     "languages": [
-        "en",
-        "indic",
         "mn",
-        "ml"
+        "ml",
+        "en",
+        "indic"
     ],
     "children": [
         {
@@ -14,10 +14,10 @@
             "parent": "malankara",
             "filename": null,
             "languages": [
-                "en",
-                "indic",
                 "mn",
-                "ml"
+                "ml",
+                "en",
+                "indic"
             ],
             "children": [
                 {
@@ -127,9 +127,9 @@
             "parent": "malankara",
             "filename": null,
             "languages": [
-                "indic",
                 "mn",
-                "ml"
+                "ml",
+                "indic"
             ],
             "children": [
                 {
@@ -138,8 +138,8 @@
                     "filename": null,
                     "languages": [
                         "mn",
-                        "indic",
-                        "ml"
+                        "ml",
+                        "indic"
                     ],
                     "children": [
                         {
@@ -154,7 +154,7 @@
                             "children": []
                         },
                         {
-                            "route": "matins",
+                            "route": "homePrayers_matins",
                             "parent": "homePrayers",
                             "filename": "dailyPrayers/homePrayers/matins.json",
                             "languages": [
@@ -165,7 +165,7 @@
                             "children": []
                         },
                         {
-                            "route": "prime",
+                            "route": "homePrayers_prime",
                             "parent": "homePrayers",
                             "filename": "dailyPrayers/homePrayers/prime.json",
                             "languages": [
@@ -182,9 +182,9 @@
                     "parent": "dailyPrayers",
                     "filename": null,
                     "languages": [
-                        "indic",
                         "mn",
-                        "ml"
+                        "ml",
+                        "indic"
                     ],
                     "children": [
                         {
@@ -260,9 +260,9 @@
                     "parent": "dailyPrayers",
                     "filename": null,
                     "languages": [
-                        "indic",
                         "mn",
-                        "ml"
+                        "ml",
+                        "indic"
                     ],
                     "children": [
                         {
@@ -359,9 +359,9 @@
                             "parent": "sheema",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -448,9 +448,9 @@
                             "parent": "sheema",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -537,9 +537,9 @@
                             "parent": "sheema",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -626,9 +626,9 @@
                             "parent": "sheema",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -715,9 +715,9 @@
                             "parent": "sheema",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -804,9 +804,9 @@
                             "parent": "sheema",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -933,10 +933,10 @@
             "parent": "malankara",
             "filename": null,
             "languages": [
-                "en",
-                "indic",
                 "mn",
-                "ml"
+                "ml",
+                "en",
+                "indic"
             ],
             "children": [
                 {
@@ -944,10 +944,10 @@
                     "parent": "sacraments",
                     "filename": null,
                     "languages": [
-                        "en",
-                        "indic",
                         "mn",
-                        "ml"
+                        "ml",
+                        "en",
+                        "indic"
                     ],
                     "children": [
                         {
@@ -1046,9 +1046,9 @@
                             "parent": "qurbana",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -1576,9 +1576,9 @@
                     "parent": "sacraments",
                     "filename": null,
                     "languages": [
-                        "indic",
                         "mn",
-                        "ml"
+                        "ml",
+                        "indic"
                     ],
                     "children": [
                         {
@@ -1621,9 +1621,9 @@
                     "parent": "sacraments",
                     "filename": null,
                     "languages": [
-                        "indic",
                         "mn",
-                        "ml"
+                        "ml",
+                        "indic"
                     ],
                     "children": [
                         {
@@ -1631,9 +1631,9 @@
                             "parent": "funeral",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -1687,9 +1687,9 @@
                             "parent": "funeral",
                             "filename": null,
                             "languages": [
-                                "indic",
                                 "mn",
-                                "ml"
+                                "ml",
+                                "indic"
                             ],
                             "children": [
                                 {
@@ -1766,9 +1766,9 @@
                     "parent": "feasts",
                     "filename": null,
                     "languages": [
-                        "indic",
                         "mn",
-                        "ml"
+                        "ml",
+                        "indic"
                     ],
                     "children": [
                         {
@@ -1930,9 +1930,9 @@
             "parent": "malankara",
             "filename": null,
             "languages": [
-                "indic",
                 "mn",
-                "ml"
+                "ml",
+                "indic"
             ],
             "children": [
                 {

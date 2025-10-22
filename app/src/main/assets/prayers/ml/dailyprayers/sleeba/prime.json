@@ -298,7 +298,7 @@
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
-        "type": "dynamic-content",
+        "type": "dynamic-songs-block",
         "timeKey": "morningGospel",
         "defaultContent": {
             "eventKey": "default",
