@@ -100,5 +100,10 @@
     {
         "type": "link-collapsible",
         "file": "commonPrayers/kauma.json"
+    },
+    {
+        "type": "button",
+        "link": "sleeba_sext",
+        "replace": true
     }
 ]

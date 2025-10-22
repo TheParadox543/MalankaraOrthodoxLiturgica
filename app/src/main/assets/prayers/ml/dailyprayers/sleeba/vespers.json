@@ -342,5 +342,10 @@
     {
         "type": "subheading",
         "content": "കൃപ നിറഞ്ഞ മറിയമേ! ..."
+    },
+    {
+        "type": "button",
+        "link": "sleeba_compline",
+        "replace": true
     }
 ]
