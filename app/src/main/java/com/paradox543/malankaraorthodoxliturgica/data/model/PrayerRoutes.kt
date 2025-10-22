@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.navigation
+package com.paradox543.malankaraorthodoxliturgica.data.model
 
 object PrayerRoutes {
 //    Section Routes
@@ -58,4 +58,3 @@ object PrayerRoutes {
     const val CHAPTERFIVE = "chapterFive"
     const val APPENDIXONE = "appendixOne"
 }
-

@@ -1,7 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,49 +39,56 @@ fun AboutScreen(navController: NavController) {
                 title = "About",
                 navController = navController,
             )
-        }
+        },
     ) { padding ->
         Column(
-            modifier = Modifier
-                .padding(padding)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier =
+                Modifier
+                    .padding(padding)
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             // App name & version
             Text(
                 text = "Malankara Orthodox Liturgica",
                 modifier = Modifier.fillMaxWidth(),
                 style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
             Text(
                 text = "Version ${BuildConfig.VERSION_NAME}",
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
 
             // Description
             Text(
-                text = "A prayer companion app designed for the members of the Malankara Orthodox Syrian Church. Offline-first, multi-language (English, Malayalam, Manglish)."
+                text =
+                    """
+                        |A prayer companion app designed for the members of the Malankara Orthodox 
+                        |Syrian Church. Offline-first, multi-language (English, Malayalam, Manglish
+                        |).
+                    """.trimMargin(),
             )
 
             HorizontalDivider()
 
             Text(
                 "📜 Credits & Contributors",
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
-            
+
             Text(
-                text = """
+                text =
+                    """
                     - Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations
                     - Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights
                     - Jerin M George – Assistance with Color Theme Fixes and Image Selection.
-                    - Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, Nohan George & Anoop Alex Koshy – Additional Text Translations and Preparation
+                    - Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, 
+                    Nohan George & Anoop Alex Koshy – Additional Text Translations and Preparation
                     """.trimIndent(),
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
             )
-
 
             HorizontalDivider()
 
@@ -87,7 +96,21 @@ fun AboutScreen(navController: NavController) {
             Text("Contact", style = MaterialTheme.typography.titleLarge)
             Text("Developer: Samuel Alex Koshy")
             TextButton(
-                onClick = { /* launch email intent */ }
+                onClick = {
+                    val intent =
+                        Intent(Intent.ACTION_SENDTO).apply {
+                            data = "mailto:".toUri()
+//                        Intent(Intent.ACTION_SEND).apply{
+//                            type = "text/plain"
+                            putExtra(Intent.EXTRA_EMAIL, arrayOf("samuel.alex.koshy@gmail.com"))
+                            putExtra(Intent.EXTRA_SUBJECT, "Malankara Orthodox Liturgica App Feedback")
+                        }
+                    try {
+                        context.startActivity(Intent.createChooser(intent, "Send Email"))
+                    } catch (_: ActivityNotFoundException) {
+                        Toast.makeText(context, "No email apps installed", Toast.LENGTH_SHORT).show()
+                    }
+                },
             ) {
                 Text("Email: samuel.alex.koshy@gmail.com")
                 Icon(
@@ -102,7 +125,7 @@ fun AboutScreen(navController: NavController) {
             // Links
             Text("More", style = MaterialTheme.typography.titleLarge)
             TextButton(
-                onClick = { openUrl(context, "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/terms-and-conditions.html") }
+                onClick = { openUrl(context, "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/terms-and-conditions.html") },
             ) {
                 Text("Terms of Service")
                 Icon(
@@ -111,8 +134,8 @@ fun AboutScreen(navController: NavController) {
                     modifier = Modifier.size(20.dp),
                 )
             }
-            TextButton (
-                onClick = { openUrl(context, "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/privacy-policy.html") }
+            TextButton(
+                onClick = { openUrl(context, "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/privacy-policy.html") },
             ) {
                 Text("Privacy Policy")
                 Icon(
@@ -125,7 +148,10 @@ fun AboutScreen(navController: NavController) {
     }
 }
 
-private fun openUrl(context: Context, url: String) {
+private fun openUrl(
+    context: Context,
+    url: String,
+) {
     val intent = Intent(Intent.ACTION_VIEW, url.toUri())
     context.startActivity(intent)
 }

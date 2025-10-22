@@ -93,7 +93,7 @@ fun PrayerScreen(
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     var title = ""
     for (item in node.route.split("_")) {
-        title += translations[item] + " "
+        title += (translations[item] ?: item) + " "
     }
 
     val configuration = LocalConfiguration.current

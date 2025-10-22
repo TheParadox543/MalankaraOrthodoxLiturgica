@@ -171,7 +171,7 @@
         "en": "Kauma",
         "ml": "കൗമ"
     },
-    "kaumaSyriac": {
+    "trisagionSyriac": {
         "en": "Kauma (Syriac)",
         "ml": "കൗമ (സുറിയാനി)"
     },
@@ -183,15 +183,15 @@
         "en": "Prayer to St. Mary",
         "ml": "ദൈവ മാതാവിനോടുള്ള അപേക്ഷ"
     },
-    "nicene": {
+    "niceneCreed": {
         "en": "Nicene Creed",
         "ml": "വിശ്വാസപ്രമാണം"
     },
-    "angels": {
+    "praiseOfAngels": {
         "en": "Praise of Angels",
         "ml": "മാലാഖമാരുടെ സ്തുതി"
     },
-    "cherubims": {
+    "praiseOfCherubims": {
         "en": "Praise of Cherubims",
         "ml": "ക്രോബേന്മാരുടെ സ്തുതി"
     },
@@ -215,7 +215,7 @@
         "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ",
         "en": "For the Apostles"
     },
-    "cyclic": {
+    "cyclicPrayers": {
         "ml": "ധൂപപ്രാർത്ഥനകൾ",
         "en": "Cyclic prayers"
     },
@@ -306,5 +306,185 @@
     "afterHolyCrossSongs": {
         "en": "Sundays after Holy Cross Sunday",
         "ml": "സ്ലീബായുടെ ശേഷമുള്ള ഞായറാച്ചകൾ"
+    },
+    "sanctification": {
+        "en": "Sanctification",
+        "ml": "കൂദോശ് ഈത്തോ"
+    },
+    "dedication": {
+        "en": "Dedication",
+        "ml": "ഹൂദോസ് ഈത്തോ"
+    },
+    "revelationToZachariah": {
+        "en": "Revelation to Zachariah",
+        "ml": "സ്\u200cകറിയായോടുള്ള അറിയിപ്പ്"
+    },
+    "annunciationToStMary": {
+        "en": "Annunciation to St. Mary",
+        "ml": "ദൈവമാതാവിനോടുള്ള അറിയിപ്പ്"
+    },
+    "afterChristmas": {
+        "en": "Sundays after Christmas",
+        "ml": "യൽദോയ്ക്ക് ശേഷമുള്ള ഞായറാഴ്‌ചകൾ"
+    },
+    "afterEpiphany": {
+        "en": "Sundays after Epiphany",
+        "ml": "ദനഹയ്ക്ക് ശേഷമുള്ള ഞായറാഴ്‌ചകൾ"
+    },
+    "afterHolyCross": {
+        "en": "Sundays after Holy Cross",
+        "ml": "സ്ലീബായുടെ ശേഷമുള്ള ഞായറാഴ്‌ചകൾ"
+    },
+    "afterNewSunday": {
+        "en": "Sundays after New Sunday",
+        "ml": "പുതുഞായറാഴ്ച‌യ്ക്കു ശേഷമുള്ള ഞായറാഴ്‌ചകൾ"
+    },
+    "allDepartedPriests": {
+        "en": "All Departed Priests",
+        "ml": "ആചാര്യന്മാരുടെ ഞായറാഴ്ച"
+    },
+    "assumption": {
+        "en": "Assumption",
+        "ml": "ശൂനോയോ പെരുന്നാൾ"
+    },
+    "beheadingOfStJohnTheBaptist": {
+        "en": "Beheading of St. John the Baptist",
+        "ml": "മാർ യൂഹാനോൻ മാംദാനായുടെ പുകഴ്‌ചയും ശിരച്ഛേദവും"
+    },
+    "birthOfJohnTheBaptist": {
+        "en": "Birth of St. John the Baptist",
+        "ml": "യൂഹാനോൻ മാംദാനായുടെ ജനനം"
+    },
+    "blindMan": {
+        "en": "Sixth Sunday of the Great Lent",
+        "ml": "നോമ്പിലെ ആറാം ഞായറാഴ്‌ച"
+    },
+    "canaaniteWoman": {
+        "en": "Fourth Sunday of the Great Lent",
+        "ml": "നോമ്പിലെ നാലാം ഞായറാഴ്‌ച"
+    },
+    "circumcision": {
+        "en": "Circumcision of Our Lord",
+        "ml": "ആണ്ടാരംഭം"
+    },
+    "crippledWoman": {
+        "en": "Fifth Sunday of the Great Lent",
+        "ml": "നോമ്പിലെ അഞ്ചാം ഞായറാഴ്ച"
+    },
+    "easter": {
+        "en": "Easter",
+        "ml": "ക്യംതാ"
+    },
+    "feastOfApostlesFast": {
+        "en": "Feast of St. Peter and St. Paul",
+        "ml": "പത്രോസ് പൗലൂസ് ശ്ലീഹന്മാരുടെ പെരുന്നാൾ"
+    },
+    "feastOfHolyCross": {
+        "en": "Feast of the Holy Cross",
+        "ml": "സ്ലീബാ പെരുന്നാൾ"
+    },
+    "feastOfStStephen": {
+        "en": "Feast of St Stephen",
+        "ml": "മാർ സ്തേഫാനോസ് സഹദാ"
+    },
+    "feastStEphrem": {
+        "en": "Feast of St Ephrem and Mar Theodorus",
+        "ml": "മാർ അപ്രേം-മാർ തേവോദോറോസ്"
+    },
+    "fortiethFriday": {
+        "en": "Fortieth Friday",
+        "ml": "നാൽപ്പതാം വെള്ളിയാഴ്ച"
+    },
+    "glorificationOfStMary": {
+        "en": "Glorification of St. Mary",
+        "ml": "ദൈവമാതാവിന്റെ പുകഴ്‌ച"
+    },
+    "goldenFriday": {
+        "en": "Golden Friday",
+        "ml": "സ്വർണവെള്ളിയാഴ്ച"
+    },
+    "hevorae": {
+        "en": "Hevorae Days",
+        "ml": "ഹേവോറേ ദിനങ്ങൾ"
+    },
+    "kothine": {
+        "en": "Kothine Sunday",
+        "ml": "കൊത്തിനെ ഞായർ"
+    },
+    "lazarusSaturday": {
+        "en": "Lazarus Saturday",
+        "ml": "ലോവോസോറിന്റെ ശനിയാഴ്ച"
+    },
+    "lepersSunday": {
+        "en": "Lepers Sunday",
+        "ml": "നോമ്പിലെ രണ്ടാം ഞായറാഴ്ച"
+    },
+    "massacreOfTheInfants": {
+        "en": "Massacre of the Infants",
+        "ml": "ശിശുവധം"
+    },
+    "maundyThursday": {
+        "en": "Maundy Thursday",
+        "ml": "പെസഹാ വ്യാഴാഴ്\u200bച"
+    },
+    "mayaltho": {
+        "en": "Mayaltho",
+        "ml": "മാഅൽത്തോ"
+    },
+    "memoryOfFortyMartyrs": {
+        "en": "Memory of the Forty Martyrs",
+        "ml": "നാൽപ്പതു സഹദേന്മാർ"
+    },
+    "midLent": {
+        "en": "Mid Lent",
+        "ml": "പകുതിനോമ്പ് ബുധനാഴ്ച"
+    },
+    "newSunday": {
+        "en": "New Sunday",
+        "ml": "പുതുഞായറാഴ്ച"
+    },
+    "ninevehLent": {
+        "en": "Nineveh Lent",
+        "ml": "നിനുവനോമ്പ്"
+    },
+    "palmSunday": {
+        "en": "Palm Sunday",
+        "ml": "ഊശാന ഞായറാഴ്‌ച"
+    },
+    "palsySunday": {
+        "en": "Palsy Sunday",
+        "ml": "നോമ്പിലെ മൂന്നാം ഞായറാഴ്‌ച"
+    },
+    "revelationToJoseph": {
+        "en": "Revelation to Joseph",
+        "ml": "യോസേപ്പിനോടുള്ള അറിയിപ്പ്"
+    },
+    "saturdayOfAnnunciation": {
+        "en": "Saturday of Annunciation",
+        "ml": "ദുഃഖശനിയാഴ്‌ച"
+    },
+    "sundayBeforeChristmas": {
+        "en": "Sunday before Christmas",
+        "ml": "യൽദോയ്ക്ക് മുമ്പുള്ള ഞായറാഴ്‌ച"
+    },
+    "transfiguration": {
+        "en": "Transfiguration",
+        "ml": "കൂടാര പെരുന്നാൾ"
+    },
+    "visitationToElizabeth": {
+        "en": "Visitation to Elizabeth",
+        "ml": "എലിശബേത്തിൻ്റെ അടുക്കലേക്കുള്ളമറിയാമിൻ്റെ യാത്ര"
+    },
+    "yeldho": {
+        "en": "Yeldho",
+        "ml": "യൽദോ"
+    },
+    "anointment": {
+        "en": "Anointment of the Sick",
+        "ml": "രോഗികളുടെ തൈലാഭിഷേകം"
+    },
+    "allDepartedFaithful": {
+        "en": "All Departed Faithful",
+        "ml": "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്‌ച"
     }
 }
