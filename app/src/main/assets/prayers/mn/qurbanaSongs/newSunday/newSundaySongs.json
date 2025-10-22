@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Puthunyaayaraazhchacha"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/newSunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/newSunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/newSunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/newSunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/newSunday/hoothomo.json"
+    }
+]

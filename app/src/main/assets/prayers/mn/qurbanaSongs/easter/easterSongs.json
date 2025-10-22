@@ -1,0 +1,22 @@
+[
+    {
+        "type": "title",
+        "content": "Kyamthaa (uyirpp)"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/hoothomo.json"
+    }
+]

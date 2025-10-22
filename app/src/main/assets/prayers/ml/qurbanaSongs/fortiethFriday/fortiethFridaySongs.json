@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "നാൽപ്പതാം വെള്ളിയാഴ്ച"
+    },
+    {
+        "type": "subheading",
+        "content": "(രണ്ടാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/hoothomo.json"
+    }
+]

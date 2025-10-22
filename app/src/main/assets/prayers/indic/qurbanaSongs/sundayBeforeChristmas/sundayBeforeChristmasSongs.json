@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "yaldōykku mumpuḷḷa ñāyaṟāzca"
+    },
+    {
+        "type": "subheading",
+        "content": "(eṭṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/hoothomo.json"
+    }
+]

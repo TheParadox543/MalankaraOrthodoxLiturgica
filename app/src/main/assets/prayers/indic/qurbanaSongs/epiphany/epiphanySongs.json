@@ -1,0 +1,38 @@
+[
+    {
+        "type": "title",
+        "content": "danahā"
+    },
+    {
+        "type": "subheading",
+        "content": "(kaṟttāviṉṟe māmōdīsā-januvari 6)"
+    },
+    {
+        "type": "subheading",
+        "content": "(raṇṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/hoothomo.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/duringCommunion.json"
+    }
+]

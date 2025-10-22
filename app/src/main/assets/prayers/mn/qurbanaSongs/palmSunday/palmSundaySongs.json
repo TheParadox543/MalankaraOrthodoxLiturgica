@@ -1,0 +1,38 @@
+[
+    {
+        "type": "title",
+        "content": "Ooshaana nyaayaraazhcha"
+    },
+    {
+        "type": "subheading",
+        "content": "(ezhaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/matinsGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/hoothomo.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/duringCommunion.json"
+    }
+]

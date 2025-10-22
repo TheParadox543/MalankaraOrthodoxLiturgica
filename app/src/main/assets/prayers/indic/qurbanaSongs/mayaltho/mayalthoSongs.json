@@ -1,0 +1,38 @@
+[
+    {
+        "type": "title",
+        "content": "māalttō"
+    },
+    {
+        "type": "subheading",
+        "content": "(kaṟttāvinđe dēvālayapravēśanaṁ)"
+    },
+    {
+        "type": "subheading",
+        "content": "(phebruvari 2)"
+    },
+    {
+        "type": "subheading",
+        "content": "(mūnnāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/mayaltho/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/mayaltho/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/mayaltho/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/mayaltho/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/mayaltho/hoothomo.json"
+    }
+]

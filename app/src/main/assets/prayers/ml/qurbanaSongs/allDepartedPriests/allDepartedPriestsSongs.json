@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "ആചാര്യന്മാരുടെ ഞായറാഴ്ച"
+    },
+    {
+        "type": "subheading",
+        "content": "(ഏഴാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedPriests/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedPriests/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedPriests/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedPriests/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedPriests/hoothomo.json"
+    }
+]

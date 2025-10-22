@@ -1,7 +1,19 @@
 [
     {
         "type": "title",
-        "content": "കൂടാര (മറുരൂപ) പ്പെരുന്നാൾ"
+        "content": "കൂടാര (മറുരൂപ)പ്പെരുന്നാൾ (ആഗസ്റ്റ് 6)"
+    },
+    {
+        "type": "subheading",
+        "content": "(ആറാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/morningGospel.json"
     },
     {
         "type": "link",

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "title",
+        "content": "ക്യംതാ (ഉയിർപ്പ്)"
+    },
+    {
+        "type": "subheading",
+        "content": "(ഒന്നാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/hoothomo.json"
+    }
+]

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "title",
+        "content": "പെസഹാ വ്യാഴാഴ്‌ച"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/maundyThursday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/maundyThursday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/maundyThursday/hoothomo.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/maundyThursday/duringCommunion.json"
+    }
+]

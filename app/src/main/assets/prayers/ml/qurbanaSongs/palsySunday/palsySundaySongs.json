@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "നോമ്പിലെ മൂന്നാം ഞായറാഴ്ച്‌ച (മ്ശറിയോ-തളർവാതരോഗി)"
+    },
+    {
+        "type": "subheading",
+        "content": "(മൂന്നാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/hoothomo.json"
+    }
+]

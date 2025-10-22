@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "sakala vāṅṅippōyavaruṭeyuṁ ñāyaṟāz‌ca"
+    },
+    {
+        "type": "subheading",
+        "content": "(eṭṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedFaithful/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedFaithful/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedFaithful/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedFaithful/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/allDepartedFaithful/hoothomo.json"
+    }
+]

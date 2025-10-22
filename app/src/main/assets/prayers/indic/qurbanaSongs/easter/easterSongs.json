@@ -1,0 +1,22 @@
+[
+    {
+        "type": "title",
+        "content": "kyaṁtā (uyiṟpp)"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/easter/hoothomo.json"
+    }
+]

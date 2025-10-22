@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "നോമ്പിലെ ആറാം ഞായറാഴ്‌ച (സമിയോ - കുരുടൻ)"
+    },
+    {
+        "type": "subheading",
+        "content": "(ആറാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/hoothomo.json"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "ഹേവോറേ ദിനങ്ങൾ"
+    },
+    {
+        "type": "subheading",
+        "content": "(രണ്ടു മുതൽ ഏഴു വരെയുള്ള രാഗങ്ങൾ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hevorae/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hevorae/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hevorae/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hevorae/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hevorae/hoothomo.json"
+    }
+]

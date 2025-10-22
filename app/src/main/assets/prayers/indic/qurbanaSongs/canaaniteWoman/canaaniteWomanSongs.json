@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "nōmpile nālāṁ ñāyaṟāz‌ca (ānoya‌ttō - kna‌ānāyakkāri)"
+    },
+    {
+        "type": "subheading",
+        "content": "(nālāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/canaaniteWoman/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/canaaniteWoman/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/canaaniteWoman/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/canaaniteWoman/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/canaaniteWoman/hoothomo.json"
+    }
+]

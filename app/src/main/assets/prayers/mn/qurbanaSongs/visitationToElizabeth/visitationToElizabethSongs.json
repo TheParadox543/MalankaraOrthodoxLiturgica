@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Elishabetthinte adukkalekkullllamariyaaminte yaathra"
+    },
+    {
+        "type": "subheading",
+        "content": "(anchaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/hoothomo.json"
+    }
+]

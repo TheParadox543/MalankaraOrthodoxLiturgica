@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Skariyaayodulllla ariyipp"
+    },
+    {
+        "type": "subheading",
+        "content": "(moonnaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToZachariah/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToZachariah/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToZachariah/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToZachariah/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToZachariah/hoothomo.json"
+    }
+]

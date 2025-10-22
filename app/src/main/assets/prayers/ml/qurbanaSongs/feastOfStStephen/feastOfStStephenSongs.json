@@ -1,0 +1,34 @@
+[
+    {
+        "type": "title",
+        "content": "മാർ സ്തേഫാനോസ് സഹദാ"
+    },
+    {
+        "type": "subheading",
+        "content": "(ജനുവരി 8)"
+    },
+    {
+        "type": "subheading",
+        "content": "(എട്ടാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfStStephen/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfStStephen/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfStStephen/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfStStephen/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfStStephen/hoothomo.json"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "nōmpile mūnnāṁ ñāyaṟāzc‌ca (mśaṟiyō-taḷaṟvātarōgi)"
+    },
+    {
+        "type": "subheading",
+        "content": "(mūnnāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palsySunday/hoothomo.json"
+    }
+]

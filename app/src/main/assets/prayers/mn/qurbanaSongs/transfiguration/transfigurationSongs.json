@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Koodaara (maruroopa)pperunnaall (aagasttu 6)"
+    },
+    {
+        "type": "subheading",
+        "content": "(aaraam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/hoothomo.json"
+    }
+]

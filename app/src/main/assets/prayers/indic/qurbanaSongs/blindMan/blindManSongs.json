@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "nōmpile āṟāṁ ñāyaṟāz‌ca (samiyō - kuruṭaṉ)"
+    },
+    {
+        "type": "subheading",
+        "content": "(āṟāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/blindMan/hoothomo.json"
+    }
+]

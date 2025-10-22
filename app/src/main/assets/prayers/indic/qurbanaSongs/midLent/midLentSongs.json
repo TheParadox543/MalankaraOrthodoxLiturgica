@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "pakutinōmp budhanāzca"
+    },
+    {
+        "type": "subheading",
+        "content": "(ēṭṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/midLent/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/midLent/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/midLent/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/midLent/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/midLent/hoothomo.json"
+    }
+]

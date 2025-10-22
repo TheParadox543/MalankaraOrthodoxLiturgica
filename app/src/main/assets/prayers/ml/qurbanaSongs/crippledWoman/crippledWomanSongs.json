@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "നോമ്പിലെ അഞ്ചാം ഞായറാഴ്ച (ക്‌പിപ്ത്തോ-കൂനി)"
+    },
+    {
+        "type": "subheading",
+        "content": "(അഞ്ചാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/hoothomo.json"
+    }
+]

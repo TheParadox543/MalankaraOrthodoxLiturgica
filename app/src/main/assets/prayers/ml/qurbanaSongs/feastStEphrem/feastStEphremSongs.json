@@ -1,0 +1,34 @@
+[
+    {
+        "type": "title",
+        "content": "മാർ അപ്രേം-മാർ തേവോദോറോസ്"
+    },
+    {
+        "type": "subheading",
+        "content": "(വലിയ നോമ്പിൽ 1-ാം ശനിയാഴ്‌ച)"
+    },
+    {
+        "type": "subheading",
+        "content": "(എട്ടാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastStEphrem/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastStEphrem/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastStEphrem/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastStEphrem/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastStEphrem/hoothomo.json"
+    }
+]

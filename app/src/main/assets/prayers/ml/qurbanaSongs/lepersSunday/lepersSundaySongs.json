@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "നോമ്പിലെ രണ്ടാം ഞായറാഴ്ച (ഗർബോ-കുഷ്ഠരോഗി)"
+    },
+    {
+        "type": "subheading",
+        "content": "(രണ്ടാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/hoothomo.json"
+    }
+]

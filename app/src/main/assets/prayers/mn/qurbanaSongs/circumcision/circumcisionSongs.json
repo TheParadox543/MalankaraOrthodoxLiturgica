@@ -1,0 +1,26 @@
+[
+    {
+        "type": "title",
+        "content": "Aandaarambham (januvari 1)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/circumcision/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/circumcision/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/circumcision/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/circumcision/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/circumcision/hoothomo.json"
+    }
+]

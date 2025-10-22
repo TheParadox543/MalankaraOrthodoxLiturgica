@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "എലിശബേത്തിൻ്റെ അടുക്കലേക്കുള്ളമറിയാമിൻ്റെ യാത്ര"
+    },
+    {
+        "type": "subheading",
+        "content": "(അഞ്ചാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/visitationToElizabeth/hoothomo.json"
+    }
+]

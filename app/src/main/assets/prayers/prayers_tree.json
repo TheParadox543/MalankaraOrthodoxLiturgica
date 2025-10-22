@@ -3,10 +3,10 @@
     "parent": null,
     "filename": null,
     "languages": [
+        "en",
         "indic",
         "mn",
-        "ml",
-        "en"
+        "ml"
     ],
     "children": [
         {
@@ -14,10 +14,10 @@
             "parent": "malankara",
             "filename": null,
             "languages": [
+                "en",
                 "indic",
                 "mn",
-                "ml",
-                "en"
+                "ml"
             ],
             "children": [
                 {
@@ -341,9 +341,9 @@
                     "parent": "dailyPrayers",
                     "filename": null,
                     "languages": [
+                        "mn",
                         "indic",
-                        "ml",
-                        "mn"
+                        "ml"
                     ],
                     "children": [
                         {
@@ -925,10 +925,10 @@
             "parent": "malankara",
             "filename": null,
             "languages": [
-                "indic",
                 "en",
-                "ml",
-                "mn"
+                "indic",
+                "mn",
+                "ml"
             ],
             "children": [
                 {
@@ -936,10 +936,10 @@
                     "parent": "sacraments",
                     "filename": null,
                     "languages": [
+                        "en",
                         "indic",
                         "mn",
-                        "ml",
-                        "en"
+                        "ml"
                     ],
                     "children": [
                         {
@@ -1048,7 +1048,9 @@
                                     "parent": "qurbanaSongs",
                                     "filename": "qurbanaSongs/sanctification/sanctificationSongs.json",
                                     "languages": [
-                                        "ml"
+                                        "ml",
+                                        "mn",
+                                        "indic"
                                     ],
                                     "children": []
                                 },
@@ -1057,7 +1059,9 @@
                                     "parent": "qurbanaSongs",
                                     "filename": "qurbanaSongs/dedication/dedicationSongs.json",
                                     "languages": [
-                                        "ml"
+                                        "ml",
+                                        "mn",
+                                        "indic"
                                     ],
                                     "children": []
                                 },
@@ -1201,9 +1205,9 @@
                                     "children": []
                                 },
                                 {
-                                    "route": "qurbanaSongs_feastofStStephen",
+                                    "route": "qurbanaSongs_feastOfStStephen",
                                     "parent": "qurbanaSongs",
-                                    "filename": "qurbanaSongs/feastofStStephen/feastofStStephenSongs.json",
+                                    "filename": "qurbanaSongs/feastOfStStephen/feastOfStStephenSongs.json",
                                     "languages": [
                                         "ml",
                                         "mn",
@@ -1420,14 +1424,22 @@
                                     "route": "qurbanaSongs_hevorae",
                                     "parent": "qurbanaSongs",
                                     "filename": "qurbanaSongs/hevorae/hevoraeSongs.json",
-                                    "languages": [],
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 },
                                 {
                                     "route": "qurbanaSongs_newSunday",
                                     "parent": "qurbanaSongs",
                                     "filename": "qurbanaSongs/newSunday/newSundaySongs.json",
-                                    "languages": [],
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 },
                                 {
@@ -1600,33 +1612,64 @@
                     "route": "funeral",
                     "parent": "sacraments",
                     "filename": null,
-                    "languages": [],
+                    "languages": [
+                        "indic",
+                        "mn",
+                        "ml"
+                    ],
                     "children": [
                         {
                             "route": "funeral_men",
                             "parent": "funeral",
                             "filename": null,
-                            "languages": [],
+                            "languages": [
+                                "indic",
+                                "mn",
+                                "ml"
+                            ],
                             "children": [
                                 {
-                                    "route": "funeral_men_partOne",
+                                    "route": "funeral_men_firstPart",
                                     "parent": "funeral_men",
-                                    "filename": "sacraments/funeral/men/partOne.json",
-                                    "languages": [],
+                                    "filename": "sacraments/funeral/men/firstPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 },
                                 {
-                                    "route": "funeral_men_partTwo",
+                                    "route": "funeral_men_secondPart",
                                     "parent": "funeral_men",
-                                    "filename": "sacraments/funeral/men/partTwo.json",
-                                    "languages": [],
+                                    "filename": "sacraments/funeral/men/secondPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 },
                                 {
-                                    "route": "funeral_men_partThree",
+                                    "route": "funeral_men_thirdPart",
                                     "parent": "funeral_men",
-                                    "filename": "sacraments/funeral/men/partThree.json",
-                                    "languages": [],
+                                    "filename": "sacraments/funeral/men/thirdPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
+                                    "children": []
+                                },
+                                {
+                                    "route": "funeral_men_fourthPart",
+                                    "parent": "funeral_men",
+                                    "filename": "sacraments/funeral/men/fourthPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 }
                             ]
@@ -1635,27 +1678,54 @@
                             "route": "funeral_women",
                             "parent": "funeral",
                             "filename": null,
-                            "languages": [],
+                            "languages": [
+                                "indic",
+                                "mn",
+                                "ml"
+                            ],
                             "children": [
                                 {
-                                    "route": "funeral_women_partOne",
+                                    "route": "funeral_women_firstPart",
                                     "parent": "funeral_women",
-                                    "filename": "sacraments/funeral/women/partOne.json",
-                                    "languages": [],
+                                    "filename": "sacraments/funeral/women/firstPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 },
                                 {
-                                    "route": "funeral_women_partTwo",
+                                    "route": "funeral_women_secondPart",
                                     "parent": "funeral_women",
-                                    "filename": "sacraments/funeral/women/partTwo.json",
-                                    "languages": [],
+                                    "filename": "sacraments/funeral/women/secondPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 },
                                 {
-                                    "route": "funeral_women_partThree",
+                                    "route": "funeral_women_thirdPart",
                                     "parent": "funeral_women",
-                                    "filename": "sacraments/funeral/women/partThree.json",
-                                    "languages": [],
+                                    "filename": "sacraments/funeral/women/thirdPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
+                                    "children": []
+                                },
+                                {
+                                    "route": "funeral_women_fourthPart",
+                                    "parent": "funeral_women",
+                                    "filename": "sacraments/funeral/women/fourthPart.json",
+                                    "languages": [
+                                        "ml",
+                                        "mn",
+                                        "indic"
+                                    ],
                                     "children": []
                                 }
                             ]
@@ -1666,7 +1736,9 @@
                     "route": "anointment",
                     "parent": "sacraments",
                     "filename": "sacraments/anointment.json",
-                    "languages": [],
+                    "languages": [
+                        "ml"
+                    ],
                     "children": []
                 }
             ]
@@ -1676,9 +1748,9 @@
             "parent": "malankara",
             "filename": null,
             "languages": [
+                "mn",
                 "indic",
-                "ml",
-                "mn"
+                "ml"
             ],
             "children": [
                 {

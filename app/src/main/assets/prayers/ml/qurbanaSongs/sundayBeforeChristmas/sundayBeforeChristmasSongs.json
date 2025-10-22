@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "യൽദോയ്ക്കു മുമ്പുള്ള ഞായറാഴ്ച"
+    },
+    {
+        "type": "subheading",
+        "content": "(എട്ടാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sundayBeforeChristmas/hoothomo.json"
+    }
+]

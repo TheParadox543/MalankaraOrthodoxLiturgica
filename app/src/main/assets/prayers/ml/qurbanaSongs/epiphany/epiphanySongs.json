@@ -1,0 +1,38 @@
+[
+    {
+        "type": "title",
+        "content": "ദനഹാ"
+    },
+    {
+        "type": "subheading",
+        "content": "(കർത്താവിൻ്റെ മാമോദീസാ-ജനുവരി 6)"
+    },
+    {
+        "type": "subheading",
+        "content": "(രണ്ടാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/hoothomo.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/duringCommunion.json"
+    }
+]

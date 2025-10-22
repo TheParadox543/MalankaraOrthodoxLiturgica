@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "putuñāyaṟāzca‌ykku śēṣamuḷḷa ñāyaṟāz‌cakaḷ"
+    },
+    {
+        "type": "subheading",
+        "content": "(kramamāyi raṇṭu mutaluḷḷa rāgaṅṅaḷ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterNewSunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterNewSunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterNewSunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterNewSunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterNewSunday/hoothomo.json"
+    }
+]

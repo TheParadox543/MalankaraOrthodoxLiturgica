@@ -1,0 +1,38 @@
+[
+    {
+        "type": "title",
+        "content": "Danahaa"
+    },
+    {
+        "type": "subheading",
+        "content": "(kartthaavinte maamodeesaa-januvari 6)"
+    },
+    {
+        "type": "subheading",
+        "content": "(randaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/hoothomo.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/epiphany/duringCommunion.json"
+    }
+]

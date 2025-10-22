@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Pathrosu pauloosu shleehanmaarude perunnaall (joon 29)"
+    },
+    {
+        "type": "subheading",
+        "content": "(anchaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/hoothomo.json"
+    }
+]

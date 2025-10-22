@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "സ്വർഗ്ഗാരോഹണം"
+    },
+    {
+        "type": "subheading",
+        "content": "(അഞ്ചാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/hoothomo.json"
+    }
+]

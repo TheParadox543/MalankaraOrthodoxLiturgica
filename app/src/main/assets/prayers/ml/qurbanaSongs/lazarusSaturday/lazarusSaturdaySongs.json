@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "ലോവോസോറിന്റെ ശനിയാഴ്ച"
+    },
+    {
+        "type": "subheading",
+        "content": "(എട്ടാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lazarusSaturday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lazarusSaturday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lazarusSaturday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lazarusSaturday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lazarusSaturday/hoothomo.json"
+    }
+]

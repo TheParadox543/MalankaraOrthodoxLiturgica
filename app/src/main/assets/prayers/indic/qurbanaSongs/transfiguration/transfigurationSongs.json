@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "kūṭāra (maṟurūpa)pperunnāḷ (āgasŧŧ 6)"
+    },
+    {
+        "type": "subheading",
+        "content": "(āṟāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/transfiguration/hoothomo.json"
+    }
+]

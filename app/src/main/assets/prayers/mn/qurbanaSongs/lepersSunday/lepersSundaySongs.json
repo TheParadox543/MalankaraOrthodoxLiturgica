@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Nompile randaam nyaayaraazhcha (garbo-kushdharogi)"
+    },
+    {
+        "type": "subheading",
+        "content": "(randaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/hoothomo.json"
+    }
+]

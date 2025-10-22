@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "സ്വർണ്ണവെള്ളിയാഴ്ച"
+    },
+    {
+        "type": "subheading",
+        "content": "(മൂന്നാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/hoothomo.json"
+    }
+]
