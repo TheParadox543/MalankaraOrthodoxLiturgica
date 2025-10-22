@@ -331,9 +331,9 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElement.DynamicContent -> {
+        is PrayerElement.DynamicSongsBlock -> {
             if (prayerElement.items.isNotEmpty()) {
-                DynamicContentUI(
+                DynamicSongsBlockUI(
                     prayerElement,
                     prayerViewModel,
                     filename,
@@ -420,8 +420,8 @@ fun PrayerButton(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DynamicContentUI(
-    dynamicContent: PrayerElement.DynamicContent,
+fun DynamicSongsBlockUI(
+    dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
     navController: NavController,
@@ -432,26 +432,17 @@ fun DynamicContentUI(
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
 
     val dynamicSong =
-        dynamicContent.items.find { it.eventKey == dynamicSongKey }
-            ?: dynamicContent.items.firstOrNull()
+        dynamicSongsBlock.items.find { it.eventKey == dynamicSongKey }
+            ?: dynamicSongsBlock.items.firstOrNull()
     // For dropdown menu
-    val songs = dynamicContent.items
+    val songs = dynamicSongsBlock.items
     var expanded by remember { mutableStateOf(false) }
 
     val titles =
         songs.map { song ->
-            when (selectedLanguage) {
-                AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
-                else -> song.eventTitle.en
-            }
+            song.eventTitle
         }
-    val selectedTitle =
-        dynamicSong?.let { song ->
-            when (selectedLanguage) {
-                AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
-                else -> song.eventTitle.en
-            }
-        } ?: "Error"
+    val selectedTitle = dynamicSong?.eventTitle ?: "Error"
     Card(modifier) {
         Column(Modifier.padding(4.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(
@@ -482,13 +473,8 @@ fun DynamicContentUI(
                         onDismissRequest = { expanded = false },
                     ) {
                         songs.forEach { song ->
-                            val title =
-                                when (selectedLanguage) {
-                                    AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
-                                    else -> song.eventTitle.en
-                                }
                             DropdownMenuItem(
-                                text = { Text(title) },
+                                text = { Text(song.eventTitle) },
                                 onClick = {
                                     prayerViewModel.setDynamicSongKey(song.eventKey)
                                     expanded = false

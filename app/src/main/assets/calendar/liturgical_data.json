@@ -1,11 +1,11 @@
 {
-    "koodoshEetho": {
+    "sanctification": {
         "type": "feast",
         "title": {
             "en": "Koodosh Eetho (Sanctification)",
             "ml": "കൂദോശ് ഈത്തോ"
         },
-        "specialSongsKey": "koodoshEethoSongs",
+        "specialSongsKey": "sanctificationSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -132,13 +132,13 @@
             ]
         }
     },
-    "hoodoshEetho": {
+    "dedication": {
         "type": "feast",
         "title": {
             "en": "Hoodosh Eetho (Dedication of Church)",
             "ml": "ഹൂദോസ് ഈത്തോ"
         },
-        "specialSongsKey": "hoodoshEethoSongs",
+        "specialSongsKey": "dedicationSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
