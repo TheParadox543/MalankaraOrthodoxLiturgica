@@ -8,6 +8,8 @@ import android.media.AudioManager
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 
 object SoundModeManager {
+    private var previousInterruptionFilter: Int? = null
+
     fun hasGrantedDndPermission(notificationManager: NotificationManager): Boolean = notificationManager.isNotificationPolicyAccessGranted
 
     fun setDndMode(
@@ -41,9 +43,11 @@ object SoundModeManager {
         val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
 
+        if (previousInterruptionFilter == null) {
+            previousInterruptionFilter = notificationManager.currentInterruptionFilter
+        }
         if (!hasGrantedDndPermission(notificationManager)) return
-        val currentFilter = notificationManager.currentInterruptionFilter
-        if (currentFilter != NotificationManager.INTERRUPTION_FILTER_ALL) return
+        if (previousInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) return
 
         when (soundMode) {
             SoundMode.OFF -> {

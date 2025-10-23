@@ -127,10 +127,6 @@ class SettingsViewModel @Inject constructor(
 
     fun setSoundMode(permissionState: SoundMode) {
         _soundMode.value = permissionState
-//        if (!hasGrantedDndPermission()) {
-//            _soundMode.value = SoundMode.OFF
-//            return
-//        }
         viewModelScope.launch {
             settingsRepository.setSoundMode(permissionState)
         }
