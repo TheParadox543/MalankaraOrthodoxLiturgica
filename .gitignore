@@ -21,3 +21,4 @@ local.properties
 .idea/kotlinc.xml
 /app/google-services.json
 /core/build
+/app/apk
