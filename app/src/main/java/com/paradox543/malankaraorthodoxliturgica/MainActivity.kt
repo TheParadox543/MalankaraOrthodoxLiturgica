@@ -1,7 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica
 
-import android.annotation.SuppressLint
+import android.app.NotificationManager
+import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -21,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
@@ -44,6 +49,76 @@ class MainActivity : ComponentActivity() {
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val navViewModel: NavViewModel by viewModels()
+
+    private fun hasGrantedDndPermission(): Boolean {
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
+        return notificationManager.isNotificationPolicyAccessGranted
+    }
+
+    private fun requestDndPermission() {
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            Toast.makeText(this, "Please grant DND permission in Settings.", Toast.LENGTH_LONG).show()
+            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+            startActivity(intent)
+        }
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            Toast
+                .makeText(
+                    this,
+                    "DND permissions not granted in Settings. Please enable to make use of features.",
+                    Toast.LENGTH_LONG,
+                ).show()
+            return
+        }
+    }
+
+    fun setDndMode(enable: Boolean) {
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as? NotificationManager ?: return
+        if (notificationManager.isNotificationPolicyAccessGranted) {
+            notificationManager.setInterruptionFilter(
+                when (enable) {
+                    true -> {
+                        NotificationManager.INTERRUPTION_FILTER_NONE
+                    }
+                    false -> {
+                        NotificationManager.INTERRUPTION_FILTER_ALL
+                    }
+                },
+            )
+        }
+    }
+
+    private fun setSilentMode() {
+        if (!hasGrantedDndPermission()) return
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+    }
+
+    private fun restoreNormalMode() {
+        if (!hasGrantedDndPermission()) return
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
+        audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
+        setDndMode(false)
+    }
+
+    private fun setSilentOnChange(soundMode: SoundMode) {
+        if (!hasGrantedDndPermission()) return
+        when (soundMode) {
+            SoundMode.OFF -> {
+                restoreNormalMode()
+            }
+
+            SoundMode.SILENT -> {
+                setSilentMode()
+            }
+
+            SoundMode.DND -> {
+                setDndMode(true)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install the splash screen.
@@ -70,6 +145,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val language by settingsViewModel.selectedLanguage.collectAsState()
             val scaleFactor by settingsViewModel.selectedFontScale.collectAsState()
+            val soundMode by settingsViewModel.soundMode.collectAsState()
 
             MalankaraOrthodoxLiturgicaTheme(language = language, textScale = scaleFactor) {
                 // 1. Remember the SnackbarHostState and a coroutine scope.
@@ -83,11 +159,12 @@ class MainActivity : ComponentActivity() {
                 LaunchedEffect(updateDownloaded) {
                     if (updateDownloaded) {
                         scope.launch {
-                            val result = snackbarHostState.showSnackbar(
-                                message = "An update has just been downloaded.",
-                                actionLabel = "RESTART",
-                                duration = SnackbarDuration.Indefinite // Stays until dismissed or actioned
-                            )
+                            val result =
+                                snackbarHostState.showSnackbar(
+                                    message = "An update has just been downloaded.",
+                                    actionLabel = "RESTART",
+                                    duration = SnackbarDuration.Indefinite, // Stays until dismissed or actioned
+                                )
                             // 4. Perform action based on user interaction.
                             if (result == SnackbarResult.ActionPerformed) {
                                 inAppUpdateManager.completeUpdate()
@@ -96,11 +173,16 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                LaunchedEffect(soundMode) {
+                    if (soundMode != SoundMode.OFF) {
+                        requestDndPermission()
+                    }
+                    restoreNormalMode()
+                    setSilentOnChange(soundMode)
+                }
+
                 // 5. Use Scaffold to provide a host for the Snackbar.
-                @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-                Scaffold(
-                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
-                ) { innerPadding ->
+                Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
                     // Your NavGraph is placed inside the Scaffold's content area.
                     // The innerPadding can be passed to your NavGraph if needed to prevent overlap.
                     NavGraph(
@@ -118,10 +200,18 @@ class MainActivity : ComponentActivity() {
         // The selected code from the Canvas is used here.
         // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
+        val soundMode = settingsViewModel.soundMode.value
+        setSilentOnChange(soundMode)
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
+        val soundMode = settingsViewModel.soundMode.value
+        when (soundMode) {
+            SoundMode.OFF -> {} // do nothing
+            SoundMode.SILENT -> restoreNormalMode()
+            SoundMode.DND -> setDndMode(false)
+        }
     }
 }

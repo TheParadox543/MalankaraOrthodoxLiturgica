@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,6 +35,7 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -57,6 +59,7 @@ import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
@@ -66,6 +69,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 fun SettingsScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontScale by settingsViewModel.selectedFontScale.collectAsState()
+    val soundMode by settingsViewModel.soundMode.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     val context = LocalContext.current
     val scrollState = rememberScrollState()
@@ -84,9 +88,9 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 .padding(horizontal = 20.dp)
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Center
+//            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-
             Card(
                 modifier = Modifier
                     .padding(8.dp)
@@ -115,8 +119,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             // Font Size Selection
             Card(
@@ -149,7 +151,47 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Card(
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                    ),
+                elevation = CardDefaults.cardElevation(4.dp),
+            ) {
+                Row(
+                    Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text("Sound Mode", Modifier.weight(1f))
+                    Column {
+                        listOf(SoundMode.OFF, SoundMode.SILENT, SoundMode.DND).forEach { mode ->
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier =
+                                    Modifier
+//                                        .fillMaxWidth()
+                                        .clickable { settingsViewModel.setSoundMode(mode) }
+                                        .padding(8.dp),
+                            ) {
+                                RadioButton(
+                                    selected = (soundMode == mode),
+                                    onClick = { settingsViewModel.setSoundMode(mode) },
+                                )
+                                Text(text = mode.name)
+                            }
+                        }
+                    }
+                }
+            }
 
             // Song Scroll State
             Card(
@@ -185,7 +227,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     }
                     if (songScrollState) {
                         Text(
-                            "Long lines will extend off-screen and can be scrolled horizontally",
+                            "Long lines will extend off-screen",
                             style = MaterialTheme.typography.labelMedium,
                         )
                     } else {
@@ -196,8 +238,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     }
                 }
             }
-
-            Spacer(Modifier.height(16.dp))
 
             // About the app option
             ListItem(
@@ -220,8 +260,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     headlineColor = MaterialTheme.colorScheme.onBackground,
                 )
             )
-
-            Spacer(Modifier.height(16.dp))
 
             // Share App
             ListItem(
@@ -249,7 +287,6 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
             )
 
             if (BuildConfig.DEBUG) {
-                Spacer(Modifier.padding(16.dp))
 
                 ElevatedButton(
                     onClick = { settingsViewModel.setOnboardingCompleted(false) },
