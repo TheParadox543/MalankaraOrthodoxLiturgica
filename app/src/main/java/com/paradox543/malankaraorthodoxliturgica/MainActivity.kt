@@ -2,7 +2,6 @@ package com.paradox543.malankaraorthodoxliturgica
 
 import android.app.NotificationManager
 import android.content.Intent
-import android.media.AudioManager
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
@@ -25,9 +24,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
@@ -35,6 +39,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -46,18 +51,24 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var calendarRepository: LiturgicalCalendarRepository
 
+    @Inject
+    lateinit var workManager: WorkManager
+
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val navViewModel: NavViewModel by viewModels()
 
-    private fun hasGrantedDndPermission(): Boolean {
+    private var previousInterruptionFilter: Int? = null
+
+    fun findPreviousInterruptionFilter(): Int {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
-        return notificationManager.isNotificationPolicyAccessGranted
+        previousInterruptionFilter = notificationManager.currentInterruptionFilter
+        return notificationManager.currentInterruptionFilter
     }
 
     private fun requestDndPermission() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
         if (!notificationManager.isNotificationPolicyAccessGranted) {
             Toast.makeText(this, "Please grant DND permission in Settings.", Toast.LENGTH_LONG).show()
             val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
@@ -71,47 +82,6 @@ class MainActivity : ComponentActivity() {
                     Toast.LENGTH_LONG,
                 ).show()
             return
-        }
-    }
-
-    private fun setDndMode(enable: Boolean) {
-        if (!hasGrantedDndPermission()) return
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as? NotificationManager ?: return
-        notificationManager.setInterruptionFilter(
-            when (enable) {
-                true -> NotificationManager.INTERRUPTION_FILTER_NONE
-                false -> NotificationManager.INTERRUPTION_FILTER_ALL
-            },
-        )
-    }
-
-    private fun setSilentMode(enable: Boolean) {
-        if (!hasGrantedDndPermission()) return
-        val audioManager = getSystemService(AUDIO_SERVICE) as? AudioManager ?: return
-        audioManager.ringerMode =
-            when (enable) {
-                true -> AudioManager.RINGER_MODE_SILENT
-                false -> AudioManager.RINGER_MODE_NORMAL
-            }
-    }
-
-    private fun applyAppSoundMode(
-        soundMode: SoundMode,
-        active: Boolean,
-    ) {
-        if (!hasGrantedDndPermission()) return
-
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val currentFilter = notificationManager.currentInterruptionFilter
-        if (currentFilter != NotificationManager.INTERRUPTION_FILTER_ALL) return
-
-        when (soundMode) {
-            SoundMode.OFF -> {
-                setSilentMode(false)
-                setDndMode(false)
-            }
-            SoundMode.SILENT -> setSilentMode(active)
-            SoundMode.DND -> setDndMode(active)
         }
     }
 
@@ -168,11 +138,17 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                LaunchedEffect(Unit) {
+                    findPreviousInterruptionFilter()
+                }
+
                 LaunchedEffect(soundMode) {
                     if (soundMode != SoundMode.OFF) {
                         requestDndPermission()
                     }
-                    applyAppSoundMode(soundMode, true)
+                    if (previousInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) {
+                        SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+                    }
                 }
 
                 // 5. Use Scaffold to provide a host for the Snackbar.
@@ -194,14 +170,34 @@ class MainActivity : ComponentActivity() {
         // The selected code from the Canvas is used here.
         // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
+        // Cancel pending restore sound work if any
+        workManager.cancelUniqueWork("restore_sound_mode")
+
         val soundMode = settingsViewModel.soundMode.value
-        applyAppSoundMode(soundMode, true)
+        if (previousInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) {
+            SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+        }
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
-        val soundMode = settingsViewModel.soundMode.value
-        applyAppSoundMode(soundMode, false)
+        // Schedule sound restoration when app goes to background
+        if (previousInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) {
+            scheduleSoundModeRestore()
+        }
+    }
+
+    fun scheduleSoundModeRestore() {
+        val restoreWork =
+            OneTimeWorkRequestBuilder<RestoreSoundWorker>()
+                .setInitialDelay(30, TimeUnit.MINUTES)
+                .build()
+
+        workManager.enqueueUniqueWork(
+            "restore_sound_mode",
+            ExistingWorkPolicy.REPLACE,
+            restoreWork,
+        )
     }
 }
