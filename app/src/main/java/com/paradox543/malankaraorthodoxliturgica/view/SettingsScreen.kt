@@ -1,19 +1,24 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
+import android.content.Intent
+import android.provider.Settings
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -21,25 +26,25 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -53,6 +58,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
@@ -63,10 +70,14 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(navController: NavController, settingsViewModel: SettingsViewModel) {
+fun SettingsScreen(
+    navController: NavController,
+    settingsViewModel: SettingsViewModel,
+) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontScale by settingsViewModel.selectedFontScale.collectAsState()
     val soundMode by settingsViewModel.soundMode.collectAsState()
@@ -79,164 +90,97 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
 
     Scaffold(
         topBar = { TopNavBar("Settings", navController) },
-        bottomBar = { BottomNavBar(navController) }
+        bottomBar = { BottomNavBar(navController) },
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = 20.dp)
-                .verticalScroll(scrollState),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = 20.dp)
+                    .verticalScroll(scrollState),
             horizontalAlignment = Alignment.Start,
 //            verticalArrangement = Arrangement.Center,
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Card(
-                modifier = Modifier
-                    .padding(8.dp)
+            Spacer(Modifier.height(12.dp))
+
+            // Language Selection
+            Row(
+                Modifier
+                    .padding(12.dp)
                     .fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                ),
-                elevation = CardDefaults.cardElevation(4.dp)
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Row(
-                    Modifier
-                        .padding(12.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Select Language",
-                        style = MaterialTheme.typography.bodyLarge,
-                    )
-                    LanguageDropdownMenu(
-                        selectedOption = selectedLanguage,
-                        onOptionSelected = { settingsViewModel.setLanguage(it) }
-                    )
-                }
+                Text(
+                    text = "Select Language",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f),
+                )
+                LanguageDropdownMenu(
+                    selectedOption = selectedLanguage,
+                    onOptionSelected = { settingsViewModel.setLanguage(it) },
+                )
             }
 
             // Font Size Selection
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                ),
-                elevation = CardDefaults.cardElevation(4.dp)
+            Row(
+                Modifier
+                    .padding(12.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Row(
-                    Modifier
-                        .padding(12.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Select Font Size",
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.weight(1f),
-                    )
-                    FontScaleDropdownMenu(
-                        selectedFontScale = selectedFontScale,
-                        onOptionSelected = { settingsViewModel.setFontScaleFromSettings(it) }
-                    )
-                }
+                Text(
+                    text = "Select Font Size",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f),
+                )
+                FontScaleDropdownMenu(
+                    selectedFontScale = selectedFontScale,
+                    onOptionSelected = { settingsViewModel.setFontScaleFromSettings(it) },
+                )
             }
 
-            Card(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors =
-                    CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                    ),
-                elevation = CardDefaults.cardElevation(4.dp),
+            // Sound Mode Selection
+            Row(
+                Modifier
+                    .padding(12.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Row(
-                    Modifier
-                        .padding(12.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text("Sound Mode", Modifier.weight(1f))
-                    Column {
-                        listOf(SoundMode.OFF, SoundMode.SILENT, SoundMode.DND).forEach { mode ->
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier =
-                                    Modifier
-//                                        .fillMaxWidth()
-                                        .clickable { settingsViewModel.setSoundMode(mode) }
-                                        .padding(8.dp),
-                            ) {
-                                RadioButton(
-                                    selected = (soundMode == mode),
-                                    onClick = { settingsViewModel.setSoundMode(mode) },
-                                )
-                                Text(text = mode.name)
-                            }
-                        }
-                    }
-                }
+                Text(
+                    text = "Select Sound Mode",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f),
+                )
+                SoundModeDropdownMenu(
+                    selectedSoundMode = soundMode,
+                    onOptionSelected = { selectedSoundMode ->
+                        settingsViewModel.setSoundMode(selectedSoundMode)
+                    },
+                )
             }
 
             // Song Scroll State
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                ),
-                elevation = CardDefaults.cardElevation(4.dp)
+            Row(
+                Modifier
+                    .padding(12.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column(
-                    Modifier.padding(8.dp)
-                ) {
-                    Row(
-                        Modifier
-                            .padding(4.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            text = "Text Layout for Songs",
-                            style = MaterialTheme.typography.bodyLarge,
-                            modifier = Modifier.weight(1f),
-                        )
-                        Switch(
-                            checked = songScrollState,
-                            onCheckedChange = { settingsViewModel.setSongScrollState(it) }
-                        )
-                    }
-                    if (songScrollState) {
-                        Text(
-                            "Long lines will extend off-screen",
-                            style = MaterialTheme.typography.labelMedium,
-                        )
-                    } else {
-                        Text(
-                            "Lines stay within the screen",
-                            style = MaterialTheme.typography.labelMedium,
-                        )
-                    }
-                }
+                Text(
+                    text = "Text Layout for Songs",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f),
+                )
+                Switch(
+                    checked = songScrollState,
+                    onCheckedChange = { settingsViewModel.setSongScrollState(it) },
+                )
             }
 
             // About the app option
@@ -246,7 +190,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                     Icon(
                         Icons.Filled.Info,
                         contentDescription = "About App Icon",
-                        tint = MaterialTheme.colorScheme.tertiary
+                        tint = MaterialTheme.colorScheme.tertiary,
                     )
                 },
                 headlineContent = {
@@ -255,10 +199,11 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 },
-                colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    headlineColor = MaterialTheme.colorScheme.onBackground,
-                )
+                colors =
+                    ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.background,
+                        headlineColor = MaterialTheme.colorScheme.onBackground,
+                    ),
             )
 
             // Share App
@@ -269,10 +214,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         style = MaterialTheme.typography.titleSmall,
                     )
                 },
-                modifier = Modifier
-                    .clickable {
-                        showShareAppBottomSheet = true
-                    },
+                modifier = Modifier.clickable { showShareAppBottomSheet = true },
                 leadingContent = {
                     Icon(
                         imageVector = Icons.Default.Share,
@@ -280,17 +222,17 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         tint = MaterialTheme.colorScheme.onTertiaryContainer,
                     )
                 },
-                colors = ListItemDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    headlineColor = MaterialTheme.colorScheme.onBackground,
-                )
+                colors =
+                    ListItemDefaults.colors(
+                        containerColor = MaterialTheme.colorScheme.background,
+                        headlineColor = MaterialTheme.colorScheme.onBackground,
+                    ),
             )
 
             if (BuildConfig.DEBUG) {
-
                 ElevatedButton(
                     onClick = { settingsViewModel.setOnboardingCompleted(false) },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
                 ) {
                     Text("Reset onboarding")
                 }
@@ -299,9 +241,7 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
     }
 
     if (showQrCodeDialog) {
-        QrCodeShareDialog(
-            onDismissRequest = { showQrCodeDialog = false }
-        )
+        QrCodeShareDialog(onDismissRequest = { showQrCodeDialog = false })
     }
 
     if (showShareAppBottomSheet) {
@@ -309,12 +249,12 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
             onDismissRequest = {
                 showShareAppBottomSheet = false
             },
-            sheetState = bottomSheetState
+            sheetState = bottomSheetState,
         ) {
             Row(
                 Modifier
                     .fillMaxWidth()
-                    .padding(12.dp)
+                    .padding(12.dp),
             ) {
                 Card(
                     Modifier
@@ -325,11 +265,12 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                             onClick = {
                                 settingsViewModel.shareAppPlayStoreLink(
                                     context = context,
-                                    shareMessage = "Welcome to Liturgica: A digital repository for " +
+                                    shareMessage =
+                                        "Welcome to Liturgica: A digital repository for " +
                                             "all your books in the Malankara Orthodox Church", // Your custom message
                                 )
-                            }
-                        )
+                            },
+                        ),
                 ) {
                     Column(
                         Modifier.fillMaxSize(),
@@ -355,9 +296,9 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
                         .padding(8.dp)
                         .clickable {
                             showQrCodeDialog = true
-                        }
+                        },
                 ) {
-                    Column (
+                    Column(
                         Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -376,27 +317,33 @@ fun SettingsScreen(navController: NavController, settingsViewModel: SettingsView
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LanguageDropdownMenu(
     selectedOption: AppLanguage,
-    onOptionSelected: (AppLanguage) -> Unit
+    onOptionSelected: (AppLanguage) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Box {
-        Button(
-            onClick = { expanded = true }
-        ) {
-            Text(
-                selectedOption.displayName.split(" ")[0],
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyLarge,
-            )
-        }
-
-        DropdownMenu(
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+    ) {
+        TextField(
+            value = selectedOption.displayName.split(" ")[0],
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            },
+            modifier =
+                Modifier
+                    .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                    .width(160.dp),
+        )
+        ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
         ) {
             AppLanguage.entries.forEach { language ->
                 DropdownMenuItem(
@@ -405,44 +352,93 @@ fun LanguageDropdownMenu(
                         onOptionSelected(language)
                         expanded = false
                     },
-                    enabled = language != selectedOption
+                    enabled = language != selectedOption,
                 )
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FontScaleDropdownMenu(
     selectedFontScale: AppFontScale,
-    onOptionSelected: (AppFontScale) -> Unit
+    onOptionSelected: (AppFontScale) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(selectedFontScale) }
 
-    Box {
-        OutlinedButton(
-            onClick = { expanded = true },
-            colors = ButtonDefaults.textButtonColors(
-                MaterialTheme.colorScheme.tertiary,
-                MaterialTheme.colorScheme.onTertiary,
-            ),
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+    ) {
+        TextField(
+            value = selectedFontScale.displayName,
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            },
+            modifier =
+                Modifier
+                    .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                    .width(160.dp),
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
         ) {
-            Text(
-                selectedText.displayName,
-                style = MaterialTheme.typography.bodyLarge,
-            )
-        }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             AppFontScale.entries.forEach { appFontSize ->
                 DropdownMenuItem(
                     text = { Text(appFontSize.displayName) },
                     onClick = {
-                        selectedText = appFontSize
                         onOptionSelected(appFontSize)
                         expanded = false
                     },
-                    enabled = appFontSize != selectedFontScale
+                    enabled = appFontSize != selectedFontScale,
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SoundModeDropdownMenu(
+    selectedSoundMode: SoundMode,
+    onOptionSelected: (SoundMode) -> Unit,
+) {
+    val context = LocalContext.current
+    var expanded by remember { mutableStateOf(false) }
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+    ) {
+        TextField(
+            value = selectedSoundMode.name,
+            onValueChange = {},
+            readOnly = true,
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+            },
+            modifier =
+                Modifier
+                    .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                    .width(160.dp),
+        )
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            SoundMode.entries.forEach { soundMode ->
+                DropdownMenuItem(
+                    text = { Text(soundMode.name) },
+                    onClick = {
+                        requestDndPermission(context)
+                        onOptionSelected(soundMode)
+                        expanded = false
+                    },
+                    enabled = soundMode != selectedSoundMode,
                 )
             }
         }
@@ -450,7 +446,7 @@ fun FontScaleDropdownMenu(
 }
 
 @Composable
-fun QrCodeShareDialog( onDismissRequest: () -> Unit ) {
+fun QrCodeShareDialog(onDismissRequest: () -> Unit) {
     // You can determine a fixed size for the QR code display here if you want
     val qrCodeDisplaySizeDp = 200.dp // Example fixed size
 
@@ -460,22 +456,23 @@ fun QrCodeShareDialog( onDismissRequest: () -> Unit ) {
         text = {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 // Load the pre-generated QR code image directly from drawables
                 Image(
                     painter = painterResource(id = R.drawable.app_share_qr), // Your QR image filename
                     contentDescription = "QR Code for App Store Link",
-                    modifier = Modifier
-                        .size(qrCodeDisplaySizeDp)
-                        .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(8.dp))
-                        .padding(8.dp)
+                    modifier =
+                        Modifier
+                            .size(qrCodeDisplaySizeDp)
+                            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(8.dp))
+                            .padding(8.dp),
                 )
                 Spacer(Modifier.height(16.dp))
                 Text(
                     text = "Scan this QR code with any QR scanner app to download from the Play Store.",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         },
@@ -485,4 +482,22 @@ fun QrCodeShareDialog( onDismissRequest: () -> Unit ) {
             }
         },
     )
+}
+
+private fun requestDndPermission(context: Context) {
+    val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+    if (!notificationManager.isNotificationPolicyAccessGranted) {
+        Toast.makeText(context, "Please grant DND permission in Settings.", Toast.LENGTH_LONG).show()
+        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+        context.startActivity(intent)
+    }
+    if (!notificationManager.isNotificationPolicyAccessGranted) {
+        Toast
+            .makeText(
+                context,
+                "DND permissions not granted in Settings. Please enable to make use of features.",
+                Toast.LENGTH_LONG,
+            ).show()
+        return
+    }
 }

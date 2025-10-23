@@ -1,10 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica
 
 import android.app.NotificationManager
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -27,7 +24,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
@@ -64,25 +60,6 @@ class MainActivity : ComponentActivity() {
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         previousInterruptionFilter = notificationManager.currentInterruptionFilter
         return notificationManager.currentInterruptionFilter
-    }
-
-    private fun requestDndPermission() {
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
-        if (!notificationManager.isNotificationPolicyAccessGranted) {
-            Toast.makeText(this, "Please grant DND permission in Settings.", Toast.LENGTH_LONG).show()
-            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-            startActivity(intent)
-        }
-        if (!notificationManager.isNotificationPolicyAccessGranted) {
-            Toast
-                .makeText(
-                    this,
-                    "DND permissions not granted in Settings. Please enable to make use of features.",
-                    Toast.LENGTH_LONG,
-                ).show()
-            return
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,12 +120,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 LaunchedEffect(soundMode) {
-                    if (soundMode != SoundMode.OFF) {
-                        requestDndPermission()
-                    }
-                    if (previousInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) {
-                        SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
-                    }
+                    SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
                 }
 
                 // 5. Use Scaffold to provide a host for the Snackbar.
@@ -174,18 +146,16 @@ class MainActivity : ComponentActivity() {
         workManager.cancelUniqueWork("restore_sound_mode")
 
         val soundMode = settingsViewModel.soundMode.value
-        if (previousInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) {
-            SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
-        }
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
+        SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
         // Schedule sound restoration when app goes to background
-        if (previousInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL) {
-            scheduleSoundModeRestore()
-        }
+        scheduleSoundModeRestore()
     }
 
     fun scheduleSoundModeRestore() {
