@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +31,7 @@ private val Context.dataStore by preferencesDataStore(name = "settings")
 
 @Singleton
 class SettingsRepository @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
 ) {
     // This scope is essential for stateIn to properly manage the StateFlow's lifecycle.
     // It's good practice to use a custom scope for singletons rather than Dispatchers.IO directly.
@@ -40,18 +41,19 @@ class SettingsRepository @Inject constructor(
     private val fontScaleKey = floatPreferencesKey("font_scale")
     private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
     private val songScrollStateKey = booleanPreferencesKey("song_scroll_state")
+    private val soundModePreferencesKey = stringPreferencesKey("sound_mode")
 
-    val selectedLanguage: StateFlow<AppLanguage> = context.dataStore.data
-        .map { preferences ->
-            // Read the string code, then convert to AppLanguage enum
-            val code = preferences[languageKey] ?: AppLanguage.MALAYALAM.code
-            AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM // Default to Malayalam if code not found
-        }
-        .stateIn(
-            scope = repositoryScope,
-            started = SharingStarted.Eagerly,
-            initialValue = AppLanguage.MALAYALAM // Initial value is also an AppLanguage enum
-        )
+    val selectedLanguage: StateFlow<AppLanguage> =
+        context.dataStore.data
+            .map { preferences ->
+                // Read the string code, then convert to AppLanguage enum
+                val code = preferences[languageKey] ?: AppLanguage.MALAYALAM.code
+                AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM // Default to Malayalam if code not found
+            }.stateIn(
+                scope = repositoryScope,
+                started = SharingStarted.Eagerly,
+                initialValue = AppLanguage.MALAYALAM, // Initial value is also an AppLanguage enum
+            )
 
     suspend fun getFontScale(): AppFontScale {
         val prefs = context.dataStore.data.first()
@@ -63,19 +65,28 @@ class SettingsRepository @Inject constructor(
 //        val prefs = context.dataStore.data.first()
 //        return prefs[hasCompletedOnboardingKey] == true
 //    }
-    val hasCompletedOnboarding: StateFlow<Boolean> = context.dataStore.data
-        .map { preferences ->
-            preferences[hasCompletedOnboardingKey] == true
-        }
-        .stateIn(
-            scope = repositoryScope,
-            started = SharingStarted.Eagerly,
-            initialValue = false
-        )
+    val hasCompletedOnboarding: StateFlow<Boolean> =
+        context.dataStore.data
+            .map { preferences ->
+                preferences[hasCompletedOnboardingKey] == true
+            }.stateIn(
+                scope = repositoryScope,
+                started = SharingStarted.Eagerly,
+                initialValue = false,
+            )
 
     suspend fun getSongScrollState(): Boolean {
         val prefs = context.dataStore.data.first()
         return prefs[songScrollStateKey] == true
+    }
+
+    suspend fun getSoundMode(): SoundMode {
+        val prefs = context.dataStore.data.first()
+        return when (prefs[soundModePreferencesKey]) {
+            "SILENT" -> SoundMode.SILENT
+            "DND" -> SoundMode.DND
+            else -> SoundMode.OFF
+        }
     }
 
     // --- Debouncing for Font Scale ---
@@ -126,6 +137,12 @@ class SettingsRepository @Inject constructor(
     suspend fun saveSongScrollState(isHorizontal: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[songScrollStateKey] = isHorizontal
+        }
+    }
+
+    suspend fun setSoundMode(permissionState: SoundMode) {
+        context.dataStore.edit { preferences ->
+            preferences[soundModePreferencesKey] = permissionState.name
         }
     }
 }
