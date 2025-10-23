@@ -7,7 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.navigation.PrayerRoutes
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted

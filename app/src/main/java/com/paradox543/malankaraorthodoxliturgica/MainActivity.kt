@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica
 
-import android.annotation.SuppressLint
+import android.app.NotificationManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,8 +21,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
@@ -30,6 +35,7 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -41,9 +47,20 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var calendarRepository: LiturgicalCalendarRepository
 
+    @Inject
+    lateinit var workManager: WorkManager
+
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val navViewModel: NavViewModel by viewModels()
+
+    private var previousInterruptionFilter: Int? = null
+
+    fun findPreviousInterruptionFilter(): Int {
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        previousInterruptionFilter = notificationManager.currentInterruptionFilter
+        return notificationManager.currentInterruptionFilter
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install the splash screen.
@@ -70,6 +87,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val language by settingsViewModel.selectedLanguage.collectAsState()
             val scaleFactor by settingsViewModel.selectedFontScale.collectAsState()
+            val soundMode by settingsViewModel.soundMode.collectAsState()
 
             MalankaraOrthodoxLiturgicaTheme(language = language, textScale = scaleFactor) {
                 // 1. Remember the SnackbarHostState and a coroutine scope.
@@ -83,11 +101,12 @@ class MainActivity : ComponentActivity() {
                 LaunchedEffect(updateDownloaded) {
                     if (updateDownloaded) {
                         scope.launch {
-                            val result = snackbarHostState.showSnackbar(
-                                message = "An update has just been downloaded.",
-                                actionLabel = "RESTART",
-                                duration = SnackbarDuration.Indefinite // Stays until dismissed or actioned
-                            )
+                            val result =
+                                snackbarHostState.showSnackbar(
+                                    message = "An update has just been downloaded.",
+                                    actionLabel = "RESTART",
+                                    duration = SnackbarDuration.Indefinite, // Stays until dismissed or actioned
+                                )
                             // 4. Perform action based on user interaction.
                             if (result == SnackbarResult.ActionPerformed) {
                                 inAppUpdateManager.completeUpdate()
@@ -96,11 +115,16 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                LaunchedEffect(Unit) {
+                    findPreviousInterruptionFilter()
+                }
+
+                LaunchedEffect(soundMode) {
+                    SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+                }
+
                 // 5. Use Scaffold to provide a host for the Snackbar.
-                @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-                Scaffold(
-                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
-                ) { innerPadding ->
+                Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
                     // Your NavGraph is placed inside the Scaffold's content area.
                     // The innerPadding can be passed to your NavGraph if needed to prevent overlap.
                     NavGraph(
@@ -118,10 +142,32 @@ class MainActivity : ComponentActivity() {
         // The selected code from the Canvas is used here.
         // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
+        // Cancel pending restore sound work if any
+        workManager.cancelUniqueWork("restore_sound_mode")
+
+        val soundMode = settingsViewModel.soundMode.value
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
+        SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
+        // Schedule sound restoration when app goes to background
+        scheduleSoundModeRestore()
+    }
+
+    fun scheduleSoundModeRestore() {
+        val restoreWork =
+            OneTimeWorkRequestBuilder<RestoreSoundWorker>()
+                .setInitialDelay(30, TimeUnit.MINUTES)
+                .build()
+
+        workManager.enqueueUniqueWork(
+            "restore_sound_mode",
+            ExistingWorkPolicy.REPLACE,
+            restoreWork,
+        )
     }
 }

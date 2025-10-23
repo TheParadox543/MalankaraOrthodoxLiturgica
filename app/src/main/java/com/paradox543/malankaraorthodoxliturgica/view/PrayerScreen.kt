@@ -93,7 +93,7 @@ fun PrayerScreen(
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     var title = ""
     for (item in node.route.split("_")) {
-        title += translations[item] + " "
+        title += (translations[item] ?: item) + " "
     }
 
     val configuration = LocalConfiguration.current
@@ -315,23 +315,12 @@ fun PrayerElementRenderer(
 
         is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
-                title = prayerElement.title,
-            ) {
-                Column {
-                    Spacer(Modifier.padding(8.dp))
-                    prayerElement.items.forEach { nestedItem ->
-                        // Loop through type-safe items
-                        // Recursively call the renderer for nested items
-                        PrayerElementRenderer(
-                            nestedItem,
-                            prayerViewModel,
-                            filename,
-                            navController,
-                        )
-                        Spacer(Modifier.padding(4.dp))
-                    }
-                }
-            }
+                prayerElement,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
         }
 
         is PrayerElement.Error -> {
@@ -342,9 +331,9 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElement.DynamicContent -> {
+        is PrayerElement.DynamicSongsBlock -> {
             if (prayerElement.items.isNotEmpty()) {
-                DynamicContentUI(
+                DynamicSongsBlockUI(
                     prayerElement,
                     prayerViewModel,
                     filename,
@@ -431,8 +420,8 @@ fun PrayerButton(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DynamicContentUI(
-    dynamicContent: PrayerElement.DynamicContent,
+fun DynamicSongsBlockUI(
+    dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
     navController: NavController,
@@ -443,26 +432,17 @@ fun DynamicContentUI(
     val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
 
     val dynamicSong =
-        dynamicContent.items.find { it.eventKey == dynamicSongKey }
-            ?: dynamicContent.items.firstOrNull()
+        dynamicSongsBlock.items.find { it.eventKey == dynamicSongKey }
+            ?: dynamicSongsBlock.items.firstOrNull()
     // For dropdown menu
-    val songs = dynamicContent.items
+    val songs = dynamicSongsBlock.items
     var expanded by remember { mutableStateOf(false) }
 
     val titles =
         songs.map { song ->
-            when (selectedLanguage) {
-                AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
-                else -> song.eventTitle.en
-            }
+            song.eventTitle
         }
-    val selectedTitle =
-        dynamicSong?.let { song ->
-            when (selectedLanguage) {
-                AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
-                else -> song.eventTitle.en
-            }
-        } ?: "Error"
+    val selectedTitle = dynamicSong?.eventTitle ?: "Error"
     Card(modifier) {
         Column(Modifier.padding(4.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(
@@ -493,13 +473,8 @@ fun DynamicContentUI(
                         onDismissRequest = { expanded = false },
                     ) {
                         songs.forEach { song ->
-                            val title =
-                                when (selectedLanguage) {
-                                    AppLanguage.MALAYALAM -> song.eventTitle.ml ?: song.eventTitle.en
-                                    else -> song.eventTitle.en
-                                }
                             DropdownMenuItem(
-                                text = { Text(title) },
+                                text = { Text(song.eventTitle) },
                                 onClick = {
                                     prayerViewModel.setDynamicSongKey(song.eventKey)
                                     expanded = false
@@ -571,8 +546,11 @@ fun ErrorBlock(
 
 @Composable
 fun CollapsibleTextBlock(
-    title: String,
-    content: @Composable () -> Unit, // Changed content to Composable Lambda
+    prayerElement: PrayerElement.CollapsibleBlock,
+    prayerViewModel: PrayerViewModel,
+    filename: String,
+    navController: NavController,
+    isSongHorizontalScroll: Boolean,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -584,10 +562,8 @@ fun CollapsibleTextBlock(
                     .fillMaxWidth()
                     .clickable { expanded = !expanded },
         ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleLarge,
-                textAlign = TextAlign.Center,
+            Heading(
+                text = prayerElement.title,
                 modifier = Modifier.weight(1f),
             )
             Icon(
@@ -598,7 +574,21 @@ fun CollapsibleTextBlock(
 
         AnimatedVisibility(visible = expanded) {
             Column {
-                content()
+                Column {
+                    Spacer(Modifier.padding(8.dp))
+                    prayerElement.items.forEach { nestedItem ->
+                        // Loop through type-safe items
+                        // Recursively call the renderer for nested items
+                        PrayerElementRenderer(
+                            nestedItem,
+                            prayerViewModel,
+                            filename,
+                            navController,
+                            isSongHorizontalScroll,
+                        )
+                        Spacer(Modifier.padding(4.dp))
+                    }
+                }
             }
         }
     }
