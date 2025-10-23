@@ -129,7 +129,7 @@ class PrayerRepository @Inject constructor(
                 }
 
                 is PrayerElement.DynamicSongsBlock -> {
-                    resolvedElements.add(loadDynamicSongs(language, element))
+                    resolvedElements.add(loadDynamicSongs(language, element, currentDepth))
                 }
 
                 else -> {
@@ -198,12 +198,27 @@ class PrayerRepository @Inject constructor(
     suspend fun loadDynamicSongs(
         language: AppLanguage,
         dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
+        currentDepth: Int,
     ): PrayerElement.DynamicSongsBlock {
         calendarRepository.initialize()
         val weekEvents = calendarRepository.getUpcomingWeekEventItems()
 
         if (dynamicSongsBlock.defaultContent != null) {
-            dynamicSongsBlock.items.add(dynamicSongsBlock.defaultContent)
+            val dynamicSong = dynamicSongsBlock.defaultContent
+            if (dynamicSong.items.first() is PrayerElement.Link) {
+                val newDynamicSong =
+                    dynamicSong.copy(
+                        items =
+                            loadPrayerElements(
+                                (dynamicSong.items.first() as PrayerElement.Link).file,
+                                language,
+                                currentDepth + 1,
+                            ),
+                    )
+                dynamicSongsBlock.items.add(newDynamicSong)
+            } else {
+                dynamicSongsBlock.items.add(dynamicSongsBlock.defaultContent)
+            }
         }
         weekEvents.forEach { event ->
             if (event.specialSongsKey != null) {

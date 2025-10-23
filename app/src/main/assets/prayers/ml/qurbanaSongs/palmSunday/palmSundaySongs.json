@@ -21,6 +21,10 @@
     },
     {
         "type": "link",
+        "file": "qurbanaSongs/palmSunday/beforeQurbanaGospel.json"
+    },
+    {
+        "type": "link",
         "file": "qurbanaSongs/palmSunday/qurbanaGospel.json"
     },
     {
