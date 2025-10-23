@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Daivamaathaavinte pukazhcha (disambar 26)"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/glorificationOfStMary/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/glorificationOfStMary/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/glorificationOfStMary/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/glorificationOfStMary/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/glorificationOfStMary/hoothomo.json"
+    }
+]

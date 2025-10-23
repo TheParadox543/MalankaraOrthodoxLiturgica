@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Shishuvadham (disambar 27)"
+    },
+    {
+        "type": "subheading",
+        "content": "(ettaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/massacreOfTheInfants/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/massacreOfTheInfants/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/massacreOfTheInfants/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/massacreOfTheInfants/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/massacreOfTheInfants/hoothomo.json"
+    }
+]

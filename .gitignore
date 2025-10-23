@@ -20,3 +20,4 @@ local.properties
 /.kotlin
 .idea/kotlinc.xml
 /app/google-services.json
+/core/build

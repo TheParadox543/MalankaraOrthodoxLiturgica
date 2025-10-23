@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "hūdōs īttō"
+    },
+    {
+        "type": "subheading",
+        "content": "(raṇṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hoodoshEetho/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hoodoshEetho/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hoodoshEetho/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hoodoshEetho/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/hoodoshEetho/hoothomo.json"
+    }
+]

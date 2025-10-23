@@ -632,16 +632,17 @@ fun DisplayEvent(
                             }
                         }
                         if (event.specialSongsKey != null) {
+                            val key = event.specialSongsKey.removeSuffix("Songs")
                             TextButton(
                                 onClick = {
-                                    navController.navigate(Screen.Prayer.createRoute(event.specialSongsKey))
-                                }
+                                    navController.navigate(Screen.Prayer.createRoute("qurbanaSongs_$key"))
+                                },
                             ) {
                                 Text(
-                                    event.specialSongsKey,
+                                    translations["specialSongs"] ?: key,
                                     Modifier.padding(start = 8.dp),
                                     style = MaterialTheme.typography.bodyLarge,
-                                    textDecoration = TextDecoration.Underline
+                                    textDecoration = TextDecoration.Underline,
                                 )
                                 Icon(
                                     Icons.AutoMirrored.Filled.KeyboardArrowRight,

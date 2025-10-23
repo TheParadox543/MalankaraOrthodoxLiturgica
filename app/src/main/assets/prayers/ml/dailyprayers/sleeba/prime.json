@@ -298,19 +298,16 @@
         "content": "ഏവൻഗേലിയോൻ"
     },
     {
-        "type": "dynamic-content",
+        "type": "dynamic-songs-block",
         "timeKey": "morningGospel",
         "defaultContent": {
             "eventKey": "default",
-            "eventTitle": {
-                "en": "General Songs",
-                "ml": "പൊതുവിലുള ഗീതങ്ങൾ"
-            },
+            "eventTitle": "പൊതുവിലുള ഗീതങ്ങൾ",
             "timeKey": "morningGospel",
             "items": [
                 {
                     "type": "subheading",
-                    "content": "(ഹാലേലുയ്യാ-ഉ-ഹാലേലുയ്യാ-ഉ-ഹാലേലുയ്യാ)"
+                    "content": "ഹാലേ... ഉ... ഹാലേ... ഉ..."
                 }
             ]
         }
@@ -446,5 +443,10 @@
     {
         "type": "subheading",
         "content": "കൃപ നിറഞ്ഞ മറിയമേ"
+    },
+    {
+        "type": "button",
+        "link": "sleeba_terce",
+        "replace": true
     }
 ]

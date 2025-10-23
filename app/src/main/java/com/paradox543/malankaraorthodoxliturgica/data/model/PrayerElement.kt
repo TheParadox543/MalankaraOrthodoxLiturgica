@@ -164,21 +164,21 @@ sealed interface PrayerElement {
     @SerialName("dynamic-song") // Represents a song whose content is fetched dynamically
     data class DynamicSong(
         val eventKey: EventKey, // The event context for the song (e.g., "easter", "christmas")
-        val eventTitle: TitleStr, // The title for the event (e.g., "Easter")
+        val eventTitle: String, // The title for the event (e.g., "Easter")
         val timeKey: String, // The time context for the song (e.g., "qurbanaGospel", "hoothomo")
         val items: List<PrayerElement>, // The items in the dynamic song (usually Subheading and Song)
     ) : PrayerElement
 
     /**
-     * A dynamic content element that fetches songs based on time context.
+     * A dynamic songs block that stores songs based on time context.
      *
      * @param timeKey The time context for the content (e.g., "afterGospel", "hoothomo").
      * @param items The dynamic songs for this time context.
      * @param defaultContent Fallback content if no dynamic songs match.
      */
     @Serializable
-    @SerialName("dynamic-content") // Represents content fetched dynamically based on context
-    data class DynamicContent(
+    @SerialName("dynamic-songs-block") // Represents content fetched dynamically based on context
+    data class DynamicSongsBlock(
         val timeKey: String, // The time context for the content (e.g., "afterGospel", "hoothomo")
         val items: MutableList<DynamicSong> = mutableListOf(), // The dynamic songs for this time context
         val defaultContent: DynamicSong? = null, // Fallback content if no dynamic songs match

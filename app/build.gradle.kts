@@ -23,8 +23,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 32
-        versionName = "1.4.0-alpha.1"
+        versionCode = 33
+        versionName = "1.4.0"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -91,6 +91,11 @@ dependencies {
     // Dependency Injection
     implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
     implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
+
+    // Background Work Management
+    implementation(libs.androidx.hilt.common)
+    implementation(libs.androidx.work.runtime.ktx)
+
     ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
     // Data Storage

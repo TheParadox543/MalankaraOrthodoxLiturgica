@@ -1,0 +1,26 @@
+[
+    {
+        "type": "title",
+        "content": "സ്ലീബാ പെരുന്നാൾ (സെപ്‌തംബർ 14)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfHolyCross/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfHolyCross/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfHolyCross/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfHolyCross/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfHolyCross/hoothomo.json"
+    }
+]

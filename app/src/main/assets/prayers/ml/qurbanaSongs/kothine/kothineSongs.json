@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "കൊത്തിനെ ഞായർ"
+    },
+    {
+        "type": "subheading",
+        "content": "(ഒന്നാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/hoothomo.json"
+    }
+]

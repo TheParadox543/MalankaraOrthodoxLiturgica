@@ -78,5 +78,9 @@
     {
         "type": "subheading",
         "content": "(പഴയനിയമ വായന - വി. കുർബ്ബാന)"
+    },
+    {
+        "type": "button",
+        "link": "qurbana_preparation"
     }
 ]

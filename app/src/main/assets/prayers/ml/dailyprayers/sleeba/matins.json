@@ -314,5 +314,10 @@
     {
         "type": "link",
         "file": "commonPrayers/nightFourthKauma.json"
+    },
+    {
+        "type": "button",
+        "link": "sleeba_prime",
+        "replace": true
     }
 ]

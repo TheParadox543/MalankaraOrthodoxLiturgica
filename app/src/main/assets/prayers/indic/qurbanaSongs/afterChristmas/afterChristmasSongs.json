@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "yaldōykk śēṣamuḷḷa ñāyaṟāz‌cakaḷ"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnu mutaluḷḷa rāgaṅṅaḷ tuṭaṟccayāyi)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterChristmas/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterChristmas/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterChristmas/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterChristmas/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterChristmas/hoothomo.json"
+    }
+]

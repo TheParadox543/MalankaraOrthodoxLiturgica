@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "nōmpile añcāṁ ñāyaṟāzca (k‌pipttō-kūni)"
+    },
+    {
+        "type": "subheading",
+        "content": "(añcāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/crippledWoman/hoothomo.json"
+    }
+]

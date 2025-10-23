@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "hūdōs īttō"
+    },
+    {
+        "type": "subheading",
+        "content": "(raṇṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/dedication/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/dedication/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/dedication/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/dedication/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/dedication/hoothomo.json"
+    }
+]

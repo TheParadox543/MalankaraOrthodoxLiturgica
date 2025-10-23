@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Yaldo (disambar 25)"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/yeldho/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/yeldho/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/yeldho/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/yeldho/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/yeldho/hoothomo.json"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "nōmpile raṇṭāṁ ñāyaṟāzca (gaṟbō-kuṣṭharōgi)"
+    },
+    {
+        "type": "subheading",
+        "content": "(raṇṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/lepersSunday/hoothomo.json"
+    }
+]

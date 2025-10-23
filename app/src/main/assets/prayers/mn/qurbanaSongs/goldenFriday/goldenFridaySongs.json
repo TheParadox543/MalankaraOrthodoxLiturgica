@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Svarnnavelllliyaazhcha"
+    },
+    {
+        "type": "subheading",
+        "content": "(moonnaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/goldenFriday/hoothomo.json"
+    }
+]

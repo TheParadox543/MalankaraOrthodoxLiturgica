@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "nālppatu sahadēnmāṟ"
+    },
+    {
+        "type": "subheading",
+        "content": "(eṭṭāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/memoryOfFortyMartyrs/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/memoryOfFortyMartyrs/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/memoryOfFortyMartyrs/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/memoryOfFortyMartyrs/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/memoryOfFortyMartyrs/hoothomo.json"
+    }
+]

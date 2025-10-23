@@ -9,6 +9,7 @@ import androidx.savedstate.SavedState
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -23,8 +24,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
     private val firebaseAnalytics: FirebaseAnalytics,
-): ViewModel() {
-
+) : ViewModel() {
     val selectedLanguage = settingsRepository.selectedLanguage
 
     private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
@@ -35,6 +35,12 @@ class SettingsViewModel @Inject constructor(
 
     private val _songScrollState = MutableStateFlow(false)
     val songScrollState = _songScrollState.asStateFlow()
+
+    private val _soundMode = MutableStateFlow(SoundMode.OFF)
+    val soundMode = _soundMode.asStateFlow()
+
+    private val _hasDndPermission = MutableStateFlow(false)
+    val hasDndPermission = _hasDndPermission.asStateFlow()
 
     // Internal MutableStateFlow to track AppFontSize changes for debounced saving
     private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
@@ -48,6 +54,7 @@ class SettingsViewModel @Inject constructor(
 //            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
             _selectedAppFontScale.value = settingsRepository.getFontScale()
             _songScrollState.value = settingsRepository.getSongScrollState()
+            _soundMode.value = settingsRepository.getSoundMode()
         }
 
         // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
@@ -118,6 +125,28 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    fun setSoundMode(permissionState: SoundMode) {
+        _soundMode.value = permissionState
+        viewModelScope.launch {
+            settingsRepository.setSoundMode(permissionState)
+        }
+    }
+
+    fun hasGrantedDndPermission(): Boolean {
+        return _hasDndPermission.value
+    }
+
+    fun setDndPermissionStatus(granted: Boolean) {
+        _hasDndPermission.value = granted
+        if (!granted) {
+            _soundMode.value = SoundMode.OFF
+        } else {
+            viewModelScope.launch {
+                _soundMode.value = settingsRepository.getSoundMode()
+            }
+        }
+    }
+
     fun logScreensVisited(routePattern: String, arguments: SavedState?) {
         val screenName: String
         val screenClass: String
@@ -166,8 +195,6 @@ class SettingsViewModel @Inject constructor(
         }
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
     }
-
-
 
     /**
      * Launches an Android share intent to share the app's Play Store link.

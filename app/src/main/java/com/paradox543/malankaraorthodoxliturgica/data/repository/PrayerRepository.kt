@@ -7,7 +7,6 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoun
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerParsingException
-import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStr
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import okio.IOException
@@ -129,8 +128,8 @@ class PrayerRepository @Inject constructor(
                     resolvedElements.add(element.copy(items = resolvedItems))
                 }
 
-                is PrayerElement.DynamicContent -> {
-                    resolvedElements.add(loadDynamicSongs(language, element))
+                is PrayerElement.DynamicSongsBlock -> {
+                    resolvedElements.add(loadDynamicSongs(language, element, currentDepth))
                 }
 
                 else -> {
@@ -198,35 +197,55 @@ class PrayerRepository @Inject constructor(
 
     suspend fun loadDynamicSongs(
         language: AppLanguage,
-        dynamicContent: PrayerElement.DynamicContent,
-    ): PrayerElement.DynamicContent {
+        dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
+        currentDepth: Int,
+    ): PrayerElement.DynamicSongsBlock {
         calendarRepository.initialize()
         val weekEvents = calendarRepository.getUpcomingWeekEventItems()
 
-        if (dynamicContent.defaultContent != null) {
-            dynamicContent.items.add(dynamicContent.defaultContent)
+        if (dynamicSongsBlock.defaultContent != null) {
+            val dynamicSong = dynamicSongsBlock.defaultContent
+            if (dynamicSong.items.first() is PrayerElement.Link) {
+                val newDynamicSong =
+                    dynamicSong.copy(
+                        items =
+                            loadPrayerElements(
+                                (dynamicSong.items.first() as PrayerElement.Link).file,
+                                language,
+                                currentDepth + 1,
+                            ),
+                    )
+                dynamicSongsBlock.items.add(newDynamicSong)
+            } else {
+                dynamicSongsBlock.items.add(dynamicSongsBlock.defaultContent)
+            }
         }
         weekEvents.forEach { event ->
             if (event.specialSongsKey != null) {
                 val songElements =
                     try {
                         loadPrayerElements(
-                            "qurbanaSongs/${event.specialSongsKey.removeSuffix("Songs")}/${dynamicContent.timeKey}.json",
+                            "qurbanaSongs/${event.specialSongsKey.removeSuffix("Songs")}/${dynamicSongsBlock.timeKey}.json",
                             language,
                         )
                     } catch (e: Exception) {
                         Log.d(
                             "PrayerRepository",
-                            "Failed to load dynamic song: ${event.specialSongsKey}/${dynamicContent.timeKey}. ${e.message}",
+                            "Failed to load dynamic song: ${event.specialSongsKey}/${dynamicSongsBlock.timeKey}. ${e.message}",
                         )
                         emptyList()
                     }
                 if (songElements.isEmpty()) return@forEach
-                dynamicContent.items.add(
+                val title =
+                    when (language) {
+                        AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
+                        AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> event.title.en
+                    }
+                dynamicSongsBlock.items.add(
                     PrayerElement.DynamicSong(
                         eventKey = event.specialSongsKey,
-                        eventTitle = event.title,
-                        timeKey = dynamicContent.timeKey,
+                        eventTitle = title,
+                        timeKey = dynamicSongsBlock.timeKey,
                         items = songElements,
                     ),
                 )
@@ -234,31 +253,33 @@ class PrayerRepository @Inject constructor(
         }
 
         // Adding prayers for the departed at the end
-        if (dynamicContent.items.any { it.eventKey != "allDepartedFaithful" }) {
+        if (dynamicSongsBlock.items.any { it.eventKey != "allDepartedFaithful" }) {
             val departedSongElements =
                 try {
                     loadPrayerElements(
-                        "qurbanaSongs/allDepartedFaithful/${dynamicContent.timeKey}.json",
+                        "qurbanaSongs/allDepartedFaithful/${dynamicSongsBlock.timeKey}.json",
                         language,
                     )
                 } catch (_: Exception) {
                     emptyList()
                 }
             if (departedSongElements.isNotEmpty()) {
-                dynamicContent.items.add(
+                val title =
+                    when (language) {
+                        AppLanguage.MALAYALAM -> "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്\u200Cച"
+                        AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> "All Departed Faithful"
+                    }
+                dynamicSongsBlock.items.add(
                     PrayerElement.DynamicSong(
                         "allDepartedFaithful",
-                        TitleStr(
-                            "All Departed Faithful",
-                            "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്\u200Cച",
-                        ),
-                        dynamicContent.timeKey,
+                        title,
+                        dynamicSongsBlock.timeKey,
                         departedSongElements,
                     ),
                 )
             }
         }
-        return dynamicContent
+        return dynamicSongsBlock
     }
 
     suspend fun getSongKeyPriority(): String {

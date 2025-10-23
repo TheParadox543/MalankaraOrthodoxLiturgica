@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "patrōs paൗlūs ślīhanmāruṭe perunnāḷ (jūṇ 29)"
+    },
+    {
+        "type": "subheading",
+        "content": "(añcāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/feastOfApostlesFast/hoothomo.json"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Svargaarohanam"
+    },
+    {
+        "type": "subheading",
+        "content": "(anchaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/ascension/hoothomo.json"
+    }
+]

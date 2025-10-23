@@ -1,0 +1,34 @@
+[
+    {
+        "type": "title",
+        "content": "Maar yoohaanon maamdaanaayude pukazhchayum shirachchhedavum (januvari 7)"
+    },
+    {
+        "type": "subheading",
+        "content": "(aagasttu 29-aam theeyathiyum aacharikkum)"
+    },
+    {
+        "type": "subheading",
+        "content": "(ettaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/beheadingOfStJohnTheBaptist/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/beheadingOfStJohnTheBaptist/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/beheadingOfStJohnTheBaptist/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/beheadingOfStJohnTheBaptist/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/beheadingOfStJohnTheBaptist/hoothomo.json"
+    }
+]

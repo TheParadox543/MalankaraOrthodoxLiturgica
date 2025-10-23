@@ -1,0 +1,26 @@
+[
+    {
+        "type": "title",
+        "content": "ദനഹായ്ക്ക് ശേഷമുള്ള ഞായറാഴ്ചകൾ"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterEpiphany/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterEpiphany/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterEpiphany/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterEpiphany/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/afterEpiphany/hoothomo.json"
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "type": "title",
+        "content": "Daivamaathaavinodulllla ariyippu"
+    },
+    {
+        "type": "subheading",
+        "content": "(vachanippuperunnaallinum (maarchu 25) ee gaanangall thanne upayogikkaam.)"
+    },
+    {
+        "type": "subheading",
+        "content": "(naalaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/annunciationToStMary/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/annunciationToStMary/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/annunciationToStMary/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/annunciationToStMary/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/annunciationToStMary/hoothomo.json"
+    }
+]

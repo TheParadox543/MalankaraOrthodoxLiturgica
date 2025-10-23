@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Naalppathaam velllliyaazhcha"
+    },
+    {
+        "type": "subheading",
+        "content": "(randaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/fortiethFriday/hoothomo.json"
+    }
+]

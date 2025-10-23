@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "kūdōś īttō"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnāṁ rāgaṁ)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sanctification/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sanctification/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sanctification/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sanctification/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/sanctification/hoothomo.json"
+    }
+]

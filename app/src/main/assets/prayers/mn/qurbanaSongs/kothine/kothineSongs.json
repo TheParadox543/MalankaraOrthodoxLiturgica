@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "Kotthine nyaayar"
+    },
+    {
+        "type": "subheading",
+        "content": "(onnaam raagam)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/kothine/hoothomo.json"
+    }
+]

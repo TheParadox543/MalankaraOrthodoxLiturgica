@@ -1,0 +1,26 @@
+[
+    {
+        "type": "title",
+        "content": "pentikkōs‌ti"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/pentecost/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/pentecost/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/pentecost/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/pentecost/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/pentecost/hoothomo.json"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "type": "title",
+        "content": "ഊശാന ഞായറാഴ്‌ച"
+    },
+    {
+        "type": "subheading",
+        "content": "(ഏഴാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/matinsGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/beforeQurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/hoothomo.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/palmSunday/duringCommunion.json"
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "type": "title",
+        "content": "യൗസേപ്പിന്റെ വെളിപാട്"
+    },
+    {
+        "type": "subheading",
+        "content": "(ഏഴാം രാഗം)"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToJoseph/eveningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToJoseph/morningGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToJoseph/qurbanaGospel.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToJoseph/kasolikki.json"
+    },
+    {
+        "type": "link",
+        "file": "qurbanaSongs/revelationToJoseph/hoothomo.json"
+    }
+]
