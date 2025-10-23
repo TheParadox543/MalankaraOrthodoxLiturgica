@@ -1038,7 +1038,7 @@
                             "route": "qurbana_conclusion",
                             "parent": "qurbana",
                             "filename": "sacraments/qurbana/conclusion.json",
-                            "languages": [],
+                            "languages": ["ml"],
                             "children": []
                         },
                         {

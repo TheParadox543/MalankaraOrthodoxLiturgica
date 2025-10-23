@@ -74,49 +74,44 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    fun setDndMode(enable: Boolean) {
+    private fun setDndMode(enable: Boolean) {
+        if (!hasGrantedDndPermission()) return
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as? NotificationManager ?: return
-        if (notificationManager.isNotificationPolicyAccessGranted) {
-            notificationManager.setInterruptionFilter(
-                when (enable) {
-                    true -> {
-                        NotificationManager.INTERRUPTION_FILTER_NONE
-                    }
-                    false -> {
-                        NotificationManager.INTERRUPTION_FILTER_ALL
-                    }
-                },
-            )
-        }
+        notificationManager.setInterruptionFilter(
+            when (enable) {
+                true -> NotificationManager.INTERRUPTION_FILTER_NONE
+                false -> NotificationManager.INTERRUPTION_FILTER_ALL
+            },
+        )
     }
 
-    private fun setSilentMode() {
+    private fun setSilentMode(enable: Boolean) {
         if (!hasGrantedDndPermission()) return
-        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        audioManager.ringerMode = AudioManager.RINGER_MODE_SILENT
+        val audioManager = getSystemService(AUDIO_SERVICE) as? AudioManager ?: return
+        audioManager.ringerMode =
+            when (enable) {
+                true -> AudioManager.RINGER_MODE_SILENT
+                false -> AudioManager.RINGER_MODE_NORMAL
+            }
     }
 
-    private fun restoreNormalMode() {
+    private fun applyAppSoundMode(
+        soundMode: SoundMode,
+        active: Boolean,
+    ) {
         if (!hasGrantedDndPermission()) return
-        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
-        setDndMode(false)
-    }
 
-    private fun setSilentOnChange(soundMode: SoundMode) {
-        if (!hasGrantedDndPermission()) return
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val currentFilter = notificationManager.currentInterruptionFilter
+        if (currentFilter != NotificationManager.INTERRUPTION_FILTER_ALL) return
+
         when (soundMode) {
             SoundMode.OFF -> {
-                restoreNormalMode()
+                setSilentMode(false)
+                setDndMode(false)
             }
-
-            SoundMode.SILENT -> {
-                setSilentMode()
-            }
-
-            SoundMode.DND -> {
-                setDndMode(true)
-            }
+            SoundMode.SILENT -> setSilentMode(active)
+            SoundMode.DND -> setDndMode(active)
         }
     }
 
@@ -177,8 +172,7 @@ class MainActivity : ComponentActivity() {
                     if (soundMode != SoundMode.OFF) {
                         requestDndPermission()
                     }
-                    restoreNormalMode()
-                    setSilentOnChange(soundMode)
+                    applyAppSoundMode(soundMode, true)
                 }
 
                 // 5. Use Scaffold to provide a host for the Snackbar.
@@ -201,17 +195,13 @@ class MainActivity : ComponentActivity() {
         // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
         val soundMode = settingsViewModel.soundMode.value
-        setSilentOnChange(soundMode)
+        applyAppSoundMode(soundMode, true)
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
         val soundMode = settingsViewModel.soundMode.value
-        when (soundMode) {
-            SoundMode.OFF -> {} // do nothing
-            SoundMode.SILENT -> restoreNormalMode()
-            SoundMode.DND -> setDndMode(false)
-        }
+        applyAppSoundMode(soundMode, false)
     }
 }
