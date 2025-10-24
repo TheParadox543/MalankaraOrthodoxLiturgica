@@ -7,6 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoun
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerParsingException
+import com.paradox543.malankaraorthodoxliturgica.utils.applyPrayerReplacements
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import okio.IOException
@@ -294,7 +295,3 @@ class PrayerRepository @Inject constructor(
     }
 }
 
-fun String.applyPrayerReplacements(): String =
-    this
-        .replace("/t", "    ")
-        .replace("/u200b", "\u200b")

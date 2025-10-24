@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.paradox543.malankaraorthodoxliturgica.data.repository.applyPrayerReplacements
+import com.paradox543.malankaraorthodoxliturgica.utils.applyPrayerReplacements
 
 @Composable
 fun Song(
