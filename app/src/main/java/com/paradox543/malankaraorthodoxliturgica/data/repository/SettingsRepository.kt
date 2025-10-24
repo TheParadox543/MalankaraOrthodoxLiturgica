@@ -147,7 +147,7 @@ class SettingsRepository @Inject constructor(
     }
 }
 
-/**
+/*
     // Helper function to get version name using context
     fun getPackageInfo(packageManager: PackageManager, packageName: String, flags: Int = 0): String? {
         return try{

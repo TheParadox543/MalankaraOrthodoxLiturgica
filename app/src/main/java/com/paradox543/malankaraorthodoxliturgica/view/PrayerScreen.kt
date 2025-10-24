@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -33,9 +32,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -45,7 +41,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -63,7 +58,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
@@ -71,6 +65,8 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabGenerate
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
+import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Heading
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Song
@@ -452,7 +448,6 @@ fun DynamicSongsBlockUI(
     modifier: Modifier = Modifier,
 ) {
     val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
 
     val dynamicSong =
         dynamicSongsBlock.items.find { it.eventKey == dynamicSongKey }
@@ -552,22 +547,6 @@ fun DynamicSongUI(
 }
 
 @Composable
-fun ErrorBlock(
-    text: String,
-    prayerViewModel: PrayerViewModel,
-    errorLocation: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.error,
-        modifier = modifier.fillMaxWidth(),
-    )
-    prayerViewModel.handlePrayerElementError(text, errorLocation)
-}
-
-@Composable
 fun CollapsibleTextBlock(
     prayerElement: PrayerElement.CollapsibleBlock,
     prayerViewModel: PrayerViewModel,
@@ -613,54 +592,6 @@ fun CollapsibleTextBlock(
                     }
                 }
             }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AlternativePrayersUI(
-    element: PrayerElement.AlternativePrayersBlock,
-    prayerViewModel: PrayerViewModel,
-    filename: String,
-    navController: NavController,
-    isSongHorizontalScroll: Boolean,
-) {
-    var selectedIndex by remember { mutableIntStateOf(0) }
-
-    Column(Modifier.fillMaxWidth()) {
-        Subheading(
-            element.title,
-            Modifier.padding(bottom = 8.dp),
-        )
-
-        SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-            element.options.forEachIndexed { index, option ->
-                SegmentedButton(
-                    selected = index == selectedIndex,
-                    onClick = { selectedIndex = index },
-                    shape =
-                        SegmentedButtonDefaults.itemShape(
-                            index = index,
-                            count = element.options.size,
-                        ),
-                ) {
-                    Text(option.label)
-                }
-            }
-        }
-
-        Spacer(Modifier.height(8.dp))
-
-        // Render the selected option's content
-        element.options[selectedIndex].items.forEach { child ->
-            PrayerElementRenderer(
-                prayerElement = child,
-                prayerViewModel = prayerViewModel,
-                filename = filename,
-                navController = navController,
-                isSongHorizontalScroll = isSongHorizontalScroll,
-            )
         }
     }
 }
