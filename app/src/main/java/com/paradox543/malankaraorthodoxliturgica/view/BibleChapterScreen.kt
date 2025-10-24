@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.VerseItem
@@ -47,7 +48,7 @@ fun BibleChapterScreen(
             navController
         )
         },
-        bottomBar = { SectionNavBar(navController, prevRoute, nextRoute) }
+        bottomBar = { SectionNavBar(navController, prevRoute, nextRoute, { Screen.BibleChapter.createDeepLink(bookIndex, chapterIndex) }) }
     ) { innerPadding ->
         if (chapterData == null ) {
             Text(

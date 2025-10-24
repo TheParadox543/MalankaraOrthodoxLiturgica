@@ -47,7 +47,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -63,7 +62,6 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.qr.QrFabGenerate
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
@@ -182,7 +180,17 @@ fun PrayerScreen(
                     visible = isVisible.value,
                     modifier = Modifier.zIndex(1f),
                 ) {
-                    SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
+                    SectionNavBar(
+                        navController,
+                        prevNodeRoute,
+                        nextNodeRoute,
+                        routeProvider = {
+                            Screen.Prayer.createDeepLink(
+                                node.route,
+                                listState.firstVisibleItemIndex,
+                            )
+                        },
+                    )
                 }
             }
         },
@@ -191,31 +199,7 @@ fun PrayerScreen(
                 visible = isVisible.value,
                 enter = fadeIn(),
                 exit = shrinkOut(),
-            ) {
-                Column(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    horizontalAlignment = Alignment.Start,
-                ) {
-                    QrFabScan(
-                        navController,
-                        Modifier
-                            .scale(0.8f)
-                            .padding(start = 12.dp),
-                        false,
-                    )
-                    QrFabGenerate(
-//                        Screen.Prayer.createDeepLink(node.route, listState.firstVisibleItemIndex),
-                        routeProvider = {
-                            Screen.Prayer.createDeepLink(
-                                node.route,
-                                listState.firstVisibleItemIndex,
-                            )
-                        },
-                        Modifier.scale(1.2f),
-                    )
-                }
-            }
+            ) { QrFabScan(navController) }
         },
     ) { innerPadding ->
 
