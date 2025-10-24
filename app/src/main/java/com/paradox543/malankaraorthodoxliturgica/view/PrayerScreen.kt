@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -32,6 +33,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -41,6 +45,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -353,6 +358,16 @@ fun PrayerElementRenderer(
             )
         }
 
+        is PrayerElement.AlternativePrayersBlock -> {
+            AlternativePrayersUI(
+                prayerElement,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
+        }
+
         is PrayerElement.Link -> {
             // This block indicates that a 'Link' element unexpectedly reached the UI.
             // Log an error or render a debug message, as it should ideally not happen.
@@ -367,6 +382,14 @@ fun PrayerElementRenderer(
             // Similar to 'Link', this suggests an issue in the data resolution layer.
             ErrorBlock(
                 "UI Error: Unresolved LinkCollapsible element encountered",
+                prayerViewModel,
+                filename,
+            )
+        }
+
+        is PrayerElement.AlternativeOption -> {
+            ErrorBlock(
+                "UI Error: AlternativeOption element encountered outside of AlternativePrayersBlock",
                 prayerViewModel,
                 filename,
             )
@@ -590,6 +613,54 @@ fun CollapsibleTextBlock(
                     }
                 }
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AlternativePrayersUI(
+    element: PrayerElement.AlternativePrayersBlock,
+    prayerViewModel: PrayerViewModel,
+    filename: String,
+    navController: NavController,
+    isSongHorizontalScroll: Boolean,
+) {
+    var selectedIndex by remember { mutableIntStateOf(0) }
+
+    Column(Modifier.fillMaxWidth()) {
+        Subheading(
+            element.title,
+            Modifier.padding(bottom = 8.dp),
+        )
+
+        SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
+            element.options.forEachIndexed { index, option ->
+                SegmentedButton(
+                    selected = index == selectedIndex,
+                    onClick = { selectedIndex = index },
+                    shape =
+                        SegmentedButtonDefaults.itemShape(
+                            index = index,
+                            count = element.options.size,
+                        ),
+                ) {
+                    Text(option.label)
+                }
+            }
+        }
+
+        Spacer(Modifier.height(8.dp))
+
+        // Render the selected option's content
+        element.options[selectedIndex].items.forEach { child ->
+            PrayerElementRenderer(
+                prayerElement = child,
+                prayerViewModel = prayerViewModel,
+                filename = filename,
+                navController = navController,
+                isSongHorizontalScroll = isSongHorizontalScroll,
+            )
         }
     }
 }

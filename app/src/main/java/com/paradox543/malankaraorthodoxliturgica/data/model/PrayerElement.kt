@@ -185,6 +185,32 @@ sealed interface PrayerElement {
     ) : PrayerElement
 
     /**
+     * An alternative prayers element that offers multiple prayer options.
+     *
+     * @param label The label for the alternative prayers section.
+     * @param items The PrayerElements for this alternative option.
+     */
+    @Serializable
+    @SerialName("alternative-option")
+    data class AlternativeOption(
+        val label: String,
+        val items: List<PrayerElement>, // The PrayerElements for this alternative option
+    ) : PrayerElement
+
+    /**
+     * A block containing multiple alternative prayer options.
+     *
+     * @param title The title of the alternative prayers block.
+     * @param options The nested PrayerElements within this block.
+     */
+    @Serializable
+    @SerialName("alternative-prayers-block")
+    data class AlternativePrayersBlock(
+        val title: String,
+        val options: List<AlternativeOption>, // The options for alternative prayers
+    ) : PrayerElement
+
+    /**
      * A placeholder element indicating that content is loading.
      *
      * This can be used in the UI to show a loading indicator while
