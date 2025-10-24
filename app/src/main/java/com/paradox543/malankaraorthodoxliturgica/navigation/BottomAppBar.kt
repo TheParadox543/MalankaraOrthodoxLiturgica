@@ -21,52 +21,54 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.R
 
-data class BottomNavItem(val route: String, val label: String, val icon: @Composable () -> Unit)
+data class BottomNavItem(
+    val route: String,
+    val label: String,
+    val icon: @Composable () -> Unit,
+)
 
 val iconSize = 24.dp
-val bottomNavItems = listOf(
-    BottomNavItem(
-        "home", "Home"
-    ) {
-        Icon(Icons.Default.Home, "Home")
-    },
-    BottomNavItem(
-        "prayNow", "Pray Now"
-    ) {
-        Icon(
-            painterResource(R.drawable.clock),
-            "Clock",
-            modifier = Modifier.size(iconSize),
-        )
-    },
-    BottomNavItem(
-        "calendar", "Calendar"
-    ) {
-      Icon(
-          painterResource(R.drawable.calendar),
-          "Calendar",
-          Modifier.size(iconSize),
-      )
-    },
-    BottomNavItem(
-        "bible", "Bible"
-    ) {
-        Icon(
-            painterResource(R.drawable.bible),
-            "Bible",
-            modifier = Modifier.size(iconSize),
-        )
-    },
-    BottomNavItem(
-        "settings", "Settings"
-    ) {
-        Icon(Icons.Default.Settings, "Settings")
-    }
-)
+val bottomNavItems =
+    listOf(
+        BottomNavItem("home", "Home") {
+            Icon(Icons.Default.Home, "Home")
+        },
+        BottomNavItem("prayNow", "Pray Now") {
+            Icon(
+                painterResource(R.drawable.clock),
+                "Clock",
+                modifier = Modifier.size(iconSize),
+            )
+        },
+        BottomNavItem("calendar", "Calendar") {
+            Icon(
+                painterResource(R.drawable.calendar),
+                "Calendar",
+                Modifier.size(iconSize),
+            )
+        },
+        BottomNavItem("bible", "Bible") {
+            Icon(
+                painterResource(R.drawable.bible),
+                "Bible",
+                modifier = Modifier.size(iconSize),
+            )
+        },
+//    BottomNavItem(
+//        "settings", "Settings"
+//    ) {
+//        Icon(Icons.Default.Settings, "Settings")
+//    }
+    )
 
 @Composable
 fun BottomNavBar(navController: NavController) {
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+    val currentRoute =
+        navController
+            .currentBackStackEntryAsState()
+            .value
+            ?.destination
+            ?.route
 
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
@@ -81,12 +83,13 @@ fun BottomNavBar(navController: NavController) {
                         navController.popBackStack(item.route, inclusive = true)
                     }
                 },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary
-                )
+                colors =
+                    NavigationBarItemDefaults.colors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+                        unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                        selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                        unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    ),
             )
         }
     }
@@ -96,7 +99,7 @@ fun BottomNavBar(navController: NavController) {
 fun SectionNavBar(
     navController: NavController,
     prevNodeRoute: String?,
-    nextNodeRoute: String?
+    nextNodeRoute: String?,
 ) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
@@ -117,12 +120,13 @@ fun SectionNavBar(
                     navController.popBackStack()
                 }
             },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                disabledIconColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
-                disabledTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
-            )
+            colors =
+                NavigationBarItemDefaults.colors(
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledIconColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
+                    disabledTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
+                ),
         )
         NavigationBarItem(
             icon = {
@@ -139,12 +143,13 @@ fun SectionNavBar(
                     navController.popBackStack()
                 }
             },
-            colors = NavigationBarItemDefaults.colors(
-                unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                disabledIconColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
-                disabledTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
-            )
+            colors =
+                NavigationBarItemDefaults.colors(
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledIconColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
+                    disabledTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
+                ),
         )
     }
 }
