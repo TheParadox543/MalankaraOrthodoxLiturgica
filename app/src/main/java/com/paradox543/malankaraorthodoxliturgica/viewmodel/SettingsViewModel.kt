@@ -1,8 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedState
@@ -227,5 +230,19 @@ class SettingsViewModel @Inject constructor(
             // Optionally, show a toast or message if no app can handle the share intent
             // Toast.makeText(context, "No app found to share with.", Toast.LENGTH_SHORT).show()
         }
+    }
+}
+
+fun requestDndPermission(context: Context) {
+    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    if (!notificationManager.isNotificationPolicyAccessGranted) {
+        Toast
+            .makeText(
+                context,
+                "Please grant the app access to modify DND in settings.",
+                Toast.LENGTH_LONG,
+            ).show()
+        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+        context.startActivity(intent)
     }
 }
