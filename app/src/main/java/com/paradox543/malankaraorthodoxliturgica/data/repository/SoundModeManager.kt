@@ -5,10 +5,11 @@ import android.content.Context
 import android.content.Context.AUDIO_SERVICE
 import android.content.Context.NOTIFICATION_SERVICE
 import android.media.AudioManager
+import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 
 object SoundModeManager {
-    private var previousInterruptionFilter: Int? = null
+    private var previousInterruptionFilter: Boolean? = null
 
     fun hasGrantedDndPermission(notificationManager: NotificationManager): Boolean = notificationManager.isNotificationPolicyAccessGranted
 
@@ -42,20 +43,29 @@ object SoundModeManager {
     ) {
         val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+        Log.d(
+            "SoundModeManager",
+            "Applied notif settings: DND=${notificationManager.currentInterruptionFilter}, Silent=${audioManager.ringerMode}",
+        )
+
+        // Return if no permissions given
+        if (!hasGrantedDndPermission(notificationManager)) return
 
         if (previousInterruptionFilter == null) {
-            previousInterruptionFilter = notificationManager.currentInterruptionFilter
+            previousInterruptionFilter =
+                notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL ||
+                audioManager.ringerMode != AudioManager.RINGER_MODE_NORMAL
+            Log.d("SoundModeManager", "Saved previousInterruptionFilter: $previousInterruptionFilter")
         }
-        if (!hasGrantedDndPermission(notificationManager)) return
-        if (previousInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) return
-
-        when (soundMode) {
-            SoundMode.OFF -> {
-                setSilentMode(false, audioManager)
-                setDndMode(false, notificationManager)
+        if (previousInterruptionFilter == false) {
+            Log.d("SoundModeManager", "Applying sound mode changes for mode: $soundMode, active: $active")
+            when (soundMode) {
+                SoundMode.OFF -> {}
+                SoundMode.SILENT -> setSilentMode(active, audioManager)
+                SoundMode.DND -> setDndMode(active, notificationManager)
             }
-            SoundMode.SILENT -> setSilentMode(active, audioManager)
-            SoundMode.DND -> setDndMode(active, notificationManager)
+        } else {
+            Log.d("SoundModeManager", "Not applying sound mode changes as previousInterruptionFilter is true")
         }
     }
 }
