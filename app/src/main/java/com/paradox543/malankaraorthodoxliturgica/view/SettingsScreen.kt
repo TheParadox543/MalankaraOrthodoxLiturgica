@@ -42,6 +42,7 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -60,6 +61,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.requestDndPermission
 
@@ -78,6 +80,7 @@ fun SettingsScreen(
     val scrollState = rememberScrollState()
     val bottomSheetState = rememberModalBottomSheetState()
     var showQrCodeDialog by remember { mutableStateOf(false) }
+    var showRestoreDialog by remember { mutableStateOf(false) }
     var showShareAppBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -171,6 +174,26 @@ fun SettingsScreen(
                             modifier = Modifier.padding(top = 4.dp),
                         ) {
                             Text("Grant Permission")
+                        }
+                    }
+                } else if (soundMode != SoundMode.OFF) {
+                    Spacer(Modifier.height(8.dp))
+                    Row {
+                        Text("Change restore time")
+                        Button(onClick = { showRestoreDialog = true }) {
+                            Text("Change")
+                        }
+                        if (showRestoreDialog) {
+                            RestoreTimePicker(
+                                onDismiss = { showRestoreDialog = false },
+                                onConfirm = { hour, minute ->
+//                            var totalMinutes = hour * 60 + minute
+//                            if (totalMinutes < 5) totalMinutes = 5
+//                            if (totalMinutes > 120) totalMinutes = 120
+                                    // Save or schedule restore accordingly
+                                    showRestoreDialog = false
+                                },
+                            )
                         }
                     }
                 }
@@ -279,7 +302,7 @@ fun SettingsScreen(
                                     context = context,
                                     shareMessage =
                                         "Welcome to Liturgica: A digital repository for " +
-                                            "all your books in the Malankara Orthodox Church", // Your custom message
+                                                "all your books in the Malankara Orthodox Church", // Your custom message
                                 )
                             },
                         ),
