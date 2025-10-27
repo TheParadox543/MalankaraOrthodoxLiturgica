@@ -50,7 +50,7 @@ fun OnboardingScreen(
     // Current selections (will be saved when "Get Started" is clicked)
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
 //    var selectedFontScale by remember { mutableStateOf(AppFontScale.Medium) } // Default medium size, adjust as needed
-    val selectedFontScale by settingsViewModel.selectedFontScale.collectAsState()
+    val selectedFontScale by settingsViewModel.selectedAppFontScale.collectAsState()
 
     // State for language dropdown menu
     var languageExpanded by remember { mutableStateOf(false) }

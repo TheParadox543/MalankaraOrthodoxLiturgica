@@ -31,7 +31,7 @@ class SettingsViewModel @Inject constructor(
     val selectedLanguage = settingsRepository.selectedLanguage
 
     private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
-    val selectedFontScale = _selectedAppFontScale.asStateFlow()
+    val selectedAppFontScale = _selectedAppFontScale.asStateFlow()
 
 //    private val _hasCompletedOnboarding = MutableStateFlow(false)
     val hasCompletedOnboarding = settingsRepository.hasCompletedOnboarding

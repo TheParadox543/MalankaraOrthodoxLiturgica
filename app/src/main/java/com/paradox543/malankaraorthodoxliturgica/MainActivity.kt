@@ -86,7 +86,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val language by settingsViewModel.selectedLanguage.collectAsState()
-            val scaleFactor by settingsViewModel.selectedFontScale.collectAsState()
+            val scaleFactor by settingsViewModel.selectedAppFontScale.collectAsState()
             val soundMode by settingsViewModel.soundMode.collectAsState()
 
             MalankaraOrthodoxLiturgicaTheme(language = language, textScale = scaleFactor) {
