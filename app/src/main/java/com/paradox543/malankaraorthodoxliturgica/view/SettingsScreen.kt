@@ -5,13 +5,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -181,13 +184,27 @@ fun SettingsScreen(
                     Spacer(Modifier.height(8.dp))
                     Row(
                         Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                        horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Spacer(Modifier.weight(0.3f))
-                        Text("Normal restored after:", Modifier.padding(horizontal = 4.dp), style = MaterialTheme.typography.bodySmall)
-                        Button(onClick = { showRestoreDialog = true }) {
-                            Text("$soundRestoreDelay", style = MaterialTheme.typography.bodySmall)
+                        val displayText =
+                            if (soundRestoreDelay >= 60) {
+                                "${soundRestoreDelay / 60} hr ${soundRestoreDelay % 60} min"
+                            } else {
+                                "$soundRestoreDelay min"
+                            }
+                        Text(
+                            "Normal restored after:",
+                            Modifier.padding(horizontal = 4.dp),
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                        Card(
+                            Modifier
+                                .requiredWidthIn(min = 120.dp)
+                                .fillMaxHeight()
+                                .clickable(onClick = { showRestoreDialog = true }),
+                        ) {
+                            Text(displayText, Modifier.padding(4.dp))
                         }
                         if (showRestoreDialog) {
                             RestoreTimePicker(
@@ -307,7 +324,7 @@ fun SettingsScreen(
                                     context = context,
                                     shareMessage =
                                         "Welcome to Liturgica: A digital repository for " +
-                                            "all your books in the Malankara Orthodox Church", // Your custom message
+                                                "all your books in the Malankara Orthodox Church", // Your custom message
                                 )
                             },
                         ),

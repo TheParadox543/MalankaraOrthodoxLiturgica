@@ -54,14 +54,6 @@ class MainActivity : ComponentActivity() {
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val navViewModel: NavViewModel by viewModels()
 
-    private var previousInterruptionFilter: Int? = null
-
-    fun findPreviousInterruptionFilter(): Int {
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        previousInterruptionFilter = notificationManager.currentInterruptionFilter
-        return notificationManager.currentInterruptionFilter
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install the splash screen.
         val splashScreen = installSplashScreen()
@@ -113,10 +105,6 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
-                }
-
-                LaunchedEffect(Unit) {
-                    findPreviousInterruptionFilter()
                 }
 
                 LaunchedEffect(soundMode) {
