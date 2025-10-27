@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,7 +43,6 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -74,8 +72,9 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    val selectedFontScale by settingsViewModel.selectedFontScale.collectAsState()
+    val selectedFontScale by settingsViewModel.selectedAppFontScale.collectAsState()
     val soundMode by settingsViewModel.soundMode.collectAsState()
+    val soundRestoreDelay by settingsViewModel.soundRestoreDelay.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     val hasPermission by settingsViewModel.hasDndPermission.collectAsState()
     val context = LocalContext.current
@@ -188,15 +187,17 @@ fun SettingsScreen(
                         Spacer(Modifier.weight(0.3f))
                         Text("Normal restored after:", Modifier.padding(horizontal = 4.dp), style = MaterialTheme.typography.bodySmall)
                         Button(onClick = { showRestoreDialog = true }) {
-                            Text("Change", style = MaterialTheme.typography.bodySmall)
+                            Text("$soundRestoreDelay", style = MaterialTheme.typography.bodySmall)
                         }
                         if (showRestoreDialog) {
                             RestoreTimePicker(
                                 onDismiss = { showRestoreDialog = false },
                                 onConfirm = { minute ->
                                     Log.d("SettingsScreen", "Restore time after $minute")
+                                    settingsViewModel.setSoundRestoreDelay(minute)
                                     showRestoreDialog = false
                                 },
+                                delayTime = soundRestoreDelay,
                             )
                         }
                     }
@@ -306,7 +307,7 @@ fun SettingsScreen(
                                     context = context,
                                     shareMessage =
                                         "Welcome to Liturgica: A digital repository for " +
-                                                "all your books in the Malankara Orthodox Church", // Your custom message
+                                            "all your books in the Malankara Orthodox Church", // Your custom message
                                 )
                             },
                         ),

@@ -42,6 +42,9 @@ class SettingsViewModel @Inject constructor(
     private val _soundMode = MutableStateFlow(SoundMode.OFF)
     val soundMode = _soundMode.asStateFlow()
 
+    private val _soundRestoreDelay = MutableStateFlow(30)
+    val soundRestoreDelay = _soundRestoreDelay.asStateFlow()
+
     private val _hasDndPermission = MutableStateFlow(false)
     val hasDndPermission = _hasDndPermission.asStateFlow()
 
@@ -58,6 +61,7 @@ class SettingsViewModel @Inject constructor(
             _selectedAppFontScale.value = settingsRepository.getFontScale()
             _songScrollState.value = settingsRepository.getSongScrollState()
             _soundMode.value = settingsRepository.getSoundMode()
+            _soundRestoreDelay.value = settingsRepository.getSoundRestoreDelay()
         }
 
         // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
@@ -132,6 +136,13 @@ class SettingsViewModel @Inject constructor(
         _soundMode.value = permissionState
         viewModelScope.launch {
             settingsRepository.setSoundMode(permissionState)
+        }
+    }
+
+    fun setSoundRestoreDelay(delay: Int) {
+        _soundRestoreDelay.value = delay
+        viewModelScope.launch {
+            settingsRepository.setSoundRestoreDelay(delay)
         }
     }
 

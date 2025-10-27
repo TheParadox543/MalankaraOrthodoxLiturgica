@@ -60,7 +60,10 @@ object SoundModeManager {
         if (previousInterruptionFilter == false) {
             Log.d("SoundModeManager", "Applying sound mode changes for mode: $soundMode, active: $active")
             when (soundMode) {
-                SoundMode.OFF -> {}
+                SoundMode.OFF -> {
+                    setSilentMode(false, audioManager)
+                    setDndMode(false, notificationManager)
+                }
                 SoundMode.SILENT -> setSilentMode(active, audioManager)
                 SoundMode.DND -> setDndMode(active, notificationManager)
             }

@@ -159,9 +159,10 @@ class MainActivity : ComponentActivity() {
     }
 
     fun scheduleSoundModeRestore() {
+        val delayTime = settingsViewModel.soundRestoreDelay.value
         val restoreWork =
             OneTimeWorkRequestBuilder<RestoreSoundWorker>()
-                .setInitialDelay(30, TimeUnit.MINUTES)
+                .setInitialDelay(delayTime.toLong(), TimeUnit.MINUTES)
                 .build()
 
         workManager.enqueueUniqueWork(

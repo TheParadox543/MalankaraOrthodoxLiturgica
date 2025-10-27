@@ -41,6 +41,7 @@ import kotlin.math.abs
 fun RestoreTimePicker(
     onConfirm: (minutes: Int) -> Unit,
     onDismiss: () -> Unit,
+    delayTime: Int,
 ) {
     val hourList =
         buildList {
@@ -58,15 +59,16 @@ fun RestoreTimePicker(
             repeat(2) { add("") }
         }
 
-    val hourState = rememberLazyListState(initialFirstVisibleItemIndex = 0)
-    val minState = rememberLazyListState(initialFirstVisibleItemIndex = 5)
+    val hourState = rememberLazyListState(initialFirstVisibleItemIndex = delayTime / 60)
+    val minState = rememberLazyListState(initialFirstVisibleItemIndex = delayTime / 5 - 1)
     var hourIndex by remember { mutableIntStateOf(hourState.firstVisibleItemIndex) }
     var minuteIndex by remember { mutableIntStateOf(minState.firstVisibleItemIndex) }
 
     LaunchedEffect(hourState.firstVisibleItemIndex) {
         hourIndex = hourState.firstVisibleItemIndex
-        if (minuteIndex <= (hourIndex * 12) || minuteIndex >= ((hourIndex + 1) * 12)) {
-            minuteIndex = (hourIndex * 12) + (minuteIndex % 12)
+        if (minuteIndex < (hourIndex * 12 - 1) || minuteIndex >= ((hourIndex + 1) * 12 - 1)) {
+            val hourMark = if ((minuteIndex + 1) % 12 == 0) (hourIndex - 1) else hourIndex
+            minuteIndex = maxOf((hourMark * 12) + (minuteIndex % 12), 0)
         }
         minState.scrollToItem(minuteIndex)
         Log.d("RestoreTimePicker", "Time indices for hour: $hourIndex $minuteIndex")
@@ -74,7 +76,7 @@ fun RestoreTimePicker(
     LaunchedEffect(minState.firstVisibleItemIndex) {
         minuteIndex = minState.firstVisibleItemIndex
         hourIndex = (minuteIndex + 1) / 12
-        hourState.animateScrollToItem(hourIndex)
+        hourState.scrollToItem(hourIndex)
         Log.d("RestoreTimePicker", "Time indices for minute: $hourIndex $minuteIndex")
     }
 
@@ -187,5 +189,5 @@ private fun TimePickerColumn(
 @Preview
 @Composable
 fun RestoreTimePickerPreview() {
-    RestoreTimePicker({ minutes -> }, {})
+    RestoreTimePicker({ minutes -> }, {}, 30)
 }
