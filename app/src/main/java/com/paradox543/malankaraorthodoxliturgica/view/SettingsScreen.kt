@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -162,7 +164,7 @@ fun SettingsScreen(
                 }
                 if (!hasPermission) {
                     Spacer(Modifier.height(8.dp))
-                    Row {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = "This feature requires DND permission.",
                             Modifier.weight(1f),
@@ -178,19 +180,21 @@ fun SettingsScreen(
                     }
                 } else if (soundMode != SoundMode.OFF) {
                     Spacer(Modifier.height(8.dp))
-                    Row {
-                        Text("Change restore time")
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Spacer(Modifier.weight(0.3f))
+                        Text("Normal restored after:", Modifier.padding(horizontal = 4.dp), style = MaterialTheme.typography.bodySmall)
                         Button(onClick = { showRestoreDialog = true }) {
-                            Text("Change")
+                            Text("Change", style = MaterialTheme.typography.bodySmall)
                         }
                         if (showRestoreDialog) {
                             RestoreTimePicker(
                                 onDismiss = { showRestoreDialog = false },
-                                onConfirm = { hour, minute ->
-//                            var totalMinutes = hour * 60 + minute
-//                            if (totalMinutes < 5) totalMinutes = 5
-//                            if (totalMinutes > 120) totalMinutes = 120
-                                    // Save or schedule restore accordingly
+                                onConfirm = { minute ->
+                                    Log.d("SettingsScreen", "Restore time after $minute")
                                     showRestoreDialog = false
                                 },
                             )

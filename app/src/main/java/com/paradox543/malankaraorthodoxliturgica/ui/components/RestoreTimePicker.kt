@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
@@ -21,9 +22,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -32,95 +37,73 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlin.math.abs
 
-//  @OptIn(ExperimentalMaterial3Api::class)
-//  @Composable
-//  fun RestoreTimePicker() {
-//    val minList = (0..55 step 5).map { if (it < 10) "0$it" else "$it" }
-//    val hourList = (0..6).map { if (it < 10) "0$it" else "$it" }
-//    var minIndex by remember { mutableIntStateOf(0) }
-//    var hourIndex by remember { mutableIntStateOf(0) }
-//    AlertDialog(
-//        onDismissRequest = {},
-//        title = { Text("Select Restore Time") },
-//        text = {
-//            Row {
-//                LazyColumn(Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
-//                    itemsIndexed(hourList) { index, item ->
-//                        if (index <= 4) {
-//                            Text(
-//                                item,
-//                                Modifier
-//                                    .width(80.dp)
-//                                    .padding(vertical = 8.dp),
-//                                fontSize = 24.sp * (1 - abs(2 - index) * 0.3),
-//                                textAlign = TextAlign.Center,
-//                            )
-//                        }
-//                    }
-//                }
-//                LazyColumn(Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
-//                    itemsIndexed(minList) { index, item ->
-//                        if (index <= 4) {
-//                            Text(
-//                                item,
-//                                Modifier
-//                                    .width(80.dp)
-//                                    .padding(vertical = 8.dp),
-//                                fontSize = 24.sp * (1 - abs(2 - index) * 0.3),
-//                                textAlign = TextAlign.Center,
-//                            )
-//                        }
-//                    }
-//                }
-//            }
-//        },
-//        confirmButton = { Text("Confirm") },
-//        dismissButton = { Text("Cancel") },
-//    )
-// }
-
 @Composable
 fun RestoreTimePicker(
-    onConfirm: (hours: Int, minutes: Int) -> Unit,
+    onConfirm: (minutes: Int) -> Unit,
     onDismiss: () -> Unit,
 ) {
-    val minList = (0..55 step 5).map { it.toString().padStart(2, '0') }
     val hourList =
-        (-2..8).map {
-            if (it < 0 || it > 6) {
-                ""
-            } else {
-                it.toString().padStart(2, '0')
-            }
+        buildList {
+            repeat(2) { add("") } // Add 2 empty slots at the start
+            addAll((0..6).map { it.toString().padStart(2, '0') })
+            repeat(2) { add("") } // Add 2 empty slots at the end
         }
 
-    val useMinList = List(100) { minList }.flatten()
+    val minList =
+        buildList {
+            repeat(2) { add("") }
+            repeat(6) {
+                addAll((5..60 step 5).map { (it % 60).toString().padStart(2, '0') })
+            }
+            repeat(2) { add("") }
+        }
 
     val hourState = rememberLazyListState(initialFirstVisibleItemIndex = 0)
-    val minState = rememberLazyListState(initialFirstVisibleItemIndex = 0)
+    val minState = rememberLazyListState(initialFirstVisibleItemIndex = 5)
+    var hourIndex by remember { mutableIntStateOf(hourState.firstVisibleItemIndex) }
+    var minuteIndex by remember { mutableIntStateOf(minState.firstVisibleItemIndex) }
 
-    val coroutineScope = rememberCoroutineScope()
+    LaunchedEffect(hourState.firstVisibleItemIndex) {
+        hourIndex = hourState.firstVisibleItemIndex
+        if (minuteIndex <= (hourIndex * 12) || minuteIndex >= ((hourIndex + 1) * 12)) {
+            minuteIndex = (hourIndex * 12) + (minuteIndex % 12)
+        }
+        minState.scrollToItem(minuteIndex)
+        Log.d("RestoreTimePicker", "Time indices for hour: $hourIndex $minuteIndex")
+    }
+    LaunchedEffect(minState.firstVisibleItemIndex) {
+        minuteIndex = minState.firstVisibleItemIndex
+        hourIndex = (minuteIndex + 1) / 12
+        hourState.animateScrollToItem(hourIndex)
+        Log.d("RestoreTimePicker", "Time indices for minute: $hourIndex $minuteIndex")
+    }
 
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Select Restore Time", Modifier.fillMaxWidth(), textAlign = TextAlign.Center) },
         text = {
-            Row(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                TimePickerColumn(hourList, hourState, label = "hr")
-                TimePickerColumn(useMinList, minState, label = "min")
+            Column {
+                Text(
+                    "$hourIndex hr ${if ((minuteIndex + 1) % 12 != 0) ((minuteIndex % 12 + 1) * 5) else 0} min",
+                    Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                )
+                Row(
+                    modifier =
+                        Modifier
+//                            .padding(vertical = 8.dp)
+                            .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    TimePickerColumn(hourList, hourState, label = "hr")
+                    TimePickerColumn(minList, minState, label = "min")
+                }
             }
         },
         confirmButton = {
             TextButton(onClick = {
-                val selectedHour = hourState.firstVisibleItemIndex.coerceIn(0, hourList.lastIndex)
                 val selectedMin = minState.firstVisibleItemIndex.coerceIn(0, minList.lastIndex)
-                onConfirm(selectedHour, selectedMin * 5)
+                onConfirm((selectedMin + 1) * 5)
             }) {
                 Text("Confirm")
             }
@@ -137,7 +120,7 @@ fun RestoreTimePicker(
 private fun TimePickerColumn(
     list: List<String>,
     scrollState: LazyListState,
-    label: String
+    label: String,
 ) {
     val flingBehavior =
         rememberSnapFlingBehavior(
@@ -145,6 +128,14 @@ private fun TimePickerColumn(
             snapPosition = SnapPosition.Start,
         )
     val derivedState = remember { derivedStateOf { scrollState.firstVisibleItemIndex } }
+    LaunchedEffect(scrollState) {
+        snapshotFlow { scrollState.isScrollInProgress }
+            .collect { isScrolling ->
+                if (!isScrolling) {
+                    scrollState.animateScrollToItem(scrollState.firstVisibleItemIndex, 0)
+                }
+            }
+    }
     Column(Modifier.padding(horizontal = 8.dp)) {
         Text(label, Modifier.width(80.dp), textAlign = TextAlign.Center)
         Box(
@@ -161,7 +152,7 @@ private fun TimePickerColumn(
             ) {
                 itemsIndexed(list) { index, item ->
                     // distance from center
-                    val distance = abs(derivedState.value - index)
+                    val distance = abs(derivedState.value - index + 2)
                     val scale = 1f - distance * 0.2f
                     val alpha = 1f - distance * 0.3f
 
@@ -173,6 +164,7 @@ private fun TimePickerColumn(
                         modifier =
                             Modifier
                                 .padding(vertical = 6.dp)
+                                .height(28.dp)
                                 .fillMaxWidth(),
                     )
                 }
@@ -195,5 +187,5 @@ private fun TimePickerColumn(
 @Preview
 @Composable
 fun RestoreTimePickerPreview() {
-    RestoreTimePicker({ hours, minutes -> }, {})
+    RestoreTimePicker({ minutes -> }, {})
 }
