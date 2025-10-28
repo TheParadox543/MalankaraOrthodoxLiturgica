@@ -116,6 +116,7 @@ dependencies {
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
     implementation(libs.firebase.crashlytics)         // Firebase Crashlytics for crash reporting
     implementation(libs.firebase.crashlytics.ndk)
+    implementation(libs.firebase.storage)
 
     // For Google Play Core libraries
     implementation(libs.review.ktx)

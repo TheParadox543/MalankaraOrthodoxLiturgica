@@ -28,6 +28,7 @@ import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.view.SongScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
@@ -108,6 +109,10 @@ fun NavGraph(
             } else {
                 ContentNotReadyScreen(navController, message = prayerRoute)
             }
+        }
+
+        composable(Screen.Song.route) {
+            SongScreen()
         }
 
         composable(Screen.PrayNow.route) {
