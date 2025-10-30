@@ -118,6 +118,11 @@ dependencies {
     implementation(libs.firebase.crashlytics.ndk)
     implementation(libs.firebase.storage)
 
+    // Media Player
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.common)
+
     // For Google Play Core libraries
     implementation(libs.review.ktx)
     implementation(libs.app.update.ktx)
