@@ -5,20 +5,20 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.work.WorkManager
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
-import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import javax.inject.Singleton
@@ -95,4 +95,15 @@ object AppModule {
         @ApplicationContext context: Context,
     ): WorkManager = WorkManager.getInstance(context)
 
+    @Provides
+    @Singleton
+    fun providePlayer(
+        @ApplicationContext context: Context,
+    ): Player =
+        ExoPlayer
+            .Builder(context)
+            // Optional: You can customize the player here if needed
+            // .setAudioAttributes(...)
+            // .setHandleAudioBecomingNoisy(true)
+            .build()
 }
