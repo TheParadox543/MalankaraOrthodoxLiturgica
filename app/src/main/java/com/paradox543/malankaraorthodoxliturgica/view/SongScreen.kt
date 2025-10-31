@@ -2,97 +2,165 @@ package com.paradox543.malankaraorthodoxliturgica.view
 
 import android.net.Uri
 import android.util.Log
+import androidx.annotation.OptIn
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.net.toUri
 import androidx.media3.common.MediaItem
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
 import java.io.File
 
+sealed interface MediaStatus {
+    object Loading : MediaStatus
+
+    data class Ready(
+        val message: String,
+    ) : MediaStatus
+
+    data class Error(
+        val message: String,
+    ) : MediaStatus
+}
+
+@OptIn(UnstableApi::class)
 @Composable
-fun SongScreen() {
+fun SongScreen(
+    songFileName: String = "introduction/00 Introduction.mp3"
+) {
     val context = LocalContext.current
     // Create Exoplayer to avoid building on every recomposition
     val exoPlayer = remember { ExoPlayer.Builder(context).build() }
 
-    Column(Modifier.padding(16.dp)) {
-        Text("Testing adding songs with firebase")
-        // Alternatively, explicitly specify the bucket name URL.
-        val storage = Firebase.storage("gs://liturgica-3d3a4.firebasestorage.app")
+    // State to manage the current status: loading, playing, or error.
+    var mediaStatus by remember { mutableStateOf<MediaStatus>(MediaStatus.Loading) }
 
-        var storageRef = storage.reference
+//    val songFileName = "00 Introduction.mp3"
+    val localFile = remember { File(context.filesDir, songFileName) }
 
-        var ekkaraRef = storageRef.child("ekkaraSongs")
+    LaunchedEffect(key1 = localFile) {
+        // Define the reference to the file in Firebase Storage
+        val storageRef =
+            Firebase
+                .storage("gs://liturgica-3d3a4.firebasestorage.app")
+                .reference
+                .child("ekkaraSongs/$songFileName")
 
-        var introductionRef = ekkaraRef.child("introduction/00 Introduction.mp3")
+        if (localFile.exists() && localFile.length() > 0) {
+            // 1. FILE EXISTS LOCALLY
+            Log.d("SongScreen", "File exists locally. Playing from: ${localFile.path}")
+            val localUri = localFile.toUri()
+            val mediaItem = MediaItem.fromUri(localUri)
+            exoPlayer.setMediaItem(mediaItem)
+            exoPlayer.prepare()
+            mediaStatus = MediaStatus.Ready("Playing from local storage")
+        } else {
+            // 2. FILE DOES NOT EXIST, STREAM FROM URL
+            Log.d("SongScreen", "File does not exist. Streaming from Firebase.")
+            storageRef.downloadUrl
+                .addOnSuccessListener { uri: Uri ->
+                    // Set up the player to stream from the URL
+                    val mediaItem = MediaItem.fromUri(uri)
+                    exoPlayer.setMediaItem(mediaItem)
+                    exoPlayer.prepare()
+                    mediaStatus = MediaStatus.Ready("Streaming from the cloud")
+                    Log.d("SongScreen", "Streaming audio from: $uri")
 
-        var rootRef = introductionRef.root
-        var parentRef = introductionRef.parent
+                    // OPTIONAL: Download the file in the background for next time
+                    storageRef
+                        .getFile(localFile)
+                        .addOnSuccessListener {
+                            Log.d(
+                                "SongScreen",
+                                "Background download complete. File saved to ${localFile.path}",
+                            )
+                        }.addOnFailureListener { e ->
+                            Log.e("SongScreen", "Background download failed", e)
+                            // Optional: Clean up partially downloaded file
+                            if (localFile.exists()) {
+                                localFile.delete()
+                            }
+                        }
+                }.addOnFailureListener { e ->
+                    // Handle failure to get the download URL
+                    Log.e("SongScreen", "Failed to get download URL", e)
+                    mediaStatus = MediaStatus.Error("Could not retrieve song.")
+                }
+        }
+    }
 
-        Text(storageRef.name)
-        Text(ekkaraRef.name)
-        Text(introductionRef.name)
-        Text(rootRef.name)
-        parentRef?.name?.let { Text(it) }
+    // Start playback once the media is ready
+    if (mediaStatus is MediaStatus.Ready) {
+        exoPlayer.playWhenReady = true
+    }
 
-        val fakeFileRef = storageRef.child("fakeFile.txt")
-        Text(fakeFileRef.name)
-        Log.d("SongScreen", "SongScreen: ${fakeFileRef.name}")
-        Log.d("SongScreen", "Path to file: ${fakeFileRef.path}")
-        Log.d("SongScreen", "Path to introduction: ${introductionRef.path}")
+    // Manage Exoplayer Lifecycle with DisposableEffect
+    // This is crucial to release the player's resources when the screen is left.
+    DisposableEffect(Unit) {
+        onDispose {
+            exoPlayer.release()
+        }
+    }
 
-        Text("Downloading a file")
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text("Orthodox Liturgical Songs")
+        Spacer(Modifier.height(24.dp))
 
-        val location = File(context.filesDir, "introduction.mp3")
-        introductionRef
-            .getFile(location)
-            .addOnSuccessListener {
-                Log.d("SongScreen", "File downloaded to ${location.path}")
-                // Data for "images/island.jpg" is returned, use this as needed
-            }.addOnFailureListener { e ->
-                Log.d("SongScreen", "File download failed", e)
-                // Handle any errors
+        // Show a loading indicator, the player, or an error message
+        when (val status = mediaStatus) {
+            is MediaStatus.Loading -> {
+                CircularProgressIndicator()
+                Text("Loading song...", modifier = Modifier.padding(top = 8.dp))
             }
-
-        introductionRef.downloadUrl
-            .addOnSuccessListener { uri: Uri ->
-                // Create a MediaItem from the obtained URL
-                val mediaItem = MediaItem.fromUri(uri)
-                exoPlayer.setMediaItem(mediaItem)
-                exoPlayer.prepare()
-                exoPlayer.playWhenReady = true // It's better to use playWhenReady
-                Log.d("SongScreen", "Streaming audio from: $uri")
-            }.addOnFailureListener { e ->
-                Log.e("SongScreen", "Failed to get download URL", e)
-                // Handle the error, e.g., show a message to the user
+            is MediaStatus.Ready -> {
+                Text(status.message)
+                Spacer(Modifier.height(8.dp))
+                // The AndroidView hosts the ExoPlayer UI
+                AndroidView(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(16 / 9f),
+                    factory = { context ->
+                        PlayerView(context).apply {
+                            this.player = exoPlayer
+                            // Key improvement: Hide the video surface and only show controls
+                            useController = true
+                            controllerShowTimeoutMs = 0 // Show controls immediately and indefinitely
+                            controllerHideOnTouch = false
+                        }
+                    },
+                )
             }
-
-        // Manage Exoplayer Lifecycle
-        DisposableEffect(Unit) {
-            onDispose {
-                exoPlayer.release()
+            is MediaStatus.Error -> {
+                Text("Error: ${status.message}")
             }
         }
-
-        AndroidView(
-            modifier = Modifier.fillMaxWidth().aspectRatio(16 / 9f),
-            factory = {
-                PlayerView(it).apply {
-                    player = exoPlayer
-                }
-            },
-        )
     }
 }
