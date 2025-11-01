@@ -24,12 +24,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.net.toUri
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import androidx.navigation.NavController
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.SongPlayerViewModel
 import java.io.File
 
 sealed interface MediaStatus {
@@ -47,7 +50,9 @@ sealed interface MediaStatus {
 @OptIn(UnstableApi::class)
 @Composable
 fun SongScreen(
-    songFileName: String = "introduction/00 Introduction.mp3"
+    navController: NavController,
+    songPlayerViewModel: SongPlayerViewModel = hiltViewModel(),
+    songFilename: String = "introduction/00 Introduction.mp3",
 ) {
     val context = LocalContext.current
     // Create Exoplayer to avoid building on every recomposition
@@ -57,7 +62,7 @@ fun SongScreen(
     var mediaStatus by remember { mutableStateOf<MediaStatus>(MediaStatus.Loading) }
 
 //    val songFileName = "00 Introduction.mp3"
-    val localFile = remember { File(context.filesDir, songFileName) }
+    val localFile = remember { File(context.filesDir, songFilename) }
 
     LaunchedEffect(key1 = localFile) {
         // Define the reference to the file in Firebase Storage
@@ -65,7 +70,7 @@ fun SongScreen(
             Firebase
                 .storage("gs://liturgica-3d3a4.firebasestorage.app")
                 .reference
-                .child("ekkaraSongs/$songFileName")
+                .child("ekkaraSongs/$songFilename")
 
         if (localFile.exists() && localFile.length() > 0) {
             // 1. FILE EXISTS LOCALLY
@@ -146,7 +151,7 @@ fun SongScreen(
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .aspectRatio(16 / 9f),
+                            .aspectRatio(1f),
                     factory = { context ->
                         PlayerView(context).apply {
                             this.player = exoPlayer
