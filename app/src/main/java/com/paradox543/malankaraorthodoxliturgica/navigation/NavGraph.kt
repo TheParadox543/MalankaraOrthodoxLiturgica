@@ -112,7 +112,7 @@ fun NavGraph(
         }
 
         composable(Screen.Song.route) {
-            SongScreen()
+            SongScreen(navController)
         }
 
         composable(Screen.PrayNow.route) {
