@@ -24,7 +24,7 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 34
-        versionName = "1.4.1-alpha.1"
+        versionName = "1.5.0-alpha.1"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -176,9 +176,16 @@ private fun SectionCard(
     ) {
         val text = node.route.split("_").last()
         Text(
-            text = translations[text] ?: text,
+            text =
+                if (text.contains("ragam")) {
+                    translations["ragam"] + " " + text.substringAfter("ragam")
+                } else {
+                    translations[text] ?: text
+                },
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(20.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(20.dp)
+                .fillMaxWidth(),
             textAlign = TextAlign.Center
         )
     }
