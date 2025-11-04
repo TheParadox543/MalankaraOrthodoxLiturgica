@@ -1,54 +1,41 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
 import androidx.annotation.OptIn
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.PlayerView
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
@@ -64,25 +51,9 @@ fun SongScreen(
     songFilename: String = "introduction/00 Introduction.mp3",
 ) {
     val mediaStatus by songPlayerViewModel.mediaStatus.collectAsState()
-    val context = LocalContext.current
-
-    val exoPlayer = remember { ExoPlayer.Builder(context).build() }
-    LaunchedEffect(mediaStatus) {
-        if (mediaStatus is MediaStatus.Ready) {
-            val readyStatus = mediaStatus as MediaStatus.Ready
-            val mediaItem = MediaItem.fromUri(readyStatus.mediaUri)
-            exoPlayer.setMediaItem(mediaItem)
-            exoPlayer.prepare()
-            exoPlayer.playWhenReady = true
-        }
-    }
-
-    // 3. This effect ensures the player is released when the screen is disposed
-    DisposableEffect(Unit) {
-        onDispose {
-            exoPlayer.release()
-        }
-    }
+    val isPlaying by songPlayerViewModel.isPlaying.collectAsState()
+    val currentPosition by songPlayerViewModel.currentPosition.collectAsState()
+    val duration by songPlayerViewModel.duration.collectAsState()
 
     LaunchedEffect(songFilename) {
         songPlayerViewModel.loadSong(songFilename)
@@ -111,9 +82,15 @@ fun SongScreen(
 
                 is MediaStatus.Ready -> {
                     SongPlayerUI(
-                        player = exoPlayer, // Pass the local player
+                        isPlaying = isPlaying,
+                        onTogglePlay = {
+                            if (isPlaying) songPlayerViewModel.pause() else songPlayerViewModel.play()
+                        },
                         title = songFilename.substringAfterLast('/').removeSuffix(".mp3"),
                         sourceMessage = status.message,
+                        currentPosition = currentPosition,
+                        duration = duration,
+                        onSeek = { newPos -> songPlayerViewModel.seekTo(newPos) },
                     )
                 }
 
@@ -129,41 +106,35 @@ fun SongScreen(
 @OptIn(UnstableApi::class)
 @Composable
 private fun SongPlayerUI(
-    player: ExoPlayer,
+    isPlaying: Boolean,
+    onTogglePlay: () -> Unit,
     title: String,
     sourceMessage: String,
+    currentPosition: Long,
+    duration: Long,
+    onSeek: (Long) -> Unit,
 ) {
-    var isPlaying by remember { mutableStateOf(player.isPlaying) }
-    var currentPosition by remember { mutableLongStateOf(player.currentPosition) }
-    var totalDuration by remember { mutableLongStateOf(player.duration) }
+    // Local UI state to manage slider dragging without fighting the frequent player updates
+    var sliderPosition by remember { mutableFloatStateOf(0f) }
+    var isUserSeeking by remember { mutableStateOf(false) }
 
-    // Use a DisposableEffect to add and remove a listener to the player.
-    DisposableEffect(player) {
-        val listener =
-            object : Player.Listener {
-                override fun onIsPlayingChanged(isPlayingValue: Boolean) {
-                    super.onIsPlayingChanged(isPlayingValue)
-                    isPlaying = isPlayingValue
-                }
+    // Convert positions to Float ranges between 0f and 1f
+    val effectiveDuration = if (duration > 0L) duration else 1L
 
-                override fun onEvents(
-                    player: Player,
-                    events: Player.Events,
-                ) {
-                    super.onEvents(player, events)
-                    // Update position and duration whenever player state changes
-                    currentPosition = player.currentPosition
-                    totalDuration = player.duration
-                }
-            }
-
-        player.addListener(listener)
-
-        // When the composable is disposed, remove the listener
-        onDispose {
-            player.removeListener(listener)
+    // Update the local sliderPosition from currentPosition when the user is NOT interacting.
+    LaunchedEffect(currentPosition, isUserSeeking, effectiveDuration) {
+        if (!isUserSeeking) {
+            sliderPosition = (currentPosition.coerceIn(0L, effectiveDuration)).toFloat() / effectiveDuration.toFloat()
         }
     }
+
+    // Use derivedStateOf to avoid unnecessary recompositions and animate for smooth movement
+    val targetProgress =
+        remember(isUserSeeking, sliderPosition) {
+            derivedStateOf { sliderPosition } // sliderPosition is updated from player or user drag
+        }
+    val animatedProgress by animateFloatAsState(targetProgress.value)
+
     Text(
         text = title,
         style = MaterialTheme.typography.headlineMedium,
@@ -191,42 +162,34 @@ private fun SongPlayerUI(
                     .fillMaxWidth(0.9f)
                     .aspectRatio(1f),
         )
+        Slider(
+            value = animatedProgress,
+            onValueChange = { newFraction ->
+                isUserSeeking = true
+                sliderPosition = newFraction
+            },
+            onValueChangeFinished = {
+                isUserSeeking = false
+                val seekMs = (sliderPosition * effectiveDuration).toLong()
+                onSeek(seekMs)
+            },
+            modifier =
+                Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(bottom = 8.dp),
+        )
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            // Previous Button
-            IconButton(onClick = { player.seekToPreviousMediaItem() }) {
-                Icon(
-                    Icons.Default.KeyboardArrowLeft,
-                    "Previous Song",
-                    modifier = Modifier.size(48.dp),
-                )
-            }
-
             // Play/Pause Button
-            IconButton(onClick = {
-                if (player.isPlaying) {
-                    player.pause()
-                } else {
-                    player.play()
-                }
-            }) {
+            IconButton(onClick = onTogglePlay) {
                 if (isPlaying) {
-                    Icon(painterResource(R.drawable.pause_24px), "Pause Song",)
+                    Icon(painterResource(R.drawable.pause_24px), "Pause Song")
                 } else {
                     Icon(Icons.Default.PlayArrow, "Play Song")
                 }
-            }
-
-            // Next Button
-            IconButton(onClick = { player.seekToNextMediaItem() }) {
-                Icon(
-                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    "Next Song",
-                    modifier = Modifier.size(48.dp),
-                )
             }
         }
     }
