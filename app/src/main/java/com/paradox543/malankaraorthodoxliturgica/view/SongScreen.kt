@@ -41,6 +41,7 @@ import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.MediaStatus
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SongPlayerViewModel
 
 @OptIn(UnstableApi::class)
@@ -48,19 +49,31 @@ import com.paradox543.malankaraorthodoxliturgica.viewmodel.SongPlayerViewModel
 fun SongScreen(
     navController: NavController,
     songPlayerViewModel: SongPlayerViewModel = hiltViewModel(),
-    songFilename: String = "introduction/00 Introduction.mp3",
+    prayerViewModel: PrayerViewModel = hiltViewModel(),
+    songFilename: String,
 ) {
     val mediaStatus by songPlayerViewModel.mediaStatus.collectAsState()
     val isPlaying by songPlayerViewModel.isPlaying.collectAsState()
     val currentPosition by songPlayerViewModel.currentPosition.collectAsState()
     val duration by songPlayerViewModel.duration.collectAsState()
+    val translations by prayerViewModel.translations.collectAsState()
+
+    var title = ""
+    for (part in songFilename.substringAfter("/").removeSuffix(".mp3").split("/")) {
+        title +=
+            if (part.contains("ragam")) {
+                translations["ragam"] + " " + part.substringAfter("ragam")
+            } else {
+                (translations[part] ?: part) + " "
+            }
+    }
 
     LaunchedEffect(songFilename) {
         songPlayerViewModel.loadSong(songFilename)
     }
 
     Scaffold(
-        topBar = { TopNavBar(songFilename.substringAfterLast("/").removeSuffix(".mp3"), navController) },
+        topBar = { TopNavBar(title, navController) },
         bottomBar = { BottomNavBar(navController) },
     ) { innerPadding ->
         Column(
@@ -86,7 +99,7 @@ fun SongScreen(
                         onTogglePlay = {
                             if (isPlaying) songPlayerViewModel.pause() else songPlayerViewModel.play()
                         },
-                        title = songFilename.substringAfterLast('/').removeSuffix(".mp3"),
+                        title = title,
                         sourceMessage = status.message,
                         currentPosition = currentPosition,
                         duration = duration,
