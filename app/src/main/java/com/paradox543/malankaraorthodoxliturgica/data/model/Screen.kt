@@ -31,7 +31,10 @@ sealed class Screen(val route: String, val deepLink: String? = null) {
         fun createDeepLink(prayerRoute: String, scroll: Int = 0) = "app://liturgica/prayer/$prayerRoute/$scroll"
     }
 
-    object Song : Screen("song")
+    object Song : Screen("song/{route}") {
+        const val ARG_ROUTE = "route"
+        fun createRoute(songRoute: String) = "song/$songRoute"
+    }
 
     object BibleBook : Screen("bible/{bookName}") {
         const val ARG_BOOK = "bookName"

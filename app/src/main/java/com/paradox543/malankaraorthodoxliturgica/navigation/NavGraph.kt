@@ -111,8 +111,17 @@ fun NavGraph(
             }
         }
 
-        composable(Screen.Song.route) {
-            SongScreen(navController)
+        composable(
+            route = Screen.Song.route,
+            arguments = listOf(navArgument(Screen.Song.ARG_ROUTE) { type = NavType.StringType }),
+        ) { backStackEntry ->
+            val route = backStackEntry.arguments?.getString(Screen.Section.ARG_ROUTE) ?: ""
+            val node = navViewModel.findNode(rootNode, route)
+            if (node != null) {
+                SongScreen(navController, songFilename = node.filename ?: "")
+            } else {
+                ContentNotReadyScreen(navController, message = route)
+            }
         }
 
         composable(Screen.PrayNow.route) {

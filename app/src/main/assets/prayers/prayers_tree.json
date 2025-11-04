@@ -1989,6 +1989,63 @@
                     "children": []
                 }
             ]
+        },
+        {
+            "route": "ekkaraSongs",
+            "parent": "malankara",
+            "filename": null,
+            "languages": [
+                "ml"
+            ],
+            "children": [
+                {
+                    "route": "ekkaraSongs_introduction",
+                    "parent": "ekkaraSongs",
+                    "filename": "ekkaraSongs/introduction/00 Introduction.mp3",
+                    "languages": [
+                        "ml"
+                    ],
+                    "children": []
+                },
+                {
+                    "route": "ekkaraSongs_sleeba",
+                    "parent": "ekkaraSongs",
+                    "filename": null,
+                    "languages": [
+                        "ml"
+                    ],
+                    "children": [
+                        {
+                            "route": "ekkaraSongs_sleeba_none",
+                            "parent": "ekkaraSongs_sleeba",
+                            "filename": null,
+                            "languages": [
+                                "ml"
+                            ],
+                            "children": [
+                                {
+                                    "route": "ekkaraSongs_sleeba_none_ragam1",
+                                    "parent": "ekkaraSongs_sleeba_none",
+                                    "filename": "ekkaraSongs/sleeba/none/ragam1.mp3",
+                                    "languages": [
+                                        "ml"
+                                    ],
+                                    "children": []
+                                },
+                                {
+                                    "route": "ekkaraSongs_sleeba_none_ragam2",
+                                    "parent": "ekkaraSongs_sleeba_none",
+                                    "filename": "ekkaraSongs/sleeba/none/ragam2.mp3",
+                                    "languages": [
+                                        "ml"
+                                    ],
+                                    "children": []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
