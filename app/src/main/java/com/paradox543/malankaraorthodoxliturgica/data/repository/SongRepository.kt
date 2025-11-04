@@ -23,7 +23,7 @@ class SongRepository
                 Firebase
                     .storage("gs://liturgica-3d3a4.firebasestorage.app")
                     .reference
-                    .child("ekkaraSongs/$songFilename")
+                    .child(songFilename)
 
             return if (localFile.exists() && localFile.length() > 0) {
                 Log.d("SongRepository", "File exists locally. Playing from: ${localFile.path}")
@@ -32,21 +32,7 @@ class SongRepository
                 Log.d("SongRepository", "File does not exist. Streaming from Firebase.")
                 try {
                     val uri = storageRef.downloadUrl.await()
-                    // Download the file in the background for next time
-                    storageRef
-                        .getFile(localFile)
-                        .addOnSuccessListener {
-                            Log.d(
-                                "SongScreen",
-                                "Background download complete. File saved to ${localFile.path}",
-                            )
-                        }.addOnFailureListener { e ->
-                            Log.e("SongScreen", "Background download failed", e)
-                            // Optional: Clean up partially downloaded file
-                            if (localFile.exists()) {
-                                localFile.delete()
-                            }
-                        }
+                    downloadSongInBackground(songFilename, localFile)
                     SongResult.Success(uri, "Streaming from the cloud")
                 } catch (e: Exception) {
                     Log.e("SongRepository", "Failed to get download URL", e)
@@ -54,5 +40,33 @@ class SongRepository
                 }
             }
         }
-    }
 
+        suspend fun downloadSongInBackground(
+            songFilename: String,
+            localFile: File,
+        ) {
+            val storageRef =
+                Firebase
+                    .storage("gs://liturgica-3d3a4.firebasestorage.app")
+                    .reference
+                    .child(songFilename)
+            try {
+                storageRef
+                    .getFile(localFile)
+                    .addOnSuccessListener {
+                        Log.d(
+                            "SongRepository",
+                            "Background download complete. File saved to ${localFile.path}",
+                        )
+                    }.addOnFailureListener { e ->
+                        Log.e("SongRepository", "Background download failed", e)
+                        // Optional: Clean up partially downloaded file
+                        if (localFile.exists()) {
+                            localFile.delete()
+                        }
+                    }
+            } catch (e: Exception) {
+                SongResult.Error("Could not retrieve song. ${e.message}")
+            }
+        }
+    }
