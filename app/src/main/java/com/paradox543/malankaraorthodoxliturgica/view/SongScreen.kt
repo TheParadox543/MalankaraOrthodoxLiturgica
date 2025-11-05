@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -109,7 +110,7 @@ fun SongScreen(
 
                 is MediaStatus.Error -> {
                     Text("Error: ${status.message}")
-                    Text("Failed to retrieve song: $songFilename")
+                    if (BuildConfig.DEBUG) Text("Failed to retrieve song: $songFilename")
                 }
             }
         }
