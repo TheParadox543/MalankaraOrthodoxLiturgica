@@ -12,6 +12,9 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.firebase.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.storage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import dagger.Module
@@ -42,6 +45,10 @@ object AppModule {
             isLenient = true        // Allows for some non-strict JSON (e.g., unquoted keys if needed)
         }
     }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage = Firebase.storage
 //    @Provides
 //    @Singleton
 //    fun providePrayerRepository(
