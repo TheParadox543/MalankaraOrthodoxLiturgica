@@ -1,8 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedState
@@ -28,7 +31,7 @@ class SettingsViewModel @Inject constructor(
     val selectedLanguage = settingsRepository.selectedLanguage
 
     private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
-    val selectedFontScale = _selectedAppFontScale.asStateFlow()
+    val selectedAppFontScale = _selectedAppFontScale.asStateFlow()
 
 //    private val _hasCompletedOnboarding = MutableStateFlow(false)
     val hasCompletedOnboarding = settingsRepository.hasCompletedOnboarding
@@ -38,6 +41,9 @@ class SettingsViewModel @Inject constructor(
 
     private val _soundMode = MutableStateFlow(SoundMode.OFF)
     val soundMode = _soundMode.asStateFlow()
+
+    private val _soundRestoreDelay = MutableStateFlow(30)
+    val soundRestoreDelay = _soundRestoreDelay.asStateFlow()
 
     private val _hasDndPermission = MutableStateFlow(false)
     val hasDndPermission = _hasDndPermission.asStateFlow()
@@ -55,6 +61,7 @@ class SettingsViewModel @Inject constructor(
             _selectedAppFontScale.value = settingsRepository.getFontScale()
             _songScrollState.value = settingsRepository.getSongScrollState()
             _soundMode.value = settingsRepository.getSoundMode()
+            _soundRestoreDelay.value = settingsRepository.getSoundRestoreDelay()
         }
 
         // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
@@ -129,6 +136,13 @@ class SettingsViewModel @Inject constructor(
         _soundMode.value = permissionState
         viewModelScope.launch {
             settingsRepository.setSoundMode(permissionState)
+        }
+    }
+
+    fun setSoundRestoreDelay(delay: Int) {
+        _soundRestoreDelay.value = delay
+        viewModelScope.launch {
+            settingsRepository.setSoundRestoreDelay(delay)
         }
     }
 
@@ -227,5 +241,19 @@ class SettingsViewModel @Inject constructor(
             // Optionally, show a toast or message if no app can handle the share intent
             // Toast.makeText(context, "No app found to share with.", Toast.LENGTH_SHORT).show()
         }
+    }
+}
+
+fun requestDndPermission(context: Context) {
+    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    if (!notificationManager.isNotificationPolicyAccessGranted) {
+        Toast
+            .makeText(
+                context,
+                "Please grant the app access to modify DND in settings.",
+                Toast.LENGTH_LONG,
+            ).show()
+        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+        context.startActivity(intent)
     }
 }

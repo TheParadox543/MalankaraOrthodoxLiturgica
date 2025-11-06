@@ -28,6 +28,7 @@ import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.view.SongScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
@@ -107,6 +108,19 @@ fun NavGraph(
                 )
             } else {
                 ContentNotReadyScreen(navController, message = prayerRoute)
+            }
+        }
+
+        composable(
+            route = Screen.Song.route,
+            arguments = listOf(navArgument(Screen.Song.ARG_ROUTE) { type = NavType.StringType }),
+        ) { backStackEntry ->
+            val route = backStackEntry.arguments?.getString(Screen.Section.ARG_ROUTE) ?: ""
+            val node = navViewModel.findNode(rootNode, route)
+            if (node != null) {
+                SongScreen(navController, songFilename = node.filename ?: "")
+            } else {
+                ContentNotReadyScreen(navController, message = route)
             }
         }
 

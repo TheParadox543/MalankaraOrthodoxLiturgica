@@ -5,18 +5,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import com.paradox543.malankaraorthodoxliturgica.utils.applyPrayerReplacements
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 
 @Composable
-fun Subheading(
+fun ErrorBlock(
     text: String,
+    prayerViewModel: PrayerViewModel,
+    errorLocation: String,
     modifier: Modifier = Modifier,
 ) {
     Text(
-        text = text.applyPrayerReplacements(),
-        style = MaterialTheme.typography.titleMedium,
-        textAlign = TextAlign.Companion.Center,
+        text = text,
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.error,
         modifier = modifier.fillMaxWidth(),
     )
+    prayerViewModel.handlePrayerElementError(text, errorLocation)
 }

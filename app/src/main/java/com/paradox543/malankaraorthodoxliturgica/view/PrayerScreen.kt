@@ -47,7 +47,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
@@ -58,14 +57,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.qr.QrFabGenerate
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
+import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Heading
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Song
@@ -172,7 +171,7 @@ fun PrayerScreen(
                 TopNavBar(
                     title,
                     navController,
-                ) { navController.navigate(Screen.Settings.route) }
+                )
             }
         },
         bottomBar = {
@@ -181,7 +180,17 @@ fun PrayerScreen(
                     visible = isVisible.value,
                     modifier = Modifier.zIndex(1f),
                 ) {
-                    SectionNavBar(navController, prevNodeRoute, nextNodeRoute)
+                    SectionNavBar(
+                        navController,
+                        prevNodeRoute,
+                        nextNodeRoute,
+                        routeProvider = {
+                            Screen.Prayer.createDeepLink(
+                                node.route,
+                                listState.firstVisibleItemIndex,
+                            )
+                        },
+                    )
                 }
             }
         },
@@ -190,31 +199,7 @@ fun PrayerScreen(
                 visible = isVisible.value,
                 enter = fadeIn(),
                 exit = shrinkOut(),
-            ) {
-                Column(
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    horizontalAlignment = Alignment.Start,
-                ) {
-                    QrFabScan(
-                        navController,
-                        Modifier
-                            .scale(0.8f)
-                            .padding(start = 12.dp),
-                        false,
-                    )
-                    QrFabGenerate(
-//                        Screen.Prayer.createDeepLink(node.route, listState.firstVisibleItemIndex),
-                        routeProvider = {
-                            Screen.Prayer.createDeepLink(
-                                node.route,
-                                listState.firstVisibleItemIndex,
-                            )
-                        },
-                        Modifier.scale(1.2f),
-                    )
-                }
-            }
+            ) { QrFabScan(navController) }
         },
     ) { innerPadding ->
 
@@ -353,6 +338,16 @@ fun PrayerElementRenderer(
             )
         }
 
+        is PrayerElement.AlternativePrayersBlock -> {
+            AlternativePrayersUI(
+                prayerElement,
+                prayerViewModel,
+                filename,
+                navController,
+                isSongHorizontalScroll,
+            )
+        }
+
         is PrayerElement.Link -> {
             // This block indicates that a 'Link' element unexpectedly reached the UI.
             // Log an error or render a debug message, as it should ideally not happen.
@@ -367,6 +362,14 @@ fun PrayerElementRenderer(
             // Similar to 'Link', this suggests an issue in the data resolution layer.
             ErrorBlock(
                 "UI Error: Unresolved LinkCollapsible element encountered",
+                prayerViewModel,
+                filename,
+            )
+        }
+
+        is PrayerElement.AlternativeOption -> {
+            ErrorBlock(
+                "UI Error: AlternativeOption element encountered outside of AlternativePrayersBlock",
                 prayerViewModel,
                 filename,
             )
@@ -429,7 +432,6 @@ fun DynamicSongsBlockUI(
     modifier: Modifier = Modifier,
 ) {
     val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
-    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
 
     val dynamicSong =
         dynamicSongsBlock.items.find { it.eventKey == dynamicSongKey }
@@ -526,22 +528,6 @@ fun DynamicSongUI(
             }
         }
     }
-}
-
-@Composable
-fun ErrorBlock(
-    text: String,
-    prayerViewModel: PrayerViewModel,
-    errorLocation: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.titleSmall,
-        color = MaterialTheme.colorScheme.error,
-        modifier = modifier.fillMaxWidth(),
-    )
-    prayerViewModel.handlePrayerElementError(text, errorLocation)
 }
 
 @Composable

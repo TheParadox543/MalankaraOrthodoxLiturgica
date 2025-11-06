@@ -57,7 +57,7 @@ fun SectionScreen(
     val screenWidth = configuration.screenWidthDp.dp
     var title = ""
     for (item in node.route.split("_")){
-        title += translations[item] + " "
+        title += (translations[item] ?: item) + " "
     }
 
     val context = LocalContext.current
@@ -159,8 +159,10 @@ private fun SectionCard(
                 if (node.children.isNotEmpty()) {
                     Log.d("SectionCard", "Navigating to section: ${node.route}")
                     navController.navigate(Screen.Section.createRoute(node.route))
-                } else if (node.filename != null) {
+                } else if (node.filename != null && node.filename.endsWith(".json")) {
                     navController.navigate(Screen.Prayer.createRoute(node.route))
+                } else if (node.type == "song" || (node.filename != null && node.filename.endsWith(".mp3"))) {
+                    navController.navigate(Screen.Song.createRoute(node.route))
                 } else {
                     Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
                 }
@@ -174,9 +176,16 @@ private fun SectionCard(
     ) {
         val text = node.route.split("_").last()
         Text(
-            text = translations[text] ?: text,
+            text =
+                if (text.contains("ragam")) {
+                    translations["ragam"] + " " + text.substringAfter("ragam")
+                } else {
+                    translations[text] ?: text
+                },
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.padding(20.dp).fillMaxWidth(),
+            modifier = Modifier
+                .padding(20.dp)
+                .fillMaxWidth(),
             textAlign = TextAlign.Center
         )
     }

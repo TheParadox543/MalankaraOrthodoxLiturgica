@@ -5,10 +5,16 @@ import android.content.Context
 import android.content.Context.AUDIO_SERVICE
 import android.content.Context.NOTIFICATION_SERVICE
 import android.media.AudioManager
+import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 
 object SoundModeManager {
-    private var previousInterruptionFilter: Int? = null
+    fun checkPreviousFilterState(context: Context): Boolean {
+        val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+        return notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL ||
+            audioManager.ringerMode != AudioManager.RINGER_MODE_NORMAL
+    }
 
     fun hasGrantedDndPermission(notificationManager: NotificationManager): Boolean = notificationManager.isNotificationPolicyAccessGranted
 
@@ -42,13 +48,14 @@ object SoundModeManager {
     ) {
         val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+        Log.d(
+            "SoundModeManager",
+            "Applied notif settings: DND=${notificationManager.currentInterruptionFilter}, Silent=${audioManager.ringerMode}",
+        )
 
-        if (previousInterruptionFilter == null) {
-            previousInterruptionFilter = notificationManager.currentInterruptionFilter
-        }
+        // Return if no permissions given
         if (!hasGrantedDndPermission(notificationManager)) return
-        if (previousInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL) return
-
+        Log.d("SoundModeManager", "Applying sound mode changes for mode: $soundMode, active: $active")
         when (soundMode) {
             SoundMode.OFF -> {
                 setSilentMode(false, audioManager)

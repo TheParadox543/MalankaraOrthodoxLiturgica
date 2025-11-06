@@ -7,6 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoun
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerParsingException
+import com.paradox543.malankaraorthodoxliturgica.utils.applyPrayerReplacements
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import okio.IOException
@@ -130,6 +131,10 @@ class PrayerRepository @Inject constructor(
 
                 is PrayerElement.DynamicSongsBlock -> {
                     resolvedElements.add(loadDynamicSongs(language, element, currentDepth))
+                }
+
+                is PrayerElement.AlternativePrayersBlock -> {
+                    resolvedElements.add(loadAlternativePrayers(language, element, currentDepth))
                 }
 
                 else -> {
@@ -282,6 +287,29 @@ class PrayerRepository @Inject constructor(
         return dynamicSongsBlock
     }
 
+    suspend fun loadAlternativePrayers(
+        language: AppLanguage,
+        alternativePrayersBlock: PrayerElement.AlternativePrayersBlock,
+        currentDepth: Int,
+    ): PrayerElement.AlternativePrayersBlock {
+        val updatedOptions =
+            alternativePrayersBlock.options.map { option ->
+                val firstItem = option.items.firstOrNull()
+                if (firstItem is PrayerElement.Link) {
+                    val content =
+                        loadPrayerElements(
+                            firstItem.file,
+                            language,
+                            currentDepth + 1,
+                        )
+                    option.copy(items = content)
+                } else {
+                    option
+                }
+            }
+        return alternativePrayersBlock.copy(options = updatedOptions)
+    }
+
     suspend fun getSongKeyPriority(): String {
         calendarRepository.initialize()
         val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
@@ -294,7 +322,3 @@ class PrayerRepository @Inject constructor(
     }
 }
 
-fun String.applyPrayerReplacements(): String =
-    this
-        .replace("/t", "    ")
-        .replace("/u200b", "\u200b")
