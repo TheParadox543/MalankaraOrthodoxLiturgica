@@ -502,5 +502,13 @@
     "ragam": {
         "en": "Tune",
         "ml": "രാഗം"
+    },
+    "specialPrayers": {
+        "en": "Special Prayers",
+        "ml": "പ്രേത്യേക പ്രാർത്ഥനകൾ"
+    },
+    "memraOfAprem": {
+        "en": "Memra Of Aprem",
+        "ml": "മാർ അപ്രേമിന്റെ ബോവുസൊ"
     }
 }

@@ -1991,6 +1991,29 @@
             ]
         },
         {
+            "route": "specialPrayers",
+            "parent": "malankara",
+            "filename": null,
+            "languages": [
+                "ml",
+                "mn",
+                "indic"
+            ],
+            "children": [
+                {
+                    "route": "memraOfAprem",
+                    "parent": "specialSongs",
+                    "filename": "specialPrayers/memraOfAprem.json",
+                    "languages": [
+                        "ml",
+                        "mn",
+                        "indic"
+                    ],
+                    "children": []
+                }
+            ]
+        },
+        {
             "route": "ekkaraSongs",
             "parent": "malankara",
             "filename": null,
