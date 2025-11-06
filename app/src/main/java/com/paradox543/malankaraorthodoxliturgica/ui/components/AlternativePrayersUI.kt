@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,7 +34,10 @@ fun AlternativePrayersUI(
 ) {
     var selectedIndex by remember { mutableIntStateOf(0) }
 
-    Column(Modifier.Companion.fillMaxWidth()) {
+    Column(
+        Modifier.Companion.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
         Subheading(
             element.title,
             Modifier.Companion.padding(bottom = 8.dp),
@@ -59,13 +63,15 @@ fun AlternativePrayersUI(
 
         // Render the selected option's content
         element.options[selectedIndex].items.forEach { child ->
-            PrayerElementRenderer(
-                prayerElement = child,
-                prayerViewModel = prayerViewModel,
-                filename = filename,
-                navController = navController,
-                isSongHorizontalScroll = isSongHorizontalScroll,
-            )
+            if (child !is PrayerElement.Heading) {
+                PrayerElementRenderer(
+                    prayerElement = child,
+                    prayerViewModel = prayerViewModel,
+                    filename = filename,
+                    navController = navController,
+                    isSongHorizontalScroll = isSongHorizontalScroll,
+                )
+            }
         }
     }
 }

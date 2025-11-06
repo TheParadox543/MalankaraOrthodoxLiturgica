@@ -9,9 +9,6 @@ import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 
 object SoundModeManager {
-    private const val PREF_NAME = "sound_mode_prefs"
-    private const val KEY_PREVIOUS_MODE = "previous_interruption_filter"
-
     fun checkPreviousFilterState(context: Context): Boolean {
         val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
