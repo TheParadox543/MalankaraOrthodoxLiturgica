@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
@@ -42,6 +43,7 @@ class SettingsRepository @Inject constructor(
     private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
     private val songScrollStateKey = booleanPreferencesKey("song_scroll_state")
     private val soundModePreferencesKey = stringPreferencesKey("sound_mode")
+    private val soundRestoreDelayKey = intPreferencesKey("sound_restore_delay")
 
     val selectedLanguage: StateFlow<AppLanguage> =
         context.dataStore.data
@@ -87,6 +89,11 @@ class SettingsRepository @Inject constructor(
             "DND" -> SoundMode.DND
             else -> SoundMode.OFF
         }
+    }
+
+    suspend fun getSoundRestoreDelay(): Int {
+        val prefs = context.dataStore.data.first()
+        return prefs[soundRestoreDelayKey] ?: 30
     }
 
     // --- Debouncing for Font Scale ---
@@ -145,9 +152,15 @@ class SettingsRepository @Inject constructor(
             preferences[soundModePreferencesKey] = permissionState.name
         }
     }
+
+    suspend fun setSoundRestoreDelay(delay: Int) {
+        context.dataStore.edit { preferences ->
+            preferences[soundRestoreDelayKey] = delay
+        }
+    }
 }
 
-/**
+/*
     // Helper function to get version name using context
     fun getPackageInfo(packageManager: PackageManager, packageName: String, flags: Int = 0): String? {
         return try{

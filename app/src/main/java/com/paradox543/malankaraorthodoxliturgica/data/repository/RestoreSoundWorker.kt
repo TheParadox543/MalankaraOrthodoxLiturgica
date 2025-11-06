@@ -16,6 +16,7 @@ class RestoreSoundWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         try {
             SoundModeManager.applyAppSoundMode(applicationContext, SoundMode.OFF, false)
+            SoundModeManager.clearPreviousState(applicationContext)
             return Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
