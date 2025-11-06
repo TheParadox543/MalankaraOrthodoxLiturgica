@@ -23,8 +23,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 33
-        versionName = "1.4.0"
+        versionCode = 34
+        versionName = "1.5.0-alpha.1"
         ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -116,6 +116,12 @@ dependencies {
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
     implementation(libs.firebase.crashlytics)         // Firebase Crashlytics for crash reporting
     implementation(libs.firebase.crashlytics.ndk)
+    implementation(libs.firebase.storage)
+
+    // Media Player
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.common)
 
     // For Google Play Core libraries
     implementation(libs.review.ktx)

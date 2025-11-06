@@ -46,9 +46,9 @@ fun BibleChapterScreen(
         topBar = { TopNavBar(
             title,
             navController
-        ) { navController.navigate(Screen.Settings.route) }
+        )
         },
-        bottomBar = { SectionNavBar(navController, prevRoute, nextRoute) }
+        bottomBar = { SectionNavBar(navController, prevRoute, nextRoute, { Screen.BibleChapter.createDeepLink(bookIndex, chapterIndex) }) }
     ) { innerPadding ->
         if (chapterData == null ) {
             Text(

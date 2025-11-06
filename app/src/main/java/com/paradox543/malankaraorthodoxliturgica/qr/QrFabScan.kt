@@ -23,7 +23,6 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 fun QrFabScan(
     navController: NavController,
     modifier: Modifier = Modifier,
-    primary: Boolean = true
 ) {
     val tooltipState = rememberTooltipState()
 
@@ -45,20 +44,18 @@ fun QrFabScan(
                 navController.navigate(Screen.QrScanner.route)
             },
             modifier = modifier,
-            containerColor = if (primary) {
-                MaterialTheme.colorScheme.primary
-            } else {
-                MaterialTheme.colorScheme.secondary
-            },
-            contentColor = if (primary) {
-                MaterialTheme.colorScheme.onPrimary
-            } else {
-                MaterialTheme.colorScheme.onSecondary
-            }
+            containerColor = MaterialTheme.colorScheme.primary,
+//            } else {
+//                MaterialTheme.colorScheme.secondary
+//            },
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+//            } else {
+//                MaterialTheme.colorScheme.onSecondary
+//            }
         ) {
             Icon(
                 painterResource(R.drawable.qr_scanner),
-                contentDescription = "Scan QR"
+                contentDescription = "Scan QR",
             )
         }
     }
