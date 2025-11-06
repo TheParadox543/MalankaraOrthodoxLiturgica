@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica
 
 import android.app.NotificationManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -49,6 +50,8 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var workManager: WorkManager
+
+    private var previousInterruptionFilter: Boolean? = null
 
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
@@ -108,7 +111,13 @@ class MainActivity : ComponentActivity() {
                 }
 
                 LaunchedEffect(soundMode) {
-                    SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+                    Log.d("SoundMode MainActivity", "SoundMode changed $soundMode, previousInterruptionFilter: $previousInterruptionFilter")
+                    if (previousInterruptionFilter == null) {
+                        previousInterruptionFilter = SoundModeManager.checkPreviousFilterState(applicationContext)
+                    }
+                    if (previousInterruptionFilter != true) {
+                        SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+                    }
                 }
 
                 // 5. Use Scaffold to provide a host for the Snackbar.
@@ -136,14 +145,18 @@ class MainActivity : ComponentActivity() {
         val soundMode = settingsViewModel.soundMode.value
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
-        SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+        if (previousInterruptionFilter != true) {
+            SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+        }
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
         // Schedule sound restoration when app goes to background
-        scheduleSoundModeRestore()
+        if (previousInterruptionFilter != true) {
+            scheduleSoundModeRestore()
+        }
     }
 
     fun scheduleSoundModeRestore() {
