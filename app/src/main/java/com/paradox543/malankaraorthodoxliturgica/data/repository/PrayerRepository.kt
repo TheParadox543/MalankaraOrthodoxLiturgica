@@ -133,6 +133,10 @@ class PrayerRepository @Inject constructor(
                     resolvedElements.add(loadDynamicSongs(language, element, currentDepth))
                 }
 
+                is PrayerElement.AlternativePrayersBlock -> {
+                    resolvedElements.add(loadAlternativePrayers(language, element, currentDepth))
+                }
+
                 else -> {
                     resolvedElements.add(element)
                 }
@@ -281,6 +285,29 @@ class PrayerRepository @Inject constructor(
             }
         }
         return dynamicSongsBlock
+    }
+
+    suspend fun loadAlternativePrayers(
+        language: AppLanguage,
+        alternativePrayersBlock: PrayerElement.AlternativePrayersBlock,
+        currentDepth: Int,
+    ): PrayerElement.AlternativePrayersBlock {
+        val updatedOptions =
+            alternativePrayersBlock.options.map { option ->
+                val firstItem = option.items.firstOrNull()
+                if (firstItem is PrayerElement.Link) {
+                    val content =
+                        loadPrayerElements(
+                            firstItem.file,
+                            language,
+                            currentDepth + 1,
+                        )
+                    option.copy(items = content)
+                } else {
+                    option
+                }
+            }
+        return alternativePrayersBlock.copy(options = updatedOptions)
     }
 
     suspend fun getSongKeyPriority(): String {
