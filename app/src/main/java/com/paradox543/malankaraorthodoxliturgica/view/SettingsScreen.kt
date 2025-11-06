@@ -1,22 +1,20 @@
 package com.paradox543.malankaraorthodoxliturgica.view
 
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Context.NOTIFICATION_SERVICE
-import android.content.Intent
-import android.provider.Settings
-import android.widget.Toast
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -26,6 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedButton
@@ -65,7 +64,9 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.requestDndPermission
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,13 +75,16 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    val selectedFontScale by settingsViewModel.selectedFontScale.collectAsState()
+    val selectedFontScale by settingsViewModel.selectedAppFontScale.collectAsState()
     val soundMode by settingsViewModel.soundMode.collectAsState()
+    val soundRestoreDelay by settingsViewModel.soundRestoreDelay.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
+    val hasPermission by settingsViewModel.hasDndPermission.collectAsState()
     val context = LocalContext.current
     val scrollState = rememberScrollState()
     val bottomSheetState = rememberModalBottomSheetState()
     var showQrCodeDialog by remember { mutableStateOf(false) }
+    var showRestoreDialog by remember { mutableStateOf(false) }
     var showShareAppBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
@@ -139,24 +143,82 @@ fun SettingsScreen(
             }
 
             // Sound Mode Selection
-            Row(
-                Modifier
-                    .padding(12.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "Select Sound Mode",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(1f),
-                )
-                SoundModeDropdownMenu(
-                    selectedSoundMode = soundMode,
-                    onOptionSelected = { selectedSoundMode ->
-                        settingsViewModel.setSoundMode(selectedSoundMode)
-                    },
-                )
+            Column(Modifier.padding(12.dp)) {
+                Row(
+                    Modifier
+//                        .padding(12.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Select Sound Mode",
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.weight(1f),
+                    )
+                    SoundModeDropdownMenu(
+                        selectedSoundMode = soundMode,
+                        onOptionSelected = { selectedSoundMode ->
+                            settingsViewModel.setSoundMode(selectedSoundMode)
+                        },
+                        hasPermission = hasPermission,
+                    )
+                }
+                if (!hasPermission) {
+                    Spacer(Modifier.height(8.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "This feature requires DND permission.",
+                            Modifier.weight(1f),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.error,
+                        )
+                        Button(
+                            onClick = { requestDndPermission(context) },
+                            modifier = Modifier.padding(top = 4.dp),
+                        ) {
+                            Text("Grant Permission")
+                        }
+                    }
+                } else if (soundMode != SoundMode.OFF) {
+                    Spacer(Modifier.height(8.dp))
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        val displayText =
+                            if (soundRestoreDelay >= 60) {
+                                "${soundRestoreDelay / 60} hr ${soundRestoreDelay % 60} min"
+                            } else {
+                                "$soundRestoreDelay min"
+                            }
+                        Text(
+                            "Normal restored after:",
+                            Modifier.padding(horizontal = 4.dp),
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                        Card(
+                            Modifier
+                                .requiredWidthIn(min = 120.dp)
+                                .fillMaxHeight()
+                                .clickable(onClick = { showRestoreDialog = true }),
+                        ) {
+                            Text(displayText, Modifier.padding(4.dp))
+                        }
+                        if (showRestoreDialog) {
+                            RestoreTimePicker(
+                                onDismiss = { showRestoreDialog = false },
+                                onConfirm = { minute ->
+                                    Log.d("SettingsScreen", "Restore time after $minute")
+                                    settingsViewModel.setSoundRestoreDelay(minute)
+                                    showRestoreDialog = false
+                                },
+                                delayTime = soundRestoreDelay,
+                            )
+                        }
+                    }
+                }
             }
 
             // Song Scroll State
@@ -262,7 +324,7 @@ fun SettingsScreen(
                                     context = context,
                                     shareMessage =
                                         "Welcome to Liturgica: A digital repository for " +
-                                            "all your books in the Malankara Orthodox Church", // Your custom message
+                                                "all your books in the Malankara Orthodox Church", // Your custom message
                                 )
                             },
                         ),
@@ -401,17 +463,18 @@ fun FontScaleDropdownMenu(
 fun SoundModeDropdownMenu(
     selectedSoundMode: SoundMode,
     onOptionSelected: (SoundMode) -> Unit,
+    hasPermission: Boolean,
 ) {
-    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = { expanded = !expanded },
+        onExpandedChange = { if (hasPermission) expanded = !expanded },
     ) {
         TextField(
             value = selectedSoundMode.name,
             onValueChange = {},
+            enabled = hasPermission,
             readOnly = true,
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
@@ -429,7 +492,6 @@ fun SoundModeDropdownMenu(
                 DropdownMenuItem(
                     text = { Text(soundMode.name) },
                     onClick = {
-                        requestDndPermission(context)
                         onOptionSelected(soundMode)
                         expanded = false
                     },
@@ -477,22 +539,4 @@ fun QrCodeShareDialog(onDismissRequest: () -> Unit) {
             }
         },
     )
-}
-
-private fun requestDndPermission(context: Context) {
-    val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-    if (!notificationManager.isNotificationPolicyAccessGranted) {
-        Toast.makeText(context, "Please grant DND permission in Settings.", Toast.LENGTH_LONG).show()
-        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-        context.startActivity(intent)
-    }
-    if (!notificationManager.isNotificationPolicyAccessGranted) {
-        Toast
-            .makeText(
-                context,
-                "DND permissions not granted in Settings. Please enable to make use of features.",
-                Toast.LENGTH_LONG,
-            ).show()
-        return
-    }
 }

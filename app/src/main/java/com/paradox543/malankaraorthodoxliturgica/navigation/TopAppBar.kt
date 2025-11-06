@@ -23,21 +23,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNavBar(
     title: String = "malankara",
     navController: NavController,
-    onSettingsClick: (() -> Unit)? = null // Optional Action button{}
 ) {
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+    val currentRoute =
+        navController
+            .currentBackStackEntryAsState()
+            .value
+            ?.destination
+            ?.route
 
     TopAppBar(
         title = {
             Box(
                 modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Text(
                     text = title,
@@ -49,38 +54,35 @@ fun TopNavBar(
             }
         },
         navigationIcon = {
-            if (currentRoute != "home") {
-                IconButton(
-                    onClick = {
-                        navController.navigateUp()
-                    }
-                ) {
+            if (currentRoute != Screen.Home.route) {
+                IconButton(onClick = { navController.navigateUp() }) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Previous Page",
                     )
                 }
             } else {
-                Spacer(modifier = Modifier.padding(16.dp)) // Spacer for home route
+                Spacer(modifier = Modifier.padding(24.dp)) // Spacer for home route
             }
         },
         actions = {
-            if (onSettingsClick != null) {
-                IconButton(onClick = onSettingsClick) {
+            if (currentRoute != Screen.Settings.route) {
+                IconButton(onClick = { navController.navigate(Screen.Settings.route) }) {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = "Settings",
                     )
                 }
             } else {
-                Spacer(modifier = Modifier.padding(16.dp)) // Spacer for no action
+                Spacer(modifier = Modifier.padding(24.dp)) // Spacer for home route
             }
         },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            navigationIconContentColor = MaterialTheme.colorScheme.onPrimary ,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary,
-            actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
-        )
+        colors =
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+                titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
+            ),
     )
 }

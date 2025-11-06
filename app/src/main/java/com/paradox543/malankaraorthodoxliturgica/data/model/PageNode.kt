@@ -14,6 +14,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PageNode(
     val route: String,
+    val type: String = "section",
     val filename: String? = null,
     val parent: String?,
     val children: List<PageNode> = emptyList(),

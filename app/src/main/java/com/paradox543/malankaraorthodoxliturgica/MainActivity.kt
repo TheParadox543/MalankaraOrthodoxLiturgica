@@ -54,14 +54,6 @@ class MainActivity : ComponentActivity() {
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val navViewModel: NavViewModel by viewModels()
 
-    private var previousInterruptionFilter: Int? = null
-
-    fun findPreviousInterruptionFilter(): Int {
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        previousInterruptionFilter = notificationManager.currentInterruptionFilter
-        return notificationManager.currentInterruptionFilter
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install the splash screen.
         val splashScreen = installSplashScreen()
@@ -86,7 +78,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val language by settingsViewModel.selectedLanguage.collectAsState()
-            val scaleFactor by settingsViewModel.selectedFontScale.collectAsState()
+            val scaleFactor by settingsViewModel.selectedAppFontScale.collectAsState()
             val soundMode by settingsViewModel.soundMode.collectAsState()
 
             MalankaraOrthodoxLiturgicaTheme(language = language, textScale = scaleFactor) {
@@ -113,10 +105,6 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
-                }
-
-                LaunchedEffect(Unit) {
-                    findPreviousInterruptionFilter()
                 }
 
                 LaunchedEffect(soundMode) {
@@ -159,9 +147,10 @@ class MainActivity : ComponentActivity() {
     }
 
     fun scheduleSoundModeRestore() {
+        val delayTime = settingsViewModel.soundRestoreDelay.value
         val restoreWork =
             OneTimeWorkRequestBuilder<RestoreSoundWorker>()
-                .setInitialDelay(30, TimeUnit.MINUTES)
+                .setInitialDelay(delayTime.toLong(), TimeUnit.MINUTES)
                 .build()
 
         workManager.enqueueUniqueWork(

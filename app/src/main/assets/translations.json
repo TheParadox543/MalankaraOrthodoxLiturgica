@@ -490,5 +490,25 @@
     "specialSongs": {
         "en": "Special Songs",
         "ml": "പ്രത്യേക പാട്ടുകൾ"
+    },
+    "ekkaraSongs": {
+        "en": "Ekkara Songs",
+        "ml": "എക്കാറാ ഗീതങ്ങൾ"
+    },
+    "introduction": {
+        "en": "Introduction",
+        "ml": "ആമുഖം "
+    },
+    "ragam": {
+        "en": "Tune",
+        "ml": "രാഗം"
+    },
+    "specialPrayers": {
+        "en": "Special Prayers",
+        "ml": "പ്രേത്യേക പ്രാർത്ഥനകൾ"
+    },
+    "memraOfAprem": {
+        "en": "Memra Of Aprem",
+        "ml": "മാർ അപ്രേമിന്റെ ബോവുസൊ"
     }
 }
