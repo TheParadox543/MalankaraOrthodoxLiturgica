@@ -3,7 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
@@ -27,7 +27,7 @@ class NavViewModel @Inject constructor(
     /**
      * The root node of the navigation tree, dynamically updated based on the selected language.
      */
-    val rootNode: StateFlow<PageNode> =
+    val rootNode: StateFlow<PageNodeData> =
         settingsRepositoryImpl.selectedLanguage
             .map { language ->
                 // Whenever selectedLanguage emits a new 'language',
@@ -39,11 +39,11 @@ class NavViewModel @Inject constructor(
                 initialValue = navigationRepositoryImpl.getNavigationTree(AppLanguage.MALAYALAM.code), // Initial value in Malayalam
             )
 
-    private val _currentNode = MutableStateFlow<PageNode?>(null)
-    val currentNode: StateFlow<PageNode?> = _currentNode
+    private val _currentNode = MutableStateFlow<PageNodeData?>(null)
+    val currentNode: StateFlow<PageNodeData?> = _currentNode
 
-    private val _parentNode = MutableStateFlow<PageNode?>(null)
-    val parentNode: StateFlow<PageNode?> = _parentNode
+    private val _parentNode = MutableStateFlow<PageNodeData?>(null)
+    val parentNode: StateFlow<PageNodeData?> = _parentNode
 
     /**
      * Gets the sibling nodes for the current prayers as a pair.
@@ -51,7 +51,7 @@ class NavViewModel @Inject constructor(
      * @param node The current prayer node.
      * @return A Pair containing the previous and next sibling routes, or null if they don't exist or have no filename.
      */
-    fun getAdjacentSiblingRoutes(node: PageNode): Pair<String?, String?> {
+    fun getAdjacentSiblingRoutes(node: PageNodeData): Pair<String?, String?> {
         val parentRoute = node.parent
         if (_parentNode.value?.route != parentRoute) {
             _parentNode.value = findNode(rootNode.value, parentRoute ?: "")
@@ -67,8 +67,8 @@ class NavViewModel @Inject constructor(
             return Pair(null, null)
         }
 
-        val prevSiblingNode: PageNode? = siblings.getOrNull(currentIndex - 1)
-        val nextSiblingNode: PageNode? = siblings.getOrNull(currentIndex + 1)
+        val prevSiblingNode: PageNodeData? = siblings.getOrNull(currentIndex - 1)
+        val nextSiblingNode: PageNodeData? = siblings.getOrNull(currentIndex + 1)
 
         // Apply the condition: route is returned only if the node exists AND its filename is not null
         val prevSiblingRoute: String? = prevSiblingNode?.takeIf { it.filename != null }?.route
@@ -90,9 +90,9 @@ class NavViewModel @Inject constructor(
      * @return The PageNode if found, or null if not found.
      */
     fun findNode(
-        node: PageNode,
+        node: PageNodeData,
         route: String,
-    ): PageNode? {
+    ): PageNodeData? {
         if (node.route == route) return node
         node.children.forEach { child ->
             val result = findNode(child, route)
@@ -164,8 +164,8 @@ class NavViewModel @Inject constructor(
         return prayerList.distinct()
     }
 
-    fun getAllPrayerNodes(): List<PageNode> {
-        val allNodes = mutableListOf<PageNode>()
+    fun getAllPrayerNodes(): List<PageNodeData> {
+        val allNodes = mutableListOf<PageNodeData>()
         val list = prayNow()
         for (item in list) {
             val node = findNode(rootNode.value, item)

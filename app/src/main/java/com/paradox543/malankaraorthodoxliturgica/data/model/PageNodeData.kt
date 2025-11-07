@@ -12,11 +12,11 @@ import kotlinx.serialization.Serializable
  * @property languages The list of language codes available for this node.
  */
 @Serializable
-data class PageNode(
+data class PageNodeData(
     val route: String,
     val type: String = "section",
     val filename: String? = null,
     val parent: String?,
-    val children: List<PageNode> = emptyList(),
+    val children: List<PageNodeData> = emptyList(),
     val languages: List<String> = listOf(),
 )

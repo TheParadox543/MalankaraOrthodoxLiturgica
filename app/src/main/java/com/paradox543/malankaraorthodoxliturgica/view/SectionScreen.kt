@@ -35,7 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -48,7 +48,7 @@ fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
-    node: PageNode,
+    node: PageNodeData,
     modifier: Modifier = Modifier,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
@@ -147,7 +147,7 @@ private fun DisplayIconography(orientation: String) {
 
 @Composable
 private fun SectionCard(
-    node: PageNode,
+    node: PageNodeData,
     navController: NavController,
     translations: Map<String, String>
 ) {

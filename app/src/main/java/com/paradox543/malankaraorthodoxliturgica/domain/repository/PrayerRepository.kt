@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.repository
 
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 
 interface PrayerRepository {
     fun loadTranslations(language: AppLanguage): Map<String, String>
@@ -10,7 +10,7 @@ interface PrayerRepository {
         fileName: String,
         language: AppLanguage,
         currentDepth: Int = 0,
-    ): List<PrayerElementData>
+    ): List<PrayerElementDomain>
 
     suspend fun getSongKeyPriority(): String
 }

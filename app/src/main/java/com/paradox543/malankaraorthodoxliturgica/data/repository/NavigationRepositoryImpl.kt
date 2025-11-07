@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.NavigationRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
@@ -12,11 +12,11 @@ import javax.inject.Singleton
 class NavigationRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : NavigationRepository {
-    val navTree: PageNode by lazy {
+    val navTree: PageNodeData by lazy {
         loadNavigationTree(context)
     }
 
-    private fun loadNavigationTree(context: Context): PageNode {
+    private fun loadNavigationTree(context: Context): PageNodeData {
         val jsonString =
             context
                 .assets
@@ -34,7 +34,7 @@ class NavigationRepositoryImpl @Inject constructor(
      * that support the specified language. If the root node itself doesn't
      * support the language, an empty root node (with no children) is returned.
      */
-    override fun getNavigationTree(targetLanguage: String): PageNode {
+    override fun getNavigationTree(targetLanguage: String): PageNodeData {
         // Start filtering from the navTree's children.
         // We assume the root node itself is a universal container, or its languages list defines
         // if *any* part of the app is available for this language.
@@ -67,9 +67,9 @@ class NavigationRepositoryImpl @Inject constructor(
      * or null if the current node itself does not support the target language.
      */
     private fun filterNodeByLanguageRecursive(
-        node: PageNode,
+        node: PageNodeData,
         targetLanguage: String,
-    ): PageNode? {
+    ): PageNodeData? {
         // Step 1: Check if the current node supports the target language
         if (!node.languages.contains(targetLanguage)) {
             return null // If not, this node and its entire subtree are excluded

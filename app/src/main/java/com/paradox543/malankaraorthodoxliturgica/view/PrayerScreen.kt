@@ -57,7 +57,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
@@ -84,7 +84,7 @@ fun PrayerScreen(
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
     navViewModel: NavViewModel,
-    node: PageNode,
+    node: PageNodeData,
     scrollIndex: Int = 0,
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
