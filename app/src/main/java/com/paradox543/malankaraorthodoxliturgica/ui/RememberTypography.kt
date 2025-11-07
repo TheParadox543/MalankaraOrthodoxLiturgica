@@ -2,7 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.EnglishTypography
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalayalamTypography
 

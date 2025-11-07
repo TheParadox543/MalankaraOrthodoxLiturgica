@@ -2,13 +2,13 @@ package com.paradox543.malankaraorthodoxliturgica.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReading
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.data.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRange
@@ -213,7 +213,7 @@ class BibleViewModel @Inject constructor(
         _selectedBibleReference.value = reference
     }
 
-    fun loadBiblePreface(bibleReference: BibleReference, language: AppLanguage): List<PrayerElement>? {
+    fun loadBiblePreface(bibleReference: BibleReference, language: AppLanguage): List<PrayerElementData>? {
         val book = _bibleBooks.value[bibleReference.bookNumber - 1]
         val prefaceContent = book.prefaces
             ?: when (book.category) {
@@ -223,7 +223,7 @@ class BibleViewModel @Inject constructor(
                 else -> return null
             }
 
-        val sourcePreface: List<PrayerElement> = when (language) {
+        val sourcePreface: List<PrayerElementData> = when (language) {
             AppLanguage.MALAYALAM -> prefaceContent.ml
             AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> prefaceContent.en
         }
@@ -244,7 +244,7 @@ class BibleViewModel @Inject constructor(
         // Use .map to create a new list with the replaced content
         return sourcePreface.map { item ->
             when (item) {
-                is PrayerElement.Prose -> {
+                is PrayerElementData.Prose -> {
                     item.copy(
                         content = item.content
                             .replace("{title}", title)

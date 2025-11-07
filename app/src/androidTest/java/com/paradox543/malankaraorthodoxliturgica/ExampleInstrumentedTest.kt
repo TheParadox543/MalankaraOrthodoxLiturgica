@@ -17,6 +17,16 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.paradox543.malankaraorthodoxliturgica.testing", appContext.packageName)
+        if (BuildConfig.DEBUG) {
+            assertEquals(
+                "com.paradox543.malankaraorthodoxliturgica.testing",
+                appContext.packageName,
+            )
+        } else {
+            assertEquals(
+                "com.paradox543.malankaraorthodoxliturgica",
+                appContext.packageName,
+            )
+        }
     }
 }
