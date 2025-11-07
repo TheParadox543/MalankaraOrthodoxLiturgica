@@ -10,6 +10,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,9 +32,9 @@ import javax.inject.Singleton
 private val Context.dataStore by preferencesDataStore(name = "settings")
 
 @Singleton
-class SettingsRepository @Inject constructor(
+class SettingsRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-) {
+) : SettingsRepository {
     // This scope is essential for stateIn to properly manage the StateFlow's lifecycle.
     // It's good practice to use a custom scope for singletons rather than Dispatchers.IO directly.
     private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -45,7 +46,7 @@ class SettingsRepository @Inject constructor(
     private val soundModePreferencesKey = stringPreferencesKey("sound_mode")
     private val soundRestoreDelayKey = intPreferencesKey("sound_restore_delay")
 
-    val selectedLanguage: StateFlow<AppLanguage> =
+    override val selectedLanguage: StateFlow<AppLanguage> =
         context.dataStore.data
             .map { preferences ->
                 // Read the string code, then convert to AppLanguage enum
@@ -57,7 +58,7 @@ class SettingsRepository @Inject constructor(
                 initialValue = AppLanguage.MALAYALAM, // Initial value is also an AppLanguage enum
             )
 
-    suspend fun getFontScale(): AppFontScale {
+    override suspend fun getFontScale(): AppFontScale {
         val prefs = context.dataStore.data.first()
         val scaleFloat = prefs[fontScaleKey] ?: 1.0f
         return AppFontScale.fromScale(scaleFloat)
@@ -77,12 +78,12 @@ class SettingsRepository @Inject constructor(
                 initialValue = false,
             )
 
-    suspend fun getSongScrollState(): Boolean {
+    override suspend fun getSongScrollState(): Boolean {
         val prefs = context.dataStore.data.first()
         return prefs[songScrollStateKey] == true
     }
 
-    suspend fun getSoundMode(): SoundMode {
+    override suspend fun getSoundMode(): SoundMode {
         val prefs = context.dataStore.data.first()
         return when (prefs[soundModePreferencesKey]) {
             "SILENT" -> SoundMode.SILENT
@@ -91,20 +92,20 @@ class SettingsRepository @Inject constructor(
         }
     }
 
-    suspend fun getSoundRestoreDelay(): Int {
+    override suspend fun getSoundRestoreDelay(): Int {
         val prefs = context.dataStore.data.first()
         return prefs[soundRestoreDelayKey] ?: 30
     }
 
     // --- Debouncing for Font Scale ---
     // Internal MutableStateFlow to trigger debounced saves for font scale.
-    private val _pendingFontScaleUpdate = MutableStateFlow(AppFontScale.Medium)
+    private val pendingFontScaleUpdate = MutableStateFlow(AppFontScale.Medium)
     private var debounceJob: Job? = null // Holds reference to the current debounce coroutine
 
     init {
-        // Collect from the _pendingFontScaleUpdate flow and debounce writes to DataStore
+        // Collect from the pendingFontScaleUpdate flow and debounce writes to DataStore
         repositoryScope.launch {
-            _pendingFontScaleUpdate.collectLatest { fontScaleToSave ->
+            pendingFontScaleUpdate.collectLatest { fontScaleToSave ->
                 debounceJob?.cancel() // Cancel any previous pending save
                 debounceJob = launch {
                     delay(200L) // Wait for 200ms after the last update
@@ -114,46 +115,46 @@ class SettingsRepository @Inject constructor(
             }
         }
 
-        // Initialize _pendingFontScaleUpdate with the current stored font scale when the repository starts.
+        // Initialize pendingFontScaleUpdate with the current stored font scale when the repository starts.
         // This ensures debouncing starts from the correct state.
 //        repositoryScope.launch {
 //            selectedFontScale.collectLatest { currentScale ->
-//                _pendingFontScaleUpdate.value = currentScale
+//                pendingFontScaleUpdate.value = currentScale
 //            }
 //        }
     }
 
-    suspend fun saveLanguage(language: AppLanguage) {
+    override suspend fun saveLanguage(language: AppLanguage) {
         context.dataStore.edit { preferences ->
             preferences[languageKey] = language.code
         }
     }
 
-    suspend fun setFontScale(fontScale: AppFontScale) {
+    override suspend fun setFontScale(fontScale: AppFontScale) {
         context.dataStore.edit { preferences ->
             preferences[fontScaleKey] = fontScale.scaleFactor
         }
     }
 
-    suspend fun saveOnboardingStatus(completed: Boolean) {
+    override suspend fun saveOnboardingStatus(completed: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[hasCompletedOnboardingKey] = completed
         }
     }
 
-    suspend fun saveSongScrollState(isHorizontal: Boolean) {
+    override suspend fun saveSongScrollState(isHorizontal: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[songScrollStateKey] = isHorizontal
         }
     }
 
-    suspend fun setSoundMode(permissionState: SoundMode) {
+    override suspend fun setSoundMode(permissionState: SoundMode) {
         context.dataStore.edit { preferences ->
             preferences[soundModePreferencesKey] = permissionState.name
         }
     }
 
-    suspend fun setSoundRestoreDelay(delay: Int) {
+    override suspend fun setSoundRestoreDelay(delay: Int) {
         context.dataStore.edit { preferences ->
             preferences[soundRestoreDelayKey] = delay
         }

@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.core.net.toUri
 import com.google.firebase.storage.FirebaseStorage
 import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
@@ -16,18 +17,18 @@ import kotlinx.coroutines.withTimeout
 import java.io.File
 import javax.inject.Inject
 
-class SongRepository @Inject constructor(
+class SongRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val storage: FirebaseStorage,
-) {
-    fun isNetworkAvailable(context: Context): Boolean {
+) : SongRepository {
+    override fun isNetworkAvailable(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = cm.activeNetwork ?: return false
         val capabilities = cm.getNetworkCapabilities(network) ?: return false
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 
-    suspend fun getSong(songFilename: String): SongResult =
+    override suspend fun getSong(songFilename: String): SongResult =
         withContext(Dispatchers.IO) {
             val localFile = File(context.filesDir, songFilename)
 
@@ -94,7 +95,7 @@ class SongRepository @Inject constructor(
      * Utility to check whether a song is already cached.
      * @param songFilename The name of the song file.
      */
-    fun isSongCached(songFilename: String): Boolean {
+    override fun isSongCached(songFilename: String): Boolean {
         val localFile = File(context.filesDir, songFilename)
         return localFile.exists() && localFile.length() > 0
     }

@@ -9,7 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
     private val prayerRepositoryImpl: PrayerRepositoryImpl,
-    settingsRepository: SettingsRepository,
+    settingsRepository: SettingsRepositoryImpl,
     private val firebaseAnalytics: FirebaseAnalytics,
     private val inAppReviewManager: InAppReviewManager,
 ) : ViewModel() {
