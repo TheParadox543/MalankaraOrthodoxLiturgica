@@ -34,7 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -157,7 +157,7 @@ fun PrayNowScreen(
 
 @Composable
 private fun PrayNowCard(
-    node: PageNode,
+    node: PageNodeData,
     navController: NavController,
     translatedParts: String,
     prayerViewModel: PrayerViewModel
