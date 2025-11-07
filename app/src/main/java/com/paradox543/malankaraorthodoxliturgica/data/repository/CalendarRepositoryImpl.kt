@@ -1,8 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.EventKey
@@ -10,7 +8,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalCalendarDa
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.MonthEvents
-import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStr
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,10 +22,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class LiturgicalCalendarRepository @Inject constructor(
+class CalendarRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val json: Json, // Inject kotlinx.serialization.Json for parsing
-) {
+) : CalendarRepository {
     // Lazy initialization ensures files are read only when first accessed
     private lateinit var liturgicalDates: LiturgicalCalendarDates
     private lateinit var liturgicalData: LiturgicalDataStore
@@ -100,7 +98,7 @@ class LiturgicalCalendarRepository @Inject constructor(
      * @throws IllegalArgumentException if an event key found in liturgical_calendar.json
      * is not present in liturgical_data.json.
      */
-    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetails> {
+    override fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetails> {
         val eventKeys = getEventKeysForDate(date)
         val eventDetails = mutableListOf<LiturgicalEventDetails>()
 
@@ -115,7 +113,7 @@ class LiturgicalCalendarRepository @Inject constructor(
         return eventDetails
     }
 
-    fun checkMonthDataExists(month: Int, year: Int): Boolean {
+    override fun checkMonthDataExists(month: Int, year: Int): Boolean {
         // Ensure data is initialized
         if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
             throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
@@ -130,7 +128,7 @@ class LiturgicalCalendarRepository @Inject constructor(
      * @param year The year. Defaults to current year if null.
      * @return A list of CalendarWeek objects, each containing 7 CalendarDay objects.
      */
-    fun loadMonthData(month: Int? = null, year: Int? = null): List<CalendarWeek> {
+    override fun loadMonthData(month: Int?, year: Int?): List<CalendarWeek> {
         // Ensure data is initialized
         if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
             throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
@@ -178,8 +176,6 @@ class LiturgicalCalendarRepository @Inject constructor(
             }
             monthData.add(CalendarWeek(weekDays.toList()))
         }
-
-
         return monthData
     }
 
@@ -188,7 +184,7 @@ class LiturgicalCalendarRepository @Inject constructor(
      * @return A list of CalendarDay objects for the next 7 days, including their events.
      * Only days with events will have non-empty event maps.
      */
-    fun getUpcomingWeekEvents(): List<CalendarDay> {
+    override fun getUpcomingWeekEvents(): List<CalendarDay> {
         // Ensure data is initialized
         if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
             throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
@@ -208,7 +204,7 @@ class LiturgicalCalendarRepository @Inject constructor(
         return weekEvents
     }
 
-    fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
+    override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
         val weekEvents = getUpcomingWeekEvents()
         val eventItems = mutableListOf<LiturgicalEventDetails>()
         weekEvents.forEach { day ->

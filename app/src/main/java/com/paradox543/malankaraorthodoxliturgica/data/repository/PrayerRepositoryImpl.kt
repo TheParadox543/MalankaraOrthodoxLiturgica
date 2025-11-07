@@ -20,7 +20,7 @@ import javax.inject.Singleton
 class PrayerRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val json: Json,
-    private val calendarRepository: LiturgicalCalendarRepository,
+    private val calendarRepository: CalendarRepositoryImpl,
 ) : PrayerRepository {
     override fun loadTranslations(language: AppLanguage): Map<String, String> {
         val json =

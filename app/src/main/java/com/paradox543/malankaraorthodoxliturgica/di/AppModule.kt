@@ -16,7 +16,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,7 +58,7 @@ object AppModule {
     @Singleton
     fun provideNavigationRepository(
         @ApplicationContext context: Context
-    ): NavigationRepository = NavigationRepository(context)
+    ): NavigationRepositoryImpl = NavigationRepositoryImpl(context)
 
     @Provides
     @Singleton

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
-import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NavViewModel @Inject constructor(
-    private val navigationRepository: NavigationRepository,
+    private val navigationRepositoryImpl: NavigationRepositoryImpl,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
     /**
@@ -32,11 +32,11 @@ class NavViewModel @Inject constructor(
             .map { language ->
                 // Whenever selectedLanguage emits a new 'language',
                 // this block will be re-executed, creating a new navigation tree
-                navigationRepository.getNavigationTree(language.code)
+                navigationRepositoryImpl.getNavigationTree(language.code)
             }.stateIn(
                 scope = viewModelScope, // Use viewModelScope for UI-related state
                 started = SharingStarted.WhileSubscribed(5000), // Start collecting when UI observes, stop after 5s inactivity
-                initialValue = navigationRepository.getNavigationTree(AppLanguage.MALAYALAM.code), // Initial value in Malayalam
+                initialValue = navigationRepositoryImpl.getNavigationTree(AppLanguage.MALAYALAM.code), // Initial value in Malayalam
             )
 
     private val _currentNode = MutableStateFlow<PageNode?>(null)
