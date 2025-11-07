@@ -3,6 +3,23 @@ package com.paradox543.malankaraorthodoxliturgica.data.mapping
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 
+// Helper extensions to reduce duplication for DynamicSong conversions
+private fun PrayerElementData.DynamicSong.toDomainSong(): PrayerElementDomain.DynamicSong =
+    PrayerElementDomain.DynamicSong(
+        eventKey = eventKey,
+        eventTitle = eventTitle,
+        timeKey = timeKey,
+        items = items.map { it.toDomain() },
+    )
+
+private fun PrayerElementDomain.DynamicSong.toDataSong(): PrayerElementData.DynamicSong =
+    PrayerElementData.DynamicSong(
+        eventKey = eventKey,
+        eventTitle = eventTitle,
+        timeKey = timeKey,
+        items = items.map { it.toData() },
+    )
+
 // Extension-based mappers: data -> domain
 fun PrayerElementData.toDomain(): PrayerElementDomain =
     when (this) {
@@ -26,35 +43,12 @@ fun PrayerElementData.toDomain(): PrayerElementDomain =
                 title = title,
                 items = items.map { it.toDomain() },
             )
-        is PrayerElementData.DynamicSong ->
-            PrayerElementDomain.DynamicSong(
-                eventKey = eventKey,
-                eventTitle = eventTitle,
-                timeKey = timeKey,
-                items = items.map { it.toDomain() },
-            )
+        is PrayerElementData.DynamicSong -> this.toDomainSong()
         is PrayerElementData.DynamicSongsBlock ->
             PrayerElementDomain.DynamicSongsBlock(
                 timeKey = timeKey,
-                items =
-                    items
-                        .map { ds: PrayerElementData.DynamicSong ->
-                            PrayerElementDomain.DynamicSong(
-                                eventKey = ds.eventKey,
-                                eventTitle = ds.eventTitle,
-                                timeKey = ds.timeKey,
-                                items = ds.items.map { it.toDomain() },
-                            )
-                        }.toMutableList(),
-                defaultContent =
-                    defaultContent?.let { ds: PrayerElementData.DynamicSong ->
-                        PrayerElementDomain.DynamicSong(
-                            eventKey = ds.eventKey,
-                            eventTitle = ds.eventTitle,
-                            timeKey = ds.timeKey,
-                            items = ds.items.map { it.toDomain() },
-                        )
-                    },
+                items = items.map { ds -> ds.toDomainSong() }.toMutableList(),
+                defaultContent = defaultContent?.toDomainSong(),
             )
         is PrayerElementData.AlternativeOption ->
             PrayerElementDomain.AlternativeOption(
@@ -65,7 +59,7 @@ fun PrayerElementData.toDomain(): PrayerElementDomain =
             PrayerElementDomain.AlternativePrayersBlock(
                 title = title,
                 options =
-                    options.map { opt: PrayerElementData.AlternativeOption ->
+                    options.map { opt ->
                         PrayerElementDomain.AlternativeOption(opt.label, opt.items.map { it.toDomain() })
                     },
             )
@@ -97,35 +91,12 @@ fun PrayerElementDomain.toData(): PrayerElementData =
                 title = title,
                 items = items.map { it.toData() },
             )
-        is PrayerElementDomain.DynamicSong ->
-            PrayerElementData.DynamicSong(
-                eventKey = eventKey,
-                eventTitle = eventTitle,
-                timeKey = timeKey,
-                items = items.map { it.toData() },
-            )
+        is PrayerElementDomain.DynamicSong -> this.toDataSong()
         is PrayerElementDomain.DynamicSongsBlock ->
             PrayerElementData.DynamicSongsBlock(
                 timeKey = timeKey,
-                items =
-                    items
-                        .map { ds: PrayerElementDomain.DynamicSong ->
-                            PrayerElementData.DynamicSong(
-                                eventKey = ds.eventKey,
-                                eventTitle = ds.eventTitle,
-                                timeKey = ds.timeKey,
-                                items = ds.items.map { it.toData() },
-                            )
-                        }.toMutableList(),
-                defaultContent =
-                    defaultContent?.let { ds: PrayerElementDomain.DynamicSong ->
-                        PrayerElementData.DynamicSong(
-                            eventKey = ds.eventKey,
-                            eventTitle = ds.eventTitle,
-                            timeKey = ds.timeKey,
-                            items = ds.items.map { it.toData() },
-                        )
-                    },
+                items = items.map { ds -> ds.toDataSong() }.toMutableList(),
+                defaultContent = defaultContent?.toDataSong(),
             )
         is PrayerElementDomain.AlternativeOption ->
             PrayerElementData.AlternativeOption(
@@ -136,8 +107,11 @@ fun PrayerElementDomain.toData(): PrayerElementData =
             PrayerElementData.AlternativePrayersBlock(
                 title = title,
                 options =
-                    options.map { opt: PrayerElementDomain.AlternativeOption ->
-                        PrayerElementData.AlternativeOption(opt.label, opt.items.map { it.toData() })
+                    options.map { opt ->
+                        PrayerElementData.AlternativeOption(
+                            opt.label,
+                            opt.items.map { it.toData() },
+                        )
                     },
             )
         is PrayerElementDomain.Error -> PrayerElementData.Error(content)
