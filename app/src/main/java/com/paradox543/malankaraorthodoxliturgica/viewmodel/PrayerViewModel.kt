@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
@@ -30,8 +30,8 @@ class PrayerViewModel @Inject constructor(
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
-    private val _prayers = MutableStateFlow<List<PrayerElement>>(emptyList())
-    val prayers: StateFlow<List<PrayerElement>> = _prayers
+    private val _prayers = MutableStateFlow<List<PrayerElementData>>(emptyList())
+    val prayers: StateFlow<List<PrayerElementData>> = _prayers
 
     private val _dynamicSongKey = MutableStateFlow<String?>(null)
     val dynamicSongKey: StateFlow<String?> = _dynamicSongKey.asStateFlow()
@@ -74,7 +74,7 @@ class PrayerViewModel @Inject constructor(
             } catch (e: Exception) {
                 // Consider more robust error handling (e.g., expose to UI via StateFlow)
 //                throw e
-                _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
+                _prayers.value = listOf(PrayerElementData.Error(e.message ?: "Unknown error"))
             }
         }
     }

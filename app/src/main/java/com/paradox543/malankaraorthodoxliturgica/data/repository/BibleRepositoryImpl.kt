@@ -2,7 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
 import android.util.Log
-import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleRoot

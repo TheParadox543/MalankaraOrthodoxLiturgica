@@ -44,8 +44,8 @@ data class DisplayText(
 
 @Serializable
 data class PrefaceContent(
-    val en: List<PrayerElement>,
-    val ml: List<PrayerElement>,
+    val en: List<PrayerElementData>,
+    val ml: List<PrayerElementData>,
 )
 
 // This is a high-level metadata object for a single book.
@@ -74,6 +74,6 @@ data class PrefaceTemplates(
 // Represents a complete reading to be displayed on the screen.
 @Serializable
 data class BibleReading(
-    val preface: List<PrayerElement>? = null,
+    val preface: List<PrayerElementData>? = null,
     val verses: List<Verse>,
 )
