@@ -2,15 +2,16 @@ package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import android.content.Context
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.NavigationRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NavigationRepository @Inject constructor(
+class NavigationRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-) {
+) : NavigationRepository {
     val navTree: PageNode by lazy {
         loadNavigationTree(context)
     }
@@ -33,7 +34,7 @@ class NavigationRepository @Inject constructor(
      * that support the specified language. If the root node itself doesn't
      * support the language, an empty root node (with no children) is returned.
      */
-    fun getNavigationTree(targetLanguage: String): PageNode {
+    override fun getNavigationTree(targetLanguage: String): PageNode {
         // Start filtering from the navTree's children.
         // We assume the root node itself is a universal container, or its languages list defines
         // if *any* part of the app is available for this language.

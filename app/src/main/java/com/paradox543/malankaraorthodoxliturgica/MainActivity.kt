@@ -26,7 +26,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
-import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
     lateinit var inAppUpdateManager: InAppUpdateManager
 
     @Inject
-    lateinit var calendarRepository: LiturgicalCalendarRepository
+    lateinit var calendarRepository: CalendarRepositoryImpl
 
     @Inject
     lateinit var workManager: WorkManager

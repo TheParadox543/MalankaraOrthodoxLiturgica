@@ -7,7 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
-import com.paradox543.malankaraorthodoxliturgica.data.repository.LiturgicalCalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
-    private val liturgicalCalendarRepository: LiturgicalCalendarRepository
+    private val calendarRepositoryImpl: CalendarRepositoryImpl
 ) : ViewModel() {
     // State for the currently displayed month's calendar data
     private val _monthCalendarData = MutableStateFlow<List<CalendarWeek>>(emptyList())
@@ -57,7 +57,7 @@ class CalendarViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                liturgicalCalendarRepository.initialize() // Important: Load JSON data first
+                calendarRepositoryImpl.initialize() // Important: Load JSON data first
                 loadMonth(_currentCalendarViewDate.value.monthValue, _currentCalendarViewDate.value.year)
                 loadUpcomingWeekEvents()
             } catch (e: Exception) {
@@ -77,12 +77,12 @@ class CalendarViewModel @Inject constructor(
         _error.value = null
         try {
             Log.d("CalendarViewModel", "Loading month data for $month/$year")
-            _monthCalendarData.value = liturgicalCalendarRepository.loadMonthData(month, year)
+            _monthCalendarData.value = calendarRepositoryImpl.loadMonthData(month, year)
             _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
             val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
-            _hasPreviousMonth.value = liturgicalCalendarRepository.checkMonthDataExists(previousMonth.monthValue, previousMonth.year)
+            _hasPreviousMonth.value = calendarRepositoryImpl.checkMonthDataExists(previousMonth.monthValue, previousMonth.year)
             val nextMonth = _currentCalendarViewDate.value.plusMonths(1)
-            _hasNextMonth.value = liturgicalCalendarRepository.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
+            _hasNextMonth.value = calendarRepositoryImpl.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
         } catch (e: Exception) {
             _error.value = "Failed to load month data for $month/$year: ${e.message}"
             System.err.println("Error loading month data: ${e.stackTraceToString()}")
@@ -93,7 +93,7 @@ class CalendarViewModel @Inject constructor(
 
     fun loadUpcomingWeekEvents() {
         try {
-            _upcomingWeekEvents.value = liturgicalCalendarRepository.getUpcomingWeekEvents()
+            _upcomingWeekEvents.value = calendarRepositoryImpl.getUpcomingWeekEvents()
         } catch (e: Exception) {
             _error.value = "Failed to load upcoming week events: ${e.message}"
             System.err.println("Error loading upcoming week events: ${e.stackTraceToString()}")
