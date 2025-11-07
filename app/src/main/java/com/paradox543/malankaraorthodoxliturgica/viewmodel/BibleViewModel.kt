@@ -13,7 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
-import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BibleViewModel @Inject constructor(
-    private val bibleRepository: BibleRepository
+    private val bibleRepositoryImpl: BibleRepositoryImpl
 ): ViewModel() {
     private val _bibleBooks = MutableStateFlow<List<BibleDetails>>(emptyList())
     val bibleBooks: StateFlow<List<BibleDetails>> = _bibleBooks
@@ -47,7 +47,7 @@ class BibleViewModel @Inject constructor(
 
     private fun loadBibleDetails() {
         try {
-            val bibleChapters = bibleRepository.loadBibleDetails()
+            val bibleChapters = bibleRepositoryImpl.loadBibleDetails()
             _bibleBooks.value = bibleChapters
         } catch (e: Exception) {
             throw e
@@ -56,7 +56,7 @@ class BibleViewModel @Inject constructor(
 
     private fun loadBiblePrefaceTemplates() {
         try {
-            val prefaceTemplates = bibleRepository.loadPrefaceTemplates()
+            val prefaceTemplates = bibleRepositoryImpl.loadPrefaceTemplates()
             _biblePrefaceTemplates.value = prefaceTemplates
         } catch (e: Exception) {
             // Handle error if needed
@@ -92,7 +92,7 @@ class BibleViewModel @Inject constructor(
     }
 
     fun loadBibleChapter(bookNumber: Int, chapterNumber: Int, language: AppLanguage): Chapter? {
-        return bibleRepository.loadBibleChapter(bookNumber, chapterNumber, language)
+        return bibleRepositoryImpl.loadBibleChapter(bookNumber, chapterNumber, language)
     }
 
     fun getAdjacentChapters(bookIndex: Int, chapterIndex: Int): Pair<String?, String?> {
@@ -268,7 +268,7 @@ class BibleViewModel @Inject constructor(
             }
             BibleReading(
                 preface = preface,
-                verses = bibleRepository.loadBibleReading(bibleReferences, language)
+                verses = bibleRepositoryImpl.loadBibleReading(bibleReferences, language)
             )
         } catch (e: BookNotFoundException) {
             // Handle the case where a book or chapter is not found

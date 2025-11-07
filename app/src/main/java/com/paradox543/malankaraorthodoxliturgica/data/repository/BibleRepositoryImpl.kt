@@ -8,10 +8,10 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleRoot
 import com.paradox543.malankaraorthodoxliturgica.data.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
 import java.util.concurrent.ConcurrentHashMap
@@ -19,10 +19,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BibleRepository @Inject constructor(
+class BibleRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val json: Json
-) {
+) : BibleRepository {
 
     // Lazily load and cache the Bible chapters to avoid re-reading the asset
     private val cachedBibleChapters: List<BibleDetails> by lazy {
@@ -50,7 +50,7 @@ class BibleRepository @Inject constructor(
         }
     }
 
-    fun loadBibleDetails(): List<BibleDetails> {
+    override fun loadBibleDetails(): List<BibleDetails> {
         return cachedBibleChapters
     }
 
@@ -68,7 +68,7 @@ class BibleRepository @Inject constructor(
      * @param language The language code (e.g., "ml", "en").
      * @return A map where keys are verse numbers (as String) and values are verse text.
      */
-    fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: AppLanguage = AppLanguage.MALAYALAM): Chapter? {
+    override fun loadBibleChapter(bookIndex: Int, chapterIndex: Int, language: AppLanguage): Chapter? {
         val bibleLanguage = when(language){
             AppLanguage.MALAYALAM -> "ml"
             else -> "en"
@@ -90,7 +90,7 @@ class BibleRepository @Inject constructor(
         return chapter
     }
 
-    fun loadBibleReading(bibleReferences: List<BibleReference>, language: AppLanguage): List<Verse> {
+    override fun loadBibleReading(bibleReferences: List<BibleReference>, language: AppLanguage): List<Verse> {
         val bibleLanguage = when(language){
             AppLanguage.MALAYALAM -> "ml"
             else -> "en"
@@ -154,7 +154,7 @@ class BibleRepository @Inject constructor(
         return verses
     }
 
-    fun loadPrefaceTemplates(): PrefaceTemplates {
+    override fun loadPrefaceTemplates(): PrefaceTemplates {
         return cachedPrefaceTemplates
     }
 }

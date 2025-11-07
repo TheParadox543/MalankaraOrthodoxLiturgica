@@ -15,13 +15,12 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.firebase.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storage
-import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
 import javax.inject.Singleton
@@ -66,7 +65,7 @@ object AppModule {
     fun provideBibleRepository(
         @ApplicationContext context: Context,
         json: Json
-    ): BibleRepository = BibleRepository(context, json)
+    ): BibleRepositoryImpl = BibleRepositoryImpl(context, json)
 
 //    @Provides
 //    @Singleton
