@@ -13,7 +13,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -25,16 +25,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val settingsRepository: SettingsRepository,
+    private val settingsRepositoryImpl: SettingsRepositoryImpl,
     private val firebaseAnalytics: FirebaseAnalytics,
 ) : ViewModel() {
-    val selectedLanguage = settingsRepository.selectedLanguage
+    val selectedLanguage = settingsRepositoryImpl.selectedLanguage
 
     private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
     val selectedAppFontScale = _selectedAppFontScale.asStateFlow()
 
 //    private val _hasCompletedOnboarding = MutableStateFlow(false)
-    val hasCompletedOnboarding = settingsRepository.hasCompletedOnboarding
+    val hasCompletedOnboarding = settingsRepositoryImpl.hasCompletedOnboarding
 
     private val _songScrollState = MutableStateFlow(false)
     val songScrollState = _songScrollState.asStateFlow()
@@ -58,17 +58,17 @@ class SettingsViewModel @Inject constructor(
         // 1. Initialize _currentAppFontSize from DataStore when ViewModel starts
         viewModelScope.launch {
 //            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
-            _selectedAppFontScale.value = settingsRepository.getFontScale()
-            _songScrollState.value = settingsRepository.getSongScrollState()
-            _soundMode.value = settingsRepository.getSoundMode()
-            _soundRestoreDelay.value = settingsRepository.getSoundRestoreDelay()
+            _selectedAppFontScale.value = settingsRepositoryImpl.getFontScale()
+            _songScrollState.value = settingsRepositoryImpl.getSongScrollState()
+            _soundMode.value = settingsRepositoryImpl.getSoundMode()
+            _soundRestoreDelay.value = settingsRepositoryImpl.getSoundRestoreDelay()
         }
 
         // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
         viewModelScope.launch {
             _debouncedAppFontScale.collectLatest { fontScaleToSave ->
                 delay(500L) // Wait for 500ms for more gesture events to stop
-                settingsRepository.setFontScale(fontScaleToSave) // Then save the enum
+                settingsRepositoryImpl.setFontScale(fontScaleToSave) // Then save the enum
             }
         }
     }
@@ -76,7 +76,7 @@ class SettingsViewModel @Inject constructor(
     // Function to set (and save) language
     fun setLanguage(language: AppLanguage) {
         viewModelScope.launch {
-            settingsRepository.saveLanguage(language)
+            settingsRepositoryImpl.saveLanguage(language)
             val bundle = Bundle().apply {
                 putString("language", language.name)
             }
@@ -88,7 +88,7 @@ class SettingsViewModel @Inject constructor(
     fun setFontScaleFromSettings(scale: AppFontScale) {
         _selectedAppFontScale.value = scale
         viewModelScope.launch {
-            settingsRepository.setFontScale(scale) // Convert TextUnit back to Int for DataStore
+            settingsRepositoryImpl.setFontScale(scale) // Convert TextUnit back to Int for DataStore
         }
     }
 
@@ -107,7 +107,7 @@ class SettingsViewModel @Inject constructor(
         debounceJob?.cancel()
         debounceJob = viewModelScope.launch {
             delay(300) // Example debounce time
-            settingsRepository.setFontScale(newScale)
+            settingsRepositoryImpl.setFontScale(newScale)
         }
     }
 
@@ -118,7 +118,7 @@ class SettingsViewModel @Inject constructor(
     fun setOnboardingCompleted(status: Boolean = true) {
 //        _hasCompletedOnboarding.value = status
         viewModelScope.launch {
-            settingsRepository.saveOnboardingStatus(status)
+            settingsRepositoryImpl.saveOnboardingStatus(status)
             if (status) {
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
             }
@@ -128,21 +128,21 @@ class SettingsViewModel @Inject constructor(
     fun setSongScrollState(isHorizontal: Boolean) {
         _songScrollState.value = isHorizontal
         viewModelScope.launch {
-            settingsRepository.saveSongScrollState(isHorizontal)
+            settingsRepositoryImpl.saveSongScrollState(isHorizontal)
         }
     }
 
     fun setSoundMode(permissionState: SoundMode) {
         _soundMode.value = permissionState
         viewModelScope.launch {
-            settingsRepository.setSoundMode(permissionState)
+            settingsRepositoryImpl.setSoundMode(permissionState)
         }
     }
 
     fun setSoundRestoreDelay(delay: Int) {
         _soundRestoreDelay.value = delay
         viewModelScope.launch {
-            settingsRepository.setSoundRestoreDelay(delay)
+            settingsRepositoryImpl.setSoundRestoreDelay(delay)
         }
     }
 
@@ -156,7 +156,7 @@ class SettingsViewModel @Inject constructor(
             _soundMode.value = SoundMode.OFF
         } else {
             viewModelScope.launch {
-                _soundMode.value = settingsRepository.getSoundMode()
+                _soundMode.value = settingsRepositoryImpl.getSoundMode()
             }
         }
     }

@@ -6,7 +6,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,13 +22,13 @@ import javax.inject.Inject
 @HiltViewModel
 class NavViewModel @Inject constructor(
     private val navigationRepositoryImpl: NavigationRepositoryImpl,
-    private val settingsRepository: SettingsRepository,
+    private val settingsRepositoryImpl: SettingsRepositoryImpl,
 ) : ViewModel() {
     /**
      * The root node of the navigation tree, dynamically updated based on the selected language.
      */
     val rootNode: StateFlow<PageNode> =
-        settingsRepository.selectedLanguage
+        settingsRepositoryImpl.selectedLanguage
             .map { language ->
                 // Whenever selectedLanguage emits a new 'language',
                 // this block will be re-executed, creating a new navigation tree
