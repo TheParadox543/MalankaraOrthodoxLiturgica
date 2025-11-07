@@ -7,6 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoun
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerParsingException
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.utils.applyPrayerReplacements
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.serialization.json.Json
@@ -16,12 +17,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PrayerRepository @Inject constructor(
+class PrayerRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val json: Json,
     private val calendarRepository: LiturgicalCalendarRepository,
-) {
-    fun loadTranslations(language: AppLanguage): Map<String, String> {
+) : PrayerRepository {
+    override fun loadTranslations(language: AppLanguage): Map<String, String> {
         val json =
             context
                 .assets
@@ -48,10 +49,10 @@ class PrayerRepository @Inject constructor(
      * Main function to load and resolve a list of PrayerElements from a JSON file.
      * Handles recursive loading of 'link' and processing of 'link-collapsible'.
      */
-    suspend fun loadPrayerElements(
+    override suspend fun loadPrayerElements(
         fileName: String,
         language: AppLanguage,
-        currentDepth: Int = 0,
+        currentDepth: Int,
     ): List<PrayerElement> {
         if (currentDepth > maxLinkDepth) {
             throw PrayerLinkDepthExceededException(
@@ -200,7 +201,7 @@ class PrayerRepository @Inject constructor(
         )
     }
 
-    suspend fun loadDynamicSongs(
+    private suspend fun loadDynamicSongs(
         language: AppLanguage,
         dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
         currentDepth: Int,
@@ -287,7 +288,7 @@ class PrayerRepository @Inject constructor(
         return dynamicSongsBlock
     }
 
-    suspend fun loadAlternativePrayers(
+    private suspend fun loadAlternativePrayers(
         language: AppLanguage,
         alternativePrayersBlock: PrayerElement.AlternativePrayersBlock,
         currentDepth: Int,
@@ -310,7 +311,7 @@ class PrayerRepository @Inject constructor(
         return alternativePrayersBlock.copy(options = updatedOptions)
     }
 
-    suspend fun getSongKeyPriority(): String {
+    override suspend fun getSongKeyPriority(): String {
         calendarRepository.initialize()
         val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
         for (item in weekEventItems) {

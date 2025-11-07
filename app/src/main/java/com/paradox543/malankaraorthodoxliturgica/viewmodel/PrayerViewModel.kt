@@ -8,7 +8,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.data.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
-import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
-    private val prayerRepository: PrayerRepository,
+    private val prayerRepositoryImpl: PrayerRepositoryImpl,
     settingsRepository: SettingsRepository,
     private val firebaseAnalytics: FirebaseAnalytics,
     private val inAppReviewManager: InAppReviewManager,
@@ -55,7 +55,7 @@ class PrayerViewModel @Inject constructor(
 
     private fun loadTranslations(language: AppLanguage) {
         viewModelScope.launch {
-            val loadedTranslations = prayerRepository.loadTranslations(language)
+            val loadedTranslations = prayerRepositoryImpl.loadTranslations(language)
             _translations.update { loadedTranslations }
         }
     }
@@ -69,7 +69,7 @@ class PrayerViewModel @Inject constructor(
             try {
                 // Access the current language from SettingsViewModel
                 val language = passedLanguage ?: selectedLanguage.value
-                val prayers = prayerRepository.loadPrayerElements(filename, language)
+                val prayers = prayerRepositoryImpl.loadPrayerElements(filename, language)
                 _prayers.value = prayers
             } catch (e: Exception) {
                 // Consider more robust error handling (e.g., expose to UI via StateFlow)
@@ -79,7 +79,7 @@ class PrayerViewModel @Inject constructor(
         }
     }
 
-    suspend fun getSongKeyPriority(): String = prayerRepository.getSongKeyPriority()
+    suspend fun getSongKeyPriority(): String = prayerRepositoryImpl.getSongKeyPriority()
 
     fun setDynamicSongKey(key: String) {
         _dynamicSongKey.value = key
