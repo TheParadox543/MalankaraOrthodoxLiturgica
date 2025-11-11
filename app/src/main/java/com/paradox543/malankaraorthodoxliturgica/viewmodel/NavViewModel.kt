@@ -32,11 +32,11 @@ class NavViewModel @Inject constructor(
             .map { language ->
                 // Whenever selectedLanguage emits a new 'language',
                 // this block will be re-executed, creating a new navigation tree
-                navigationRepositoryImpl.getNavigationTree(language.code)
+                navigationRepositoryImpl.getNavigationTreeData(language.code)
             }.stateIn(
                 scope = viewModelScope, // Use viewModelScope for UI-related state
                 started = SharingStarted.WhileSubscribed(5000), // Start collecting when UI observes, stop after 5s inactivity
-                initialValue = navigationRepositoryImpl.getNavigationTree(AppLanguage.MALAYALAM.code), // Initial value in Malayalam
+                initialValue = navigationRepositoryImpl.getNavigationTreeData(AppLanguage.MALAYALAM.code), // Initial value in Malayalam
             )
 
     private val _currentNode = MutableStateFlow<PageNodeData?>(null)
