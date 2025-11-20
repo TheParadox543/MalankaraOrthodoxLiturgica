@@ -10,6 +10,9 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,8 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
-    private val prayerRepositoryImpl: PrayerRepositoryImpl,
-    settingsRepository: SettingsRepositoryImpl,
+    private val prayerRepository: PrayerRepository,
+    settingsRepository: SettingsRepository,
     private val firebaseAnalytics: FirebaseAnalytics,
     private val inAppReviewManager: InAppReviewManager,
 ) : ViewModel() {
@@ -30,8 +33,8 @@ class PrayerViewModel @Inject constructor(
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
-    private val _prayers = MutableStateFlow<List<PrayerElementData>>(emptyList())
-    val prayers: StateFlow<List<PrayerElementData>> = _prayers
+    private val _prayers = MutableStateFlow<List<PrayerElementDomain>>(emptyList())
+    val prayers: StateFlow<List<PrayerElementDomain>> = _prayers
 
     private val _dynamicSongKey = MutableStateFlow<String?>(null)
     val dynamicSongKey: StateFlow<String?> = _dynamicSongKey.asStateFlow()
@@ -55,7 +58,7 @@ class PrayerViewModel @Inject constructor(
 
     private fun loadTranslations(language: AppLanguage) {
         viewModelScope.launch {
-            val loadedTranslations = prayerRepositoryImpl.loadTranslations(language)
+            val loadedTranslations = prayerRepository.loadTranslations(language)
             _translations.update { loadedTranslations }
         }
     }
@@ -69,17 +72,17 @@ class PrayerViewModel @Inject constructor(
             try {
                 // Access the current language from SettingsViewModel
                 val language = passedLanguage ?: selectedLanguage.value
-                val prayers = prayerRepositoryImpl.loadPrayerElements(filename, language)
+                val prayers = prayerRepository.loadPrayerElements(filename, language)
                 _prayers.value = prayers
             } catch (e: Exception) {
                 // Consider more robust error handling (e.g., expose to UI via StateFlow)
 //                throw e
-                _prayers.value = listOf(PrayerElementData.Error(e.message ?: "Unknown error"))
+                _prayers.value = listOf(PrayerElementDomain.Error(e.message ?: "Unknown error"))
             }
         }
     }
 
-    suspend fun getSongKeyPriority(): String = prayerRepositoryImpl.getSongKeyPriority()
+    suspend fun getSongKeyPriority(): String = prayerRepository.getSongKeyPriority()
 
     fun setDynamicSongKey(key: String) {
         _dynamicSongKey.value = key
