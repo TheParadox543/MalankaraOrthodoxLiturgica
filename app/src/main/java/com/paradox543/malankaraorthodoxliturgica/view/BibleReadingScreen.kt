@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
@@ -67,7 +69,7 @@ fun BibleReadingScreen(
                 if (bibleReading.preface != null) {
                     items(bibleReading.preface.size) { index ->
                         PrayerElementRenderer(
-                            prayerElementData = bibleReading.preface[index],
+                            prayerElementDomain = bibleReading.preface[index].toDomain(),
                             prayerViewModel = prayerViewModel,
                             filename = title,
                             navController = navController,
