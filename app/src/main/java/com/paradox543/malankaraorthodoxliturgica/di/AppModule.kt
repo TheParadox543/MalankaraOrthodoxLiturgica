@@ -16,7 +16,6 @@ import com.google.firebase.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storage
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.data.repository.NavigationRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,72 +27,47 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-//    @Provides
-//    @Singleton
-//    fun provideSettingsRepository(
-//        @ApplicationContext context: Context
-//    ): SettingsRepository = SettingsRepository(context)
-
     @Provides
     @Singleton // Ensure only one instance of Json is created
-    fun provideJson(): Json {
-        return Json {
+    fun provideJson(): Json =
+        Json {
             ignoreUnknownKeys = true // Important for robust parsing
             prettyPrint = true      // For readability if you ever debug JSON output
             isLenient = true        // Allows for some non-strict JSON (e.g., unquoted keys if needed)
         }
-    }
 
     @Provides
     @Singleton
     fun provideFirebaseStorage(): FirebaseStorage = Firebase.storage
-//    @Provides
-//    @Singleton
-//    fun providePrayerRepository(
-//        @ApplicationContext context: Context
-//    ): PrayerRepository = PrayerRepository(context, Json, LiturgicalCalendarRepository(context, Json))
-
-    @Provides
-    @Singleton
-    fun provideNavigationRepository(
-        @ApplicationContext context: Context
-    ): NavigationRepositoryImpl = NavigationRepositoryImpl(context)
 
     @Provides
     @Singleton
     fun provideBibleRepository(
         @ApplicationContext context: Context,
-        json: Json
+        json: Json,
     ): BibleRepositoryImpl = BibleRepositoryImpl(context, json)
-
-//    @Provides
-//    @Singleton
-//    fun provideCalendarRepository(
-//        @ApplicationContext context: Context,
-//        json: Json
-//    ): LiturgicalCalendarRepository = LiturgicalCalendarRepository(context, json)
 
     @Singleton
     @Provides
-    fun providePreferencesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return PreferenceDataStoreFactory.create(
-            produceFile = { context.preferencesDataStoreFile("app_settings") }
+    fun providePreferencesDataStore(
+        @ApplicationContext context: Context,
+    ): DataStore<Preferences> =
+        PreferenceDataStoreFactory.create(
+            produceFile = { context.preferencesDataStoreFile("app_settings") },
         )
-    }
 
     // Hilt will automatically provide the Context and DataStore it needs.
     @Singleton
     @Provides
-    fun provideReviewManager(@ApplicationContext context: Context): ReviewManager {
-        return ReviewManagerFactory.create(context)
-    }
+    fun provideReviewManager(
+        @ApplicationContext context: Context,
+    ): ReviewManager = ReviewManagerFactory.create(context)
 
     @Singleton
     @Provides
-    fun provideAppUpdateManager(@ApplicationContext context: Context): AppUpdateManager {
-        return AppUpdateManagerFactory.create(context)
-    }
+    fun provideAppUpdateManager(
+        @ApplicationContext context: Context,
+    ): AppUpdateManager = AppUpdateManagerFactory.create(context)
 
     @Provides
     @Singleton
