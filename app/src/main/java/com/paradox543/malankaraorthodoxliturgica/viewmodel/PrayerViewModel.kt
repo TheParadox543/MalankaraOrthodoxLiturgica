@@ -29,7 +29,7 @@ class PrayerViewModel @Inject constructor(
     private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
     private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
 ) : ViewModel() {
-    val selectedLanguage = settingsRepository.selectedLanguage
+    val selectedLanguage = settingsRepository.language
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()

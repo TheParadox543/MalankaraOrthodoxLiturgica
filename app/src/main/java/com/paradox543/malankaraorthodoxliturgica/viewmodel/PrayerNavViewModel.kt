@@ -14,7 +14,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.runBlocking
@@ -35,7 +34,7 @@ class PrayerNavViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val rootNode =
-        settingsRepository.selectedLanguage
+        settingsRepository.language
             .mapLatest { lang ->
                 prayerRepository.getPrayerNavigationTree(lang)
             }.stateIn(

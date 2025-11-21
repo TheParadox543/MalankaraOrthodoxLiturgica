@@ -7,9 +7,9 @@ import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -29,24 +29,38 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 // DataStore instance
-private val Context.dataStore by preferencesDataStore(name = "settings")
-
 @Singleton
 class SettingsRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : SettingsRepository {
     // This scope is essential for stateIn to properly manage the StateFlow's lifecycle.
     // It's good practice to use a custom scope for singletons rather than Dispatchers.IO directly.
+    private val Context.dataStore by preferencesDataStore(name = "settings")
+    val dataStore = context.dataStore
+
     private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
+    // DataStore keys
     private val languageKey = stringPreferencesKey("selected_language")
     private val fontScaleKey = floatPreferencesKey("font_scale")
     private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
     private val songScrollStateKey = booleanPreferencesKey("song_scroll_state")
-    private val soundModePreferencesKey = stringPreferencesKey("sound_mode")
+    private val soundModeKey = stringPreferencesKey("sound_mode")
     private val soundRestoreDelayKey = intPreferencesKey("sound_restore_delay")
 
-    override val selectedLanguage: StateFlow<AppLanguage> =
+    // Start up reads
+    override suspend fun getInitialLanguage(): AppLanguage {
+        val prefs = dataStore.data.first()
+        val code = prefs[languageKey] ?: AppLanguage.MALAYALAM.code
+        return AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM
+    }
+
+    override suspend fun getInitialOnboardingCompleted(): Boolean {
+        val prefs = dataStore.data.first()
+        return prefs[hasCompletedOnboardingKey] ?: false
+    }
+
+    override val language: StateFlow<AppLanguage> =
         context.dataStore.data
             .map { preferences ->
                 // Read the string code, then convert to AppLanguage enum
@@ -55,20 +69,10 @@ class SettingsRepositoryImpl @Inject constructor(
             }.stateIn(
                 scope = repositoryScope,
                 started = SharingStarted.Eagerly,
-                initialValue = AppLanguage.MALAYALAM, // Initial value is also an AppLanguage enum
+                initialValue = AppLanguage.MALAYALAM,
             )
 
-    override suspend fun getFontScale(): AppFontScale {
-        val prefs = context.dataStore.data.first()
-        val scaleFloat = prefs[fontScaleKey] ?: 1.0f
-        return AppFontScale.fromScale(scaleFloat)
-    }
-
-//    suspend fun getOnboardingComplete(): Boolean {
-//        val prefs = context.dataStore.data.first()
-//        return prefs[hasCompletedOnboardingKey] == true
-//    }
-    val hasCompletedOnboarding: StateFlow<Boolean> =
+    override val onboardingCompleted: StateFlow<Boolean> =
         context.dataStore.data
             .map { preferences ->
                 preferences[hasCompletedOnboardingKey] == true
@@ -78,24 +82,50 @@ class SettingsRepositoryImpl @Inject constructor(
                 initialValue = false,
             )
 
-    override suspend fun getSongScrollState(): Boolean {
-        val prefs = context.dataStore.data.first()
-        return prefs[songScrollStateKey] == true
-    }
+    override val fontScale: StateFlow<AppFontScale> =
+        dataStore.data
+            .map { prefs ->
+                val stored = prefs[fontScaleKey] ?: AppFontScale.Medium.scaleFactor
+                AppFontScale.fromScale(stored)
+            }.stateIn(
+                scope = repositoryScope,
+                started = SharingStarted.Eagerly,
+                initialValue = AppFontScale.Medium,
+            )
 
-    override suspend fun getSoundMode(): SoundMode {
-        val prefs = context.dataStore.data.first()
-        return when (prefs[soundModePreferencesKey]) {
-            "SILENT" -> SoundMode.SILENT
-            "DND" -> SoundMode.DND
-            else -> SoundMode.OFF
-        }
-    }
+    override val songScrollState: StateFlow<Boolean> =
+        dataStore.data
+            .map { prefs ->
+                prefs[songScrollStateKey] ?: false
+            }.stateIn(
+                scope = repositoryScope,
+                started = SharingStarted.Eagerly,
+                initialValue = false,
+            )
 
-    override suspend fun getSoundRestoreDelay(): Int {
-        val prefs = context.dataStore.data.first()
-        return prefs[soundRestoreDelayKey] ?: 30
-    }
+    override val soundMode: StateFlow<SoundMode> =
+        dataStore.data
+            .map { prefs ->
+                when (prefs[soundModeKey]) {
+                    "SILENT" -> SoundMode.SILENT
+                    "DND" -> SoundMode.DND
+                    else -> SoundMode.OFF
+                }
+            }.stateIn(
+                scope = repositoryScope,
+                started = SharingStarted.Eagerly,
+                initialValue = SoundMode.OFF,
+            )
+
+    override val soundRestoreDelay: StateFlow<Int> =
+        dataStore.data
+            .map { prefs ->
+                prefs[soundRestoreDelayKey] ?: 30
+            }.stateIn(
+                scope = repositoryScope,
+                started = SharingStarted.Eagerly,
+                initialValue = 30,
+            )
 
     // --- Debouncing for Font Scale ---
     // Internal MutableStateFlow to trigger debounced saves for font scale.
@@ -107,11 +137,12 @@ class SettingsRepositoryImpl @Inject constructor(
         repositoryScope.launch {
             pendingFontScaleUpdate.collectLatest { fontScaleToSave ->
                 debounceJob?.cancel() // Cancel any previous pending save
-                debounceJob = launch {
-                    delay(200L) // Wait for 200ms after the last update
-                    // Directly call your existing setFontScale function
-                    setFontScale(fontScaleToSave)
-                }
+                debounceJob =
+                    launch {
+                        delay(200L) // Wait for 200ms after the last update
+                        // Directly call your existing setFontScale function
+                        setFontScale(fontScaleToSave)
+                    }
             }
         }
 
@@ -124,7 +155,7 @@ class SettingsRepositoryImpl @Inject constructor(
 //        }
     }
 
-    override suspend fun saveLanguage(language: AppLanguage) {
+    override suspend fun setLanguage(language: AppLanguage) {
         context.dataStore.edit { preferences ->
             preferences[languageKey] = language.code
         }
@@ -136,13 +167,13 @@ class SettingsRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun saveOnboardingStatus(completed: Boolean) {
+    override suspend fun setOnboardingCompleted(completed: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[hasCompletedOnboardingKey] = completed
         }
     }
 
-    override suspend fun saveSongScrollState(isHorizontal: Boolean) {
+    override suspend fun setSongScrollState(isHorizontal: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[songScrollStateKey] = isHorizontal
         }
@@ -150,7 +181,7 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override suspend fun setSoundMode(permissionState: SoundMode) {
         context.dataStore.edit { preferences ->
-            preferences[soundModePreferencesKey] = permissionState.name
+            preferences[soundModeKey] = permissionState.name
         }
     }
 

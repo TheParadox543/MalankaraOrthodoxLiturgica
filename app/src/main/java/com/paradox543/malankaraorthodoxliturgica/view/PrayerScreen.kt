@@ -57,7 +57,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
@@ -156,10 +155,10 @@ fun PrayerScreen(
                         cumulativeZoomFactor *= zoom
 
                         if (cumulativeZoomFactor >= zoomInThreshold) {
-                            settingsViewModel.stepFontScale(1)
+                            settingsViewModel.setFontScaleDebounced(1)
                             cumulativeZoomFactor = 1f
                         } else if (cumulativeZoomFactor <= zoomOutThreshold) {
-                            settingsViewModel.stepFontScale(-1)
+                            settingsViewModel.setFontScaleDebounced(-1)
                             cumulativeZoomFactor = 1f
                         }
                     }
