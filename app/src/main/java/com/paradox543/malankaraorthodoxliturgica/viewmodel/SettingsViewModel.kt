@@ -10,10 +10,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedState
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -25,25 +25,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val settingsRepositoryImpl: SettingsRepositoryImpl,
+    private val settingsRepository: SettingsRepository,
     private val firebaseAnalytics: FirebaseAnalytics,
 ) : ViewModel() {
-    val selectedLanguage = settingsRepositoryImpl.selectedLanguage
-
-    private val _selectedAppFontScale = MutableStateFlow(AppFontScale.Medium)
-    val selectedAppFontScale = _selectedAppFontScale.asStateFlow()
-
-//    private val _hasCompletedOnboarding = MutableStateFlow(false)
-    val hasCompletedOnboarding = settingsRepositoryImpl.hasCompletedOnboarding
-
-    private val _songScrollState = MutableStateFlow(false)
-    val songScrollState = _songScrollState.asStateFlow()
-
-    private val _soundMode = MutableStateFlow(SoundMode.OFF)
-    val soundMode = _soundMode.asStateFlow()
-
-    private val _soundRestoreDelay = MutableStateFlow(30)
-    val soundRestoreDelay = _soundRestoreDelay.asStateFlow()
+    val selectedLanguage = settingsRepository.language
+    val onboardingCompleted = settingsRepository.onboardingCompleted
+    val fontScale = settingsRepository.fontScale
+    val songScrollState = settingsRepository.songScrollState
+    val soundMode = settingsRepository.soundMode
+    val soundRestoreDelay = settingsRepository.soundRestoreDelay
 
     private val _hasDndPermission = MutableStateFlow(false)
     val hasDndPermission = _hasDndPermission.asStateFlow()
@@ -55,20 +45,11 @@ class SettingsViewModel @Inject constructor(
     private var debounceJob: Job? = null
 
     init {
-        // 1. Initialize _currentAppFontSize from DataStore when ViewModel starts
-        viewModelScope.launch {
-//            _hasCompletedOnboarding.value = settingsRepository.getOnboardingComplete()
-            _selectedAppFontScale.value = settingsRepositoryImpl.getFontScale()
-            _songScrollState.value = settingsRepositoryImpl.getSongScrollState()
-            _soundMode.value = settingsRepositoryImpl.getSoundMode()
-            _soundRestoreDelay.value = settingsRepositoryImpl.getSoundRestoreDelay()
-        }
-
-        // 2. Debounce mechanism: only save to DataStore after a short delay of no new updates
+        // Debounce mechanism: only save to DataStore after a short delay of no new updates
         viewModelScope.launch {
             _debouncedAppFontScale.collectLatest { fontScaleToSave ->
                 delay(500L) // Wait for 500ms for more gesture events to stop
-                settingsRepositoryImpl.setFontScale(fontScaleToSave) // Then save the enum
+                settingsRepository.setFontScale(fontScaleToSave) // Then save the enum
             }
         }
     }
@@ -76,92 +57,88 @@ class SettingsViewModel @Inject constructor(
     // Function to set (and save) language
     fun setLanguage(language: AppLanguage) {
         viewModelScope.launch {
-            settingsRepositoryImpl.saveLanguage(language)
-            val bundle = Bundle().apply {
-                putString("language", language.name)
-            }
+            settingsRepository.setLanguage(language)
+            val bundle =
+                Bundle().apply {
+                    putString("language", language.name)
+                }
             firebaseAnalytics.logEvent("language_selected", bundle)
         }
     }
 
     // Function to set (and save) font size
     fun setFontScaleFromSettings(scale: AppFontScale) {
-        _selectedAppFontScale.value = scale
         viewModelScope.launch {
-            settingsRepositoryImpl.setFontScale(scale) // Convert TextUnit back to Int for DataStore
+            settingsRepository.setFontScale(scale) // Convert TextUnit back to Int for DataStore
         }
     }
 
-    fun stepFontScale(direction: Int) {
-        if (direction > 0) {
-            _selectedAppFontScale.value = _selectedAppFontScale.value.next()
-        } else if (direction < 0) {
-            _selectedAppFontScale.value = _selectedAppFontScale.value.prev()
-        }
-        updateFontScaleWithDebounce(_selectedAppFontScale.value)
+    fun setFontScaleDebounced(direction: Int) {
+//        if (direction > 0) {
+//            _selectedAppFontScale.value = _selectedAppFontScale.value.next()
+//        } else if (direction < 0) {
+//            _selectedAppFontScale.value = _selectedAppFontScale.value.prev()
+//        }
+//        updateFontScaleWithDebounce(_selectedAppFontScale.value)
     }
 
     fun updateFontScaleWithDebounce(newScale: AppFontScale) {
-        _selectedAppFontScale.value = newScale
+//        _selectedAppFontScale.value = newScale
 
         debounceJob?.cancel()
-        debounceJob = viewModelScope.launch {
-            delay(300) // Example debounce time
-            settingsRepositoryImpl.setFontScale(newScale)
-        }
+        debounceJob =
+            viewModelScope.launch {
+                delay(300) // Example debounce time
+                settingsRepository.setFontScale(newScale)
+            }
     }
 
     fun logTutorialStart() {
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, null)
     }
 
-    fun setOnboardingCompleted(status: Boolean = true) {
-//        _hasCompletedOnboarding.value = status
+    fun setOnboardingCompleted(completed: Boolean = true) {
         viewModelScope.launch {
-            settingsRepositoryImpl.saveOnboardingStatus(status)
-            if (status) {
+            settingsRepository.setOnboardingCompleted(completed)
+            if (completed) {
                 firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
             }
         }
     }
 
     fun setSongScrollState(isHorizontal: Boolean) {
-        _songScrollState.value = isHorizontal
         viewModelScope.launch {
-            settingsRepositoryImpl.saveSongScrollState(isHorizontal)
+            settingsRepository.setSongScrollState(isHorizontal)
         }
     }
 
     fun setSoundMode(permissionState: SoundMode) {
-        _soundMode.value = permissionState
         viewModelScope.launch {
-            settingsRepositoryImpl.setSoundMode(permissionState)
+            settingsRepository.setSoundMode(permissionState)
         }
     }
 
     fun setSoundRestoreDelay(delay: Int) {
-        _soundRestoreDelay.value = delay
         viewModelScope.launch {
-            settingsRepositoryImpl.setSoundRestoreDelay(delay)
+            settingsRepository.setSoundRestoreDelay(delay)
         }
-    }
-
-    fun hasGrantedDndPermission(): Boolean {
-        return _hasDndPermission.value
     }
 
     fun setDndPermissionStatus(granted: Boolean) {
         _hasDndPermission.value = granted
-        if (!granted) {
-            _soundMode.value = SoundMode.OFF
-        } else {
-            viewModelScope.launch {
-                _soundMode.value = settingsRepositoryImpl.getSoundMode()
-            }
-        }
+//        if (!granted) {
+//            _soundMode.value = SoundMode.OFF
+//        } else {
+//            viewModelScope.launch {
+//                _soundMode.value = settingsRepository.getSoundMode()
+//            }
+//        }
     }
 
-    fun logScreensVisited(routePattern: String, arguments: SavedState?) {
+    fun logScreensVisited(
+        routePattern: String,
+        arguments: SavedState?,
+    ) {
         val screenName: String
         val screenClass: String
 
@@ -189,11 +166,12 @@ class SettingsViewModel @Inject constructor(
             routePattern.startsWith("bible/") && routePattern.contains("{bookIndex}") && routePattern.contains("{chapterIndex}") -> {
                 val bookIndex = arguments?.getString("bookIndex")
                 val chapterIndex = arguments?.getString("chapterIndex")
-                screenName = when {
-                    bookIndex != null && chapterIndex != null -> "bible/$bookIndex/$chapterIndex"
-                    bookIndex != null -> "bible/$bookIndex" // Fallback if chapterIndex is missing but bookIndex isn't
-                    else -> routePattern
-                }
+                screenName =
+                    when {
+                        bookIndex != null && chapterIndex != null -> "bible/$bookIndex/$chapterIndex"
+                        bookIndex != null -> "bible/$bookIndex" // Fallback if chapterIndex is missing but bookIndex isn't
+                        else -> routePattern
+                    }
                 screenClass = "BibleChapterScreen"
             }
             // Default Case: For static routes or other unhandled patterns
@@ -203,10 +181,11 @@ class SettingsViewModel @Inject constructor(
             }
         }
 
-        val bundle = Bundle().apply {
-            putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
-            putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
-        }
+        val bundle =
+            Bundle().apply {
+                putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
+                putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
+            }
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
     }
 
@@ -215,27 +194,33 @@ class SettingsViewModel @Inject constructor(
      * @param shareMessage An optional custom message to include.
      * @param appPackageName Your app's package name.
      */
-    fun shareAppPlayStoreLink(context: Context, shareMessage: String = "", appPackageName: String? = null) {
+    fun shareAppPlayStoreLink(
+        context: Context,
+        shareMessage: String = "",
+        appPackageName: String? = null,
+    ) {
         val appPackageName = appPackageName ?: "com.paradox543.malankaraorthodoxliturgica"
         val playStoreLink = "https://play.google.com/store/apps/details?id=$appPackageName"
 
-        val shareIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain" // We are sharing plain text
-            putExtra(Intent.EXTRA_SUBJECT, "Check out this amazing app!") // Subject for email/other apps
-            putExtra(
-                Intent.EXTRA_TEXT,
-                "$shareMessage\n$playStoreLink" // Your message + the Play Store link
-            )
-        }
+        val shareIntent =
+            Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain" // We are sharing plain text
+                putExtra(Intent.EXTRA_SUBJECT, "Check out this amazing app!") // Subject for email/other apps
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "$shareMessage\n$playStoreLink", // Your message + the Play Store link
+                )
+            }
 
         // Check if there's any app to handle this intent
         if (shareIntent.resolveActivity(context.packageManager) != null) {
             context.startActivity(Intent.createChooser(shareIntent, "Share App Via"))
-            val bundle = Bundle().apply {
-                putString(FirebaseAnalytics.Param.CONTENT_TYPE, "share_app")
-                putString(FirebaseAnalytics.Param.ITEM_ID, "app_link")
-                putString(FirebaseAnalytics.Param.METHOD, "text/plain")
-            }
+            val bundle =
+                Bundle().apply {
+                    putString(FirebaseAnalytics.Param.CONTENT_TYPE, "share_app")
+                    putString(FirebaseAnalytics.Param.ITEM_ID, "app_link")
+                    putString(FirebaseAnalytics.Param.METHOD, "text/plain")
+                }
             firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
         } else {
             // Optionally, show a toast or message if no app can handle the share intent

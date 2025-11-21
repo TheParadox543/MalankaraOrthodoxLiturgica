@@ -43,7 +43,7 @@ fun NavGraph(
     val bibleViewModel: BibleViewModel = hiltViewModel()
     val prayerNavViewModel: PrayerNavViewModel = hiltViewModel()
     val navController = rememberNavController()
-    val onboardingStatus by settingsViewModel.hasCompletedOnboarding.collectAsState()
+    val onboardingStatus by settingsViewModel.onboardingCompleted.collectAsState()
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route

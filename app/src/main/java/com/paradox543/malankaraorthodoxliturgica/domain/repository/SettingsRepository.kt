@@ -1,28 +1,32 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.repository
 
+import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
 import kotlinx.coroutines.flow.StateFlow
 
 interface SettingsRepository {
-    val selectedLanguage: StateFlow<AppLanguage>
+    // 1. One-time startup reads (NO DEFAULTS ALLOWED)
+    suspend fun getInitialLanguage(): AppLanguage
 
-    suspend fun getFontScale(): AppFontScale
+    suspend fun getInitialOnboardingCompleted(): Boolean
 
-    suspend fun getSongScrollState(): Boolean
+    // 2. Reactive flows for state
+    val language: StateFlow<AppLanguage>
+    val onboardingCompleted: StateFlow<Boolean>
+    val fontScale: StateFlow<AppFontScale>
+    val songScrollState: StateFlow<Boolean>
+    val soundMode: StateFlow<SoundMode>
+    val soundRestoreDelay: StateFlow<Int>
 
-    suspend fun getSoundMode(): SoundMode
-
-    suspend fun getSoundRestoreDelay(): Int
-
-    suspend fun saveLanguage(language: AppLanguage)
+    // 3. Setters for setting options
+    suspend fun setLanguage(language: AppLanguage)
 
     suspend fun setFontScale(fontScale: AppFontScale)
 
-    suspend fun saveOnboardingStatus(completed: Boolean)
+    suspend fun setOnboardingCompleted(completed: Boolean)
 
-    suspend fun saveSongScrollState(isHorizontal: Boolean)
+    suspend fun setSongScrollState(isHorizontal: Boolean)
 
     suspend fun setSoundMode(permissionState: SoundMode)
 

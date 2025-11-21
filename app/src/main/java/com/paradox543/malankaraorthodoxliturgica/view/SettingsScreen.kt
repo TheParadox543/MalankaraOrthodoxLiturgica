@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -58,10 +57,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
@@ -75,7 +74,7 @@ fun SettingsScreen(
     settingsViewModel: SettingsViewModel,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    val selectedFontScale by settingsViewModel.selectedAppFontScale.collectAsState()
+    val selectedFontScale by settingsViewModel.fontScale.collectAsState()
     val soundMode by settingsViewModel.soundMode.collectAsState()
     val soundRestoreDelay by settingsViewModel.soundRestoreDelay.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
@@ -324,7 +323,7 @@ fun SettingsScreen(
                                     context = context,
                                     shareMessage =
                                         "Welcome to Liturgica: A digital repository for " +
-                                                "all your books in the Malankara Orthodox Church", // Your custom message
+                                            "all your books in the Malankara Orthodox Church", // Your custom message
                                 )
                             },
                         ),

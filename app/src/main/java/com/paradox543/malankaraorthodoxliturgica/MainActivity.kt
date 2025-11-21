@@ -25,7 +25,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
@@ -72,13 +71,13 @@ class MainActivity : ComponentActivity() {
 
         // Launch a coroutine to load necessary data before hiding the splash screen.
         lifecycleScope.launch {
-            settingsViewModel.hasCompletedOnboarding.first() // Await its first value
+            settingsViewModel.onboardingCompleted.first() // Await its first value
             isInitialDataLoaded = true // Signal that data is loaded
         }
 
         setContent {
             val language by settingsViewModel.selectedLanguage.collectAsState()
-            val scaleFactor by settingsViewModel.selectedAppFontScale.collectAsState()
+            val scaleFactor by settingsViewModel.fontScale.collectAsState()
             val soundMode by settingsViewModel.soundMode.collectAsState()
 
             MalankaraOrthodoxLiturgicaTheme(language = language, textScale = scaleFactor) {

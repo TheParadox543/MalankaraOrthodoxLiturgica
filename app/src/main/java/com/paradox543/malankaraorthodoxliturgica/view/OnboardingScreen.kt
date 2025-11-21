@@ -34,9 +34,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
+import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
@@ -50,7 +50,7 @@ fun OnboardingScreen(
     // Current selections (will be saved when "Get Started" is clicked)
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
 //    var selectedFontScale by remember { mutableStateOf(AppFontScale.Medium) } // Default medium size, adjust as needed
-    val selectedFontScale by settingsViewModel.selectedAppFontScale.collectAsState()
+    val selectedFontScale by settingsViewModel.fontScale.collectAsState()
 
     // State for language dropdown menu
     var languageExpanded by remember { mutableStateOf(false) }
@@ -65,14 +65,14 @@ fun OnboardingScreen(
 
     Scaffold { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(24.dp)
-                .verticalScroll(rememberScrollState()),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(24.dp)
+                    .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-
         ) {
             Text(
                 text = "Welcome to Liturgica!",
@@ -83,13 +83,13 @@ fun OnboardingScreen(
             Text(
                 text = "Please choose your preferred language and font size.",
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(bottom = 32.dp)
+                modifier = Modifier.padding(bottom = 32.dp),
             )
 
             // --- Language Selection ---
             ExposedDropdownMenuBox(
                 expanded = languageExpanded,
-                onExpandedChange = { languageExpanded = it }
+                onExpandedChange = { languageExpanded = it },
             ) {
                 OutlinedTextField(
                     value = selectedLanguage.displayName,
@@ -99,14 +99,15 @@ fun OnboardingScreen(
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageExpanded)
                     },
-                    modifier = Modifier
-                        .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
-                        .fillMaxWidth()
+                    modifier =
+                        Modifier
+                            .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                            .fillMaxWidth(),
                 )
                 ExposedDropdownMenu(
                     expanded = languageExpanded,
                     onDismissRequest = { languageExpanded = false },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     AppLanguage.entries.forEach {
                         DropdownMenuItem(
@@ -115,7 +116,7 @@ fun OnboardingScreen(
                                 selectedLanguage = it
                                 languageExpanded = false
                             },
-                            enabled = it != selectedLanguage
+                            enabled = it != selectedLanguage,
                         )
                     }
                 }
@@ -126,7 +127,7 @@ fun OnboardingScreen(
             // --- Font Size Selection ---
             Text(
                 text = "Font Size: ${selectedFontScale.displayName}",
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.bodyLarge,
             )
             Slider(
                 value = selectedFontScale.scaleFactor,
@@ -136,22 +137,22 @@ fun OnboardingScreen(
                 },
                 modifier = Modifier.width(240.dp),
                 valueRange = 0.7f..1.4f,
-                steps = 3
+                steps = 3,
             )
 
             if (!prayers.isEmpty()) {
                 Column(
-                    modifier = Modifier.padding(vertical=28.dp)
+                    modifier = Modifier.padding(vertical = 28.dp),
                 ) {
                     Text(
                         "Sample Prayer",
-                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
                     )
                     PrayerElementRenderer(
                         prayers[1],
                         prayerViewModel,
                         filename,
-                        navController
+                        navController,
                     )
                 }
             }
@@ -163,13 +164,15 @@ fun OnboardingScreen(
                     settingsViewModel.setFontScaleFromSettings(selectedFontScale)
                     settingsViewModel.setOnboardingCompleted()
                     // Navigate to the home screen
-                    navController.navigate(Screen.Home.route) { // Define your main app route
-                        popUpTo(Screen.Onboarding.route) { // Remove onboarding from back stack
+                    navController.navigate(Screen.Home.route) {
+                        // Define your main app route
+                        popUpTo(Screen.Onboarding.route) {
+                            // Remove onboarding from back stack
                             inclusive = true
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 Text("Get Started!")
             }
