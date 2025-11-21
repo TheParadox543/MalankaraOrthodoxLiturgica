@@ -1,6 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.data.datasource
 
 import android.content.Context
+import android.util.Log
+import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerContentNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerLinkDepthExceededException
@@ -37,14 +39,26 @@ class PrayerSource @Inject constructor(
                 )
             }
 
+            val filePath = "${language.code}/prayers/$fileName"
             return@withContext try {
-                val inputStream = context.assets.open("prayers/${language.code}/$fileName")
+                val inputStream = context.assets.open(filePath)
                 val jsonString = inputStream.bufferedReader().use { it.readText() }
                 json.decodeFromString<List<PrayerElementData>>(jsonString)
             } catch (_: IOException) {
-                throw PrayerContentNotFoundException("Error loading file: ${language.code}/$fileName.")
+                throw PrayerContentNotFoundException("Error loading file: $filePath.")
             } catch (_: Exception) {
-                throw PrayerParsingException("Error parsing JSON in: ${language.code}/$fileName.")
+                throw PrayerParsingException("Error parsing JSON in: $filePath.")
             }
+        }
+
+    suspend fun loadPrayerNavigationTree(language: AppLanguage): PageNodeData =
+        withContext(Dispatchers.IO) {
+            val jsonString =
+                context
+                    .assets
+                    .open("${language.code}/prayers_tree.json")
+                    .bufferedReader()
+                    .use { it.readText() }
+            return@withContext json.decodeFromString<PageNodeData>(jsonString)
         }
 }

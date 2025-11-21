@@ -25,13 +25,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
     lateinit var inAppUpdateManager: InAppUpdateManager
 
     @Inject
-    lateinit var calendarRepository: CalendarRepositoryImpl
+    lateinit var calendarRepository: CalendarRepository
 
     @Inject
     lateinit var workManager: WorkManager
@@ -55,7 +55,6 @@ class MainActivity : ComponentActivity() {
 
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
-    private val navViewModel: NavViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install the splash screen.
@@ -74,8 +73,6 @@ class MainActivity : ComponentActivity() {
         // Launch a coroutine to load necessary data before hiding the splash screen.
         lifecycleScope.launch {
             settingsViewModel.hasCompletedOnboarding.first() // Await its first value
-            navViewModel.getInitialNode() // Ensure initial node logic is run and ready
-            calendarRepository.initialize() // Load calendar data
             isInitialDataLoaded = true // Signal that data is loaded
         }
 
@@ -126,7 +123,6 @@ class MainActivity : ComponentActivity() {
                     // The innerPadding can be passed to your NavGraph if needed to prevent overlap.
                     NavGraph(
                         settingsViewModel = settingsViewModel,
-                        navViewModel = navViewModel,
                         Modifier.padding(innerPadding),
                     )
                 }

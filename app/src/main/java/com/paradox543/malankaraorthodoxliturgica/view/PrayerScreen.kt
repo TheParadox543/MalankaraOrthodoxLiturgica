@@ -59,6 +59,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
@@ -72,7 +73,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.components.Source
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Subtext
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Title
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import kotlinx.coroutines.delay
@@ -83,8 +84,8 @@ fun PrayerScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
-    navViewModel: NavViewModel,
-    node: PageNodeData,
+    prayerNavViewModel: PrayerNavViewModel,
+    node: PageNodeDomain,
     scrollIndex: Int = 0,
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
@@ -100,7 +101,7 @@ fun PrayerScreen(
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
     val currentFilename = node.filename ?: "NoFileNameFound"
-    val (prevNodeRoute, nextNodeRoute) = navViewModel.getAdjacentSiblingRoutes(node)
+    val (prevNodeRoute, nextNodeRoute) = prayerNavViewModel.getAdjacentRoutes(node)
 
     // State to accumulate zoom gesture delta for triggering discrete steps
     var cumulativeZoomFactor by remember { mutableFloatStateOf(1f) }
