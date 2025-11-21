@@ -11,6 +11,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomai
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetPrayerScreenContentUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetSongKeyPriorityUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,6 +27,7 @@ class PrayerViewModel @Inject constructor(
     private val firebaseAnalytics: FirebaseAnalytics,
     private val inAppReviewManager: InAppReviewManager,
     private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
+    private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
 ) : ViewModel() {
     val selectedLanguage = settingsRepository.selectedLanguage
 
@@ -49,7 +51,7 @@ class PrayerViewModel @Inject constructor(
         viewModelScope.launch {
             prayers.collect {
                 if (_dynamicSongKey.value == null) {
-                    _dynamicSongKey.value = getSongKeyPriority()
+                    _dynamicSongKey.value = getSongKeyPriorityUseCase()
                 }
             }
         }
@@ -80,8 +82,6 @@ class PrayerViewModel @Inject constructor(
             }
         }
     }
-
-    suspend fun getSongKeyPriority(): String = prayerRepository.getSongKeyPriority()
 
     fun setDynamicSongKey(key: String) {
         _dynamicSongKey.value = key

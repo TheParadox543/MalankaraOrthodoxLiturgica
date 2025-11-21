@@ -11,6 +11,4 @@ interface PrayerRepository {
         language: AppLanguage,
         currentDepth: Int = 0,
     ): List<PrayerElementDomain>
-
-    suspend fun getSongKeyPriority(): String
 }

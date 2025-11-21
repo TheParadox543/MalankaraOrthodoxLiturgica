@@ -13,7 +13,6 @@ import javax.inject.Singleton
 class PrayerRepositoryImpl @Inject constructor(
     private val prayerSource: PrayerSource,
     private val translationSource: TranslationSource,
-    private val calendarRepository: CalendarRepositoryImpl,
 ) : PrayerRepository {
     override fun loadTranslations(language: AppLanguage): Map<String, String> = translationSource.loadTranslations(language)
 
@@ -28,15 +27,4 @@ class PrayerRepositoryImpl @Inject constructor(
                 language,
                 currentDepth,
             ).toDomainList()
-
-    override suspend fun getSongKeyPriority(): String {
-        calendarRepository.initialize()
-        val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
-        for (item in weekEventItems) {
-            if (item.specialSongsKey != null) {
-                return item.specialSongsKey
-            }
-        }
-        return "default"
-    }
 }
