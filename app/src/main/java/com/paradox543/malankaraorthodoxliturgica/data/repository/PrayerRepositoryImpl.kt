@@ -14,8 +14,6 @@ class PrayerRepositoryImpl @Inject constructor(
     private val prayerSource: PrayerSource,
     private val translationSource: TranslationSource,
 ) : PrayerRepository {
-    override fun loadTranslations(language: AppLanguage): Map<String, String> = translationSource.loadTranslations(language)
-
     override suspend fun loadPrayerElements(
         fileName: String,
         language: AppLanguage,

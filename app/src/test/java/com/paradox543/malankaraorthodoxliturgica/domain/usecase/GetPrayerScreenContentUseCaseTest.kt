@@ -11,8 +11,6 @@ class GetPrayerScreenContentUseCaseTest {
     private class FakePrayerRepository(
         private val map: Map<String, List<PrayerElementDomain>>,
     ) : PrayerRepository {
-        override fun loadTranslations(language: AppLanguage): Map<String, String> = emptyMap()
-
         override suspend fun loadPrayerElements(
             fileName: String,
             language: AppLanguage,
