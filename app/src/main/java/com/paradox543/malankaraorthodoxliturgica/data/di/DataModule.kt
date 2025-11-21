@@ -1,7 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.data.di
 
+import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import dagger.Binds
@@ -20,4 +22,7 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindPrayerRepository(impl: PrayerRepositoryImpl): PrayerRepository
+
+    @Binds
+    abstract fun bindCalendarRepository(impl: CalendarRepositoryImpl): CalendarRepository
 }

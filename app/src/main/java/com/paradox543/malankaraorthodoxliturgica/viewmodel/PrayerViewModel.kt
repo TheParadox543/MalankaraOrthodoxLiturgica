@@ -5,14 +5,12 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
-import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetPrayerScreenContentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,6 +25,7 @@ class PrayerViewModel @Inject constructor(
     settingsRepository: SettingsRepository,
     private val firebaseAnalytics: FirebaseAnalytics,
     private val inAppReviewManager: InAppReviewManager,
+    private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
 ) : ViewModel() {
     val selectedLanguage = settingsRepository.selectedLanguage
 
@@ -72,7 +71,7 @@ class PrayerViewModel @Inject constructor(
             try {
                 // Access the current language from SettingsViewModel
                 val language = passedLanguage ?: selectedLanguage.value
-                val prayers = prayerRepository.loadPrayerElements(filename, language)
+                val prayers = getPrayerScreenContentUseCase(filename, language)
                 _prayers.value = prayers
             } catch (e: Exception) {
                 // Consider more robust error handling (e.g., expose to UI via StateFlow)
@@ -126,4 +125,3 @@ class PrayerViewModel @Inject constructor(
         }
     }
 }
-

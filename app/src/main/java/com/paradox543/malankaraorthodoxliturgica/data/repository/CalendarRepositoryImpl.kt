@@ -31,7 +31,7 @@ class CalendarRepositoryImpl @Inject constructor(
     private lateinit var liturgicalData: LiturgicalDataStore
 
     // Initial load, to be called in an appropriate scope (e.g., ViewModel init or App startup)
-    suspend fun initialize() {
+    override suspend fun initialize() {
         if (!::liturgicalDates.isInitialized) { // Check if already initialized
             readLiturgicalDates()
         }
