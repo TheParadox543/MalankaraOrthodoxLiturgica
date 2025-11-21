@@ -4,8 +4,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 
 interface PrayerRepository {
-    fun loadTranslations(language: AppLanguage): Map<String, String>
-
     suspend fun loadPrayerElements(
         fileName: String,
         language: AppLanguage,
