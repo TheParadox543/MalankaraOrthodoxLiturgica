@@ -30,26 +30,25 @@ import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.view.SongScreen
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.CalendarViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
 @Composable
 fun NavGraph(
     settingsViewModel: SettingsViewModel,
-    navViewModel: NavViewModel,
     modifier: Modifier = Modifier,
 ) {
     val prayerViewModel: PrayerViewModel = hiltViewModel()
     val bibleViewModel: BibleViewModel = hiltViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = hiltViewModel()
     val navController = rememberNavController()
     val onboardingStatus by settingsViewModel.hasCompletedOnboarding.collectAsState()
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val arguments = navBackStackEntry?.arguments
-    val rootNode by navViewModel.rootNode.collectAsState()
+    val rootNode by prayerNavViewModel.rootNode.collectAsState()
     LaunchedEffect(currentRoute, arguments) {
         if (currentRoute != null) {
             settingsViewModel.logScreensVisited(currentRoute, arguments)
@@ -58,17 +57,18 @@ fun NavGraph(
 
     NavHost(
         navController,
-        startDestination = if (onboardingStatus) {
-            Screen.Home.route
-        } else {
-            Screen.Onboarding.route
-        }
+        startDestination =
+            if (onboardingStatus) {
+                Screen.Home.route
+            } else {
+                Screen.Onboarding.route
+            },
     ) {
         composable(
             Screen.Home.route,
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Home.deepLink!! } )
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Home.deepLink!! }),
         ) {
-            HomeScreen(navController, prayerViewModel, settingsViewModel, navViewModel)
+            HomeScreen(navController, prayerViewModel, settingsViewModel, prayerNavViewModel)
         }
 
         composable(Screen.Onboarding.route) {
@@ -78,10 +78,10 @@ fun NavGraph(
         composable(
             route = Screen.Section.route,
             arguments = listOf(navArgument(Screen.Section.ARG_ROUTE) { type = NavType.StringType }),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Section.DEEP_LINK_PATTERN })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Section.DEEP_LINK_PATTERN }),
         ) { backStackEntry ->
             val route = backStackEntry.arguments?.getString(Screen.Section.ARG_ROUTE) ?: ""
-            val node = navViewModel.findNode(rootNode, route)
+            val node = prayerNavViewModel.findNode(route)
             if (node != null) {
                 SectionScreen(navController, prayerViewModel, settingsViewModel, node)
             } else {
@@ -92,19 +92,19 @@ fun NavGraph(
         composable(
             route = Screen.Prayer.route,
             arguments = listOf(navArgument(Screen.Prayer.ARG_ROUTE) { type = NavType.StringType }),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Prayer.DEEP_LINK_PATTERN })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Prayer.DEEP_LINK_PATTERN }),
         ) { backStackEntry ->
             val prayerRoute = backStackEntry.arguments?.getString(Screen.Prayer.ARG_ROUTE) ?: ""
             val scrollIndex = backStackEntry.arguments?.getString(Screen.Prayer.ARG_SCROLL)?.toIntOrNull() ?: 0
-            val node = navViewModel.findNode(rootNode, prayerRoute)
+            val node = prayerNavViewModel.findNode(prayerRoute)
             if (node != null) {
                 PrayerScreen(
                     navController,
                     prayerViewModel,
                     settingsViewModel,
-                    navViewModel,
+                    prayerNavViewModel,
                     node,
-                    scrollIndex
+                    scrollIndex,
                 )
             } else {
                 ContentNotReadyScreen(navController, message = prayerRoute)
@@ -116,7 +116,7 @@ fun NavGraph(
             arguments = listOf(navArgument(Screen.Song.ARG_ROUTE) { type = NavType.StringType }),
         ) { backStackEntry ->
             val route = backStackEntry.arguments?.getString(Screen.Section.ARG_ROUTE) ?: ""
-            val node = navViewModel.findNode(rootNode, route)
+            val node = prayerNavViewModel.findNode(route)
             if (node != null) {
                 SongScreen(navController, songFilename = node.filename ?: "")
             } else {
@@ -125,12 +125,12 @@ fun NavGraph(
         }
 
         composable(Screen.PrayNow.route) {
-            PrayNowScreen(navController, settingsViewModel, prayerViewModel, navViewModel)
+            PrayNowScreen(navController, settingsViewModel, prayerViewModel, prayerNavViewModel)
         }
 
         composable(
             Screen.Bible.route,
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Bible.deepLink!! })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Bible.deepLink!! }),
         ) {
             BibleScreen(navController, settingsViewModel, bibleViewModel)
         }
@@ -138,7 +138,7 @@ fun NavGraph(
         composable(
             route = Screen.BibleBook.route,
             arguments = listOf(navArgument(Screen.BibleBook.ARG_BOOK) { type = NavType.StringType }),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleBook.DEEP_LINK_PATTERN })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleBook.DEEP_LINK_PATTERN }),
         ) { backStackEntry ->
             val book = backStackEntry.arguments?.getString(Screen.BibleBook.ARG_BOOK) ?: ""
             BibleBookScreen(navController, settingsViewModel, bibleViewModel, book)
@@ -146,10 +146,11 @@ fun NavGraph(
 
         composable(
             route = Screen.BibleChapter.route,
-            arguments = listOf(
-                navArgument(Screen.BibleChapter.ARG_BOOK_INDEX) { type = NavType.StringType }
-            ),
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleChapter.DEEP_LINK_PATTERN })
+            arguments =
+                listOf(
+                    navArgument(Screen.BibleChapter.ARG_BOOK_INDEX) { type = NavType.StringType },
+                ),
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleChapter.DEEP_LINK_PATTERN }),
         ) { backStackEntry ->
             val bookIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.ARG_BOOK_INDEX)?.toIntOrNull() ?: 0
             val chapterIndex = backStackEntry.arguments?.getString(Screen.BibleChapter.ARG_CHAPTER_INDEX)?.toIntOrNull() ?: 0
@@ -162,27 +163,27 @@ fun NavGraph(
 
         composable(
             Screen.Calendar.route,
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Calendar.deepLink!! })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Calendar.deepLink!! }),
         ) {
             CalendarScreen(navController, bibleViewModel)
         }
 
         composable(
-            Screen.QrScanner.route
+            Screen.QrScanner.route,
         ) {
             QrScannerView(navController)
         }
 
         composable(
             Screen.Settings.route,
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.Settings.deepLink!! })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.Settings.deepLink!! }),
         ) {
             SettingsScreen(navController, settingsViewModel)
         }
 
         composable(
             Screen.About.route,
-            deepLinks = listOf(navDeepLink { uriPattern = Screen.About.deepLink!! })
+            deepLinks = listOf(navDeepLink { uriPattern = Screen.About.deepLink!! }),
         ) {
             AboutScreen(navController)
         }

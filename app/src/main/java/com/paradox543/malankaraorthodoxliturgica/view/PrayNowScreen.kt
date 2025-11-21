@@ -34,11 +34,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.NavViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 
@@ -47,27 +47,28 @@ fun PrayNowScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel,
     prayerViewModel: PrayerViewModel,
-    navViewModel: NavViewModel
+    prayerNavViewModel: PrayerNavViewModel,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val nodes = navViewModel.getAllPrayerNodes()
+    val nodes = prayerNavViewModel.getAllPrayerNodes()
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
-    val title = translations["prayNow"]?: "Pray Now"
-    Scaffold (
+    val title = translations["prayNow"] ?: "Pray Now"
+    Scaffold(
         topBar = { TopNavBar(title, navController) },
-        bottomBar = { BottomNavBar(navController = navController) }
+        bottomBar = { BottomNavBar(navController = navController) },
     ) { innerPadding ->
         Box {
             Image(
                 painter = painterResource(R.drawable.praynow),
                 "background Image",
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .requiredWidth(400.dp)
-                    .fillMaxSize(),
+                modifier =
+                    Modifier
+                        .padding(innerPadding)
+                        .requiredWidth(400.dp)
+                        .fillMaxSize(),
                 alignment = Alignment.TopStart,
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.Fit,
             )
             if (screenWidth > 600.dp) {
                 Row {
@@ -75,22 +76,24 @@ fun PrayNowScreen(
                     if (nodes.isNotEmpty()) {
                         LazyVerticalGrid(
                             columns = GridCells.Adaptive(240.dp),
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                                .padding(horizontal = 20.dp),
-                            horizontalArrangement = Arrangement.SpaceEvenly
+                            modifier =
+                                Modifier
+                                    .fillMaxSize()
+                                    .padding(innerPadding)
+                                    .padding(horizontal = 20.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
                         ) {
                             items(nodes) { node ->
                                 val routeParts = node.route.split("_")
-                                val translatedParts = routeParts.joinToString(" ") { part ->
-                                    translations[part] ?: part
-                                }
+                                val translatedParts =
+                                    routeParts.joinToString(" ") { part ->
+                                        translations[part] ?: part
+                                    }
                                 PrayNowCard(
                                     node,
                                     navController,
                                     translatedParts,
-                                    prayerViewModel
+                                    prayerViewModel,
                                 )
                             }
                         }
@@ -111,23 +114,25 @@ fun PrayNowScreen(
                     if (nodes.isNotEmpty()) {
                         LazyVerticalGrid(
                             columns = GridCells.Adaptive(240.dp),
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(innerPadding)
-                                .padding(horizontal = 20.dp),
-//                                .weight(0.6f),
-                            horizontalArrangement = Arrangement.SpaceEvenly
+                            modifier =
+                                Modifier
+                                    .fillMaxSize()
+                                    .padding(innerPadding)
+                                    .padding(horizontal = 20.dp),
+                            //                                .weight(0.6f),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
                         ) {
                             items(nodes) { node ->
                                 val routeParts = node.route.split("_")
-                                val translatedParts = routeParts.joinToString(" ") { part ->
-                                    translations[part] ?: part
-                                }
+                                val translatedParts =
+                                    routeParts.joinToString(" ") { part ->
+                                        translations[part] ?: part
+                                    }
                                 PrayNowCard(
                                     node,
                                     navController,
                                     translatedParts,
-                                    prayerViewModel
+                                    prayerViewModel,
                                 )
                             }
                         }
@@ -137,18 +142,18 @@ fun PrayNowScreen(
                                 .padding(innerPadding)
                                 .padding(horizontal = 20.dp)
                                 .fillMaxWidth(),
-                            colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                            ),
+                            colors =
+                                CardDefaults.cardColors(
+                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                                ),
                         ) {
                             Text(
                                 "No prayers found for this time.",
-                                Modifier.fillMaxWidth().padding(8.dp)
+                                Modifier.fillMaxWidth().padding(8.dp),
                             )
                         }
                     }
-
                 }
             }
         }
@@ -157,39 +162,41 @@ fun PrayNowScreen(
 
 @Composable
 private fun PrayNowCard(
-    node: PageNodeData,
+    node: PageNodeDomain,
     navController: NavController,
     translatedParts: String,
-    prayerViewModel: PrayerViewModel
+    prayerViewModel: PrayerViewModel,
 ) {
     var errorState = remember { false }
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .clickable {
-                if (node.filename != null) {
-                    prayerViewModel.logPrayNowItemSelection(translatedParts, node.route)
-                    navController.navigate(Screen.Prayer.createRoute(node.route))
-                } else {
-                    Log.w("PrayNowScreen", "No file found")
-                    errorState = true
-                }
-            },
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .clickable {
+                    if (node.filename != null) {
+                        prayerViewModel.logPrayNowItemSelection(translatedParts, node.route)
+                        navController.navigate(Screen.Prayer.createRoute(node.route))
+                    } else {
+                        Log.w("PrayNowScreen", "No file found")
+                        errorState = true
+                    }
+                },
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-        ),
-        elevation = CardDefaults.cardElevation(4.dp)
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            ),
+        elevation = CardDefaults.cardElevation(4.dp),
     ) {
         Column(
-            Modifier.requiredHeightIn(min=60.dp)
+            Modifier.requiredHeightIn(min = 60.dp),
         ) {
             Text(
                 translatedParts,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(16.dp),
             )
             if (errorState) {
                 Text("No file found", color = MaterialTheme.colorScheme.error)

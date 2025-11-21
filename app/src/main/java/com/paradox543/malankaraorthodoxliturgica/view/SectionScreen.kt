@@ -37,6 +37,7 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
@@ -48,7 +49,7 @@ fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
-    node: PageNodeData,
+    node: PageNodeDomain,
     modifier: Modifier = Modifier,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
@@ -56,7 +57,7 @@ fun SectionScreen(
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
     var title = ""
-    for (item in node.route.split("_")){
+    for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
     }
 
@@ -69,45 +70,46 @@ fun SectionScreen(
         }
     }
 
-    Scaffold (
+    Scaffold(
         topBar = { TopNavBar(title, navController) },
         bottomBar = { BottomNavBar(navController = navController) },
-        floatingActionButton = { QrFabScan(navController) }
-    ){ innerPadding ->
-        Box{
+        floatingActionButton = { QrFabScan(navController) },
+    ) { innerPadding ->
+        Box {
             if (screenWidth > 600.dp) {
                 Row(
-                    Modifier.padding(innerPadding)
+                    Modifier.padding(innerPadding),
                 ) {
                     DisplayIconography("row")
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 20.dp),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
                         items(nodes.size) { index ->
                             SectionCard(
                                 nodes[index],
                                 navController,
-                                translations
+                                translations,
                             )
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 Column(
-                    Modifier.padding(innerPadding)
+                    Modifier.padding(innerPadding),
                 ) {
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(240.dp),
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(horizontal = 20.dp)
-                            .weight(0.6f),
-                        horizontalArrangement = Arrangement.SpaceEvenly
+                        modifier =
+                            Modifier
+                                .fillMaxSize()
+                                .padding(horizontal = 20.dp)
+                                .weight(0.6f),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
                     ) {
                         item {
                             DisplayIconography("column")
@@ -116,7 +118,7 @@ fun SectionScreen(
                             SectionCard(
                                 nodes[index],
                                 navController,
-                                translations
+                                translations,
                             )
                         }
                     }
@@ -131,48 +133,51 @@ private fun DisplayIconography(orientation: String) {
     Image(
         painter = painterResource(R.drawable.transfigurationicon),
         contentDescription = "icon",
-        modifier = if (orientation == "row") {
-            Modifier
-                .requiredWidthIn(min = 200.dp, max = 400.dp)
-                .fillMaxHeight()
-        } else {
-            Modifier
-                .requiredWidthIn(max = 400.dp)
+        modifier =
+            if (orientation == "row") {
+                Modifier
+                    .requiredWidthIn(min = 200.dp, max = 400.dp)
+                    .fillMaxHeight()
+            } else {
+                Modifier
+                    .requiredWidthIn(max = 400.dp)
 //                .fillMaxWidth()
-        },
+            },
         alignment = Alignment.TopStart,
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
     )
 }
 
 @Composable
 private fun SectionCard(
-    node: PageNodeData,
+    node: PageNodeDomain,
     navController: NavController,
-    translations: Map<String, String>
+    translations: Map<String, String>,
 ) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(4.dp)
-            .clickable {
-                if (node.children.isNotEmpty()) {
-                    Log.d("SectionCard", "Navigating to section: ${node.route}")
-                    navController.navigate(Screen.Section.createRoute(node.route))
-                } else if (node.filename != null && node.filename.endsWith(".json")) {
-                    navController.navigate(Screen.Prayer.createRoute(node.route))
-                } else if (node.type == "song" || (node.filename != null && node.filename.endsWith(".mp3"))) {
-                    navController.navigate(Screen.Song.createRoute(node.route))
-                } else {
-                    Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
-                }
-            },
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-        ),
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(4.dp)
+                .clickable {
+                    if (node.children.isNotEmpty()) {
+                        Log.d("SectionCard", "Navigating to section: ${node.route}")
+                        navController.navigate(Screen.Section.createRoute(node.route))
+                    } else if (node.filename != null && node.filename.endsWith(".json")) {
+                        navController.navigate(Screen.Prayer.createRoute(node.route))
+                    } else if (node.type == "song" || (node.filename != null && node.filename.endsWith(".mp3"))) {
+                        navController.navigate(Screen.Song.createRoute(node.route))
+                    } else {
+                        Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
+                    }
+                },
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            ),
         shape = RoundedCornerShape(8.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
+        elevation = CardDefaults.cardElevation(4.dp),
     ) {
         val text = node.route.split("_").last()
         Text(
@@ -183,10 +188,11 @@ private fun SectionCard(
                     translations[text] ?: text
                 },
             style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier
-                .padding(20.dp)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center
+            modifier =
+                Modifier
+                    .padding(20.dp)
+                    .fillMaxWidth(),
+            textAlign = TextAlign.Center,
         )
     }
 }
