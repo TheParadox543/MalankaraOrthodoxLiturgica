@@ -25,11 +25,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.domain.model.StartupState
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
+import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.StartupViewModel
