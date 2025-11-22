@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
-import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SongRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.domain.model.SongResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
@@ -54,16 +54,20 @@ class SongPlayerViewModel @Inject constructor(
     private val _songFilename = MutableStateFlow<String?>(null)
     val songFilename = _songFilename.asStateFlow()
 
-    private val listener = object : Player.Listener {
-        override fun onIsPlayingChanged(isPlayingValue: Boolean) {
-            _isPlaying.value = isPlayingValue
-        }
+    private val listener =
+        object : Player.Listener {
+            override fun onIsPlayingChanged(isPlayingValue: Boolean) {
+                _isPlaying.value = isPlayingValue
+            }
 
-        override fun onEvents(player: Player, events: Player.Events) {
-            _currentPosition.value = player.currentPosition
-            _duration.value = player.duration
+            override fun onEvents(
+                player: Player,
+                events: Player.Events,
+            ) {
+                _currentPosition.value = player.currentPosition
+                _duration.value = player.duration
+            }
         }
-    }
 
     init {
         exoPlayer.addListener(listener)

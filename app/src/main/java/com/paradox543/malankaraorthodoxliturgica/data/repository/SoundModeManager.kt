@@ -6,7 +6,7 @@ import android.content.Context.AUDIO_SERVICE
 import android.content.Context.NOTIFICATION_SERVICE
 import android.media.AudioManager
 import android.util.Log
-import com.paradox543.malankaraorthodoxliturgica.data.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
 
 object SoundModeManager {
     fun checkPreviousFilterState(context: Context): Boolean {

@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repository
+package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.app.Activity
 import android.util.Log
@@ -15,9 +15,8 @@ import javax.inject.Singleton
 
 @Singleton
 class InAppUpdateManager @Inject constructor(
-    private val appUpdateManager: AppUpdateManager
+    private val appUpdateManager: AppUpdateManager,
 ) {
-
     companion object {
         const val UPDATE_REQUEST_CODE = 123
         private const val TAG = "InAppUpdateManager"
@@ -75,33 +74,40 @@ class InAppUpdateManager @Inject constructor(
     /**
      * Starts the immediate update
      */
-    private fun startImmediateUpdate(appUpdateInfo: AppUpdateInfo, activity: Activity) {
+    private fun startImmediateUpdate(
+        appUpdateInfo: AppUpdateInfo,
+        activity: Activity,
+    ) {
         appUpdateManager.startUpdateFlowForResult(
             appUpdateInfo,
             AppUpdateType.IMMEDIATE,
             activity,
-            UPDATE_REQUEST_CODE
+            UPDATE_REQUEST_CODE,
         )
     }
 
     /**
      * Starts the flexible update flow.
      */
-    private fun startFlexibleUpdate(appUpdateInfo: AppUpdateInfo, activity: Activity) {
-        updateListener = InstallStateUpdatedListener { state ->
-            if (state.installStatus() == InstallStatus.DOWNLOADED) {
-                // An update has been downloaded. Notify the UI by updating the state.
-                _updateDownloaded.value = true
-                // Unregister the listener as it's no longer needed for this session.
-                unregisterListener()
+    private fun startFlexibleUpdate(
+        appUpdateInfo: AppUpdateInfo,
+        activity: Activity,
+    ) {
+        updateListener =
+            InstallStateUpdatedListener { state ->
+                if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                    // An update has been downloaded. Notify the UI by updating the state.
+                    _updateDownloaded.value = true
+                    // Unregister the listener as it's no longer needed for this session.
+                    unregisterListener()
+                }
             }
-        }
         appUpdateManager.registerListener(updateListener!!)
         appUpdateManager.startUpdateFlowForResult(
             appUpdateInfo,
             AppUpdateType.FLEXIBLE,
             activity,
-            UPDATE_REQUEST_CODE
+            UPDATE_REQUEST_CODE,
         )
     }
 
@@ -140,13 +146,12 @@ class InAppUpdateManager @Inject constructor(
             }
     }
 
-    private fun availabilityToString(availability: Int): String {
-        return when (availability) {
+    private fun availabilityToString(availability: Int): String =
+        when (availability) {
             UpdateAvailability.UPDATE_AVAILABLE -> "UPDATE_AVAILABLE"
             UpdateAvailability.UPDATE_NOT_AVAILABLE -> "UPDATE_NOT_AVAILABLE"
             UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS -> "DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS"
             UpdateAvailability.UNKNOWN -> "UNKNOWN"
             else -> "UNEXPECTED_VALUE"
         }
-    }
 }

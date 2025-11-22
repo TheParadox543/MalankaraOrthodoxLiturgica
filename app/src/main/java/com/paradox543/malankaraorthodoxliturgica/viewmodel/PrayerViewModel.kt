@@ -5,13 +5,13 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetSongKeyPriorityUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.LoadTranslationsUseCase
+import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

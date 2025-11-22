@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repository
+package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.app.Activity
 import androidx.datastore.core.DataStore
@@ -16,7 +16,6 @@ class InAppReviewManager @Inject constructor(
     private val reviewManager: ReviewManager,
     private val dataStore: DataStore<Preferences>,
 ) {
-
     // Define a key for storing the prayer screen visit count in DataStore.
     private val prayerScreenVisitCountKey = intPreferencesKey("prayer_screen_visit_count")
 
@@ -42,10 +41,11 @@ class InAppReviewManager @Inject constructor(
      */
     suspend fun incrementAndGetPrayerScreenVisits(): Int {
         // dataStore.edit returns the updated Preferences object.
-        val updatedPreferences = dataStore.edit { settings ->
-            val currentCount = settings[prayerScreenVisitCountKey] ?: 0
-            settings[prayerScreenVisitCountKey] = currentCount + 1
-        }
+        val updatedPreferences =
+            dataStore.edit { settings ->
+                val currentCount = settings[prayerScreenVisitCountKey] ?: 0
+                settings[prayerScreenVisitCountKey] = currentCount + 1
+            }
         // We then extract the new value from the returned preferences.
         return updatedPreferences[prayerScreenVisitCountKey] ?: 1
     }
@@ -58,9 +58,10 @@ class InAppReviewManager @Inject constructor(
 
     suspend fun getPrayerScreenVisitCount(): Int {
         // Retrieve the current visit count from DataStore.
-        return dataStore.data.map { settings ->
-            settings[prayerScreenVisitCountKey] ?: 0
-        }.first() // Use first() to get the value immediately
+        return dataStore.data
+            .map { settings ->
+                settings[prayerScreenVisitCountKey] ?: 0
+            }.first() // Use first() to get the value immediately
     }
 
     /**
