@@ -28,12 +28,12 @@ import androidx.work.WorkManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.model.StartupState
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -45,15 +45,13 @@ class MainActivity : ComponentActivity() {
     lateinit var inAppUpdateManager: InAppUpdateManager
 
     @Inject
-    lateinit var calendarRepository: CalendarRepository
-
-    @Inject
     lateinit var workManager: WorkManager
 
     private var previousInterruptionFilter: Boolean? = null
 
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
+    private val startupViewModel: StartupViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Install the splash screen.
@@ -61,69 +59,66 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         // Check for app updates as soon as the app starts.
-        if (!BuildConfig.DEBUG) {
-            inAppUpdateManager.checkForUpdate(this)
-        }
+        inAppUpdateManager.checkForUpdate(this)
 
         // Keep the splash screen active until the initial data is loaded.
-        var isInitialDataLoaded by mutableStateOf(false)
-        splashScreen.setKeepOnScreenCondition { !isInitialDataLoaded }
+        var keepSplashOn by mutableStateOf(true)
+        splashScreen.setKeepOnScreenCondition { keepSplashOn }
 
         // Launch a coroutine to load necessary data before hiding the splash screen.
         lifecycleScope.launch {
-            settingsViewModel.onboardingCompleted.first() // Await its first value
-            isInitialDataLoaded = true // Signal that data is loaded
+            startupViewModel.startupState.collect { state ->
+                if (state is StartupState.Ready) keepSplashOn = false
+            }
         }
 
         setContent {
-            val language by settingsViewModel.selectedLanguage.collectAsState()
-            val scaleFactor by settingsViewModel.fontScale.collectAsState()
-            val soundMode by settingsViewModel.soundMode.collectAsState()
+            val startupState by startupViewModel.startupState.collectAsState()
+            when (val s = startupState) {
+                is StartupState.Loading -> {}
+                is StartupState.Ready -> {
+                    val onboardingCompleted = s.onboardingCompleted
+                    val soundMode by settingsViewModel.soundMode.collectAsState()
+                    MalankaraOrthodoxLiturgicaTheme(
+                        language = s.language,
+                        textScale = s.fontScale,
+                    ) {
+                        val snackbarHostState = remember { SnackbarHostState() }
 
-            MalankaraOrthodoxLiturgicaTheme(language = language, textScale = scaleFactor) {
-                // 1. Remember the SnackbarHostState and a coroutine scope.
-                val snackbarHostState = remember { SnackbarHostState() }
-                val scope = rememberCoroutineScope()
+                        // 2. Collect the state from the manager.
+                        val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
 
-                // 2. Collect the state from the manager.
-                val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
-
-                // 3. Use LaunchedEffect to react to the state change.
-                LaunchedEffect(updateDownloaded) {
-                    if (updateDownloaded) {
-                        scope.launch {
-                            val result =
-                                snackbarHostState.showSnackbar(
-                                    message = "An update has just been downloaded.",
-                                    actionLabel = "RESTART",
-                                    duration = SnackbarDuration.Indefinite, // Stays until dismissed or actioned
-                                )
-                            // 4. Perform action based on user interaction.
-                            if (result == SnackbarResult.ActionPerformed) {
-                                inAppUpdateManager.completeUpdate()
+                        // 3. Use LaunchedEffect to react to the state change.
+                        LaunchedEffect(updateDownloaded) {
+                            if (updateDownloaded) {
+                                val result =
+                                    snackbarHostState.showSnackbar(
+                                        message = "An update has just been downloaded.",
+                                        actionLabel = "RESTART",
+                                        duration = SnackbarDuration.Indefinite, // Stays until dismissed or actioned
+                                    )
+                                // 4. Perform action based on user interaction.
+                                if (result == SnackbarResult.ActionPerformed) {
+                                    inAppUpdateManager.completeUpdate()
+                                }
                             }
                         }
+                        LaunchedEffect(soundMode) {
+                            Log.d(
+                                "SoundMode MainActivity",
+                                "SoundMode changed $soundMode, previousInterruptionFilter: $previousInterruptionFilter",
+                            )
+                            if (previousInterruptionFilter == null) {
+                                previousInterruptionFilter = SoundModeManager.checkPreviousFilterState(applicationContext)
+                            }
+                            if (previousInterruptionFilter != true) {
+                                SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
+                            }
+                        }
+                        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
+                            NavGraph(Modifier.padding(innerPadding))
+                        }
                     }
-                }
-
-                LaunchedEffect(soundMode) {
-                    Log.d("SoundMode MainActivity", "SoundMode changed $soundMode, previousInterruptionFilter: $previousInterruptionFilter")
-                    if (previousInterruptionFilter == null) {
-                        previousInterruptionFilter = SoundModeManager.checkPreviousFilterState(applicationContext)
-                    }
-                    if (previousInterruptionFilter != true) {
-                        SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
-                    }
-                }
-
-                // 5. Use Scaffold to provide a host for the Snackbar.
-                Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
-                    // Your NavGraph is placed inside the Scaffold's content area.
-                    // The innerPadding can be passed to your NavGraph if needed to prevent overlap.
-                    NavGraph(
-                        settingsViewModel = settingsViewModel,
-                        Modifier.padding(innerPadding),
-                    )
                 }
             }
         }
