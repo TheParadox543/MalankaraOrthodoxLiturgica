@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,13 +24,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleScreen(
@@ -44,38 +44,40 @@ fun BibleScreen(
     val oldTestamentChapters = bibleChapters.take(39)
     val newTestamentChapters = bibleChapters.drop(39)
 
-    val title = when(selectedLanguage){
-        AppLanguage.MALAYALAM -> "വേദപുസ്തകം"
-        else -> "Bible"
-    }
+    val title =
+        when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> "വേദപുസ്തകം"
+            else -> "Bible"
+        }
 
     Scaffold(
         topBar = { TopNavBar(title, navController) },
-        bottomBar = { BottomNavBar(navController) }
-    ) {innerPadding ->
+        bottomBar = { BottomNavBar(navController) },
+    ) { innerPadding ->
         LazyVerticalGrid(
             columns = GridCells.Adaptive(180.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = 12.dp)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = 12.dp),
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
-                when(selectedLanguage) {
+                when (selectedLanguage) {
                     AppLanguage.MALAYALAM -> SectionCard("പഴയ നിയമം")
                     else -> SectionCard("Old Testament")
                 }
             }
             items(oldTestamentChapters.size) { index ->
-                BibleCard (oldTestamentChapters[index], selectedLanguage, navController)
+                BibleCard(oldTestamentChapters[index], selectedLanguage, navController)
             }
-            item(span = {GridItemSpan(this.maxLineSpan)}) {
-                when(selectedLanguage){
+            item(span = { GridItemSpan(this.maxLineSpan) }) {
+                when (selectedLanguage) {
                     AppLanguage.MALAYALAM -> SectionCard("പുതിയ നിയമം")
                     else -> SectionCard("New Testament")
                 }
             }
-            items(newTestamentChapters.size) {index ->
+            items(newTestamentChapters.size) { index ->
                 BibleCard(newTestamentChapters[index], selectedLanguage, navController)
             }
         }
@@ -85,19 +87,21 @@ fun BibleScreen(
 @Composable
 fun SectionCard(title: String) {
     Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-            .height(60.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-        )
+        modifier =
+            Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .height(60.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ),
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Text(title)
         }
@@ -105,37 +109,43 @@ fun SectionCard(title: String) {
 }
 
 @Composable
-fun BibleCard(bibleDetails: BibleDetails, selectedLanguage: AppLanguage, navController: NavController){
-    val bookName = when(selectedLanguage) {
-        AppLanguage.MALAYALAM -> bibleDetails.book.ml
-        else -> bibleDetails.book.en
-    }
+fun BibleCard(
+    bibleDetails: BibleDetails,
+    selectedLanguage: AppLanguage,
+    navController: NavController,
+) {
+    val bookName =
+        when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> bibleDetails.book.ml
+            else -> bibleDetails.book.en
+        }
     Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxSize()
-            .height(48.dp)
-            .clickable {
-                navController.navigate(Screen.BibleBook.createRoute(bookName))
-            },
+        modifier =
+            Modifier
+                .padding(8.dp)
+                .fillMaxSize()
+                .height(48.dp)
+                .clickable {
+                    navController.navigate(Screen.BibleBook.createRoute(bookName))
+                },
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-        ),
-        elevation = CardDefaults.cardElevation(4.dp)
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            ),
+        elevation = CardDefaults.cardElevation(4.dp),
     ) {
-        Column (
+        Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        )
-        {
+            verticalArrangement = Arrangement.Center,
+        ) {
             Text(
                 bookName,
                 maxLines = 1,
                 style = MaterialTheme.typography.bodyMedium,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }

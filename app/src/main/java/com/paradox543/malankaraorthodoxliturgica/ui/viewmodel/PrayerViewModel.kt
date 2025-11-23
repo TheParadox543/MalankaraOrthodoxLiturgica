@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.viewmodel
+package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import android.app.Activity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,13 +11,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.VerseItem
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleChapterScreen(
@@ -25,43 +25,46 @@ fun BibleChapterScreen(
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookIndex: Int,
-    chapterIndex: Int
+    chapterIndex: Int,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
     val bibleBook = bibleBooks[bookIndex]
 
-    val bookName: String = when(selectedLanguage) {
-        AppLanguage.MALAYALAM -> bibleBook.book.ml
-        else -> bibleBook.book.en
-    }
-    val title = if (bookIndex == 18 && selectedLanguage == AppLanguage.MALAYALAM) {
-        "${chapterIndex + 1}-ാം സങ്കീർത്തനം"
-    } else {
-        "$bookName ${chapterIndex + 1}"
-    }
+    val bookName: String =
+        when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> bibleBook.book.ml
+            else -> bibleBook.book.en
+        }
+    val title =
+        if (bookIndex == 18 && selectedLanguage == AppLanguage.MALAYALAM) {
+            "${chapterIndex + 1}-ാം സങ്കീർത്തനം"
+        } else {
+            "$bookName ${chapterIndex + 1}"
+        }
     val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, selectedLanguage)
     val (prevRoute, nextRoute) = bibleViewModel.getAdjacentChapters(bookIndex, chapterIndex)
     Scaffold(
-        topBar = { TopNavBar(
-            title,
-            navController
-        )
+        topBar = {
+            TopNavBar(
+                title,
+                navController,
+            )
         },
-        bottomBar = { SectionNavBar(navController, prevRoute, nextRoute, { Screen.BibleChapter.createDeepLink(bookIndex, chapterIndex) }) }
+        bottomBar = { SectionNavBar(navController, prevRoute, nextRoute, { Screen.BibleChapter.createDeepLink(bookIndex, chapterIndex) }) },
     ) { innerPadding ->
-        if (chapterData == null ) {
+        if (chapterData == null) {
             Text(
                 "Error in loading Bible content.",
                 Modifier.padding(innerPadding),
-                MaterialTheme.colorScheme.error
+                MaterialTheme.colorScheme.error,
             )
-        }
-        else {
+        } else {
             LazyColumn(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(horizontal = 16.dp)
+                modifier =
+                    Modifier
+                        .padding(innerPadding)
+                        .padding(horizontal = 16.dp),
             ) {
                 items(chapterData.Verse.size) { index ->
                     val verseNumber = (index + 1).toString()

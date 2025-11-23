@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,41 +25,42 @@ fun ContentNotReadyScreen(
 ) {
     Scaffold(
         topBar = { TopNavBar("Error", navController) },
-        bottomBar = { BottomNavBar(navController = navController) }
+        bottomBar = { BottomNavBar(navController = navController) },
     ) { innerPadding ->
         Column(
-            modifier = modifier
-                .fillMaxSize()
-                .padding(24.dp)
-                .padding(innerPadding),
+            modifier =
+                modifier
+                    .fillMaxSize()
+                    .padding(24.dp)
+                    .padding(innerPadding),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = "Content for this page is not yet ready.".replace("this page", message ?: "this page"),
                 style = MaterialTheme.typography.headlineSmall, // A prominent style
                 color = MaterialTheme.colorScheme.onSurfaceVariant, // A subtle color
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(bottom = 16.dp)
+                modifier = Modifier.padding(bottom = 16.dp),
             )
             Text(
                 text = "Please check back later for updates!",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
             // You could add a button to go back, or a refresh button if applicable
-             Button(onClick = { navController.navigateUp() }) {
-                 Text("Go Back")
-             }
+            Button(onClick = { navController.navigateUp() }) {
+                Text("Go Back")
+            }
         }
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun ContentNotReadyScreenPreview() {
+// @Preview(showBackground = true)
+// @Composable
+// fun ContentNotReadyScreenPreview() {
 //    MalankaraOrthodoxLiturgicaTheme {
 //        ContentNotReadyScreen(navController = rememberNavController())
 //    }
-//}
+// }

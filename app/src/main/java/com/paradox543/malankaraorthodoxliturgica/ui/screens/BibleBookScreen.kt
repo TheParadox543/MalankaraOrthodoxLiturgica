@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,20 +24,20 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleBookScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
-    bookName: String
+    bookName: String,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
     val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, selectedLanguage)
-    if (bibleBook == null){
+    if (bibleBook == null) {
         navController.navigate(Screen.Bible.route) {
             popUpTo(Screen.Bible.route) { inclusive = true }
         }
@@ -46,49 +46,55 @@ fun BibleBookScreen(
 
     Scaffold(
         topBar = { TopNavBar(bookName, navController) },
-        bottomBar = { BottomNavBar(navController) }
-    ) {innerPadding ->
+        bottomBar = { BottomNavBar(navController) },
+    ) { innerPadding ->
         LazyVerticalGrid(
             columns = GridCells.Adaptive(72.dp),
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(count = chapters) { chapterIndex ->
-                BibleChapterCard(navController, bookIndex?: 0, chapterIndex)
+                BibleChapterCard(navController, bookIndex ?: 0, chapterIndex)
             }
         }
     }
 }
 
 @Composable
-fun BibleChapterCard(navController: NavController, bookIndex: Int, chapterIndex: Int) {
+fun BibleChapterCard(
+    navController: NavController,
+    bookIndex: Int,
+    chapterIndex: Int,
+) {
     Card(
-        modifier = Modifier
-            .padding(12.dp)
-            .fillMaxSize()
-            .aspectRatio(1f)
-            .clickable {
-                navController.navigate(Screen.BibleChapter.createRoute(bookIndex, chapterIndex))
-            },
+        modifier =
+            Modifier
+                .padding(12.dp)
+                .fillMaxSize()
+                .aspectRatio(1f)
+                .clickable {
+                    navController.navigate(Screen.BibleChapter.createRoute(bookIndex, chapterIndex))
+                },
         shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-        ),
-        elevation = CardDefaults.cardElevation(4.dp)
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            ),
+        elevation = CardDefaults.cardElevation(4.dp),
     ) {
-        Column (
+        Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        )
-        {
+            verticalArrangement = Arrangement.Center,
+        ) {
             Text(
-                text = (chapterIndex+1).toString()
+                text = (chapterIndex + 1).toString(),
             )
         }
     }

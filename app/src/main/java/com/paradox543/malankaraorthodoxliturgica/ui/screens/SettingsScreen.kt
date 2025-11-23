@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -64,8 +64,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.requestDndPermission
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.requestDndPermission
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

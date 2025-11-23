@@ -15,24 +15,24 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
-import com.paradox543.malankaraorthodoxliturgica.view.AboutScreen
-import com.paradox543.malankaraorthodoxliturgica.view.BibleBookScreen
-import com.paradox543.malankaraorthodoxliturgica.view.BibleChapterScreen
-import com.paradox543.malankaraorthodoxliturgica.view.BibleReadingScreen
-import com.paradox543.malankaraorthodoxliturgica.view.BibleScreen
-import com.paradox543.malankaraorthodoxliturgica.view.CalendarScreen
-import com.paradox543.malankaraorthodoxliturgica.view.ContentNotReadyScreen
-import com.paradox543.malankaraorthodoxliturgica.view.HomeScreen
-import com.paradox543.malankaraorthodoxliturgica.view.OnboardingScreen
-import com.paradox543.malankaraorthodoxliturgica.view.PrayNowScreen
-import com.paradox543.malankaraorthodoxliturgica.view.PrayerScreen
-import com.paradox543.malankaraorthodoxliturgica.view.SectionScreen
-import com.paradox543.malankaraorthodoxliturgica.view.SettingsScreen
-import com.paradox543.malankaraorthodoxliturgica.view.SongScreen
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleReadingScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.CalendarScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.HomeScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayNowScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.SectionScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun NavGraph(modifier: Modifier = Modifier) {
