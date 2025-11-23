@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.viewmodel
+package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

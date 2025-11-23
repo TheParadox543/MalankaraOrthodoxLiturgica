@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,12 +14,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.VerseItem
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleReadingScreen(
@@ -35,36 +34,38 @@ fun BibleReadingScreen(
         Text(
             "No Bible readings selected.",
             Modifier.padding(16.dp),
-            MaterialTheme.colorScheme.error
+            MaterialTheme.colorScheme.error,
         )
         return
     }
-    val title = if (bibleReadings.size == 1) {
-        bibleViewModel.formatBibleReadingEntry(bibleReadings.first(), selectedLanguage)
-    } else {
-        bibleViewModel.formatGospelEntry(bibleReadings, selectedLanguage)
-    }
+    val title =
+        if (bibleReadings.size == 1) {
+            bibleViewModel.formatBibleReadingEntry(bibleReadings.first(), selectedLanguage)
+        } else {
+            bibleViewModel.formatGospelEntry(bibleReadings, selectedLanguage)
+        }
 
     Scaffold(
-        topBar = { TopNavBar(
-            title,
-            navController
-        )
+        topBar = {
+            TopNavBar(
+                title,
+                navController,
+            )
         },
     ) { innerPadding ->
-        if (bibleReadings.isEmpty() ) {
+        if (bibleReadings.isEmpty()) {
             Text(
                 "Error in loading Bible content.",
                 Modifier.padding(innerPadding),
-                MaterialTheme.colorScheme.error
+                MaterialTheme.colorScheme.error,
             )
-        }
-        else {
+        } else {
             val bibleReading = bibleViewModel.loadBibleReading(bibleReadings, selectedLanguage)
             LazyColumn(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(horizontal = 16.dp)
+                modifier =
+                    Modifier
+                        .padding(innerPadding)
+                        .padding(horizontal = 16.dp),
             ) {
                 if (bibleReading.preface != null) {
                     items(bibleReading.preface.size) { index ->
@@ -79,7 +80,7 @@ fun BibleReadingScreen(
                         HorizontalDivider(
                             modifier = Modifier.padding(vertical = 8.dp),
                             thickness = 4.dp,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
                         )
                     }
                 }

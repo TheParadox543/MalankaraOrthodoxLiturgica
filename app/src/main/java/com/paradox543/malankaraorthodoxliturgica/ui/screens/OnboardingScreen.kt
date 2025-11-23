@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -37,8 +37,8 @@ import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class) // For ExposedDropdownMenuBox
 @Composable

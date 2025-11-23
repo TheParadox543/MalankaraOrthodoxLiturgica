@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.viewmodel
+package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import android.content.Context
 import android.net.Uri
@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SongRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.domain.model.SongResult
+import com.paradox543.malankaraorthodoxliturgica.domain.model.MediaStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
@@ -16,19 +17,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-sealed interface MediaStatus {
-    object Loading : MediaStatus
-
-    data class Ready(
-        val message: String,
-        val mediaUri: Uri,
-    ) : MediaStatus
-
-    data class Error(
-        val message: String,
-    ) : MediaStatus
-}
 
 @HiltViewModel
 class SongPlayerViewModel @Inject constructor(

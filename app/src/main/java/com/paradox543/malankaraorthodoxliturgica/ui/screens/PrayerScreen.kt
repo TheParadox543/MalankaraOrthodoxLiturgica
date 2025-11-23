@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
@@ -72,9 +72,9 @@ import com.paradox543.malankaraorthodoxliturgica.ui.components.Source
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Subtext
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Title
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import kotlinx.coroutines.delay
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

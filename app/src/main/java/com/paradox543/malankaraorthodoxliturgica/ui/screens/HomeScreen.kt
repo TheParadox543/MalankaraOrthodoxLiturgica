@@ -1,12 +1,12 @@
-package com.paradox543.malankaraorthodoxliturgica.view
+package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun HomeScreen(

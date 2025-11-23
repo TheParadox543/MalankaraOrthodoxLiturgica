@@ -17,7 +17,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -31,8 +30,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.StartupState
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.SettingsViewModel
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.StartupViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
