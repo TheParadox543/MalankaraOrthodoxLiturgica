@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1A863BC82ED437DB00EBB7B1"
+               BuildableName = "malankaraorthodoxliturgica.app"
+               BlueprintName = "malankaraorthodoxliturgica"
+               ReferencedContainer = "container:malankaraorthodoxliturgica.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1A863BC82ED437DB00EBB7B1"
+            BuildableName = "malankaraorthodoxliturgica.app"
+            BlueprintName = "malankaraorthodoxliturgica"
+            ReferencedContainer = "container:malankaraorthodoxliturgica.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+</Scheme>
