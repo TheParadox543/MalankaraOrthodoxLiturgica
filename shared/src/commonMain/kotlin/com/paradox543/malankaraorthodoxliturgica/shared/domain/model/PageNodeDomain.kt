@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.shared.domain.model
 
 /**
  * Represents a node in the navigation tree.

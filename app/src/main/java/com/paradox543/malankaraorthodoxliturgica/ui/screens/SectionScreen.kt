@@ -36,10 +36,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
@@ -159,12 +159,13 @@ private fun SectionCard(
                 .fillMaxWidth()
                 .padding(4.dp)
                 .clickable {
+                    val filename = node.filename
                     if (node.children.isNotEmpty()) {
                         Log.d("SectionCard", "Navigating to section: ${node.route}")
                         navController.navigate(Screen.Section.createRoute(node.route))
-                    } else if (node.filename != null && node.filename.endsWith(".json")) {
+                    } else if (filename != null && (filename?.endsWith(".json") ?: false)) {
                         navController.navigate(Screen.Prayer.createRoute(node.route))
-                    } else if (node.type == "song" || (node.filename != null && node.filename.endsWith(".mp3"))) {
+                    } else if (node.type == "song" || (filename != null && (filename?.endsWith(".mp3") ?: false))) {
                         navController.navigate(Screen.Song.createRoute(node.route))
                     } else {
                         Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")

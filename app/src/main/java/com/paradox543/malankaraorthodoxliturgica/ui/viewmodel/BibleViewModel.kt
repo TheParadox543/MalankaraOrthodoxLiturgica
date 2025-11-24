@@ -12,8 +12,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
 import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.AppLanguage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

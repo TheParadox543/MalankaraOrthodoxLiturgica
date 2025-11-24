@@ -1,8 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.repository
 
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.AppLanguage
 import kotlinx.coroutines.flow.StateFlow
 
 interface SettingsRepository {

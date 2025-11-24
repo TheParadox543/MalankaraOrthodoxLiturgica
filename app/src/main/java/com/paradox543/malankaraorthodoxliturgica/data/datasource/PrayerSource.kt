@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerContentNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerParsingException
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

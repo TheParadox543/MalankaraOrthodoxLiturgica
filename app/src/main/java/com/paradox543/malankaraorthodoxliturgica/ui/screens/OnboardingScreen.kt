@@ -36,7 +36,7 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 

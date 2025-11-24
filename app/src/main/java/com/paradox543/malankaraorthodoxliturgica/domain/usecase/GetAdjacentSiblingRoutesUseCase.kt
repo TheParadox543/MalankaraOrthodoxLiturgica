@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.PageNodeDomain
 import javax.inject.Inject
 
 class GetAdjacentSiblingRoutesUseCase @Inject constructor(
