@@ -29,6 +29,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.StartupState
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.shared.Greeting
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
@@ -56,6 +57,7 @@ class MainActivity : ComponentActivity() {
         // Install the splash screen.
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+        Log.d("Main Activity", "Hello from shared module ${Greeting().greet()}")
 
         // Check for app updates as soon as the app starts.
         inAppUpdateManager.checkForUpdate(this)
