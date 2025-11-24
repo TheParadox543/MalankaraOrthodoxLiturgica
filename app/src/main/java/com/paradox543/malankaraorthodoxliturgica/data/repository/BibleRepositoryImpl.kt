@@ -10,6 +10,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -48,7 +49,7 @@ class BibleRepositoryImpl @Inject constructor(
             null
         }
 
-    override fun loadBibleDetails(): List<BibleDetails> = cachedBibleChapters
+    override fun loadBibleDetails(): List<BibleBookDetails> = cachedBibleChapters.toDomain()
 
     // Cache for loaded chapter files (e.g., bible-ml.json, bible-en.json)
     // Using ConcurrentHashMap for potential thread safety if accessed from multiple coroutines
