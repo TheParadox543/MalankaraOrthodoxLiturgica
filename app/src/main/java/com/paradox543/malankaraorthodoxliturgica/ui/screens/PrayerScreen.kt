@@ -58,11 +58,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Heading
