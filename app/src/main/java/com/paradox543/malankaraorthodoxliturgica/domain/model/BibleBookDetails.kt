@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.model
 
 data class BibleBookDetails(
-    val book: DisplayText,
+    val book: BibleBookName,
     val folder: String,
     val chapters: Int,
     val verseCount: List<Int>,

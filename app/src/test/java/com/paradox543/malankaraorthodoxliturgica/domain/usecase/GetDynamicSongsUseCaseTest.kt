@@ -1,5 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
+import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
+import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStrData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
@@ -20,13 +22,11 @@ class GetDynamicSongsUseCaseTest {
     }
 
     private class FakeCalendarRepository(
-        private val items: List<com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails>,
+        private val items: List<LiturgicalEventDetailsData>,
     ) : CalendarRepository {
         override suspend fun initialize() {}
 
-        override fun getEventsForDate(
-            date: java.time.LocalDate,
-        ): List<com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails> = emptyList()
+        override fun getEventsForDate(date: java.time.LocalDate): List<LiturgicalEventDetailsData> = emptyList()
 
         override fun checkMonthDataExists(
             month: Int,
@@ -40,7 +40,7 @@ class GetDynamicSongsUseCaseTest {
 
         override fun getUpcomingWeekEvents(): List<com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay> = emptyList()
 
-        override fun getUpcomingWeekEventItems(): List<com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails> = items
+        override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetailsData> = items
     }
 
     @Test
@@ -62,11 +62,10 @@ class GetDynamicSongsUseCaseTest {
             val prayerRepo = FakePrayerRepository(map)
 
             val eventDetail =
-                com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails(
+                LiturgicalEventDetailsData(
                     type = "t",
                     title =
-                        com.paradox543.malankaraorthodoxliturgica.data.model
-                            .TitleStr(en = "E"),
+                        TitleStrData(en = "E"),
                     specialSongsKey = "defaultKey",
                     bibleReadings = null,
                     niram = null,

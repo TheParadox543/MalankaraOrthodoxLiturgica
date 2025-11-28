@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
-import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStr
+import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
+import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStrData
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -10,11 +10,11 @@ import java.time.LocalDate
 
 class GetSongKeyPriorityUseCaseTest {
     private class FakeCalendarRepository(
-        var items: List<LiturgicalEventDetails>,
+        var items: List<LiturgicalEventDetailsData>,
     ) : CalendarRepository {
         override suspend fun initialize() {}
 
-        override fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetails> = emptyList()
+        override fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsData> = emptyList()
 
         override fun checkMonthDataExists(
             month: Int,
@@ -28,16 +28,16 @@ class GetSongKeyPriorityUseCaseTest {
 
         override fun getUpcomingWeekEvents(): List<com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay> = emptyList()
 
-        override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> = items
+        override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetailsData> = items
     }
 
     @Test
     fun `returns first specialSongsKey when present`() =
         runBlocking {
             val details =
-                LiturgicalEventDetails(
+                LiturgicalEventDetailsData(
                     type = "type",
-                    title = TitleStr(en = "E", ml = null),
+                    title = TitleStrData(en = "E", ml = null),
                     specialSongsKey = "specialSongs",
                     bibleReadings = null,
                     niram = null,
@@ -55,9 +55,9 @@ class GetSongKeyPriorityUseCaseTest {
     fun `returns default when no specialSongsKey`() =
         runBlocking {
             val details =
-                LiturgicalEventDetails(
+                LiturgicalEventDetailsData(
                     type = "type",
-                    title = TitleStr(en = "E", ml = null),
+                    title = TitleStrData(en = "E", ml = null),
                     specialSongsKey = null,
                     bibleReadings = null,
                     niram = null,

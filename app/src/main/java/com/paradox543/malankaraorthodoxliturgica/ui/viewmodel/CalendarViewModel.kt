@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,8 +39,8 @@ class CalendarViewModel @Inject constructor(
     private val _hasPreviousMonth = MutableStateFlow(false)
     val hasPreviousMonth: StateFlow<Boolean> = _hasPreviousMonth.asStateFlow()
 
-    private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
-    val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> = _selectedDayViewData.asStateFlow()
+    private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetailsData>>(emptyList())
+    val selectedDayViewData: StateFlow<List<LiturgicalEventDetailsData>> = _selectedDayViewData.asStateFlow()
 
     // State for the currently selected date for UI feedback
     private val _selectedDate = MutableStateFlow<LocalDate?>(null)
@@ -101,7 +102,7 @@ class CalendarViewModel @Inject constructor(
     }
 
     fun setDayEvents(
-        events: List<LiturgicalEventDetails>,
+        events: List<LiturgicalEventDetailsData>,
         date: LocalDate,
     ) {
         _selectedDayViewData.value = events
