@@ -47,11 +47,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
@@ -334,15 +336,22 @@ private fun RowScope.DayItem(
     // --- Define colors based on multiple states ---
     val containerColor =
         when {
-            isSelected -> MaterialTheme.colorScheme.primary // Filled color for selected day
+            isSelected -> MaterialTheme.colorScheme.primary
+
+            // Filled color for selected day
             else -> Color.Transparent // Default transparent background
         }
 
     val contentColor =
         when {
-            isSelected -> MaterialTheme.colorScheme.onPrimary // High-contrast text for selected day
-            isToday -> MaterialTheme.colorScheme.primary // Special color for today's date
+            isSelected -> MaterialTheme.colorScheme.onPrimary
+
+            // High-contrast text for selected day
+            isToday -> MaterialTheme.colorScheme.primary
+
+            // Special color for today's date
             isCurrentMonth -> MaterialTheme.colorScheme.onSurface
+
             else -> MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f) // Dim for other months
         }
 
@@ -398,7 +407,7 @@ private fun RowScope.DayItem(
 @Composable
 private fun DisplayEvents(
     scrollState: ScrollState,
-    displayEvents: List<LiturgicalEventDetails>,
+    displayEvents: List<LiturgicalEventDetailsData>,
     selectedLanguage: AppLanguage,
     navController: NavController,
     calendarViewModel: CalendarViewModel,
@@ -411,7 +420,7 @@ private fun DisplayEvents(
     ) {
         displayEvents.forEach { event ->
             DisplayEvent(
-                event,
+                event.toDomain(),
                 selectedLanguage,
                 navController,
                 calendarViewModel = calendarViewModel,

@@ -27,6 +27,7 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
@@ -110,7 +111,7 @@ fun SectionCard(title: String) {
 
 @Composable
 fun BibleCard(
-    bibleDetails: BibleDetails,
+    bibleDetails: BibleBookDetails,
     selectedLanguage: AppLanguage,
     navController: NavController,
 ) {

@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
+import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
@@ -39,8 +40,7 @@ class GetPrayerScreenContentUseCaseTest {
                 object : com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository {
                     override suspend fun initialize() {}
 
-                    override fun getEventsForDate(date: java.time.LocalDate) =
-                        emptyList<com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails>()
+                    override fun getEventsForDate(date: java.time.LocalDate) = emptyList<LiturgicalEventDetailsData>()
 
                     override fun checkMonthDataExists(
                         month: Int,
@@ -54,8 +54,7 @@ class GetPrayerScreenContentUseCaseTest {
 
                     override fun getUpcomingWeekEvents() = emptyList<com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay>()
 
-                    override fun getUpcomingWeekEventItems() =
-                        emptyList<com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetails>()
+                    override fun getUpcomingWeekEventItems() = emptyList<LiturgicalEventDetailsData>()
                 }
 
             val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarFake)

@@ -10,17 +10,17 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PageNodeMapperTest {
-
     @Test
     fun `simple node maps to domain and back`() {
-        val data = PageNodeData(
-            route = "home",
-            type = "section",
-            filename = "index.html",
-            parent = null,
-            children = emptyList(),
-            languages = listOf("en", "ml")
-        )
+        val data =
+            PageNodeData(
+                route = "home",
+                type = "section",
+                filename = "index.html",
+                parent = null,
+                children = emptyList(),
+                languages = listOf("en", "ml"),
+            )
 
         val domain = data.toDomain()
         assertEquals(PageNodeDomain::class, domain::class)
@@ -36,9 +36,18 @@ class PageNodeMapperTest {
 
     @Test
     fun `nested children map correctly`() {
-        val grandChild = PageNodeData(route = "home/section/item", filename = "item.html", parent = "home/section", children = emptyList(), languages = listOf())
-        val child = PageNodeData(route = "home/section", filename = null, parent = "home", children = listOf(grandChild), languages = listOf("en"))
-        val root = PageNodeData(route = "home", filename = "index.html", parent = null, children = listOf(child), languages = listOf("en", "ml"))
+        val grandChild =
+            PageNodeData(
+                route = "home/section/item",
+                filename = "item.html",
+                parent = "home/section",
+                children = emptyList(),
+                languages = listOf(),
+            )
+        val child =
+            PageNodeData(route = "home/section", filename = null, parent = "home", children = listOf(grandChild), languages = listOf("en"))
+        val root =
+            PageNodeData(route = "home", filename = "index.html", parent = null, children = listOf(child), languages = listOf("en", "ml"))
 
         val domain = root.toDomain()
         // root checks
@@ -67,4 +76,3 @@ class PageNodeMapperTest {
         assertEquals(node, back)
     }
 }
-

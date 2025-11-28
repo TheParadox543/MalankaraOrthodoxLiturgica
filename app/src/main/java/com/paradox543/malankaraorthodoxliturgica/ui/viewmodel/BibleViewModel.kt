@@ -2,18 +2,19 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReading
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReference
-import com.paradox543.malankaraorthodoxliturgica.data.model.Chapter
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContent
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplates
-import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRange
-import com.paradox543.malankaraorthodoxliturgica.data.model.Verse
-import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleChapter
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReading
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleVerse
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceContent
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
+import com.paradox543.malankaraorthodoxliturgica.domain.model.ReferenceRange
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,10 +24,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BibleViewModel @Inject constructor(
-    private val bibleRepositoryImpl: BibleRepositoryImpl,
+    private val bibleRepository: BibleRepository,
 ) : ViewModel() {
-    private val _bibleBooks = MutableStateFlow<List<BibleDetails>>(emptyList())
-    val bibleBooks: StateFlow<List<BibleDetails>> = _bibleBooks
+    private val _bibleBooks = MutableStateFlow<List<BibleBookDetails>>(emptyList())
+    val bibleBooks: StateFlow<List<BibleBookDetails>> = _bibleBooks
 
     private val _biblePrefaceTemplates =
         MutableStateFlow(
@@ -48,7 +49,7 @@ class BibleViewModel @Inject constructor(
 
     private fun loadBibleDetails() {
         try {
-            val bibleChapters = bibleRepositoryImpl.loadBibleDetails()
+            val bibleChapters = bibleRepository.loadBibleDetails()
             _bibleBooks.value = bibleChapters
         } catch (e: Exception) {
             throw e
@@ -57,7 +58,7 @@ class BibleViewModel @Inject constructor(
 
     private fun loadBiblePrefaceTemplates() {
         try {
-            val prefaceTemplates = bibleRepositoryImpl.loadPrefaceTemplates()
+            val prefaceTemplates = bibleRepository.loadPrefaceTemplates()
             _biblePrefaceTemplates.value = prefaceTemplates
         } catch (e: Exception) {
             // Handle error if needed
@@ -68,7 +69,7 @@ class BibleViewModel @Inject constructor(
     fun findBibleBookWithIndex(
         bookName: String,
         language: AppLanguage,
-    ): Pair<BibleDetails?, Int?> {
+    ): Pair<BibleBookDetails?, Int?> {
         val currentBooks = _bibleBooks.value
 
         currentBooks.forEachIndexed { index, bibleBook ->
@@ -99,7 +100,7 @@ class BibleViewModel @Inject constructor(
         bookNumber: Int,
         chapterNumber: Int,
         language: AppLanguage,
-    ): Chapter? = bibleRepositoryImpl.loadBibleChapter(bookNumber, chapterNumber, language)
+    ): BibleChapter? = bibleRepository.loadBibleChapter(bookNumber, chapterNumber, language)
 
     fun getAdjacentChapters(
         bookIndex: Int,
@@ -162,12 +163,12 @@ class BibleViewModel @Inject constructor(
     ): String {
         try {
             val book = _bibleBooks.value[bookIndex]
-
-            return when (language) {
-                AppLanguage.ENGLISH -> book.book.en
-                AppLanguage.MALAYALAM -> book.book.ml
-                else -> book.book.en
-            }
+            return book.book.get(language)
+//            return when (language) {
+//                AppLanguage.ENGLISH -> book.book.en
+//                AppLanguage.MALAYALAM -> book.book.ml
+//                else -> book.book.en
+//            }
         } catch (_: Exception) {
             System.err.println("Could not find the book")
             return "Error"
@@ -234,7 +235,7 @@ class BibleViewModel @Inject constructor(
     fun loadBiblePreface(
         bibleReference: BibleReference,
         language: AppLanguage,
-    ): List<PrayerElementData>? {
+    ): List<PrayerElementDomain>? {
         val book = _bibleBooks.value[bibleReference.bookNumber - 1]
         val prefaceContent =
             book.prefaces
@@ -245,7 +246,7 @@ class BibleViewModel @Inject constructor(
                     else -> return null
                 }
 
-        val sourcePreface: List<PrayerElementData> =
+        val sourcePreface: List<PrayerElementDomain> =
             when (language) {
                 AppLanguage.MALAYALAM -> prefaceContent.ml
                 AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> prefaceContent.en
@@ -270,7 +271,7 @@ class BibleViewModel @Inject constructor(
         // Use .map to create a new list with the replaced content
         return sourcePreface.map { item ->
             when (item) {
-                is PrayerElementData.Prose -> {
+                is PrayerElementDomain.Prose -> {
                     item.copy(
                         content =
                             item.content
@@ -298,15 +299,15 @@ class BibleViewModel @Inject constructor(
                 }
             BibleReading(
                 preface = preface,
-                verses = bibleRepositoryImpl.loadBibleReading(bibleReferences, language),
+                verses = bibleRepository.loadBibleReading(bibleReferences, language),
             )
         } catch (e: BookNotFoundException) {
             // Handle the case where a book or chapter is not found
             BibleReading(
                 verses =
                     listOf(
-                        Verse(
-                            "Error",
+                        BibleVerse(
+                            0,
                             "Book or chapter not found: ${e.message}",
                         ),
                     ),

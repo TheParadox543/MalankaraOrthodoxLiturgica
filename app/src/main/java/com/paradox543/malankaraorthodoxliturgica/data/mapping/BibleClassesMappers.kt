@@ -1,12 +1,50 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBookNameData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleChapterData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReadingsData
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleVerseData
+import com.paradox543.malankaraorthodoxliturgica.data.model.DisplayTextData
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContentData
+import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplatesData
+import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRangeData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookName
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleChapter
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReadingsSelection
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleVerse
 import com.paradox543.malankaraorthodoxliturgica.domain.model.DisplayText
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceContent
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
+import com.paradox543.malankaraorthodoxliturgica.domain.model.ReferenceRange
+
+fun PrefaceContentData.toDomain(): PrefaceContent =
+    PrefaceContent(
+        en = this.en.toDomainList(),
+        ml = this.ml.toDomainList(),
+    )
+
+fun PrefaceTemplatesData.toDomain(): PrefaceTemplates =
+    PrefaceTemplates(
+        prophets = this.prophets.toDomain(),
+        generalEpistle = this.generalEpistle.toDomain(),
+        paulineEpistle = this.paulineEpistle.toDomain(),
+    )
+
+fun DisplayTextData.toDomain(): DisplayText =
+    DisplayText(
+        en = this.en,
+        ml = this.ml,
+    )
+
+fun BibleBookNameData.toDomain(): BibleBookName =
+    BibleBookName(
+        en = this.en,
+        ml = this.ml,
+    )
 
 fun BibleVerseData.toDomain(): BibleVerse =
     BibleVerse(
@@ -23,15 +61,17 @@ fun BibleChapterData.toDomain(): BibleChapter =
 
 fun BibleDetails.toDomain(): BibleBookDetails =
     BibleBookDetails(
-        book = this.book,
-        folder = "",
+        book = this.book.toDomain(),
+        folder = this.folder,
         chapters = this.chapters,
-        verseCount = listOf(0),
+        verseCount = this.verseCount,
         category = this.category,
-        prefaces = this.prefaces,
-        displayTitle = this.displayTitle,
-        ordinal = this.ordinal,
+        prefaces = this.prefaces?.toDomain(),
+        displayTitle = this.displayTitle?.toDomain(),
+        ordinal = this.ordinal?.toDomain(),
     )
+
+fun List<BibleDetails>.toBibleDetailsDomain(): List<BibleBookDetails> = map { it.toDomain() }
 
 fun BibleVerse.toData(): BibleVerseData =
     BibleVerseData(
@@ -39,9 +79,35 @@ fun BibleVerse.toData(): BibleVerseData =
         verse = verse,
     )
 
+fun List<BibleVerseData>.toBibleVerseDomain(): List<BibleVerse> = map { it.toDomain() }
+
 fun BibleChapter.toData(): BibleChapterData =
     BibleChapterData(
         book = book,
         chapter = chapter,
         verses = verses.map { it.toData() },
+    )
+
+fun ReferenceRangeData.toDomain(): ReferenceRange =
+    ReferenceRange(
+        startChapter = this.startChapter,
+        endChapter = this.endChapter,
+        startVerse = this.startVerse,
+        endVerse = this.endVerse,
+    )
+
+fun BibleReferenceData.toDomain(): BibleReference =
+    BibleReference(
+        bookNumber = bookNumber,
+        ranges = ranges.map { it.toDomain() },
+    )
+
+fun List<BibleReferenceData>.toBibleReferenceDomain(): List<BibleReference> =
+    map {
+        it.toDomain()
+    }
+
+fun BibleReadingsData.toDomain(): BibleReadingsSelection =
+    BibleReadingsSelection(
+        vespersGospel = this.vespersGospel?.map { it.toDomain() },
     )

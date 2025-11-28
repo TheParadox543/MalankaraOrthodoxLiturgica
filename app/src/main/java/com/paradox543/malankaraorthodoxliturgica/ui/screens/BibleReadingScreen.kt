@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
@@ -28,7 +29,7 @@ fun BibleReadingScreen(
     prayerViewModel: PrayerViewModel = hiltViewModel(),
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    val bibleReadings by bibleViewModel.selectedBibleReference.collectAsState()
+    val bibleReadings: List<BibleReference> by bibleViewModel.selectedBibleReference.collectAsState()
 
     if (bibleReadings.isEmpty()) {
         Text(
@@ -70,7 +71,7 @@ fun BibleReadingScreen(
                 if (bibleReading.preface != null) {
                     items(bibleReading.preface.size) { index ->
                         PrayerElementRenderer(
-                            prayerElementDomain = bibleReading.preface[index].toDomain(),
+                            prayerElementDomain = bibleReading.preface[index],
                             prayerViewModel = prayerViewModel,
                             filename = title,
                             navController = navController,
@@ -85,8 +86,8 @@ fun BibleReadingScreen(
                     }
                 }
                 items(bibleReading.verses.size) { index ->
-                    val verseNumber = bibleReading.verses[index].Verseid
-                    val verseText = bibleReading.verses[index].Verse
+                    val verseNumber = bibleReading.verses[index].id.toString()
+                    val verseText = bibleReading.verses[index].verse
                     VerseItem(
                         verseNumber,
                         verseText,
