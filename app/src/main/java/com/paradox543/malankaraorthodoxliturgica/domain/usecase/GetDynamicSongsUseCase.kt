@@ -32,7 +32,7 @@ class GetDynamicSongsUseCase @Inject constructor(
             if (firstItem is PrayerElementDomain.Link) {
                 // Load the linked file and replace items
                 val file = firstItem.file
-                val loadedItems = prayerRepository.loadPrayerElements(file, language, currentDepth + 1)
+                val loadedItems = prayerRepository.loadPrayerElements(file, language)
                 val newDynamicSong = defaultContent.copy(items = loadedItems)
                 resolvedBlock.items.add(newDynamicSong)
             } else {
@@ -73,7 +73,7 @@ class GetDynamicSongsUseCase @Inject constructor(
         }
 
         // Add prayers for the departed at the end if not already added
-        if (resolvedBlock.items.none { it is PrayerElementDomain.DynamicSong && it.eventKey == "allDepartedFaithful" }) {
+        if (resolvedBlock.items.none { it.eventKey == "allDepartedFaithful" }) {
             val departedFilename = "qurbanaSongs/allDepartedFaithful/${dynamicSongsBlock.timeKey}.json"
             val departedSongElements =
                 try {

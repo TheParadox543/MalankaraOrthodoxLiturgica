@@ -40,12 +40,12 @@ object AppModule {
     @Singleton
     fun provideFirebaseStorage(): FirebaseStorage = Firebase.storage
 
-    @Provides
-    @Singleton
-    fun provideBibleRepository(
-        @ApplicationContext context: Context,
-        json: Json,
-    ): BibleRepositoryImpl = BibleRepositoryImpl(context, json)
+//    @Provides
+//    @Singleton
+//    fun provideBibleRepository(
+//        @ApplicationContext context: Context,
+//        json: Json,
+//    ): BibleRepositoryImpl = BibleRepositoryImpl()
 
     @Singleton
     @Provides
