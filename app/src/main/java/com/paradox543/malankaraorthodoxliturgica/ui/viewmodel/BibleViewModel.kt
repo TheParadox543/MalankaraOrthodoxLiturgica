@@ -2,7 +2,6 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleChapter
@@ -15,6 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.domain.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.usecase.LoadBibleReadingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,6 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BibleViewModel @Inject constructor(
     private val bibleRepository: BibleRepository,
+    private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
 ) : ViewModel() {
     private val _bibleBooks = MutableStateFlow<List<BibleBookDetails>>(emptyList())
     val bibleBooks: StateFlow<List<BibleBookDetails>> = _bibleBooks
@@ -280,7 +281,10 @@ class BibleViewModel @Inject constructor(
                                 .replace("{ordinal}", ordinal),
                     )
                 }
-                else -> item
+
+                else -> {
+                    item
+                }
             }
         }
     }
@@ -297,10 +301,7 @@ class BibleViewModel @Inject constructor(
                 } else {
                     null
                 }
-            BibleReading(
-                preface = preface,
-                verses = bibleRepository.loadBibleReading(bibleReferences, language),
-            )
+            loadBibleReadingUseCase(bibleReferences, language).copy(preface = preface)
         } catch (e: BookNotFoundException) {
             // Handle the case where a book or chapter is not found
             BibleReading(

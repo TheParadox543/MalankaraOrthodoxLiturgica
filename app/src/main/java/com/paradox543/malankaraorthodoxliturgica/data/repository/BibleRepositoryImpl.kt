@@ -3,12 +3,9 @@ package com.paradox543.malankaraorthodoxliturgica.data.repository
 import android.content.Context
 import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toBibleDetailsDomain
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.toBibleVerseDomain
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleChapterData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleVerseData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContentData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplatesData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
@@ -29,7 +26,7 @@ class BibleRepositoryImpl @Inject constructor(
     private val json: Json,
 ) : BibleRepository {
     // Lazily load and cache the Bible chapters to avoid re-reading the asset
-    override val cachedBibleChapters: List<BibleBookDetails> by lazy {
+    private val cachedBibleChapters: List<BibleBookDetails> by lazy {
         Log.d("BibleRepository", "Caching Bible Details")
         val content = loadJsonAsset<List<BibleDetails>>("bibleBookMetadata.json")?.toBibleDetailsDomain() ?: emptyList()
         Log.d("BibleRepository", "Cached Bible Details: $content")
@@ -85,91 +82,7 @@ class BibleRepositoryImpl @Inject constructor(
         Log.d("BibleRepository", "BookFolder: $bookFolder")
         val fileName = "$bibleLanguage/bible/$bookFolder/${"%03d".format(chapterIndex + 1)}.json"
 
-        // Load or retrieve the cached BibleRoot object for the specific language file
-//        val bibleRoot  =
-//            cachedBibleChapterFiles.computeIfAbsent(fileName) {
-//                loadJsonAsset<BibleRoot>(fileName)
-//                    ?: run {
-//                        Log.e("BibleRepository", "Failed to load Bible file: $fileName")
-//                        BibleRoot(emptyList()) // Return empty if the file itself can't be loaded
-//                    }
-//            }
-//
-//        // Access the book and chapter using safe indexing
-//        val book = bibleRoot.Book.getOrNull(bookIndex)
-//        val chapter = book?.Chapter?.getOrNull(chapterIndex)
-//        return chapter
         return loadJsonAsset<BibleChapterData>(fileName)?.toDomain()
-    }
-
-    override fun loadBibleReading(
-        bibleReference: List<BibleReference>,
-        language: AppLanguage,
-    ): List<BibleVerse> {
-        val bibleLanguage =
-            when (language) {
-                AppLanguage.MALAYALAM -> "ml"
-                else -> "en"
-            }
-        val fileName = "bible-$bibleLanguage.json"
-
-//        val bibleRoot: BibleRoot =
-//            cachedBibleChapterFiles.computeIfAbsent(fileName) {
-//                loadJsonAsset<BibleRoot>(fileName)
-//                    ?: run {
-//                        Log.e("BibleRepository", "Failed to load Bible file: $fileName")
-//                        BibleRoot(emptyList()) // Return empty if the file itself can't be loaded
-//                    }
-//            }
-
-        val verses = mutableListOf<BibleVerseData>()
-//        try {
-//            for (bibleReference in bibleReference) {
-//                val book = bibleRoot.Book.getOrNull(bibleReference.bookNumber - 1)
-//                if (book == null) {
-//                    throw BookNotFoundException("Book not found: ${bibleReference.bookNumber}")
-//                }
-//                for (range in bibleReference.ranges) {
-//                    var chapter = book.Chapter.getOrNull(range.startChapter - 1)
-//                    if (chapter == null) {
-//                        throw BookNotFoundException("Chapter not found: ${bibleReference.bookNumber}.${range.startChapter}")
-//                    }
-//                    if (range.startChapter == range.endChapter) {
-//                        Log.d(
-//                            "BibleRepository",
-//                            "Loading verses from ${bibleReference.bookNumber}.${range.startChapter} ${range.startVerse}-${range.endVerse}",
-//                        )
-//                        verses.addAll(chapter.Verse.subList(range.startVerse - 1, range.endVerse))
-//                    } else {
-//                        verses.addAll(
-//                            chapter.Verse.subList(
-//                                range.startVerse - 1,
-//                                chapter.Verse.size,
-//                            ),
-//                        )
-//                        chapter = book.Chapter.getOrNull(range.endChapter - 1)
-//                        if (chapter == null) {
-//                            throw BookNotFoundException("Chapter not found: ${bibleReference.bookNumber}.${range.endChapter}")
-//                        }
-//                        verses.addAll(chapter.Verse.subList(0, range.endVerse))
-//                    }
-//                }
-//                return verses.map { verse ->
-//                    val verseId = verse.Verseid.substring(5).toInt() + 1
-//                    Verse(
-//                        "$verseId",
-//                        verse.Verse,
-//                    )
-//                }
-//            }
-//        } catch (e: IndexOutOfBoundsException) {
-//            Log.e("BibleRepository", "Error accessing verses: ${e.message}", e)
-//            throw BookNotFoundException("Invalid verse range in the request.")
-//        } catch (e: BookNotFoundException) {
-//            Log.e("BibleRepository", "Error: ${e.message}", e)
-//            throw e // Re-throw to be handled by the caller
-//        }
-        return verses.toBibleVerseDomain()
     }
 
     override fun loadPrefaceTemplates() = cachedPrefaceTemplates

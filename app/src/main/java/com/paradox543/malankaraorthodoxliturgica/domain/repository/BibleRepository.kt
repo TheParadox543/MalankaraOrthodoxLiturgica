@@ -8,8 +8,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleVerse
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
 
 interface BibleRepository {
-    val cachedBibleChapters: List<BibleBookDetails>
-
     fun loadBibleDetails(): List<BibleBookDetails>
 
     fun loadBibleChapter(
@@ -17,11 +15,6 @@ interface BibleRepository {
         chapterIndex: Int,
         language: AppLanguage,
     ): BibleChapter?
-
-    fun loadBibleReading(
-        bibleReference: List<BibleReference>,
-        language: AppLanguage,
-    ): List<BibleVerse>
 
     fun loadPrefaceTemplates(): PrefaceTemplates
 }
