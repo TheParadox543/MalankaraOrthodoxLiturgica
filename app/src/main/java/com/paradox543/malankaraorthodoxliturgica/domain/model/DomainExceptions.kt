@@ -18,3 +18,8 @@ class PrayerParsingException(
 class PrayerLinkDepthExceededException(
     message: String,
 ) : Exception(message)
+
+class BibleParsingException(
+    message: String,
+    cause: Throwable? = null,
+) : Exception(message, cause)

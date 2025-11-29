@@ -18,13 +18,11 @@ class PrayerRepositoryImpl @Inject constructor(
     override suspend fun loadPrayerElements(
         fileName: String,
         language: AppLanguage,
-        currentDepth: Int,
     ): List<PrayerElementDomain> =
         prayerSource
             .loadPrayerElements(
                 fileName,
                 language,
-                currentDepth,
             ).toDomainList()
 
     override suspend fun getPrayerNavigationTree(targetLanguage: AppLanguage): PageNodeDomain =

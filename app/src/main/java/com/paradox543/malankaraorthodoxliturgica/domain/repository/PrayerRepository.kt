@@ -8,7 +8,6 @@ interface PrayerRepository {
     suspend fun loadPrayerElements(
         fileName: String,
         language: AppLanguage,
-        currentDepth: Int = 0,
     ): List<PrayerElementDomain>
 
     suspend fun getPrayerNavigationTree(targetLanguage: AppLanguage): PageNodeDomain

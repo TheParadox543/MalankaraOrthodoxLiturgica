@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import javax.inject.Inject
 
@@ -13,12 +14,19 @@ class GetPrayerScreenContentUseCase @Inject constructor(
     private val prayerRepository: PrayerRepository,
     private val getDynamicSongsUseCase: GetDynamicSongsUseCase,
 ) {
+    private val maxLinkDepth = 5
+
     suspend operator fun invoke(
         fileName: String,
         language: AppLanguage,
         currentDepth: Int = 0,
     ): List<PrayerElementDomain> {
-        val rawElements = prayerRepository.loadPrayerElements(fileName, language, currentDepth)
+        if (currentDepth > maxLinkDepth) {
+            throw PrayerLinkDepthExceededException(
+                "Exceeded maximum link depth ($maxLinkDepth) while loading ${language.code}/$fileName",
+            )
+        }
+        val rawElements = prayerRepository.loadPrayerElements(fileName, language)
         return resolveList(rawElements, language, currentDepth)
     }
 
@@ -33,7 +41,7 @@ class GetPrayerScreenContentUseCase @Inject constructor(
             when (element) {
                 is PrayerElementDomain.Link -> {
                     try {
-                        val loaded = prayerRepository.loadPrayerElements(element.file, language, currentDepth + 1)
+                        val loaded = prayerRepository.loadPrayerElements(element.file, language)
                         val resolved = resolveList(loaded, language, currentDepth + 1)
                         out.addAll(resolved)
                     } catch (t: Throwable) {
@@ -43,7 +51,7 @@ class GetPrayerScreenContentUseCase @Inject constructor(
 
                 is PrayerElementDomain.LinkCollapsible -> {
                     try {
-                        val loaded = prayerRepository.loadPrayerElements(element.file, language, currentDepth + 1)
+                        val loaded = prayerRepository.loadPrayerElements(element.file, language)
                         val resolved = resolveList(loaded, language, currentDepth + 1)
 
                         var title: String? = null
