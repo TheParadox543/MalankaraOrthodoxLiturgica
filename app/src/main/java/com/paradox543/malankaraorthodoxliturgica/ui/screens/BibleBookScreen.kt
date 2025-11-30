@@ -32,17 +32,12 @@ fun BibleBookScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
-    bookName: String,
+    bookIndex: Int,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-
-    val (bibleBook, bookIndex) = bibleViewModel.findBibleBookWithIndex(bookName, selectedLanguage)
-    if (bibleBook == null) {
-        navController.navigate(Screen.Bible.route) {
-            popUpTo(Screen.Bible.route) { inclusive = true }
-        }
-    }
-    val chapters = bibleBook?.chapters ?: 1
+    val bibleBook = bibleViewModel.loadBibleBook(bookIndex)
+    val bookName = bibleBook.book.get(selectedLanguage)
+    val chapters = bibleBook.chapters
 
     Scaffold(
         topBar = { TopNavBar(bookName, navController) },
@@ -59,7 +54,7 @@ fun BibleBookScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(count = chapters) { chapterIndex ->
-                BibleChapterCard(navController, bookIndex ?: 0, chapterIndex)
+                BibleChapterCard(navController, bookIndex, chapterIndex)
             }
         }
     }

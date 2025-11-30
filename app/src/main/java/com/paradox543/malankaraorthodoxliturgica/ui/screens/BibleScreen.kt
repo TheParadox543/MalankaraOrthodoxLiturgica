@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
@@ -42,8 +42,9 @@ fun BibleScreen(
     val bibleChapters by bibleViewModel.bibleBooks.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
-    val oldTestamentChapters = bibleChapters.take(39)
-    val newTestamentChapters = bibleChapters.drop(39)
+    val oldTestamentCount = 39
+    val oldTestamentChapters = bibleChapters.take(oldTestamentCount)
+    val newTestamentChapters = bibleChapters.drop(oldTestamentCount)
 
     val title =
         when (selectedLanguage) {
@@ -70,7 +71,7 @@ fun BibleScreen(
                 }
             }
             items(oldTestamentChapters.size) { index ->
-                BibleCard(oldTestamentChapters[index], selectedLanguage, navController)
+                BibleCard(oldTestamentChapters[index], selectedLanguage, navController, index)
             }
             item(span = { GridItemSpan(this.maxLineSpan) }) {
                 when (selectedLanguage) {
@@ -79,7 +80,7 @@ fun BibleScreen(
                 }
             }
             items(newTestamentChapters.size) { index ->
-                BibleCard(newTestamentChapters[index], selectedLanguage, navController)
+                BibleCard(newTestamentChapters[index], selectedLanguage, navController, index + oldTestamentCount)
             }
         }
     }
@@ -114,6 +115,7 @@ fun BibleCard(
     bibleDetails: BibleBookDetails,
     selectedLanguage: AppLanguage,
     navController: NavController,
+    index: Int,
 ) {
     val bookName =
         when (selectedLanguage) {
@@ -127,7 +129,8 @@ fun BibleCard(
                 .fillMaxSize()
                 .height(48.dp)
                 .clickable {
-                    navController.navigate(Screen.BibleBook.createRoute(bookName))
+                    Log.d("BibleScreen", "BibleCard: $bookName, Index: $index")
+                    navController.navigate(Screen.BibleBook.createRoute(index))
                 },
         shape = RoundedCornerShape(8.dp),
         colors =

@@ -67,35 +67,7 @@ class BibleViewModel @Inject constructor(
         }
     }
 
-    fun findBibleBookWithIndex(
-        bookName: String,
-        language: AppLanguage,
-    ): Pair<BibleBookDetails?, Int?> {
-        val currentBooks = _bibleBooks.value
-
-        currentBooks.forEachIndexed { index, bibleBook ->
-            when (language) {
-//                AppLanguage.ENGLISH -> {
-//                    if (bibleBook.book.en == bookName) {
-//                        return Pair(bibleBook, index)
-//                    }
-//                }
-
-                AppLanguage.MALAYALAM -> {
-                    if (bibleBook.book.ml == bookName) {
-                        return Pair(bibleBook, index)
-                    }
-                }
-
-                else -> {
-                    if (bibleBook.book.en == bookName) {
-                        return Pair(bibleBook, index)
-                    }
-                }
-            }
-        }
-        return Pair(null, null)
-    }
+    fun loadBibleBook(bookNumber: Int): BibleBookDetails = bibleBooks.value[bookNumber]
 
     fun loadBibleChapter(
         bookNumber: Int,
