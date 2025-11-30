@@ -135,11 +135,11 @@ fun NavGraph(modifier: Modifier = Modifier) {
 
         composable(
             route = Screen.BibleBook.route,
-            arguments = listOf(navArgument(Screen.BibleBook.ARG_BOOK) { type = NavType.StringType }),
+            arguments = listOf(navArgument(Screen.BibleBook.ARG_BOOK_INDEX) { type = NavType.StringType }),
             deepLinks = listOf(navDeepLink { uriPattern = Screen.BibleBook.DEEP_LINK_PATTERN }),
         ) { backStackEntry ->
-            val book = backStackEntry.arguments?.getString(Screen.BibleBook.ARG_BOOK) ?: ""
-            BibleBookScreen(navController, settingsViewModel, bibleViewModel, book)
+            val bookIndex = backStackEntry.arguments?.getString(Screen.BibleBook.ARG_BOOK_INDEX)?.toIntOrNull() ?: 0
+            BibleBookScreen(navController, settingsViewModel, bibleViewModel, bookIndex)
         }
 
         composable(
