@@ -13,4 +13,12 @@ enum class AppLanguage(
     companion object {
         fun fromCode(code: String): AppLanguage? = entries.find { it.code == code }
     }
+
+    fun properLanguageMapper(): String =
+        when (this) {
+            MALAYALAM -> this.code
+            ENGLISH -> this.code
+            MANGLISH -> ENGLISH.code
+            INDIC -> ENGLISH.code
+        }
 }

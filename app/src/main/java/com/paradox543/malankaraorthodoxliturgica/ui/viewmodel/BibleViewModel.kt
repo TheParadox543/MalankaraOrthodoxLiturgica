@@ -50,7 +50,7 @@ class BibleViewModel @Inject constructor(
 
     private fun loadBibleDetails() {
         try {
-            val bibleChapters = bibleRepository.loadBibleDetails()
+            val bibleChapters = bibleRepository.loadBibleMetaData()
             _bibleBooks.value = bibleChapters
         } catch (e: Exception) {
             throw e
