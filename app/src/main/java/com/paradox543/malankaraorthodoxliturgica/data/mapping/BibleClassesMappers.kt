@@ -1,8 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBookDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBookNameData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleChapterData
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleDetails
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReadingsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleVerseData
@@ -59,7 +59,7 @@ fun BibleChapterData.toDomain(): BibleChapter =
         verses = this.verses.map { it.toDomain() },
     )
 
-fun BibleDetails.toDomain(): BibleBookDetails =
+fun BibleBookDetailsData.toDomain(): BibleBookDetails =
     BibleBookDetails(
         book = this.book.toDomain(),
         folder = this.folder,
@@ -71,7 +71,7 @@ fun BibleDetails.toDomain(): BibleBookDetails =
         ordinal = this.ordinal?.toDomain(),
     )
 
-fun List<BibleDetails>.toBibleDetailsDomain(): List<BibleBookDetails> = map { it.toDomain() }
+fun List<BibleBookDetailsData>.toBibleDetailsDomain(): List<BibleBookDetails> = map { it.toDomain() }
 
 fun BibleVerse.toData(): BibleVerseData =
     BibleVerseData(
