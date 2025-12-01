@@ -39,7 +39,7 @@ fun BibleScreen(
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
 ) {
-    val bibleChapters by bibleViewModel.bibleBooks.collectAsState()
+    val bibleChapters = bibleViewModel.bibleBooks
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
     val oldTestamentCount = 39

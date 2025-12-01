@@ -12,8 +12,9 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundExcept
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
-import com.paradox543.malankaraorthodoxliturgica.domain.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatBibleReadingEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetAdjacentChaptersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.LoadBibleReadingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,9 +29,10 @@ class BibleViewModel @Inject constructor(
     private val bibleRepository: BibleRepository,
     private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
     private val getAdjacentChaptersUseCase: GetAdjacentChaptersUseCase,
+    private val formatBibleReadingEntryUseCase: FormatBibleReadingEntryUseCase,
+    private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
 ) : ViewModel() {
-    private val _bibleBooks = MutableStateFlow<List<BibleBookDetails>>(emptyList())
-    val bibleBooks: StateFlow<List<BibleBookDetails>> = _bibleBooks
+    val bibleBooks: List<BibleBookDetails> = bibleRepository.loadBibleMetaData()
 
     private val _biblePrefaceTemplates =
         MutableStateFlow(
@@ -46,17 +48,7 @@ class BibleViewModel @Inject constructor(
     val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
 
     init {
-        viewModelScope.launch { loadBibleDetails() }
         viewModelScope.launch { loadBiblePrefaceTemplates() }
-    }
-
-    private fun loadBibleDetails() {
-        try {
-            val bibleChapters = bibleRepository.loadBibleMetaData()
-            _bibleBooks.value = bibleChapters
-        } catch (e: Exception) {
-            throw e
-        }
     }
 
     private fun loadBiblePrefaceTemplates() {
@@ -69,7 +61,7 @@ class BibleViewModel @Inject constructor(
         }
     }
 
-    fun loadBibleBook(bookNumber: Int): BibleBookDetails = bibleBooks.value[bookNumber]
+    fun loadBibleBook(bookNumber: Int): BibleBookDetails = bibleBooks[bookNumber]
 
     fun loadBibleChapter(
         bookNumber: Int,
@@ -83,40 +75,6 @@ class BibleViewModel @Inject constructor(
     ): Pair<String?, String?> = getAdjacentChaptersUseCase(bookIndex, chapterIndex)
 
     /**
-     * Gets the localized name of a Bible book.
-     * @param bookIndex The numerical index of the book.
-     * @param language The desired AppLanguage for the book name.
-     * @return The localized book name, or "Unknown Book" if not found.
-     */
-    fun getBookName(
-        bookIndex: Int,
-        language: AppLanguage,
-    ): String {
-        try {
-            val book = _bibleBooks.value[bookIndex]
-            return book.book.get(language)
-        } catch (_: Exception) {
-            System.err.println("Could not find the book")
-            return "Error"
-        }
-    }
-
-    /**
-     * Formats a single BibleRange into a string (e.g., "5:1-10" or "3:16 - 4:5").
-     * This is a helper function, not exposed directly to UI.
-     */
-    private fun formatSingleRange(referenceRange: ReferenceRange): String =
-        if (referenceRange.startChapter == referenceRange.endChapter) {
-            if (referenceRange.startVerse == referenceRange.endVerse) {
-                "${referenceRange.startChapter}:${referenceRange.startVerse}"
-            } else {
-                "${referenceRange.startChapter}:${referenceRange.startVerse}-${referenceRange.endVerse}"
-            }
-        } else {
-            "${referenceRange.startChapter}:${referenceRange.startVerse} - ${referenceRange.endChapter}:${referenceRange.endVerse}"
-        }
-
-    /**
      * Formats a complete BibleReadingEntry (a book with its list of ranges) into a readable string.
      * (e.g., "Matthew 5:1-10, 6:1-5")
      * This function uses the currently selected language from the ViewModel's internal state.
@@ -126,29 +84,12 @@ class BibleViewModel @Inject constructor(
     fun formatBibleReadingEntry(
         entry: BibleReference,
         language: AppLanguage,
-    ): String {
-        val bookName = getBookName(entry.bookNumber - 1, language) // Use bookNumber from entry
-
-        val formattedRanges =
-            entry.ranges.joinToString(separator = ", ") { range ->
-                formatSingleRange(range)
-            }
-
-        return "$bookName $formattedRanges"
-    }
+    ): String = formatBibleReadingEntryUseCase(entry, language)
 
     fun formatGospelEntry(
         entries: List<BibleReference>,
         language: AppLanguage,
-    ): String {
-        if (entries.isEmpty()) {
-            return ""
-        }
-
-        return entries.joinToString(separator = ", ") { entry ->
-            formatBibleReadingEntry(entry, language)
-        }
-    }
+    ): String = formatGospelEntryUseCase(entries, language)
 
     /**
      * Sets the selected BibleReference to be displayed on the BibleReaderScreen.
@@ -162,7 +103,7 @@ class BibleViewModel @Inject constructor(
         bibleReference: BibleReference,
         language: AppLanguage,
     ): List<PrayerElementDomain>? {
-        val book = _bibleBooks.value[bibleReference.bookNumber - 1]
+        val book = bibleBooks[bibleReference.bookNumber - 1]
         val prefaceContent =
             book.prefaces
                 ?: when (book.category) {
