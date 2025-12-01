@@ -28,7 +28,7 @@ fun BibleChapterScreen(
     chapterIndex: Int,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
-    val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
+    val bibleBooks = bibleViewModel.bibleBooks
     val bibleBook = bibleBooks[bookIndex]
 
     val bookName: String =
@@ -51,7 +51,14 @@ fun BibleChapterScreen(
                 navController,
             )
         },
-        bottomBar = { SectionNavBar(navController, prevRoute, nextRoute, { Screen.BibleChapter.createDeepLink(bookIndex, chapterIndex) }) },
+        bottomBar = {
+            SectionNavBar(navController, prevRoute, nextRoute) {
+                Screen.BibleChapter.createDeepLink(
+                    bookIndex,
+                    chapterIndex,
+                )
+            }
+        },
     ) { innerPadding ->
         if (chapterData == null) {
             Text(

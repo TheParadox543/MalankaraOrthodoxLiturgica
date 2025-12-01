@@ -49,5 +49,21 @@ class BibleRepositoryImpl @Inject constructor(
         return content?.toDomain() ?: throw BibleParsingException("Missing Bible chapter: $path")
     }
 
+    /**
+     * Gets the localized name of a Bible book.
+     * @param bookIndex The numerical index of the book.
+     * @param language The desired AppLanguage for the book name.
+     * @return The localized book name, or "Unknown Book" if not found.
+     */
+    override fun getBibleBookName(
+        bookIndex: Int,
+        language: AppLanguage,
+    ): String {
+        val book =
+            cachedBibleMetaData.getOrNull(bookIndex)
+                ?: return "Error"
+        return book.book.get(language)
+    }
+
     override fun loadPrefaceTemplates() = cachedPrefaceTemplates
 }
