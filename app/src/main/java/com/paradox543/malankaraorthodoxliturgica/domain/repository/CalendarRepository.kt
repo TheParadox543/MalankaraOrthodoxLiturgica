@@ -1,14 +1,15 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.repository
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
 import java.time.LocalDate
 
 interface CalendarRepository {
-    suspend fun initialize()
+//    suspend fun initialize()
 
-    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsData>
+//    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsData>
 
     fun checkMonthDataExists(
         month: Int,
@@ -22,5 +23,5 @@ interface CalendarRepository {
 
     fun getUpcomingWeekEvents(): List<CalendarDay>
 
-    fun getUpcomingWeekEventItems(): List<LiturgicalEventDetailsData>
+    fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails>
 }

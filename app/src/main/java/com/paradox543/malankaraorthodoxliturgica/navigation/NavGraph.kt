@@ -66,7 +66,7 @@ fun NavGraph(modifier: Modifier = Modifier) {
             Screen.Home.route,
             deepLinks = listOf(navDeepLink { uriPattern = Screen.Home.deepLink!! }),
         ) {
-            HomeScreen(navController, prayerViewModel, settingsViewModel, prayerNavViewModel)
+            HomeScreen(navController, prayerViewModel, prayerNavViewModel)
         }
 
         composable(Screen.Onboarding.route) {
@@ -81,7 +81,7 @@ fun NavGraph(modifier: Modifier = Modifier) {
             val route = backStackEntry.arguments?.getString(Screen.Section.ARG_ROUTE) ?: ""
             val node = prayerNavViewModel.findNode(route)
             if (node != null) {
-                SectionScreen(navController, prayerViewModel, settingsViewModel, node)
+                SectionScreen(navController, prayerViewModel, node)
             } else {
                 ContentNotReadyScreen(navController, modifier, message = route)
             }

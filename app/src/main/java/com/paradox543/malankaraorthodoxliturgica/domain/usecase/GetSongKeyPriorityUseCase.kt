@@ -7,7 +7,6 @@ class GetSongKeyPriorityUseCase @Inject constructor(
     private val calendarRepository: CalendarRepository,
 ) {
     suspend operator fun invoke(): String {
-        calendarRepository.initialize()
         val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
         for (item in weekEventItems) {
             if (item.specialSongsKey != null) {
@@ -17,4 +16,3 @@ class GetSongKeyPriorityUseCase @Inject constructor(
         return "default"
     }
 }
-

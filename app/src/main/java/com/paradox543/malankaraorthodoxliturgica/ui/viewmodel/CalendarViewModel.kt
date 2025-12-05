@@ -3,11 +3,11 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,7 +58,6 @@ class CalendarViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                calendarRepositoryImpl.initialize() // Important: Load JSON data first
                 loadMonth(_currentCalendarViewDate.value.monthValue, _currentCalendarViewDate.value.year)
                 loadUpcomingWeekEvents()
             } catch (e: Exception) {

@@ -110,4 +110,10 @@ fun List<BibleReferenceData>.toBibleReferenceDomain(): List<BibleReference> =
 fun BibleReadingsData.toDomain(): BibleReadingsSelection =
     BibleReadingsSelection(
         vespersGospel = this.vespersGospel?.map { it.toDomain() },
+        matinsGospel = this.matinsGospel?.map { it.toDomain() },
+        primeGospel = this.primeGospel?.map { it.toDomain() },
+        oldTestament = this.oldTestament?.map { it.toDomain() },
+        generalEpistle = this.generalEpistle?.map { it.toDomain() },
+        paulEpistle = this.paulEpistle?.map { it.toDomain() },
+        gospel = this.gospel?.map { it.toDomain() },
     )

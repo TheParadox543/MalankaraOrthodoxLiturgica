@@ -6,15 +6,13 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun HomeScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    settingsViewModel: SettingsViewModel,
     prayerNavViewModel: PrayerNavViewModel,
 ) {
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
-    SectionScreen(navController, prayerViewModel, settingsViewModel, rootNode)
+    SectionScreen(navController, prayerViewModel, rootNode)
 }
