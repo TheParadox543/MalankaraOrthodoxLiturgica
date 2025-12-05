@@ -3,12 +3,12 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
-import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatDateTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
-    private val calendarRepositoryImpl: CalendarRepositoryImpl,
+    private val calendarRepository: CalendarRepository,
+    private val formatDateTitleUseCase: FormatDateTitleUseCase,
 ) : ViewModel() {
     // State for the currently displayed month's calendar data
     private val _monthCalendarData = MutableStateFlow<List<CalendarWeek>>(emptyList())
@@ -39,8 +40,8 @@ class CalendarViewModel @Inject constructor(
     private val _hasPreviousMonth = MutableStateFlow(false)
     val hasPreviousMonth: StateFlow<Boolean> = _hasPreviousMonth.asStateFlow()
 
-    private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetailsData>>(emptyList())
-    val selectedDayViewData: StateFlow<List<LiturgicalEventDetailsData>> = _selectedDayViewData.asStateFlow()
+    private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
+    val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> = _selectedDayViewData.asStateFlow()
 
     // State for the currently selected date for UI feedback
     private val _selectedDate = MutableStateFlow<LocalDate?>(null)
@@ -75,25 +76,32 @@ class CalendarViewModel @Inject constructor(
     ) {
         _isLoading.value = true
         _error.value = null
-        try {
-            Log.d("CalendarViewModel", "Loading month data for $month/$year")
-            _monthCalendarData.value = calendarRepositoryImpl.loadMonthData(month, year)
-            _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
-            val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
-            _hasPreviousMonth.value = calendarRepositoryImpl.checkMonthDataExists(previousMonth.monthValue, previousMonth.year)
-            val nextMonth = _currentCalendarViewDate.value.plusMonths(1)
-            _hasNextMonth.value = calendarRepositoryImpl.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
-        } catch (e: Exception) {
-            _error.value = "Failed to load month data for $month/$year: ${e.message}"
-            System.err.println("Error loading month data: ${e.stackTraceToString()}")
-        } finally {
-            _isLoading.value = false
+        viewModelScope.launch {
+            try {
+                Log.d("CalendarViewModel", "Loading month data for $month/$year")
+                _monthCalendarData.value = calendarRepository.loadMonthData(month, year)
+                _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
+                val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
+                _hasPreviousMonth.value =
+                    calendarRepository.checkMonthDataExists(
+                        previousMonth.monthValue,
+                        previousMonth.year,
+                    )
+                val nextMonth = _currentCalendarViewDate.value.plusMonths(1)
+                _hasNextMonth.value =
+                    calendarRepository.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
+            } catch (e: Exception) {
+                _error.value = "Failed to load month data for $month/$year: ${e.message}"
+                System.err.println("Error loading month data: ${e.stackTraceToString()}")
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 
     fun loadUpcomingWeekEvents() {
         try {
-            _upcomingWeekEvents.value = calendarRepositoryImpl.getUpcomingWeekEvents()
+            _upcomingWeekEvents.value = calendarRepository.getUpcomingWeekEvents()
         } catch (e: Exception) {
             _error.value = "Failed to load upcoming week events: ${e.message}"
             System.err.println("Error loading upcoming week events: ${e.stackTraceToString()}")
@@ -101,7 +109,7 @@ class CalendarViewModel @Inject constructor(
     }
 
     fun setDayEvents(
-        events: List<LiturgicalEventDetailsData>,
+        events: List<LiturgicalEventDetails>,
         date: LocalDate,
     ) {
         _selectedDayViewData.value = events
@@ -125,33 +133,8 @@ class CalendarViewModel @Inject constructor(
         loadMonth(prevMonthDate.monthValue, prevMonthDate.year)
     }
 
-    fun generateYearSuffix(year: Int): String =
-        when (year % 10) {
-            1 -> if (year % 100 != 11) "st" else "th"
-            2 -> if (year % 100 != 12) "nd" else "th"
-            3 -> if (year % 100 != 13) "rd" else "th"
-            else -> "th"
-        }
-
-    fun generateDateTitle(
+    fun getFormattedDateTitle(
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,
-    ): String {
-        val currentYear = LocalDate.now().year
-        return if (event.startedYear != null) {
-            val yearNumber = currentYear - event.startedYear + 1
-            val baseYearString = "$yearNumber"
-
-            if (selectedLanguage == AppLanguage.MALAYALAM && event.title.ml != null) {
-                "$baseYearString-ാം${event.title.ml}"
-            } else {
-                "$baseYearString${generateYearSuffix(yearNumber)} ${event.title.en}"
-            }
-        } else {
-            when (selectedLanguage) {
-                AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
-                else -> event.title.en
-            }
-        }
-    }
+    ): String = formatDateTitleUseCase(event, selectedLanguage)
 }

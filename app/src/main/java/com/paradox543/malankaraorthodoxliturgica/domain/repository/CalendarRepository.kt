@@ -7,10 +7,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDet
 import java.time.LocalDate
 
 interface CalendarRepository {
-//    suspend fun initialize()
-
-//    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsData>
-
     fun checkMonthDataExists(
         month: Int,
         year: Int,

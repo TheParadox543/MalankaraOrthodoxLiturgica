@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -48,8 +47,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
@@ -408,7 +405,7 @@ private fun RowScope.DayItem(
 @Composable
 private fun DisplayEvents(
     scrollState: ScrollState,
-    displayEvents: List<LiturgicalEventDetailsData>,
+    displayEvents: List<LiturgicalEventDetails>,
     selectedLanguage: AppLanguage,
     navController: NavController,
     calendarViewModel: CalendarViewModel,
@@ -421,7 +418,7 @@ private fun DisplayEvents(
     ) {
         displayEvents.forEach { event ->
             DisplayEvent(
-                event.toDomain(),
+                event,
                 selectedLanguage,
                 navController,
                 calendarViewModel = calendarViewModel,
@@ -442,7 +439,7 @@ fun DisplayEvent(
     prayerViewModel: PrayerViewModel = hiltViewModel(),
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    val textTitle = calendarViewModel.generateDateTitle(event, selectedLanguage)
+    val textTitle = calendarViewModel.getFormattedDateTitle(event, selectedLanguage)
     Card(
         modifier
             .padding(8.dp)
