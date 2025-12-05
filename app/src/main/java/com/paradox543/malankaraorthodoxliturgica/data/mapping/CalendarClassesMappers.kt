@@ -1,7 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
+import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDayDto
+import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeekDto
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStrData
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.model.TitleStr
 
@@ -22,3 +26,18 @@ fun LiturgicalEventDetailsData.toDomain(): LiturgicalEventDetails =
     )
 
 fun List<LiturgicalEventDetailsData>.toLiturgicalEventsDetailsDomain(): List<LiturgicalEventDetails> = map { it.toDomain() }
+
+fun CalendarDayDto.toDomain(): CalendarDay =
+    CalendarDay(
+        date = this.date,
+        events = this.events.toLiturgicalEventsDetailsDomain(),
+    )
+
+fun List<CalendarDayDto>.toCalendarDaysDomain(): List<CalendarDay> = map { it.toDomain() }
+
+fun CalendarWeekDto.toDomain(): CalendarWeek =
+    CalendarWeek(
+        days = this.days.toCalendarDaysDomain(),
+    )
+
+fun List<CalendarWeekDto>.toCalendarWeeksDomain(): List<CalendarWeek> = map { it.toDomain() }

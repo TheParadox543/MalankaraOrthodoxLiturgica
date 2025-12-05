@@ -1,7 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
 import com.paradox543.malankaraorthodoxliturgica.data.datasource.CalendarSource
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.toCalendarDaysDomain
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.toCalendarWeeksDomain
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toLiturgicalEventsDetailsDomain
+import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDayDto
+import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeekDto
 import com.paradox543.malankaraorthodoxliturgica.data.model.EventKey
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalCalendarDates
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalDataStore
@@ -73,7 +77,7 @@ class CalendarRepositoryImpl @Inject constructor(
      * Each week starts on Sunday.
      * @param month The month (1-12). Defaults to current month if null.
      * @param year The year. Defaults to current year if null.
-     * @return A list of CalendarWeek objects, each containing 7 CalendarDay objects.
+     * @return A list of CalendarWeekDto objects, each containing 7 CalendarDay objects.
      */
     override fun loadMonthData(
         month: Int?,
@@ -93,16 +97,16 @@ class CalendarRepositoryImpl @Inject constructor(
             currentDay = currentDay.minusDays(1)
         }
 
-        val monthData = mutableListOf<CalendarWeek>()
-        var weekDays = mutableListOf<CalendarDay>()
+        val monthData = mutableListOf<CalendarWeekDto>()
+        var weekDays = mutableListOf<CalendarDayDto>()
 
         // Iterate through days, forming weeks
         while (currentDay.isBefore(lastDayOfMonth.plusDays(1)) || currentDay.dayOfWeek != DayOfWeek.SUNDAY) {
             val events = getEventsForDate(currentDay)
-            weekDays.add(CalendarDay(currentDay, events))
+            weekDays.add(CalendarDayDto(currentDay, events))
 
             if (weekDays.size == 7) {
-                monthData.add(CalendarWeek(weekDays.toList()))
+                monthData.add(CalendarWeekDto(weekDays.toList()))
                 weekDays = mutableListOf() // Start a new week
             }
             currentDay = currentDay.plusDays(1)
@@ -116,36 +120,38 @@ class CalendarRepositoryImpl @Inject constructor(
             // If it finished mid-week (e.g. month ends on Wednesday), it will contain
             // days from the month and then days from the next month until Saturday.
             while (weekDays.size < 7) {
-                weekDays.add(CalendarDay(currentDay, emptyList())) // Add placeholder for visual alignment
+                weekDays.add(CalendarDayDto(currentDay, emptyList())) // Add placeholder for visual alignment
                 currentDay = currentDay.plusDays(1)
             }
-            monthData.add(CalendarWeek(weekDays.toList()))
+            monthData.add(CalendarWeekDto(weekDays.toList()))
         }
-        return monthData
+        return monthData.toCalendarWeeksDomain()
     }
 
-    /**
-     * Get events for the upcoming week starting from today.
-     * @return A list of CalendarDay objects for the next 7 days, including their events.
-     * Only days with events will have non-empty event maps.
-     */
-    override fun getUpcomingWeekEvents(): List<CalendarDay> {
+    fun getUpcomingWeekEventsData(): List<CalendarDayDto> {
         val today = LocalDate.now()
-        val weekEvents = mutableListOf<CalendarDay>()
+        val weekEvents = mutableListOf<CalendarDayDto>()
 
         for (i in 0 until 7) {
             val day = today.plusDays(i.toLong())
             val eventDetails = getEventsForDate(day)
             // Python's code appended only if event_details != {}, but here we append
-            // CalendarDay regardless for consistent list size, and the `events` map
+            // CalendarDayDto regardless for consistent list size, and the `events` map
             // will be empty if no events are found, similar to the month data.
-            weekEvents.add(CalendarDay(day, eventDetails))
+            weekEvents.add(CalendarDayDto(day, eventDetails))
         }
         return weekEvents
     }
 
+    /**
+     * Get events for the upcoming week starting from today.
+     * @return A list of CalendarDayDto objects for the next 7 days, including their events.
+     * Only days with events will have non-empty event maps.
+     */
+    override fun getUpcomingWeekEvents(): List<CalendarDay> = getUpcomingWeekEventsData().toCalendarDaysDomain()
+
     override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
-        val weekEvents = getUpcomingWeekEvents()
+        val weekEvents = getUpcomingWeekEventsData()
         val eventItems = mutableListOf<LiturgicalEventDetailsData>()
         weekEvents.forEach { day ->
             eventItems.addAll(day.events)
