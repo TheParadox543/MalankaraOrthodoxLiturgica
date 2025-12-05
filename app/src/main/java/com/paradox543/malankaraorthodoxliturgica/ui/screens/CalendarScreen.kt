@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -48,11 +49,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar

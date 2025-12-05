@@ -41,13 +41,11 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
-    settingsViewModel: SettingsViewModel,
     node: PageNodeDomain,
     modifier: Modifier = Modifier,
 ) {

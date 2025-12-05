@@ -2,6 +2,8 @@ package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import kotlinx.coroutines.runBlocking
@@ -50,9 +52,9 @@ class GetPrayerScreenContentUseCaseTest {
                     override fun loadMonthData(
                         month: Int?,
                         year: Int?,
-                    ) = emptyList<com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek>()
+                    ) = emptyList<CalendarWeek>()
 
-                    override fun getUpcomingWeekEvents() = emptyList<com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay>()
+                    override fun getUpcomingWeekEvents() = emptyList<CalendarDay>()
 
                     override fun getUpcomingWeekEventItems() = emptyList<LiturgicalEventDetailsData>()
                 }

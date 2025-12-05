@@ -20,9 +20,6 @@ class GetDynamicSongsUseCase @Inject constructor(
         dynamicSongsBlock: PrayerElementDomain.DynamicSongsBlock,
         currentDepth: Int = 0,
     ): PrayerElementDomain.DynamicSongsBlock {
-        // Ensure calendar data is loaded
-        calendarRepository.initialize()
-
         val resolvedBlock = dynamicSongsBlock.copy(items = dynamicSongsBlock.items.toMutableList())
 
         // Handle default content (may be a link which needs to be resolved)

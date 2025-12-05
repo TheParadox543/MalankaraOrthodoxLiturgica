@@ -2,6 +2,8 @@ package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStrData
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -24,9 +26,9 @@ class GetSongKeyPriorityUseCaseTest {
         override fun loadMonthData(
             month: Int?,
             year: Int?,
-        ): List<com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek> = emptyList()
+        ): List<CalendarWeek> = emptyList()
 
-        override fun getUpcomingWeekEvents(): List<com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay> = emptyList()
+        override fun getUpcomingWeekEvents(): List<CalendarDay> = emptyList()
 
         override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetailsData> = items
     }

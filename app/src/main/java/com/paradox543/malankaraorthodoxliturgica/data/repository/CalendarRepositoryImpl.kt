@@ -1,21 +1,16 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repository
 
-import android.content.Context
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.data.datasource.CalendarSource
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.toLiturgicalEventsDetailsDomain
 import com.paradox543.malankaraorthodoxliturgica.data.model.EventKey
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalCalendarDates
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.MonthEvents
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.json.Json
 import java.io.IOException
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -25,71 +20,22 @@ import javax.inject.Singleton
 
 @Singleton
 class CalendarRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val json: Json, // Inject kotlinx.serialization.Json for parsing
+    private val calendarSource: CalendarSource,
 ) : CalendarRepository {
     // Lazy initialization ensures files are read only when first accessed
-    private lateinit var liturgicalDates: LiturgicalCalendarDates
-    private lateinit var liturgicalData: LiturgicalDataStore
-
-    // Initial load, to be called in an appropriate scope (e.g., ViewModel init or App startup)
-    override suspend fun initialize() {
-        if (!::liturgicalDates.isInitialized) { // Check if already initialized
-            readLiturgicalDates()
-        }
-        if (!::liturgicalData.isInitialized) {
-            readLiturgicalData()
-        }
+    private val cachedLiturgicalDates: LiturgicalCalendarDates by lazy {
+        calendarSource.readLiturgicalDates() ?: throw IOException("Could not read from assets/calendar/liturgical_calendar.json")
     }
 
-    /**
-     * Reads and parses liturgical_calendar.json from assets.
-     * This should be called once during initialization.
-     */
-    private suspend fun readLiturgicalDates() =
-        withContext(Dispatchers.IO) {
-            val filename = "calendar/liturgical_calendar.json"
-            try {
-                context.assets.open(filename).bufferedReader().use { reader ->
-                    val jsonString = reader.readText()
-                    liturgicalDates = json.decodeFromString<LiturgicalCalendarDates>(jsonString)
-                }
-            } catch (e: IOException) {
-                System.err.println("File $filename not found or could not be read. Error: ${e.message}")
-                throw e
-            } catch (e: SerializationException) {
-                System.err.println("Error decoding JSON from $filename. Please check file format. Error: ${e.message}")
-                throw e
-            }
-        }
-
-    private suspend fun readLiturgicalData() =
-        withContext(Dispatchers.IO) {
-            val filename = "calendar/liturgical_data.json"
-            try {
-                context.assets.open(filename).bufferedReader().use { reader ->
-                    val jsonString = reader.readText()
-                    liturgicalData = json.decodeFromString<LiturgicalDataStore>(jsonString)
-                }
-            } catch (e: IOException) {
-                System.err.println("File $filename not found or could not be read. Error: ${e.message}")
-                throw e
-            } catch (e: SerializationException) {
-                System.err.println("Error decoding JSON from $filename. Please check file format. Error: ${e.message}")
-                throw e
-            }
-        }
+    private val cachedLiturgicalData: LiturgicalDataStore by lazy {
+        calendarSource.readLiturgicalData() ?: throw IOException("Could not read from assets/calendar/liturgical_data.json")
+    }
 
     /**
      * Internal helper to get event keys for a specific date.
      */
     private fun getEventKeysForDate(day: LocalDate): List<EventKey> {
-        // Ensure data is initialized before accessing
-        if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
-            throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
-        }
-
-        return liturgicalDates[day.year.toString()]
+        return cachedLiturgicalDates[day.year.toString()]
             ?.get(day.monthValue.toString())
             ?.get(day.dayOfMonth.toString())
             ?: emptyList() // Return empty list if no events for the day
@@ -102,12 +48,12 @@ class CalendarRepositoryImpl @Inject constructor(
      * @throws IllegalArgumentException if an event key found in liturgical_calendar.json
      * is not present in liturgical_data.json.
      */
-    override fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsData> {
+    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsData> {
         val eventKeys = getEventKeysForDate(date)
         val eventDetails = mutableListOf<LiturgicalEventDetailsData>()
 
         for (key in eventKeys) {
-            val details = liturgicalData[key]
+            val details = cachedLiturgicalData[key]
             if (details != null) {
                 eventDetails.add(details)
             } else {
@@ -120,13 +66,7 @@ class CalendarRepositoryImpl @Inject constructor(
     override fun checkMonthDataExists(
         month: Int,
         year: Int,
-    ): Boolean {
-        // Ensure data is initialized
-        if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
-            throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
-        }
-        return liturgicalDates[year.toString()]?.get(month.toString()) is MonthEvents
-    }
+    ): Boolean = cachedLiturgicalDates[year.toString()]?.get(month.toString()) is MonthEvents
 
     /**
      * Loads the calendar data for a specific month and year, structured by weeks.
@@ -139,11 +79,6 @@ class CalendarRepositoryImpl @Inject constructor(
         month: Int?,
         year: Int?,
     ): List<CalendarWeek> {
-        // Ensure data is initialized
-        if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
-            throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
-        }
-
         val targetYear = year ?: LocalDate.now().year
         val targetMonth = month ?: LocalDate.now().monthValue
 
@@ -195,11 +130,6 @@ class CalendarRepositoryImpl @Inject constructor(
      * Only days with events will have non-empty event maps.
      */
     override fun getUpcomingWeekEvents(): List<CalendarDay> {
-        // Ensure data is initialized
-        if (!::liturgicalDates.isInitialized || !::liturgicalData.isInitialized) {
-            throw IllegalStateException("LiturgicalCalendarRepository not initialized. Call initialize() first.")
-        }
-
         val today = LocalDate.now()
         val weekEvents = mutableListOf<CalendarDay>()
 
@@ -214,12 +144,12 @@ class CalendarRepositoryImpl @Inject constructor(
         return weekEvents
     }
 
-    override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetailsData> {
+    override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
         val weekEvents = getUpcomingWeekEvents()
         val eventItems = mutableListOf<LiturgicalEventDetailsData>()
         weekEvents.forEach { day ->
             eventItems.addAll(day.events)
         }
-        return eventItems
+        return eventItems.toLiturgicalEventsDetailsDomain()
     }
 }

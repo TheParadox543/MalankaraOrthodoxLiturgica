@@ -20,3 +20,5 @@ fun LiturgicalEventDetailsData.toDomain(): LiturgicalEventDetails =
         specialSongsKey = this.specialSongsKey,
         startedYear = this.startedYear,
     )
+
+fun List<LiturgicalEventDetailsData>.toLiturgicalEventsDetailsDomain(): List<LiturgicalEventDetails> = map { it.toDomain() }
