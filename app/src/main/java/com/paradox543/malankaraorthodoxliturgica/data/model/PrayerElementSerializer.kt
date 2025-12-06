@@ -14,7 +14,7 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 
-object PrayerElementSerializer : KSerializer<PrayerElement> {
+object PrayerElementSerializer : KSerializer<PrayerElementData> {
     // Descriptor for the serializer itself. For polymorphic types, it's often simple.
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("PrayerElement")
 
@@ -34,7 +34,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
             // but for PrayerElement itself, we handle it manually.
         }
 
-    override fun deserialize(decoder: Decoder): PrayerElement {
+    override fun deserialize(decoder: Decoder): PrayerElementData {
         val jsonDecoder =
             decoder as? JsonDecoder
                 ?: throw SerializationException("This serializer can only be used with JsonDecoder")
@@ -50,38 +50,38 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
         return try {
             when (type) {
                 // Simple types
-                "title" -> json.decodeFromJsonElement(PrayerElement.Title.serializer(), element)
-                "heading" -> json.decodeFromJsonElement(PrayerElement.Heading.serializer(), element)
-                "subheading" -> json.decodeFromJsonElement(PrayerElement.Subheading.serializer(), element)
-                "prose" -> json.decodeFromJsonElement(PrayerElement.Prose.serializer(), element)
-                "song" -> json.decodeFromJsonElement(PrayerElement.Song.serializer(), element)
-                "subtext" -> json.decodeFromJsonElement(PrayerElement.Subtext.serializer(), element)
-                "source" -> json.decodeFromJsonElement(PrayerElement.Source.serializer(), element)
-                "button" -> json.decodeFromJsonElement(PrayerElement.Button.serializer(), element)
+                "title" -> json.decodeFromJsonElement(PrayerElementData.Title.serializer(), element)
+                "heading" -> json.decodeFromJsonElement(PrayerElementData.Heading.serializer(), element)
+                "subheading" -> json.decodeFromJsonElement(PrayerElementData.Subheading.serializer(), element)
+                "prose" -> json.decodeFromJsonElement(PrayerElementData.Prose.serializer(), element)
+                "song" -> json.decodeFromJsonElement(PrayerElementData.Song.serializer(), element)
+                "subtext" -> json.decodeFromJsonElement(PrayerElementData.Subtext.serializer(), element)
+                "source" -> json.decodeFromJsonElement(PrayerElementData.Source.serializer(), element)
+                "button" -> json.decodeFromJsonElement(PrayerElementData.Button.serializer(), element)
 
                 // Complex types
-                "collapsible-block" -> json.decodeFromJsonElement(PrayerElement.CollapsibleBlock.serializer(), element)
-                "link" -> json.decodeFromJsonElement(PrayerElement.Link.serializer(), element)
-                "link-collapsible" -> json.decodeFromJsonElement(PrayerElement.LinkCollapsible.serializer(), element)
-                "dynamic-song" -> json.decodeFromJsonElement(PrayerElement.DynamicSong.serializer(), element)
-                "dynamic-songs-block" -> json.decodeFromJsonElement(PrayerElement.DynamicSongsBlock.serializer(), element)
-                "alternative-prayers-block" -> json.decodeFromJsonElement(PrayerElement.AlternativePrayersBlock.serializer(), element)
-                "alternative-option" -> json.decodeFromJsonElement(PrayerElement.AlternativeOption.serializer(), element)
+                "collapsible-block" -> json.decodeFromJsonElement(PrayerElementData.CollapsibleBlock.serializer(), element)
+                "link" -> json.decodeFromJsonElement(PrayerElementData.Link.serializer(), element)
+                "link-collapsible" -> json.decodeFromJsonElement(PrayerElementData.LinkCollapsible.serializer(), element)
+                "dynamic-song" -> json.decodeFromJsonElement(PrayerElementData.DynamicSong.serializer(), element)
+                "dynamic-songs-block" -> json.decodeFromJsonElement(PrayerElementData.DynamicSongsBlock.serializer(), element)
+                "alternative-prayers-block" -> json.decodeFromJsonElement(PrayerElementData.AlternativePrayersBlock.serializer(), element)
+                "alternative-option" -> json.decodeFromJsonElement(PrayerElementData.AlternativeOption.serializer(), element)
 
                 // If you explicitly serialize PrayerElement.Error in your JSON, handle it:
-                "error" -> json.decodeFromJsonElement(PrayerElement.Error.serializer(), element)
+                "error" -> json.decodeFromJsonElement(PrayerElementData.Error.serializer(), element)
 
                 // --- Fallback for unknown types ---
                 else -> {
                     // Create an Error element with informative content
-                    PrayerElement.Error("Unknown or invalid PrayerElement type: '$type'.")
+                    PrayerElementData.Error("Unknown or invalid PrayerElement type: '$type'.")
                 }
             }
         } catch (_: Exception) {
             // Catch any serialization exceptions that might occur even for known types
             // (e.g., missing required fields, type mismatch for a property)
             Log.d("PrayerElementSerializer", "Error parsing PrayerElement: $element")
-            PrayerElement.Error("Error parsing PrayerElement: ${element.toString().substring(0, 10)}")
+            PrayerElementData.Error("Error parsing PrayerElement: ${element.toString().substring(0, 10)}")
         }
     }
 
@@ -90,7 +90,7 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
     // but essential if you ever serialize PrayerElement objects back to JSON.
     override fun serialize(
         encoder: Encoder,
-        value: PrayerElement,
+        value: PrayerElementData,
     ) {
         val jsonEncoder =
             encoder as? JsonEncoder
@@ -98,26 +98,26 @@ object PrayerElementSerializer : KSerializer<PrayerElement> {
 
         val jsonElement =
             when (value) {
-                is PrayerElement.Title -> json.encodeToJsonElement(PrayerElement.Title.serializer(), value)
-                is PrayerElement.Heading -> json.encodeToJsonElement(PrayerElement.Heading.serializer(), value)
-                is PrayerElement.Subheading -> json.encodeToJsonElement(PrayerElement.Subheading.serializer(), value)
-                is PrayerElement.Prose -> json.encodeToJsonElement(PrayerElement.Prose.serializer(), value)
-                is PrayerElement.Song -> json.encodeToJsonElement(PrayerElement.Song.serializer(), value)
-                is PrayerElement.Subtext -> json.encodeToJsonElement(PrayerElement.Subtext.serializer(), value)
-                is PrayerElement.Source -> json.encodeToJsonElement(PrayerElement.Source.serializer(), value)
-                is PrayerElement.Button -> json.encodeToJsonElement(PrayerElement.Button.serializer(), value)
-                is PrayerElement.CollapsibleBlock -> json.encodeToJsonElement(PrayerElement.CollapsibleBlock.serializer(), value)
-                is PrayerElement.Link -> json.encodeToJsonElement(PrayerElement.Link.serializer(), value)
-                is PrayerElement.LinkCollapsible -> json.encodeToJsonElement(PrayerElement.LinkCollapsible.serializer(), value)
-                is PrayerElement.DynamicSong -> json.encodeToJsonElement(PrayerElement.DynamicSong.serializer(), value)
-                is PrayerElement.DynamicSongsBlock -> json.encodeToJsonElement(PrayerElement.DynamicSongsBlock.serializer(), value)
-                is PrayerElement.AlternativePrayersBlock ->
+                is PrayerElementData.Title -> json.encodeToJsonElement(PrayerElementData.Title.serializer(), value)
+                is PrayerElementData.Heading -> json.encodeToJsonElement(PrayerElementData.Heading.serializer(), value)
+                is PrayerElementData.Subheading -> json.encodeToJsonElement(PrayerElementData.Subheading.serializer(), value)
+                is PrayerElementData.Prose -> json.encodeToJsonElement(PrayerElementData.Prose.serializer(), value)
+                is PrayerElementData.Song -> json.encodeToJsonElement(PrayerElementData.Song.serializer(), value)
+                is PrayerElementData.Subtext -> json.encodeToJsonElement(PrayerElementData.Subtext.serializer(), value)
+                is PrayerElementData.Source -> json.encodeToJsonElement(PrayerElementData.Source.serializer(), value)
+                is PrayerElementData.Button -> json.encodeToJsonElement(PrayerElementData.Button.serializer(), value)
+                is PrayerElementData.CollapsibleBlock -> json.encodeToJsonElement(PrayerElementData.CollapsibleBlock.serializer(), value)
+                is PrayerElementData.Link -> json.encodeToJsonElement(PrayerElementData.Link.serializer(), value)
+                is PrayerElementData.LinkCollapsible -> json.encodeToJsonElement(PrayerElementData.LinkCollapsible.serializer(), value)
+                is PrayerElementData.DynamicSong -> json.encodeToJsonElement(PrayerElementData.DynamicSong.serializer(), value)
+                is PrayerElementData.DynamicSongsBlock -> json.encodeToJsonElement(PrayerElementData.DynamicSongsBlock.serializer(), value)
+                is PrayerElementData.AlternativePrayersBlock ->
                     json.encodeToJsonElement(
-                        PrayerElement.AlternativePrayersBlock.serializer(),
+                        PrayerElementData.AlternativePrayersBlock.serializer(),
                         value,
                     )
-                is PrayerElement.AlternativeOption -> json.encodeToJsonElement(PrayerElement.AlternativeOption.serializer(), value)
-                is PrayerElement.Error -> json.encodeToJsonElement(PrayerElement.Error.serializer(), value)
+                is PrayerElementData.AlternativeOption -> json.encodeToJsonElement(PrayerElementData.AlternativeOption.serializer(), value)
+                is PrayerElementData.Error -> json.encodeToJsonElement(PrayerElementData.Error.serializer(), value)
             }
         jsonEncoder.encodeJsonElement(jsonElement)
     }

@@ -5,7 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.paradox543.malankaraorthodoxliturgica.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 
 @Composable
 fun ErrorBlock(
@@ -20,5 +20,5 @@ fun ErrorBlock(
         color = MaterialTheme.colorScheme.error,
         modifier = modifier.fillMaxWidth(),
     )
-    prayerViewModel.handlePrayerElementError(text, errorLocation)
+    prayerViewModel.reportError(text, errorLocation)
 }
