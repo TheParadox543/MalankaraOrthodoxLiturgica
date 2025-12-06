@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repository
+package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey

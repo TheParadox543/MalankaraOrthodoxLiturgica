@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repository
+package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
 
 import android.content.Context
 import android.net.ConnectivityManager
