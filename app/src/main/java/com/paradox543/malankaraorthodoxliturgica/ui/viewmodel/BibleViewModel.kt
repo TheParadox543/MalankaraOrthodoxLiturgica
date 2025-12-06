@@ -1,7 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleChapter
@@ -10,9 +9,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleVerse
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceContent
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatBiblePrefaceUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatBibleReadingEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetAdjacentChaptersUseCase
@@ -21,7 +19,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,35 +28,12 @@ class BibleViewModel @Inject constructor(
     private val getAdjacentChaptersUseCase: GetAdjacentChaptersUseCase,
     private val formatBibleReadingEntryUseCase: FormatBibleReadingEntryUseCase,
     private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
+    private val formatBiblePrefaceUseCase: FormatBiblePrefaceUseCase,
 ) : ViewModel() {
     val bibleBooks: List<BibleBookDetails> = bibleRepository.loadBibleMetaData()
 
-    private val _biblePrefaceTemplates =
-        MutableStateFlow(
-            PrefaceTemplates(
-                prophets = PrefaceContent(emptyList(), emptyList()),
-                generalEpistle = PrefaceContent(emptyList(), emptyList()),
-                paulineEpistle = PrefaceContent(emptyList(), emptyList()),
-            ),
-        )
-    val biblePrefaceTemplates: StateFlow<PrefaceTemplates> = _biblePrefaceTemplates.asStateFlow()
-
     private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
     val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
-
-    init {
-        viewModelScope.launch { loadBiblePrefaceTemplates() }
-    }
-
-    private fun loadBiblePrefaceTemplates() {
-        try {
-            val prefaceTemplates = bibleRepository.loadPrefaceTemplates()
-            _biblePrefaceTemplates.value = prefaceTemplates
-        } catch (e: Exception) {
-            // Handle error if needed
-            throw e
-        }
-    }
 
     fun loadBibleBook(bookNumber: Int): BibleBookDetails = bibleBooks[bookNumber]
 
@@ -102,58 +76,7 @@ class BibleViewModel @Inject constructor(
     fun loadBiblePreface(
         bibleReference: BibleReference,
         language: AppLanguage,
-    ): List<PrayerElementDomain>? {
-        val book = bibleBooks[bibleReference.bookNumber - 1]
-        val prefaceContent =
-            book.prefaces
-                ?: when (book.category) {
-                    "prophet" -> _biblePrefaceTemplates.value.prophets
-                    "generalEpistle" -> _biblePrefaceTemplates.value.generalEpistle
-                    "paulineEpistle" -> _biblePrefaceTemplates.value.paulineEpistle
-                    else -> return null
-                }
-
-        val sourcePreface: List<PrayerElementDomain> =
-            when (language) {
-                AppLanguage.MALAYALAM -> prefaceContent.ml
-                AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> prefaceContent.en
-            }
-
-        val title =
-            when (language) {
-                AppLanguage.MALAYALAM -> book.book.ml
-                AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> book.book.en
-            }
-        val displayTitle =
-            when (language) {
-                AppLanguage.MALAYALAM -> book.displayTitle?.ml ?: ""
-                AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> book.displayTitle?.en ?: ""
-            }
-        val ordinal =
-            when (language) {
-                AppLanguage.MALAYALAM -> book.ordinal?.ml ?: ""
-                AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> book.ordinal?.en ?: ""
-            }
-
-        // Use .map to create a new list with the replaced content
-        return sourcePreface.map { item ->
-            when (item) {
-                is PrayerElementDomain.Prose -> {
-                    item.copy(
-                        content =
-                            item.content
-                                .replace("{title}", title)
-                                .replace("{displayTitle}", displayTitle)
-                                .replace("{ordinal}", ordinal),
-                    )
-                }
-
-                else -> {
-                    item
-                }
-            }
-        }
-    }
+    ): List<PrayerElementDomain>? = formatBiblePrefaceUseCase(bibleReference, language)
 
     fun loadBibleReading(
         bibleReferences: List<BibleReference>,
