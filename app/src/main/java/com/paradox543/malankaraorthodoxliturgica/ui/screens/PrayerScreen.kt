@@ -60,7 +60,6 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
@@ -72,6 +71,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.components.Source
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Subtext
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Title
+import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
