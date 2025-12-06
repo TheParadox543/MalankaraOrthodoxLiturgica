@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.savedstate.SavedState
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
@@ -130,66 +129,6 @@ class SettingsViewModel @Inject constructor(
 
     fun setDndPermissionStatus(granted: Boolean) {
         _hasDndPermission.value = granted
-    }
-
-    fun logScreensVisited(
-        routePattern: String,
-        arguments: SavedState?,
-    ) {
-        val screenName: String
-        val screenClass: String
-
-        when {
-            // Case 1: "section/{route}"
-            routePattern.startsWith("section/") && routePattern.contains("{route}") -> {
-                val sectionRouteValue = arguments?.getString("route")
-                screenName = if (sectionRouteValue != null) "section/$sectionRouteValue" else routePattern
-                screenClass = "SectionScreen"
-            }
-
-            // Case 2: "prayerScreen/{route}
-            routePattern.startsWith("prayerScreen/") && routePattern.contains("{route}") -> {
-                val prayerRouteValue = arguments?.getString("route")
-                screenName = if (prayerRouteValue != null) "prayerScreen/$prayerRouteValue" else routePattern
-                screenClass = "PrayerScreen"
-            }
-
-            // Case 3: "bible/{bookName}"
-            routePattern.startsWith("bible/") && routePattern.contains("{bookName}") && !routePattern.contains("{chapterIndex}") -> {
-                val bookName = arguments?.getString("bookName")
-                screenName = if (bookName != null) "bible/$bookName" else routePattern
-                screenClass = "BibleBookScreen"
-            }
-
-            // Case 4: "bible/{bookIndex}/{chapterIndex}"
-            routePattern.startsWith("bible/") && routePattern.contains("{bookIndex}") && routePattern.contains("{chapterIndex}") -> {
-                val bookIndex = arguments?.getString("bookIndex")
-                val chapterIndex = arguments?.getString("chapterIndex")
-                screenName =
-                    when {
-                        bookIndex != null && chapterIndex != null -> "bible/$bookIndex/$chapterIndex"
-
-                        bookIndex != null -> "bible/$bookIndex"
-
-                        // Fallback if chapterIndex is missing but bookIndex isn't
-                        else -> routePattern
-                    }
-                screenClass = "BibleChapterScreen"
-            }
-
-            // Default Case: For static routes or other unhandled patterns
-            else -> {
-                screenName = routePattern
-                screenClass = "StaticScreen" // Or "ComposeScreen"
-            }
-        }
-
-        val bundle =
-            Bundle().apply {
-                putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
-                putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
-            }
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
     }
 
     /**

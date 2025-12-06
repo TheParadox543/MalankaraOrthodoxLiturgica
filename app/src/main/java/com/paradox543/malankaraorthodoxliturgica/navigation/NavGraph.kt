@@ -1,7 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -15,6 +14,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
+import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
@@ -38,6 +38,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 @Composable
 fun NavGraph(
     inAppReviewManager: InAppReviewManager,
+    analyticsService: AnalyticsService,
     modifier: Modifier = Modifier,
 ) {
     val prayerViewModel: PrayerViewModel = hiltViewModel()
@@ -50,11 +51,8 @@ fun NavGraph(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val arguments = navBackStackEntry?.arguments
-    val rootNode by prayerNavViewModel.rootNode.collectAsState()
-    LaunchedEffect(currentRoute, arguments) {
-        if (currentRoute != null) {
-            settingsViewModel.logScreensVisited(currentRoute, arguments)
-        }
+    navController.addOnDestinationChangedListener { _, destination, arguments ->
+        analyticsService.logScreensVisited(destination.route ?: "", arguments)
     }
 
     NavHost(
