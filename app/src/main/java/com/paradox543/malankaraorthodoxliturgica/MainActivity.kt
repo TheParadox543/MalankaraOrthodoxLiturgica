@@ -24,11 +24,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.paradox543.malankaraorthodoxliturgica.data.repository.RestoreSoundWorker
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.domain.model.StartupState
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.services.RestoreSoundWorker
+import com.paradox543.malankaraorthodoxliturgica.services.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
@@ -75,9 +75,10 @@ class MainActivity : ComponentActivity() {
             val startupState by startupViewModel.startupState.collectAsState()
             when (val s = startupState) {
                 is StartupState.Loading -> {}
+
                 is StartupState.Ready -> {
                     val onboardingCompleted = s.onboardingCompleted
-                    val soundMode by settingsViewModel.soundMode.collectAsState()
+                    val soundMode = s.soundMode
                     MalankaraOrthodoxLiturgicaTheme(
                         language = s.language,
                         textScale = s.fontScale,
