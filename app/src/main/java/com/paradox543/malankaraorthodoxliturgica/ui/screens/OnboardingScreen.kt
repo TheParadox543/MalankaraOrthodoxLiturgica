@@ -34,9 +34,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
@@ -164,9 +164,9 @@ fun OnboardingScreen(
                     settingsViewModel.setFontScaleFromSettings(selectedFontScale)
                     settingsViewModel.setOnboardingCompleted()
                     // Navigate to the home screen
-                    navController.navigate(Screen.Home.route) {
+                    navController.navigate(AppScreen.Home.route) {
                         // Define your main app route
-                        popUpTo(Screen.Onboarding.route) {
+                        popUpTo(AppScreen.Onboarding.route) {
                             // Remove onboarding from back stack
                             inclusive = true
                         }

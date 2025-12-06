@@ -25,11 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
@@ -130,7 +130,7 @@ fun BibleCard(
                 .height(48.dp)
                 .clickable {
                     Log.d("BibleScreen", "BibleCard: $bookName, Index: $index")
-                    navController.navigate(Screen.BibleBook.createRoute(index))
+                    navController.navigate(AppScreen.BibleBook.createRoute(index))
                 },
         shape = RoundedCornerShape(8.dp),
         colors =

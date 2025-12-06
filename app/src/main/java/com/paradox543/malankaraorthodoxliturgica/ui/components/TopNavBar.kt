@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,7 +54,7 @@ fun TopNavBar(
             }
         },
         navigationIcon = {
-            if (currentRoute != Screen.Home.route) {
+            if (currentRoute != AppScreen.Home.route) {
                 IconButton(onClick = { navController.navigateUp() }) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
@@ -66,8 +66,8 @@ fun TopNavBar(
             }
         },
         actions = {
-            if (currentRoute != Screen.Settings.route) {
-                IconButton(onClick = { navController.navigate(Screen.Settings.route) }) {
+            if (currentRoute != AppScreen.Settings.route) {
+                IconButton(onClick = { navController.navigate(AppScreen.Settings.route) }) {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = "Settings",

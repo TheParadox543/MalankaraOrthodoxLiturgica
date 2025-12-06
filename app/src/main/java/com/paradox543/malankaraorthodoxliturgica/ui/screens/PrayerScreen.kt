@@ -57,7 +57,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
@@ -72,6 +71,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Subtext
 import com.paradox543.malankaraorthodoxliturgica.ui.components.Title
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
@@ -185,7 +185,7 @@ fun PrayerScreen(
                         prevNodeRoute,
                         nextNodeRoute,
                         routeProvider = {
-                            Screen.Prayer.createDeepLink(
+                            AppScreen.Prayer.createDeepLink(
                                 node.route,
                                 listState.firstVisibleItemIndex,
                             )
@@ -216,9 +216,9 @@ fun PrayerScreen(
             var retryCount = 0
             if (scrollIndex > 0) {
                 while (listState.firstVisibleItemIndex != scrollIndex && retryCount < 10) {
-                    Log.d("QR in Prayer Screen", "Detected scroll from Qr: $scrollIndex")
+                    Log.d("QR in Prayer AppScreen", "Detected scroll from Qr: $scrollIndex")
                     listState.scrollToItem(scrollIndex)
-                    Log.d("QR in Prayer Screen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
+                    Log.d("QR in Prayer AppScreen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
                     retryCount++
                     delay(100) // Small delay to allow UI to update
                 }
@@ -399,7 +399,7 @@ fun PrayerButton(
     ) {
         Button(
             onClick = {
-                navController.navigate(Screen.Prayer.createRoute(prayerButton.link)) {
+                navController.navigate(AppScreen.Prayer.createRoute(prayerButton.link)) {
                     if (prayerButton.replace) {
                         navController.popBackStack()
                     }

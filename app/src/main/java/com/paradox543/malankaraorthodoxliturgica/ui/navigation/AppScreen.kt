@@ -1,31 +1,28 @@
-package com.paradox543.malankaraorthodoxliturgica.data.model
+package com.paradox543.malankaraorthodoxliturgica.ui.navigation
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-sealed class Screen(
+sealed class AppScreen(
     val route: String,
     val deepLink: String? = null,
 ) {
-    object Home : Screen("home", "app://liturgica/home")
+    object Home : AppScreen("home", "app://liturgica/home")
 
-    object Onboarding : Screen("onboarding")
+    object Onboarding : AppScreen("onboarding")
 
-    object PrayNow : Screen("prayNow")
+    object PrayNow : AppScreen("prayNow")
 
-    object Bible : Screen("bible", "app://liturgica/bible")
+    object Bible : AppScreen("bible", "app://liturgica/bible")
 
-    object BibleReader : Screen("bibleReader")
+    object BibleReader : AppScreen("bibleReader")
 
-    object Calendar : Screen("calendar", "app://liturgica/calendar")
+    object Calendar : AppScreen("calendar", "app://liturgica/calendar")
 
-    object QrScanner : Screen("qrScanner")
+    object QrScanner : AppScreen("qrScanner")
 
-    object Settings : Screen("settings", "app://liturgica/settings")
+    object Settings : AppScreen("settings", "app://liturgica/settings")
 
-    object About : Screen("about", "app://liturgica/about")
+    object About : AppScreen("about", "app://liturgica/about")
 
-    object Section : Screen("section/{route}") {
+    object Section : AppScreen("section/{route}") {
         const val ARG_ROUTE = "route"
         const val DEEP_LINK_PATTERN = "app://liturgica/section/{$ARG_ROUTE}"
 
@@ -34,7 +31,7 @@ sealed class Screen(
         fun createDeepLink(sectionRoute: String) = "app://liturgica/section/$sectionRoute"
     }
 
-    object Prayer : Screen("prayer/{route}/{scroll}") {
+    object Prayer : AppScreen("prayer/{route}/{scroll}") {
         const val ARG_ROUTE = "route"
         const val ARG_SCROLL = "scroll"
         const val DEEP_LINK_PATTERN = "app://liturgica/prayer/{$ARG_ROUTE}/{$ARG_SCROLL}"
@@ -50,13 +47,13 @@ sealed class Screen(
         ) = "app://liturgica/prayer/$prayerRoute/$scroll"
     }
 
-    object Song : Screen("song/{route}") {
+    object Song : AppScreen("song/{route}") {
         const val ARG_ROUTE = "route"
 
         fun createRoute(songRoute: String) = "song/$songRoute"
     }
 
-    object BibleBook : Screen("bible/{bookIndex}") {
+    object BibleBook : AppScreen("bible/{bookIndex}") {
         const val ARG_BOOK_INDEX = "bookIndex"
         const val DEEP_LINK_PATTERN = "app://liturgica/bible/{$ARG_BOOK_INDEX}"
 
@@ -65,7 +62,7 @@ sealed class Screen(
         fun createDeepLink(bookIndex: Int) = "app://liturgica/bible/$bookIndex"
     }
 
-    object BibleChapter : Screen("bible/{bookIndex}/{chapterIndex}") {
+    object BibleChapter : AppScreen("bible/{bookIndex}/{chapterIndex}") {
         const val ARG_BOOK_INDEX = "bookIndex"
         const val ARG_CHAPTER_INDEX = "chapterIndex"
         const val DEEP_LINK_PATTERN = "app://liturgica/bible/{$ARG_BOOK_INDEX}/{$ARG_CHAPTER_INDEX}"

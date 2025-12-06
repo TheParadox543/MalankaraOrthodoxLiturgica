@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +41,7 @@ fun QrFabScan(
     ) {
         FloatingActionButton(
             onClick = {
-                navController.navigate(Screen.QrScanner.route)
+                navController.navigate(AppScreen.QrScanner.route)
             },
             modifier = modifier,
             containerColor = MaterialTheme.colorScheme.primary,
