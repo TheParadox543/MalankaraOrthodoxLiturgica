@@ -24,6 +24,7 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.services.ShareService
 import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
@@ -43,6 +44,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var analyticsService: AnalyticsService
+
+    @Inject
+    lateinit var shareService: ShareService
 
     @Inject
     lateinit var soundModeManager: SoundModeManager
@@ -106,7 +110,12 @@ class MainActivity : ComponentActivity() {
                             soundModeManager.apply(soundMode)
                         }
                         Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
-                            NavGraph(inAppReviewManager, analyticsService, Modifier.padding(innerPadding))
+                            NavGraph(
+                                inAppReviewManager,
+                                analyticsService,
+                                shareService,
+                                Modifier.padding(innerPadding),
+                            )
                         }
                     }
                 }

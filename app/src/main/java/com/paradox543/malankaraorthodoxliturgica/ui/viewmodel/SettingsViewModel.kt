@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +12,9 @@ import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -35,6 +35,9 @@ class SettingsViewModel @Inject constructor(
 
     private val _hasDndPermission = MutableStateFlow(false)
     val hasDndPermission = _hasDndPermission.asStateFlow()
+
+    private val _shareApp = MutableSharedFlow<Unit>()
+    val shareApp = _shareApp.asSharedFlow()
 
     // Internal MutableStateFlow to track AppFontSize changes for debounced saving
     private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
@@ -131,42 +134,7 @@ class SettingsViewModel @Inject constructor(
         _hasDndPermission.value = granted
     }
 
-    /**
-     * Launches an Android share intent to share the app's Play Store link.
-     * @param shareMessage An optional custom message to include.
-     * @param appPackageName Your app's package name.
-     */
-    fun shareAppPlayStoreLink(
-        context: Context,
-        shareMessage: String = "",
-        appPackageName: String? = null,
-    ) {
-        val appPackageName = appPackageName ?: "com.paradox543.malankaraorthodoxliturgica"
-        val playStoreLink = "https://play.google.com/store/apps/details?id=$appPackageName"
-
-        val shareIntent =
-            Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain" // We are sharing plain text
-                putExtra(Intent.EXTRA_SUBJECT, "Check out this amazing app!") // Subject for email/other apps
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    "$shareMessage\n$playStoreLink", // Your message + the Play Store link
-                )
-            }
-
-        // Check if there's any app to handle this intent
-        if (shareIntent.resolveActivity(context.packageManager) != null) {
-            context.startActivity(Intent.createChooser(shareIntent, "Share App Via"))
-            val bundle =
-                Bundle().apply {
-                    putString(FirebaseAnalytics.Param.CONTENT_TYPE, "share_app")
-                    putString(FirebaseAnalytics.Param.ITEM_ID, "app_link")
-                    putString(FirebaseAnalytics.Param.METHOD, "text/plain")
-                }
-            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
-        } else {
-            // Optionally, show a toast or message if no app can handle the share intent
-            // Toast.makeText(context, "No app found to share with.", Toast.LENGTH_SHORT).show()
-        }
+    fun onShareAppClicked() {
+        viewModelScope.launch { _shareApp.emit(Unit) }
     }
 }
