@@ -16,6 +16,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
+import com.paradox543.malankaraorthodoxliturgica.services.ShareService
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
@@ -39,6 +40,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 fun NavGraph(
     inAppReviewManager: InAppReviewManager,
     analyticsService: AnalyticsService,
+    shareService: ShareService,
     modifier: Modifier = Modifier,
 ) {
     val prayerViewModel: PrayerViewModel = hiltViewModel()
@@ -178,7 +180,7 @@ fun NavGraph(
             Screen.Settings.route,
             deepLinks = listOf(navDeepLink { uriPattern = Screen.Settings.deepLink!! }),
         ) {
-            SettingsScreen(navController, settingsViewModel)
+            SettingsScreen(navController, settingsViewModel, shareService)
         }
 
         composable(

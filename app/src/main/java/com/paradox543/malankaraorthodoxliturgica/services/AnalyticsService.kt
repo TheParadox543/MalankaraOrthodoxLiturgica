@@ -33,6 +33,16 @@ class AnalyticsService @Inject constructor(
         firebaseAnalytics.logEvent("app_error", bundle)
     }
 
+    fun logShareEvent() {
+        val bundle =
+            Bundle().apply {
+                putString(FirebaseAnalytics.Param.CONTENT_TYPE, "share_app")
+                putString(FirebaseAnalytics.Param.ITEM_ID, "app_link")
+                putString(FirebaseAnalytics.Param.METHOD, "text/plain")
+            }
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
+    }
+
     fun logScreensVisited(
         routePattern: String,
         arguments: SavedState?,

@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
+import android.app.Activity
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
@@ -48,6 +49,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,6 +61,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
@@ -68,6 +71,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.services.ShareService
 import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
@@ -76,6 +80,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 fun SettingsScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel,
+    shareService: ShareService,
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontScale by settingsViewModel.fontScale.collectAsState()
@@ -89,6 +94,19 @@ fun SettingsScreen(
     var showQrCodeDialog by remember { mutableStateOf(false) }
     var showRestoreDialog by remember { mutableStateOf(false) }
     var showShareAppBottomSheet by remember { mutableStateOf(false) }
+    val activity = LocalContext.current as? Activity
+
+    LaunchedEffect(Unit) {
+        settingsViewModel.shareApp.collect {
+            activity?.let {
+                shareService.shareAppLink(
+                    it,
+                    "Welcome to Liturgica: A digital repository for " +
+                        "all your books in the Malankara Orthodox Church",
+                )
+            }
+        }
+    }
 
     Scaffold(
         topBar = { TopNavBar("Settings", navController) },
@@ -324,12 +342,7 @@ fun SettingsScreen(
                         .padding(8.dp)
                         .clickable(
                             onClick = {
-                                settingsViewModel.shareAppPlayStoreLink(
-                                    context = context,
-                                    shareMessage =
-                                        "Welcome to Liturgica: A digital repository for " +
-                                            "all your books in the Malankara Orthodox Church", // Your custom message
-                                )
+                                settingsViewModel.onShareAppClicked()
                             },
                         ),
                 ) {
