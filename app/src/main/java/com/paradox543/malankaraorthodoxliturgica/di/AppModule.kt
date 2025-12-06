@@ -15,7 +15,6 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.firebase.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storage
-import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

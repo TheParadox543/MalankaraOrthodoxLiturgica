@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repository
+package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
 
 import com.paradox543.malankaraorthodoxliturgica.data.datasource.PrayerSource
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
