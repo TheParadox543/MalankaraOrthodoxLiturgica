@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.utils
+package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
 fun String.applyPrayerReplacements(): String =
     this

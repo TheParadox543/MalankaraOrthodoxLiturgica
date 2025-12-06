@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.applyPrayerReplacements
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 
@@ -24,37 +25,37 @@ private fun PrayerElementDomain.DynamicSong.toDataSong(): PrayerElementData.Dyna
 fun PrayerElementData.toDomain(): PrayerElementDomain =
     when (this) {
         is PrayerElementData.Title -> {
-            PrayerElementDomain.Title(content)
+            PrayerElementDomain.Title(content.applyPrayerReplacements())
         }
 
         is PrayerElementData.Heading -> {
-            PrayerElementDomain.Heading(content)
+            PrayerElementDomain.Heading(content.applyPrayerReplacements())
         }
 
         is PrayerElementData.Subheading -> {
-            PrayerElementDomain.Subheading(content)
+            PrayerElementDomain.Subheading(content.applyPrayerReplacements())
         }
 
         is PrayerElementData.Prose -> {
-            PrayerElementDomain.Prose(content)
+            PrayerElementDomain.Prose(content.applyPrayerReplacements())
         }
 
         is PrayerElementData.Song -> {
-            PrayerElementDomain.Song(content)
+            PrayerElementDomain.Song(content.applyPrayerReplacements())
         }
 
         is PrayerElementData.Subtext -> {
-            PrayerElementDomain.Subtext(content)
+            PrayerElementDomain.Subtext(content.applyPrayerReplacements())
         }
 
         is PrayerElementData.Source -> {
-            PrayerElementDomain.Source(content)
+            PrayerElementDomain.Source(content.applyPrayerReplacements())
         }
 
         is PrayerElementData.Button -> {
             PrayerElementDomain.Button(
                 link = link,
-                label = label,
+                label = label?.applyPrayerReplacements(),
                 replace = replace,
             )
         }
