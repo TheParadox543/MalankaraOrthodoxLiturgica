@@ -1,0 +1,24 @@
+package com.paradox543.malankaraorthodoxliturgica.domain.model
+
+enum class AppLanguage(
+    val code: String,
+    val displayName: String,
+) {
+    MALAYALAM("ml", "മലയാളം"),
+    ENGLISH("en", "English"),
+    MANGLISH("mn", "Manglish (Malayalam in English Script)"),
+    INDIC("indic", "Indic (Malayalam in Indic Script)"),
+    ;
+
+    companion object {
+        fun fromCode(code: String): AppLanguage? = entries.find { it.code == code }
+    }
+
+    fun properLanguageMapper(): String =
+        when (this) {
+            MALAYALAM -> this.code
+            ENGLISH -> this.code
+            MANGLISH -> ENGLISH.code
+            INDIC -> ENGLISH.code
+        }
+}

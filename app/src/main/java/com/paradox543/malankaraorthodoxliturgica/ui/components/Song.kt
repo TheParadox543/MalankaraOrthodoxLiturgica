@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.paradox543.malankaraorthodoxliturgica.utils.applyPrayerReplacements
 
 @Composable
 fun Song(
@@ -39,7 +38,7 @@ fun Song(
                 ),
     ) {
         Text(
-            text = text.applyPrayerReplacements(),
+            text = text,
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Start,
             modifier =
