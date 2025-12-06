@@ -1,11 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
-import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.savedstate.SavedState
@@ -14,6 +11,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -27,6 +25,7 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
     private val firebaseAnalytics: FirebaseAnalytics,
+    private val soundModeManager: SoundModeManager,
 ) : ViewModel() {
     val selectedLanguage = settingsRepository.language
     val onboardingCompleted = settingsRepository.onboardingCompleted
@@ -112,6 +111,11 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    fun refreshDndPermissionStatus() {
+        val granted = soundModeManager.checkDndPermission()
+        setDndPermissionStatus(granted)
+    }
+
     fun setSoundMode(permissionState: SoundMode) {
         viewModelScope.launch {
             settingsRepository.setSoundMode(permissionState)
@@ -126,13 +130,6 @@ class SettingsViewModel @Inject constructor(
 
     fun setDndPermissionStatus(granted: Boolean) {
         _hasDndPermission.value = granted
-//        if (!granted) {
-//            _soundMode.value = SoundMode.OFF
-//        } else {
-//            viewModelScope.launch {
-//                _soundMode.value = settingsRepository.getSoundMode()
-//            }
-//        }
     }
 
     fun logScreensVisited(
@@ -149,6 +146,7 @@ class SettingsViewModel @Inject constructor(
                 screenName = if (sectionRouteValue != null) "section/$sectionRouteValue" else routePattern
                 screenClass = "SectionScreen"
             }
+
             // Case 2: "prayerScreen/{route}
             routePattern.startsWith("prayerScreen/") && routePattern.contains("{route}") -> {
                 val prayerRouteValue = arguments?.getString("route")
@@ -162,6 +160,7 @@ class SettingsViewModel @Inject constructor(
                 screenName = if (bookName != null) "bible/$bookName" else routePattern
                 screenClass = "BibleBookScreen"
             }
+
             // Case 4: "bible/{bookIndex}/{chapterIndex}"
             routePattern.startsWith("bible/") && routePattern.contains("{bookIndex}") && routePattern.contains("{chapterIndex}") -> {
                 val bookIndex = arguments?.getString("bookIndex")
@@ -169,11 +168,15 @@ class SettingsViewModel @Inject constructor(
                 screenName =
                     when {
                         bookIndex != null && chapterIndex != null -> "bible/$bookIndex/$chapterIndex"
-                        bookIndex != null -> "bible/$bookIndex" // Fallback if chapterIndex is missing but bookIndex isn't
+
+                        bookIndex != null -> "bible/$bookIndex"
+
+                        // Fallback if chapterIndex is missing but bookIndex isn't
                         else -> routePattern
                     }
                 screenClass = "BibleChapterScreen"
             }
+
             // Default Case: For static routes or other unhandled patterns
             else -> {
                 screenName = routePattern
@@ -226,19 +229,5 @@ class SettingsViewModel @Inject constructor(
             // Optionally, show a toast or message if no app can handle the share intent
             // Toast.makeText(context, "No app found to share with.", Toast.LENGTH_SHORT).show()
         }
-    }
-}
-
-fun requestDndPermission(context: Context) {
-    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    if (!notificationManager.isNotificationPolicyAccessGranted) {
-        Toast
-            .makeText(
-                context,
-                "Please grant the app access to modify DND in settings.",
-                Toast.LENGTH_LONG,
-            ).show()
-        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-        context.startActivity(intent)
     }
 }
