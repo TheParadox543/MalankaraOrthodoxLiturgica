@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.navigation
+package com.paradox543.malankaraorthodoxliturgica.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer

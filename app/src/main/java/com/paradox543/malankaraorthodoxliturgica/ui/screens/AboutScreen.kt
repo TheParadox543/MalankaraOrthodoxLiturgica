@@ -27,7 +27,7 @@ import androidx.core.net.toUri
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 
 @Composable
 fun AboutScreen(navController: NavController) {
