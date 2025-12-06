@@ -34,10 +34,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
@@ -176,7 +176,7 @@ private fun PrayNowCard(
                 .clickable {
                     if (node.filename != null) {
                         prayerViewModel.onPrayerSelected(translatedParts, node.route)
-                        navController.navigate(Screen.Prayer.createRoute(node.route))
+                        navController.navigate(AppScreen.Prayer.createRoute(node.route))
                     } else {
                         Log.w("PrayNowScreen", "No file found")
                         errorState = true

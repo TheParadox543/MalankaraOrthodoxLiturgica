@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import javax.inject.Inject
 
 class GetAdjacentSiblingRoutesUseCase @Inject constructor(
@@ -20,8 +20,8 @@ class GetAdjacentSiblingRoutesUseCase @Inject constructor(
         val prev = siblings.getOrNull(index - 1)
         val next = siblings.getOrNull(index + 1)
 
-        val prevRoute = prev?.filename?.let { Screen.Prayer.createRoute(prev.route) }
-        val nextRoute = next?.filename?.let { Screen.Prayer.createRoute(next.route) }
+        val prevRoute = prev?.filename?.let { AppScreen.Prayer.createRoute(prev.route) }
+        val nextRoute = next?.filename?.let { AppScreen.Prayer.createRoute(next.route) }
 
         return Pair(prevRoute, nextRoute)
     }

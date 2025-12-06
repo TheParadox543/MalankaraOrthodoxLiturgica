@@ -21,9 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
@@ -73,7 +73,7 @@ fun BibleChapterCard(
                 .fillMaxSize()
                 .aspectRatio(1f)
                 .clickable {
-                    navController.navigate(Screen.BibleChapter.createRoute(bookIndex, chapterIndex))
+                    navController.navigate(AppScreen.BibleChapter.createRoute(bookIndex, chapterIndex))
                 },
         shape = RoundedCornerShape(8.dp),
         colors =
