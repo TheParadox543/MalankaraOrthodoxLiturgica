@@ -4,11 +4,13 @@ import com.paradox543.malankaraorthodoxliturgica.data.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.data.repository.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.PrayerRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.SettingsRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.data.repository.SongRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repository.TranslationsRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.TranslationsRepository
 import dagger.Binds
 import dagger.Module
@@ -35,4 +37,7 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindBibleRepository(impl: BibleRepositoryImpl): BibleRepository
+
+    @Binds
+    abstract fun bindSongRepository(impl: SongRepositoryImpl): SongRepository
 }

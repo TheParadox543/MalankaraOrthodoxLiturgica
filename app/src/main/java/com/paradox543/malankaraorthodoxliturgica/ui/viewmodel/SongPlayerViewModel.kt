@@ -8,8 +8,8 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
-import com.paradox543.malankaraorthodoxliturgica.data.repository.SongRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.domain.model.MediaStatus
+import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SongPlayerViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val songRepositoryImpl: SongRepositoryImpl,
+    private val songRepository: SongRepository,
 ) : ViewModel() {
     // ExoPlayer managed by ViewModel (uses application context to avoid leaking Activity)
     private val exoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()
@@ -82,7 +82,7 @@ class SongPlayerViewModel @Inject constructor(
 
         _mediaStatus.value = MediaStatus.Loading
         viewModelScope.launch {
-            when (val result = songRepositoryImpl.getSong(songFilename)) {
+            when (val result = songRepository.getSong(songFilename)) {
                 is SongResult.Success -> {
                     _songFilename.value = songFilename
                     _mediaStatus.value = MediaStatus.Ready(result.message, result.uri)
