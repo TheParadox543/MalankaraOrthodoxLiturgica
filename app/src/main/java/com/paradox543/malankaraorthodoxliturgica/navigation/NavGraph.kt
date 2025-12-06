@@ -15,6 +15,7 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.data.model.Screen
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
+import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
@@ -35,7 +36,10 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
-fun NavGraph(modifier: Modifier = Modifier) {
+fun NavGraph(
+    inAppReviewManager: InAppReviewManager,
+    modifier: Modifier = Modifier,
+) {
     val prayerViewModel: PrayerViewModel = hiltViewModel()
     val bibleViewModel: BibleViewModel = hiltViewModel()
     val prayerNavViewModel: PrayerNavViewModel = hiltViewModel()
@@ -66,7 +70,7 @@ fun NavGraph(modifier: Modifier = Modifier) {
             Screen.Home.route,
             deepLinks = listOf(navDeepLink { uriPattern = Screen.Home.deepLink!! }),
         ) {
-            HomeScreen(navController, prayerViewModel, prayerNavViewModel)
+            HomeScreen(navController, prayerViewModel, prayerNavViewModel, inAppReviewManager)
         }
 
         composable(Screen.Onboarding.route) {
@@ -81,7 +85,7 @@ fun NavGraph(modifier: Modifier = Modifier) {
             val route = backStackEntry.arguments?.getString(Screen.Section.ARG_ROUTE) ?: ""
             val node = prayerNavViewModel.findNode(route)
             if (node != null) {
-                SectionScreen(navController, prayerViewModel, node)
+                SectionScreen(navController, prayerViewModel, node, inAppReviewManager)
             } else {
                 ContentNotReadyScreen(navController, modifier, message = route)
             }

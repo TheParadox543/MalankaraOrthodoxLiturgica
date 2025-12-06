@@ -20,5 +20,5 @@ fun ErrorBlock(
         color = MaterialTheme.colorScheme.error,
         modifier = modifier.fillMaxWidth(),
     )
-    prayerViewModel.handlePrayerElementError(text, errorLocation)
+    prayerViewModel.reportError(text, errorLocation)
 }
