@@ -7,5 +7,6 @@ sealed class StartupState {
         val language: AppLanguage,
         val fontScale: AppFontScale,
         val onboardingCompleted: Boolean,
+        val soundMode: SoundMode,
     ) : StartupState()
 }

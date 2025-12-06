@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repository
+package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.content.Context
 import androidx.hilt.work.HiltWorker

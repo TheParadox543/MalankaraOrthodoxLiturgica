@@ -1,17 +1,15 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repository
+package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Context.AUDIO_SERVICE
-import android.content.Context.NOTIFICATION_SERVICE
 import android.media.AudioManager
 import android.util.Log
 import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
 
 object SoundModeManager {
     fun checkPreviousFilterState(context: Context): Boolean {
-        val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         return notificationManager.currentInterruptionFilter != NotificationManager.INTERRUPTION_FILTER_ALL ||
             audioManager.ringerMode != AudioManager.RINGER_MODE_NORMAL
     }
@@ -46,8 +44,8 @@ object SoundModeManager {
         soundMode: SoundMode,
         active: Boolean,
     ) {
-        val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val audioManager = context.getSystemService(AUDIO_SERVICE) as AudioManager
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         Log.d(
             "SoundModeManager",
             "Applied notif settings: DND=${notificationManager.currentInterruptionFilter}, Silent=${audioManager.ringerMode}",
@@ -61,8 +59,14 @@ object SoundModeManager {
                 setSilentMode(false, audioManager)
                 setDndMode(false, notificationManager)
             }
-            SoundMode.SILENT -> setSilentMode(active, audioManager)
-            SoundMode.DND -> setDndMode(active, notificationManager)
+
+            SoundMode.SILENT -> {
+                setSilentMode(active, audioManager)
+            }
+
+            SoundMode.DND -> {
+                setDndMode(active, notificationManager)
+            }
         }
     }
 }
