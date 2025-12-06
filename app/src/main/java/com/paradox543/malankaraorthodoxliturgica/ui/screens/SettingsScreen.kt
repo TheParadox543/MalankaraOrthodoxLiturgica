@@ -1,6 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -65,7 +70,6 @@ import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.requestDndPermission
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -173,6 +177,7 @@ fun SettingsScreen(
                             color = MaterialTheme.colorScheme.error,
                         )
                         Button(
+//                            onClick = { settingsViewModel.refreshDndPermissionStatus() },
                             onClick = { requestDndPermission(context) },
                             modifier = Modifier.padding(top = 4.dp),
                         ) {
@@ -538,4 +543,18 @@ fun QrCodeShareDialog(onDismissRequest: () -> Unit) {
             }
         },
     )
+}
+
+fun requestDndPermission(context: Context) {
+    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    if (!notificationManager.isNotificationPolicyAccessGranted) {
+        Toast
+            .makeText(
+                context,
+                "Please grant the app access to modify DND in settings.",
+                Toast.LENGTH_LONG,
+            ).show()
+        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+        context.startActivity(intent)
+    }
 }

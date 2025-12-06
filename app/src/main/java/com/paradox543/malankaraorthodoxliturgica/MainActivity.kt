@@ -1,8 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica
 
-import android.app.NotificationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -21,20 +19,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import androidx.work.ExistingWorkPolicy
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.paradox543.malankaraorthodoxliturgica.domain.model.StartupState
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
-import com.paradox543.malankaraorthodoxliturgica.services.RestoreSoundWorker
-import com.paradox543.malankaraorthodoxliturgica.services.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -44,9 +37,7 @@ class MainActivity : ComponentActivity() {
     lateinit var inAppUpdateManager: InAppUpdateManager
 
     @Inject
-    lateinit var workManager: WorkManager
-
-    private var previousInterruptionFilter: Boolean? = null
+    lateinit var soundModeManager: SoundModeManager
 
     // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
@@ -78,7 +69,7 @@ class MainActivity : ComponentActivity() {
 
                 is StartupState.Ready -> {
                     val onboardingCompleted = s.onboardingCompleted
-                    val soundMode = s.soundMode
+                    val soundMode by settingsViewModel.soundMode.collectAsState()
                     MalankaraOrthodoxLiturgicaTheme(
                         language = s.language,
                         textScale = s.fontScale,
@@ -104,16 +95,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                         LaunchedEffect(soundMode) {
-                            Log.d(
-                                "SoundMode MainActivity",
-                                "SoundMode changed $soundMode, previousInterruptionFilter: $previousInterruptionFilter",
-                            )
-                            if (previousInterruptionFilter == null) {
-                                previousInterruptionFilter = SoundModeManager.checkPreviousFilterState(applicationContext)
-                            }
-                            if (previousInterruptionFilter != true) {
-                                SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
-                            }
+                            soundModeManager.apply(soundMode)
                         }
                         Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
                             NavGraph(Modifier.padding(innerPadding))
@@ -129,37 +111,17 @@ class MainActivity : ComponentActivity() {
         // The selected code from the Canvas is used here.
         // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
-        // Cancel pending restore sound work if any
-        workManager.cancelUniqueWork("restore_sound_mode")
 
+        settingsViewModel.refreshDndPermissionStatus()
+        soundModeManager.cancelRestoreWork()
         val soundMode = settingsViewModel.soundMode.value
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        settingsViewModel.setDndPermissionStatus(notificationManager.isNotificationPolicyAccessGranted)
-        if (previousInterruptionFilter != true) {
-            SoundModeManager.applyAppSoundMode(applicationContext, soundMode, true)
-        }
+        soundModeManager.apply(soundMode)
     }
 
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
         // Schedule sound restoration when app goes to background
-        if (previousInterruptionFilter != true) {
-            scheduleSoundModeRestore()
-        }
-    }
-
-    fun scheduleSoundModeRestore() {
-        val delayTime = settingsViewModel.soundRestoreDelay.value
-        val restoreWork =
-            OneTimeWorkRequestBuilder<RestoreSoundWorker>()
-                .setInitialDelay(delayTime.toLong(), TimeUnit.MINUTES)
-                .build()
-
-        workManager.enqueueUniqueWork(
-            "restore_sound_mode",
-            ExistingWorkPolicy.REPLACE,
-            restoreWork,
-        )
+        soundModeManager.scheduleRestore(settingsViewModel.soundRestoreDelay.value)
     }
 }
