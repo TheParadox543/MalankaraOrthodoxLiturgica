@@ -12,10 +12,13 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.MediaStatus
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -61,7 +64,7 @@ class SongPlayerViewModel @Inject constructor(
         exoPlayer.addListener(listener)
 
         viewModelScope.launch {
-            while (true) {
+            while (isActive) {
                 if (_isPlaying.value) {
                     _currentPosition.value = exoPlayer.currentPosition
                 }
@@ -97,11 +100,12 @@ class SongPlayerViewModel @Inject constructor(
         }
     }
 
-    private fun prepareAndPlayUri(uri: Uri) {
-        exoPlayer.setMediaItem(MediaItem.fromUri(uri))
-        exoPlayer.prepare()
-        exoPlayer.playWhenReady = true
-    }
+    private suspend fun prepareAndPlayUri(uri: Uri) =
+        withContext(Dispatchers.Main) {
+            exoPlayer.setMediaItem(MediaItem.fromUri(uri))
+            exoPlayer.prepare()
+            exoPlayer.playWhenReady = true
+        }
 
     fun play() {
         exoPlayer.play()
