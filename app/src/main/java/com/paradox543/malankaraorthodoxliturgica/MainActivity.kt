@@ -21,6 +21,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.paradox543.malankaraorthodoxliturgica.domain.model.StartupState
 import com.paradox543.malankaraorthodoxliturgica.navigation.NavGraph
+import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
@@ -39,6 +40,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var inAppReviewManager: InAppReviewManager
+
+    @Inject
+    lateinit var analyticsService: AnalyticsService
 
     @Inject
     lateinit var soundModeManager: SoundModeManager
@@ -102,7 +106,7 @@ class MainActivity : ComponentActivity() {
                             soundModeManager.apply(soundMode)
                         }
                         Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
-                            NavGraph(inAppReviewManager, Modifier.padding(innerPadding))
+                            NavGraph(inAppReviewManager, analyticsService, Modifier.padding(innerPadding))
                         }
                     }
                 }
