@@ -40,6 +40,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 
 @Composable
@@ -47,6 +48,7 @@ fun SectionScreen(
     navController: NavController,
     prayerViewModel: PrayerViewModel,
     node: PageNodeDomain,
+    inAppReviewManager: InAppReviewManager,
     modifier: Modifier = Modifier,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
@@ -58,12 +60,15 @@ fun SectionScreen(
         title += (translations[item] ?: item) + " "
     }
 
-    val context = LocalContext.current
-    LaunchedEffect(Unit) {
-        // The review flow needs an Activity context.
-        val activity = context as? Activity
-        if (activity != null) {
-            prayerViewModel.onSectionScreenOpened(activity)
+    val activity = LocalContext.current as? Activity
+
+    LaunchedEffect(activity) {
+        // Notify ViewModel that screen opened
+        prayerViewModel.onSectionScreenOpened()
+
+        // Collect review request events
+        prayerViewModel.requestReview.collect {
+            activity?.let { inAppReviewManager.checkForReview(it) }
         }
     }
 
