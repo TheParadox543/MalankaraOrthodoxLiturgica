@@ -113,6 +113,7 @@ class MainActivity : ComponentActivity() {
                                 inAppReviewManager,
                                 analyticsService,
                                 shareService,
+                                settingsViewModel,
                             )
                         }
                     }
