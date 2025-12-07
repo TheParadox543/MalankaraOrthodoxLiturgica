@@ -2,13 +2,13 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FindNodeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetPrayerNodesForCurrentTimeUseCase
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.PageNodeDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
