@@ -1,5 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.model
 
+import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.AppLanguage
+
 sealed class StartupState {
     object Loading : StartupState()
 
