@@ -25,7 +25,6 @@ android {
         targetSdk = 36
         versionCode = 36
         versionName = "2.0.0-beta.2"
-        ndk.debugSymbolLevel = "SYMBOL_TABLE"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,6 +33,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            ndk.debugSymbolLevel = "FULL"
             resValue("string", "app_name", "Liturgica")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -52,6 +52,9 @@ android {
             versionNameSuffix = "-dev"
             resValue("string", "app_name", "Liturgica (Dev)")
         }
+    }
+    packaging {
+        jniLibs.keepDebugSymbols += arrayOf("**/*.so")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
