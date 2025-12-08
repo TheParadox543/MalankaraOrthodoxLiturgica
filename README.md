@@ -24,6 +24,7 @@ Version **2.0** introduces a major architectural overhaul, improved performance,
 - 🎵 **Song Player** – Audio playback with caching and controls.
 - 📷 **QR Code Support** – Scan QR to jump directly to sections.
 - 📊 **Analytics Tracking** – Screen usage and error insight for improvements.
+- 🔕 **Auto Silent/DND feature** - Automatically trigger based on user preference.
 - ⭐ **In-App Review Prompts** – Smartly triggered based on meaningful usage.
 
 ---
