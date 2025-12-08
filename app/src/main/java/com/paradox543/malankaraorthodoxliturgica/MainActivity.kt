@@ -80,9 +80,11 @@ class MainActivity : ComponentActivity() {
                 is StartupState.Ready -> {
                     val onboardingCompleted = s.onboardingCompleted
                     val soundMode by settingsViewModel.soundMode.collectAsState()
+                    val textScale by settingsViewModel.fontScale.collectAsState()
+                    val language by settingsViewModel.selectedLanguage.collectAsState()
                     MalankaraOrthodoxLiturgicaTheme(
-                        language = s.language,
-                        textScale = s.fontScale,
+                        language = language,
+                        textScale = textScale,
                     ) {
                         val snackbarHostState = remember { SnackbarHostState() }
 
@@ -107,7 +109,8 @@ class MainActivity : ComponentActivity() {
                         LaunchedEffect(soundMode) {
                             soundModeManager.apply(soundMode)
                         }
-                        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) { innerPadding ->
+                        @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
+                        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
                             NavGraph(
                                 onboardingCompleted,
                                 inAppReviewManager,
