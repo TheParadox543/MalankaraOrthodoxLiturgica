@@ -11,7 +11,7 @@ _Add new sections here as future changes are completed._
 
 ---
 
-## 🚀 [2.0.0] — 2025-12-XX
+## 🚀 [2.0.0] — 2025-12-12
 
 ### ✨ Added
 - New **Sound Mode Manager** with clean internal → external mode mapping.  
