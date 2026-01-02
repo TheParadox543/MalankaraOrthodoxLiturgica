@@ -6,8 +6,8 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ---
 
 ## 🔮 [Unreleased]
-
-_Add new sections here as future changes are completed._
+### Added
+- Calendar data for up to April 2026.
 
 ---
 

@@ -1859,7 +1859,7 @@
         "type": "feast",
         "title": {
             "en": "Beheading of St. John the Baptist",
-            "ml": "ശിരച്ഛേദ"
+            "ml": "യോഹന്നാൻ സ്നാപകന്റെ ശിരച്ഛേദ"
         },
         "specialSongsKey": "beheadingStJohnSongs",
         "niram": 8,
@@ -4192,7 +4192,7 @@
             ]
         }
     },
-    "fourthSaturdafOfGreatLent": {
+    "fourthSaturdayOfGreatLent": {
         "type": "feast",
         "title": {
             "en": "Fourth Saturday of Great Lent",
@@ -5152,6 +5152,24 @@
             ]
         }
     },
+    "mondayOfHolyWeek": {
+        "type": "event",
+        "title": {
+            "en": "Monday of the Holy Week"
+        }
+    },
+    "tuesdayOfHolyWeek": {
+        "type": "event",
+        "title": {
+            "en": "Tuesday of the Holy Week"
+        }
+    },
+    "wednesdayOfHolyWeek": {
+        "type": "event",
+        "title": {
+            "en": "Wednesday of the Holy Week"
+        }
+    },
     "maundyThursday": {
         "type": "feast",
         "title": {
@@ -5293,6 +5311,13 @@
                     ]
                 }
             ]
+        }
+    },
+    "goodFriday": {
+        "type": "feast",
+        "title": {
+            "en": "Good Friday",
+            "ml": "ദുഃഖ വെള്ളി"
         }
     },
     "saturdayOfAnnunciation": {
@@ -11594,10 +11619,17 @@
         },
         "startedYear": 1955
     },
-    "republic": {
+    "republicDay": {
         "type": "event",
         "title": {
             "en": "Republic Day"
+        }
+    },
+    "marSeveriosPatriarch": {
+        "type": "event",
+        "title": {
+            "en": "Commemoration of Mar Severios Patriarch",
+            "ml": "മാർ സേവേറിയോസ് പാത്രിയർകീസിന്ടെ ഓർമ്മ"
         }
     },
     "stSimonHanna": {
@@ -11635,7 +11667,7 @@
     "ignatiusElias": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Patriarch Ignatius Elias III (Manjinikkara Dayara"
+            "en": "Commemoration of Patriarch Ignatius Elias III (Manjinikkara Dayara)"
         },
         "startedYear": 1933
     },
@@ -12474,6 +12506,12 @@
         },
         "startedYear": 1987
     },
+    "catholicateDay": {
+        "type": "event",
+        "title": {
+            "en": "Catholicate Day"
+        }
+    },
     "missionSunday": {
         "type": "event",
         "title": {
@@ -12484,6 +12522,27 @@
         "type": "event",
         "title": {
             "en": "Seminary Day"
+        }
+    },
+    "ninevehLentStart": {
+        "type": "event",
+        "title": {
+            "en": "Nineveh Lent Start",
+            "ml": "നിനുവാ നോമ്പ് ആരംഭം"
+        }
+    },
+    "ninevehLentEnd": {
+        "type": "event",
+        "title": {
+            "en": "Nineveh Lent End",
+            "ml": "നിനുവാ നോമ്പ് വീടൽ"
+        }
+    },
+    "greatLentStart": {
+        "type": "event",
+        "title": {
+            "en": "Great Lent Start",
+            "ml": "വലിയ നോമ്പ് ആരംഭം"
         }
     }
 }
