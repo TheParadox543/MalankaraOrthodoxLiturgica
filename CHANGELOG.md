@@ -6,6 +6,9 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ---
 
 ## 🔮 [Unreleased]
+---
+
+## [2.0.1] - 2026-01-02
 ### Added
 - Calendar data for up to April 2026.
 
