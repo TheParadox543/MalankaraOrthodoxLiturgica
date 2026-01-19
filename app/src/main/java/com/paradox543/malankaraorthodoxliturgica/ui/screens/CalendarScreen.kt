@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -334,9 +335,9 @@ private fun RowScope.DayItem(
     // --- Define colors based on multiple states ---
     val containerColor =
         when {
+            // Filled color for selected day
             isSelected -> MaterialTheme.colorScheme.primary
 
-            // Filled color for selected day
             else -> Color.Transparent // Default transparent background
         }
 
@@ -345,7 +346,7 @@ private fun RowScope.DayItem(
             isSelected -> MaterialTheme.colorScheme.onPrimary
 
             // High-contrast text for selected day
-            isToday -> MaterialTheme.colorScheme.primary
+            isToday -> MaterialTheme.colorScheme.onPrimaryContainer
 
             // Special color for today's date
             isCurrentMonth -> MaterialTheme.colorScheme.onSurface
@@ -383,6 +384,12 @@ private fun RowScope.DayItem(
                     } else {
                         Modifier
                     },
+                ).then(
+                    if (isToday and !isSelected) {
+                        Modifier.background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f))
+                    } else {
+                        Modifier
+                    },
                 ),
         enabled = hasEvents, // Only enable buttons if there are events
         colors =
@@ -397,7 +404,7 @@ private fun RowScope.DayItem(
     ) {
         Text(
             text = day.date.dayOfMonth.toString(),
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }
