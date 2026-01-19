@@ -60,6 +60,7 @@ class SettingsRepositoryImpl @Inject constructor(
         return prefs[hasCompletedOnboardingKey] ?: false
     }
 
+    override suspend fun getInitialFontScale(): AppFontScale {
         val prefs = dataStore.data.first()
         val stored =  prefs[fontScaleKey] ?: AppFontScale.Medium.scaleFactor
         return AppFontScale.fromScale(stored)
