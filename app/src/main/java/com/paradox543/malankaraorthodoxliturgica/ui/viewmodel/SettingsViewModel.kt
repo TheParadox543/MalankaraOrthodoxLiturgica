@@ -40,19 +40,19 @@ class SettingsViewModel @Inject constructor(
     val shareApp = _shareApp.asSharedFlow()
 
     // Internal MutableStateFlow to track AppFontSize changes for debounced saving
-    private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
+//    private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
 
     // Debounce state
     private var debounceJob: Job? = null
 
     init {
         // Debounce mechanism: only save to DataStore after a short delay of no new updates
-        viewModelScope.launch {
-            _debouncedAppFontScale.collectLatest { fontScaleToSave ->
-                delay(500L) // Wait for 500ms for more gesture events to stop
-                settingsRepository.setFontScale(fontScaleToSave) // Then save the enum
-            }
-        }
+//        viewModelScope.launch {
+//            _debouncedAppFontScale.collectLatest { fontScaleToSave ->
+//                delay(500L) // Wait for 500ms for more gesture events to stop
+//                settingsRepository.setFontScale(fontScaleToSave) // Then save the enum
+//            }
+//        }
     }
 
     // Function to set (and save) language

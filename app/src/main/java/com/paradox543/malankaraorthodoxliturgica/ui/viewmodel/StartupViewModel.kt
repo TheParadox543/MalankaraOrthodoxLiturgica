@@ -22,7 +22,7 @@ class StartupViewModel @Inject constructor(
         viewModelScope.launch {
             val language = settingsRepository.getInitialLanguage()
             val onboarding = settingsRepository.getInitialOnboardingCompleted()
-            val fontScale = settingsRepository.fontScale.first()
+            val fontScale = settingsRepository.getInitialFontScale()
             val soundMode = settingsRepository.soundMode.first()
 
             // preload tree OR any other critical init work here

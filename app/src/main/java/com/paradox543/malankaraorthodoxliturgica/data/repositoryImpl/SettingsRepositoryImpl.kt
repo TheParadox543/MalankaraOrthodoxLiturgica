@@ -60,6 +60,11 @@ class SettingsRepositoryImpl @Inject constructor(
         return prefs[hasCompletedOnboardingKey] ?: false
     }
 
+        val prefs = dataStore.data.first()
+        val stored =  prefs[fontScaleKey] ?: AppFontScale.Medium.scaleFactor
+        return AppFontScale.fromScale(stored)
+    }
+
     override val language: StateFlow<AppLanguage> =
         context.dataStore.data
             .map { preferences ->
@@ -132,28 +137,28 @@ class SettingsRepositoryImpl @Inject constructor(
     private val pendingFontScaleUpdate = MutableStateFlow(AppFontScale.Medium)
     private var debounceJob: Job? = null // Holds reference to the current debounce coroutine
 
-    init {
-        // Collect from the pendingFontScaleUpdate flow and debounce writes to DataStore
-        repositoryScope.launch {
-            pendingFontScaleUpdate.collectLatest { fontScaleToSave ->
-                debounceJob?.cancel() // Cancel any previous pending save
-                debounceJob =
-                    launch {
-                        delay(200L) // Wait for 200ms after the last update
-                        // Directly call your existing setFontScale function
-                        setFontScale(fontScaleToSave)
-                    }
-            }
-        }
-
-        // Initialize pendingFontScaleUpdate with the current stored font scale when the repository starts.
-        // This ensures debouncing starts from the correct state.
+//    init {
+//        // Collect from the pendingFontScaleUpdate flow and debounce writes to DataStore
 //        repositoryScope.launch {
-//            selectedFontScale.collectLatest { currentScale ->
-//                pendingFontScaleUpdate.value = currentScale
+//            pendingFontScaleUpdate.collectLatest { fontScaleToSave ->
+//                debounceJob?.cancel() // Cancel any previous pending save
+//                debounceJob =
+//                    launch {
+//                        delay(200L) // Wait for 200ms after the last update
+//                        // Directly call your existing setFontScale function
+//                        setFontScale(fontScaleToSave)
+//                    }
 //            }
 //        }
-    }
+//
+//        // Initialize pendingFontScaleUpdate with the current stored font scale when the repository starts.
+//        // This ensures debouncing starts from the correct state.
+// //        repositoryScope.launch {
+// //            selectedFontScale.collectLatest { currentScale ->
+// //                pendingFontScaleUpdate.value = currentScale
+// //            }
+// //        }
+//    }
 
     override suspend fun setLanguage(language: AppLanguage) {
         context.dataStore.edit { preferences ->
