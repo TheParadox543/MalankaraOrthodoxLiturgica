@@ -8,6 +8,16 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ## 🔮 [Unreleased]
 ---
 
+## [2.1.0] - 2026-01-19
+### Added
+- Nineveh Lent Prayers.
+
+### Changed
+- UI for calendar updated to show the current date better.
+
+### Fixed
+- Font size was not getting initialized properly due to unused job debounce.
+
 ## [2.0.1] - 2026-01-02
 ### Added
 - Calendar data for up to April 2026.
