@@ -515,6 +515,8 @@ fun DynamicSongUI(
                 is PrayerElementDomain.Song,
                 is PrayerElementDomain.Subheading,
                 is PrayerElementDomain.CollapsibleBlock,
+                is PrayerElementDomain.AlternativePrayersBlock,
+                is PrayerElementDomain.AlternativeOption,
                 -> {
                     PrayerElementRenderer(
                         item,

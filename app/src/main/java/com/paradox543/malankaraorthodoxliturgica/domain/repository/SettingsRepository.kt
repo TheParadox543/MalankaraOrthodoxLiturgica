@@ -11,6 +11,8 @@ interface SettingsRepository {
 
     suspend fun getInitialOnboardingCompleted(): Boolean
 
+    suspend fun getInitialFontScale(): AppFontScale
+
     // 2. Reactive flows for state
     val language: StateFlow<AppLanguage>
     val onboardingCompleted: StateFlow<Boolean>
