@@ -6,6 +6,13 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ---
 
 ## 🔮 [Unreleased]
+- Unversioned changes
+
+---
+## [2.1.1] - 2026-01-20
+### Fixed
+- Manglish translations of Nineveh Lent not getting displayed.
+
 ---
 
 ## [2.1.0] - 2026-01-19
@@ -17,6 +24,8 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ### Fixed
 - Font size was not getting initialized properly due to unused job debounce.
+
+---
 
 ## [2.0.1] - 2026-01-02
 ### Added
