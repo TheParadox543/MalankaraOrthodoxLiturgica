@@ -19,21 +19,31 @@ val bottomNavItems =
             Icon(
                 painterResource(R.drawable.clock),
                 "Clock",
-                modifier = Modifier.Companion.size(iconSize),
+                modifier = Modifier.size(iconSize),
+            )
+        },
+        BottomNavItem(
+            "music",
+            "Music",
+        ) {
+            Icon(
+                painterResource(R.drawable.musical_note),
+                "Music",
+                modifier = Modifier.size(iconSize),
             )
         },
         BottomNavItem("calendar", "Calendar") {
             Icon(
                 painterResource(R.drawable.calendar),
                 "Calendar",
-                Modifier.Companion.size(iconSize),
+                Modifier.size(iconSize),
             )
         },
         BottomNavItem("bible", "Bible") {
             Icon(
                 painterResource(R.drawable.bible),
                 "Bible",
-                modifier = Modifier.Companion.size(iconSize),
+                modifier = Modifier.size(iconSize),
             )
         },
     )
