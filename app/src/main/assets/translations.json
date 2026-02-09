@@ -538,5 +538,9 @@
     "passover": {
         "ml": "പെസഹാ",
         "en": "Passover"
+    },
+    "general": {
+        "ml": "പൊതുവായ",
+        "en": "General"
     }
 }
