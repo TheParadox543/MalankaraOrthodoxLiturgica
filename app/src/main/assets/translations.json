@@ -514,5 +514,33 @@
     "lent": {
         "en": "Lenten Prayers",
         "ml": "നോമ്പിലെ പ്രാർത്ഥനകൾ"
+    },
+    "conclusion": {
+        "en": "Conclusion",
+        "ml": "കുർബാനന്തര"
+    },
+    "confession": {
+        "en": "Confession",
+        "ml": "കുമ്പസാരം"
+    },
+    "passionWeek": {
+        "en": "Passion Week",
+        "ml": "ഹാശാ ആഴ്ച"
+    },
+    "goodFriday":{
+        "en": "Good Friday",
+        "ml": "ദുഃഖവെള്ളിയാഴ്ച"
+    },
+    "procession": {
+        "ml": "ഒന്നാം പ്രദക്ഷിണം",
+        "en": "First Procession"
+    },
+    "passover": {
+        "ml": "പെസഹാ",
+        "en": "Passover"
+    },
+    "general": {
+        "ml": "പൊതുവായ",
+        "en": "General"
     }
 }

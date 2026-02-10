@@ -133,7 +133,7 @@ fun SectionScreen(
 @Composable
 private fun DisplayIconography(orientation: String) {
     Image(
-        painter = painterResource(R.drawable.transfigurationicon),
+        painter = painterResource(R.drawable.greatlent),
         contentDescription = "icon",
         modifier =
             if (orientation == "row") {
