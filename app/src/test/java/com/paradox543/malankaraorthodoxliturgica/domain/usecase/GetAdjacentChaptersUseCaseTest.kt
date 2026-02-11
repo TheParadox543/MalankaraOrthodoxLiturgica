@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
+import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookName
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
@@ -16,7 +17,7 @@ class GetAdjacentChaptersUseCaseTest {
         override fun loadBibleChapter(
             bookIndex: Int,
             chapterIndex: Int,
-            language: com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage,
+            language: AppLanguage,
         ) = null
 
         override fun loadPrefaceTemplates() =
