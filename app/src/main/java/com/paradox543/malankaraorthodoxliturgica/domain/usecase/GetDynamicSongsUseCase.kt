@@ -1,8 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import javax.inject.Inject
 

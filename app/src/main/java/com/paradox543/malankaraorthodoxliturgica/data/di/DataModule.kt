@@ -6,12 +6,12 @@ import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.PrayerRepos
 import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.SettingsRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.SongRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.TranslationsRepositoryImpl
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.TranslationsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.TranslationsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

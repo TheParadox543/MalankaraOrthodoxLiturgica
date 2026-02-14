@@ -14,7 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import java.io.IOException
 import java.time.DayOfWeek
 import java.time.LocalDate

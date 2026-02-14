@@ -5,7 +5,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookNam
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 /**

@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.repository
+package com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository
 
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain

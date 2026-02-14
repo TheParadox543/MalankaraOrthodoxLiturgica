@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.repository
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.repository
 
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter

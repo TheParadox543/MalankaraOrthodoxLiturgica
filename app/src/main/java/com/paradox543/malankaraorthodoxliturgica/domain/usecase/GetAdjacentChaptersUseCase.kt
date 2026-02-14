@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import javax.inject.Inject
 
 /**

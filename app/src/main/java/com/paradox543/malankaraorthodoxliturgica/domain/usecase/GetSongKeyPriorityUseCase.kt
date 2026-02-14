@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import javax.inject.Inject
 
 class GetSongKeyPriorityUseCase @Inject constructor(

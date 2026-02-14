@@ -1,8 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
 
 import com.paradox543.malankaraorthodoxliturgica.data.datasource.TranslationSource
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.TranslationsRepository
 import javax.inject.Inject
 
 class TranslationsRepositoryImpl @Inject constructor(
