@@ -8,8 +8,8 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
-import com.paradox543.malankaraorthodoxliturgica.domain.model.MediaStatus
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
+import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
