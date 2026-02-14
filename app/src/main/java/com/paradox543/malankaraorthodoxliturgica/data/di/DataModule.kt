@@ -9,8 +9,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.Translation
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.TranslationsRepository
 import dagger.Binds
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.repository
+package com.paradox543.malankaraorthodoxliturgica.domain.settings.repository
 
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
