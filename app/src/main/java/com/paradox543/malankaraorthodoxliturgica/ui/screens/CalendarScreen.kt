@@ -459,14 +459,14 @@ fun DisplayEvent(
     ) {
         Column(Modifier.padding(8.dp)) {
             Text(textTitle, style = MaterialTheme.typography.titleLarge)
-            if (event.bibleReadings != null) {
+            event.bibleReadings?.let { bibleReadings ->
                 Column(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
-                    if (event.bibleReadings.vespersGospel != null) {
+                    bibleReadings.vespersGospel?.let  { vespersGospel ->
                         val text =
                             bibleViewModel.formatGospelEntry(
-                                event.bibleReadings.vespersGospel,
+                                vespersGospel,
                                 selectedLanguage,
                             )
                         Text(
@@ -478,7 +478,7 @@ fun DisplayEvent(
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.vespersGospel)
+                                    bibleViewModel.setSelectedBibleReference(vespersGospel)
                                     navController.navigate(AppScreen.BibleReader.route)
                                 },
                             ) {
@@ -494,10 +494,10 @@ fun DisplayEvent(
                             }
                         }
                     }
-                    if (event.bibleReadings.matinsGospel != null) {
+                    bibleReadings.matinsGospel?.let { matinsGospel ->
                         val text =
                             bibleViewModel.formatGospelEntry(
-                                event.bibleReadings.matinsGospel,
+                                matinsGospel,
                                 selectedLanguage,
                             )
                         Text(
@@ -509,7 +509,7 @@ fun DisplayEvent(
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.matinsGospel)
+                                    bibleViewModel.setSelectedBibleReference(matinsGospel)
                                     navController.navigate(AppScreen.BibleReader.route)
                                 },
                             ) {
@@ -525,10 +525,10 @@ fun DisplayEvent(
                             }
                         }
                     }
-                    if (event.bibleReadings.primeGospel != null) {
+                    bibleReadings.primeGospel?.let { primeGospel ->
                         val text =
                             bibleViewModel.formatGospelEntry(
-                                event.bibleReadings.primeGospel,
+                                primeGospel,
                                 selectedLanguage,
                             )
                         Text(
@@ -540,7 +540,7 @@ fun DisplayEvent(
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.primeGospel)
+                                    bibleViewModel.setSelectedBibleReference(primeGospel)
                                     navController.navigate(AppScreen.BibleReader.route)
                                 },
                             ) {
@@ -556,13 +556,13 @@ fun DisplayEvent(
                             }
                         }
                     }
-                    if (event.bibleReadings.oldTestament != null) {
+                    bibleReadings.oldTestament?.let { oldTestament ->
                         Text(
                             translations["oldTestament"] ?: "Before Holy Qurbana",
                             Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.titleMedium,
                         )
-                        event.bibleReadings.oldTestament.forEach { entry ->
+                        oldTestament.forEach { entry ->
                             val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
                             Row {
                                 Spacer(Modifier.padding(8.dp))
@@ -585,13 +585,13 @@ fun DisplayEvent(
                             }
                         }
                     }
-                    if (event.bibleReadings.gospel != null) {
+                    bibleReadings.gospel?.let { gospel ->
                         Text(
                             translations["qurbana"] ?: "Holy Qurbana",
                             Modifier.padding(start = 4.dp),
                             style = MaterialTheme.typography.titleMedium,
                         )
-                        event.bibleReadings.generalEpistle?.forEach { entry ->
+                        bibleReadings.generalEpistle?.forEach { entry ->
                             val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
                             Row {
                                 Spacer(Modifier.padding(8.dp))
@@ -613,7 +613,7 @@ fun DisplayEvent(
                                 }
                             }
                         }
-                        event.bibleReadings.paulEpistle?.forEach {  entry ->
+                        bibleReadings.paulEpistle?.forEach {  entry ->
                             val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
                             Row {
                                 Spacer(Modifier.padding(8.dp))
@@ -637,14 +637,14 @@ fun DisplayEvent(
                         }
                         val text =
                             bibleViewModel.formatGospelEntry(
-                                event.bibleReadings.gospel,
+                                gospel,
                                 selectedLanguage,
                             )
                         Row {
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(event.bibleReadings.gospel)
+                                    bibleViewModel.setSelectedBibleReference(gospel)
                                     navController.navigate(AppScreen.BibleReader.route)
                                 },
                             ) {
@@ -659,8 +659,8 @@ fun DisplayEvent(
                                 )
                             }
                         }
-                        if (event.specialSongsKey != null) {
-                            val key = event.specialSongsKey.removeSuffix("Songs")
+                        event.specialSongsKey?.let { specialSongsKey ->
+                            val key = specialSongsKey.removeSuffix("Songs")
                             TextButton(
                                 onClick = {
                                     navController.navigate(AppScreen.Prayer.createRoute("qurbanaSongs_$key"))

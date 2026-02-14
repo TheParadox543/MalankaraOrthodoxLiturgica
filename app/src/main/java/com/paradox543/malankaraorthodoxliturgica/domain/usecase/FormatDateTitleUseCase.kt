@@ -11,8 +11,8 @@ class FormatDateTitleUseCase @Inject constructor() {
         selectedLanguage: AppLanguage,
     ): String {
         val currentYear = LocalDate.now().year
-        return if (event.startedYear != null) {
-            val yearNumber = currentYear - event.startedYear + 1
+        return event.startedYear?.let { startedYear ->
+            val yearNumber = currentYear - startedYear + 1
             val baseYearString = "$yearNumber"
 
             if (selectedLanguage == AppLanguage.MALAYALAM && event.title.ml != null) {
@@ -20,11 +20,9 @@ class FormatDateTitleUseCase @Inject constructor() {
             } else {
                 "$baseYearString${generateYearSuffix(yearNumber)} ${event.title.en}"
             }
-        } else {
-            when (selectedLanguage) {
-                AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
-                else -> event.title.en
-            }
+        }  ?: when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
+            else -> event.title.en
         }
     }
 

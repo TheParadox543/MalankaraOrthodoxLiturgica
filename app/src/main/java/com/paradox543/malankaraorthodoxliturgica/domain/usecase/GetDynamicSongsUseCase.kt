@@ -40,9 +40,9 @@ class GetDynamicSongsUseCase @Inject constructor(
         // Add songs for upcoming week events
         val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
         for (event in weekEventItems) {
-            val specialKey = event.specialSongsKey
-            if (specialKey != null) {
-                val filename = "qurbanaSongs/${specialKey.removeSuffix("Songs")}/${dynamicSongsBlock.timeKey}.json"
+            val specialSongsKey = event.specialSongsKey
+            if (specialSongsKey != null) {
+                val filename = "qurbanaSongs/${specialSongsKey.removeSuffix("Songs")}/${dynamicSongsBlock.timeKey}.json"
                 val songElements =
                     try {
                         prayerRepository.loadPrayerElements(filename, language)
@@ -60,7 +60,7 @@ class GetDynamicSongsUseCase @Inject constructor(
 
                 resolvedBlock.items.add(
                     PrayerElementDomain.DynamicSong(
-                        eventKey = event.specialSongsKey,
+                        eventKey = specialSongsKey,
                         eventTitle = title,
                         timeKey = dynamicSongsBlock.timeKey,
                         items = songElements,
