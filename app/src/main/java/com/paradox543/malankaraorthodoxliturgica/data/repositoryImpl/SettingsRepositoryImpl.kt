@@ -14,9 +14,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
@@ -63,7 +62,8 @@ class SettingsRepositoryImpl @Inject constructor(
         return AppFontScale.fromScale(stored)
     }
 
-    override val language: StateFlow<AppLanguage> =
+    // Internal StateFlows for efficient caching
+    private val _language: StateFlow<AppLanguage> =
         context.dataStore.data
             .map { preferences ->
                 // Read the string code, then convert to AppLanguage enum
@@ -75,7 +75,7 @@ class SettingsRepositoryImpl @Inject constructor(
                 initialValue = AppLanguage.MALAYALAM,
             )
 
-    override val onboardingCompleted: StateFlow<Boolean> =
+    private val _onboardingCompleted: StateFlow<Boolean> =
         context.dataStore.data
             .map { preferences ->
                 preferences[hasCompletedOnboardingKey] == true
@@ -85,7 +85,7 @@ class SettingsRepositoryImpl @Inject constructor(
                 initialValue = false,
             )
 
-    override val fontScale: StateFlow<AppFontScale> =
+    private val _fontScale: StateFlow<AppFontScale> =
         dataStore.data
             .map { prefs ->
                 val stored = prefs[fontScaleKey] ?: AppFontScale.Medium.scaleFactor
@@ -96,7 +96,7 @@ class SettingsRepositoryImpl @Inject constructor(
                 initialValue = AppFontScale.Medium,
             )
 
-    override val songScrollState: StateFlow<Boolean> =
+    private val _songScrollState: StateFlow<Boolean> =
         dataStore.data
             .map { prefs ->
                 prefs[songScrollStateKey] ?: false
@@ -106,7 +106,7 @@ class SettingsRepositoryImpl @Inject constructor(
                 initialValue = false,
             )
 
-    override val soundMode: StateFlow<SoundMode> =
+    private val _soundMode: StateFlow<SoundMode> =
         dataStore.data
             .map { prefs ->
                 when (prefs[soundModeKey]) {
@@ -120,7 +120,7 @@ class SettingsRepositoryImpl @Inject constructor(
                 initialValue = SoundMode.OFF,
             )
 
-    override val soundRestoreDelay: StateFlow<Int> =
+    private val _soundRestoreDelay: StateFlow<Int> =
         dataStore.data
             .map { prefs ->
                 prefs[soundRestoreDelayKey] ?: 30
@@ -130,10 +130,16 @@ class SettingsRepositoryImpl @Inject constructor(
                 initialValue = 30,
             )
 
+    // Public Flow properties exposed through the interface
+    override val language: Flow<AppLanguage> get() = _language
+    override val onboardingCompleted: Flow<Boolean> get() = _onboardingCompleted
+    override val fontScale: Flow<AppFontScale> get() = _fontScale
+    override val songScrollState: Flow<Boolean> get() = _songScrollState
+    override val soundMode: Flow<SoundMode> get() = _soundMode
+    override val soundRestoreDelay: Flow<Int> get() = _soundRestoreDelay
+
     // --- Debouncing for Font Scale ---
-    // Internal MutableStateFlow to trigger debounced saves for font scale.
-    private val pendingFontScaleUpdate = MutableStateFlow(AppFontScale.Medium)
-    private var debounceJob: Job? = null // Holds reference to the current debounce coroutine
+    // Debouncing has been moved to ViewModel layer for better separation of concerns
 
 //    init {
 //        // Collect from the pendingFontScaleUpdate flow and debounce writes to DataStore
