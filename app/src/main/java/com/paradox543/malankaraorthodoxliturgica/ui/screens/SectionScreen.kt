@@ -162,12 +162,13 @@ private fun SectionCard(
                 .fillMaxWidth()
                 .padding(4.dp)
                 .clickable {
+                    val filename = node.filename
                     if (node.children.isNotEmpty()) {
                         Log.d("SectionCard", "Navigating to section: ${node.route}")
                         navController.navigate(AppScreen.Section.createRoute(node.route))
-                    } else if (node.filename != null && node.filename.endsWith(".json")) {
+                    } else if (filename != null && filename.endsWith(".json")) {
                         navController.navigate(AppScreen.Prayer.createRoute(node.route))
-                    } else if (node.type == "song" || (node.filename != null && node.filename.endsWith(".mp3"))) {
+                    } else if (node.type == "song" || (filename != null && filename.endsWith(".mp3"))) {
                         navController.navigate(AppScreen.Song.createRoute(node.route))
                     } else {
                         Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
