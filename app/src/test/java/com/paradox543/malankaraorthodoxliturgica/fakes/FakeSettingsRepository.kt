@@ -25,10 +25,6 @@ class FakeSettingsRepository(
     private val soundModeFlow = MutableStateFlow(initialSoundMode)
     private val soundDelayFlow = MutableStateFlow(initialSoundDelay)
 
-    override suspend fun getInitialLanguage(): AppLanguage = languageFlow.value
-
-    override suspend fun getInitialOnboardingCompleted(): Boolean = onboardingFlow.value
-
     override val language: StateFlow<AppLanguage> = languageFlow
     override val onboardingCompleted: StateFlow<Boolean> = onboardingFlow
     override val fontScale: StateFlow<AppFontScale> = fontScaleFlow

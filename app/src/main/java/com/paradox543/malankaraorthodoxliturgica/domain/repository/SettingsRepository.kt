@@ -6,14 +6,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
-    // 1. One-time startup reads (NO DEFAULTS ALLOWED)
-    suspend fun getInitialLanguage(): AppLanguage
-
-    suspend fun getInitialOnboardingCompleted(): Boolean
-
-    suspend fun getInitialFontScale(): AppFontScale
-
-    // 2. Reactive flows for state
+    // Reactive flows for state - provides both initial and ongoing values
     val language: Flow<AppLanguage>
     val onboardingCompleted: Flow<Boolean>
     val fontScale: Flow<AppFontScale>
@@ -21,7 +14,7 @@ interface SettingsRepository {
     val soundMode: Flow<SoundMode>
     val soundRestoreDelay: Flow<Int>
 
-    // 3. Setters for setting options
+    // Setters for updating settings
     suspend fun setLanguage(language: AppLanguage)
 
     suspend fun setFontScale(fontScale: AppFontScale)

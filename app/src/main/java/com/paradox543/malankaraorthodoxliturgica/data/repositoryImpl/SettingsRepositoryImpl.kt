@@ -12,15 +12,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontSc
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,12 +22,8 @@ import javax.inject.Singleton
 class SettingsRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : SettingsRepository {
-    // This scope is essential for stateIn to properly manage the StateFlow's lifecycle.
-    // It's good practice to use a custom scope for singletons rather than Dispatchers.IO directly.
     private val Context.dataStore by preferencesDataStore(name = "settings")
     val dataStore = context.dataStore
-
-    private val repositoryScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     // DataStore keys
     private val languageKey = stringPreferencesKey("selected_language")
@@ -44,99 +33,42 @@ class SettingsRepositoryImpl @Inject constructor(
     private val soundModeKey = stringPreferencesKey("sound_mode")
     private val soundRestoreDelayKey = intPreferencesKey("sound_restore_delay")
 
-    // Start up reads
-    override suspend fun getInitialLanguage(): AppLanguage {
-        val prefs = dataStore.data.first()
-        val code = prefs[languageKey] ?: AppLanguage.MALAYALAM.code
-        return AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM
-    }
+    // Public Flow properties exposed through the interface - directly from DataStore
+    override val language: Flow<AppLanguage> =
+        context.dataStore.data.map { preferences ->
+            val code = preferences[languageKey] ?: AppLanguage.MALAYALAM.code
+            AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM
+        }
 
-    override suspend fun getInitialOnboardingCompleted(): Boolean {
-        val prefs = dataStore.data.first()
-        return prefs[hasCompletedOnboardingKey] ?: false
-    }
+    override val onboardingCompleted: Flow<Boolean> =
+        context.dataStore.data.map { preferences ->
+            preferences[hasCompletedOnboardingKey] == true
+        }
 
-    override suspend fun getInitialFontScale(): AppFontScale {
-        val prefs = dataStore.data.first()
-        val stored =  prefs[fontScaleKey] ?: AppFontScale.Medium.scaleFactor
-        return AppFontScale.fromScale(stored)
-    }
+    override val fontScale: Flow<AppFontScale> =
+        dataStore.data.map { prefs ->
+            val stored = prefs[fontScaleKey] ?: AppFontScale.Medium.scaleFactor
+            AppFontScale.fromScale(stored)
+        }
 
-    // Internal StateFlows for efficient caching
-    private val _language: StateFlow<AppLanguage> =
-        context.dataStore.data
-            .map { preferences ->
-                // Read the string code, then convert to AppLanguage enum
-                val code = preferences[languageKey] ?: AppLanguage.MALAYALAM.code
-                AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM // Default to Malayalam if code not found
-            }.stateIn(
-                scope = repositoryScope,
-                started = SharingStarted.Eagerly,
-                initialValue = AppLanguage.MALAYALAM,
-            )
+    override val songScrollState: Flow<Boolean> =
+        dataStore.data.map { prefs ->
+            prefs[songScrollStateKey] ?: false
+        }
 
-    private val _onboardingCompleted: StateFlow<Boolean> =
-        context.dataStore.data
-            .map { preferences ->
-                preferences[hasCompletedOnboardingKey] == true
-            }.stateIn(
-                scope = repositoryScope,
-                started = SharingStarted.Eagerly,
-                initialValue = false,
-            )
+    override val soundMode: Flow<SoundMode> =
+        dataStore.data.map { prefs ->
+            when (prefs[soundModeKey]) {
+                "SILENT" -> SoundMode.SILENT
+                "DND" -> SoundMode.DND
+                else -> SoundMode.OFF
+            }
+        }
 
-    private val _fontScale: StateFlow<AppFontScale> =
-        dataStore.data
-            .map { prefs ->
-                val stored = prefs[fontScaleKey] ?: AppFontScale.Medium.scaleFactor
-                AppFontScale.fromScale(stored)
-            }.stateIn(
-                scope = repositoryScope,
-                started = SharingStarted.Eagerly,
-                initialValue = AppFontScale.Medium,
-            )
-
-    private val _songScrollState: StateFlow<Boolean> =
-        dataStore.data
-            .map { prefs ->
-                prefs[songScrollStateKey] ?: false
-            }.stateIn(
-                scope = repositoryScope,
-                started = SharingStarted.Eagerly,
-                initialValue = false,
-            )
-
-    private val _soundMode: StateFlow<SoundMode> =
-        dataStore.data
-            .map { prefs ->
-                when (prefs[soundModeKey]) {
-                    "SILENT" -> SoundMode.SILENT
-                    "DND" -> SoundMode.DND
-                    else -> SoundMode.OFF
-                }
-            }.stateIn(
-                scope = repositoryScope,
-                started = SharingStarted.Eagerly,
-                initialValue = SoundMode.OFF,
-            )
-
-    private val _soundRestoreDelay: StateFlow<Int> =
-        dataStore.data
-            .map { prefs ->
-                prefs[soundRestoreDelayKey] ?: 30
-            }.stateIn(
-                scope = repositoryScope,
-                started = SharingStarted.Eagerly,
-                initialValue = 30,
-            )
-
-    // Public Flow properties exposed through the interface
-    override val language: Flow<AppLanguage> get() = _language
-    override val onboardingCompleted: Flow<Boolean> get() = _onboardingCompleted
-    override val fontScale: Flow<AppFontScale> get() = _fontScale
-    override val songScrollState: Flow<Boolean> get() = _songScrollState
-    override val soundMode: Flow<SoundMode> get() = _soundMode
-    override val soundRestoreDelay: Flow<Int> get() = _soundRestoreDelay
+    override val soundRestoreDelay: Flow<Int> =
+        dataStore.data.map { prefs ->
+            prefs[soundRestoreDelayKey] ?: 30
+        }
 
     // --- Debouncing for Font Scale ---
     // Debouncing has been moved to ViewModel layer for better separation of concerns

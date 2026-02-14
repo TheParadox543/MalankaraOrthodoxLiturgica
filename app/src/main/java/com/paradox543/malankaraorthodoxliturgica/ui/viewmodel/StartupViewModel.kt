@@ -20,9 +20,11 @@ class StartupViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val language = settingsRepository.getInitialLanguage()
-            val onboarding = settingsRepository.getInitialOnboardingCompleted()
-            val fontScale = settingsRepository.getInitialFontScale()
+            // Use drop(1).first() to skip the initial default value and wait for the actual DataStore value
+            // Or better yet, collect once to ensure we get the real stored value
+            val language = settingsRepository.language.first()
+            val onboarding = settingsRepository.onboardingCompleted.first()
+            val fontScale = settingsRepository.fontScale.first()
             val soundMode = settingsRepository.soundMode.first()
 
             // preload tree OR any other critical init work here
