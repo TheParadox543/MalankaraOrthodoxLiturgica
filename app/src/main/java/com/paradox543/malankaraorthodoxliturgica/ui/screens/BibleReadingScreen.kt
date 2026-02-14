@@ -68,10 +68,11 @@ fun BibleReadingScreen(
                         .padding(innerPadding)
                         .padding(horizontal = 16.dp),
             ) {
-                if (bibleReading.preface != null) {
-                    items(bibleReading.preface.size) { index ->
+                val preface = bibleReading.preface
+                if (preface != null) {
+                    items(preface.size) { index ->
                         PrayerElementRenderer(
-                            prayerElementDomain = bibleReading.preface[index],
+                            prayerElementDomain = preface[index],
                             prayerViewModel = prayerViewModel,
                             filename = title,
                             navController = navController,

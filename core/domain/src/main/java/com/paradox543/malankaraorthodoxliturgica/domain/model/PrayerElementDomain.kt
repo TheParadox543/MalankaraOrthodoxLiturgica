@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.model
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.EventKey
-
 /**
  * Domain copy of PrayerElement kept in the core/domain layer.
  * This mirrors the structure of the data model but intentionally
