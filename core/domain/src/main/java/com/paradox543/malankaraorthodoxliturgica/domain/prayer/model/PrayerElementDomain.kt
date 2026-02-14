@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.prayer.model
 
 /**
  * Domain copy of PrayerElement kept in the core/domain layer.

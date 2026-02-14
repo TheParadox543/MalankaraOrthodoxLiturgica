@@ -1,4 +1,6 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.model
+
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 data class DisplayText(
     val en: String,

@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.settings.model
 
 /**
  * Supported application languages.

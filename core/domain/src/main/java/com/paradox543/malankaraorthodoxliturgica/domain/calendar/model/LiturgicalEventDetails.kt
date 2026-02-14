@@ -1,4 +1,6 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.calendar.model
+
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReadingsSelection
 
 data class LiturgicalEventDetails(
     val type: String,

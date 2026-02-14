@@ -3,7 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.services.sound
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton

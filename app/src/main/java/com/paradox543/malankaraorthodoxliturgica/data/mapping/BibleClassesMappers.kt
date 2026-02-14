@@ -10,16 +10,16 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.DisplayTextData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContentData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplatesData
 import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRangeData
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookName
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleChapter
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReadingsSelection
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReference
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleVerse
-import com.paradox543.malankaraorthodoxliturgica.domain.model.DisplayText
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceContent
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
-import com.paradox543.malankaraorthodoxliturgica.domain.model.ReferenceRange
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookName
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReadingsSelection
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.DisplayText
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceContent
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 
 fun PrefaceContentData.toDomain(): PrefaceContent =
     PrefaceContent(

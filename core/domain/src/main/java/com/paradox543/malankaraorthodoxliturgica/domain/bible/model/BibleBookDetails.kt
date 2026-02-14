@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.model
 
 /**
  * Holds metadata for a single book of the Bible used throughout the app.

@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
 import java.time.LocalDateTime
 import javax.inject.Inject
 

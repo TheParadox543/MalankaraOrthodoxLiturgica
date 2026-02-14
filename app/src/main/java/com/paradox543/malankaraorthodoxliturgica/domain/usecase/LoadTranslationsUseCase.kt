@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.TranslationsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import javax.inject.Inject
 
 class LoadTranslationsUseCase @Inject constructor(

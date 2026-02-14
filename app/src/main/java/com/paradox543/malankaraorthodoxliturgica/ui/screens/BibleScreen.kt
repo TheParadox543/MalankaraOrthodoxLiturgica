@@ -25,8 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen

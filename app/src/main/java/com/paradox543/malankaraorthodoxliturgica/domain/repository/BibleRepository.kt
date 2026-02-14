@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.repository
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleChapter
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 interface BibleRepository {
     fun loadBibleMetaData(): List<BibleBookDetails>

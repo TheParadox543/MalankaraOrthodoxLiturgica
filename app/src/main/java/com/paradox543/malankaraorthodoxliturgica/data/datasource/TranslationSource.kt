@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.datasource
 
 import android.content.Context
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

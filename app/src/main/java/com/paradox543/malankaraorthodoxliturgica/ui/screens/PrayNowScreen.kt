@@ -34,7 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen

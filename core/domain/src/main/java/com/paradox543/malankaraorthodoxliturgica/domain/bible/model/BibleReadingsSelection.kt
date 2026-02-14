@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.model
 
 /**
  * Holds selection of Bible readings used in liturgical contexts.

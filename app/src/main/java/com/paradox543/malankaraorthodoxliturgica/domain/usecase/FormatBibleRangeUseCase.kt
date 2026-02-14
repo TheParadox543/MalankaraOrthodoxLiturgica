@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.ReferenceRange
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 import javax.inject.Inject
 
 /**

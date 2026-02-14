@@ -1,4 +1,6 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.model
+
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 
 /**
  * Represents the loaded content for a Bible reading.

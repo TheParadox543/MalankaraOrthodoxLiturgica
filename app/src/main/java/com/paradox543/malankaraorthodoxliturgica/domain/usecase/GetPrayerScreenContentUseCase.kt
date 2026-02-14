@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerLinkDepthExceededException
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import javax.inject.Inject
 
 /**
