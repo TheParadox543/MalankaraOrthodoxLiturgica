@@ -1,7 +1,7 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.repository
+package com.paradox543.malankaraorthodoxliturgica.domain.song.repository
 
 import android.content.Context
-import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
+import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
 
 interface SongRepository {
     // Check whether network is available (kept same signature as implementation)
