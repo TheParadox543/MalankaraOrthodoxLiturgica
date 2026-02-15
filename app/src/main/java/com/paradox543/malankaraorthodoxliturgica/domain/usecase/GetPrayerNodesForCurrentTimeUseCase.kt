@@ -6,13 +6,12 @@ import javax.inject.Inject
 
 class GetPrayerNodesForCurrentTimeUseCase @Inject constructor(
     private val getRecommendedPrayersUseCase: GetRecommendedPrayersUseCase,
-    private val findNodeUseCase: FindNodeUseCase,
 ) {
     operator fun invoke(
         root: PageNodeDomain,
         now: LocalDateTime = LocalDateTime.now(),
     ): List<PageNodeDomain> {
         val keys = getRecommendedPrayersUseCase(now)
-        return keys.mapNotNull { findNodeUseCase(root, it) }
+        return keys.mapNotNull { root.findByRoute(it) }
     }
 }

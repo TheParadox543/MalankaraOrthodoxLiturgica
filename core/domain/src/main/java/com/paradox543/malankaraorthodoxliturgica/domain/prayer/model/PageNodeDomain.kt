@@ -16,4 +16,13 @@ data class PageNodeDomain(
     val parent: String?,
     val children: List<PageNodeDomain> = emptyList(),
     val languages: List<String> = listOf(),
-)
+) {
+    fun findByRoute(route: String): PageNodeDomain? {
+        if (this.route == route) return this
+        for (child in children) {
+            val result = child.findByRoute(route)
+            if (result != null) return result
+        }
+        return null
+    }
+}

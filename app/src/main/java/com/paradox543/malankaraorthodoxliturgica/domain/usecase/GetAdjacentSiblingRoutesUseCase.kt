@@ -4,14 +4,12 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDom
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import javax.inject.Inject
 
-class GetAdjacentSiblingRoutesUseCase @Inject constructor(
-    private val findNodeUseCase: FindNodeUseCase,
-) {
+class GetAdjacentSiblingRoutesUseCase @Inject constructor() {
     operator fun invoke(
         rootNode: PageNodeDomain,
         node: PageNodeDomain,
     ): Pair<String?, String?> {
-        val parentNode = findNodeUseCase(rootNode, node.parent ?: "") ?: return Pair(null, null)
+        val parentNode = rootNode.findByRoute(node.parent ?: "") ?: return Pair(null, null)
 
         val siblings = parentNode.children
         val index = siblings.indexOf(node)

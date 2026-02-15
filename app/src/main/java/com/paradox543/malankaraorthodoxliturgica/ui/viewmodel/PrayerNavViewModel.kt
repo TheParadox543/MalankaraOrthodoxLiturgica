@@ -6,7 +6,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDom
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FindNodeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetPrayerNodesForCurrentTimeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +22,6 @@ import javax.inject.Inject
 class PrayerNavViewModel @Inject constructor(
     settingsRepository: SettingsRepository,
     private val prayerRepository: PrayerRepository,
-    private val findNodeUseCase: FindNodeUseCase,
     private val getAdjacentSiblingRoutesUseCase: GetAdjacentSiblingRoutesUseCase,
     private val getPrayerNodesForCurrentTimeUseCase: GetPrayerNodesForCurrentTimeUseCase,
 ) : ViewModel() {
@@ -46,7 +44,7 @@ class PrayerNavViewModel @Inject constructor(
     private val _currentNode = MutableStateFlow<PageNodeDomain?>(null)
     val currentNode = _currentNode.asStateFlow()
 
-    fun findNode(route: String) = findNodeUseCase(rootNode.value, route)
+    fun findNode(route: String) = rootNode.value.findByRoute(route)
 
     fun getAdjacentRoutes(node: PageNodeDomain): Pair<String?, String?> = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
 
