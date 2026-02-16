@@ -1,17 +1,16 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import javax.inject.Inject
 
 /**
  * Formats the preface content for a given BibleReference and language.
  * This extracts preface templates from the repository and substitutes placeholders.
  */
-class FormatBiblePrefaceUseCase @Inject constructor(
+class FormatBiblePrefaceUseCase(
     private val bibleRepository: BibleRepository,
 ) {
     operator fun invoke(

@@ -1,10 +1,9 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import javax.inject.Inject
 
-class FormatGospelEntryUseCase @Inject constructor(
+class FormatGospelEntryUseCase(
     private val formatBibleReadingEntryUseCase: FormatBibleReadingEntryUseCase,
 ) {
     operator fun invoke(

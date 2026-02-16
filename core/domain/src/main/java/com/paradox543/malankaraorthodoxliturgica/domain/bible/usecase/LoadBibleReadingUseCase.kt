@@ -1,18 +1,17 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import javax.inject.Inject
 
 /**
  * Use case to load Bible readings given a list of references and a language.
  * It uses the repository to load individual chapters and then selects verse ranges.
  */
-class LoadBibleReadingUseCase @Inject constructor(
+class LoadBibleReadingUseCase(
     private val bibleRepository: BibleRepository,
 ) {
     operator fun invoke(
