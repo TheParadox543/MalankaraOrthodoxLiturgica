@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.model
+package com.paradox543.malankaraorthodoxliturgica.domain.prayer.model
 
 object PrayerRoutes {
 //    Section Routes
@@ -17,6 +17,7 @@ object PrayerRoutes {
     const val WOMEN = "women"
     const val WEDDING = "wedding"
     const val BAPTISM = "baptism"
+
     // Feasts
     const val CHRISTMAS = "christmas"
     const val EPIPHANY = "epiphany"

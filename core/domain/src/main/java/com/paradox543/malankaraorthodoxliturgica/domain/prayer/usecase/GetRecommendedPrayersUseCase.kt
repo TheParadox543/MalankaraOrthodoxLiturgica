@@ -1,13 +1,12 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerRoutes
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerRoutes
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.time.format.TextStyle
 import java.util.Locale
-import javax.inject.Inject
 
-class GetRecommendedPrayersUseCase @Inject constructor() {
+class GetRecommendedPrayersUseCase {
     operator fun invoke(now: LocalDateTime = LocalDateTime.now()): List<String> {
         val list = mutableListOf<String>()
 
