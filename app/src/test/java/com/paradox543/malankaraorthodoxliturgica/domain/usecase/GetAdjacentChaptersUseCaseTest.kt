@@ -1,8 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookName
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookName
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceContent
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
@@ -16,20 +19,17 @@ class GetAdjacentChaptersUseCaseTest {
         override fun loadBibleChapter(
             bookIndex: Int,
             chapterIndex: Int,
-            language: com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage,
+            language: AppLanguage,
         ) = null
 
         override fun loadPrefaceTemplates() =
-            com.paradox543.malankaraorthodoxliturgica.domain.model.PrefaceTemplates(
+            PrefaceTemplates(
                 prophets =
-                    com.paradox543.malankaraorthodoxliturgica.domain.model
-                        .PrefaceContent(emptyList(), emptyList()),
+                    PrefaceContent(emptyList(), emptyList()),
                 generalEpistle =
-                    com.paradox543.malankaraorthodoxliturgica.domain.model
-                        .PrefaceContent(emptyList(), emptyList()),
+                    PrefaceContent(emptyList(), emptyList()),
                 paulineEpistle =
-                    com.paradox543.malankaraorthodoxliturgica.domain.model
-                        .PrefaceContent(emptyList(), emptyList()),
+                    PrefaceContent(emptyList(), emptyList()),
             )
     }
 

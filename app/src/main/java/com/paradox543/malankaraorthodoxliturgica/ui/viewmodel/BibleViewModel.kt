@@ -1,15 +1,15 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleBookDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleChapter
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReading
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReference
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatBiblePrefaceUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatBibleReadingEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FormatGospelEntryUseCase

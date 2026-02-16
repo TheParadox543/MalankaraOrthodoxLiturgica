@@ -1,11 +1,14 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetDynamicSongsUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -39,7 +42,7 @@ class GetPrayerScreenContentUseCaseTest {
             val prayerRepo = FakePrayerRepository(repoMap)
 
             val calendarFake =
-                object : com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository {
+                object : CalendarRepository {
                     override suspend fun initialize() {}
 
                     override fun getEventsForDate(date: java.time.LocalDate) = emptyList<LiturgicalEventDetailsData>()

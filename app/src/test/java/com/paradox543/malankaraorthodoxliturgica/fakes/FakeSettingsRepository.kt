@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.fakes
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -24,10 +24,6 @@ class FakeSettingsRepository(
     private val songScrollFlow = MutableStateFlow(initialSongScroll)
     private val soundModeFlow = MutableStateFlow(initialSoundMode)
     private val soundDelayFlow = MutableStateFlow(initialSoundDelay)
-
-    override suspend fun getInitialLanguage(): AppLanguage = languageFlow.value
-
-    override suspend fun getInitialOnboardingCompleted(): Boolean = onboardingFlow.value
 
     override val language: StateFlow<AppLanguage> = languageFlow
     override val onboardingCompleted: StateFlow<Boolean> = onboardingFlow

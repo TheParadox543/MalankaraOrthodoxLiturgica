@@ -24,9 +24,10 @@ android {
         minSdk = 26
         targetSdk = 36
         versionCode = 50
-        versionName = "2.2.1"
+        versionName = "2.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        versionNameSuffix = "alpha"
     }
 
     buildTypes {
@@ -73,6 +74,8 @@ android {
 
 dependencies {
     implementation(project(":shared"))
+    implementation(project(":core:domain"))
+
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
     implementation(libs.androidx.lifecycle.runtime.ktx) // Lifecycle-aware components for Kotlin coroutines

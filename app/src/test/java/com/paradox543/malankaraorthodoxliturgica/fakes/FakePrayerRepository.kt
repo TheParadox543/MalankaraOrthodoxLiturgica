@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.fakes
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 /**
  * Test fake for [PrayerRepository].

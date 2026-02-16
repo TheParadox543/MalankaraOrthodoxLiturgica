@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.fakes
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
-import com.paradox543.malankaraorthodoxliturgica.domain.model.LiturgicalEventDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 
 /**
  * Test fake for [CalendarRepository].

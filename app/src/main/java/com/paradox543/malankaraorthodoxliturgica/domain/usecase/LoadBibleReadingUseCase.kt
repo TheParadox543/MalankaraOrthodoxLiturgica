@@ -1,11 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReading
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleReference
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import javax.inject.Inject
 
 /**

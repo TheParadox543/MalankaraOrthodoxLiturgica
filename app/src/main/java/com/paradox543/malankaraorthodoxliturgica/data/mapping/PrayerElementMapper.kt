@@ -1,8 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.applyPrayerReplacements
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 
 // Helper extensions to reduce duplication for DynamicSong conversions
 private fun PrayerElementData.DynamicSong.toDomainSong(): PrayerElementDomain.DynamicSong =

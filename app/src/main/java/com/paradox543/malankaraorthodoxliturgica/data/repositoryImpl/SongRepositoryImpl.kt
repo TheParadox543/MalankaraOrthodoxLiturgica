@@ -6,8 +6,10 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.core.net.toUri
 import com.google.firebase.storage.FirebaseStorage
-import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
+import com.paradox543.malankaraorthodoxliturgica.data.model.SongResultDto
+import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
+import com.paradox543.malankaraorthodoxliturgica.domain.song.repository.SongRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
@@ -34,11 +36,11 @@ class SongRepositoryImpl @Inject constructor(
 
             if (localFile.exists() && localFile.length() > 0) {
                 Log.d("SongRepository", "Playing from local storage: ${localFile.path}")
-                return@withContext SongResult.Success(localFile.toUri(), "Playing from local storage")
+                return@withContext SongResultDto.Success(localFile.toUri(), "Playing from local storage").toDomain()
             }
 
             if (!isNetworkAvailable(context)) {
-                return@withContext SongResult.Error("No internet connection. Please try again later.")
+                return@withContext SongResultDto.Error("No internet connection. Please try again later.").toDomain()
             }
 
             Log.d("SongRepository", "Streaming from Firebase for $songFilename")
@@ -49,13 +51,13 @@ class SongRepositoryImpl @Inject constructor(
                 // Trigger background download (non-blocking)
                 downloadSongInBackground(songFilename, localFile)
 
-                SongResult.Success(uri, "Streaming from Firebase")
+                SongResultDto.Success(uri, "Streaming from Firebase").toDomain()
             } catch (e: TimeoutCancellationException) {
                 Log.e("SongRepository", "Firebase request timed out", e)
-                SongResult.Error("Request timed out. Please check your internet connection.")
+                SongResultDto.Error("Request timed out. Please check your internet connection.").toDomain()
             } catch (e: Exception) {
                 Log.e("SongRepository", "Failed to fetch song: $songFilename", e)
-                SongResult.Error("Could not retrieve song: ${e.localizedMessage}")
+                SongResultDto.Error("Could not retrieve song: ${e.localizedMessage}").toDomain()
             }
         }
 

@@ -4,19 +4,21 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,12 +28,53 @@ class SettingsViewModel @Inject constructor(
     private val firebaseAnalytics: FirebaseAnalytics,
     private val soundModeManager: SoundModeManager,
 ) : ViewModel() {
-    val selectedLanguage = settingsRepository.language
-    val onboardingCompleted = settingsRepository.onboardingCompleted
-    val fontScale = settingsRepository.fontScale
-    val songScrollState = settingsRepository.songScrollState
-    val soundMode = settingsRepository.soundMode
-    val soundRestoreDelay = settingsRepository.soundRestoreDelay
+    val selectedLanguage: StateFlow<AppLanguage> =
+        settingsRepository.language
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = AppLanguage.MALAYALAM,
+            )
+
+    val onboardingCompleted: StateFlow<Boolean> =
+        settingsRepository.onboardingCompleted
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = false,
+            )
+
+    val fontScale: StateFlow<AppFontScale> =
+        settingsRepository.fontScale
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = AppFontScale.Medium,
+            )
+
+    val songScrollState: StateFlow<Boolean> =
+        settingsRepository.songScrollState
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = false,
+            )
+
+    val soundMode: StateFlow<SoundMode> =
+        settingsRepository.soundMode
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = SoundMode.OFF,
+            )
+
+    val soundRestoreDelay: StateFlow<Int> =
+        settingsRepository.soundRestoreDelay
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = 30,
+            )
 
     private val _hasDndPermission = MutableStateFlow(false)
     val hasDndPermission = _hasDndPermission.asStateFlow()

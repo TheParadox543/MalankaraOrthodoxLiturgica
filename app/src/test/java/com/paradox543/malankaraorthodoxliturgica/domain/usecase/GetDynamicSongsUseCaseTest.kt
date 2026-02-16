@@ -2,12 +2,13 @@ package com.paradox543.malankaraorthodoxliturgica.domain.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStrData
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.domain.model.CalendarWeek
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.CalendarRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetDynamicSongsUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -6,6 +6,31 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ---
 
 ## 🔮 [Unreleased]
+- Unversioned changes
+
+---
+## [2.2.0] - 2026-02-10
+### Added
+- Prayers for Great lent, Passion Week in Malayalam, Manglish and Indic.
+- New image for Great Lent.
+
+---
+## [2.1.1] - 2026-01-20
+### Fixed
+- Manglish translations of Nineveh Lent not getting displayed.
+
+---
+
+## [2.1.0] - 2026-01-19
+### Added
+- Nineveh Lent Prayers.
+
+### Changed
+- UI for calendar updated to show the current date better.
+
+### Fixed
+- Font size was not getting initialized properly due to unused job debounce.
+
 ---
 
 ## [2.0.1] - 2026-01-02

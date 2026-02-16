@@ -5,8 +5,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppFontScale
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 private val DarkColorScheme =
     darkColorScheme(

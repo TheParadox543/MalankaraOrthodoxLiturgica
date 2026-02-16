@@ -2,9 +2,9 @@ package com.paradox543.malankaraorthodoxliturgica.data.datasource
 
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerContentNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerParsingException
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
