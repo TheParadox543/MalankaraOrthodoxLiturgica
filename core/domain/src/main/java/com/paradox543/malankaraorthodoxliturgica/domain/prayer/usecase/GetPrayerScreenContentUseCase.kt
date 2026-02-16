@@ -1,16 +1,15 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import javax.inject.Inject
 
 /**
  * Use-case that loads a prayer file and resolves any Link/LinkCollapsible/Dynamic blocks
  * into a fully-resolved list of PrayerElementDomain items suitable for rendering.
  */
-class GetPrayerScreenContentUseCase @Inject constructor(
+class GetPrayerScreenContentUseCase(
     private val prayerRepository: PrayerRepository,
     private val getDynamicSongsUseCase: GetDynamicSongsUseCase,
 ) {

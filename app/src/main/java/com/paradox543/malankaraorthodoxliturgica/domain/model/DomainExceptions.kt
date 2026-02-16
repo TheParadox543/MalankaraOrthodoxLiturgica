@@ -15,10 +15,6 @@ class PrayerParsingException(
     cause: Throwable? = null,
 ) : Exception(message, cause)
 
-class PrayerLinkDepthExceededException(
-    message: String,
-) : Exception(message)
-
 class BibleParsingException(
     message: String,
     cause: Throwable? = null,
