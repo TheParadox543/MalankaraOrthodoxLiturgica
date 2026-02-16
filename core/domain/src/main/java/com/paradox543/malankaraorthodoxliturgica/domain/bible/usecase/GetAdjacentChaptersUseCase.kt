@@ -1,13 +1,12 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
-import javax.inject.Inject
 
 /**
  * Use case to calculate previous and next chapter routes for a given book and chapter index.
  * Returns a Pair(prevRoute, nextRoute) where each may be null if there's no adjacent chapter.
  */
-class GetAdjacentChaptersUseCase @Inject constructor(
+class GetAdjacentChaptersUseCase(
     private val bibleRepository: BibleRepository,
 ) {
     operator fun invoke(

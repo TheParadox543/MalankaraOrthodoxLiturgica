@@ -5,6 +5,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookNam
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacentChaptersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull

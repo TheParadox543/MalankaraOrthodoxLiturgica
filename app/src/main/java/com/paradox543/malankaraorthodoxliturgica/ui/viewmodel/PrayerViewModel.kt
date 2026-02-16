@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetSongKeyPriorityUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.LoadTranslationsUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,9 +25,9 @@ import javax.inject.Inject
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
     settingsRepository: SettingsRepository,
+    private val translationsRepository: TranslationsRepository,
     private val analyticsService: AnalyticsService,
     private val inAppReviewManager: InAppReviewManager,
-    private val loadTranslationsUseCase: LoadTranslationsUseCase,
     private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
     private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
 ) : ViewModel() {
@@ -69,7 +69,7 @@ class PrayerViewModel @Inject constructor(
 
     private fun loadTranslations(language: AppLanguage) {
         viewModelScope.launch {
-            val loadedTranslations = loadTranslationsUseCase(language)
+            val loadedTranslations = translationsRepository.loadTranslations(language)
             _translations.update { loadedTranslations }
         }
     }

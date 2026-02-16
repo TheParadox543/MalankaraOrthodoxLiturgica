@@ -5,13 +5,17 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibl
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleRangeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleReadingEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacentChaptersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetDynamicSongsUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetRecommendedPrayersUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,6 +54,13 @@ object UseCaseModule {
             getDynamicSongsUseCase = getDynamicSongsUseCase,
         )
 
+    @Provides
+    fun provideGetAdjacentSiblingRoutesUseCase(): GetAdjacentSiblingRoutesUseCase = GetAdjacentSiblingRoutesUseCase()
+
+    @Provides
+    fun provideGetSongKeyPriorityUseCase(calendarRepository: CalendarRepository): GetSongKeyPriorityUseCase =
+        GetSongKeyPriorityUseCase(calendarRepository = calendarRepository)
+
     // Bible Use Cases
     @Provides
     fun provideBiblePrefaceUseCase(bibleRepository: BibleRepository): FormatBiblePrefaceUseCase =
@@ -82,4 +93,14 @@ object UseCaseModule {
     @Provides
     fun provideBibleReadingUseCase(bibleRepository: BibleRepository): LoadBibleReadingUseCase =
         LoadBibleReadingUseCase(bibleRepository = bibleRepository)
+
+    @Provides
+    fun provideAdjacentChapterUseCase(bibleRepository: BibleRepository): GetAdjacentChaptersUseCase =
+        GetAdjacentChaptersUseCase(
+            bibleRepository = bibleRepository,
+        )
+
+    // Calendar Use Case
+    @Provides
+    fun provideFormatDateTitleUseCase(): FormatDateTitleUseCase = FormatDateTitleUseCase()
 }

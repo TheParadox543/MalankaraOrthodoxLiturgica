@@ -1,11 +1,10 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import java.time.LocalDate
-import javax.inject.Inject
 
-class FormatDateTitleUseCase @Inject constructor() {
+class FormatDateTitleUseCase {
     operator fun invoke(
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,

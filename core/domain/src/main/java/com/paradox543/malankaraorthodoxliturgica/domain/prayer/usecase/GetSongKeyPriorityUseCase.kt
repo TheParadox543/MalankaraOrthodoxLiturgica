@@ -1,9 +1,8 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
-import javax.inject.Inject
 
-class GetSongKeyPriorityUseCase @Inject constructor(
+class GetSongKeyPriorityUseCase(
     private val calendarRepository: CalendarRepository,
 ) {
     suspend operator fun invoke(): String {
