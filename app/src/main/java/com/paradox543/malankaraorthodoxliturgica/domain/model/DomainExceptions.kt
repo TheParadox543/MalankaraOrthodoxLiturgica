@@ -2,10 +2,6 @@ package com.paradox543.malankaraorthodoxliturgica.domain.model
 
 import okio.IOException
 
-class BookNotFoundException(
-    message: String,
-) : IOException(message)
-
 class PrayerContentNotFoundException(
     message: String,
 ) : IOException(message)

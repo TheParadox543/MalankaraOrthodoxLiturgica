@@ -6,12 +6,12 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBiblePrefaceUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleReadingEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.model.BookNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetAdjacentChaptersUseCase
