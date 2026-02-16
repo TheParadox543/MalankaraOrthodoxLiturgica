@@ -104,6 +104,17 @@ fun NavGraph(
         }
 
         composable(
+            route = AppScreen.MusicSection.route,
+            arguments =
+                listOf(
+                    navArgument(AppScreen.MusicSection.ARG_ROUTE) {
+                        type = NavType.StringType
+                    },
+                ),
+        ) { backStackEntry ->
+        }
+
+        composable(
             route = AppScreen.Prayer.route,
             arguments =
                 listOf(
