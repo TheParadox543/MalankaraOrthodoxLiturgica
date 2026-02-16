@@ -221,7 +221,7 @@
     },
     "feasts": {
         "en": "Feasts",
-        "ml": "പെരുന്നാളുകൾ"
+        "ml": "മോറാനായ പെരുന്നാളുകൾ"
     },
     "ascension": {
         "ml": "സ്വർഗ്ഗാരോഹണ പെരുന്നാൾ",
@@ -509,7 +509,7 @@
     },
     "specialPrayers": {
         "en": "Special Prayers",
-        "ml": "പ്രേത്യേക പ്രാർത്ഥനകൾ"
+        "ml": "പ്രത്യേക പ്രാർത്ഥനകൾ"
     },
     "memraOfAprem": {
         "en": "Memra Of Aprem",
@@ -542,5 +542,17 @@
     "passover": {
         "ml": "പെസഹാ",
         "en": "Passover"
+    },
+    "general": {
+        "ml": "പൊതുവായ",
+        "en": "General"
+    },
+    "palmSundayService":{
+        "ml": "ഊശാന",
+        "en": "Palm Sunday"
+    },
+    "washingOfFeetService": {
+        "ml": "കാൽകഴുകൽ ശുശ്രൂഷ",
+        "en": "Washing of the Feet"
     }
 }
