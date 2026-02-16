@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetRecommendedPrayersUseCase
 import dagger.Module
 import dagger.Provides
@@ -12,4 +13,10 @@ import javax.inject.Singleton
 object UseCaseModule {
     @Provides
     fun provideGetRecommendedPrayersUseCase(): GetRecommendedPrayersUseCase = GetRecommendedPrayersUseCase()
+
+    @Provides
+    fun provideGetPrayerNodesForCurrentTimeUseCase(): GetPrayerNodesForCurrentTimeUseCase =
+        GetPrayerNodesForCurrentTimeUseCase(
+            GetRecommendedPrayersUseCase(),
+        )
 }

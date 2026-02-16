@@ -1,11 +1,9 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.usecase
+package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetRecommendedPrayersUseCase
 import java.time.LocalDateTime
-import javax.inject.Inject
 
-class GetPrayerNodesForCurrentTimeUseCase @Inject constructor(
+class GetPrayerNodesForCurrentTimeUseCase(
     private val getRecommendedPrayersUseCase: GetRecommendedPrayersUseCase,
 ) {
     operator fun invoke(
