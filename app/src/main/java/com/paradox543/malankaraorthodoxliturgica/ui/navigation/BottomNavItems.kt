@@ -22,16 +22,16 @@ val bottomNavItems =
                 modifier = Modifier.size(iconSize),
             )
         },
-        BottomNavItem(
-            "music",
-            "Music",
-        ) {
-            Icon(
-                painterResource(R.drawable.musical_note),
-                "Music",
-                modifier = Modifier.size(iconSize),
-            )
-        },
+//        BottomNavItem(
+//            "music",
+//            "Music",
+//        ) {
+//            Icon(
+//                painterResource(R.drawable.musical_note),
+//                "Music",
+//                modifier = Modifier.size(iconSize),
+//            )
+//        },
         BottomNavItem("calendar", "Calendar") {
             Icon(
                 painterResource(R.drawable.calendar),
