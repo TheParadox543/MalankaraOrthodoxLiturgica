@@ -19,11 +19,12 @@ import kotlinx.coroutines.withTimeout
 import java.io.File
 import javax.inject.Inject
 
-class SongRepositoryImpl @Inject constructor(
+class
+SongRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val storage: FirebaseStorage,
 ) : SongRepository {
-    override fun isNetworkAvailable(context: Context): Boolean {
+    fun isNetworkAvailable(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = cm.activeNetwork ?: return false
         val capabilities = cm.getNetworkCapabilities(network) ?: return false

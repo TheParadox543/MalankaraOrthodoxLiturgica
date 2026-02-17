@@ -26,3 +26,4 @@ local.properties
 /app/src/main/assets/en
 /app/src/main/assets/mn
 /app/src/main/assets/indic
+gradle/gradle-daemon-jvm.properties
