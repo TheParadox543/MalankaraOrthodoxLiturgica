@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.fakes
+package com.paradox543.malankaraorthodoxliturgica.domain.fakes
 
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek

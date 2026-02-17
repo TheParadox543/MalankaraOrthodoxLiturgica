@@ -1,11 +1,11 @@
-package com.paradox543.malankaraorthodoxliturgica.fakes
+package com.paradox543.malankaraorthodoxliturgica.domain.fakes
 
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Test fake for [SettingsRepository].
@@ -25,12 +25,12 @@ class FakeSettingsRepository(
     private val soundModeFlow = MutableStateFlow(initialSoundMode)
     private val soundDelayFlow = MutableStateFlow(initialSoundDelay)
 
-    override val language: StateFlow<AppLanguage> = languageFlow
-    override val onboardingCompleted: StateFlow<Boolean> = onboardingFlow
-    override val fontScale: StateFlow<AppFontScale> = fontScaleFlow
-    override val songScrollState: StateFlow<Boolean> = songScrollFlow
-    override val soundMode: StateFlow<SoundMode> = soundModeFlow
-    override val soundRestoreDelay: StateFlow<Int> = soundDelayFlow
+    override val language: Flow<AppLanguage> = languageFlow
+    override val onboardingCompleted: Flow<Boolean> = onboardingFlow
+    override val fontScale: Flow<AppFontScale> = fontScaleFlow
+    override val songScrollState: Flow<Boolean> = songScrollFlow
+    override val soundMode: Flow<SoundMode> = soundModeFlow
+    override val soundRestoreDelay: Flow<Int> = soundDelayFlow
 
     override suspend fun setLanguage(language: AppLanguage) {
         languageFlow.value = language
