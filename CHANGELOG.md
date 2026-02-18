@@ -9,6 +9,14 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 - Unversioned changes
 
 ---
+## [2.2.1] - 2026-02-15
+### Fixed
+- Updated a few spellings within the app
+
+### Changed
+- Corrected locations of certain prayers
+
+---
 ## [2.2.0] - 2026-02-10
 ### Added
 - Prayers for Great lent, Passion Week in Malayalam, Manglish and Indic.
