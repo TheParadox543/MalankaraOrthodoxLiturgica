@@ -17,14 +17,16 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
-    settingsRepository: SettingsRepository,
+    private val settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,
     private val analyticsService: AnalyticsService,
     private val inAppReviewManager: InAppReviewManager,
@@ -35,7 +37,7 @@ class PrayerViewModel @Inject constructor(
         settingsRepository.language.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = AppLanguage.MALAYALAM,
+            initialValue = runBlocking { settingsRepository.language.first() },
         )
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
