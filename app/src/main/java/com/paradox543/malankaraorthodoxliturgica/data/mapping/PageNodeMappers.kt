@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
 
 /**
  * Mappers between the data and domain representations of a page node.

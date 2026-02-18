@@ -2,13 +2,13 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.PrayerRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.FindNodeUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetAdjacentSiblingRoutesUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetPrayerNodesForCurrentTimeUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +23,6 @@ import javax.inject.Inject
 class PrayerNavViewModel @Inject constructor(
     settingsRepository: SettingsRepository,
     private val prayerRepository: PrayerRepository,
-    private val findNodeUseCase: FindNodeUseCase,
     private val getAdjacentSiblingRoutesUseCase: GetAdjacentSiblingRoutesUseCase,
     private val getPrayerNodesForCurrentTimeUseCase: GetPrayerNodesForCurrentTimeUseCase,
 ) : ViewModel() {
@@ -46,9 +45,14 @@ class PrayerNavViewModel @Inject constructor(
     private val _currentNode = MutableStateFlow<PageNodeDomain?>(null)
     val currentNode = _currentNode.asStateFlow()
 
-    fun findNode(route: String) = findNodeUseCase(rootNode.value, route)
+    fun findNode(route: String) = rootNode.value.findByRoute(route)
 
-    fun getAdjacentRoutes(node: PageNodeDomain): Pair<String?, String?> = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
+    fun getAdjacentRoutes(node: PageNodeDomain): Pair<String?, String?> {
+        val (prev, next) = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
+        val prevRoute = prev?.let { AppScreen.Prayer.createRoute(prev) }
+        val nextRoute = next?.let { AppScreen.Prayer.createRoute(next) }
+        return Pair(prevRoute, nextRoute)
+    }
 
     fun getAllPrayerNodes(): List<PageNodeDomain> = getPrayerNodesForCurrentTimeUseCase(rootNode.value)
 }

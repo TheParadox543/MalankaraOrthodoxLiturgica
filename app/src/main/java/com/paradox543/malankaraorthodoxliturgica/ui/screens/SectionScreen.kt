@@ -35,7 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
@@ -162,12 +162,13 @@ private fun SectionCard(
                 .fillMaxWidth()
                 .padding(4.dp)
                 .clickable {
+                    val filename = node.filename
                     if (node.children.isNotEmpty()) {
                         Log.d("SectionCard", "Navigating to section: ${node.route}")
                         navController.navigate(AppScreen.Section.createRoute(node.route))
-                    } else if (node.filename != null && node.filename.endsWith(".json")) {
+                    } else if (filename != null && filename.endsWith(".json")) {
                         navController.navigate(AppScreen.Prayer.createRoute(node.route))
-                    } else if (node.type == "song" || (node.filename != null && node.filename.endsWith(".mp3"))) {
+                    } else if (node.type == "song" || (filename != null && filename.endsWith(".mp3"))) {
                         navController.navigate(AppScreen.Song.createRoute(node.route))
                     } else {
                         Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
