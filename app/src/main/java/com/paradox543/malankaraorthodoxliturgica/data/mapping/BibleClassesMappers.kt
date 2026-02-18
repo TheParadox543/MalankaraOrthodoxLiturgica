@@ -1,11 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleChapterDto
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleVerseDto
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBookDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBookNameData
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleChapterData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReadingsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleVerseData
 import com.paradox543.malankaraorthodoxliturgica.data.model.DisplayTextData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceContentData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplatesData
@@ -46,13 +46,13 @@ fun BibleBookNameData.toDomain(): BibleBookName =
         ml = this.ml,
     )
 
-fun BibleVerseData.toDomain(): BibleVerse =
+fun BibleVerseDto.toDomain(): BibleVerse =
     BibleVerse(
         id = this.id,
         verse = this.verse,
     )
 
-fun BibleChapterData.toDomain(): BibleChapter =
+fun BibleChapterDto.toDomain(): BibleChapter =
     BibleChapter(
         book = this.book,
         chapter = this.chapter,
@@ -73,16 +73,16 @@ fun BibleBookDetailsData.toDomain(): BibleBookDetails =
 
 fun List<BibleBookDetailsData>.toBibleDetailsDomain(): List<BibleBookDetails> = map { it.toDomain() }
 
-fun BibleVerse.toData(): BibleVerseData =
-    BibleVerseData(
+fun BibleVerse.toData(): BibleVerseDto =
+    BibleVerseDto(
         id = id,
         verse = verse,
     )
 
-fun List<BibleVerseData>.toBibleVerseDomain(): List<BibleVerse> = map { it.toDomain() }
+fun List<BibleVerseDto>.toBibleVerseDomain(): List<BibleVerse> = map { it.toDomain() }
 
-fun BibleChapter.toData(): BibleChapterData =
-    BibleChapterData(
+fun BibleChapter.toData(): BibleChapterDto =
+    BibleChapterDto(
         book = book,
         chapter = chapter,
         verses = verses.map { it.toData() },

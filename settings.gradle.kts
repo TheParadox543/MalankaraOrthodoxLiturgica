@@ -26,3 +26,4 @@ rootProject.name = "MalankaraOrthodoxLiturgica"
 include(":app")
 include(":shared")
 include(":core:domain")
+include(":data:bible")

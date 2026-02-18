@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.datasource
 
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleChapterDto
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBookDetailsData
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleChapterData
 import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplatesData
 import javax.inject.Inject
 
@@ -12,5 +12,5 @@ class BibleSource @Inject constructor(
 
     fun readPrefaceTemplates(): PrefaceTemplatesData? = reader.loadJsonAsset<PrefaceTemplatesData>("bible_preface_templates.json")
 
-    fun readBibleChapter(path: String): BibleChapterData? = reader.loadJsonAsset<BibleChapterData>(path)
+    fun readBibleChapter(path: String): BibleChapterDto? = reader.loadJsonAsset<BibleChapterDto>(path)
 }

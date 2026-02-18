@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     // Linter plugin
     alias(libs.plugins.ktlint)
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
+    alias(libs.plugins.kotlin.serialization)
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     // Google services plugin
@@ -23,7 +23,7 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 50
+        versionCode = 51
         versionName = "2.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -75,6 +75,7 @@ android {
 dependencies {
     implementation(project(":shared"))
     implementation(project(":core:domain"))
+    implementation(project(":data:bible"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
