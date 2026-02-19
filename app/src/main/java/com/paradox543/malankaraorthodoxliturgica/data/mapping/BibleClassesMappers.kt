@@ -3,14 +3,14 @@ package com.paradox543.malankaraorthodoxliturgica.data.mapping
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookNameData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleChapterDto
-import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleReadingsData
-import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleReferenceData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleVerseDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.DisplayTextData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceContentData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceTemplatesData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.ProseDto
-import com.paradox543.malankaraorthodoxliturgica.data.bible.model.ReferenceRangeData
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReadingsData
+import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
+import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRangeData
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookName
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
@@ -22,7 +22,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceConte
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Prose
 
 fun ProseDto.toDomain(): PrayerElementDomain.Prose = PrayerElementDomain.Prose(this.content)
 
