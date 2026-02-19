@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.model
 
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleReadingsData
 import kotlinx.serialization.Serializable
 
 @Serializable

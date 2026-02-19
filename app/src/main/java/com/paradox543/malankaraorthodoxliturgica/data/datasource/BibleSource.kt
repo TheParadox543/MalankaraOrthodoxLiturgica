@@ -1,8 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.data.datasource
 
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleChapterDto
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleBookDetailsData
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrefaceTemplatesData
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceTemplatesData
 import javax.inject.Inject
 
 class BibleSource @Inject constructor(
