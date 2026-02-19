@@ -5,13 +5,13 @@ import kotlinx.serialization.Serializable
 /** High-level metadata object for a single book.
  */
 @Serializable
-data class BibleBookDetailsData(
-    val book: BibleBookNameData,
+data class BibleBookDetailsDto(
+    val book: BibleBookNameDto,
     val folder: String,
     val verseCount: List<Int>,
     val chapters: Int = 1,
     val category: String? = null,
-    val prefaces: PrefaceContentData? = null,
-    val displayTitle: DisplayTextData? = null,
-    val ordinal: DisplayTextData? = null,
+    val prefaces: PrefaceContentDto? = null,
+    val displayTitle: DisplayTextDto? = null,
+    val ordinal: DisplayTextDto? = null,
 )

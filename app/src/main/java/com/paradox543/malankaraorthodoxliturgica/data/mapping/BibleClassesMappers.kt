@@ -1,11 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
-import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookDetailsData
-import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookNameData
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookDetailsDto
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookNameDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleChapterDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleVerseDto
-import com.paradox543.malankaraorthodoxliturgica.data.bible.model.DisplayTextData
-import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceContentData
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.DisplayTextDto
+import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceContentDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceTemplatesData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.ProseDto
 import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReadingsData
@@ -27,7 +27,7 @@ fun ProseDto.toDomain(): PrayerElementDomain.Prose = PrayerElementDomain.Prose(t
 
 fun List<ProseDto>.toProseListDomain(): List<PrayerElementDomain.Prose> = map { it.toDomain() }
 
-fun PrefaceContentData.toDomain(): PrefaceContent =
+fun PrefaceContentDto.toDomain(): PrefaceContent =
     PrefaceContent(
         en = this.en.toProseListDomain(),
         ml = this.ml.toProseListDomain(),
@@ -40,13 +40,13 @@ fun PrefaceTemplatesData.toDomain(): PrefaceTemplates =
         paulineEpistle = this.paulineEpistle.toDomain(),
     )
 
-fun DisplayTextData.toDomain(): DisplayText =
+fun DisplayTextDto.toDomain(): DisplayText =
     DisplayText(
         en = this.en,
         ml = this.ml,
     )
 
-fun BibleBookNameData.toDomain(): BibleBookName =
+fun BibleBookNameDto.toDomain(): BibleBookName =
     BibleBookName(
         en = this.en,
         ml = this.ml,
@@ -65,7 +65,7 @@ fun BibleChapterDto.toDomain(): BibleChapter =
         verses = this.verses.map { it.toDomain() },
     )
 
-fun BibleBookDetailsData.toDomain(): BibleBookDetails =
+fun BibleBookDetailsDto.toDomain(): BibleBookDetails =
     BibleBookDetails(
         book = this.book.toDomain(),
         folder = this.folder,
@@ -77,7 +77,7 @@ fun BibleBookDetailsData.toDomain(): BibleBookDetails =
         ordinal = this.ordinal?.toDomain(),
     )
 
-fun List<BibleBookDetailsData>.toBibleDetailsDomain(): List<BibleBookDetails> = map { it.toDomain() }
+fun List<BibleBookDetailsDto>.toBibleDetailsDomain(): List<BibleBookDetails> = map { it.toDomain() }
 
 fun BibleVerse.toData(): BibleVerseDto =
     BibleVerseDto(

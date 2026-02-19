@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 // Represents the template file for all preface types.
 @Serializable
 data class PrefaceTemplatesData(
-    val prophets: PrefaceContentData,
-    val generalEpistle: PrefaceContentData,
-    val paulineEpistle: PrefaceContentData,
+    val prophets: PrefaceContentDto,
+    val generalEpistle: PrefaceContentDto,
+    val paulineEpistle: PrefaceContentDto,
 )
