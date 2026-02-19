@@ -1,14 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ktlint)
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.paradox543.malankaraorthodxliturgica.data.bible"
+    namespace = "com.paradox543.malankaraorthodoxliturgica.data.core"
     compileSdk {
         version = release(36)
     }
@@ -39,16 +37,13 @@ android {
 }
 
 dependencies {
-    // Project imports
-    implementation(project(":core:domain"))
-    implementation(project(":data:core"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
     // Dependency Injection
     implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
+
     ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
     // Data Serialization

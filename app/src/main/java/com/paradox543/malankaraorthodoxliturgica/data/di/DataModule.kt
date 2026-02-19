@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.di
 
-import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.BibleRepositoryImpl
+import com.paradox543.malankaraorthodoxliturgica.data.bible.repository.BibleRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.CalendarRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.PrayerRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl.SettingsRepositoryImpl
@@ -34,9 +34,6 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindCalendarRepository(impl: CalendarRepositoryImpl): CalendarRepository
-
-    @Binds
-    abstract fun bindBibleRepository(impl: BibleRepositoryImpl): BibleRepository
 
     @Binds
     abstract fun bindSongRepository(impl: SongRepositoryImpl): SongRepository

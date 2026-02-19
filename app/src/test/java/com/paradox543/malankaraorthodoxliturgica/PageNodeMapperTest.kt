@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica
 
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.toData
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomain
+import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toData
+import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toDomain
 import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
 import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.PageNodeDomain
 import org.junit.Assert.assertEquals

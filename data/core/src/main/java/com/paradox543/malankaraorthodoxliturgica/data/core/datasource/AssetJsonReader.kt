@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.datasource
+package com.paradox543.malankaraorthodoxliturgica.data.core.datasource
 
 import android.content.Context
 import android.util.Log

@@ -5,7 +5,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.model.SongResultDto
 import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
 import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongSource
 
-fun SongResultDto.toDomain() =
+fun SongResultDto.toSongResultDomain() =
     when (this) {
         is SongResultDto.Error -> {
             SongResult.Error(

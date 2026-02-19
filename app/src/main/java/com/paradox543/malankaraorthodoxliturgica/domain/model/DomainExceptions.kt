@@ -10,8 +10,3 @@ class PrayerParsingException(
     message: String,
     cause: Throwable? = null,
 ) : Exception(message, cause)
-
-class BibleParsingException(
-    message: String,
-    cause: Throwable? = null,
-) : Exception(message, cause)
