@@ -36,6 +36,16 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    testOptions {
+        unitTests {
+            // Make Android stub methods (e.g. Log.e) return defaults instead of throwing
+            isReturnDefaultValues = true
+        }
+        unitTests.all {
+            // Suppress the ByteBuddy/mockk "Java agent loaded dynamically" warning on JDK 21+
+            it.jvmArgs("-Djdk.attach.allowAttachSelf=true")
+        }
+    }
 }
 
 dependencies {
@@ -55,6 +65,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
