@@ -36,6 +36,14 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    testOptions {
+        unitTests {
+            isReturnDefaultValues = true
+        }
+        unitTests.all {
+            it.jvmArgs("-Djdk.attach.allowAttachSelf=true")
+        }
+    }
 }
 
 dependencies {
@@ -54,7 +62,10 @@ dependencies {
     // Data Serialization
     implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
 
-    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.test.core)
+    testImplementation(libs.kotlinx.test.junit)
+    testImplementation(libs.kotlinx.test.annotations.common)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
