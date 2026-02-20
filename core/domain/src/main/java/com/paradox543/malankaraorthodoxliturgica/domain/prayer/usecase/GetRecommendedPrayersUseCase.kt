@@ -46,6 +46,7 @@ class GetRecommendedPrayersUseCase {
             val name = day.getDisplayName(TextStyle.FULL, Locale.ENGLISH).lowercase()
             if (isGreatLentSeason && day != DayOfWeek.SATURDAY) {
                 addFor("greatLent_$name")
+                addFor("greatLent_general")
             } else {
                 addFor("sheema_$name")
             }
