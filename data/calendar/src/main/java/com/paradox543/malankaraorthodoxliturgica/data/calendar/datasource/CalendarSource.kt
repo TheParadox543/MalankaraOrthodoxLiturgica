@@ -1,8 +1,8 @@
-package com.paradox543.malankaraorthodoxliturgica.data.datasource
+package com.paradox543.malankaraorthodoxliturgica.data.calendar.datasource
 
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalCalendarDates
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalCalendarDates
 import javax.inject.Inject
 
 class CalendarSource @Inject constructor(

@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.model
 
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.EventKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 //  import kotlinx.serialization.json.JsonClassDiscriminator

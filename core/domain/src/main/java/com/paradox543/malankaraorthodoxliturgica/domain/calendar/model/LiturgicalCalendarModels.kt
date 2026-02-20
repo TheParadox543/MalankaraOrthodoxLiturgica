@@ -1,6 +1,6 @@
-package com.paradox543.malankaraorthodoxliturgica.data.model
+package com.paradox543.malankaraorthodoxliturgica.domain.calendar.model
 
-typealias EventKey = String // Semantically, good to keep, though technically just String
+typealias EventKey = String
 
 // Structure for liturgical_calendar.json
 typealias DayEvents = List<EventKey> // List of EventKeys
