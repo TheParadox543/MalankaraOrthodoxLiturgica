@@ -1,13 +1,13 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReadingsData
-import com.paradox543.malankaraorthodoxliturgica.data.model.BibleReferenceData
-import com.paradox543.malankaraorthodoxliturgica.data.model.ReferenceRangeData
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.BibleReadingsDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.BibleReferenceDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.ReferenceRangeDto
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReadingsSelection
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 
-fun ReferenceRangeData.toDomain(): ReferenceRange =
+fun ReferenceRangeDto.toDomain(): ReferenceRange =
     ReferenceRange(
         startChapter = this.startChapter,
         endChapter = this.endChapter,
@@ -15,18 +15,18 @@ fun ReferenceRangeData.toDomain(): ReferenceRange =
         endVerse = this.endVerse,
     )
 
-fun BibleReferenceData.toDomain(): BibleReference =
+fun BibleReferenceDto.toDomain(): BibleReference =
     BibleReference(
         bookNumber = bookNumber,
         ranges = ranges.map { it.toDomain() },
     )
 
-fun List<BibleReferenceData>.toBibleReferenceDomain(): List<BibleReference> =
+fun List<BibleReferenceDto>.toBibleReferenceDomain(): List<BibleReference> =
     map {
         it.toDomain()
     }
 
-fun BibleReadingsData.toDomain(): BibleReadingsSelection =
+fun BibleReadingsDto.toDomain(): BibleReadingsSelection =
     BibleReadingsSelection(
         vespersGospel = this.vespersGospel?.map { it.toDomain() },
         matinsGospel = this.matinsGospel?.map { it.toDomain() },

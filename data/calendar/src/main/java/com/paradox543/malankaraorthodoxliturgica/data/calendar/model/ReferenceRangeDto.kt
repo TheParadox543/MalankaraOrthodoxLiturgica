@@ -1,9 +1,9 @@
-package com.paradox543.malankaraorthodoxliturgica.data.model
+package com.paradox543.malankaraorthodoxliturgica.data.calendar.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ReferenceRangeData(
+data class ReferenceRangeDto(
     val startChapter: Int,
     val startVerse: Int,
     val endChapter: Int,

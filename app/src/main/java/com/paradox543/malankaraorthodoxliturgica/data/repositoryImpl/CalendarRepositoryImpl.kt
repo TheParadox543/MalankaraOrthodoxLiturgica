@@ -1,15 +1,15 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
 
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDayDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDataStore
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
 import com.paradox543.malankaraorthodoxliturgica.data.datasource.CalendarSource
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toCalendarDaysDomain
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toCalendarWeeksDomain
 import com.paradox543.malankaraorthodoxliturgica.data.mapping.toLiturgicalEventsDetailsDomain
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDayDto
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeekDto
 import com.paradox543.malankaraorthodoxliturgica.data.model.EventKey
 import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalCalendarDates
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalDataStore
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
 import com.paradox543.malankaraorthodoxliturgica.data.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
@@ -52,9 +52,9 @@ class CalendarRepositoryImpl @Inject constructor(
      * @throws IllegalArgumentException if an event key found in liturgical_calendar.json
      * is not present in liturgical_data.json.
      */
-    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsData> {
+    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsDto> {
         val eventKeys = getEventKeysForDate(date)
-        val eventDetails = mutableListOf<LiturgicalEventDetailsData>()
+        val eventDetails = mutableListOf<LiturgicalEventDetailsDto>()
 
         for (key in eventKeys) {
             val details = cachedLiturgicalData[key]
@@ -152,7 +152,7 @@ class CalendarRepositoryImpl @Inject constructor(
 
     override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
         val weekEvents = getUpcomingWeekEventsData()
-        val eventItems = mutableListOf<LiturgicalEventDetailsData>()
+        val eventItems = mutableListOf<LiturgicalEventDetailsDto>()
         weekEvents.forEach { day ->
             eventItems.addAll(day.events)
         }

@@ -1,21 +1,21 @@
 package com.paradox543.malankaraorthodoxliturgica.data.mapping
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarDayDto
-import com.paradox543.malankaraorthodoxliturgica.data.model.CalendarWeekDto
-import com.paradox543.malankaraorthodoxliturgica.data.model.LiturgicalEventDetailsData
-import com.paradox543.malankaraorthodoxliturgica.data.model.TitleStrData
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDayDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.TitleStrDto
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.TitleStr
 
-fun TitleStrData.toDomain(): TitleStr =
+fun TitleStrDto.toDomain(): TitleStr =
     TitleStr(
         en = this.en,
         ml = this.ml,
     )
 
-fun LiturgicalEventDetailsData.toDomain(): LiturgicalEventDetails =
+fun LiturgicalEventDetailsDto.toDomain(): LiturgicalEventDetails =
     LiturgicalEventDetails(
         type = this.type,
         title = this.title.toDomain(),
@@ -25,7 +25,7 @@ fun LiturgicalEventDetailsData.toDomain(): LiturgicalEventDetails =
         startedYear = this.startedYear,
     )
 
-fun List<LiturgicalEventDetailsData>.toLiturgicalEventsDetailsDomain(): List<LiturgicalEventDetails> = map { it.toDomain() }
+fun List<LiturgicalEventDetailsDto>.toLiturgicalEventsDetailsDomain(): List<LiturgicalEventDetails> = map { it.toDomain() }
 
 fun CalendarDayDto.toDomain(): CalendarDay =
     CalendarDay(

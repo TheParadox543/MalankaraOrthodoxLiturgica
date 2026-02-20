@@ -2,8 +2,6 @@ package com.paradox543.malankaraorthodoxliturgica.data.model
 
 typealias EventKey = String // Semantically, good to keep, though technically just String
 
-typealias LiturgicalDataStore = Map<String, LiturgicalEventDetailsData>
-
 // Structure for liturgical_calendar.json
 typealias DayEvents = List<EventKey> // List of EventKeys
 typealias MonthEvents = Map<String, DayEvents> // Maps day (e.g., "1") to DayEvents

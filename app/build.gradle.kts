@@ -79,6 +79,7 @@ dependencies {
     // TODO: Remove data core dependency after completing data refactor
     implementation(project(":data:core")) // Temporary import for AssetJsonReader
     implementation(project(":data:bible"))
+    implementation(project(":data:calendar"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
