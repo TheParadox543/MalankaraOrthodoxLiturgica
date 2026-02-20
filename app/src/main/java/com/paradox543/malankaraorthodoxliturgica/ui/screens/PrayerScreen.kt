@@ -57,8 +57,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PageNodeDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
@@ -175,23 +175,21 @@ fun PrayerScreen(
             }
         },
         bottomBar = {
-            if (prevNodeRoute != null || nextNodeRoute != null) {
-                AnimatedVisibility(
-                    visible = isVisible.value,
-                    modifier = Modifier.zIndex(1f),
-                ) {
-                    SectionNavBar(
-                        navController,
-                        prevNodeRoute,
-                        nextNodeRoute,
-                        routeProvider = {
-                            AppScreen.Prayer.createDeepLink(
-                                node.route,
-                                listState.firstVisibleItemIndex,
-                            )
-                        },
-                    )
-                }
+            AnimatedVisibility(
+                visible = isVisible.value,
+                modifier = Modifier.zIndex(1f),
+            ) {
+                SectionNavBar(
+                    navController,
+                    prevNodeRoute,
+                    nextNodeRoute,
+                    routeProvider = {
+                        AppScreen.Prayer.createDeepLink(
+                            node.route,
+                            listState.firstVisibleItemIndex,
+                        )
+                    },
+                )
             }
         },
         floatingActionButton = {

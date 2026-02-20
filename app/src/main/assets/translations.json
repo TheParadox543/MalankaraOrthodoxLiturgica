@@ -373,7 +373,7 @@
     },
     "easter": {
         "en": "Easter",
-        "ml": "ക്യംതാ"
+        "ml": "ഉയിർപ്പു"
     },
     "feastOfApostlesFast": {
         "en": "Feast of St. Peter and St. Paul",
@@ -448,6 +448,10 @@
         "ml": "നിനുവനോമ്പ്"
     },
     "palmSunday": {
+        "en": "Palm Sunday",
+        "ml": "ഊശാന ഞായറാഴ്‌ച"
+    },
+    "palmSundayService": {
         "en": "Palm Sunday",
         "ml": "ഊശാന ഞായറാഴ്‌ച"
     },

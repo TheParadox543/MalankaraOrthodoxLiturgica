@@ -66,8 +66,7 @@ fun AboutScreen(navController: NavController) {
                 text =
                     """
                         |A prayer companion app designed for the members of the Malankara Orthodox 
-                        |Syrian Church. Offline-first, multi-language (English, Malayalam, Manglish
-                        |).
+                        |Syrian Church. Offline-first, multi-language (English, Malayalam, Manglish).
                     """.trimMargin(),
             )
 
@@ -82,10 +81,10 @@ fun AboutScreen(navController: NavController) {
                 text =
                     """
                     - Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations
-                    - Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights
+                    - Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights.
                     - Jerin M George – Assistance with Color Theme Fixes and Image Selection.
-                    - Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, 
-                    Nohan George & Anoop Alex Koshy – Additional Text Translations and Preparation
+                    - Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, Nohan George & Anoop Alex Koshy – Additional Text Translations and Preparation.
+                    - Prasad Joseph Cheeran - Audio files for Ekkara Songs.
                     """.trimIndent(),
                 style = MaterialTheme.typography.bodyMedium,
             )

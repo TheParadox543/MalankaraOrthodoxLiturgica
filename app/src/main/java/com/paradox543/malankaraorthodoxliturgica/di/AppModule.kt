@@ -26,14 +26,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    @Provides
-    @Singleton // Ensure only one instance of Json is created
-    fun provideJson(): Json =
-        Json {
-            ignoreUnknownKeys = true // Important for robust parsing
-            prettyPrint = true      // For readability if you ever debug JSON output
-            isLenient = true        // Allows for some non-strict JSON (e.g., unquoted keys if needed)
-        }
+//    TODO: Remove this once refactoring is done to ensure only one instance of Json is created
+//    @Provides
+//    @Singleton // Ensure only one instance of JSON is created
+//    fun provideJson(): Json =
+//        Json {
+//            ignoreUnknownKeys = true // Important for robust parsing
+//            prettyPrint = true      // For readability if you ever debug JSON output
+//            isLenient = true        // Allows for some non-strict JSON (e.g., unquoted keys if needed)
+//        }
 
     @Provides
     @Singleton

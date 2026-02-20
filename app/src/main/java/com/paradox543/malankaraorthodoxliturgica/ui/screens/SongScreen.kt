@@ -39,7 +39,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.domain.model.MediaStatus
+import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel

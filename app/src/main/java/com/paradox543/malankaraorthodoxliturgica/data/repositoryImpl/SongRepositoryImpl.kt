@@ -6,8 +6,11 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.core.net.toUri
 import com.google.firebase.storage.FirebaseStorage
-import com.paradox543.malankaraorthodoxliturgica.data.model.SongResult
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.SongRepository
+import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toDomain
+import com.paradox543.malankaraorthodoxliturgica.data.mapping.toSongResultDomain
+import com.paradox543.malankaraorthodoxliturgica.data.model.SongResultDto
+import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
+import com.paradox543.malankaraorthodoxliturgica.domain.song.repository.SongRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
@@ -17,11 +20,12 @@ import kotlinx.coroutines.withTimeout
 import java.io.File
 import javax.inject.Inject
 
-class SongRepositoryImpl @Inject constructor(
+class
+SongRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val storage: FirebaseStorage,
 ) : SongRepository {
-    override fun isNetworkAvailable(context: Context): Boolean {
+    fun isNetworkAvailable(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = cm.activeNetwork ?: return false
         val capabilities = cm.getNetworkCapabilities(network) ?: return false
@@ -34,11 +38,11 @@ class SongRepositoryImpl @Inject constructor(
 
             if (localFile.exists() && localFile.length() > 0) {
                 Log.d("SongRepository", "Playing from local storage: ${localFile.path}")
-                return@withContext SongResult.Success(localFile.toUri(), "Playing from local storage")
+                return@withContext SongResultDto.Success(localFile.toUri(), "Playing from local storage").toSongResultDomain()
             }
 
             if (!isNetworkAvailable(context)) {
-                return@withContext SongResult.Error("No internet connection. Please try again later.")
+                return@withContext SongResultDto.Error("No internet connection. Please try again later.").toSongResultDomain()
             }
 
             Log.d("SongRepository", "Streaming from Firebase for $songFilename")
@@ -49,13 +53,13 @@ class SongRepositoryImpl @Inject constructor(
                 // Trigger background download (non-blocking)
                 downloadSongInBackground(songFilename, localFile)
 
-                SongResult.Success(uri, "Streaming from Firebase")
+                SongResultDto.Success(uri, "Streaming from Firebase").toSongResultDomain()
             } catch (e: TimeoutCancellationException) {
                 Log.e("SongRepository", "Firebase request timed out", e)
-                SongResult.Error("Request timed out. Please check your internet connection.")
+                SongResultDto.Error("Request timed out. Please check your internet connection.").toSongResultDomain()
             } catch (e: Exception) {
                 Log.e("SongRepository", "Failed to fetch song: $songFilename", e)
-                SongResult.Error("Could not retrieve song: ${e.localizedMessage}")
+                SongResultDto.Error("Could not retrieve song: ${e.localizedMessage}").toSongResultDomain()
             }
         }
 

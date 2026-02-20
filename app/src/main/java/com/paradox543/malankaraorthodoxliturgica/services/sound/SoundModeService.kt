@@ -3,7 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.services.sound
 import android.app.NotificationManager
 import android.content.Context
 import android.media.AudioManager
-import com.paradox543.malankaraorthodoxliturgica.domain.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

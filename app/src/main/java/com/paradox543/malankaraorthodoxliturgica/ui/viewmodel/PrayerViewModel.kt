@@ -2,34 +2,43 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.domain.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.model.PrayerElementDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetPrayerScreenContentUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.GetSongKeyPriorityUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.usecase.LoadTranslationsUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class PrayerViewModel @Inject constructor(
-    settingsRepository: SettingsRepository,
+    private val settingsRepository: SettingsRepository,
+    private val translationsRepository: TranslationsRepository,
     private val analyticsService: AnalyticsService,
     private val inAppReviewManager: InAppReviewManager,
-    private val loadTranslationsUseCase: LoadTranslationsUseCase,
     private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
     private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
 ) : ViewModel() {
-    val selectedLanguage = settingsRepository.language
+    val selectedLanguage: StateFlow<AppLanguage> =
+        settingsRepository.language.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = runBlocking { settingsRepository.language.first() },
+        )
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
@@ -62,7 +71,7 @@ class PrayerViewModel @Inject constructor(
 
     private fun loadTranslations(language: AppLanguage) {
         viewModelScope.launch {
-            val loadedTranslations = loadTranslationsUseCase(language)
+            val loadedTranslations = translationsRepository.loadTranslations(language)
             _translations.update { loadedTranslations }
         }
     }
@@ -75,7 +84,7 @@ class PrayerViewModel @Inject constructor(
             // Launch in ViewModelScope for async operation
             try {
                 // Access the current language from SettingsViewModel
-                val language = passedLanguage ?: selectedLanguage.value
+                val language: AppLanguage = passedLanguage ?: selectedLanguage.value
                 val prayers = getPrayerScreenContentUseCase(filename, language)
                 _prayers.value = prayers
             } catch (e: Exception) {
