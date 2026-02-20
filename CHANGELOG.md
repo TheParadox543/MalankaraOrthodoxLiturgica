@@ -9,15 +9,26 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 - Unversioned changes
 
+### Added
+
+- Pray now logic for Great Lent.
+
 ### Fixed
 
 - Prayer corrections in Great Lent prayers.
+- Fixed issue where next, prev, qr buttons were not loading when they were not supposed to.
+- Fixed issue where qr was not showing when sibling buttons were deactivated.
 
 ### Refactor
 
 - Refactored domain module to a separate kotlin module.
 - Refactored models, repository interfaces, use cases and a few exceptions to domain module.
+- Refactored data layer of bible to :data:bible and data layer of calendar to :data:calendar.
+
+### Test
+
 - Added unit tests for domain module, for models and usecases.
+- Added unit tests for :data:bible and :data:calendar.
 
 ---
 
