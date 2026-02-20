@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
+package com.paradox543.malankaraorthodoxliturgica.data.calendar.repository
 
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.datasource.CalendarSource
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toCalendarDaysDomain
