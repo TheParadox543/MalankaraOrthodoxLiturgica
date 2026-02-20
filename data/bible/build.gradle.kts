@@ -64,7 +64,7 @@ dependencies {
     // Data Serialization
     implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
 
-    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
     testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.settings.model
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class AppFontScaleTest {
     @Test

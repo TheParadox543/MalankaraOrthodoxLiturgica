@@ -14,6 +14,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
     // Unit testing
-    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.coroutines.test)
 }

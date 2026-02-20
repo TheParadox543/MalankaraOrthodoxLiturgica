@@ -9,9 +9,9 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BookNotFound
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeBibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThrows
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class LoadBibleReadingUseCaseTest {
     private fun makeVerses(count: Int) = (1..count).map { BibleVerse(id = it, verse = "Verse $it") }
@@ -118,7 +118,7 @@ class LoadBibleReadingUseCaseTest {
             ranges = listOf(ReferenceRange(startChapter = 1, startVerse = 1, endChapter = 1, endVerse = 1)),
         )
 
-        assertThrows(BookNotFoundException::class.java) {
+        assertFailsWith<BookNotFoundException> {
             useCase(listOf(reference), AppLanguage.ENGLISH)
         }
     }
@@ -135,7 +135,7 @@ class LoadBibleReadingUseCaseTest {
             ranges = listOf(ReferenceRange(startChapter = 1, startVerse = 1, endChapter = 1, endVerse = 10)),
         )
 
-        assertThrows(BookNotFoundException::class.java) {
+        assertFailsWith<BookNotFoundException> {
             useCase(listOf(reference), AppLanguage.ENGLISH)
         }
     }

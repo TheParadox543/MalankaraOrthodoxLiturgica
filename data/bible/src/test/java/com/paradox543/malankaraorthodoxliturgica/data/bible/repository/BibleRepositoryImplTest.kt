@@ -14,10 +14,10 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerEleme
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThrows
-import org.junit.Before
-import org.junit.Test
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class BibleRepositoryImplTest {
 
@@ -60,7 +60,7 @@ class BibleRepositoryImplTest {
      * stubs must be configured before the first access, and each test should
      * start with an un-initialized cache.
      */
-    @Before
+    @BeforeTest
     fun setup() {
         repository = BibleRepositoryImpl(source)
     }
@@ -93,7 +93,7 @@ class BibleRepositoryImplTest {
     fun `loadBibleMetaData throws BibleParsingException when source returns null`() {
         every { source.readBibleDetails() } returns null
 
-        assertThrows(BibleParsingException::class.java) {
+        assertFailsWith<BibleParsingException> {
             repository.loadBibleMetaData()
         }
     }
@@ -162,7 +162,7 @@ class BibleRepositoryImplTest {
         every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
         every { source.readBibleChapter(any()) } returns null
 
-        assertThrows(BibleParsingException::class.java) {
+        assertFailsWith<BibleParsingException> {
             repository.loadBibleChapter(
                 bookIndex = 0,
                 chapterIndex = 0,
@@ -227,7 +227,7 @@ class BibleRepositoryImplTest {
     fun `loadPrefaceTemplates throws BibleParsingException when source returns null`() {
         every { source.readPrefaceTemplates() } returns null
 
-        assertThrows(BibleParsingException::class.java) {
+        assertFailsWith<BibleParsingException> {
             repository.loadPrefaceTemplates()
         }
     }

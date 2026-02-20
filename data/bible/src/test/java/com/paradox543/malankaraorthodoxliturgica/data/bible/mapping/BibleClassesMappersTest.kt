@@ -12,9 +12,9 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookNam
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class BibleClassesMappersTest {
     // ─── ProseDto ────────────────────────────────────────────────────────────

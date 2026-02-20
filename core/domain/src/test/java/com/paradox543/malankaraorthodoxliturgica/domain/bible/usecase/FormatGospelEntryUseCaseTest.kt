@@ -6,8 +6,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReferen
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeBibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class FormatGospelEntryUseCaseTest {
     private fun makeBook(en: String, ml: String) = BibleBookDetails(

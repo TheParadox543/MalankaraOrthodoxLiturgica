@@ -3,8 +3,9 @@ package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookName
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeBibleRepository
-import org.junit.Assert
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class GetAdjacentChaptersUseCaseTest {
     private fun createUseCase(books: List<BibleBookDetails>): GetAdjacentChaptersUseCase {
@@ -25,8 +26,8 @@ class GetAdjacentChaptersUseCaseTest {
         val books = listOf(simpleBook(5))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 2)
-        Assert.assertEquals("bible/0/1", prev)
-        Assert.assertEquals("bible/0/3", next)
+        assertEquals("bible/0/1", prev)
+        assertEquals("bible/0/3", next)
     }
 
     @Test
@@ -34,8 +35,8 @@ class GetAdjacentChaptersUseCaseTest {
         val books = listOf(simpleBook(3))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 0)
-        Assert.assertNull(prev)
-        Assert.assertEquals("bible/0/1", next)
+        assertNull(prev)
+        assertEquals("bible/0/1", next)
     }
 
     @Test
@@ -43,8 +44,8 @@ class GetAdjacentChaptersUseCaseTest {
         val books = listOf(simpleBook(2), simpleBook(4))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 1)
-        Assert.assertEquals("bible/0/0", prev)
-        Assert.assertEquals("bible/1/0", next)
+        assertEquals("bible/0/0", prev)
+        assertEquals("bible/1/0", next)
     }
 
     @Test
@@ -52,7 +53,7 @@ class GetAdjacentChaptersUseCaseTest {
         val books = listOf(simpleBook(1))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 0)
-        Assert.assertNull(prev)
-        Assert.assertNull(next)
+        assertNull(prev)
+        assertNull(next)
     }
 }

@@ -7,10 +7,10 @@ import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakePrayerReposito
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class GetDynamicSongsUseCaseTest {
     private fun makeBlock(

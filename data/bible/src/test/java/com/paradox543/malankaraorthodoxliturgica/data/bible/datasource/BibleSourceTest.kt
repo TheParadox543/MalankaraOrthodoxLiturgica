@@ -7,12 +7,12 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.serialization.json.Json
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
-import org.junit.Before
-import org.junit.Test
 import java.io.ByteArrayInputStream
 import java.io.IOException
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 /**
  * Tests for [BibleSource].
@@ -25,7 +25,6 @@ import java.io.IOException
  *   - deserialized DTOs are returned (or null on failure).
  */
 class BibleSourceTest {
-
     private val assetManager: AssetManager = mockk()
     private val context: Context = mockk()
 
@@ -34,7 +33,7 @@ class BibleSourceTest {
 
     private lateinit var source: BibleSource
 
-    @Before
+    @BeforeTest
     fun setup() {
         every { context.assets } returns assetManager
         source = BibleSource(AssetJsonReader(context, json))
@@ -42,7 +41,10 @@ class BibleSourceTest {
 
     // ─── Helpers ─────────────────────────────────────────────────────────────
 
-    private fun stubAsset(path: String, jsonContent: String) {
+    private fun stubAsset(
+        path: String,
+        jsonContent: String,
+    ) {
         every { assetManager.open(path) } returns ByteArrayInputStream(jsonContent.toByteArray())
     }
 
@@ -108,8 +110,8 @@ class BibleSourceTest {
 
         val result = source.readPrefaceTemplates()
 
-        assertEquals(emptyList<Any>(), result?.prophets?.en)
-        assertEquals(emptyList<Any>(), result?.paulineEpistle?.ml)
+        assertEquals(result?.prophets?.en?.isEmpty(), true)
+        assertEquals(result?.paulineEpistle?.ml?.isEmpty(), true)
     }
 
     @Test

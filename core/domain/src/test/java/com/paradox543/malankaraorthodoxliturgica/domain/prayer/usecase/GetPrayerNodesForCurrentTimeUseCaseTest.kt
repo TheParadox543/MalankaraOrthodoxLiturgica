@@ -1,10 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 import java.time.LocalDateTime
 
 class GetPrayerNodesForCurrentTimeUseCaseTest {
@@ -17,7 +17,7 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
         val monday9am = LocalDateTime.of(2026, 2, 16, 9, 0) // Monday
 
         val keys = getRecommendedPrayers(monday9am)
-        assertTrue("Expected some recommended prayers at Monday 9am", keys.isNotEmpty())
+        assertTrue(keys.isNotEmpty(), "Expected some recommended prayers at Monday 9am")
 
         // Build a tree containing at least one of the recommended routes
         val firstKey = keys.first()
@@ -29,7 +29,7 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
         )
 
         val result = useCase(root, monday9am)
-        assertTrue("Expected at least one matching node", result.isNotEmpty())
+        assertTrue(result.isNotEmpty(), "Expected at least one matching node")
         assertTrue(result.any { it.route == firstKey })
     }
 

@@ -1,8 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class FormatBibleRangeUseCaseTest {
     private val useCase = FormatBibleRangeUseCase()

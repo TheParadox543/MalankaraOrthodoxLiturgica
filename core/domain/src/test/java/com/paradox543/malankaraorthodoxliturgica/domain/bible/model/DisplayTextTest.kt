@@ -1,8 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.bible.model
 
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class DisplayTextTest {
     @Test

@@ -4,8 +4,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.TitleStr
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeCalendarRepository
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class GetSongKeyPriorityUseCaseTest {
     @Test
