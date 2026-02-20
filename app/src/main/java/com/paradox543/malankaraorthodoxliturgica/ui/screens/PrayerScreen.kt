@@ -175,23 +175,21 @@ fun PrayerScreen(
             }
         },
         bottomBar = {
-            if (prevNodeRoute != null || nextNodeRoute != null) {
-                AnimatedVisibility(
-                    visible = isVisible.value,
-                    modifier = Modifier.zIndex(1f),
-                ) {
-                    SectionNavBar(
-                        navController,
-                        prevNodeRoute,
-                        nextNodeRoute,
-                        routeProvider = {
-                            AppScreen.Prayer.createDeepLink(
-                                node.route,
-                                listState.firstVisibleItemIndex,
-                            )
-                        },
-                    )
-                }
+            AnimatedVisibility(
+                visible = isVisible.value,
+                modifier = Modifier.zIndex(1f),
+            ) {
+                SectionNavBar(
+                    navController,
+                    prevNodeRoute,
+                    nextNodeRoute,
+                    routeProvider = {
+                        AppScreen.Prayer.createDeepLink(
+                            node.route,
+                            listState.firstVisibleItemIndex,
+                        )
+                    },
+                )
             }
         },
         floatingActionButton = {
