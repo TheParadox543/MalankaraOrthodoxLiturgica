@@ -9,9 +9,9 @@ import javax.inject.Inject
 class BibleSource @Inject constructor(
     private val reader: AssetJsonReader,
 ) {
-    fun readBibleDetails(): List<BibleBookDetailsDto>? = reader.loadJsonAsset<List<BibleBookDetailsDto>>("bibleBookMetadata.json")
+    fun readBibleDetails(): List<BibleBookDetailsDto> = reader.loadJsonAsset("bibleBookMetadata.json")
 
-    fun readPrefaceTemplates(): PrefaceTemplatesDto? = reader.loadJsonAsset<PrefaceTemplatesDto>("bible_preface_templates.json")
+    fun readPrefaceTemplates(): PrefaceTemplatesDto = reader.loadJsonAsset("bible_preface_templates.json")
 
-    fun readBibleChapter(path: String): BibleChapterDto? = reader.loadJsonAsset<BibleChapterDto>(path)
+    fun readBibleChapter(path: String): BibleChapterDto = reader.loadJsonAsset(path)
 }

@@ -4,4 +4,5 @@ import java.io.IOException
 
 class PrayerContentNotFoundException(
     message: String,
+    cause: Throwable? = null,
 ) : IOException(message)

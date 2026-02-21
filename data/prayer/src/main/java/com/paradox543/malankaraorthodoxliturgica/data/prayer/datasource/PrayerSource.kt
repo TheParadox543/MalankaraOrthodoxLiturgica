@@ -1,6 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.data.prayer.datasource
 
 import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PageNodeDto
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerContentNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElementDto
@@ -18,6 +20,8 @@ class PrayerSource @Inject constructor(
      * NOTE: This function now only reads and parses the file and returns the raw elements.
      * Any resolution of `Link`, `LinkCollapsible`, or nested content should be done in a use-case
      * that calls this data-source.
+     *
+     * Throws [PrayerParsingException] if the asset cannot be read or parsed.
      */
     suspend fun loadPrayerElements(
         fileName: String,
@@ -25,14 +29,29 @@ class PrayerSource @Inject constructor(
     ): List<PrayerElementDto> =
         withContext(Dispatchers.IO) {
             val filePath = "${language.code}/prayers/$fileName"
-            return@withContext reader.loadJsonAsset<List<PrayerElementDto>>(filePath)
-                ?: throw PrayerParsingException("Error parsing JSON in: $filePath.")
+            try {
+                reader.loadJsonAsset<List<PrayerElementDto>>(filePath)
+            } catch (e: AssetReadException) {
+                throw PrayerParsingException("Error reading prayer file: $filePath.", e)
+            } catch (e: AssetParsingException) {
+                throw PrayerParsingException("Error parsing JSON in: $filePath.", e)
+            }
         }
 
+    /**
+     * Loads the prayer navigation tree for the given language.
+     *
+     * Throws [PrayerContentNotFoundException] if the asset cannot be read or parsed.
+     */
     suspend fun loadPrayerNavigationTree(language: AppLanguage): PageNodeDto =
         withContext(Dispatchers.IO) {
             val filename = "${language.code}/prayers_tree.json"
-            return@withContext reader.loadJsonAsset<PageNodeDto>(filename)
-                ?: throw PrayerContentNotFoundException("Prayer navigation tree not found: $filename")
+            try {
+                reader.loadJsonAsset<PageNodeDto>(filename)
+            } catch (e: AssetReadException) {
+                throw PrayerContentNotFoundException("Prayer navigation tree not found: $filename", e)
+            } catch (e: AssetParsingException) {
+                throw PrayerContentNotFoundException("Prayer navigation tree malformed: $filename", e)
+            }
         }
 }

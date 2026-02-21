@@ -18,6 +18,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 
 class BibleRepositoryImplTest {
     private val source: BibleSource = mockk()
@@ -94,8 +95,8 @@ class BibleRepositoryImplTest {
     }
 
     @Test
-    fun `loadBibleMetaData throws BibleParsingException when source returns null`() {
-        every { source.readBibleDetails() } returns null
+    fun `loadBibleMetaData throws BibleParsingException when source throws AssetReadException`() {
+        every { source.readBibleDetails() } throws AssetReadException("not found")
 
         assertFailsWith<BibleParsingException> {
             repository.loadBibleMetaData()
@@ -163,9 +164,9 @@ class BibleRepositoryImplTest {
     }
 
     @Test
-    fun `loadBibleChapter throws BibleParsingException when source returns null`() {
+    fun `loadBibleChapter throws BibleParsingException when source throws AssetReadException`() {
         every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-        every { source.readBibleChapter(any()) } returns null
+        every { source.readBibleChapter(any()) } throws AssetReadException("not found")
 
         assertFailsWith<BibleParsingException> {
             repository.loadBibleChapter(
@@ -229,8 +230,8 @@ class BibleRepositoryImplTest {
     }
 
     @Test
-    fun `loadPrefaceTemplates throws BibleParsingException when source returns null`() {
-        every { source.readPrefaceTemplates() } returns null
+    fun `loadPrefaceTemplates throws BibleParsingException when source throws AssetReadException`() {
+        every { source.readPrefaceTemplates() } throws AssetReadException("not found")
 
         assertFailsWith<BibleParsingException> {
             repository.loadPrefaceTemplates()
