@@ -76,8 +76,6 @@ dependencies {
     // Project imports
     implementation(project(":shared"))
     implementation(project(":core:domain"))
-    // TODO: Remove data core dependency after completing data refactor
-    implementation(project(":data:core")) // Temporary import for AssetJsonReader
     implementation(project(":data:bible"))
     implementation(project(":data:calendar"))
     implementation(project(":data:prayer"))
