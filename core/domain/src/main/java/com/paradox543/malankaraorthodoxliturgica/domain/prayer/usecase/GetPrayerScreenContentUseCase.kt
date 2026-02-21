@@ -1,13 +1,13 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 /**
  * Use-case that loads a prayer file and resolves any Link/LinkCollapsible/Dynamic blocks
- * into a fully-resolved list of PrayerElementDomain items suitable for rendering.
+ * into a fully-resolved list of PrayerElement items suitable for rendering.
  */
 class GetPrayerScreenContentUseCase(
     private val prayerRepository: PrayerRepository,
@@ -19,7 +19,7 @@ class GetPrayerScreenContentUseCase(
         fileName: String,
         language: AppLanguage,
         currentDepth: Int = 0,
-    ): List<PrayerElementDomain> {
+    ): List<PrayerElement> {
         if (currentDepth > maxLinkDepth) {
             throw PrayerLinkDepthExceededException(
                 "Exceeded maximum link depth ($maxLinkDepth) while loading ${language.code}/$fileName",
@@ -30,64 +30,64 @@ class GetPrayerScreenContentUseCase(
     }
 
     private suspend fun resolveList(
-        list: List<PrayerElementDomain>,
+        list: List<PrayerElement>,
         language: AppLanguage,
         currentDepth: Int,
-    ): List<PrayerElementDomain> {
-        val out = mutableListOf<PrayerElementDomain>()
+    ): List<PrayerElement> {
+        val out = mutableListOf<PrayerElement>()
 
         for (element in list) {
             when (element) {
-                is PrayerElementDomain.Link -> {
+                is PrayerElement.Link -> {
                     try {
                         val loaded = prayerRepository.loadPrayerElements(element.file, language)
                         val resolved = resolveList(loaded, language, currentDepth + 1)
                         out.addAll(resolved)
                     } catch (t: Throwable) {
-                        out.add(PrayerElementDomain.Error(t.message ?: "Error loading ${element.file}"))
+                        out.add(PrayerElement.Error(t.message ?: "Error loading ${element.file}"))
                     }
                 }
 
-                is PrayerElementDomain.LinkCollapsible -> {
+                is PrayerElement.LinkCollapsible -> {
                     try {
                         val loaded = prayerRepository.loadPrayerElements(element.file, language)
                         val resolved = resolveList(loaded, language, currentDepth + 1)
 
                         var title: String? = null
-                        val items = mutableListOf<PrayerElementDomain>()
+                        val items = mutableListOf<PrayerElement>()
 
                         for (r in resolved) {
                             when (r) {
-                                is PrayerElementDomain.Title -> if (title == null) title = r.content
-                                is PrayerElementDomain.Heading -> if (title == null) title = r.content
+                                is PrayerElement.Title -> if (title == null) title = r.content
+                                is PrayerElement.Heading -> if (title == null) title = r.content
                                 else -> items.add(r)
                             }
                         }
 
                         if (items.isEmpty()) {
-                            out.add(PrayerElementDomain.Error("Linked file ${element.file} contained no displayable items"))
+                            out.add(PrayerElement.Error("Linked file ${element.file} contained no displayable items"))
                         } else {
-                            out.add(PrayerElementDomain.CollapsibleBlock(title ?: "Expandable Block", items))
+                            out.add(PrayerElement.CollapsibleBlock(title ?: "Expandable Block", items))
                         }
                     } catch (t: Throwable) {
-                        out.add(PrayerElementDomain.Error(t.message ?: "Error loading ${element.file}"))
+                        out.add(PrayerElement.Error(t.message ?: "Error loading ${element.file}"))
                     }
                 }
 
-                is PrayerElementDomain.CollapsibleBlock -> {
+                is PrayerElement.CollapsibleBlock -> {
                     val resolvedItems = resolveList(element.items, language, currentDepth)
-                    out.add(PrayerElementDomain.CollapsibleBlock(element.title, resolvedItems))
+                    out.add(PrayerElement.CollapsibleBlock(element.title, resolvedItems))
                 }
 
-                is PrayerElementDomain.DynamicSongsBlock -> {
+                is PrayerElement.DynamicSongsBlock -> {
                     val resolved = getDynamicSongsUseCase(language, element, currentDepth)
                     out.add(resolved)
                 }
 
-                is PrayerElementDomain.DynamicSong -> {
+                is PrayerElement.DynamicSong -> {
                     val resolvedItems = resolveList(element.items, language, currentDepth)
                     out.add(
-                        PrayerElementDomain.DynamicSong(
+                        PrayerElement.DynamicSong(
                             eventKey = element.eventKey,
                             eventTitle = element.eventTitle,
                             timeKey = element.timeKey,
@@ -96,14 +96,14 @@ class GetPrayerScreenContentUseCase(
                     )
                 }
 
-                is PrayerElementDomain.AlternativePrayersBlock -> {
+                is PrayerElement.AlternativePrayersBlock -> {
                     val resolvedOptions =
                         element.options
                             .map { opt ->
                                 val resolvedItems = resolveList(opt.items, language, currentDepth)
-                                PrayerElementDomain.AlternativeOption(opt.label, resolvedItems)
+                                PrayerElement.AlternativeOption(opt.label, resolvedItems)
                             }
-                    out.add(PrayerElementDomain.AlternativePrayersBlock(element.title, resolvedOptions))
+                    out.add(PrayerElement.AlternativePrayersBlock(element.title, resolvedOptions))
                 }
 
                 else -> {

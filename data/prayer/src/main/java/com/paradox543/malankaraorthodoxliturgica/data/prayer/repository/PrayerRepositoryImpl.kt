@@ -1,11 +1,10 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
+package com.paradox543.malankaraorthodoxliturgica.data.prayer.repository
 
-import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toDomain
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.datasource.PrayerSource
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.mapping.toDomainList
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.mapping.toPageNodeDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import javax.inject.Inject
@@ -18,13 +17,13 @@ class PrayerRepositoryImpl @Inject constructor(
     override suspend fun loadPrayerElements(
         fileName: String,
         language: AppLanguage,
-    ): List<PrayerElementDomain> =
+    ): List<PrayerElement> =
         prayerSource
             .loadPrayerElements(
                 fileName,
                 language,
             ).toDomainList()
 
-    override suspend fun getPrayerNavigationTree(targetLanguage: AppLanguage): PageNodeDomain =
+    override suspend fun getPrayerNavigationTree(targetLanguage: AppLanguage): PageNode =
         prayerSource.loadPrayerNavigationTree(targetLanguage).toPageNodeDomain()
 }

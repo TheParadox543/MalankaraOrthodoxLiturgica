@@ -1,11 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
+import java.time.LocalDateTime
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import java.time.LocalDateTime
 
 class GetPrayerNodesForCurrentTimeUseCaseTest {
     private val getRecommendedPrayers = GetRecommendedPrayersUseCase()
@@ -21,12 +20,13 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
 
         // Build a tree containing at least one of the recommended routes
         val firstKey = keys.first()
-        val matchingNode = PageNodeDomain(route = firstKey, parent = "root")
-        val root = PageNodeDomain(
-            route = "root",
-            parent = null,
-            children = listOf(matchingNode),
-        )
+        val matchingNode = PageNode(route = firstKey, parent = "root")
+        val root =
+            PageNode(
+                route = "root",
+                parent = null,
+                children = listOf(matchingNode),
+            )
 
         val result = useCase(root, monday9am)
         assertTrue(result.isNotEmpty(), "Expected at least one matching node")
@@ -38,13 +38,15 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
         val monday9am = LocalDateTime.of(2026, 2, 16, 9, 0)
 
         // Build a tree with routes that won't match any recommendations
-        val root = PageNodeDomain(
-            route = "root",
-            parent = null,
-            children = listOf(
-                PageNodeDomain(route = "nonexistent/route", parent = "root"),
-            ),
-        )
+        val root =
+            PageNode(
+                route = "root",
+                parent = null,
+                children =
+                    listOf(
+                        PageNode(route = "nonexistent/route", parent = "root"),
+                    ),
+            )
 
         val result = useCase(root, monday9am)
         assertTrue(result.isEmpty())
@@ -57,12 +59,13 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
 
         // Only add one of the recommended routes to the tree
         val firstKey = keys.first()
-        val matchingNode = PageNodeDomain(route = firstKey, parent = "root")
-        val root = PageNodeDomain(
-            route = "root",
-            parent = null,
-            children = listOf(matchingNode),
-        )
+        val matchingNode = PageNode(route = firstKey, parent = "root")
+        val root =
+            PageNode(
+                route = "root",
+                parent = null,
+                children = listOf(matchingNode),
+            )
 
         val result = useCase(root, monday9am)
 

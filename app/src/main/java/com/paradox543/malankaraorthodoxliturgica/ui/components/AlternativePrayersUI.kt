@@ -19,14 +19,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerElementRenderer
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlternativePrayersUI(
-    element: PrayerElementDomain.AlternativePrayersBlock,
+    element: PrayerElement.AlternativePrayersBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
     navController: NavController,
@@ -63,9 +63,9 @@ fun AlternativePrayersUI(
 
         // Render the selected option's content
         element.options[selectedIndex].items.forEach { child ->
-            if (child !is PrayerElementDomain.Heading) {
+            if (child !is PrayerElement.Heading) {
                 PrayerElementRenderer(
-                    prayerElementDomain = child,
+                    prayerElement = child,
                     prayerViewModel = prayerViewModel,
                     filename = filename,
                     navController = navController,

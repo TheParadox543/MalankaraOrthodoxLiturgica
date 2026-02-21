@@ -9,15 +9,15 @@ package com.paradox543.malankaraorthodoxliturgica.domain.prayer.model
  * @property children The list of child nodes.
  * @property languages The list of language codes available for this node.
  */
-data class PageNodeDomain(
+data class PageNode(
     val route: String,
     val type: String = "section",
     val filename: String? = null,
     val parent: String?,
-    val children: List<PageNodeDomain> = emptyList(),
+    val children: List<PageNode> = emptyList(),
     val languages: List<String> = listOf(),
 ) {
-    fun findByRoute(route: String): PageNodeDomain? {
+    fun findByRoute(route: String): PageNode? {
         if (this.route == route) return this
         for (child in children) {
             val result = child.findByRoute(route)

@@ -7,80 +7,80 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.EventKey
  * This mirrors the structure of the data model but intentionally
  * does not include serialization annotations or data-layer concerns.
  */
-sealed interface PrayerElementDomain {
+sealed interface PrayerElement {
     // Simple data classes
     data class Title(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Heading(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Subheading(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Prose(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Song(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Subtext(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Source(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Button(
         val link: String,
         val label: String? = null,
         val replace: Boolean = false,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     // Complex data classes
     data class Link(
         val file: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class LinkCollapsible(
         val file: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class CollapsibleBlock(
         val title: String,
-        val items: List<PrayerElementDomain>,
-    ) : PrayerElementDomain
+        val items: List<PrayerElement>,
+    ) : PrayerElement
 
     data class DynamicSong(
         val eventKey: EventKey,
         val eventTitle: String,
         val timeKey: String,
-        val items: List<PrayerElementDomain>,
-    ) : PrayerElementDomain
+        val items: List<PrayerElement>,
+    ) : PrayerElement
 
     data class DynamicSongsBlock(
         val timeKey: String,
         val items: MutableList<DynamicSong> = mutableListOf(),
         val defaultContent: DynamicSong? = null,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class AlternativeOption(
         val label: String,
-        val items: List<PrayerElementDomain>,
-    ) : PrayerElementDomain
+        val items: List<PrayerElement>,
+    ) : PrayerElement
 
     data class AlternativePrayersBlock(
         val title: String,
         val options: List<AlternativeOption>,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 
     data class Error(
         val content: String,
-    ) : PrayerElementDomain
+    ) : PrayerElement
 }

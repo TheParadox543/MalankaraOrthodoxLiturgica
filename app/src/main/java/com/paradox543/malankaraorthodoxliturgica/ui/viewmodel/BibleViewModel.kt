@@ -13,7 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibl
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacentChaptersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -76,7 +76,7 @@ class BibleViewModel @Inject constructor(
     fun loadBiblePreface(
         bibleReference: BibleReference,
         language: AppLanguage,
-    ): List<PrayerElementDomain>? = formatBiblePrefaceUseCase(bibleReference, language)
+    ): List<PrayerElement>? = formatBiblePrefaceUseCase(bibleReference, language)
 
     fun loadBibleReading(
         bibleReferences: List<BibleReference>,

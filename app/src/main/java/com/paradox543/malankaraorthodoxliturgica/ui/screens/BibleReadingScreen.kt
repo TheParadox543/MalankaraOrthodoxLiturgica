@@ -71,7 +71,7 @@ fun BibleReadingScreen(
                 if (preface != null) {
                     items(preface.size) { index ->
                         PrayerElementRenderer(
-                            prayerElementDomain = preface[index],
+                            prayerElement = preface[index],
                             prayerViewModel = prayerViewModel,
                             filename = title,
                             navController = navController,

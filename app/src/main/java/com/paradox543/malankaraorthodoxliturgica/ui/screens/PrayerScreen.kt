@@ -57,8 +57,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
@@ -84,7 +84,7 @@ fun PrayerScreen(
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
     prayerNavViewModel: PrayerNavViewModel,
-    node: PageNodeDomain,
+    node: PageNode,
     scrollIndex: Int = 0,
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
@@ -252,53 +252,53 @@ fun PrayerScreen(
 
 @Composable
 fun PrayerElementRenderer(
-    prayerElementDomain: PrayerElementDomain,
+    prayerElement: PrayerElement,
     prayerViewModel: PrayerViewModel,
     filename: String,
     navController: NavController,
     isSongHorizontalScroll: Boolean = false,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
-    when (prayerElementDomain) {
-        is PrayerElementDomain.Title -> {
-            Title(prayerElementDomain.content)
+    when (prayerElement) {
+        is PrayerElement.Title -> {
+            Title(prayerElement.content)
         }
 
-        is PrayerElementDomain.Heading -> {
-            Heading(prayerElementDomain.content)
+        is PrayerElement.Heading -> {
+            Heading(prayerElement.content)
         }
 
-        is PrayerElementDomain.Subheading -> {
-            Subheading(prayerElementDomain.content)
+        is PrayerElement.Subheading -> {
+            Subheading(prayerElement.content)
         }
 
-        is PrayerElementDomain.Prose -> {
-            Prose(prayerElementDomain.content)
+        is PrayerElement.Prose -> {
+            Prose(prayerElement.content)
         }
 
-        is PrayerElementDomain.Song -> {
-            Song(prayerElementDomain.content, isHorizontal = isSongHorizontalScroll)
+        is PrayerElement.Song -> {
+            Song(prayerElement.content, isHorizontal = isSongHorizontalScroll)
         }
 
-        is PrayerElementDomain.Subtext -> {
-            Subtext(prayerElementDomain.content)
+        is PrayerElement.Subtext -> {
+            Subtext(prayerElement.content)
         }
 
-        is PrayerElementDomain.Button -> {
+        is PrayerElement.Button -> {
             PrayerButton(
-                prayerButton = prayerElementDomain,
+                prayerButton = prayerElement,
                 navController = navController,
                 translations = translations,
             )
         }
 
-        is PrayerElementDomain.Source -> {
-            Source(prayerElementDomain.content)
+        is PrayerElement.Source -> {
+            Source(prayerElement.content)
         }
 
-        is PrayerElementDomain.CollapsibleBlock -> {
+        is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
-                prayerElementDomain,
+                prayerElement,
                 prayerViewModel,
                 filename,
                 navController,
@@ -306,18 +306,18 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElementDomain.Error -> {
+        is PrayerElement.Error -> {
             ErrorBlock(
-                "Error: ${prayerElementDomain.content}",
+                "Error: ${prayerElement.content}",
                 prayerViewModel,
                 filename,
             )
         }
 
-        is PrayerElementDomain.DynamicSongsBlock -> {
-            if (prayerElementDomain.items.isNotEmpty()) {
+        is PrayerElement.DynamicSongsBlock -> {
+            if (prayerElement.items.isNotEmpty()) {
                 DynamicSongsBlockUI(
-                    prayerElementDomain,
+                    prayerElement,
                     prayerViewModel,
                     filename,
                     navController,
@@ -326,9 +326,9 @@ fun PrayerElementRenderer(
             }
         }
 
-        is PrayerElementDomain.DynamicSong -> {
+        is PrayerElement.DynamicSong -> {
             DynamicSongUI(
-                prayerElementDomain,
+                prayerElement,
                 prayerViewModel,
                 filename,
                 navController,
@@ -336,9 +336,9 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElementDomain.AlternativePrayersBlock -> {
+        is PrayerElement.AlternativePrayersBlock -> {
             AlternativePrayersUI(
-                prayerElementDomain,
+                prayerElement,
                 prayerViewModel,
                 filename,
                 navController,
@@ -346,7 +346,7 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElementDomain.Link -> {
+        is PrayerElement.Link -> {
             // This block indicates that a 'Link' element unexpectedly reached the UI.
             // Log an error or render a debug message, as it should ideally not happen.
             ErrorBlock(
@@ -356,7 +356,7 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElementDomain.LinkCollapsible -> {
+        is PrayerElement.LinkCollapsible -> {
             // Similar to 'Link', this suggests an issue in the data resolution layer.
             ErrorBlock(
                 "UI Error: Unresolved LinkCollapsible element encountered",
@@ -365,7 +365,7 @@ fun PrayerElementRenderer(
             )
         }
 
-        is PrayerElementDomain.AlternativeOption -> {
+        is PrayerElement.AlternativeOption -> {
             ErrorBlock(
                 "UI Error: AlternativeOption element encountered outside of AlternativePrayersBlock",
                 prayerViewModel,
@@ -377,7 +377,7 @@ fun PrayerElementRenderer(
 
 @Composable
 fun PrayerButton(
-    prayerButton: PrayerElementDomain.Button,
+    prayerButton: PrayerElement.Button,
     navController: NavController,
     translations: Map<String, String>,
     modifier: Modifier = Modifier,
@@ -422,7 +422,7 @@ fun PrayerButton(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DynamicSongsBlockUI(
-    dynamicSongsBlock: PrayerElementDomain.DynamicSongsBlock,
+    dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
     navController: NavController,
@@ -500,7 +500,7 @@ fun DynamicSongsBlockUI(
 
 @Composable
 fun DynamicSongUI(
-    dynamicSong: PrayerElementDomain.DynamicSong,
+    dynamicSong: PrayerElement.DynamicSong,
     prayerViewModel: PrayerViewModel,
     filename: String,
     navController: NavController,
@@ -510,11 +510,11 @@ fun DynamicSongUI(
     Column(modifier.padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         dynamicSong.items.forEach { item ->
             when (item) {
-                is PrayerElementDomain.Song,
-                is PrayerElementDomain.Subheading,
-                is PrayerElementDomain.CollapsibleBlock,
-                is PrayerElementDomain.AlternativePrayersBlock,
-                is PrayerElementDomain.AlternativeOption,
+                is PrayerElement.Song,
+                is PrayerElement.Subheading,
+                is PrayerElement.CollapsibleBlock,
+                is PrayerElement.AlternativePrayersBlock,
+                is PrayerElement.AlternativeOption,
                 -> {
                     PrayerElementRenderer(
                         item,
@@ -533,7 +533,7 @@ fun DynamicSongUI(
 
 @Composable
 fun CollapsibleTextBlock(
-    PrayerElementDomain: PrayerElementDomain.CollapsibleBlock,
+    PrayerElement: PrayerElement.CollapsibleBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
     navController: NavController,
@@ -550,7 +550,7 @@ fun CollapsibleTextBlock(
                     .clickable { expanded = !expanded },
         ) {
             Heading(
-                text = PrayerElementDomain.title,
+                text = PrayerElement.title,
                 modifier = Modifier.weight(1f),
             )
             Icon(
@@ -563,7 +563,7 @@ fun CollapsibleTextBlock(
             Column {
                 Column {
                     Spacer(Modifier.padding(8.dp))
-                    PrayerElementDomain.items.forEach { nestedItem ->
+                    PrayerElement.items.forEach { nestedItem ->
                         // Loop through type-safe items
                         // Recursively call the renderer for nested items
                         PrayerElementRenderer(

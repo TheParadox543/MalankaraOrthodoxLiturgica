@@ -1,11 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 
 class GetAdjacentSiblingRoutesUseCase {
     operator fun invoke(
-        rootNode: PageNodeDomain,
-        node: PageNodeDomain,
+        rootNode: PageNode,
+        node: PageNode,
     ): Pair<String?, String?> {
         val parentNode = rootNode.findByRoute(node.parent ?: "") ?: return Pair(null, null)
         if (parentNode.route == "feasts" || parentNode.route == "sacraments") return Pair(null, null)

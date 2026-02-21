@@ -3,7 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica
 import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toDomain
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElementDto
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -12,8 +12,8 @@ class PrayerElementMapperTest {
     fun `simple title maps to domain and back`() {
         val data = PrayerElementDto.Title("Hello World")
         val domain = data.toDomain()
-        assert(domain is PrayerElementDomain.Title)
-        assertEquals("Hello World", (domain as PrayerElementDomain.Title).content)
+        assert(domain is PrayerElement.Title)
+        assertEquals("Hello World", (domain as PrayerElement.Title).content)
 
         val roundtrip = domain.toData()
         assert(roundtrip is PrayerElementDto.Title)
@@ -33,12 +33,12 @@ class PrayerElementMapperTest {
             )
 
         val domain = nested.toDomain()
-        assert(domain is PrayerElementDomain.CollapsibleBlock)
-        val domainBlock = domain as PrayerElementDomain.CollapsibleBlock
+        assert(domain is PrayerElement.CollapsibleBlock)
+        val domainBlock = domain as PrayerElement.CollapsibleBlock
         assertEquals("Section", domainBlock.title)
         assertEquals(2, domainBlock.items.size)
-        assert(domainBlock.items[0] is PrayerElementDomain.Heading)
-        assert(domainBlock.items[1] is PrayerElementDomain.Prose)
+        assert(domainBlock.items[0] is PrayerElement.Heading)
+        assert(domainBlock.items[1] is PrayerElement.Prose)
 
         val back = domain.toData()
         assert(back is PrayerElementDto.CollapsibleBlock)
@@ -65,8 +65,8 @@ class PrayerElementMapperTest {
             )
 
         val domain = block.toDomain()
-        assert(domain is PrayerElementDomain.DynamicSongsBlock)
-        val domainBlock = domain as PrayerElementDomain.DynamicSongsBlock
+        assert(domain is PrayerElement.DynamicSongsBlock)
+        val domainBlock = domain as PrayerElement.DynamicSongsBlock
         assertEquals("afterGospel", domainBlock.timeKey)
         assertEquals(1, domainBlock.items.size)
         assertEquals("easter", domainBlock.items[0].eventKey)

@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -11,8 +11,8 @@ class GetAdjacentSiblingRoutesUseCaseTest {
     private fun makeNode(
         route: String,
         parent: String?,
-        children: List<PageNodeDomain> = emptyList(),
-    ) = PageNodeDomain(route = route, parent = parent, children = children)
+        children: List<PageNode> = emptyList(),
+    ) = PageNode(route = route, parent = parent, children = children)
 
     @Test
     fun `returns prev and next for a middle sibling`() {
@@ -20,7 +20,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
         val child2 = makeNode("prayers/evening", "prayers")
         val child3 = makeNode("prayers/night", "prayers")
         val root =
-            PageNodeDomain(
+            PageNode(
                 route = "prayers",
                 parent = null,
                 children = listOf(child1, child2, child3),
@@ -36,7 +36,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
         val child1 = makeNode("prayers/morning", "prayers")
         val child2 = makeNode("prayers/evening", "prayers")
         val root =
-            PageNodeDomain(
+            PageNode(
                 route = "prayers",
                 parent = null,
                 children = listOf(child1, child2),
@@ -52,7 +52,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
         val child1 = makeNode("prayers/morning", "prayers")
         val child2 = makeNode("prayers/evening", "prayers")
         val root =
-            PageNodeDomain(
+            PageNode(
                 route = "prayers",
                 parent = null,
                 children = listOf(child1, child2),
@@ -66,7 +66,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
     @Test
     fun `returns null pair when parent route is not found in tree`() {
         val node = makeNode("prayers/morning", "nonexistent")
-        val root = PageNodeDomain(route = "prayers", parent = null)
+        val root = PageNode(route = "prayers", parent = null)
 
         val (prev, next) = useCase(root, node)
         assertNull(prev)
@@ -76,7 +76,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
     @Test
     fun `returns null pair when node has no parent`() {
         val node = makeNode("prayers", null)
-        val root = PageNodeDomain(route = "prayers", parent = null)
+        val root = PageNode(route = "prayers", parent = null)
 
         val (prev, next) = useCase(root, node)
         assertNull(prev)
@@ -87,7 +87,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
     fun `returns null pair when node is not found in parent children`() {
         val child1 = makeNode("prayers/morning", "prayers")
         val root =
-            PageNodeDomain(
+            PageNode(
                 route = "prayers",
                 parent = null,
                 children = listOf(child1),
@@ -104,7 +104,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
     fun `returns null both for single child`() {
         val child = makeNode("prayers/morning", "prayers")
         val root =
-            PageNodeDomain(
+            PageNode(
                 route = "prayers",
                 parent = null,
                 children = listOf(child),
@@ -125,7 +125,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
         val weddingTwo = makeNode("wedding_Two", "wedding")
         val wedding = makeNode("wedding", "root", listOf(weddingOne, weddingTwo))
         val root =
-            PageNodeDomain(
+            PageNode(
                 route = "root",
                 parent = null,
                 children = listOf(qurbana, baptism, wedding),
@@ -141,7 +141,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
         val child2 = makeNode("epiphany", "feasts")
         val child3 = makeNode("palmSundayService", "feasts")
         val feasts =
-            PageNodeDomain(
+            PageNode(
                 "feasts",
                 parent = null,
                 children = listOf(child1, child2, child3),
@@ -157,7 +157,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
         val child2 = makeNode("prayer_Two", "sacraments")
         val child3 = makeNode("prayer_Three", "sacraments")
         val sacraments =
-            PageNodeDomain(
+            PageNode(
                 "sacraments",
                 parent = null,
                 children = listOf(child1, child2, child3),

@@ -11,7 +11,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.bible.model.ProseDto
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookName
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -55,9 +55,9 @@ class BibleClassesMappersTest {
             )
         val domain = dto.toDomain()
         assertEquals(1, domain.en.size)
-        assertEquals("English preface", (domain.en[0] as PrayerElementDomain.Prose).content)
+        assertEquals("English preface", (domain.en[0] as PrayerElement.Prose).content)
         assertEquals(1, domain.ml.size)
-        assertEquals("Malayalam preface", (domain.ml[0] as PrayerElementDomain.Prose).content)
+        assertEquals("Malayalam preface", (domain.ml[0] as PrayerElement.Prose).content)
     }
 
     // ─── PrefaceTemplatesDto ─────────────────────────────────────────────────
@@ -76,9 +76,9 @@ class BibleClassesMappersTest {
                 paulineEpistle = makeContent("Pauline"),
             )
         val domain = dto.toDomain()
-        assertEquals("Prophets EN", (domain.prophets.en[0] as PrayerElementDomain.Prose).content)
-        assertEquals("GenEpistle EN", (domain.generalEpistle.en[0] as PrayerElementDomain.Prose).content)
-        assertEquals("Pauline EN", (domain.paulineEpistle.en[0] as PrayerElementDomain.Prose).content)
+        assertEquals("Prophets EN", (domain.prophets.en[0] as PrayerElement.Prose).content)
+        assertEquals("GenEpistle EN", (domain.generalEpistle.en[0] as PrayerElement.Prose).content)
+        assertEquals("Pauline EN", (domain.paulineEpistle.en[0] as PrayerElement.Prose).content)
     }
 
     // ─── DisplayTextDto ──────────────────────────────────────────────────────
@@ -189,7 +189,7 @@ class BibleClassesMappersTest {
             )
         val domain = dto.toDomain()
         assertEquals("prophets", domain.category)
-        assertEquals("EN", (domain.prefaces?.en?.get(0) as? PrayerElementDomain.Prose)?.content)
+        assertEquals("EN", (domain.prefaces?.en?.get(0) as? PrayerElement.Prose)?.content)
         assertEquals("The Book of Isaiah", domain.displayTitle?.en)
         assertEquals("First", domain.ordinal?.en)
         assertEquals("ഒന്നാമൻ", domain.ordinal?.ml)

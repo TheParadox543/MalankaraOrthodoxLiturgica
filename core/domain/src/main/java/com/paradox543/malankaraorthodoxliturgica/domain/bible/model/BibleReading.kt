@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.bible.model
 
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 
 /**
  * Represents the loaded content for a Bible reading.
@@ -12,6 +12,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerEleme
  * @property verses list of [BibleVerse] representing the reading body.
  */
 data class BibleReading(
-    val preface: List<PrayerElementDomain>? = null,
+    val preface: List<PrayerElement>? = null,
     val verses: List<BibleVerse>,
 )
