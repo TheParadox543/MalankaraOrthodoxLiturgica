@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
+package com.paradox543.malankaraorthodoxliturgica.data.settings.repository
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -20,7 +20,7 @@ import javax.inject.Singleton
 // DataStore instance
 @Singleton
 class SettingsRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
 ) : SettingsRepository {
     private val Context.dataStore by preferencesDataStore(name = "settings")
     val dataStore = context.dataStore
