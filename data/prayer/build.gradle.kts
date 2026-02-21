@@ -36,6 +36,18 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    testOptions {
+        unitTests {
+            // Required: PrayerElementSerializer calls android.util.Log.d in its catch block,
+            // and AssetJsonReader calls Log.e. Without this, JVM unit tests throw
+            // "Method not mocked" for any Android stub that gets touched.
+            isReturnDefaultValues = true
+            all {
+                // Suppress the ByteBuddy/mockk "Java agent loaded dynamically" warning on JDK 21+
+                it.jvmArgs("-Djdk.attach.allowAttachSelf=true")
+            }
+        }
+    }
 }
 
 dependencies {
