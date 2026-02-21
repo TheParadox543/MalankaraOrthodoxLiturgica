@@ -9,9 +9,18 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 - Unversioned changes
 
+---
+
+## [2.2.2] - 2026-02-22
+
 ### Added
 
 - Pray now logic for Great Lent.
+
+### Changed
+
+- Updated the pray now logic so that it has more flexible boundaries.
+- Write tests using `kotlin-test` in anticipation of multiplatform migration.
 
 ### Fixed
 
@@ -23,7 +32,13 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 - Refactored domain module to a separate kotlin module.
 - Refactored models, repository interfaces, use cases and a few exceptions to domain module.
-- Refactored data layer of bible to :data:bible and data layer of calendar to :data:calendar.
+- Refactored data layer of following modules:
+    - bible to :data:bible
+    - calendar to :data:calendar
+    - settings to :data:settings
+    - prayer to :data:prayer
+    - translations to :data:translations
+- Created :data:core module for common dependencies.
 
 ### Test
 
