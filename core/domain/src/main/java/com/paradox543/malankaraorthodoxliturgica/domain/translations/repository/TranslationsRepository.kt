@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.domain.settings.repository
+package com.paradox543.malankaraorthodoxliturgica.domain.translations.repository
 
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 

@@ -80,6 +80,7 @@ dependencies {
     implementation(project(":data:calendar"))
     implementation(project(":data:prayer"))
     implementation(project(":data:settings"))
+    implementation(project(":data:translations"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
