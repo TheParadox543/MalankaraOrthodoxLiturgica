@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.model
+package com.paradox543.malankaraorthodoxliturgica.data.prayer.model
 
 import kotlinx.serialization.Serializable
 
@@ -12,11 +12,11 @@ import kotlinx.serialization.Serializable
  * @property languages The list of language codes available for this node.
  */
 @Serializable
-data class PageNodeData(
+data class PageNodeDto(
     val route: String,
     val type: String = "section",
     val filename: String? = null,
     val parent: String?,
-    val children: List<PageNodeData> = emptyList(),
+    val children: List<PageNodeDto> = emptyList(),
     val languages: List<String> = listOf(),
 )

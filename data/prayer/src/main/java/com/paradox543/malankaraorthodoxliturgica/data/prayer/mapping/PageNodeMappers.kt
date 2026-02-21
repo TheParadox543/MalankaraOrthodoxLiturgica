@@ -1,13 +1,13 @@
-package com.paradox543.malankaraorthodoxliturgica.data.mapping
+package com.paradox543.malankaraorthodoxliturgica.data.prayer.mapping
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PageNodeDto
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
 
 /**
  * Mappers between the data and domain representations of a page node.
  * These are recursive and will map children as well.
  */
-fun PageNodeData.toPageNodeDomain(): PageNodeDomain =
+fun PageNodeDto.toPageNodeDomain(): PageNodeDomain =
     PageNodeDomain(
         route = this.route,
         type = this.type,
@@ -17,8 +17,8 @@ fun PageNodeData.toPageNodeDomain(): PageNodeDomain =
         languages = this.languages.toList(),
     )
 
-fun PageNodeDomain.toData(): PageNodeData =
-    PageNodeData(
+fun PageNodeDomain.toData(): PageNodeDto =
+    PageNodeDto(
         route = this.route,
         type = this.type,
         filename = this.filename,

@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
 
 import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toDomain
-import com.paradox543.malankaraorthodoxliturgica.data.datasource.PrayerSource
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.toDomainList
-import com.paradox543.malankaraorthodoxliturgica.data.mapping.toPageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.datasource.PrayerSource
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.mapping.toDomainList
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.mapping.toPageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository

@@ -23,11 +23,11 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 51
+        versionCode = 52
         versionName = "2.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        versionNameSuffix = "-alpha.1"
+        versionNameSuffix = "-alpha.2"
     }
 
     buildTypes {
@@ -80,6 +80,7 @@ dependencies {
     implementation(project(":data:core")) // Temporary import for AssetJsonReader
     implementation(project(":data:bible"))
     implementation(project(":data:calendar"))
+    implementation(project(":data:prayer"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions

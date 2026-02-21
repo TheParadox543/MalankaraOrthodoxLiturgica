@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.model
+package com.paradox543.malankaraorthodoxliturgica.data.prayer.model
 
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.EventKey
 import kotlinx.serialization.SerialName
@@ -17,7 +17,7 @@ import kotlinx.serialization.Serializable
  * to instantiate when deserializing.
  */
 @Serializable(with = PrayerElementSerializer::class)
-sealed interface PrayerElementData {
+sealed interface PrayerElementDto {
 //  @JsonClassDiscriminator("type")  // Used in initial implementation, but now handled in custom serializer
 
     // Simple data classes
@@ -31,7 +31,7 @@ sealed interface PrayerElementData {
     @SerialName("title")  // Maps JSON "type": "title" to this class
     data class Title(
         val content: String,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A heading element in a prayer.
@@ -42,7 +42,7 @@ sealed interface PrayerElementData {
     @SerialName("heading")  // Maps JSON "type": "heading" to this class
     data class Heading(
         val content: String,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A subheading element in a prayer.
@@ -53,7 +53,7 @@ sealed interface PrayerElementData {
     @SerialName("subheading")  // Maps JSON "type": "subheading" to this class
     data class Subheading(
         val content: String,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A prose (regular text) element in a prayer.
@@ -64,7 +64,7 @@ sealed interface PrayerElementData {
     @SerialName("prose")  // Maps JSON "type": "prose" to this class
     data class Prose(
         val content: String,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A song element in a prayer.
@@ -75,7 +75,7 @@ sealed interface PrayerElementData {
     @SerialName("song")  // Maps JSON "type": "song" to this class
     data class Song(
         val content: String,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A subtext element in a prayer, used to display responses on the right.
@@ -86,7 +86,7 @@ sealed interface PrayerElementData {
     @SerialName("subtext")  // Maps JSON "type": "subtext" to this class
     data class Subtext(
         val content: String,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A source/citation element in a prayer.
@@ -97,7 +97,7 @@ sealed interface PrayerElementData {
     @SerialName("source")
     data class Source(
         val content: String,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A button element in a prayer, which can link to another prayer or action.
@@ -114,7 +114,7 @@ sealed interface PrayerElementData {
         val link: String,
         val label: String? = null,
         val replace: Boolean = false,
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     // Complex data classes
 
@@ -127,7 +127,7 @@ sealed interface PrayerElementData {
     @SerialName("link") // Represents a reference to another JSON file to be inlined
     data class Link(
         val file: String, // The filename (e.g., "common_prayers.json")
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A collapsible block element that references another JSON file for its content.
@@ -138,7 +138,7 @@ sealed interface PrayerElementData {
     @SerialName("link-collapsible") // Represents a reference to a JSON file whose content forms a collapsible block
     data class LinkCollapsible(
         val file: String, // The filename (e.g., "litanies.json")
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A collapsible block element whose content is directly in this JSON.
@@ -150,8 +150,8 @@ sealed interface PrayerElementData {
     @SerialName("collapsible-block") // Represents a collapsible block whose content is directly in this JSON
     data class CollapsibleBlock(
         val title: String,
-        val items: List<PrayerElementData>, // The nested PrayerElements within this block
-    ) : PrayerElementData
+        val items: List<PrayerElementDto>, // The nested PrayerElements within this block
+    ) : PrayerElementDto
 
     /**
      * A dynamic song element whose content is fetched based on event and time context.
@@ -167,8 +167,8 @@ sealed interface PrayerElementData {
         val eventKey: EventKey, // The event context for the song (e.g., "easter", "christmas")
         val eventTitle: String, // The title for the event (e.g., "Easter")
         val timeKey: String, // The time context for the song (e.g., "qurbanaGospel", "hoothomo")
-        val items: List<PrayerElementData>, // The items in the dynamic song (usually Subheading and Song)
-    ) : PrayerElementData
+        val items: List<PrayerElementDto>, // The items in the dynamic song (usually Subheading and Song)
+    ) : PrayerElementDto
 
     /**
      * A dynamic songs block that stores songs based on time context.
@@ -183,7 +183,7 @@ sealed interface PrayerElementData {
         val timeKey: String, // The time context for the content (e.g., "afterGospel", "hoothomo")
         val items: MutableList<DynamicSong> = mutableListOf(), // The dynamic songs for this time context
         val defaultContent: DynamicSong? = null, // Fallback content if no dynamic songs match
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * An alternative prayers element that offers multiple prayer options.
@@ -195,8 +195,8 @@ sealed interface PrayerElementData {
     @SerialName("alternative-option")
     data class AlternativeOption(
         val label: String,
-        val items: List<PrayerElementData>, // The PrayerElements for this alternative option
-    ) : PrayerElementData
+        val items: List<PrayerElementDto>, // The PrayerElements for this alternative option
+    ) : PrayerElementDto
 
     /**
      * A block containing multiple alternative prayer options.
@@ -209,7 +209,7 @@ sealed interface PrayerElementData {
     data class AlternativePrayersBlock(
         val title: String,
         val options: List<AlternativeOption>, // The options for alternative prayers
-    ) : PrayerElementData
+    ) : PrayerElementDto
 
     /**
      * A placeholder element indicating that content is loading.
@@ -221,5 +221,5 @@ sealed interface PrayerElementData {
     @SerialName("error")
     data class Error(
         val content: String, // e.g., "Error: File not found."
-    ) : PrayerElementData
+    ) : PrayerElementDto
 }

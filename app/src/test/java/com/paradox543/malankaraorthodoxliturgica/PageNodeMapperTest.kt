@@ -2,7 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica
 
 import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toDomain
-import com.paradox543.malankaraorthodoxliturgica.data.model.PageNodeData
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PageNodeDto
 import com.paradox543.malankaraorthodoxliturgica.shared.domain.model.PageNodeDomain
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -13,7 +13,7 @@ class PageNodeMapperTest {
     @Test
     fun `simple node maps to domain and back`() {
         val data =
-            PageNodeData(
+            PageNodeDto(
                 route = "home",
                 type = "section",
                 filename = "index.html",
@@ -37,7 +37,7 @@ class PageNodeMapperTest {
     @Test
     fun `nested children map correctly`() {
         val grandChild =
-            PageNodeData(
+            PageNodeDto(
                 route = "home/section/item",
                 filename = "item.html",
                 parent = "home/section",
@@ -45,9 +45,9 @@ class PageNodeMapperTest {
                 languages = listOf(),
             )
         val child =
-            PageNodeData(route = "home/section", filename = null, parent = "home", children = listOf(grandChild), languages = listOf("en"))
+            PageNodeDto(route = "home/section", filename = null, parent = "home", children = listOf(grandChild), languages = listOf("en"))
         val root =
-            PageNodeData(route = "home", filename = "index.html", parent = null, children = listOf(child), languages = listOf("en", "ml"))
+            PageNodeDto(route = "home", filename = "index.html", parent = null, children = listOf(child), languages = listOf("en", "ml"))
 
         val domain = root.toDomain()
         // root checks
@@ -66,7 +66,7 @@ class PageNodeMapperTest {
 
     @Test
     fun `empty lists and null filename handled`() {
-        val node = PageNodeData(route = "empty", filename = null, parent = null, children = emptyList(), languages = emptyList())
+        val node = PageNodeDto(route = "empty", filename = null, parent = null, children = emptyList(), languages = emptyList())
         val domain = node.toDomain()
         assertNull(domain.filename)
         assertTrue(domain.children.isEmpty())

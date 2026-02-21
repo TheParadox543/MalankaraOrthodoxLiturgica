@@ -1,10 +1,10 @@
-package com.paradox543.malankaraorthodoxliturgica.data.mapping
+package com.paradox543.malankaraorthodoxliturgica.data.prayer.mapping
 
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElementDto
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 
 // Helper extensions to reduce duplication for DynamicSong conversions
-private fun PrayerElementData.DynamicSong.toDomainSong(): PrayerElementDomain.DynamicSong =
+private fun PrayerElementDto.DynamicSong.toDomainSong(): PrayerElementDomain.DynamicSong =
     PrayerElementDomain.DynamicSong(
         eventKey = eventKey,
         eventTitle = eventTitle,
@@ -12,8 +12,8 @@ private fun PrayerElementData.DynamicSong.toDomainSong(): PrayerElementDomain.Dy
         items = items.map { it.toDomain() },
     )
 
-private fun PrayerElementDomain.DynamicSong.toDataSong(): PrayerElementData.DynamicSong =
-    PrayerElementData.DynamicSong(
+private fun PrayerElementDomain.DynamicSong.toDataSong(): PrayerElementDto.DynamicSong =
+    PrayerElementDto.DynamicSong(
         eventKey = eventKey,
         eventTitle = eventTitle,
         timeKey = timeKey,
@@ -21,37 +21,37 @@ private fun PrayerElementDomain.DynamicSong.toDataSong(): PrayerElementData.Dyna
     )
 
 // Extension-based mappers: data -> domain
-fun PrayerElementData.toDomain(): PrayerElementDomain =
+fun PrayerElementDto.toDomain(): PrayerElementDomain =
     when (this) {
-        is PrayerElementData.Title -> {
+        is PrayerElementDto.Title -> {
             PrayerElementDomain.Title(content.applyPrayerReplacements())
         }
 
-        is PrayerElementData.Heading -> {
+        is PrayerElementDto.Heading -> {
             PrayerElementDomain.Heading(content.applyPrayerReplacements())
         }
 
-        is PrayerElementData.Subheading -> {
+        is PrayerElementDto.Subheading -> {
             PrayerElementDomain.Subheading(content.applyPrayerReplacements())
         }
 
-        is PrayerElementData.Prose -> {
+        is PrayerElementDto.Prose -> {
             PrayerElementDomain.Prose(content.applyPrayerReplacements())
         }
 
-        is PrayerElementData.Song -> {
+        is PrayerElementDto.Song -> {
             PrayerElementDomain.Song(content.applyPrayerReplacements())
         }
 
-        is PrayerElementData.Subtext -> {
+        is PrayerElementDto.Subtext -> {
             PrayerElementDomain.Subtext(content.applyPrayerReplacements())
         }
 
-        is PrayerElementData.Source -> {
+        is PrayerElementDto.Source -> {
             PrayerElementDomain.Source(content.applyPrayerReplacements())
         }
 
-        is PrayerElementData.Button -> {
+        is PrayerElementDto.Button -> {
             PrayerElementDomain.Button(
                 link = link,
                 label = label?.applyPrayerReplacements(),
@@ -59,26 +59,26 @@ fun PrayerElementData.toDomain(): PrayerElementDomain =
             )
         }
 
-        is PrayerElementData.Link -> {
+        is PrayerElementDto.Link -> {
             PrayerElementDomain.Link(file)
         }
 
-        is PrayerElementData.LinkCollapsible -> {
+        is PrayerElementDto.LinkCollapsible -> {
             PrayerElementDomain.LinkCollapsible(file)
         }
 
-        is PrayerElementData.CollapsibleBlock -> {
+        is PrayerElementDto.CollapsibleBlock -> {
             PrayerElementDomain.CollapsibleBlock(
                 title = title,
                 items = items.map { it.toDomain() },
             )
         }
 
-        is PrayerElementData.DynamicSong -> {
+        is PrayerElementDto.DynamicSong -> {
             this.toDomainSong()
         }
 
-        is PrayerElementData.DynamicSongsBlock -> {
+        is PrayerElementDto.DynamicSongsBlock -> {
             PrayerElementDomain.DynamicSongsBlock(
                 timeKey = timeKey,
                 items = items.map { ds -> ds.toDomainSong() }.toMutableList(),
@@ -86,14 +86,14 @@ fun PrayerElementData.toDomain(): PrayerElementDomain =
             )
         }
 
-        is PrayerElementData.AlternativeOption -> {
+        is PrayerElementDto.AlternativeOption -> {
             PrayerElementDomain.AlternativeOption(
                 label = label,
                 items = items.map { it.toDomain() },
             )
         }
 
-        is PrayerElementData.AlternativePrayersBlock -> {
+        is PrayerElementDto.AlternativePrayersBlock -> {
             PrayerElementDomain.AlternativePrayersBlock(
                 title = title,
                 options =
@@ -103,46 +103,46 @@ fun PrayerElementData.toDomain(): PrayerElementDomain =
             )
         }
 
-        is PrayerElementData.Error -> {
+        is PrayerElementDto.Error -> {
             PrayerElementDomain.Error(content)
         }
     }
 
-fun List<PrayerElementData>.toDomainList(): List<PrayerElementDomain> = map { it.toDomain() }
+fun List<PrayerElementDto>.toDomainList(): List<PrayerElementDomain> = map { it.toDomain() }
 
 // Reverse mapping: domain -> data
-fun PrayerElementDomain.toData(): PrayerElementData =
+fun PrayerElementDomain.toData(): PrayerElementDto =
     when (this) {
         is PrayerElementDomain.Title -> {
-            PrayerElementData.Title(content)
+            PrayerElementDto.Title(content)
         }
 
         is PrayerElementDomain.Heading -> {
-            PrayerElementData.Heading(content)
+            PrayerElementDto.Heading(content)
         }
 
         is PrayerElementDomain.Subheading -> {
-            PrayerElementData.Subheading(content)
+            PrayerElementDto.Subheading(content)
         }
 
         is PrayerElementDomain.Prose -> {
-            PrayerElementData.Prose(content)
+            PrayerElementDto.Prose(content)
         }
 
         is PrayerElementDomain.Song -> {
-            PrayerElementData.Song(content)
+            PrayerElementDto.Song(content)
         }
 
         is PrayerElementDomain.Subtext -> {
-            PrayerElementData.Subtext(content)
+            PrayerElementDto.Subtext(content)
         }
 
         is PrayerElementDomain.Source -> {
-            PrayerElementData.Source(content)
+            PrayerElementDto.Source(content)
         }
 
         is PrayerElementDomain.Button -> {
-            PrayerElementData.Button(
+            PrayerElementDto.Button(
                 link = link,
                 label = label,
                 replace = replace,
@@ -150,15 +150,15 @@ fun PrayerElementDomain.toData(): PrayerElementData =
         }
 
         is PrayerElementDomain.Link -> {
-            PrayerElementData.Link(file)
+            PrayerElementDto.Link(file)
         }
 
         is PrayerElementDomain.LinkCollapsible -> {
-            PrayerElementData.LinkCollapsible(file)
+            PrayerElementDto.LinkCollapsible(file)
         }
 
         is PrayerElementDomain.CollapsibleBlock -> {
-            PrayerElementData.CollapsibleBlock(
+            PrayerElementDto.CollapsibleBlock(
                 title = title,
                 items = items.map { it.toData() },
             )
@@ -169,7 +169,7 @@ fun PrayerElementDomain.toData(): PrayerElementData =
         }
 
         is PrayerElementDomain.DynamicSongsBlock -> {
-            PrayerElementData.DynamicSongsBlock(
+            PrayerElementDto.DynamicSongsBlock(
                 timeKey = timeKey,
                 items = items.map { ds -> ds.toDataSong() }.toMutableList(),
                 defaultContent = defaultContent?.toDataSong(),
@@ -177,18 +177,18 @@ fun PrayerElementDomain.toData(): PrayerElementData =
         }
 
         is PrayerElementDomain.AlternativeOption -> {
-            PrayerElementData.AlternativeOption(
+            PrayerElementDto.AlternativeOption(
                 label = label,
                 items = items.map { it.toData() },
             )
         }
 
         is PrayerElementDomain.AlternativePrayersBlock -> {
-            PrayerElementData.AlternativePrayersBlock(
+            PrayerElementDto.AlternativePrayersBlock(
                 title = title,
                 options =
                     options.map { opt ->
-                        PrayerElementData.AlternativeOption(
+                        PrayerElementDto.AlternativeOption(
                             opt.label,
                             opt.items.map { it.toData() },
                         )
@@ -197,8 +197,8 @@ fun PrayerElementDomain.toData(): PrayerElementData =
         }
 
         is PrayerElementDomain.Error -> {
-            PrayerElementData.Error(content)
+            PrayerElementDto.Error(content)
         }
     }
 
-fun List<PrayerElementDomain>.toDataList(): List<PrayerElementData> = map { it.toData() }
+fun List<PrayerElementDomain>.toDataList(): List<PrayerElementDto> = map { it.toData() }
