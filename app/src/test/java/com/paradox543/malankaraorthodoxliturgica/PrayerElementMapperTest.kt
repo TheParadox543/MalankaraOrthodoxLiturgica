@@ -2,47 +2,47 @@ package com.paradox543.malankaraorthodoxliturgica
 
 import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toData
 import com.paradox543.malankaraorthodoxliturgica.data.bible.mapping.toDomain
-import com.paradox543.malankaraorthodoxliturgica.data.model.PrayerElementData
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElementDto
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class PrayerElementMapperTest {
     @Test
     fun `simple title maps to domain and back`() {
-        val data = PrayerElementData.Title("Hello World")
+        val data = PrayerElementDto.Title("Hello World")
         val domain = data.toDomain()
-        assert(domain is PrayerElementDomain.Title)
-        assertEquals("Hello World", (domain as PrayerElementDomain.Title).content)
+        assert(domain is PrayerElement.Title)
+        assertEquals("Hello World", (domain as PrayerElement.Title).content)
 
         val roundtrip = domain.toData()
-        assert(roundtrip is PrayerElementData.Title)
-        assertEquals("Hello World", (roundtrip as PrayerElementData.Title).content)
+        assert(roundtrip is PrayerElementDto.Title)
+        assertEquals("Hello World", (roundtrip as PrayerElementDto.Title).content)
     }
 
     @Test
     fun `collapsible block maps nested items`() {
         val nested =
-            PrayerElementData.CollapsibleBlock(
+            PrayerElementDto.CollapsibleBlock(
                 title = "Section",
                 items =
                     listOf(
-                        PrayerElementData.Heading("H1"),
-                        PrayerElementData.Prose("Some text"),
+                        PrayerElementDto.Heading("H1"),
+                        PrayerElementDto.Prose("Some text"),
                     ),
             )
 
         val domain = nested.toDomain()
-        assert(domain is PrayerElementDomain.CollapsibleBlock)
-        val domainBlock = domain as PrayerElementDomain.CollapsibleBlock
+        assert(domain is PrayerElement.CollapsibleBlock)
+        val domainBlock = domain as PrayerElement.CollapsibleBlock
         assertEquals("Section", domainBlock.title)
         assertEquals(2, domainBlock.items.size)
-        assert(domainBlock.items[0] is PrayerElementDomain.Heading)
-        assert(domainBlock.items[1] is PrayerElementDomain.Prose)
+        assert(domainBlock.items[0] is PrayerElement.Heading)
+        assert(domainBlock.items[1] is PrayerElement.Prose)
 
         val back = domain.toData()
-        assert(back is PrayerElementData.CollapsibleBlock)
-        val backBlock = back as PrayerElementData.CollapsibleBlock
+        assert(back is PrayerElementDto.CollapsibleBlock)
+        val backBlock = back as PrayerElementDto.CollapsibleBlock
         assertEquals("Section", backBlock.title)
         assertEquals(2, backBlock.items.size)
     }
@@ -50,23 +50,23 @@ class PrayerElementMapperTest {
     @Test
     fun `dynamic songs block maps items and default content`() {
         val songItem =
-            PrayerElementData.DynamicSong(
+            PrayerElementDto.DynamicSong(
                 eventKey = "easter",
                 eventTitle = "Easter",
                 timeKey = "afterGospel",
-                items = listOf(PrayerElementData.Subheading("Verse 1"), PrayerElementData.Song("Alleluia")),
+                items = listOf(PrayerElementDto.Subheading("Verse 1"), PrayerElementDto.Song("Alleluia")),
             )
 
         val block =
-            PrayerElementData.DynamicSongsBlock(
+            PrayerElementDto.DynamicSongsBlock(
                 timeKey = "afterGospel",
                 items = mutableListOf(songItem),
                 defaultContent = songItem,
             )
 
         val domain = block.toDomain()
-        assert(domain is PrayerElementDomain.DynamicSongsBlock)
-        val domainBlock = domain as PrayerElementDomain.DynamicSongsBlock
+        assert(domain is PrayerElement.DynamicSongsBlock)
+        val domainBlock = domain as PrayerElement.DynamicSongsBlock
         assertEquals("afterGospel", domainBlock.timeKey)
         assertEquals(1, domainBlock.items.size)
         assertEquals("easter", domainBlock.items[0].eventKey)
@@ -75,8 +75,8 @@ class PrayerElementMapperTest {
         assert(domainBlock.defaultContent != null)
 
         val back = domain.toData()
-        assert(back is PrayerElementData.DynamicSongsBlock)
-        val backBlock = back as PrayerElementData.DynamicSongsBlock
+        assert(back is PrayerElementDto.DynamicSongsBlock)
+        val backBlock = back as PrayerElementDto.DynamicSongsBlock
         assertEquals("afterGospel", backBlock.timeKey)
         assertEquals(1, backBlock.items.size)
         assertEquals("easter", backBlock.items[0].eventKey)

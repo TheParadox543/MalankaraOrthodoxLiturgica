@@ -1,14 +1,21 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerRoutes
+import java.time.LocalDate
+import java.time.LocalDateTime
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import java.time.LocalDateTime
 
 class GetRecommendedPrayersUseCaseTest {
     private val useCase = GetRecommendedPrayersUseCase()
+
+    data class HourCase(
+        val hour: Int,
+        val minute: Int = 0,
+        val expected: List<String>,
+    )
 
     @Test
     fun `returns Qurbana prayers on Sunday morning`() {
@@ -49,7 +56,7 @@ class GetRecommendedPrayersUseCaseTest {
 
     @Test
     fun `returns Kyamtha prayers on Sunday during Easter season`() {
-        // Sunday during Kyamtha season (April 12, 2026 is a Sunday after Easter)
+        // Sunday during Kyamtha season (April 12, 2026, is a Sunday after Easter)
         val kyamthaSunday = LocalDateTime.of(2026, 4, 12, 9, 0)
         val result = useCase(kyamthaSunday)
 
@@ -110,7 +117,53 @@ class GetRecommendedPrayersUseCaseTest {
         assertFalse(result.any { it.contains(PrayerRoutes.QURBANA) })
     }
 
-    private fun assertEquals(expected: Int, actual: Int) {
-        org.junit.Assert.assertEquals(expected, actual)
+    @Test
+    fun `great lent weekday full 24 hour mapping`() {
+        val date = LocalDate.of(2026, 2, 20) // inside great lent
+        val cases =
+            listOf(
+                HourCase(0, expected = listOf("greatLent_friday_matins")),
+                HourCase(1, expected = listOf("greatLent_friday_matins")),
+                HourCase(2, expected = listOf("greatLent_friday_matins")),
+                HourCase(3, expected = listOf("greatLent_friday_matins")),
+                HourCase(4, expected = listOf("greatLent_friday_matins", "greatLent_friday_prime")),
+                HourCase(5, expected = listOf("greatLent_friday_matins", "greatLent_friday_prime", "greatLent_friday_terce")),
+                HourCase(6, expected = listOf("greatLent_friday_matins", "greatLent_friday_prime", "greatLent_friday_terce")),
+                HourCase(7, expected = listOf("greatLent_friday_prime", "greatLent_friday_terce")),
+                HourCase(8, expected = listOf("greatLent_friday_prime", "greatLent_friday_terce")),
+                HourCase(9, expected = listOf("greatLent_friday_prime", "greatLent_friday_terce")),
+                HourCase(10, expected = listOf("greatLent_friday_terce")),
+                HourCase(11, expected = listOf("greatLent_friday_terce", "greatLent_friday_sext", "greatLent_friday_none")),
+                HourCase(12, expected = listOf("greatLent_friday_terce", "greatLent_friday_sext", "greatLent_friday_none")),
+                HourCase(13, expected = listOf("greatLent_friday_sext", "greatLent_friday_none")),
+                HourCase(14, expected = listOf("greatLent_friday_sext", "greatLent_friday_none")),
+                HourCase(15, expected = listOf("greatLent_friday_sext", "greatLent_friday_none")),
+                HourCase(16, expected = listOf("greatLent_friday_none", "sheema_saturday_vespers", "sheema_saturday_compline")),
+                HourCase(17, expected = listOf("greatLent_friday_none", "sheema_saturday_vespers", "sheema_saturday_compline")),
+                HourCase(18, expected = listOf("greatLent_friday_none", "sheema_saturday_vespers", "sheema_saturday_compline")),
+                HourCase(19, expected = listOf("sheema_saturday_vespers", "sheema_saturday_compline")),
+                HourCase(20, expected = listOf("sheema_saturday_vespers", "sheema_saturday_compline")),
+                HourCase(21, expected = listOf("sheema_saturday_matins")),
+                HourCase(22, expected = listOf("sheema_saturday_matins")),
+                HourCase(23, expected = listOf("sheema_saturday_matins")),
+            )
+
+        for (case in cases) {
+            val time = date.atTime(case.hour, case.minute)
+            val result = useCase(time)
+
+            for (expected in case.expected) {
+                assertTrue(
+                    result.any { it.endsWith(expected) },
+                    "Failed at ${case.hour}:${case.minute}. Could not find $expected",
+                )
+            }
+
+//            assertEquals(
+//                case.expected,
+//                result,
+//                "Failed at ${case.hour}:${case.minute}",
+//            )
+        }
     }
 }

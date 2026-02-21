@@ -9,8 +9,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleVerseDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceContentDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceTemplatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.ProseDto
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -18,40 +18,45 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 
 class BibleRepositoryImplTest {
-
     private val source: BibleSource = mockk()
     private lateinit var repository: BibleRepositoryImpl
 
     // ─── Shared fixture data ─────────────────────────────────────────────────
 
-    private val fakePrefaceContent = PrefaceContentDto(
-        en = listOf(ProseDto(type = "prose", content = "EN preface")),
-        ml = listOf(ProseDto(type = "prose", content = "ML preface")),
-    )
+    private val fakePrefaceContent =
+        PrefaceContentDto(
+            en = listOf(ProseDto(type = "prose", content = "EN preface")),
+            ml = listOf(ProseDto(type = "prose", content = "ML preface")),
+        )
 
-    private val fakePrefaceTemplatesDto = PrefaceTemplatesDto(
-        prophets = fakePrefaceContent,
-        generalEpistle = fakePrefaceContent,
-        paulineEpistle = fakePrefaceContent,
-    )
+    private val fakePrefaceTemplatesDto =
+        PrefaceTemplatesDto(
+            prophets = fakePrefaceContent,
+            generalEpistle = fakePrefaceContent,
+            paulineEpistle = fakePrefaceContent,
+        )
 
-    private val fakeBookDetailsDto = BibleBookDetailsDto(
-        book = BibleBookNameDto(en = "Genesis", ml = "ഉൽപ്പത്തി"),
-        folder = "genesis",
-        chapters = 50,
-        verseCount = listOf(31, 25, 24),
-    )
+    private val fakeBookDetailsDto =
+        BibleBookDetailsDto(
+            book = BibleBookNameDto(en = "Genesis", ml = "ഉൽപ്പത്തി"),
+            folder = "genesis",
+            chapters = 50,
+            verseCount = listOf(31, 25, 24),
+        )
 
-    private val fakeChapterDto = BibleChapterDto(
-        book = "Genesis",
-        chapter = 1,
-        verses = listOf(
-            BibleVerseDto(id = 1, verse = "In the beginning"),
-            BibleVerseDto(id = 2, verse = "And the earth was void"),
-        ),
-    )
+    private val fakeChapterDto =
+        BibleChapterDto(
+            book = "Genesis",
+            chapter = 1,
+            verses =
+                listOf(
+                    BibleVerseDto(id = 1, verse = "In the beginning"),
+                    BibleVerseDto(id = 2, verse = "And the earth was void"),
+                ),
+        )
 
     /**
      * Creates a fresh repository instance before every test.
@@ -90,8 +95,8 @@ class BibleRepositoryImplTest {
     }
 
     @Test
-    fun `loadBibleMetaData throws BibleParsingException when source returns null`() {
-        every { source.readBibleDetails() } returns null
+    fun `loadBibleMetaData throws BibleParsingException when source throws AssetReadException`() {
+        every { source.readBibleDetails() } throws AssetReadException("not found")
 
         assertFailsWith<BibleParsingException> {
             repository.loadBibleMetaData()
@@ -145,11 +150,12 @@ class BibleRepositoryImplTest {
         every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
         every { source.readBibleChapter(any()) } returns fakeChapterDto
 
-        val result = repository.loadBibleChapter(
-            bookIndex = 0,
-            chapterIndex = 0,
-            language = AppLanguage.ENGLISH,
-        )
+        val result =
+            repository.loadBibleChapter(
+                bookIndex = 0,
+                chapterIndex = 0,
+                language = AppLanguage.ENGLISH,
+            )
 
         assertEquals("Genesis", result.book)
         assertEquals(1, result.chapter)
@@ -158,9 +164,9 @@ class BibleRepositoryImplTest {
     }
 
     @Test
-    fun `loadBibleChapter throws BibleParsingException when source returns null`() {
+    fun `loadBibleChapter throws BibleParsingException when source throws AssetReadException`() {
         every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-        every { source.readBibleChapter(any()) } returns null
+        every { source.readBibleChapter(any()) } throws AssetReadException("not found")
 
         assertFailsWith<BibleParsingException> {
             repository.loadBibleChapter(
@@ -208,9 +214,9 @@ class BibleRepositoryImplTest {
 
         val result = repository.loadPrefaceTemplates()
 
-        assertEquals("EN preface", (result.prophets.en[0] as PrayerElementDomain.Prose).content)
-        assertEquals("ML preface", (result.generalEpistle.ml[0] as PrayerElementDomain.Prose).content)
-        assertEquals("EN preface", (result.paulineEpistle.en[0] as PrayerElementDomain.Prose).content)
+        assertEquals("EN preface", (result.prophets.en[0] as PrayerElement.Prose).content)
+        assertEquals("ML preface", (result.generalEpistle.ml[0] as PrayerElement.Prose).content)
+        assertEquals("EN preface", (result.paulineEpistle.en[0] as PrayerElement.Prose).content)
     }
 
     @Test
@@ -224,8 +230,8 @@ class BibleRepositoryImplTest {
     }
 
     @Test
-    fun `loadPrefaceTemplates throws BibleParsingException when source returns null`() {
-        every { source.readPrefaceTemplates() } returns null
+    fun `loadPrefaceTemplates throws BibleParsingException when source throws AssetReadException`() {
+        every { source.readPrefaceTemplates() } throws AssetReadException("not found")
 
         assertFailsWith<BibleParsingException> {
             repository.loadPrefaceTemplates()

@@ -12,7 +12,9 @@ import java.io.IOException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
+import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 
 /**
  * Tests for [BibleSource].
@@ -22,7 +24,7 @@ import kotlin.test.assertNull
  * construct a *real* [AssetJsonReader] whose [Context] / [AssetManager] are mocked, and feed
  * test JSON through them. This lets us verify:
  *   - the correct asset path is opened for each method, and
- *   - deserialized DTOs are returned (or null on failure).
+ *   - deserialized DTOs are returned (or AssetReadException thrown on failure).
  */
 class BibleSourceTest {
     private val assetManager: AssetManager = mockk()
@@ -75,16 +77,16 @@ class BibleSourceTest {
 
         val result = source.readBibleDetails()
 
-        assertEquals(1, result?.size)
-        assertEquals("Genesis", result?.get(0)?.book?.en)
-        assertEquals("genesis", result?.get(0)?.folder)
+        assertEquals(1, result.size)
+        assertEquals("Genesis", result[0].book?.en)
+        assertEquals("genesis", result[0].folder)
     }
 
     @Test
-    fun `readBibleDetails returns null when asset cannot be opened`() {
+    fun `readBibleDetails throws AssetReadException when asset cannot be opened`() {
         stubAssetThrows("bibleBookMetadata.json")
 
-        assertNull(source.readBibleDetails())
+        assertFailsWith<AssetReadException> { source.readBibleDetails() }
     }
 
     // ─── readPrefaceTemplates ────────────────────────────────────────────────
@@ -110,15 +112,15 @@ class BibleSourceTest {
 
         val result = source.readPrefaceTemplates()
 
-        assertEquals(result?.prophets?.en?.isEmpty(), true)
-        assertEquals(result?.paulineEpistle?.ml?.isEmpty(), true)
+        assertTrue(result.prophets?.en?.isEmpty() == true)
+        assertTrue(result.paulineEpistle?.ml?.isEmpty() == true)
     }
 
     @Test
-    fun `readPrefaceTemplates returns null when asset cannot be opened`() {
+    fun `readPrefaceTemplates throws AssetReadException when asset cannot be opened`() {
         stubAssetThrows("bible_preface_templates.json")
 
-        assertNull(source.readPrefaceTemplates())
+        assertFailsWith<AssetReadException> { source.readPrefaceTemplates() }
     }
 
     // ─── readBibleChapter ────────────────────────────────────────────────────
@@ -141,18 +143,18 @@ class BibleSourceTest {
 
         val result = source.readBibleChapter(path)
 
-        assertEquals("Genesis", result?.book)
-        assertEquals(1, result?.chapter)
-        assertEquals(1, result?.verses?.size)
-        assertEquals("In the beginning", result?.verses?.get(0)?.verse)
+        assertEquals("Genesis", result.book)
+        assertEquals(1, result.chapter)
+        assertEquals(1, result.verses?.size)
+        assertEquals("In the beginning", result.verses?.get(0)?.verse)
     }
 
     @Test
-    fun `readBibleChapter returns null when asset cannot be opened`() {
+    fun `readBibleChapter throws AssetReadException when asset cannot be opened`() {
         val path = "en/bible/genesis/001.json"
         stubAssetThrows(path)
 
-        assertNull(source.readBibleChapter(path))
+        assertFailsWith<AssetReadException> { source.readBibleChapter(path) }
     }
 
     @Test

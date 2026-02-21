@@ -23,11 +23,11 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 51
+        versionCode = 52
         versionName = "2.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        versionNameSuffix = "-alpha.1"
+        versionNameSuffix = ""
     }
 
     buildTypes {
@@ -76,10 +76,11 @@ dependencies {
     // Project imports
     implementation(project(":shared"))
     implementation(project(":core:domain"))
-    // TODO: Remove data core dependency after completing data refactor
-    implementation(project(":data:core")) // Temporary import for AssetJsonReader
     implementation(project(":data:bible"))
     implementation(project(":data:calendar"))
+    implementation(project(":data:prayer"))
+    implementation(project(":data:settings"))
+    implementation(project(":data:translations"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
@@ -103,12 +104,11 @@ dependencies {
     // Dependency Injection
     implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
     implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
+    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
     // Background Work Management
     implementation(libs.androidx.hilt.common)
     implementation(libs.androidx.work.runtime.ktx)
-
-    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
     // Data Storage
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences

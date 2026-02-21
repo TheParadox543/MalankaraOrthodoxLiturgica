@@ -15,11 +15,11 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.DisplayText
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 
-fun ProseDto.toDomain(): PrayerElementDomain.Prose = PrayerElementDomain.Prose(this.content)
+fun ProseDto.toDomain(): PrayerElement.Prose = PrayerElement.Prose(this.content)
 
-fun List<ProseDto>.toProseListDomain(): List<PrayerElementDomain.Prose> = map { it.toDomain() }
+fun List<ProseDto>.toProseListDomain(): List<PrayerElement.Prose> = map { it.toDomain() }
 
 fun PrefaceContentDto.toDomain(): PrefaceContent =
     PrefaceContent(

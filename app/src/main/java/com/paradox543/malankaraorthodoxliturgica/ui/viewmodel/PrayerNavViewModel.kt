@@ -2,7 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNodeDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
@@ -42,17 +42,17 @@ class PrayerNavViewModel @Inject constructor(
                 initialTree,
             )
 
-    private val _currentNode = MutableStateFlow<PageNodeDomain?>(null)
+    private val _currentNode = MutableStateFlow<PageNode?>(null)
     val currentNode = _currentNode.asStateFlow()
 
     fun findNode(route: String) = rootNode.value.findByRoute(route)
 
-    fun getAdjacentRoutes(node: PageNodeDomain): Pair<String?, String?> {
+    fun getAdjacentRoutes(node: PageNode): Pair<String?, String?> {
         val (prev, next) = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
         val prevRoute = prev?.let { AppScreen.Prayer.createRoute(prev) }
         val nextRoute = next?.let { AppScreen.Prayer.createRoute(next) }
         return Pair(prevRoute, nextRoute)
     }
 
-    fun getAllPrayerNodes(): List<PageNodeDomain> = getPrayerNodesForCurrentTimeUseCase(rootNode.value)
+    fun getAllPrayerNodes(): List<PageNode> = getPrayerNodesForCurrentTimeUseCase(rootNode.value)
 }

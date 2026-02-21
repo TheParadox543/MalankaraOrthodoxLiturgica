@@ -4,7 +4,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.TitleStr
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakePrayerRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
@@ -15,8 +15,8 @@ import kotlin.test.assertTrue
 class GetDynamicSongsUseCaseTest {
     private fun makeBlock(
         timeKey: String = "afterGospel",
-        defaultContent: PrayerElementDomain.DynamicSong? = null,
-    ) = PrayerElementDomain.DynamicSongsBlock(
+        defaultContent: PrayerElement.DynamicSong? = null,
+    ) = PrayerElement.DynamicSongsBlock(
         timeKey = timeKey,
         items = mutableListOf(),
         defaultContent = defaultContent,
@@ -26,16 +26,16 @@ class GetDynamicSongsUseCaseTest {
     fun `resolves default link and event songs`() =
         runBlocking {
             val defaultSong =
-                PrayerElementDomain.DynamicSong(
+                PrayerElement.DynamicSong(
                     eventKey = "defaultKey",
                     eventTitle = "Default",
                     timeKey = "afterGospel",
-                    items = listOf(PrayerElementDomain.Song("Alleluia")),
+                    items = listOf(PrayerElement.Song("Alleluia")),
                 )
 
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/defaultKey/afterGospel.json" to listOf(PrayerElementDomain.Song("Alleluia")),
+                    "qurbanaSongs/defaultKey/afterGospel.json" to listOf(PrayerElement.Song("Alleluia")),
                 )
 
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
@@ -53,18 +53,18 @@ class GetDynamicSongsUseCaseTest {
             val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
             val resolved = usecase(AppLanguage.ENGLISH, makeBlock(defaultContent = defaultSong))
 
-            assertTrue(resolved.items.any { it is PrayerElementDomain.DynamicSong && it.eventKey == "defaultKey" })
+            assertTrue(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "defaultKey" })
         }
 
     @Test
     fun `adds default content directly when it contains no Link`() =
         runBlocking {
             val defaultSong =
-                PrayerElementDomain.DynamicSong(
+                PrayerElement.DynamicSong(
                     eventKey = "default",
                     eventTitle = "Default",
                     timeKey = "afterGospel",
-                    items = listOf(PrayerElementDomain.Song("Alleluia")),
+                    items = listOf(PrayerElement.Song("Alleluia")),
                 )
             val prayerRepo = FakePrayerRepository()
             val calendarRepo = FakeCalendarRepository()
@@ -72,7 +72,7 @@ class GetDynamicSongsUseCaseTest {
 
             val resolved = usecase(AppLanguage.ENGLISH, makeBlock(defaultContent = defaultSong))
 
-            assertTrue(resolved.items.any { it is PrayerElementDomain.DynamicSong && it.eventKey == "default" })
+            assertTrue(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "default" })
         }
 
     @Test
@@ -80,7 +80,7 @@ class GetDynamicSongsUseCaseTest {
         runBlocking {
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElementDomain.Song("Departed song")),
+                    "qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
                 )
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
             val calendarRepo = FakeCalendarRepository()
@@ -88,28 +88,28 @@ class GetDynamicSongsUseCaseTest {
 
             val resolved = usecase(AppLanguage.ENGLISH, makeBlock())
 
-            assertTrue(resolved.items.any { it is PrayerElementDomain.DynamicSong && it.eventKey == "allDepartedFaithful" })
+            assertTrue(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "allDepartedFaithful" })
         }
 
     @Test
     fun `skips departed faithful song when already in event list`() =
         runBlocking {
             val alreadyPresent =
-                PrayerElementDomain.DynamicSong(
+                PrayerElement.DynamicSong(
                     eventKey = "allDepartedFaithful",
                     eventTitle = "Departed",
                     timeKey = "afterGospel",
-                    items = listOf(PrayerElementDomain.Song("Song")),
+                    items = listOf(PrayerElement.Song("Song")),
                 )
             val block =
-                PrayerElementDomain.DynamicSongsBlock(
+                PrayerElement.DynamicSongsBlock(
                     timeKey = "afterGospel",
                     items = mutableListOf(alreadyPresent),
                     defaultContent = null,
                 )
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElementDomain.Song("Departed song")),
+                    "qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
                 )
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
             val calendarRepo = FakeCalendarRepository()
@@ -117,7 +117,7 @@ class GetDynamicSongsUseCaseTest {
 
             val resolved = usecase(AppLanguage.ENGLISH, block)
 
-            assertEquals(1, resolved.items.count { it is PrayerElementDomain.DynamicSong && it.eventKey == "allDepartedFaithful" })
+            assertEquals(1, resolved.items.count { it is PrayerElement.DynamicSong && it.eventKey == "allDepartedFaithful" })
         }
 
     @Test
@@ -127,7 +127,7 @@ class GetDynamicSongsUseCaseTest {
             // so "christmasSongs" → "christmas" in the filename
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/christmas/afterGospel.json" to listOf(PrayerElementDomain.Song("Song")),
+                    "qurbanaSongs/christmas/afterGospel.json" to listOf(PrayerElement.Song("Song")),
                 )
             val eventDetail =
                 LiturgicalEventDetails(
@@ -143,7 +143,7 @@ class GetDynamicSongsUseCaseTest {
 
             val song =
                 resolved.items
-                    .filterIsInstance<PrayerElementDomain.DynamicSong>()
+                    .filterIsInstance<PrayerElement.DynamicSong>()
                     .firstOrNull { it.eventKey == "christmasSongs" }
             assertEquals("ക്രിസ്മസ്", song?.eventTitle)
         }
@@ -163,6 +163,6 @@ class GetDynamicSongsUseCaseTest {
 
             val resolved = usecase(AppLanguage.ENGLISH, makeBlock())
 
-            assertFalse(resolved.items.any { it is PrayerElementDomain.DynamicSong && it.eventKey == "Generic Feast" })
+            assertFalse(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "Generic Feast" })
         }
 }

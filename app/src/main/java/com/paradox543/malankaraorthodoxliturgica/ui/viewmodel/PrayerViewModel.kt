@@ -2,12 +2,12 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.TranslationsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,8 +43,8 @@ class PrayerViewModel @Inject constructor(
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
-    private val _prayers = MutableStateFlow<List<PrayerElementDomain>>(emptyList())
-    val prayers: StateFlow<List<PrayerElementDomain>> = _prayers
+    private val _prayers = MutableStateFlow<List<PrayerElement>>(emptyList())
+    val prayers: StateFlow<List<PrayerElement>> = _prayers
 
     private val _dynamicSongKey = MutableStateFlow<String?>(null)
     val dynamicSongKey: StateFlow<String?> = _dynamicSongKey.asStateFlow()
@@ -88,7 +88,7 @@ class PrayerViewModel @Inject constructor(
                 val prayers = getPrayerScreenContentUseCase(filename, language)
                 _prayers.value = prayers
             } catch (e: Exception) {
-                _prayers.value = listOf(PrayerElementDomain.Error(e.message ?: "Unknown error"))
+                _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
             }
         }
     }

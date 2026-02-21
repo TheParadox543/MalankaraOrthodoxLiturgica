@@ -8,13 +8,13 @@ import javax.inject.Inject
 class CalendarSource @Inject constructor(
     private val reader: AssetJsonReader,
 ) {
-    fun readLiturgicalData(): LiturgicalDataStore? =
+    fun readLiturgicalData(): LiturgicalDataStore =
 //        withContext(Dispatchers.IO) {
-        reader.loadJsonAsset<LiturgicalDataStore>("calendar/liturgical_data.json")
+        reader.loadJsonAsset("calendar/liturgical_data.json")
 //        }
 
-    fun readLiturgicalDates(): LiturgicalCalendarDates? =
+    fun readLiturgicalDates(): LiturgicalCalendarDates =
 //        withContext(Dispatchers.IO) {
-        reader.loadJsonAsset<LiturgicalCalendarDates>("calendar/liturgical_calendar.json")
+        reader.loadJsonAsset("calendar/liturgical_calendar.json")
 //        }
 }

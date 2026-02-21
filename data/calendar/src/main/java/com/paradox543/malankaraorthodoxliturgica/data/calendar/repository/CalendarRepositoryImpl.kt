@@ -15,7 +15,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
-import java.io.IOException
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters
@@ -26,13 +27,27 @@ import javax.inject.Singleton
 class CalendarRepositoryImpl @Inject constructor(
     private val calendarSource: CalendarSource,
 ) : CalendarRepository {
-    // Lazy initialization ensures files are read only when first accessed
+    // Lazy initialization ensures files are read only when first accessed.
+    // Asset exceptions are translated at this boundary so callers deal only with
+    // AssetReadException / AssetParsingException (both from :data:core).
     private val cachedLiturgicalDates: LiturgicalCalendarDates by lazy {
-        calendarSource.readLiturgicalDates() ?: throw IOException("Could not read from assets/calendar/liturgical_calendar.json")
+        try {
+            calendarSource.readLiturgicalDates()
+        } catch (e: AssetReadException) {
+            throw AssetReadException("Could not read assets/calendar/liturgical_calendar.json", e)
+        } catch (e: AssetParsingException) {
+            throw AssetParsingException("Could not parse assets/calendar/liturgical_calendar.json", e)
+        }
     }
 
     private val cachedLiturgicalData: LiturgicalDataStore by lazy {
-        calendarSource.readLiturgicalData() ?: throw IOException("Could not read from assets/calendar/liturgical_data.json")
+        try {
+            calendarSource.readLiturgicalData()
+        } catch (e: AssetReadException) {
+            throw AssetReadException("Could not read assets/calendar/liturgical_data.json", e)
+        } catch (e: AssetParsingException) {
+            throw AssetParsingException("Could not parse assets/calendar/liturgical_data.json", e)
+        }
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
@@ -16,16 +16,16 @@ class GetDynamicSongsUseCase(
 ) {
     suspend operator fun invoke(
         language: AppLanguage,
-        dynamicSongsBlock: PrayerElementDomain.DynamicSongsBlock,
+        dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
         currentDepth: Int = 0,
-    ): PrayerElementDomain.DynamicSongsBlock {
+    ): PrayerElement.DynamicSongsBlock {
         val resolvedBlock = dynamicSongsBlock.copy(items = dynamicSongsBlock.items.toMutableList())
 
         // Handle default content (may be a link which needs to be resolved)
         val defaultContent = dynamicSongsBlock.defaultContent
         if (defaultContent != null) {
             val firstItem = defaultContent.items.firstOrNull()
-            if (firstItem is PrayerElementDomain.Link) {
+            if (firstItem is PrayerElement.Link) {
                 // Load the linked file and replace items
                 val file = firstItem.file
                 val loadedItems = prayerRepository.loadPrayerElements(file, language)
@@ -58,7 +58,7 @@ class GetDynamicSongsUseCase(
                     }
 
                 resolvedBlock.items.add(
-                    PrayerElementDomain.DynamicSong(
+                    PrayerElement.DynamicSong(
                         eventKey = specialSongsKey,
                         eventTitle = title,
                         timeKey = dynamicSongsBlock.timeKey,
@@ -85,7 +85,7 @@ class GetDynamicSongsUseCase(
                         AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> "All Departed Faithful"
                     }
                 resolvedBlock.items.add(
-                    PrayerElementDomain.DynamicSong(
+                    PrayerElement.DynamicSong(
                         eventKey = "allDepartedFaithful",
                         eventTitle = title,
                         timeKey = dynamicSongsBlock.timeKey,

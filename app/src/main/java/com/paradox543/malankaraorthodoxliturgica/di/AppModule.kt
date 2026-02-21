@@ -26,28 +26,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-//    TODO: Remove this once refactoring is done to ensure only one instance of Json is created
-//    @Provides
-//    @Singleton // Ensure only one instance of JSON is created
-//    fun provideJson(): Json =
-//        Json {
-//            ignoreUnknownKeys = true // Important for robust parsing
-//            prettyPrint = true      // For readability if you ever debug JSON output
-//            isLenient = true        // Allows for some non-strict JSON (e.g., unquoted keys if needed)
-//        }
-
     @Provides
     @Singleton
     fun provideFirebaseStorage(): FirebaseStorage = Firebase.storage
-
-    @Singleton
-    @Provides
-    fun providePreferencesDataStore(
-        @ApplicationContext context: Context,
-    ): DataStore<Preferences> =
-        PreferenceDataStoreFactory.create(
-            produceFile = { context.preferencesDataStoreFile("app_settings") },
-        )
 
     // Hilt will automatically provide the Context and DataStore it needs.
     @Singleton

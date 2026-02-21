@@ -3,7 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceContent
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElementDomain
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 /**
@@ -16,7 +16,7 @@ class FormatBiblePrefaceUseCase(
     operator fun invoke(
         bibleReference: BibleReference,
         language: AppLanguage,
-    ): List<PrayerElementDomain>? {
+    ): List<PrayerElement>? {
         val books = bibleRepository.loadBibleMetaData()
         val book = books.getOrNull(bibleReference.bookNumber - 1) ?: return null
         val prefaces = bibleRepository.loadPrefaceTemplates()
@@ -30,7 +30,7 @@ class FormatBiblePrefaceUseCase(
                     else -> return null
                 }
 
-        val sourcePreface: List<PrayerElementDomain> =
+        val sourcePreface: List<PrayerElement> =
             when (language) {
                 AppLanguage.MALAYALAM -> prefaceContent.ml
                 AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> prefaceContent.en
@@ -56,7 +56,7 @@ class FormatBiblePrefaceUseCase(
 
         return sourcePreface.map { item ->
             when (item) {
-                is PrayerElementDomain.Prose -> {
+                is PrayerElement.Prose -> {
                     item.copy(
                         content =
                             item.content

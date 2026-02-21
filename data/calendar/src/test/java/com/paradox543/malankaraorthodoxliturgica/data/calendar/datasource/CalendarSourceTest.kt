@@ -12,8 +12,8 @@ import java.io.IOException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
+import kotlin.test.assertFailsWith
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 
 /**
  * Tests for [CalendarSource].
@@ -67,15 +67,14 @@ class CalendarSourceTest {
 
         val result = source.readLiturgicalDates()
 
-        assertNotNull(result)
         assertEquals(listOf("easter"), result["2025"]?.get("4")?.get("20"))
     }
 
     @Test
-    fun `readLiturgicalDates returns null when asset cannot be opened`() {
+    fun `readLiturgicalDates throws AssetReadException when asset cannot be opened`() {
         stubAssetThrows("calendar/liturgical_calendar.json")
 
-        assertNull(source.readLiturgicalDates())
+        assertFailsWith<AssetReadException> { source.readLiturgicalDates() }
     }
 
     // ─── readLiturgicalData ──────────────────────────────────────────────────
@@ -99,16 +98,15 @@ class CalendarSourceTest {
 
         val result = source.readLiturgicalData()
 
-        assertNotNull(result)
         assertEquals("feast", result["easter"]?.type)
         assertEquals("Easter Sunday", result["easter"]?.title?.en)
         assertEquals("ഉയിർപ്പ്", result["easter"]?.title?.ml)
     }
 
     @Test
-    fun `readLiturgicalData returns null when asset cannot be opened`() {
+    fun `readLiturgicalData throws AssetReadException when asset cannot be opened`() {
         stubAssetThrows("calendar/liturgical_data.json")
 
-        assertNull(source.readLiturgicalData())
+        assertFailsWith<AssetReadException> { source.readLiturgicalData() }
     }
 }

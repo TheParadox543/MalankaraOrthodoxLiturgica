@@ -66,6 +66,4 @@ dependencies {
     testImplementation(libs.kotlinx.test.junit)
     testImplementation(libs.kotlinx.test.annotations.common)
     testImplementation(libs.mockk)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

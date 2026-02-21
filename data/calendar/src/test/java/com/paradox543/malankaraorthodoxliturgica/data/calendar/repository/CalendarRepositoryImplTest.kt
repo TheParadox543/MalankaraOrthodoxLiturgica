@@ -8,7 +8,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEven
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.YearEvents
 import io.mockk.every
 import io.mockk.mockk
-import java.io.IOException
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import java.time.DayOfWeek
 import java.time.LocalDate
 import kotlin.test.BeforeTest
@@ -65,21 +65,21 @@ class CalendarRepositoryImplTest {
     // ─── Cache and error handling ─────────────────────────────────────────────
 
     @Test
-    fun `throws IOException when liturgical dates asset is missing`() {
-        every { source.readLiturgicalDates() } returns null
+    fun `throws AssetReadException when liturgical dates asset is missing`() {
+        every { source.readLiturgicalDates() } throws AssetReadException("not found")
         every { source.readLiturgicalData() } returns fakeData
 
-        assertFailsWith<IOException> {
+        assertFailsWith<AssetReadException> {
             repository.checkMonthDataExists(4, 2025)
         }
     }
 
     @Test
-    fun `throws IOException when liturgical data asset is missing`() {
+    fun `throws AssetReadException when liturgical data asset is missing`() {
         every { source.readLiturgicalDates() } returns fakeDates
-        every { source.readLiturgicalData() } returns null
+        every { source.readLiturgicalData() } throws AssetReadException("not found")
 
-        assertFailsWith<IOException> {
+        assertFailsWith<AssetReadException> {
             repository.loadMonthData(4, 2025)
         }
     }
