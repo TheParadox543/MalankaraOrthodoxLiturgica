@@ -27,7 +27,7 @@ android {
         versionName = "2.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        versionNameSuffix = "-alpha.2"
+        versionNameSuffix = ""
     }
 
     buildTypes {
