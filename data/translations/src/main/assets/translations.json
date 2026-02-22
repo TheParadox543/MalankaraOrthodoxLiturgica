@@ -547,12 +547,12 @@
         "ml": "പൊതുവായ",
         "en": "General"
     },
-    "palmSundayService":{
-        "ml": "ഊശാന",
-        "en": "Palm Sunday"
-    },
     "washingOfFeetService": {
         "ml": "കാൽകഴുകൽ ശുശ്രൂഷ",
         "en": "Washing of the Feet"
+    },
+    "garbo": {
+        "ml": "ഗർബോ",
+        "en": "Garbo"
     }
 }

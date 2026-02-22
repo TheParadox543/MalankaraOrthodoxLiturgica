@@ -23,11 +23,11 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 52
-        versionName = "2.2.2"
+        versionCode = 53
+        versionName = "2.2.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        versionNameSuffix = ""
+        versionNameSuffix = "-alpha.1"
     }
 
     buildTypes {
