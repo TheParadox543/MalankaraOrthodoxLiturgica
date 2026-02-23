@@ -2,7 +2,7 @@
     "route": "malankara",
     "parent": null,
     "filename": null,
-    "lastModified": 1771753884743,
+    "lastModified": 1771866227879,
     "minVersionCode": 34,
     "children": [
         {
@@ -1383,21 +1383,21 @@
             "route": "lent",
             "parent": "malankara",
             "filename": null,
-            "lastModified": 1771753884743,
+            "lastModified": 1771866227879,
             "minVersionCode": 34,
             "children": [
                 {
                     "route": "ninevehLent",
                     "parent": "lent",
                     "filename": null,
-                    "lastModified": 1771667935067,
+                    "lastModified": 1771822471995,
                     "minVersionCode": 34,
                     "children": [
                         {
                             "route": "ninevehLent_monday",
                             "parent": "ninevehLent",
                             "filename": null,
-                            "lastModified": 1771480087950,
+                            "lastModified": 1771822471995,
                             "minVersionCode": 34,
                             "children": [
                                 {
@@ -1412,7 +1412,7 @@
                                     "route": "ninevehLent_monday_compline",
                                     "parent": "ninevehLent_monday",
                                     "filename": "lent/ninevehLent/monday/compline.json",
-                                    "lastModified": 1771480087950,
+                                    "lastModified": 1771822471995,
                                     "minVersionCode": 34,
                                     "children": []
                                 },
@@ -1594,7 +1594,7 @@
                     "route": "greatLent",
                     "parent": "lent",
                     "filename": null,
-                    "lastModified": 1771753884743,
+                    "lastModified": 1771866227879,
                     "minVersionCode": 34,
                     "children": [
                         {
@@ -1658,14 +1658,14 @@
                             "route": "greatLent_monday",
                             "parent": "greatLent",
                             "filename": null,
-                            "lastModified": 1771480087662,
+                            "lastModified": 1771822471352,
                             "minVersionCode": 34,
                             "children": [
                                 {
                                     "route": "greatLent_monday_vespers",
                                     "parent": "greatLent_monday",
                                     "filename": "lent/greatLent/monday/vespers.json",
-                                    "lastModified": 1771480087662,
+                                    "lastModified": 1771822471352,
                                     "minVersionCode": 34,
                                     "children": []
                                 },
@@ -1983,28 +1983,28 @@
                             "route": "greatLent_promiyon",
                             "parent": "greatLent",
                             "filename": null,
-                            "lastModified": 1771753884743,
+                            "lastModified": 1771866227879,
                             "minVersionCode": 34,
                             "children": [
                                 {
                                     "route": "greatLent_promiyon_garbo",
                                     "parent": "greatLent_promiyon",
                                     "filename": null,
-                                    "lastModified": 1771753884743,
+                                    "lastModified": 1771866227879,
                                     "minVersionCode": 34,
                                     "children": [
                                         {
                                             "route": "greatLent_promiyon_garbo_monday",
                                             "parent": "greatLent_promiyon_garbo",
                                             "filename": null,
-                                            "lastModified": 1771753884598,
+                                            "lastModified": 1771822471386,
                                             "minVersionCode": 34,
                                             "children": [
                                                 {
                                                     "route": "greatLent_promiyon_garbo_monday_vespers",
                                                     "parent": "greatLent_promiyon_garbo_monday",
                                                     "filename": "lent/greatLent/promiyon/garbo/monday/vespers.json",
-                                                    "lastModified": 1771753243170,
+                                                    "lastModified": 1771822471386,
                                                     "minVersionCode": 34,
                                                     "children": []
                                                 },
@@ -2012,7 +2012,7 @@
                                                     "route": "greatLent_promiyon_garbo_monday_prime",
                                                     "parent": "greatLent_promiyon_garbo_monday",
                                                     "filename": "lent/greatLent/promiyon/garbo/monday/prime.json",
-                                                    "lastModified": 1771753884598,
+                                                    "lastModified": 1771822471367,
                                                     "minVersionCode": 34,
                                                     "children": []
                                                 }
@@ -2022,14 +2022,14 @@
                                             "route": "greatLent_promiyon_garbo_tuesday",
                                             "parent": "greatLent_promiyon_garbo",
                                             "filename": null,
-                                            "lastModified": 1771753884687,
+                                            "lastModified": 1771822471453,
                                             "minVersionCode": 34,
                                             "children": [
                                                 {
                                                     "route": "greatLent_promiyon_garbo_tuesday_vespers",
                                                     "parent": "greatLent_promiyon_garbo_tuesday",
                                                     "filename": "lent/greatLent/promiyon/garbo/tuesday/vespers.json",
-                                                    "lastModified": 1771753884687,
+                                                    "lastModified": 1771822471453,
                                                     "minVersionCode": 34,
                                                     "children": []
                                                 },
@@ -2037,7 +2037,7 @@
                                                     "route": "greatLent_promiyon_garbo_tuesday_prime",
                                                     "parent": "greatLent_promiyon_garbo_tuesday",
                                                     "filename": "lent/greatLent/promiyon/garbo/tuesday/prime.json",
-                                                    "lastModified": 1771753884643,
+                                                    "lastModified": 1771822471434,
                                                     "minVersionCode": 34,
                                                     "children": []
                                                 }
@@ -2047,14 +2047,14 @@
                                             "route": "greatLent_promiyon_garbo_wednesday",
                                             "parent": "greatLent_promiyon_garbo",
                                             "filename": null,
-                                            "lastModified": 1771753884743,
+                                            "lastModified": 1771822471535,
                                             "minVersionCode": 34,
                                             "children": [
                                                 {
                                                     "route": "greatLent_promiyon_garbo_wednesday_vespers",
                                                     "parent": "greatLent_promiyon_garbo_wednesday",
                                                     "filename": "lent/greatLent/promiyon/garbo/wednesday/vespers.json",
-                                                    "lastModified": 1771753884743,
+                                                    "lastModified": 1771822471535,
                                                     "minVersionCode": 34,
                                                     "children": []
                                                 },
@@ -2062,7 +2062,82 @@
                                                     "route": "greatLent_promiyon_garbo_wednesday_prime",
                                                     "parent": "greatLent_promiyon_garbo_wednesday",
                                                     "filename": "lent/greatLent/promiyon/garbo/wednesday/prime.json",
-                                                    "lastModified": 1771753884718,
+                                                    "lastModified": 1771822471492,
+                                                    "minVersionCode": 34,
+                                                    "children": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "route": "greatLent_promiyon_garbo_thursday",
+                                            "parent": "greatLent_promiyon_garbo",
+                                            "filename": null,
+                                            "lastModified": 1771866227879,
+                                            "minVersionCode": 34,
+                                            "children": [
+                                                {
+                                                    "route": "greatLent_promiyon_garbo_thursday_vespers",
+                                                    "parent": "greatLent_promiyon_garbo_thursday",
+                                                    "filename": "lent/greatLent/promiyon/garbo/thursday/vespers.json",
+                                                    "lastModified": 1771866227879,
+                                                    "minVersionCode": 34,
+                                                    "children": []
+                                                },
+                                                {
+                                                    "route": "greatLent_promiyon_garbo_thursday_prime",
+                                                    "parent": "greatLent_promiyon_garbo_thursday",
+                                                    "filename": "lent/greatLent/promiyon/garbo/thursday/prime.json",
+                                                    "lastModified": 1771866227851,
+                                                    "minVersionCode": 34,
+                                                    "children": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "route": "greatLent_promiyon_garbo_friday",
+                                            "parent": "greatLent_promiyon_garbo",
+                                            "filename": null,
+                                            "lastModified": 1771866227707,
+                                            "minVersionCode": 34,
+                                            "children": [
+                                                {
+                                                    "route": "greatLent_promiyon_garbo_friday_vespers",
+                                                    "parent": "greatLent_promiyon_garbo_friday",
+                                                    "filename": "lent/greatLent/promiyon/garbo/friday/vespers.json",
+                                                    "lastModified": 1771866227707,
+                                                    "minVersionCode": 34,
+                                                    "children": []
+                                                },
+                                                {
+                                                    "route": "greatLent_promiyon_garbo_friday_prime",
+                                                    "parent": "greatLent_promiyon_garbo_friday",
+                                                    "filename": "lent/greatLent/promiyon/garbo/friday/prime.json",
+                                                    "lastModified": 1771866227669,
+                                                    "minVersionCode": 34,
+                                                    "children": []
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "route": "greatLent_promiyon_garbo_saturday",
+                                            "parent": "greatLent_promiyon_garbo",
+                                            "filename": null,
+                                            "lastModified": 1771866227823,
+                                            "minVersionCode": 34,
+                                            "children": [
+                                                {
+                                                    "route": "greatLent_promiyon_garbo_saturday_vespers",
+                                                    "parent": "greatLent_promiyon_garbo_saturday",
+                                                    "filename": "lent/greatLent/promiyon/garbo/saturday/vespers.json",
+                                                    "lastModified": 1771866227823,
+                                                    "minVersionCode": 34,
+                                                    "children": []
+                                                },
+                                                {
+                                                    "route": "greatLent_promiyon_garbo_saturday_prime",
+                                                    "parent": "greatLent_promiyon_garbo_saturday",
+                                                    "filename": "lent/greatLent/promiyon/garbo/saturday/prime.json",
+                                                    "lastModified": 1771866227799,
                                                     "minVersionCode": 34,
                                                     "children": []
                                                 }
