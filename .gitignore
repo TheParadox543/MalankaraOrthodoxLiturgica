@@ -20,10 +20,5 @@ local.properties
 /.kotlin
 .idea/kotlinc.xml
 /app/google-services.json
-/core/build
 /app/apk
-/app/src/main/assets/ml
-/app/src/main/assets/en
-/app/src/main/assets/mn
-/app/src/main/assets/indic
 gradle/gradle-daemon-jvm.properties
