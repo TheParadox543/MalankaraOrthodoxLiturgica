@@ -35,7 +35,7 @@ class GetDynamicSongsUseCaseTest {
 
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/defaultKey/afterGospel.json" to listOf(PrayerElement.Song("Alleluia")),
+                    "sacraments/qurbana/qurbanaSongs/defaultKey/afterGospel.json" to listOf(PrayerElement.Song("Alleluia")),
                 )
 
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
@@ -80,7 +80,7 @@ class GetDynamicSongsUseCaseTest {
         runBlocking {
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
+                    "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
                 )
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
             val calendarRepo = FakeCalendarRepository()
@@ -109,7 +109,7 @@ class GetDynamicSongsUseCaseTest {
                 )
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
+                    "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
                 )
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
             val calendarRepo = FakeCalendarRepository()
@@ -127,7 +127,7 @@ class GetDynamicSongsUseCaseTest {
             // so "christmasSongs" → "christmas" in the filename
             val elementsMap =
                 mapOf(
-                    "qurbanaSongs/christmas/afterGospel.json" to listOf(PrayerElement.Song("Song")),
+                    "sacraments/qurbana/qurbanaSongs/christmas/afterGospel.json" to listOf(PrayerElement.Song("Song")),
                 )
             val eventDetail =
                 LiturgicalEventDetails(
