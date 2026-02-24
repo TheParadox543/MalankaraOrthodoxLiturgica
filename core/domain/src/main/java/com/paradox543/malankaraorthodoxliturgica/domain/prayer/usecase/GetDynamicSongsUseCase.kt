@@ -41,7 +41,7 @@ class GetDynamicSongsUseCase(
         for (event in weekEventItems) {
             val specialSongsKey = event.specialSongsKey
             if (specialSongsKey != null) {
-                val filename = "qurbanaSongs/${specialSongsKey.removeSuffix("Songs")}/${dynamicSongsBlock.timeKey}.json"
+                val filename = "sacraments/qurbana/qurbanaSongs/${specialSongsKey.removeSuffix("Songs")}/${dynamicSongsBlock.timeKey}.json"
                 val songElements =
                     try {
                         prayerRepository.loadPrayerElements(filename, language)
@@ -70,7 +70,7 @@ class GetDynamicSongsUseCase(
 
         // Add prayers for the departed at the end if not already added
         if (resolvedBlock.items.none { it.eventKey == "allDepartedFaithful" }) {
-            val departedFilename = "qurbanaSongs/allDepartedFaithful/${dynamicSongsBlock.timeKey}.json"
+            val departedFilename = "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/${dynamicSongsBlock.timeKey}.json"
             val departedSongElements =
                 try {
                     prayerRepository.loadPrayerElements(departedFilename, language)
