@@ -1,5 +1,9 @@
 /build
 src/main/assets/en/prayers
+src/main/assets/en/prayers_tree.json
 src/main/assets/ml/prayers
+src/main/assets/ml/prayers_tree.json
 src/main/assets/mn/prayers
+src/main/assets/mn/prayers_tree.json
 src/main/assets/indic/prayers
+src/main/assets/indic/prayers_tree.json
