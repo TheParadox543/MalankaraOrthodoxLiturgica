@@ -9,8 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
-import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.services.ShareService
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
@@ -52,7 +52,11 @@ fun NavGraph(
     DisposableEffect(navController, analyticsService) {
         val listener =
             androidx.navigation.NavController.OnDestinationChangedListener { _, destination, args ->
-                analyticsService.logScreensVisited(destination.route ?: "", args)
+                val argsMap =
+                    args?.keySet()?.associateWith { key ->
+                        args.get(key)?.toString()
+                    } ?: emptyMap()
+                analyticsService.logScreenVisited(destination.route ?: "", argsMap)
             }
         navController.addOnDestinationChangedListener(listener)
         onDispose { navController.removeOnDestinationChangedListener(listener) }

@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.core.platform
 
-import androidx.savedstate.SavedState
-
 /**
  * Abstraction over the app's analytics backend (e.g. Firebase Analytics).
  *
@@ -9,10 +7,16 @@ import androidx.savedstate.SavedState
  */
 interface AnalyticsService {
     /** Log a prayer selected from the Pray Now screen. */
-    fun logPrayNowItemSelection(prayerName: String, prayerId: String)
+    fun logPrayNowItemSelection(
+        prayerName: String,
+        prayerId: String,
+    )
 
     /** Log an application error with a description and where it occurred. */
-    fun logError(description: String, location: String)
+    fun logError(
+        description: String,
+        location: String,
+    )
 
     /** Log that the user shared the app. */
     fun logShareEvent()
@@ -23,5 +27,8 @@ interface AnalyticsService {
      * [routePattern] is the raw navigation route pattern (may contain argument placeholders),
      * and [arguments] is the resolved argument bundle for that destination.
      */
-    fun logScreensVisited(routePattern: String, arguments: SavedState?)
+    fun logScreenVisited(
+        routePattern: String,
+        arguments: Map<String, String?> = emptyMap(),
+    )
 }

@@ -1,14 +1,14 @@
 package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.os.Bundle
-import androidx.savedstate.SavedState
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import javax.inject.Inject
 
-class AnalyticsService @Inject constructor(
+class FirebaseAnalyticsService @Inject constructor(
     private val firebaseAnalytics: FirebaseAnalytics,
-) {
-    fun logPrayNowItemSelection(
+) : AnalyticsService {
+    override fun logPrayNowItemSelection(
         prayerName: String,
         prayerId: String,
     ) {
@@ -21,7 +21,7 @@ class AnalyticsService @Inject constructor(
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
     }
 
-    fun logError(
+    override fun logError(
         description: String,
         location: String,
     ) {
@@ -33,7 +33,7 @@ class AnalyticsService @Inject constructor(
         firebaseAnalytics.logEvent("app_error", bundle)
     }
 
-    fun logShareEvent() {
+    override fun logShareEvent() {
         val bundle =
             Bundle().apply {
                 putString(FirebaseAnalytics.Param.CONTENT_TYPE, "share_app")
@@ -43,9 +43,9 @@ class AnalyticsService @Inject constructor(
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
     }
 
-    fun logScreensVisited(
+    override fun logScreenVisited(
         routePattern: String,
-        arguments: SavedState?,
+        arguments: Map<String, String?>,
     ) {
         val screenName: String
         val screenClass: String
@@ -53,14 +53,14 @@ class AnalyticsService @Inject constructor(
         when {
             // Case 1
             routePattern.startsWith("section/") && routePattern.contains("{route}") -> {
-                val value = arguments?.getString("route")
+                val value = arguments["route"]
                 screenName = value?.let { "section/$it" } ?: routePattern
                 screenClass = "SectionScreen"
             }
 
             // Case 2
             routePattern.startsWith("prayerScreen/") && routePattern.contains("{route}") -> {
-                val value = arguments?.getString("route")
+                val value = arguments["route"]
                 screenName = value?.let { "prayerScreen/$it" } ?: routePattern
                 screenClass = "PrayerScreen"
             }
@@ -69,7 +69,7 @@ class AnalyticsService @Inject constructor(
             routePattern.startsWith("bible/") &&
                 routePattern.contains("{bookName}") &&
                 !routePattern.contains("{chapterIndex}") -> {
-                val bookName = arguments?.getString("bookName")
+                val bookName = arguments["bookName"]
                 screenName = bookName?.let { "bible/$it" } ?: routePattern
                 screenClass = "BibleBookScreen"
             }
@@ -78,8 +78,8 @@ class AnalyticsService @Inject constructor(
             routePattern.startsWith("bible/") &&
                 routePattern.contains("{bookIndex}") &&
                 routePattern.contains("{chapterIndex}") -> {
-                val bookIndex = arguments?.getString("bookIndex")
-                val chapterIndex = arguments?.getString("chapterIndex")
+                val bookIndex = arguments["bookIndex"]
+                val chapterIndex = arguments["chapterIndex"]
 
                 screenName =
                     when {

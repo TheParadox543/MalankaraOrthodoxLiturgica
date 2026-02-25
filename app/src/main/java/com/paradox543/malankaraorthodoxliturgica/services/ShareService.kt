@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.app.Activity
 import android.content.Intent
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import javax.inject.Inject
 
 class ShareService @Inject constructor(

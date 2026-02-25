@@ -83,6 +83,8 @@ dependencies {
     implementation(project(":data:translations"))
     implementation(project(":feature:prayer"))
 
+    implementation(project(":core:platform"))
+
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
     implementation(libs.androidx.lifecycle.runtime.ktx) // Lifecycle-aware components for Kotlin coroutines
