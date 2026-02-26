@@ -19,7 +19,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
-import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.services.ShareService
 import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
