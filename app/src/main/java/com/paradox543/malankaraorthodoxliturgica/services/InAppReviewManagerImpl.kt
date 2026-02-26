@@ -6,16 +6,17 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import com.google.android.play.core.review.ReviewManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class InAppReviewManager @Inject constructor(
+class InAppReviewManagerImpl @Inject constructor(
     private val reviewManager: ReviewManager,
     private val dataStore: DataStore<Preferences>,
-) {
+) : InAppReviewManager {
     // Define a key for storing the prayer screen visit count in DataStore.
     private val prayerScreenVisitCountKey = intPreferencesKey("prayer_screen_visit_count")
 
@@ -25,7 +26,7 @@ class InAppReviewManager @Inject constructor(
      *
      * @param activity The current activity, required to launch the review flow.
      */
-    suspend fun checkForReview(activity: Activity) {
+    override suspend fun checkForReview(activity: Activity) {
         // Increment the stored count and get the new value.
         val currentCount = incrementAndGetPrayerScreenVisits()
 
@@ -39,7 +40,7 @@ class InAppReviewManager @Inject constructor(
     /**
      * Atomically increments the visit count in DataStore and returns the new count.
      */
-    suspend fun incrementAndGetPrayerScreenVisits(): Int {
+    override suspend fun incrementAndGetPrayerScreenVisits(): Int {
         // dataStore.edit returns the updated Preferences object.
         val updatedPreferences =
             dataStore.edit { settings ->
@@ -50,13 +51,13 @@ class InAppReviewManager @Inject constructor(
         return updatedPreferences[prayerScreenVisitCountKey] ?: 1
     }
 
-    suspend fun clearPrayerScreenVisitCount() {
+    override suspend fun clearPrayerScreenVisitCount() {
         dataStore.edit { settings ->
             settings[prayerScreenVisitCountKey] = 0
         }
     }
 
-    suspend fun getPrayerScreenVisitCount(): Int {
+    override suspend fun getPrayerScreenVisitCount(): Int {
         // Retrieve the current visit count from DataStore.
         return dataStore.data
             .map { settings ->

@@ -35,9 +35,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
-import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen

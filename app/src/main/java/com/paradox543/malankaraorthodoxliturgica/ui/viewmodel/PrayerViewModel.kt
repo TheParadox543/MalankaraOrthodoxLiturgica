@@ -3,13 +3,13 @@ package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
-import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
