@@ -11,8 +11,8 @@ import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
-import com.paradox543.malankaraorthodoxliturgica.services.ShareService
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
@@ -94,7 +94,7 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.Section.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
         ) { backStackEntry ->
             val prayerNavViewModel: PrayerNavViewModel = hiltViewModel(backStackEntry)
             val prayerViewModel: PrayerViewModel = hiltViewModel(backStackEntry)
@@ -126,7 +126,7 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
         ) { backStackEntry ->
             val prayerViewModel: PrayerViewModel = hiltViewModel(backStackEntry)
 //            val settingsViewModel: SettingsViewModel = hiltViewModel(backStackEntry)
@@ -193,7 +193,7 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
         ) { backStackEntry ->
 //            val bibleGraphEntry = navController.getBackStackEntry(AppScreen.Bible.route)
             val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
@@ -212,7 +212,9 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.BibleChapter.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks =
+                AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) }
+                    ?: emptyList(),
         ) { backStackEntry ->
 //            val bibleGraphEntry = navController.getBackStackEntry(AppScreen.Bible.route)
             val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
