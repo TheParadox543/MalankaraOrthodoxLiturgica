@@ -84,6 +84,7 @@ dependencies {
     implementation(project(":feature:prayer"))
 
     implementation(project(":core:platform"))
+    implementation(project(":platform:analytics-firebase"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
