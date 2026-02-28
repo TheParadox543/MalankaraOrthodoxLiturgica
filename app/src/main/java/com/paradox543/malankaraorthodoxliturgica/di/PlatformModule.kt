@@ -4,10 +4,12 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.services.FirebaseAnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.ShareServiceImpl
+import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager as SoundModeManagerImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,4 +34,8 @@ abstract class PlatformModule {
     @Binds
     @Singleton
     abstract fun bindShareServiceManager(impl: ShareServiceImpl): ShareService
+
+    @Binds
+    @Singleton
+    abstract fun bindSoundModeManager(impl: SoundModeManagerImpl): SoundModeManager
 }
