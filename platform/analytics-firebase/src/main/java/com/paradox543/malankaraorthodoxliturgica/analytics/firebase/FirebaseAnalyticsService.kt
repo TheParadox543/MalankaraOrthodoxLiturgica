@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.services
+package com.paradox543.malankaraorthodoxliturgica.analytics.firebase
 
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
