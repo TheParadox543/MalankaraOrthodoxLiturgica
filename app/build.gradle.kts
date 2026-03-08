@@ -81,6 +81,10 @@ dependencies {
     implementation(project(":data:prayer"))
     implementation(project(":data:settings"))
     implementation(project(":data:translations"))
+    implementation(project(":feature:prayer"))
+
+    implementation(project(":core:platform"))
+    implementation(project(":platform:analytics-firebase"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
@@ -97,9 +101,6 @@ dependencies {
     // Jetpack Navigation
     implementation(libs.androidx.navigation.runtime.ktx) // Core Navigation library for Kotlin
     implementation(libs.androidx.navigation.compose)  // Navigation integration for Compose
-
-    // Data Serialization
-    implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
 
     // Dependency Injection
     implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection

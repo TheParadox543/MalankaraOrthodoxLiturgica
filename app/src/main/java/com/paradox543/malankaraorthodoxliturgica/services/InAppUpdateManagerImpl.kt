@@ -8,23 +8,24 @@ import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class InAppUpdateManager @Inject constructor(
+class InAppUpdateManagerImpl @Inject constructor(
     private val appUpdateManager: AppUpdateManager,
-) {
+) : InAppUpdateManager {
     companion object {
         const val UPDATE_REQUEST_CODE = 123
-        private const val TAG = "InAppUpdateManager"
+        private const val TAG = "InAppUpdateManagerImpl"
     }
 
     // State for managing Flexible updates.
     private val _updateDownloaded = MutableStateFlow(false)
-    val updateDownloaded = _updateDownloaded.asStateFlow()
+    override val updateDownloaded = _updateDownloaded.asStateFlow()
 
     private var updateListener: InstallStateUpdatedListener? = null
 
@@ -32,7 +33,7 @@ class InAppUpdateManager @Inject constructor(
      * Checks for an available update and initiates the flexible update flow if one is found.
      * This should be called from the main activity's onResume() or onCreate().
      */
-    fun checkForUpdate(activity: Activity) {
+    override fun checkForUpdate(activity: Activity) {
         Log.d(TAG, "Checking for updates...")
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
@@ -51,6 +52,7 @@ class InAppUpdateManager @Inject constructor(
                         Log.d(TAG, "High priority update found. Starting IMMEDIATE flow.")
                         startImmediateUpdate(appUpdateInfo, activity)
                     }
+
                     // For medium-priority updates (0-2), use the FLEXIBLE flow.
                     priority >= 0 && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE) -> {
                         Log.d(TAG, "Medium priority update found. Starting FLEXIBLE flow.")
@@ -115,7 +117,7 @@ class InAppUpdateManager @Inject constructor(
      * Triggers the installation of the downloaded update.
      * This should be called by the UI when the user confirms the restart.
      */
-    fun completeUpdate() {
+    override fun completeUpdate() {
         Log.d(TAG, "Completing update (FLEXIBLE flow)...")
         appUpdateManager.completeUpdate()
     }
@@ -123,7 +125,7 @@ class InAppUpdateManager @Inject constructor(
     /**
      * Unregisters the update listener. Should be called in onPause().
      */
-    fun unregisterListener() {
+    override fun unregisterListener() {
         updateListener?.let {
             Log.d(TAG, "Unregistering update listener (FLEXIBLE flow).")
             appUpdateManager.unregisterListener(it)
@@ -135,7 +137,7 @@ class InAppUpdateManager @Inject constructor(
      * Resumes the update flow. Should be called in onResume() to handle updates
      * that were initiated but not completed.
      */
-    fun resumeUpdate() {
+    override fun resumeUpdate() {
         appUpdateManager
             .appUpdateInfo
             .addOnSuccessListener { appUpdateInfo ->

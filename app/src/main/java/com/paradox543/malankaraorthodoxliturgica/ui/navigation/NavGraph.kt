@@ -9,10 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
-import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
-import com.paradox543.malankaraorthodoxliturgica.services.ShareService
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
@@ -52,7 +52,11 @@ fun NavGraph(
     DisposableEffect(navController, analyticsService) {
         val listener =
             androidx.navigation.NavController.OnDestinationChangedListener { _, destination, args ->
-                analyticsService.logScreensVisited(destination.route ?: "", args)
+                val argsMap =
+                    args?.keySet()?.associateWith { key ->
+                        args.get(key)?.toString()
+                    } ?: emptyMap()
+                analyticsService.logScreenVisited(destination.route ?: "", argsMap)
             }
         navController.addOnDestinationChangedListener(listener)
         onDispose { navController.removeOnDestinationChangedListener(listener) }
@@ -90,7 +94,7 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.Section.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
         ) { backStackEntry ->
             val prayerNavViewModel: PrayerNavViewModel = hiltViewModel(backStackEntry)
             val prayerViewModel: PrayerViewModel = hiltViewModel(backStackEntry)
@@ -122,7 +126,7 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
         ) { backStackEntry ->
             val prayerViewModel: PrayerViewModel = hiltViewModel(backStackEntry)
 //            val settingsViewModel: SettingsViewModel = hiltViewModel(backStackEntry)
@@ -189,7 +193,7 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
         ) { backStackEntry ->
 //            val bibleGraphEntry = navController.getBackStackEntry(AppScreen.Bible.route)
             val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
@@ -208,7 +212,9 @@ fun NavGraph(
                         type = NavType.StringType
                     },
                 ),
-            deepLinks = AppScreen.BibleChapter.DEEP_LINK_PATTERN?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            deepLinks =
+                AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) }
+                    ?: emptyList(),
         ) { backStackEntry ->
 //            val bibleGraphEntry = navController.getBackStackEntry(AppScreen.Bible.route)
             val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
