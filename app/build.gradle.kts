@@ -83,6 +83,8 @@ dependencies {
     implementation(project(":data:translations"))
     implementation(project(":feature:prayer"))
 
+    implementation(project(":core:ui"))
+
     implementation(project(":core:platform"))
     implementation(project(":platform:analytics-firebase"))
 

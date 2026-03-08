@@ -22,9 +22,9 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManage
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
-import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
