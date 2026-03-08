@@ -22,3 +22,4 @@ local.properties
 /app/google-services.json
 /app/apk
 gradle/gradle-daemon-jvm.properties
+keystore.properties
