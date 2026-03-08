@@ -126,7 +126,7 @@ object PrayerElementSerializer : KSerializer<PrayerElementDto> {
             // Catch any serialization exceptions that might occur even for known types
             // (e.g., missing required fields, type mismatch for a property)
             Log.d("PrayerElementSerializer", "Error parsing PrayerElement: $element")
-            PrayerElementDto.Error("Error parsing PrayerElement: ${element.toString().substring(0, 10)}")
+            PrayerElementDto.Error("Error parsing PrayerElement: ${element.toString().substring(0, 50)}")
         }
     }
 
