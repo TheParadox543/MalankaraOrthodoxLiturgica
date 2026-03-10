@@ -62,7 +62,7 @@ fun TopNavBar(
                     )
                 }
             } else {
-                Spacer(modifier = Modifier.padding(24.dp)) // Spacer for home route
+                Spacer(modifier = Modifier.padding(24.dp))
             }
         },
         actions = {
@@ -74,7 +74,7 @@ fun TopNavBar(
                     )
                 }
             } else {
-                Spacer(modifier = Modifier.padding(24.dp)) // Spacer for home route
+                Spacer(modifier = Modifier.padding(24.dp))
             }
         },
         colors =

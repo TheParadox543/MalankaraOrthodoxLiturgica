@@ -26,7 +26,7 @@ fun BottomNavBar(navController: NavController) {
         bottomNavItems.forEach { item ->
             NavigationBarItem(
                 icon = item.icon,
-                label = { Text(item.label, textAlign = TextAlign.Companion.Center) },
+                label = { Text(item.label, textAlign = TextAlign.Center) },
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {

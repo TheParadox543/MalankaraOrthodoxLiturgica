@@ -115,7 +115,7 @@ fun SectionNavBar(
                 Image(
                     bitmap = qrBitmap!!.asImageBitmap(),
                     contentDescription = null,
-                    modifier = Modifier.Companion.size(250.dp),
+                    modifier = Modifier.size(250.dp),
                 )
             },
             confirmButton = {
