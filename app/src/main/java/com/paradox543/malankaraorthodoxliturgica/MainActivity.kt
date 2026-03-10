@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.shrinkOut
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -15,15 +18,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.zIndex
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.compose.rememberNavController
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
+import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
+import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.components.SectionNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
@@ -33,39 +45,24 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    // Inject the update manager for handling in-app updates.
-    @Inject
-    lateinit var inAppUpdateManager: InAppUpdateManager
+    @Inject lateinit var inAppUpdateManager: InAppUpdateManager
+    @Inject lateinit var inAppReviewManager: InAppReviewManager
+    @Inject lateinit var analyticsService: AnalyticsService
+    @Inject lateinit var shareService: ShareService
+    @Inject lateinit var soundModeManager: SoundModeManager
 
-    @Inject
-    lateinit var inAppReviewManager: InAppReviewManager
-
-    @Inject
-    lateinit var analyticsService: AnalyticsService
-
-    @Inject
-    lateinit var shareService: ShareService
-
-    @Inject
-    lateinit var soundModeManager: SoundModeManager
-
-    // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val startupViewModel: StartupViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Install the splash screen.
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        // Check for app updates as soon as the app starts.
         inAppUpdateManager.checkForUpdate(this)
 
-        // Keep the splash screen active until the initial data is loaded.
         var keepSplashOn by mutableStateOf(true)
         splashScreen.setKeepOnScreenCondition { keepSplashOn }
 
-        // Launch a coroutine to load necessary data before hiding the splash screen.
         lifecycleScope.launch {
             startupViewModel.startupState.collect { state ->
                 if (state is StartupState.Ready) keepSplashOn = false
@@ -82,25 +79,26 @@ class MainActivity : ComponentActivity() {
                     val soundMode by settingsViewModel.soundMode.collectAsState()
                     val textScale by settingsViewModel.fontScale.collectAsState()
                     val language by settingsViewModel.selectedLanguage.collectAsState()
+
                     MalankaraOrthodoxLiturgicaTheme(
                         language = language,
                         textScale = textScale,
                     ) {
+                        // NavController hoisted here so bars can reference it
+                        val navController = rememberNavController()
                         val snackbarHostState = remember { SnackbarHostState() }
-
-                        // 2. Collect the state from the manager.
                         val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
 
-                        // 3. Use LaunchedEffect to react to the state change.
+                        // Tracks which bars/FAB each screen requests
+                        var scaffoldUiState by remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
+
                         LaunchedEffect(updateDownloaded) {
                             if (updateDownloaded) {
-                                val result =
-                                    snackbarHostState.showSnackbar(
-                                        message = "An update has just been downloaded.",
-                                        actionLabel = "RESTART",
-                                        duration = SnackbarDuration.Indefinite, // Stays until dismissed or actioned
-                                    )
-                                // 4. Perform action based on user interaction.
+                                val result = snackbarHostState.showSnackbar(
+                                    message = "An update has just been downloaded.",
+                                    actionLabel = "RESTART",
+                                    duration = SnackbarDuration.Indefinite,
+                                )
                                 if (result == SnackbarResult.ActionPerformed) {
                                     inAppUpdateManager.completeUpdate()
                                 }
@@ -109,14 +107,87 @@ class MainActivity : ComponentActivity() {
                         LaunchedEffect(soundMode) {
                             soundModeManager.apply(soundMode)
                         }
-                        @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
-                        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
+
+                        // Apply nestedScroll modifier only for PrayerReading state
+                        val scaffoldModifier = when (val state = scaffoldUiState) {
+                            is ScaffoldUiState.PrayerReading ->
+                                Modifier.nestedScroll(state.nestedScrollConnection)
+                            else -> Modifier
+                        }
+
+                        Scaffold(
+                            modifier = scaffoldModifier,
+                            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+                            topBar = {
+                                when (val state = scaffoldUiState) {
+                                    is ScaffoldUiState.Standard -> {
+                                        TopNavBar(state.title, navController)
+                                    }
+                                    is ScaffoldUiState.PrayerReading -> {
+                                        AnimatedVisibility(
+                                            visible = state.isVisible,
+                                            modifier = Modifier.zIndex(1f),
+                                        ) {
+                                            TopNavBar(state.title, navController)
+                                        }
+                                    }
+                                    ScaffoldUiState.None -> {}
+                                }
+                            },
+                            bottomBar = {
+                                when (val state = scaffoldUiState) {
+                                    is ScaffoldUiState.Standard -> {
+                                        if (state.showBottomBar) {
+                                            BottomNavBar(navController)
+                                        }
+                                    }
+                                    is ScaffoldUiState.PrayerReading -> {
+                                        AnimatedVisibility(
+                                            visible = state.isVisible,
+                                            modifier = Modifier.zIndex(1f),
+                                        ) {
+                                            SectionNavBar(
+                                                navController = navController,
+                                                prevNodeRoute = state.prevRoute,
+                                                nextNodeRoute = state.nextRoute,
+                                                routeProvider = state.routeProvider,
+                                            )
+                                        }
+                                    }
+                                    ScaffoldUiState.None -> {}
+                                }
+                            },
+                            floatingActionButton = {
+                                when (val state = scaffoldUiState) {
+                                    is ScaffoldUiState.PrayerReading -> {
+                                        if (state.showFab) {
+                                            AnimatedVisibility(
+                                                visible = state.isVisible,
+                                                enter = fadeIn(),
+                                                exit = shrinkOut(),
+                                            ) {
+                                                QrFabScan(navController)
+                                            }
+                                        }
+                                    }
+                                    is ScaffoldUiState.Standard -> {
+                                        if (state.showBottomBar) {
+                                            QrFabScan(navController)
+                                        }
+                                    }
+                                    ScaffoldUiState.None -> {}
+                                }
+                            },
+                        ) { innerPadding ->
                             NavGraph(
-                                onboardingCompleted,
-                                inAppReviewManager,
-                                analyticsService,
-                                shareService,
-                                settingsViewModel,
+                                navController = navController,
+                                onboardingCompleted = onboardingCompleted,
+                                inAppReviewManager = inAppReviewManager,
+                                analyticsService = analyticsService,
+                                shareService = shareService,
+                                settingsViewModel = settingsViewModel,
+                                contentPadding = innerPadding,
+                                onScaffoldStateChanged = { scaffoldUiState = it },
                             )
                         }
                     }
@@ -127,10 +198,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // The selected code from the Canvas is used here.
-        // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
-
         settingsViewModel.refreshDndPermissionStatus()
         soundModeManager.cancelRestoreWork()
         val soundMode = settingsViewModel.soundMode.value
@@ -140,7 +208,6 @@ class MainActivity : ComponentActivity() {
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
-        // Schedule sound restoration when app goes to background
         soundModeManager.scheduleRestore(settingsViewModel.soundRestoreDelay.value)
     }
 }

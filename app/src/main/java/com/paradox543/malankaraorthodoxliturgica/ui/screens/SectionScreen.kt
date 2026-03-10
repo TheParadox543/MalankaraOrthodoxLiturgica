@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,10 +20,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -37,9 +38,7 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
-import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
-import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 
@@ -49,6 +48,8 @@ fun SectionScreen(
     prayerViewModel: PrayerViewModel,
     node: PageNode,
     inAppReviewManager: InAppReviewManager,
+    contentPadding: PaddingValues,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
@@ -59,6 +60,8 @@ fun SectionScreen(
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
     }
+
+    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
     val activity = LocalContext.current as? Activity
 
@@ -72,57 +75,51 @@ fun SectionScreen(
         }
     }
 
-    Scaffold(
-        topBar = { TopNavBar(title, navController) },
-        bottomBar = { BottomNavBar(navController = navController) },
-        floatingActionButton = { QrFabScan(navController) },
-    ) { innerPadding ->
-        Box {
-            if (screenWidth > 600.dp) {
-                Row(
-                    Modifier.padding(innerPadding),
+    Box {
+        if (screenWidth > 600.dp) {
+            Row(
+                Modifier.padding(contentPadding),
+            ) {
+                DisplayIconography("row")
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(240.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
-                    DisplayIconography("row")
-                    LazyVerticalGrid(
-                        columns = GridCells.Adaptive(240.dp),
-                        modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .padding(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.SpaceEvenly,
-                    ) {
-                        items(nodes.size) { index ->
-                            SectionCard(
-                                nodes[index],
-                                navController,
-                                translations,
-                            )
-                        }
+                    items(nodes.size) { index ->
+                        SectionCard(
+                            nodes[index],
+                            navController,
+                            translations,
+                        )
                     }
                 }
-            } else {
-                Column(
-                    Modifier.padding(innerPadding),
+            }
+        } else {
+            Column(
+                Modifier.padding(contentPadding),
+            ) {
+                LazyVerticalGrid(
+                    columns = GridCells.Adaptive(240.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 20.dp)
+                            .weight(0.6f),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
-                    LazyVerticalGrid(
-                        columns = GridCells.Adaptive(240.dp),
-                        modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .padding(horizontal = 20.dp)
-                                .weight(0.6f),
-                        horizontalArrangement = Arrangement.SpaceEvenly,
-                    ) {
-                        item {
-                            DisplayIconography("column")
-                        }
-                        items(nodes.size) { index ->
-                            SectionCard(
-                                nodes[index],
-                                navController,
-                                translations,
-                            )
-                        }
+                    item {
+                        DisplayIconography("column")
+                    }
+                    items(nodes.size) { index ->
+                        SectionCard(
+                            nodes[index],
+                            navController,
+                            translations,
+                        )
                     }
                 }
             }
@@ -143,7 +140,6 @@ private fun DisplayIconography(orientation: String) {
             } else {
                 Modifier
                     .requiredWidthIn(max = 400.dp)
-//                .fillMaxWidth()
             },
         alignment = Alignment.TopStart,
         contentScale = ContentScale.Crop,

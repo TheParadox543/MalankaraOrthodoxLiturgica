@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -17,11 +18,11 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -40,8 +41,7 @@ import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
-import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewModel
 
@@ -52,6 +52,8 @@ fun SongScreen(
     songPlayerViewModel: SongPlayerViewModel = hiltViewModel(),
     prayerViewModel: PrayerViewModel = hiltViewModel(),
     songFilename: String,
+    contentPadding: PaddingValues = PaddingValues(),
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val mediaStatus by songPlayerViewModel.mediaStatus.collectAsState()
     val isPlaying by songPlayerViewModel.isPlaying.collectAsState()
@@ -69,49 +71,46 @@ fun SongScreen(
             }
     }
 
+    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
+
     LaunchedEffect(songFilename) {
         songPlayerViewModel.loadSong(songFilename)
     }
 
-    Scaffold(
-        topBar = { TopNavBar(title, navController) },
-        bottomBar = { BottomNavBar(navController) },
-    ) { innerPadding ->
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(innerPadding)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text("Orthodox Liturgical Songs")
-            Spacer(Modifier.height(24.dp))
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(contentPadding)
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text("Orthodox Liturgical Songs")
+        Spacer(Modifier.height(24.dp))
 
-            // Show a loading indicator, the player, or an error message
-            when (val status = mediaStatus) {
-                is MediaStatus.Loading -> {
-                    CircularProgressIndicator()
-                    Text("Loading song...", modifier = Modifier.padding(top = 8.dp))
-                }
+        // Show a loading indicator, the player, or an error message
+        when (val status = mediaStatus) {
+            is MediaStatus.Loading -> {
+                CircularProgressIndicator()
+                Text("Loading song...", modifier = Modifier.padding(top = 8.dp))
+            }
 
-                is MediaStatus.Ready -> {
-                    SongPlayerUI(
-                        isPlaying = isPlaying,
-                        onTogglePlay = {
-                            if (isPlaying) songPlayerViewModel.pause() else songPlayerViewModel.play()
-                        },
-                        title = title,
-                        sourceMessage = status.message,
-                        currentPosition = currentPosition,
-                        duration = duration,
-                        onSeek = { newPos -> songPlayerViewModel.seekTo(newPos) },
-                    )
-                }
+            is MediaStatus.Ready -> {
+                SongPlayerUI(
+                    isPlaying = isPlaying,
+                    onTogglePlay = {
+                        if (isPlaying) songPlayerViewModel.pause() else songPlayerViewModel.play()
+                    },
+                    title = title,
+                    sourceMessage = status.message,
+                    currentPosition = currentPosition,
+                    duration = duration,
+                    onSeek = { newPos -> songPlayerViewModel.seekTo(newPos) },
+                )
+            }
 
-                is MediaStatus.Error -> {
-                    Text("Error: ${status.message}")
-                    if (BuildConfig.DEBUG) Text("Failed to retrieve song: $songFilename")
-                }
+            is MediaStatus.Error -> {
+                Text("Error: ${status.message}")
+                if (BuildConfig.DEBUG) Text("Failed to retrieve song: $songFilename")
             }
         }
     }
@@ -145,7 +144,7 @@ private fun SongPlayerUI(
     // Use derivedStateOf to avoid unnecessary recompositions and animate for smooth movement
     val targetProgress =
         remember(isUserSeeking, sliderPosition) {
-            derivedStateOf { sliderPosition } // sliderPosition is updated from player or user drag
+            derivedStateOf { sliderPosition }
         }
     val animatedProgress by animateFloatAsState(targetProgress.value)
 
@@ -161,13 +160,11 @@ private fun SongPlayerUI(
         modifier = Modifier.padding(bottom = 24.dp),
     )
 
-    // 2. Use a Box to overlay the player controls on top of the image
     Column(
         modifier = Modifier.fillMaxWidth(0.9f),
-        verticalArrangement = Arrangement.Bottom, // Align controls to the bottom
+        verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        // The Image serves as the background of the Box
         Image(
             painter = painterResource(id = R.drawable.cheeranachan),
             contentDescription = "Song Artwork",

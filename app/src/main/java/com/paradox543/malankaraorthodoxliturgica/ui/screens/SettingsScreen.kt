@@ -42,7 +42,6 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -50,6 +49,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -68,11 +68,11 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
-import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
+import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import androidx.compose.foundation.layout.PaddingValues
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -80,6 +80,8 @@ fun SettingsScreen(
     navController: NavController,
     settingsViewModel: SettingsViewModel,
     shareService: ShareService,
+    contentPadding: PaddingValues = PaddingValues(),
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontScale by settingsViewModel.fontScale.collectAsState()
@@ -108,21 +110,19 @@ fun SettingsScreen(
         }
     }
 
-    Scaffold(
-        topBar = { TopNavBar("Settings", navController) },
-        bottomBar = { BottomNavBar(navController) },
-    ) { innerPadding ->
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = 20.dp)
-                    .verticalScroll(scrollState),
-            horizontalAlignment = Alignment.Start,
+    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard("Settings")) }
+
+    Column(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(horizontal = 20.dp)
+                .verticalScroll(scrollState),
+        horizontalAlignment = Alignment.Start,
 //            verticalArrangement = Arrangement.Center,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
             Spacer(Modifier.height(12.dp))
 
             // Language Selection
@@ -316,7 +316,6 @@ fun SettingsScreen(
                     Text("Reset onboarding")
                 }
             }
-        }
     }
 
     if (showQrCodeDialog) {

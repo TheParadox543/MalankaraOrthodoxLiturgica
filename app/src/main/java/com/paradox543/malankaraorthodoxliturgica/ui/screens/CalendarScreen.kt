@@ -32,11 +32,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -52,13 +52,12 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -71,6 +70,8 @@ fun CalendarScreen(
     bibleViewModel: BibleViewModel,
     calendarViewModel: CalendarViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel(),
+    contentPadding: PaddingValues = PaddingValues(),
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     // Collect the StateFlows from the ViewModel
     val monthCalendarData by calendarViewModel.monthCalendarData.collectAsState()
@@ -83,17 +84,15 @@ fun CalendarScreen(
     val error by calendarViewModel.error.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
-    Scaffold(
-        topBar = { TopNavBar("Calendar", navController) },
-        bottomBar = { BottomNavBar(navController) },
-    ) { innerPadding ->
-        Column(
-            modifier =
-                Modifier
-                    .padding(innerPadding)
-                    .padding(horizontal = 8.dp)
-                    .fillMaxSize(),
-        ) {
+    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard("Calendar")) }
+
+    Column(
+        modifier =
+            Modifier
+                .padding(contentPadding)
+                .padding(horizontal = 8.dp)
+                .fillMaxSize(),
+    ) {
             if (isLoading) {
                 // Show a loading indicator
                 Box(
@@ -185,7 +184,6 @@ fun CalendarScreen(
                         }
                     }
                 }
-            }
         }
     }
 }
