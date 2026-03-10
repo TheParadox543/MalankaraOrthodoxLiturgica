@@ -15,7 +15,7 @@ fun Subheading(
     Text(
         text = text,
         style = MaterialTheme.typography.titleMedium,
-        textAlign = TextAlign.Companion.Center,
+        textAlign = TextAlign.Center,
         modifier = modifier.fillMaxWidth(),
     )
 }
