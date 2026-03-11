@@ -13,16 +13,17 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,8 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import kotlinx.coroutines.delay
 
 data class ScannerMessage(
@@ -50,6 +50,8 @@ data class ScannerMessage(
 fun QrScannerView(
     onNavigate: (String) -> Unit,
     onBack: () -> Unit,
+    contentPadding: PaddingValues,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     var code by remember { mutableStateOf("") }
     var useHybrid by remember { mutableStateOf(false) }
@@ -126,89 +128,87 @@ fun QrScannerView(
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopNavBar(
+    SideEffect {
+        onScaffoldStateChanged(
+            ScaffoldUiState.Standard(
                 title = "QR Scanner",
-                currentRoute = AppScreen.QrScanner.route,
-                onBack = onBack,
-                onSettingsClick = {},
-            )
-        },
-    ) { innerPadding ->
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
-        ) {
-            if (hasCamPermission) {
-                Box(
-                    Modifier.weight(0.5f),
-                ) {
-                    AndroidView(factory = { ctx ->
-                        val previewView = PreviewView(ctx)
-                        val cameraProviderFuture = ProcessCameraProvider.getInstance(ctx)
-                        cameraProviderFuture.addListener({
-                            val cameraProvider = cameraProviderFuture.get()
-                            val preview =
-                                Preview.Builder().build().apply {
-                                    surfaceProvider = previewView.surfaceProvider
-                                }
-                            val analyzer =
-                                ImageAnalysis
-                                    .Builder()
-                                    .setBackpressureStrategy(STRATEGY_KEEP_ONLY_LATEST)
-                                    .build()
-                                    .also {
-                                        it.setAnalyzer(
-                                            ContextCompat.getMainExecutor(ctx),
-                                            if (useHybrid) {
-                                                HybridQRAnalyzer { qrCode ->
-                                                    code = qrCode
-                                                }
-                                            } else {
-                                                MLKitQRCodeAnalyzer { qrCode ->
-                                                    code = qrCode
-                                                }
-                                            },
-                                        )
-                                    }
-                            cameraProvider.unbindAll()
-                            cameraProvider.bindToLifecycle(
-                                lifecycleOwner,
-                                CameraSelector.DEFAULT_BACK_CAMERA,
-                                preview,
-                                analyzer,
-                            )
-                        }, ContextCompat.getMainExecutor(ctx))
-                        previewView
-                    }, modifier = Modifier.fillMaxSize())
+                showBottomBar = false,
+            ),
+        )
+    }
 
-                    QrScannerOverlay(
-                        isDetected = code.startsWith("app://liturgica/"),
-                    )
-                }
-                Card(
-                    colors =
-                        CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                            contentColor = message.color,
-                        ),
-                ) {
-                    Text(
-                        text = message.text,
-                        modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(32.dp),
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        maxLines = 1,
-                        textAlign = TextAlign.Center,
-                    )
-                }
+    Column(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
+    ) {
+        if (hasCamPermission) {
+            Box(
+                Modifier.weight(0.5f),
+            ) {
+                AndroidView(factory = { ctx ->
+                    val previewView = PreviewView(ctx)
+                    val cameraProviderFuture = ProcessCameraProvider.getInstance(ctx)
+                    cameraProviderFuture.addListener({
+                        val cameraProvider = cameraProviderFuture.get()
+                        val preview =
+                            Preview.Builder().build().apply {
+                                surfaceProvider = previewView.surfaceProvider
+                            }
+                        val analyzer =
+                            ImageAnalysis
+                                .Builder()
+                                .setBackpressureStrategy(STRATEGY_KEEP_ONLY_LATEST)
+                                .build()
+                                .also {
+                                    it.setAnalyzer(
+                                        ContextCompat.getMainExecutor(ctx),
+                                        if (useHybrid) {
+                                            HybridQRAnalyzer { qrCode ->
+                                                code = qrCode
+                                            }
+                                        } else {
+                                            MLKitQRCodeAnalyzer { qrCode ->
+                                                code = qrCode
+                                            }
+                                        },
+                                    )
+                                }
+                        cameraProvider.unbindAll()
+                        cameraProvider.bindToLifecycle(
+                            lifecycleOwner,
+                            CameraSelector.DEFAULT_BACK_CAMERA,
+                            preview,
+                            analyzer,
+                        )
+                    }, ContextCompat.getMainExecutor(ctx))
+                    previewView
+                }, modifier = Modifier.fillMaxSize())
+
+                QrScannerOverlay(
+                    isDetected = code.startsWith("app://liturgica/"),
+                )
+            }
+            Card(
+                colors =
+                    CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        contentColor = message.color,
+                    ),
+            ) {
+                Text(
+                    text = message.text,
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(32.dp),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1,
+                    textAlign = TextAlign.Center,
+                )
             }
         }
     }
-}
+}

@@ -473,6 +473,8 @@ fun NavGraph(
                         }
                     },
                     onBack = { navController.navigateUp() },
+                    contentPadding = innerPadding,
+                    onScaffoldStateChanged = { scaffoldUiState = it },
                 )
             }
 
