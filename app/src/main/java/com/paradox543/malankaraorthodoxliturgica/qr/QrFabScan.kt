@@ -14,14 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QrFabScan(
-    navController: NavController,
+    onScanClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val tooltipState = rememberTooltipState()
@@ -40,9 +38,7 @@ fun QrFabScan(
         state = tooltipState,
     ) {
         FloatingActionButton(
-            onClick = {
-                navController.navigate(AppScreen.QrScanner.route)
-            },
+            onClick = onScanClick,
             modifier = modifier,
             containerColor = MaterialTheme.colorScheme.primary,
 //            } else {

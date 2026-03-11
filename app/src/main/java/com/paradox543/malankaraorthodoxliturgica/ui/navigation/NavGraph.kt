@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
@@ -96,6 +97,10 @@ fun NavGraph(
 
     val bibleViewModel: BibleViewModel = hiltViewModel()
 
+    // Observe the current route to pass to bars for highlight/back logic
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = currentBackStackEntry?.destination?.route
+
     // Log screen views for analytics
     DisposableEffect(navController, analyticsService) {
         val listener =
@@ -123,7 +128,12 @@ fun NavGraph(
         topBar = {
             when (val state = scaffoldUiState) {
                 is ScaffoldUiState.Standard -> {
-                    TopNavBar(state.title, navController)
+                    TopNavBar(
+                        title = state.title,
+                        currentRoute = currentRoute,
+                        onBack = { navController.navigateUp() },
+                        onSettingsClick = { navController.navigate(AppScreen.Settings.route) },
+                    )
                 }
 
                 is ScaffoldUiState.PrayerReading -> {
@@ -131,7 +141,12 @@ fun NavGraph(
                         visible = state.isVisible,
                         modifier = Modifier.zIndex(1f),
                     ) {
-                        TopNavBar(state.title, navController)
+                        TopNavBar(
+                            title = state.title,
+                            currentRoute = currentRoute,
+                            onBack = { navController.navigateUp() },
+                            onSettingsClick = { navController.navigate(AppScreen.Settings.route) },
+                        )
                     }
                 }
 
@@ -142,7 +157,14 @@ fun NavGraph(
             when (val state = scaffoldUiState) {
                 is ScaffoldUiState.Standard -> {
                     if (state.showBottomBar) {
-                        BottomNavBar(navController)
+                        BottomNavBar(
+                            currentRoute = currentRoute,
+                            onNavItemClick = { route ->
+                                navController.navigate(route) {
+                                    navController.popBackStack(route, inclusive = true)
+                                }
+                            },
+                        )
                     }
                 }
 
@@ -152,10 +174,19 @@ fun NavGraph(
                         modifier = Modifier.zIndex(1f),
                     ) {
                         SectionNavBar(
-                            navController = navController,
                             prevNodeRoute = state.prevRoute,
                             nextNodeRoute = state.nextRoute,
                             routeProvider = state.routeProvider,
+                            onPrevClick = {
+                                navController.navigate(state.prevRoute!!) {
+                                    navController.popBackStack()
+                                }
+                            },
+                            onNextClick = {
+                                navController.navigate(state.nextRoute!!) {
+                                    navController.popBackStack()
+                                }
+                            },
                         )
                     }
                 }
@@ -172,14 +203,18 @@ fun NavGraph(
                             enter = fadeIn(),
                             exit = shrinkOut(),
                         ) {
-                            QrFabScan(navController)
+                            QrFabScan(
+                                onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
+                            )
                         }
                     }
                 }
 
                 is ScaffoldUiState.Standard -> {
                     if (state.showBottomBar) {
-                        QrFabScan(navController)
+                        QrFabScan(
+                            onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
+                        )
                     }
                 }
 
@@ -430,7 +465,15 @@ fun NavGraph(
             }
 
             composable(AppScreen.QrScanner.route) {
-                QrScannerView(navController)
+                QrScannerView(
+                    onNavigate = { route ->
+                        navController.navigate(route) {
+                            launchSingleTop = true
+                            navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)
+                        }
+                    },
+                    onBack = { navController.navigateUp() },
+                )
             }
 
             composable(

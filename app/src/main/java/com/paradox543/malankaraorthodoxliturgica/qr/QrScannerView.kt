@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import kotlinx.coroutines.delay
@@ -48,7 +47,10 @@ data class ScannerMessage(
 )
 
 @Composable
-fun QrScannerView(navController: NavController) {
+fun QrScannerView(
+    onNavigate: (String) -> Unit,
+    onBack: () -> Unit,
+) {
     var code by remember { mutableStateOf("") }
     var useHybrid by remember { mutableStateOf(false) }
     var hasNavigated by remember { mutableStateOf(false) }
@@ -120,15 +122,19 @@ fun QrScannerView(navController: NavController) {
             Log.d("QR Scanner View", "Navigating to $lockedRoute")
             hasNavigated = true
             delay(500) // short pause so the UI shows "QR detected"
-            navController.navigate(lockedRoute) {
-                launchSingleTop = true
-                navController.popBackStack(AppScreen.QrScanner.route, true)
-            }
+            onNavigate(lockedRoute)
         }
     }
 
     Scaffold(
-        topBar = { TopNavBar("QR Scanner", navController) },
+        topBar = {
+            TopNavBar(
+                title = "QR Scanner",
+                currentRoute = AppScreen.QrScanner.route,
+                onBack = onBack,
+                onSettingsClick = {},
+            )
+        },
     ) { innerPadding ->
         Column(
             modifier =

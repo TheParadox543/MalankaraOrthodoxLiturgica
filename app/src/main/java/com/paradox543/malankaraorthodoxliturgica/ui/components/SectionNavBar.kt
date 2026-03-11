@@ -23,16 +23,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 
 @Composable
 fun SectionNavBar(
-    navController: NavController,
     prevNodeRoute: String?,
     nextNodeRoute: String?,
     routeProvider: () -> String,
+    onPrevClick: () -> Unit,
+    onNextClick: () -> Unit,
 ) {
     var showDialog by remember { mutableStateOf(false) }
     var qrBitmap by remember { mutableStateOf<Bitmap?>(null) }
@@ -51,11 +51,7 @@ fun SectionNavBar(
             label = { Text("Previous") },
             selected = false,
             enabled = prevNodeRoute != null,
-            onClick = {
-                navController.navigate(prevNodeRoute!!) {
-                    navController.popBackStack()
-                }
-            },
+            onClick = onPrevClick,
             colors =
                 NavigationBarItemDefaults.colors(
                     unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
@@ -93,11 +89,7 @@ fun SectionNavBar(
             label = { Text("Next") },
             selected = false,
             enabled = nextNodeRoute != null,
-            onClick = {
-                navController.navigate(nextNodeRoute!!) {
-                    navController.popBackStack()
-                }
-            },
+            onClick = onNextClick,
             colors =
                 NavigationBarItemDefaults.colors(
                     unselectedIconColor = MaterialTheme.colorScheme.onPrimary,

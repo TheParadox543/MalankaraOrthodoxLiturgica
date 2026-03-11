@@ -21,23 +21,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNavBar(
     title: String = "malankara",
-    navController: NavController,
+    currentRoute: String?,
+    onBack: () -> Unit,
+    onSettingsClick: () -> Unit,
 ) {
-    val currentRoute =
-        navController
-            .currentBackStackEntryAsState()
-            .value
-            ?.destination
-            ?.route
-
     TopAppBar(
         title = {
             Box(
@@ -55,7 +48,7 @@ fun TopNavBar(
         },
         navigationIcon = {
             if (currentRoute != AppScreen.Home.route) {
-                IconButton(onClick = { navController.navigateUp() }) {
+                IconButton(onClick = onBack) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Previous Page",
@@ -67,7 +60,7 @@ fun TopNavBar(
         },
         actions = {
             if (currentRoute != AppScreen.Settings.route) {
-                IconButton(onClick = { navController.navigate(AppScreen.Settings.route) }) {
+                IconButton(onClick = onSettingsClick) {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = "Settings",

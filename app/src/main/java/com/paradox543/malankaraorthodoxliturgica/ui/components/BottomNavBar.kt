@@ -7,19 +7,13 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
-import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.bottomNavItems
 
 @Composable
-fun BottomNavBar(navController: NavController) {
-    val currentRoute =
-        navController
-            .currentBackStackEntryAsState()
-            .value
-            ?.destination
-            ?.route
-
+fun BottomNavBar(
+    currentRoute: String?,
+    onNavItemClick: (String) -> Unit,
+) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
     ) {
@@ -28,11 +22,7 @@ fun BottomNavBar(navController: NavController) {
                 icon = item.icon,
                 label = { Text(item.label, textAlign = TextAlign.Center) },
                 selected = currentRoute == item.route,
-                onClick = {
-                    navController.navigate(item.route) {
-                        navController.popBackStack(item.route, inclusive = true)
-                    }
-                },
+                onClick = { onNavItemClick(item.route) },
                 colors =
                     NavigationBarItemDefaults.colors(
                         selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
