@@ -375,7 +375,9 @@ fun NavGraph(
             ) { backStackEntry ->
                 val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
                 BibleScreen(
-                    navController,
+                    { index ->
+                        navController.navigate(AppScreen.BibleBook.createRoute(index))
+                    },
                     settingsViewModel,
                     bibleViewModel,
                     innerPadding,
@@ -398,7 +400,9 @@ fun NavGraph(
                     backStackEntry.arguments?.getString(AppScreen.BibleBook.ARG_BOOK_INDEX)?.toIntOrNull()
                         ?: 0
                 BibleBookScreen(
-                    navController,
+                    { bookIndex, chapterIndex ->
+                        navController.navigate(AppScreen.BibleChapter.createRoute(bookIndex, chapterIndex))
+                    },
                     settingsViewModel,
                     bibleViewModel,
                     bookIndex,

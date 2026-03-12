@@ -1,26 +1,13 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
-import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -29,15 +16,23 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import android.util.Log
-import androidx.navigation.NavController as NC
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
+import androidx.compose.ui.unit.dp
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleScreen(
-    navController: NavController,
+    onBibleNavigate: (Int) -> Unit,
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     contentPadding: PaddingValues,
@@ -56,7 +51,7 @@ fun BibleScreen(
             else -> "Bible"
         }
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
+    LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
@@ -73,7 +68,7 @@ fun BibleScreen(
             }
         }
         items(oldTestamentChapters.size) { index ->
-            BibleCard(oldTestamentChapters[index], selectedLanguage, navController, index)
+            BibleCard(oldTestamentChapters[index], selectedLanguage, onBibleNavigate, index)
         }
         item(span = { GridItemSpan(this.maxLineSpan) }) {
             when (selectedLanguage) {
@@ -82,7 +77,7 @@ fun BibleScreen(
             }
         }
         items(newTestamentChapters.size) { index ->
-            BibleCard(newTestamentChapters[index], selectedLanguage, navController, index + oldTestamentCount)
+            BibleCard(newTestamentChapters[index], selectedLanguage, onBibleNavigate, index + oldTestamentCount)
         }
     }
 }
@@ -115,7 +110,7 @@ fun SectionCard(title: String) {
 fun BibleCard(
     bibleDetails: BibleBookDetails,
     selectedLanguage: AppLanguage,
-    navController: NavController,
+    onBibleNavigate: (Int) -> Unit,
     index: Int,
 ) {
     val bookName =
@@ -130,8 +125,7 @@ fun BibleCard(
                 .fillMaxSize()
                 .height(48.dp)
                 .clickable {
-                    Log.d("BibleScreen", "BibleCard: $bookName, Index: $index")
-                    navController.navigate(AppScreen.BibleBook.createRoute(index))
+                    onBibleNavigate(index)
                 },
         shape = RoundedCornerShape(8.dp),
         colors =

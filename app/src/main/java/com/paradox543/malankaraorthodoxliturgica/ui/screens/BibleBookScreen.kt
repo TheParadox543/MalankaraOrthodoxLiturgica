@@ -15,21 +15,19 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleBookScreen(
-    navController: NavController,
+    onBibleNavigate: (Int, Int) -> Unit,
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookIndex: Int,
@@ -41,7 +39,7 @@ fun BibleBookScreen(
     val bookName = bibleBook.book.get(selectedLanguage)
     val chapters = bibleBook.chapters
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard(bookName)) }
+    LaunchedEffect(bookName) { onScaffoldStateChanged(ScaffoldUiState.Standard(bookName)) }
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(72.dp),
@@ -54,14 +52,14 @@ fun BibleBookScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(count = chapters) { chapterIndex ->
-            BibleChapterCard(navController, bookIndex, chapterIndex)
+            BibleChapterCard(onBibleNavigate, bookIndex, chapterIndex)
         }
     }
 }
 
 @Composable
 fun BibleChapterCard(
-    navController: NavController,
+    onBibleNavigate: (Int, Int) -> Unit,
     bookIndex: Int,
     chapterIndex: Int,
 ) {
@@ -71,9 +69,7 @@ fun BibleChapterCard(
                 .padding(12.dp)
                 .fillMaxSize()
                 .aspectRatio(1f)
-                .clickable {
-                    navController.navigate(AppScreen.BibleChapter.createRoute(bookIndex, chapterIndex))
-                },
+                .clickable { onBibleNavigate(bookIndex, chapterIndex) },
         shape = RoundedCornerShape(8.dp),
         colors =
             CardDefaults.cardColors(
