@@ -483,10 +483,10 @@ fun NavGraph(
                 deepLinks = AppScreen.Settings.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
                 SettingsScreen(
-                    navController,
-                    settingsViewModel,
-                    shareService,
-                    innerPadding,
+                    onNavigateToAbout = { navController.navigate(AppScreen.About.route) },
+                    settingsViewModel = settingsViewModel,
+                    shareService = shareService,
+                    contentPadding = innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )
             }
@@ -496,7 +496,6 @@ fun NavGraph(
                 deepLinks = AppScreen.About.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
                 AboutScreen(
-                    navController,
                     innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )
