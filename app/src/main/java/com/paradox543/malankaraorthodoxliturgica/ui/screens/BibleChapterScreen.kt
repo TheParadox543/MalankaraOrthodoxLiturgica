@@ -5,13 +5,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -20,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.components.VerseItem
@@ -31,7 +28,6 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleChapterScreen(
-    navController: NavController,
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookIndex: Int,
@@ -74,13 +70,18 @@ fun BibleChapterScreen(
     // Read during composition so Compose tracks this state and recomposes when it changes
     val barsVisible = isVisible.value
 
-    SideEffect {
+    val routeProvider =
+        remember(bookIndex, chapterIndex) {
+            { AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex) }
+        }
+
+    LaunchedEffect(title, prevRoute, nextRoute, barsVisible, routeProvider) {
         onScaffoldStateChanged(
             ScaffoldUiState.PrayerReading(
                 title = title,
                 prevRoute = prevRoute,
                 nextRoute = nextRoute,
-                routeProvider = { AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex) },
+                routeProvider = routeProvider,
                 isVisible = barsVisible,
                 nestedScrollConnection = nestedScrollConnection,
                 showFab = false,
@@ -104,9 +105,10 @@ fun BibleChapterScreen(
     } else {
         LazyColumn(
             state = listState,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
+            modifier =
+                Modifier
+                    .padding(horizontal = 16.dp)
+                    .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
         ) {
             item {
                 Spacer(Modifier.padding(top = initialTopPadding.value))

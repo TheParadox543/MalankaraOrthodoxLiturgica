@@ -23,7 +23,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -33,19 +33,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun PrayNowScreen(
-    navController: NavController,
-    settingsViewModel: SettingsViewModel,
+    onCardClick: (String) -> Unit,
     prayerViewModel: PrayerViewModel,
     prayerNavViewModel: PrayerNavViewModel,
     contentPadding: PaddingValues,
@@ -57,7 +53,7 @@ fun PrayNowScreen(
     val screenWidth = configuration.screenWidthDp.dp
     val title = translations["prayNow"] ?: "Pray Now"
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
+    LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
     Box {
         Image(
@@ -92,7 +88,7 @@ fun PrayNowScreen(
                                 }
                             PrayNowCard(
                                 node,
-                                navController,
+                                onCardClick,
                                 translatedParts,
                                 prayerViewModel,
                             )
@@ -130,7 +126,7 @@ fun PrayNowScreen(
                                 }
                             PrayNowCard(
                                 node,
-                                navController,
+                                onCardClick,
                                 translatedParts,
                                 prayerViewModel,
                             )
@@ -162,7 +158,7 @@ fun PrayNowScreen(
 @Composable
 private fun PrayNowCard(
     node: PageNode,
-    navController: NavController,
+    onCardClick: (String) -> Unit,
     translatedParts: String,
     prayerViewModel: PrayerViewModel,
 ) {
@@ -175,7 +171,7 @@ private fun PrayNowCard(
                 .clickable {
                     if (node.filename != null) {
                         prayerViewModel.onPrayerSelected(translatedParts, node.route)
-                        navController.navigate(AppScreen.Prayer.createRoute(node.route))
+                        onCardClick(node.route)
                     } else {
                         Log.w("PrayNowScreen", "No file found")
                         errorState = true

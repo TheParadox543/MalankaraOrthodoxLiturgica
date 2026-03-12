@@ -18,7 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -36,13 +36,13 @@ fun AboutScreen(
 ) {
     val context = LocalContext.current
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard("About", showBottomBar = false)) }
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("About", showBottomBar = false)) }
 
     Column(
         modifier =
             Modifier
                 .padding(contentPadding)
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
                 .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {

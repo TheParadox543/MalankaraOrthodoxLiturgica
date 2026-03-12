@@ -22,7 +22,6 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -37,7 +36,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.media3.common.util.UnstableApi
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
@@ -48,7 +46,6 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewMode
 @OptIn(UnstableApi::class)
 @Composable
 fun SongScreen(
-    navController: NavController,
     songPlayerViewModel: SongPlayerViewModel = hiltViewModel(),
     prayerViewModel: PrayerViewModel = hiltViewModel(),
     songFilename: String,
@@ -71,7 +68,7 @@ fun SongScreen(
             }
     }
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
     LaunchedEffect(songFilename) {
         songPlayerViewModel.loadSong(songFilename)

@@ -342,7 +342,6 @@ fun NavGraph(
                 val node = prayerNavViewModel.findNode(route)
                 if (node != null) {
                     SongScreen(
-                        navController,
                         songFilename = node.filename ?: "",
                         contentPadding = innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState = it },
@@ -361,13 +360,13 @@ fun NavGraph(
                 val prayerViewModel = hiltViewModel<PrayerViewModel>(backStackEntry)
                 val prayerNavViewModel = hiltViewModel<PrayerNavViewModel>(backStackEntry)
                 PrayNowScreen(
-                    navController,
-                    settingsViewModel,
+                    { route ->
+                        navController.navigate(AppScreen.Prayer.createRoute(route))
+                    },
                     prayerViewModel,
                     prayerNavViewModel,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                ) { scaffoldUiState = it }
             }
 
             composable(
@@ -430,7 +429,6 @@ fun NavGraph(
                         ?.getString(AppScreen.BibleChapter.ARG_CHAPTER_INDEX)
                         ?.toIntOrNull() ?: 0
                 BibleChapterScreen(
-                    navController,
                     settingsViewModel,
                     bibleViewModel,
                     bookIndex,
