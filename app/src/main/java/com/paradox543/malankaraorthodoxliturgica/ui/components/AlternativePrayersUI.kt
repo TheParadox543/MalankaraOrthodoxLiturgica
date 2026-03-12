@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerElementRenderer
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
@@ -29,21 +28,21 @@ fun AlternativePrayersUI(
     element: PrayerElement.AlternativePrayersBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     isSongHorizontalScroll: Boolean,
 ) {
     var selectedIndex by remember { mutableIntStateOf(0) }
 
     Column(
-        Modifier.Companion.fillMaxWidth(),
+        Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Subheading(
             element.title,
-            Modifier.Companion.padding(bottom = 8.dp),
+            Modifier.padding(bottom = 8.dp),
         )
 
-        SingleChoiceSegmentedButtonRow(Modifier.Companion.fillMaxWidth()) {
+        SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
             element.options.forEachIndexed { index, option ->
                 SegmentedButton(
                     selected = index == selectedIndex,
@@ -59,7 +58,7 @@ fun AlternativePrayersUI(
             }
         }
 
-        Spacer(Modifier.Companion.height(8.dp))
+        Spacer(Modifier.height(8.dp))
 
         // Render the selected option's content
         element.options[selectedIndex].items.forEach { child ->
@@ -68,7 +67,7 @@ fun AlternativePrayersUI(
                     prayerElement = child,
                     prayerViewModel = prayerViewModel,
                     filename = filename,
-                    navController = navController,
+                    onPrayerButtonClick = onPrayerButtonClick,
                     isSongHorizontalScroll = isSongHorizontalScroll,
                 )
             }

@@ -250,7 +250,14 @@ fun NavGraph(
             composable(AppScreen.Onboarding.route) {
                 val prayerViewModel: PrayerViewModel = hiltViewModel()
                 OnboardingScreen(
-                    navController,
+                    { _, _ -> },
+                    {
+                        navController.navigate(AppScreen.Home.route) {
+                            popUpTo(AppScreen.Onboarding.route) {
+                                inclusive = true
+                            }
+                        }
+                    },
                     settingsViewModel,
                     prayerViewModel,
                     innerPadding,
@@ -309,15 +316,20 @@ fun NavGraph(
                 val node = prayerNavViewModel.findNode(prayerRoute)
                 if (node != null) {
                     PrayerScreen(
-                        navController,
+                        { route, replace ->
+                            navController.navigate(AppScreen.Prayer.createRoute(route)) {
+                                if (replace) {
+                                    navController.popBackStack()
+                                }
+                            }
+                        },
                         prayerViewModel,
                         settingsViewModel,
                         prayerNavViewModel,
                         node,
                         scrollIndex,
                         innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
-                    )
+                    ) { scaffoldUiState = it }
                 } else {
                     ContentNotReadyScreen(
                         navController,
@@ -458,7 +470,7 @@ fun NavGraph(
 
             composable(AppScreen.BibleReader.route) {
                 BibleReadingScreen(
-                    navController,
+                    { _, _ -> },
                     bibleViewModel,
                     settingsViewModel,
                     innerPadding,

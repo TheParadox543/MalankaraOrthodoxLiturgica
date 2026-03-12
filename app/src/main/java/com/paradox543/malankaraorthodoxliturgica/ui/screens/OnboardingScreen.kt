@@ -23,7 +23,6 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,19 +32,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
+    onNavigateToHome: () -> Unit,
     settingsViewModel: SettingsViewModel,
     prayerViewModel: PrayerViewModel,
     contentPadding: PaddingValues = PaddingValues(),
@@ -58,7 +56,7 @@ fun OnboardingScreen(
     val prayers by prayerViewModel.prayers.collectAsState()
     val filename = "commonPrayers/lords.json"
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.None) }
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.None) }
 
     LaunchedEffect(selectedLanguage) {
         prayerViewModel.loadPrayerElements(filename, selectedLanguage)
@@ -154,7 +152,7 @@ fun OnboardingScreen(
                     prayers[1],
                     prayerViewModel,
                     filename,
-                    navController,
+                    onPrayerButtonClick,
                 )
             }
         }
@@ -165,11 +163,12 @@ fun OnboardingScreen(
                 settingsViewModel.setLanguage(selectedLanguage)
                 settingsViewModel.setFontScaleFromSettings(selectedFontScale)
                 settingsViewModel.setOnboardingCompleted()
-                navController.navigate(AppScreen.Home.route) {
-                    popUpTo(AppScreen.Onboarding.route) {
-                        inclusive = true
-                    }
-                }
+//                navController.navigate(AppScreen.Home.route) {
+//                    popUpTo(AppScreen.Onboarding.route) {
+//                        inclusive = true
+//                    }
+//                }
+                onNavigateToHome()
             },
             modifier = Modifier.fillMaxWidth(),
         ) {

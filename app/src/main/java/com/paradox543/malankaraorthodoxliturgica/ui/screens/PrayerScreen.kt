@@ -1,11 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
@@ -37,7 +34,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -55,7 +51,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
@@ -77,7 +72,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun PrayerScreen(
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     prayerViewModel: PrayerViewModel,
     settingsViewModel: SettingsViewModel,
     prayerNavViewModel: PrayerNavViewModel,
@@ -147,7 +142,7 @@ fun PrayerScreen(
     // Read during composition so Compose tracks this state and recomposes when it changes
     val barsVisible = isVisible.value
 
-    SideEffect {
+    LaunchedEffect(title, prevNodeRoute, nextNodeRoute, barsVisible) {
         onScaffoldStateChanged(
             ScaffoldUiState.PrayerReading(
                 title = title,
@@ -213,7 +208,7 @@ fun PrayerScreen(
                 prayerElement,
                 prayerViewModel,
                 currentFilename,
-                navController,
+                onPrayerButtonClick,
                 songScrollState,
             )
         }
@@ -228,7 +223,7 @@ fun PrayerElementRenderer(
     prayerElement: PrayerElement,
     prayerViewModel: PrayerViewModel,
     filename: String,
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     isSongHorizontalScroll: Boolean = false,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
@@ -260,7 +255,7 @@ fun PrayerElementRenderer(
         is PrayerElement.Button -> {
             PrayerButton(
                 prayerButton = prayerElement,
-                navController = navController,
+                onPrayerButtonClick = onPrayerButtonClick,
                 translations = translations,
             )
         }
@@ -274,7 +269,7 @@ fun PrayerElementRenderer(
                 prayerElement,
                 prayerViewModel,
                 filename,
-                navController,
+                onPrayerButtonClick,
                 isSongHorizontalScroll,
             )
         }
@@ -293,7 +288,7 @@ fun PrayerElementRenderer(
                     prayerElement,
                     prayerViewModel,
                     filename,
-                    navController,
+                    onPrayerButtonClick,
                     isSongHorizontalScroll,
                 )
             }
@@ -304,7 +299,7 @@ fun PrayerElementRenderer(
                 prayerElement,
                 prayerViewModel,
                 filename,
-                navController,
+                onPrayerButtonClick,
                 isSongHorizontalScroll,
             )
         }
@@ -314,7 +309,7 @@ fun PrayerElementRenderer(
                 prayerElement,
                 prayerViewModel,
                 filename,
-                navController,
+                onPrayerButtonClick,
                 isSongHorizontalScroll,
             )
         }
@@ -351,7 +346,7 @@ fun PrayerElementRenderer(
 @Composable
 fun PrayerButton(
     prayerButton: PrayerElement.Button,
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     translations: Map<String, String>,
     modifier: Modifier = Modifier,
 ) {
@@ -370,11 +365,12 @@ fun PrayerButton(
     ) {
         Button(
             onClick = {
-                navController.navigate(AppScreen.Prayer.createRoute(prayerButton.link)) {
-                    if (prayerButton.replace) {
-                        navController.popBackStack()
-                    }
-                }
+                onPrayerButtonClick(prayerButton.link, prayerButton.replace)
+//                navController.navigate(AppScreen.Prayer.createRoute(prayerButton.link)) {
+//                    if (prayerButton.replace) {
+//                        navController.popBackStack()
+//                    }
+//                }
             },
         ) {
             Text(
@@ -398,7 +394,7 @@ fun DynamicSongsBlockUI(
     dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     isSongHorizontalScroll: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -463,7 +459,7 @@ fun DynamicSongsBlockUI(
                     dynamicSong,
                     prayerViewModel,
                     filename,
-                    navController,
+                    onPrayerButtonClick,
                     isSongHorizontalScroll,
                 )
             }
@@ -476,7 +472,7 @@ fun DynamicSongUI(
     dynamicSong: PrayerElement.DynamicSong,
     prayerViewModel: PrayerViewModel,
     filename: String,
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     isSongHorizontalScroll: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -493,7 +489,7 @@ fun DynamicSongUI(
                         item,
                         prayerViewModel,
                         filename,
-                        navController,
+                        onPrayerButtonClick,
                         isSongHorizontalScroll,
                     )
                 }
@@ -506,10 +502,10 @@ fun DynamicSongUI(
 
 @Composable
 fun CollapsibleTextBlock(
-    PrayerElement: PrayerElement.CollapsibleBlock,
+    prayerElement: PrayerElement.CollapsibleBlock,
     prayerViewModel: PrayerViewModel,
     filename: String,
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     isSongHorizontalScroll: Boolean,
 ) {
     var expanded by remember { mutableStateOf(false) }
@@ -523,7 +519,7 @@ fun CollapsibleTextBlock(
                     .clickable { expanded = !expanded },
         ) {
             Heading(
-                text = PrayerElement.title,
+                text = prayerElement.title,
                 modifier = Modifier.weight(1f),
             )
             Icon(
@@ -536,14 +532,14 @@ fun CollapsibleTextBlock(
             Column {
                 Column {
                     Spacer(Modifier.padding(8.dp))
-                    PrayerElement.items.forEach { nestedItem ->
+                    prayerElement.items.forEach { nestedItem ->
                         // Loop through type-safe items
                         // Recursively call the renderer for nested items
                         PrayerElementRenderer(
                             nestedItem,
                             prayerViewModel,
                             filename,
-                            navController,
+                            onPrayerButtonClick,
                             isSongHorizontalScroll,
                         )
                         Spacer(Modifier.padding(4.dp))

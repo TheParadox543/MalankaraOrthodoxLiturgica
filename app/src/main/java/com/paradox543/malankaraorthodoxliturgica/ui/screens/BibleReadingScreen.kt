@@ -7,13 +7,12 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.components.VerseItem
@@ -23,7 +22,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleReadingScreen(
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     bibleViewModel: BibleViewModel,
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     contentPadding: PaddingValues = PaddingValues(),
@@ -34,7 +33,7 @@ fun BibleReadingScreen(
     val bibleReadings: List<BibleReference> by bibleViewModel.selectedBibleReference.collectAsState()
 
     if (bibleReadings.isEmpty()) {
-        SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard("Bible Reading", showBottomBar = false)) }
+        LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Bible Reading", showBottomBar = false)) }
         Text(
             "No Bible readings selected.",
             Modifier.padding(16.dp),
@@ -49,7 +48,7 @@ fun BibleReadingScreen(
             bibleViewModel.formatGospelEntry(bibleReadings, selectedLanguage)
         }
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard(title, showBottomBar = false)) }
+    LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title, showBottomBar = false)) }
 
     val bibleReading = bibleViewModel.loadBibleReading(bibleReadings, selectedLanguage)
     LazyColumn(
@@ -65,7 +64,7 @@ fun BibleReadingScreen(
                     prayerElement = preface[index],
                     prayerViewModel = prayerViewModel,
                     filename = title,
-                    navController = navController,
+                    onPrayerButtonClick = onPrayerButtonClick,
                 )
             }
             item("Divider") {
