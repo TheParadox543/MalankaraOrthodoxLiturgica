@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
@@ -12,13 +11,20 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 
 @Composable
 fun HomeScreen(
-    navController: NavController,
     prayerViewModel: PrayerViewModel,
     prayerNavViewModel: PrayerNavViewModel,
     inAppReviewManager: InAppReviewManager,
     contentPadding: PaddingValues,
+    onSectionNavigate: (String) -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
-    SectionScreen(navController, prayerViewModel, rootNode, inAppReviewManager, contentPadding, onScaffoldStateChanged)
+    SectionScreen(
+        prayerViewModel,
+        rootNode,
+        inAppReviewManager,
+        contentPadding,
+        onScaffoldStateChanged,
+        onSectionNavigate = onSectionNavigate,
+    )
 }

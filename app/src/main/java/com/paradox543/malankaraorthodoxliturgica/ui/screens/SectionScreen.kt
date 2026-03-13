@@ -33,23 +33,22 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 
 @Composable
 fun SectionScreen(
-    navController: NavController,
     prayerViewModel: PrayerViewModel,
     node: PageNode,
     inAppReviewManager: InAppReviewManager,
     contentPadding: PaddingValues,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
-    modifier: Modifier = Modifier,
+    onSectionNavigate: (String) -> Unit = {},
+    onPrayerNavigate: (String) -> Unit = {},
+    onSongNavigate: (String) -> Unit = {},
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val nodes = node.children
@@ -91,8 +90,10 @@ fun SectionScreen(
                     items(nodes.size) { index ->
                         SectionCard(
                             nodes[index],
-                            navController,
                             translations,
+                            onSectionNavigate,
+                            onPrayerNavigate,
+                            onSongNavigate,
                         )
                     }
                 }
@@ -116,8 +117,10 @@ fun SectionScreen(
                     items(nodes.size) { index ->
                         SectionCard(
                             nodes[index],
-                            navController,
                             translations,
+                            onSectionNavigate,
+                            onPrayerNavigate,
+                            onSongNavigate,
                         )
                     }
                 }
@@ -148,8 +151,10 @@ private fun DisplayIconography(orientation: String) {
 @Composable
 private fun SectionCard(
     node: PageNode,
-    navController: NavController,
     translations: Map<String, String>,
+    onSectionNavigate: (String) -> Unit,
+    onPrayerNavigate: (String) -> Unit,
+    onSongNavigate: (String) -> Unit,
 ) {
     Card(
         modifier =
@@ -160,11 +165,11 @@ private fun SectionCard(
                     val filename = node.filename
                     if (node.children.isNotEmpty()) {
                         Log.d("SectionCard", "Navigating to section: ${node.route}")
-                        navController.navigate(AppScreen.Section.createRoute(node.route))
+                        onSectionNavigate(node.route)
                     } else if (filename != null && filename.endsWith(".json")) {
-                        navController.navigate(AppScreen.Prayer.createRoute(node.route))
+                        onPrayerNavigate(node.route)
                     } else if (node.type == "song" || (filename != null && filename.endsWith(".mp3"))) {
-                        navController.navigate(AppScreen.Song.createRoute(node.route))
+                        onSongNavigate(node.route)
                     } else {
                         Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
                     }

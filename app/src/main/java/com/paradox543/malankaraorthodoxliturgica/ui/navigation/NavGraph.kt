@@ -238,11 +238,13 @@ fun NavGraph(
                 val prayerViewModel: PrayerViewModel = hiltViewModel()
                 val prayerNavViewModel: PrayerNavViewModel = hiltViewModel()
                 HomeScreen(
-                    navController,
                     prayerViewModel,
                     prayerNavViewModel,
                     inAppReviewManager,
                     innerPadding,
+                    onSectionNavigate = { route ->
+                        navController.navigate(AppScreen.Section.createRoute(route))
+                    },
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )
             }
@@ -250,6 +252,9 @@ fun NavGraph(
             composable(AppScreen.Onboarding.route) {
                 val prayerViewModel: PrayerViewModel = hiltViewModel()
                 OnboardingScreen(
+                    settingsViewModel,
+                    prayerViewModel,
+                    innerPadding,
                     { _, _ -> },
                     {
                         navController.navigate(AppScreen.Home.route) {
@@ -258,11 +263,7 @@ fun NavGraph(
                             }
                         }
                     },
-                    settingsViewModel,
-                    prayerViewModel,
-                    innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                ) { scaffoldUiState = it }
             }
 
             composable(
@@ -281,12 +282,20 @@ fun NavGraph(
                 val node = prayerNavViewModel.findNode(route)
                 if (node != null) {
                     SectionScreen(
-                        navController,
                         prayerViewModel,
                         node,
                         inAppReviewManager,
                         innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState = it },
+                        onSectionNavigate = { route ->
+                            navController.navigate(AppScreen.Section.createRoute(route))
+                        },
+                        onPrayerNavigate = { route ->
+                            navController.navigate(AppScreen.Prayer.createRoute(route))
+                        },
+                        onSongNavigate = { route ->
+                            navController.navigate(AppScreen.Song.createRoute(route))
+                        },
                     )
                 } else {
                     ContentNotReadyScreen(

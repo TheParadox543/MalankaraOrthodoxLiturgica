@@ -42,11 +42,11 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(
-    onPrayerButtonClick: (String, Boolean) -> Unit,
-    onNavigateToHome: () -> Unit,
     settingsViewModel: SettingsViewModel,
     prayerViewModel: PrayerViewModel,
     contentPadding: PaddingValues = PaddingValues(),
+    onPrayerButtonClick: (String, Boolean) -> Unit,
+    onNavigateToHome: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
@@ -163,11 +163,6 @@ fun OnboardingScreen(
                 settingsViewModel.setLanguage(selectedLanguage)
                 settingsViewModel.setFontScaleFromSettings(selectedFontScale)
                 settingsViewModel.setOnboardingCompleted()
-//                navController.navigate(AppScreen.Home.route) {
-//                    popUpTo(AppScreen.Onboarding.route) {
-//                        inclusive = true
-//                    }
-//                }
                 onNavigateToHome()
             },
             modifier = Modifier.fillMaxWidth(),
