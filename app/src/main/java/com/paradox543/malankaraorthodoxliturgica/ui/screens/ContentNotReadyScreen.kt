@@ -14,15 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 
 @Composable
 fun ContentNotReadyScreen(
-    navController: NavController,
     modifier: Modifier = Modifier,
     message: String? = null,
     contentPadding: PaddingValues = PaddingValues(),
+    onBackNavigation: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Error", showBottomBar = false)) }
@@ -49,7 +48,7 @@ fun ContentNotReadyScreen(
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
             textAlign = TextAlign.Center,
         )
-        Button(onClick = { navController.navigateUp() }) {
+        Button(onClick = { onBackNavigation() }) {
             Text("Go Back")
         }
     }

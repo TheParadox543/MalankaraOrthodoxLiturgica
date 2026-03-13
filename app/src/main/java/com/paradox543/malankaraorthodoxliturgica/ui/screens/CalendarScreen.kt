@@ -47,13 +47,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
@@ -66,11 +64,12 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
-    navController: NavController,
     bibleViewModel: BibleViewModel,
     calendarViewModel: CalendarViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel(),
     contentPadding: PaddingValues = PaddingValues(),
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     // Collect the StateFlows from the ViewModel
@@ -140,6 +139,8 @@ fun CalendarScreen(
                         hasNextMonth,
                         monthCalendarData,
                         selectedDate,
+                        onPrayerNavigate,
+                        onBibleNavigate,
                     )
                 }
                 if (displayEvents.isNotEmpty()) {
@@ -152,9 +153,10 @@ fun CalendarScreen(
                         scrollState,
                         displayEvents,
                         selectedLanguage,
-                        navController,
                         calendarViewModel,
                         bibleViewModel,
+                        onBibleNavigate,
+                        onPrayerNavigate,
                     )
                 }
             } else {
@@ -166,6 +168,8 @@ fun CalendarScreen(
                         hasNextMonth,
                         monthCalendarData,
                         selectedDate,
+                        onPrayerNavigate,
+                        onBibleNavigate,
                     )
                     if (displayEvents.isNotEmpty()) {
                         val scrollState = rememberScrollState()
@@ -177,9 +181,10 @@ fun CalendarScreen(
                             scrollState,
                             displayEvents,
                             selectedLanguage,
-                            navController,
                             calendarViewModel,
                             bibleViewModel,
+                            onBibleNavigate,
+                            onPrayerNavigate,
                         )
                     }
                 }
@@ -196,6 +201,8 @@ private fun CalendarMainView(
     hasNextMonth: Boolean,
     monthCalendarData: List<CalendarWeek>,
     selectedDate: LocalDate?,
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
 ) {
     Column(
         Modifier
@@ -412,9 +419,10 @@ private fun DisplayEvents(
     scrollState: ScrollState,
     displayEvents: List<LiturgicalEventDetails>,
     selectedLanguage: AppLanguage,
-    navController: NavController,
     calendarViewModel: CalendarViewModel,
     bibleViewModel: BibleViewModel,
+    onBibleNavigate: () -> Unit,
+    onPrayerNavigate: (String) -> Unit,
 ) {
     Column(
         Modifier
@@ -425,9 +433,10 @@ private fun DisplayEvents(
             DisplayEvent(
                 event,
                 selectedLanguage,
-                navController,
                 calendarViewModel = calendarViewModel,
                 bibleViewModel = bibleViewModel,
+                onPrayerNavigate = onPrayerNavigate,
+                onBibleNavigate = onBibleNavigate,
             )
         }
     }
@@ -437,11 +446,12 @@ private fun DisplayEvents(
 fun DisplayEvent(
     event: LiturgicalEventDetails,
     selectedLanguage: AppLanguage,
-    navController: NavController,
     modifier: Modifier = Modifier,
     calendarViewModel: CalendarViewModel,
     bibleViewModel: BibleViewModel,
     prayerViewModel: PrayerViewModel = hiltViewModel(),
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val textTitle = calendarViewModel.getFormattedDateTitle(event, selectedLanguage)
@@ -477,7 +487,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(vespersGospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -508,7 +518,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(matinsGospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -539,7 +549,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(primeGospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -567,7 +577,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate(AppScreen.BibleReader.route)
+                                        onBibleNavigate()
                                     },
                                 ) {
                                     Text(
@@ -596,7 +606,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate(AppScreen.BibleReader.route)
+                                        onBibleNavigate()
                                     },
                                 ) {
                                     Text(
@@ -618,7 +628,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate(AppScreen.BibleReader.route)
+                                        onBibleNavigate()
                                     },
                                 ) {
                                     Text(
@@ -643,7 +653,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(gospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -661,7 +671,7 @@ fun DisplayEvent(
                             val key = specialSongsKey.removeSuffix("Songs")
                             TextButton(
                                 onClick = {
-                                    navController.navigate(AppScreen.Prayer.createRoute("qurbanaSongs_$key"))
+                                    onPrayerNavigate("qurbanaSongs_$key")
                                 },
                             ) {
                                 Text(

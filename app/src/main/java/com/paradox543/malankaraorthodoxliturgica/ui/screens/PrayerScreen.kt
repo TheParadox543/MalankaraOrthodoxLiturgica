@@ -366,11 +366,6 @@ fun PrayerButton(
         Button(
             onClick = {
                 onPrayerButtonClick(prayerButton.link, prayerButton.replace)
-//                navController.navigate(AppScreen.Prayer.createRoute(prayerButton.link)) {
-//                    if (prayerButton.replace) {
-//                        navController.popBackStack()
-//                    }
-//                }
             },
         ) {
             Text(

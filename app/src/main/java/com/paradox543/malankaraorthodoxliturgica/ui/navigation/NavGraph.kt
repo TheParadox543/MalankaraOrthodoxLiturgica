@@ -299,11 +299,10 @@ fun NavGraph(
                     )
                 } else {
                     ContentNotReadyScreen(
-                        navController,
                         message = route,
                         contentPadding = innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
-                    )
+                        onBackNavigation = { navController.navigateUp() },
+                    ) { scaffoldUiState = it }
                 }
             }
 
@@ -341,11 +340,10 @@ fun NavGraph(
                     ) { scaffoldUiState = it }
                 } else {
                     ContentNotReadyScreen(
-                        navController,
                         message = prayerRoute,
                         contentPadding = innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
-                    )
+                        onBackNavigation = { navController.navigateUp() },
+                    ) { scaffoldUiState = it }
                 }
             }
 
@@ -369,11 +367,10 @@ fun NavGraph(
                     )
                 } else {
                     ContentNotReadyScreen(
-                        navController,
                         message = route,
                         contentPadding = innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
-                    )
+                        onBackNavigation = { navController.navigateUp() },
+                    ) { scaffoldUiState = it }
                 }
             }
 
@@ -469,10 +466,15 @@ fun NavGraph(
             ) { backStackEntry ->
                 val calendarViewModel: CalendarViewModel = hiltViewModel(backStackEntry)
                 CalendarScreen(
-                    navController,
                     bibleViewModel,
                     calendarViewModel,
                     contentPadding = innerPadding,
+                    onBibleNavigate = {
+                        navController.navigate(AppScreen.BibleReader.route)
+                    },
+                    onPrayerNavigate = { route ->
+                        navController.navigate(AppScreen.Prayer.createRoute(route))
+                    },
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )
             }
