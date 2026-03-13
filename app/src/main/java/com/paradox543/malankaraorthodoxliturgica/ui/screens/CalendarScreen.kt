@@ -36,7 +36,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -53,11 +53,11 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarW
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -84,7 +84,7 @@ fun CalendarScreen(
     val error by calendarViewModel.error.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
-    SideEffect { onScaffoldStateChanged(ScaffoldUiState.Standard("Calendar")) }
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Calendar")) }
 
     Column(
         modifier =
@@ -93,58 +93,83 @@ fun CalendarScreen(
                 .padding(horizontal = 8.dp)
                 .fillMaxSize(),
     ) {
-            if (isLoading) {
-                // Show a loading indicator
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
-            } else if (error != null || monthCalendarData.isEmpty()) {
-                // Show an error message
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = "Error: $error",
-                            color = MaterialTheme.colorScheme.error,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(16.dp),
+        if (isLoading) {
+            // Show a loading indicator
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (error != null || monthCalendarData.isEmpty()) {
+            // Show an error message
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Error: $error",
+                        color = MaterialTheme.colorScheme.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(16.dp),
+                    )
+                    // Add a retry button if appropriate
+                    Button(onClick = {
+                        calendarViewModel.loadMonth(
+                            currentCalendarViewDate.monthValue,
+                            currentCalendarViewDate.year,
                         )
-                        // Add a retry button if appropriate
-                        Button(onClick = {
-                            calendarViewModel.loadMonth(
-                                currentCalendarViewDate.monthValue,
-                                currentCalendarViewDate.year,
-                            )
-                        }) {
-                            Text("Retry")
-                        }
+                    }) {
+                        Text("Retry")
                     }
+                }
+            }
+        } else {
+            // Calendar content
+            val configuration = LocalConfiguration.current
+            val screenWidth = configuration.screenWidthDp.dp
+            if (screenWidth <= 600.dp) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    CalendarMainView(
+                        calendarViewModel,
+                        currentCalendarViewDate,
+                        hasPrevMonth,
+                        hasNextMonth,
+                        monthCalendarData,
+                        selectedDate,
+                    )
+                }
+                if (displayEvents.isNotEmpty()) {
+                    val scrollState = rememberScrollState()
+                    HorizontalDivider(
+                        thickness = 8.dp,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    DisplayEvents(
+                        scrollState,
+                        displayEvents,
+                        selectedLanguage,
+                        navController,
+                        calendarViewModel,
+                        bibleViewModel,
+                    )
                 }
             } else {
-                // Calendar content
-                val configuration = LocalConfiguration.current
-                val screenWidth = configuration.screenWidthDp.dp
-                if (screenWidth <= 600.dp) {
-                    Column(
-                        modifier = Modifier.padding(8.dp),
-                    ) {
-                        CalendarMainView(
-                            calendarViewModel,
-                            currentCalendarViewDate,
-                            hasPrevMonth,
-                            hasNextMonth,
-                            monthCalendarData,
-                            selectedDate,
-                        )
-                    }
+                Row(Modifier.padding(8.dp)) {
+                    CalendarMainView(
+                        calendarViewModel,
+                        currentCalendarViewDate,
+                        hasPrevMonth,
+                        hasNextMonth,
+                        monthCalendarData,
+                        selectedDate,
+                    )
                     if (displayEvents.isNotEmpty()) {
                         val scrollState = rememberScrollState()
-                        HorizontalDivider(
+                        VerticalDivider(
                             thickness = 8.dp,
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -157,33 +182,8 @@ fun CalendarScreen(
                             bibleViewModel,
                         )
                     }
-                } else {
-                    Row(Modifier.padding(8.dp)) {
-                        CalendarMainView(
-                            calendarViewModel,
-                            currentCalendarViewDate,
-                            hasPrevMonth,
-                            hasNextMonth,
-                            monthCalendarData,
-                            selectedDate,
-                        )
-                        if (displayEvents.isNotEmpty()) {
-                            val scrollState = rememberScrollState()
-                            VerticalDivider(
-                                thickness = 8.dp,
-                                color = MaterialTheme.colorScheme.primary,
-                            )
-                            DisplayEvents(
-                                scrollState,
-                                displayEvents,
-                                selectedLanguage,
-                                navController,
-                                calendarViewModel,
-                                bibleViewModel,
-                            )
-                        }
-                    }
                 }
+            }
         }
     }
 }

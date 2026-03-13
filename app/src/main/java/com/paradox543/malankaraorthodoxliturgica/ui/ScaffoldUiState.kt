@@ -4,7 +4,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 
 /**
  * Describes which top bar, bottom bar, and FAB the single Scaffold in MainActivity should render.
- * Each screen emits one of these via SideEffect to communicate its bar requirements.
+ * Each screen emits one of these via LaunchedEffect to communicate its bar requirements.
  */
 sealed class ScaffoldUiState {
     /**
