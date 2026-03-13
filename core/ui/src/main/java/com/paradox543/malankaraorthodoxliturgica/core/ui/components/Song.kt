@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.components
+package com.paradox543.malankaraorthodoxliturgica.core.ui.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll

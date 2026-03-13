@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerElementRenderer
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel

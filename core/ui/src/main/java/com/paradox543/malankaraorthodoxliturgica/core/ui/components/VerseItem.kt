@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.components
+package com.paradox543.malankaraorthodoxliturgica.core.ui.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding

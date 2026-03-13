@@ -1,23 +1,26 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.components
+package com.paradox543.malankaraorthodoxliturgica.core.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
 
 @Composable
-fun Title(
+fun Source(
     text: String,
     modifier: Modifier = Modifier,
 ) {
     Text(
         text = text,
-        style = MaterialTheme.typography.headlineSmall,
+        style = MaterialTheme.typography.labelSmall,
         textAlign = TextAlign.Companion.Center,
-        textDecoration = TextDecoration.Companion.Underline,
-        modifier = modifier.fillMaxWidth(),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp, bottom = 16.dp),
     )
 }

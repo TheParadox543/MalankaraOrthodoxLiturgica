@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.components
+package com.paradox543.malankaraorthodoxliturgica.core.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
@@ -8,15 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun Heading(
+fun Prose(
     text: String,
     modifier: Modifier = Modifier,
 ) {
     Text(
         text = text,
-        style = MaterialTheme.typography.titleLarge,
-        textAlign = TextAlign.Companion.Center,
+        style = MaterialTheme.typography.bodyLarge,
+        textAlign = TextAlign.Companion.Left,
         modifier = modifier.fillMaxWidth(),
     )
 }
-

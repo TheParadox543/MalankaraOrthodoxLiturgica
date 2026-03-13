@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.navigation
+package com.paradox543.malankaraorthodoxliturgica.core.ui.navigation
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
