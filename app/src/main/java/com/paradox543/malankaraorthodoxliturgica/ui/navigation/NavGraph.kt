@@ -130,10 +130,10 @@ fun NavGraph(
                 is ScaffoldUiState.Standard -> {
                     TopNavBar(
                         title = state.title,
-                        currentRoute = currentRoute,
+                        showBack = currentRoute != AppScreen.Home.route,
+                        showSettings = currentRoute != AppScreen.Settings.route,
                         onBack = { navController.navigateUp() },
-                        onSettingsClick = { navController.navigate(AppScreen.Settings.route) },
-                    )
+                    ) { navController.navigate(AppScreen.Settings.route) }
                 }
 
                 is ScaffoldUiState.PrayerReading -> {
@@ -143,10 +143,10 @@ fun NavGraph(
                     ) {
                         TopNavBar(
                             title = state.title,
-                            currentRoute = currentRoute,
+                            showBack = currentRoute != AppScreen.Home.route,
+                            showSettings = currentRoute != AppScreen.Settings.route,
                             onBack = { navController.navigateUp() },
-                            onSettingsClick = { navController.navigate(AppScreen.Settings.route) },
-                        )
+                        ) { navController.navigate(AppScreen.Settings.route) }
                     }
                 }
 

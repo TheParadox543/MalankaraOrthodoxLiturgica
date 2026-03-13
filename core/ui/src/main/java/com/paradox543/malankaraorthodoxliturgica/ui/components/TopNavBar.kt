@@ -21,13 +21,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopNavBar(
     title: String = "malankara",
-    currentRoute: String?,
+    showBack: Boolean,
+    showSettings: Boolean,
     onBack: () -> Unit,
     onSettingsClick: () -> Unit,
 ) {
@@ -47,7 +47,7 @@ fun TopNavBar(
             }
         },
         navigationIcon = {
-            if (currentRoute != AppScreen.Home.route) {
+            if (showBack) {
                 IconButton(onClick = onBack) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
@@ -59,7 +59,7 @@ fun TopNavBar(
             }
         },
         actions = {
-            if (currentRoute != AppScreen.Settings.route) {
+            if (showSettings) {
                 IconButton(onClick = onSettingsClick) {
                     Icon(
                         imageVector = Icons.Default.Settings,
