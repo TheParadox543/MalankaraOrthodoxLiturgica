@@ -497,7 +497,6 @@ fun NavGraph(
                             navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)
                         }
                     },
-                    onBack = { navController.navigateUp() },
                     contentPadding = innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )

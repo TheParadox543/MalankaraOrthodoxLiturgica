@@ -48,12 +48,10 @@ data class ScannerMessage(
 @Composable
 fun QrScannerView(
     onNavigate: (String) -> Unit,
-    onBack: () -> Unit,
     contentPadding: PaddingValues,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     var code by remember { mutableStateOf("") }
-    var useHybrid by remember { mutableStateOf(false) }
     var hasNavigated by remember { mutableStateOf(false) }
     val colorScheme = MaterialTheme.colorScheme
     var message by remember {
@@ -164,14 +162,8 @@ fun QrScannerView(
                                 .also {
                                     it.setAnalyzer(
                                         ContextCompat.getMainExecutor(ctx),
-                                        if (useHybrid) {
-                                            HybridQRAnalyzer { qrCode ->
-                                                code = qrCode
-                                            }
-                                        } else {
-                                            MLKitQRCodeAnalyzer { qrCode ->
-                                                code = qrCode
-                                            }
+                                        MLKitQRCodeAnalyzer { qrCode ->
+                                            code = qrCode
                                         },
                                     )
                                 }
