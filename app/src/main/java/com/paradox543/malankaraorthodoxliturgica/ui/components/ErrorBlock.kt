@@ -10,7 +10,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 @Composable
 fun ErrorBlock(
     text: String,
-    prayerViewModel: PrayerViewModel,
+    onError: (String, String) -> Unit,
     errorLocation: String,
     modifier: Modifier = Modifier,
 ) {
@@ -20,5 +20,5 @@ fun ErrorBlock(
         color = MaterialTheme.colorScheme.error,
         modifier = modifier.fillMaxWidth(),
     )
-    prayerViewModel.reportError(text, errorLocation)
+    onError(text, errorLocation)
 }

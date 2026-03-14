@@ -32,7 +32,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -42,9 +41,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
@@ -82,6 +78,8 @@ fun PrayerScreen(
     val prayers by prayerViewModel.prayers.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
     val songScrollState by prayerViewModel.songScrollState.collectAsState()
+    val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
+
     var title = ""
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
@@ -115,6 +113,17 @@ fun PrayerScreen(
             key = currentFilename,
         ) {
             LazyListState()
+        }
+
+    val renderContext =
+        remember(translations, dynamicSongKey, songScrollState) {
+            PrayerRenderContext(
+                translations = translations,
+                dynamicSongKey = dynamicSongKey,
+                isSongHorizontalScroll = songScrollState,
+                onDynamicSongKeyChanged = prayerViewModel::setDynamicSongKey,
+                onError = prayerViewModel::reportError,
+            )
         }
 
     // Observe if the LazyColumn has been scrolled to its very end
@@ -189,10 +198,9 @@ fun PrayerScreen(
         items(prayers) { prayerElement ->
             PrayerElementRenderer(
                 prayerElement,
-                prayerViewModel,
+                renderContext,
                 currentFilename,
                 onPrayerButtonClick,
-                songScrollState,
             )
         }
         item {
@@ -201,15 +209,21 @@ fun PrayerScreen(
     }
 }
 
+data class PrayerRenderContext(
+    val translations: Map<String, String>,
+    val dynamicSongKey: String?,
+    val isSongHorizontalScroll: Boolean,
+    val onDynamicSongKeyChanged: (String) -> Unit,
+    val onError: (String, String) -> Unit,
+)
+
 @Composable
 fun PrayerElementRenderer(
     prayerElement: PrayerElement,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    isSongHorizontalScroll: Boolean = false,
 ) {
-    val translations by prayerViewModel.translations.collectAsState()
     when (prayerElement) {
         is PrayerElement.Title -> {
             Title(prayerElement.content)
@@ -228,7 +242,7 @@ fun PrayerElementRenderer(
         }
 
         is PrayerElement.Song -> {
-            Song(prayerElement.content, isHorizontal = isSongHorizontalScroll)
+            Song(prayerElement.content, isHorizontal = context.isSongHorizontalScroll)
         }
 
         is PrayerElement.Subtext -> {
@@ -239,7 +253,7 @@ fun PrayerElementRenderer(
             PrayerButton(
                 prayerButton = prayerElement,
                 onPrayerButtonClick = onPrayerButtonClick,
-                translations = translations,
+                translations = context.translations,
             )
         }
 
@@ -250,17 +264,16 @@ fun PrayerElementRenderer(
         is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
                 prayerElement,
-                prayerViewModel,
+                context,
                 filename,
                 onPrayerButtonClick,
-                isSongHorizontalScroll,
             )
         }
 
         is PrayerElement.Error -> {
             ErrorBlock(
                 "Error: ${prayerElement.content}",
-                prayerViewModel,
+                onError = context.onError,
                 filename,
             )
         }
@@ -269,10 +282,9 @@ fun PrayerElementRenderer(
             if (prayerElement.items.isNotEmpty()) {
                 DynamicSongsBlockUI(
                     prayerElement,
-                    prayerViewModel,
+                    context,
                     filename,
                     onPrayerButtonClick,
-                    isSongHorizontalScroll,
                 )
             }
         }
@@ -280,20 +292,18 @@ fun PrayerElementRenderer(
         is PrayerElement.DynamicSong -> {
             DynamicSongUI(
                 prayerElement,
-                prayerViewModel,
+                context,
                 filename,
                 onPrayerButtonClick,
-                isSongHorizontalScroll,
             )
         }
 
         is PrayerElement.AlternativePrayersBlock -> {
             AlternativePrayersUI(
                 prayerElement,
-                prayerViewModel,
+                context,
                 filename,
                 onPrayerButtonClick,
-                isSongHorizontalScroll,
             )
         }
 
@@ -302,7 +312,7 @@ fun PrayerElementRenderer(
             // Log an error or render a debug message, as it should ideally not happen.
             ErrorBlock(
                 "UI Error: Unresolved Link element encountered",
-                prayerViewModel,
+                context.onError,
                 filename,
             )
         }
@@ -311,7 +321,7 @@ fun PrayerElementRenderer(
             // Similar to 'Link', this suggests an issue in the data resolution layer.
             ErrorBlock(
                 "UI Error: Unresolved LinkCollapsible element encountered",
-                prayerViewModel,
+                context.onError,
                 filename,
             )
         }
@@ -319,7 +329,7 @@ fun PrayerElementRenderer(
         is PrayerElement.AlternativeOption -> {
             ErrorBlock(
                 "UI Error: AlternativeOption element encountered outside of AlternativePrayersBlock",
-                prayerViewModel,
+                context.onError,
                 filename,
             )
         }
@@ -370,13 +380,12 @@ fun PrayerButton(
 @Composable
 fun DynamicSongsBlockUI(
     dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    isSongHorizontalScroll: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
+    val dynamicSongKey = context.dynamicSongKey
 
     val dynamicSong =
         dynamicSongsBlock.items.find { it.eventKey == dynamicSongKey }
@@ -423,7 +432,7 @@ fun DynamicSongsBlockUI(
                             DropdownMenuItem(
                                 text = { Text(song.eventTitle) },
                                 onClick = {
-                                    prayerViewModel.setDynamicSongKey(song.eventKey)
+                                    context.onDynamicSongKeyChanged(song.eventKey)
                                     expanded = false
                                 },
                             )
@@ -435,10 +444,9 @@ fun DynamicSongsBlockUI(
             if (dynamicSong != null) {
                 DynamicSongUI(
                     dynamicSong,
-                    prayerViewModel,
+                    context,
                     filename,
                     onPrayerButtonClick,
-                    isSongHorizontalScroll,
                 )
             }
         }
@@ -448,10 +456,9 @@ fun DynamicSongsBlockUI(
 @Composable
 fun DynamicSongUI(
     dynamicSong: PrayerElement.DynamicSong,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    isSongHorizontalScroll: Boolean,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier.padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -465,10 +472,9 @@ fun DynamicSongUI(
                 -> {
                     PrayerElementRenderer(
                         item,
-                        prayerViewModel,
+                        context,
                         filename,
                         onPrayerButtonClick,
-                        isSongHorizontalScroll,
                     )
                 }
 
@@ -481,10 +487,9 @@ fun DynamicSongUI(
 @Composable
 fun CollapsibleTextBlock(
     prayerElement: PrayerElement.CollapsibleBlock,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    isSongHorizontalScroll: Boolean,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -515,10 +520,9 @@ fun CollapsibleTextBlock(
                         // Recursively call the renderer for nested items
                         PrayerElementRenderer(
                             nestedItem,
-                            prayerViewModel,
+                            context,
                             filename,
                             onPrayerButtonClick,
-                            isSongHorizontalScroll,
                         )
                         Spacer(Modifier.padding(4.dp))
                     }
@@ -526,27 +530,4 @@ fun CollapsibleTextBlock(
             }
         }
     }
-}
-
-@Composable
-fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
-    val isVisible = remember { mutableStateOf(true) }
-
-    val nestedScrollConnection =
-        remember {
-            object : NestedScrollConnection {
-                override fun onPreScroll(
-                    available: Offset,
-                    source: NestedScrollSource,
-                ): Offset {
-                    if (available.y > 20) {
-                        isVisible.value = true  // Scrolling UP → Show bars
-                    } else if (available.y < 0) {
-                        isVisible.value = false // Scrolling DOWN → Hide bars
-                    }
-                    return Offset.Zero
-                }
-            }
-        }
-    return isVisible to nestedScrollConnection
 }

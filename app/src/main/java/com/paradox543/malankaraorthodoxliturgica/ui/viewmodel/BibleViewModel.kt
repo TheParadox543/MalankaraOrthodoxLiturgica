@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
@@ -15,25 +16,43 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacen
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class BibleViewModel @Inject constructor(
     private val bibleRepository: BibleRepository,
+    private val settingsRepository: SettingsRepository,
+    private val translationsRepository: TranslationsRepository,
     private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
     private val getAdjacentChaptersUseCase: GetAdjacentChaptersUseCase,
     private val formatBibleReadingEntryUseCase: FormatBibleReadingEntryUseCase,
     private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
     private val formatBiblePrefaceUseCase: FormatBiblePrefaceUseCase,
 ) : ViewModel() {
+    val selectedLanguage: StateFlow<AppLanguage> =
+        settingsRepository.language.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = runBlocking { settingsRepository.language.first() },
+        )
+
     val bibleBooks: List<BibleBookDetails> = bibleRepository.loadBibleMetaData()
 
     private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
     val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
+
+    private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
+    val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
     fun loadBibleBook(bookNumber: Int): BibleBookDetails = bibleBooks[bookNumber]
 

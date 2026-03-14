@@ -271,7 +271,6 @@ fun NavGraph(
                     settingsViewModel,
                     prayerViewModel,
                     innerPadding,
-                    { _, _ -> },
                     {
                         navController.navigate(AppScreen.Home.route) {
                             popUpTo(AppScreen.Onboarding.route) {
@@ -501,7 +500,6 @@ fun NavGraph(
                 BibleReadingScreen(
                     { _, _ -> },
                     bibleViewModel,
-                    settingsViewModel,
                     innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )

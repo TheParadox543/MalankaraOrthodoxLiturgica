@@ -34,6 +34,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
@@ -45,7 +47,6 @@ fun OnboardingScreen(
     settingsViewModel: SettingsViewModel,
     prayerViewModel: PrayerViewModel,
     contentPadding: PaddingValues = PaddingValues(),
-    onPrayerButtonClick: (String, Boolean) -> Unit,
     onNavigateToHome: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
@@ -148,12 +149,7 @@ fun OnboardingScreen(
                     "Sample Prayer",
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                 )
-                PrayerElementRenderer(
-                    prayers[1],
-                    prayerViewModel,
-                    filename,
-                    onPrayerButtonClick,
-                )
+                (prayers[1] as? PrayerElement.Prose)?.let { Prose(it.content) }
             }
         }
 

@@ -21,16 +21,15 @@ import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerElementRenderer
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerRenderContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlternativePrayersUI(
     element: PrayerElement.AlternativePrayersBlock,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    isSongHorizontalScroll: Boolean,
 ) {
     var selectedIndex by remember { mutableIntStateOf(0) }
 
@@ -66,10 +65,9 @@ fun AlternativePrayersUI(
             if (child !is PrayerElement.Heading) {
                 PrayerElementRenderer(
                     prayerElement = child,
-                    prayerViewModel = prayerViewModel,
+                    context = context,
                     filename = filename,
                     onPrayerButtonClick = onPrayerButtonClick,
-                    isSongHorizontalScroll = isSongHorizontalScroll,
                 )
             }
         }
