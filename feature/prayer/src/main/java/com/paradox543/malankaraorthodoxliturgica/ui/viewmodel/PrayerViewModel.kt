@@ -40,6 +40,13 @@ class PrayerViewModel @Inject constructor(
             initialValue = runBlocking { settingsRepository.language.first() },
         )
 
+    val songScrollState: StateFlow<Boolean> =
+        settingsRepository.songScrollState.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = false,
+        )
+
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 

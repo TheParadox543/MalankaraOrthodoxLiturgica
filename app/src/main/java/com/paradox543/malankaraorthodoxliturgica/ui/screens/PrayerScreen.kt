@@ -66,14 +66,12 @@ import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayer
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import kotlinx.coroutines.delay
 
 @Composable
 fun PrayerScreen(
     onPrayerButtonClick: (String, Boolean) -> Unit,
     prayerViewModel: PrayerViewModel,
-    settingsViewModel: SettingsViewModel,
     prayerNavViewModel: PrayerNavViewModel,
     node: PageNode,
     scrollIndex: Int = 0,
@@ -83,7 +81,7 @@ fun PrayerScreen(
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
-    val songScrollState by settingsViewModel.songScrollState.collectAsState()
+    val songScrollState by prayerViewModel.songScrollState.collectAsState()
     var title = ""
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "

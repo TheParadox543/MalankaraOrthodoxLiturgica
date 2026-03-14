@@ -348,7 +348,6 @@ fun NavGraph(
                             }
                         },
                         prayerViewModel,
-                        settingsViewModel,
                         prayerNavViewModel,
                         node,
                         scrollIndex,
