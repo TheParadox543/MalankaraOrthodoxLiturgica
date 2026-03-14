@@ -8,7 +8,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjace
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,12 +46,7 @@ class PrayerNavViewModel @Inject constructor(
 
     fun findNode(route: String) = rootNode.value.findByRoute(route)
 
-    fun getAdjacentRoutes(node: PageNode): Pair<String?, String?> {
-        val (prev, next) = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
-        val prevRoute = prev?.let { AppScreen.Prayer.createRoute(prev) }
-        val nextRoute = next?.let { AppScreen.Prayer.createRoute(next) }
-        return Pair(prevRoute, nextRoute)
-    }
+    fun getAdjacentRoutes(node: PageNode): Pair<String?, String?> = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
 
     fun getAllPrayerNodes(): List<PageNode> = getPrayerNodesForCurrentTimeUseCase(rootNode.value)
 }

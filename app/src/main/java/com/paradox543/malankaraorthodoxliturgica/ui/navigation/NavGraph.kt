@@ -178,12 +178,12 @@ fun NavGraph(
                             nextNodeRoute = state.nextRoute,
                             onShowQr = state.onShowQrDialog,
                             onPrevClick = {
-                                navController.navigate(state.prevRoute!!) {
+                                navController.navigate(AppScreen.Prayer.createRoute(state.prevRoute!!)) {
                                     navController.popBackStack()
                                 }
                             },
                             onNextClick = {
-                                navController.navigate(state.nextRoute!!) {
+                                navController.navigate(AppScreen.Prayer.createRoute(state.nextRoute!!)) {
                                     navController.popBackStack()
                                 }
                             },
