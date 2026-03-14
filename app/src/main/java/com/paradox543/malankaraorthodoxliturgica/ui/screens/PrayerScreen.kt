@@ -66,7 +66,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerEleme
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
@@ -81,6 +80,7 @@ fun PrayerScreen(
     node: PageNode,
     scrollIndex: Int = 0,
     contentPadding: PaddingValues = PaddingValues(),
+    onQrDialogShow: (String, Int) -> String,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
@@ -181,10 +181,7 @@ fun PrayerScreen(
     if (showQrDialog) {
         val qrBitmap =
             generateQrBitmap(
-                AppScreen.Prayer.createDeepLink(
-                    node.route,
-                    listState.firstVisibleItemIndex,
-                ),
+                onQrDialogShow(node.route, listState.firstVisibleItemIndex),
             )
         QrDialog(qrBitmap) { showQrDialog = false }
     }

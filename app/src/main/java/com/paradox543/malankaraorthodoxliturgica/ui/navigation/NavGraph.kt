@@ -337,6 +337,9 @@ fun NavGraph(
                         node,
                         scrollIndex,
                         innerPadding,
+                        onQrDialogShow = { route, scrollIndex ->
+                            AppScreen.Prayer.createDeepLink(route, scrollIndex)
+                        },
                     ) { scaffoldUiState = it }
                 } else {
                     ContentNotReadyScreen(
