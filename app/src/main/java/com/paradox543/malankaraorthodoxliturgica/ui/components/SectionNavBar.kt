@@ -1,13 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.components
 
 import android.graphics.Bitmap
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -19,10 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 
@@ -100,21 +93,6 @@ fun SectionNavBar(
         )
     }
     if (showDialog && qrBitmap != null) {
-        AlertDialog(
-            onDismissRequest = { showDialog = false },
-            title = { Text("QR Code") },
-            text = {
-                Image(
-                    bitmap = qrBitmap!!.asImageBitmap(),
-                    contentDescription = null,
-                    modifier = Modifier.size(250.dp),
-                )
-            },
-            confirmButton = {
-                Button(onClick = { showDialog = false }) {
-                    Text("Close")
-                }
-            },
-        )
+        QrDialog(qrBitmap, onDismissRequest = { showDialog = false })
     }
 }
