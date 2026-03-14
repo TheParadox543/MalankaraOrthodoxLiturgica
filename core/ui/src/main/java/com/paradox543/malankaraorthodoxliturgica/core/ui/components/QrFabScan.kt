@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.qr
+package com.paradox543.malankaraorthodoxliturgica.core.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -20,7 +20,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.R
 @Composable
 fun QrFabScan(
     onScanClick: () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.Companion,
 ) {
     val tooltipState = rememberTooltipState()
 
@@ -30,7 +30,7 @@ fun QrFabScan(
             Card {
                 Text(
                     "Scan QR Code",
-                    Modifier.padding(12.dp),
+                    Modifier.Companion.padding(12.dp),
                     style = MaterialTheme.typography.labelLarge,
                 )
             }

@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 
 @Composable
 fun AboutScreen(

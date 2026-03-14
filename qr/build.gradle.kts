@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    // Linter plugin
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -35,11 +38,20 @@ android {
 }
 
 dependencies {
+    // Project Imports
     implementation(project(":core:platform"))
+    implementation(project(":core:ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    // Jetpack Compose UI
+    implementation(libs.androidx.activity.compose)    // Compose integration for Activity
+    implementation(platform(libs.androidx.compose.bom)) // BOM for consistent Compose library versions
+    implementation(libs.androidx.ui)                  // Core Compose UI toolkit
+    implementation(libs.androidx.ui.graphics)         // Compose graphics primitives
+    implementation(libs.androidx.material3)           // Material Design 3 components for Compose
 
     // QR generation and scanning
     implementation(libs.zxing.android.embedded)

@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import kotlinx.coroutines.delay
 
 data class ScannerMessage(

@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui
+package com.paradox543.malankaraorthodoxliturgica.core.ui
 
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 
