@@ -12,6 +12,7 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ### Added
 
 - Promyion prayers in great lent for two weeks.
+- QR module
 
 ### Fix
 
@@ -25,6 +26,7 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 - Refactored UI components to make them more reusable.
 - Refactored navController usage so that screens no longer directly call navigation properties.
 - Move UI theme, typography, colors to :core:ui.
+- Move QR generation and decoding to :qr.
 
 ---
 
