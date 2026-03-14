@@ -60,9 +60,11 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subtext
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Title
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
+import com.paradox543.malankaraorthodoxliturgica.ui.components.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
@@ -88,6 +90,7 @@ fun PrayerScreen(
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
     }
+    var showQrDialog by remember { mutableStateOf(false) }
 
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -148,15 +151,11 @@ fun PrayerScreen(
                 title = title,
                 prevRoute = prevNodeRoute,
                 nextRoute = nextNodeRoute,
-                routeProvider = {
-                    AppScreen.Prayer.createDeepLink(
-                        node.route,
-                        listState.firstVisibleItemIndex,
-                    )
+                onShowQrDialog = {
+                    showQrDialog = true
                 },
                 isVisible = barsVisible,
                 nestedScrollConnection = nestedScrollConnection,
-                showFab = true,
             ),
         )
     }
@@ -177,6 +176,17 @@ fun PrayerScreen(
                 delay(100)
             }
         }
+    }
+
+    if (showQrDialog) {
+        val qrBitmap =
+            generateQrBitmap(
+                AppScreen.Prayer.createDeepLink(
+                    node.route,
+                    listState.firstVisibleItemIndex,
+                ),
+            )
+        QrDialog(qrBitmap) { showQrDialog = false }
     }
 
     LazyColumn(

@@ -15,12 +15,15 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 import com.paradox543.malankaraorthodoxliturgica.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.ui.components.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
@@ -38,6 +41,7 @@ fun BibleChapterScreen(
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val bibleBooks = bibleViewModel.bibleBooks
     val bibleBook = bibleBooks[bookIndex]
+    var showQrDialog by remember { mutableStateOf(false) }
 
     val bookName: String =
         when (selectedLanguage) {
@@ -81,7 +85,7 @@ fun BibleChapterScreen(
                 title = title,
                 prevRoute = prevRoute,
                 nextRoute = nextRoute,
-                routeProvider = routeProvider,
+                onShowQrDialog = { showQrDialog = true },
                 isVisible = barsVisible,
                 nestedScrollConnection = nestedScrollConnection,
                 showFab = false,
@@ -103,6 +107,10 @@ fun BibleChapterScreen(
             MaterialTheme.colorScheme.error,
         )
     } else {
+        if (showQrDialog) {
+            val qrBitmap = generateQrBitmap(routeProvider())
+            QrDialog(qrBitmap) { showQrDialog = false }
+        }
         LazyColumn(
             state = listState,
             modifier =

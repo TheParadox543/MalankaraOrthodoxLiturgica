@@ -23,7 +23,7 @@ sealed class ScaffoldUiState {
         val title: String,
         val prevRoute: String?,
         val nextRoute: String?,
-        val routeProvider: () -> String,
+        val onShowQrDialog: () -> Unit,
         val isVisible: Boolean,
         val nestedScrollConnection: NestedScrollConnection,
         val showFab: Boolean = true,

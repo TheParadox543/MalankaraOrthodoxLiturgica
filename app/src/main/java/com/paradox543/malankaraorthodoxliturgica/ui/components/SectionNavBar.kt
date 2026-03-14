@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.components
 
-import android.graphics.Bitmap
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
@@ -11,25 +10,17 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import com.paradox543.malankaraorthodoxliturgica.R
-import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 
 @Composable
 fun SectionNavBar(
     prevNodeRoute: String?,
     nextNodeRoute: String?,
-    routeProvider: () -> String,
+    onShowQr: () -> Unit,
     onPrevClick: () -> Unit,
     onNextClick: () -> Unit,
 ) {
-    var showDialog by remember { mutableStateOf(false) }
-    var qrBitmap by remember { mutableStateOf<Bitmap?>(null) }
-
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -60,10 +51,7 @@ fun SectionNavBar(
             label = { Text("Generate QR") },
             selected = false,
             enabled = true,
-            onClick = {
-                qrBitmap = generateQrBitmap(routeProvider())
-                showDialog = true
-            },
+            onClick = onShowQr,
             colors =
                 NavigationBarItemDefaults.colors(
                     unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
@@ -91,8 +79,5 @@ fun SectionNavBar(
                     disabledTextColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.3f),
                 ),
         )
-    }
-    if (showDialog && qrBitmap != null) {
-        QrDialog(qrBitmap, onDismissRequest = { showDialog = false })
     }
 }

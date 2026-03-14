@@ -176,7 +176,7 @@ fun NavGraph(
                         SectionNavBar(
                             prevNodeRoute = state.prevRoute,
                             nextNodeRoute = state.nextRoute,
-                            routeProvider = state.routeProvider,
+                            onShowQr = state.onShowQrDialog,
                             onPrevClick = {
                                 navController.navigate(state.prevRoute!!) {
                                     navController.popBackStack()
