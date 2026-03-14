@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.core.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,13 +41,7 @@ fun QrFabScan(
             onClick = onScanClick,
             modifier = modifier,
             containerColor = MaterialTheme.colorScheme.primary,
-//            } else {
-//                MaterialTheme.colorScheme.secondary
-//            },
             contentColor = MaterialTheme.colorScheme.onPrimary,
-//            } else {
-//                MaterialTheme.colorScheme.onSecondary
-//            }
         ) {
             Icon(
                 painterResource(R.drawable.qr_scanner),
