@@ -60,13 +60,13 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Source
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subtext
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Title
+import com.paradox543.malankaraorthodoxliturgica.core.ui.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
