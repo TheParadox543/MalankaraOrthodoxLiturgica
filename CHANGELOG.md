@@ -16,6 +16,7 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ### Fix
 
+- Fixed pinch zoom logic which was broken before.
 - Updated some corrections in prayers.
 - Updated location of assets.
 - Screens no longer have their own scaffolds, instead make use of AppScaffold used by navigation.

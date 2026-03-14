@@ -39,6 +39,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
+import com.paradox543.malankaraorthodoxliturgica.ui.modifier.globalPinchZoom
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
@@ -115,12 +116,27 @@ fun NavGraph(
         onDispose { navController.removeOnDestinationChangedListener(listener) }
     }
 
+    val pinchZoomDisabledRoutes =
+        setOf(
+            AppScreen.QrScanner.route,
+            AppScreen.Onboarding.route,
+        )
+
+    val pinchZoomEnabled = currentRoute !in pinchZoomDisabledRoutes
+
     // Apply nestedScroll modifier only for PrayerReading state
-    val scaffoldModifier =
+    val baseScaffoldModifier =
         when (val state = scaffoldUiState) {
             is ScaffoldUiState.PrayerReading -> Modifier.nestedScroll(state.nestedScrollConnection)
             else -> Modifier
         }
+
+    val scaffoldModifier =
+        baseScaffoldModifier.globalPinchZoom(
+            enabled = pinchZoomEnabled,
+            onZoomInStep = { settingsViewModel.setFontScaleDebounced(1) },
+            onZoomOutStep = { settingsViewModel.setFontScaleDebounced(-1) },
+        )
 
     Scaffold(
         modifier = scaffoldModifier,

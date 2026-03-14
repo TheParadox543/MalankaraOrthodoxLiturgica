@@ -38,14 +38,6 @@ class SettingsViewModel @Inject constructor(
                 initialValue = runBlocking { settingsRepository.language.first() },
             )
 
-    val onboardingCompleted: StateFlow<Boolean> =
-        settingsRepository.onboardingCompleted
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000),
-                initialValue = false,
-            )
-
     val fontScale: StateFlow<AppFontScale> =
         settingsRepository.fontScale
             .stateIn(
@@ -84,21 +76,7 @@ class SettingsViewModel @Inject constructor(
     private val _shareApp = MutableSharedFlow<Unit>()
     val shareApp = _shareApp.asSharedFlow()
 
-    // Internal MutableStateFlow to track AppFontSize changes for debounced saving
-//    private val _debouncedAppFontScale = MutableStateFlow(AppFontScale.Medium)
-
-    // Debounce state
     private var debounceJob: Job? = null
-
-    init {
-        // Debounce mechanism: only save to DataStore after a short delay of no new updates
-//        viewModelScope.launch {
-//            _debouncedAppFontScale.collectLatest { fontScaleToSave ->
-//                delay(500L) // Wait for 500ms for more gesture events to stop
-//                settingsRepository.setFontScale(fontScaleToSave) // Then save the enum
-//            }
-//        }
-    }
 
     // Function to set (and save) language
     fun setLanguage(language: AppLanguage) {
@@ -120,12 +98,16 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun setFontScaleDebounced(direction: Int) {
-//        if (direction > 0) {
-//            _selectedAppFontScale.value = _selectedAppFontScale.value.next()
-//        } else if (direction < 0) {
-//            _selectedAppFontScale.value = _selectedAppFontScale.value.prev()
-//        }
-//        updateFontScaleWithDebounce(_selectedAppFontScale.value)
+        val current = fontScale.value
+        val target =
+            when {
+                direction > 0 -> current.next()
+                direction < 0 -> current.prev()
+                else -> current
+            }
+
+        if (target == current) return
+        updateFontScaleWithDebounce(target)
     }
 
     fun updateFontScaleWithDebounce(newScale: AppFontScale) {
