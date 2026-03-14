@@ -119,14 +119,14 @@ dependencies {
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
 
     // QR generation and scanning
-    implementation(libs.zxing.android.embedded)
-    implementation(libs.zxing.core)
-    implementation(libs.barcode.scanning)
-
-    // Camera Scanning
-    implementation(libs.androidx.camera.camera2)
-    implementation(libs.androidx.camera.lifecycle)
-    implementation(libs.androidx.camera.view)
+//    implementation(libs.zxing.android.embedded)
+//    implementation(libs.zxing.core)
+//    implementation(libs.barcode.scanning)
+//
+//    // Camera Scanning
+//    implementation(libs.androidx.camera.camera2)
+//    implementation(libs.androidx.camera.lifecycle)
+//    implementation(libs.androidx.camera.view)
 
     // Firebase Services
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency
