@@ -55,60 +55,25 @@ class FirebaseAnalyticsService @Inject constructor(
         routePattern: String,
         arguments: Map<String, String?>,
     ) {
-        val screenName: String
-        val screenClass: String
-
-        when {
-            // Case 1
-            routePattern.startsWith("section/") && routePattern.contains("{route}") -> {
-                val value = arguments["route"]
-                screenName = value?.let { "section/$it" } ?: routePattern
-                screenClass = "SectionScreen"
+        val resolvedScreenName =
+            """\{([^}]+)\}""".toRegex().replace(routePattern) { match ->
+                val argName = match.groupValues[1]
+                arguments[argName] ?: match.value
             }
 
-            // Case 2
-            routePattern.startsWith("prayerScreen/") && routePattern.contains("{route}") -> {
-                val value = arguments["route"]
-                screenName = value?.let { "prayerScreen/$it" } ?: routePattern
-                screenClass = "PrayerScreen"
+        val screenClass =
+            when {
+                routePattern.startsWith("section/") -> "SectionScreen"
+                routePattern.startsWith("prayer/") -> "PrayerScreen"
+                routePattern.startsWith("song/") -> "SongScreen"
+                routePattern == "calendar" -> "CalendarScreen"
+                routePattern.startsWith("bible") -> "BibleScreen"
+                else -> "StaticScreen"
             }
-
-            // Case 3
-            routePattern.startsWith("bible/") &&
-                routePattern.contains("{bookName}") &&
-                !routePattern.contains("{chapterIndex}") -> {
-                val bookName = arguments["bookName"]
-                screenName = bookName?.let { "bible/$it" } ?: routePattern
-                screenClass = "BibleBookScreen"
-            }
-
-            // Case 4
-            routePattern.startsWith("bible/") &&
-                routePattern.contains("{bookIndex}") &&
-                routePattern.contains("{chapterIndex}") -> {
-                val bookIndex = arguments["bookIndex"]
-                val chapterIndex = arguments["chapterIndex"]
-
-                screenName =
-                    when {
-                        bookIndex != null && chapterIndex != null -> "bible/$bookIndex/$chapterIndex"
-                        bookIndex != null -> "bible/$bookIndex"
-                        else -> routePattern
-                    }
-
-                screenClass = "BibleChapterScreen"
-            }
-
-            // Default
-            else -> {
-                screenName = routePattern
-                screenClass = "StaticScreen"
-            }
-        }
 
         val bundle =
             Bundle().apply {
-                putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
+                putString(FirebaseAnalytics.Param.SCREEN_NAME, resolvedScreenName)
                 putString(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
             }
 
