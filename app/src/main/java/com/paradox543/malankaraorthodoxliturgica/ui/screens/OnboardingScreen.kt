@@ -39,7 +39,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerEleme
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

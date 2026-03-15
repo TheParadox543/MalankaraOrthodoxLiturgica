@@ -48,17 +48,17 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerSc
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.AboutScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.ui.modifier.globalPinchZoom
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.

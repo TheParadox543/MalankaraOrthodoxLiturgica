@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.settings.screens
 
 import android.app.Activity
 import android.app.NotificationManager
@@ -68,8 +68,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.R
-import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.components.RestoreTimePicker
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

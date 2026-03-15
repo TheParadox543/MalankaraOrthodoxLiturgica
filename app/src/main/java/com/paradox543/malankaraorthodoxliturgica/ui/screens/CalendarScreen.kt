@@ -54,8 +54,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle

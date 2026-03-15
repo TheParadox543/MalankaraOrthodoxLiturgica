@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.components
+package com.paradox543.malankaraorthodoxliturgica.feature.settings.components
 
 import android.util.Log
 import androidx.compose.foundation.background

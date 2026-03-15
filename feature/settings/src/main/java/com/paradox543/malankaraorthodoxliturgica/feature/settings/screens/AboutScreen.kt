@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.settings.screens
 
 import android.content.ActivityNotFoundException
 import android.content.Context
