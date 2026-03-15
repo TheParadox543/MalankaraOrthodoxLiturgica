@@ -9,6 +9,10 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 - Unversioned changes
 
+---
+
+## [2.2.3] - 2026-03-15
+
 ### Added
 
 - Promyion prayers in great lent for two weeks.
