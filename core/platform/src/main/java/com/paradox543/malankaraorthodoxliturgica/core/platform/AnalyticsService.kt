@@ -21,6 +21,8 @@ interface AnalyticsService {
     /** Log that the user shared the app. */
     fun logShareEvent()
 
+    fun logQrNavigationSuccess(destinationRoute: String)
+
     fun logLanguageSelected(language: String)
 
     /**

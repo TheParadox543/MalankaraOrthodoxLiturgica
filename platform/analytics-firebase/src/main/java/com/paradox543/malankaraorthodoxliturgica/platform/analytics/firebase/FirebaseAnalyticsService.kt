@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.analytics.firebase
+package com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase
 
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -51,6 +51,15 @@ class FirebaseAnalyticsService @Inject constructor(
         firebaseAnalytics.logEvent("language_selected", bundle)
     }
 
+    override fun logQrNavigationSuccess(destinationRoute: String) {
+        val bundle =
+            Bundle().apply {
+                putString("destination_route", destinationRoute)
+                putString("destination_type", destinationRoute.substringBefore('/'))
+            }
+        firebaseAnalytics.logEvent("qr_navigation_success", bundle)
+    }
+
     override fun logScreenVisited(
         routePattern: String,
         arguments: Map<String, String?>,
@@ -67,6 +76,7 @@ class FirebaseAnalyticsService @Inject constructor(
                 routePattern.startsWith("prayer/") -> "PrayerScreen"
                 routePattern.startsWith("song/") -> "SongScreen"
                 routePattern == "calendar" -> "CalendarScreen"
+                routePattern == "qrScanner" -> "QrScannerScreen"
                 routePattern.startsWith("bible") -> "BibleScreen"
                 else -> "StaticScreen"
             }

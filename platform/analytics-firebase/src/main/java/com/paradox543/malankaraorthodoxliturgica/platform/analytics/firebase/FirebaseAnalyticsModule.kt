@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.analytics.firebase
+package com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase
 
 import android.Manifest
 import android.content.Context

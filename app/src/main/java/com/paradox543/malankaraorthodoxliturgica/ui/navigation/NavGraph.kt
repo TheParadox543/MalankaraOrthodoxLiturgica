@@ -508,6 +508,7 @@ fun NavGraph(
             composable(AppScreen.QrScanner.route) {
                 QrScannerView(
                     onNavigate = { route ->
+                        analyticsService.logQrNavigationSuccess(route)
                         navController.navigate(route) {
                             launchSingleTop = true
                             navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)
