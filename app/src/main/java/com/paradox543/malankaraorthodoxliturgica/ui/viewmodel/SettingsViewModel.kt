@@ -4,11 +4,12 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
-import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -27,7 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val settingsRepository: SettingsRepository,
-    private val firebaseAnalytics: FirebaseAnalytics,
+    private val analyticsService: AnalyticsService,
     private val soundModeManager: SoundModeManager,
 ) : ViewModel() {
     val selectedLanguage: StateFlow<AppLanguage> =
@@ -82,11 +83,7 @@ class SettingsViewModel @Inject constructor(
     fun setLanguage(language: AppLanguage) {
         viewModelScope.launch {
             settingsRepository.setLanguage(language)
-            val bundle =
-                Bundle().apply {
-                    putString("language", language.name)
-                }
-            firebaseAnalytics.logEvent("language_selected", bundle)
+            analyticsService.logLanguageSelected(language.name)
         }
     }
 
@@ -122,14 +119,14 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun logTutorialStart() {
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, null)
+        analyticsService.logTutorialStarted()
     }
 
     fun setOnboardingCompleted(completed: Boolean = true) {
         viewModelScope.launch {
             settingsRepository.setOnboardingCompleted(completed)
             if (completed) {
-                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
+                analyticsService.logTutorialCompleted()
             }
         }
     }

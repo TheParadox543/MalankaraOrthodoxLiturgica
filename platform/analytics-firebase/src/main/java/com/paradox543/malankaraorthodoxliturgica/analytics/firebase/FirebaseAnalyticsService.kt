@@ -43,6 +43,14 @@ class FirebaseAnalyticsService @Inject constructor(
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
     }
 
+    override fun logLanguageSelected(language: String) {
+        val bundle =
+            Bundle().apply {
+                putString("language", language)
+            }
+        firebaseAnalytics.logEvent("language_selected", bundle)
+    }
+
     override fun logScreenVisited(
         routePattern: String,
         arguments: Map<String, String?>,
@@ -105,5 +113,13 @@ class FirebaseAnalyticsService @Inject constructor(
             }
 
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+    }
+
+    override fun logTutorialStarted() {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN, null)
+    }
+
+    override fun logTutorialCompleted() {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE, null)
     }
 }
