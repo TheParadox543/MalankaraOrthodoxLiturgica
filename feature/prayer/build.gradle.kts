@@ -45,6 +45,8 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:platform"))
 
+    implementation(project(":qr"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
 
