@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens
 
 import android.content.res.Configuration
 import android.util.Log
@@ -57,11 +57,11 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Title
 import com.paradox543.malankaraorthodoxliturgica.core.ui.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.components.AlternativePrayersUI
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.components.ErrorBlock
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
-import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
-import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import kotlinx.coroutines.delay
 
 @Composable

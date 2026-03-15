@@ -38,6 +38,12 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.HomeScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayNowScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.SectionScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.ui.modifier.globalPinchZoom
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
@@ -47,17 +53,11 @@ import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayNowScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 /**

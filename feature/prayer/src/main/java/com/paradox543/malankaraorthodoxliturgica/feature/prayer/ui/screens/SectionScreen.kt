@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens
 
 import android.app.Activity
 import android.util.Log
@@ -37,7 +37,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManage
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.R
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerViewModel
 
 @Composable
 fun SectionScreen(

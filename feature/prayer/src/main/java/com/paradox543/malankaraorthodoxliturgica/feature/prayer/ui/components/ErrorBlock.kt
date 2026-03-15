@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.components
+package com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
