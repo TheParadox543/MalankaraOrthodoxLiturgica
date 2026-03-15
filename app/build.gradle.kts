@@ -81,11 +81,12 @@ dependencies {
     implementation(project(":data:prayer"))
     implementation(project(":data:settings"))
     implementation(project(":data:translations"))
-    implementation(project(":feature:prayer"))
 
     implementation(project(":qr"))
 
     implementation(project(":core:ui"))
+    implementation(project(":feature:settings"))
+    implementation(project(":feature:prayer"))
 
     implementation(project(":core:platform"))
     implementation(project(":platform:analytics-firebase"))

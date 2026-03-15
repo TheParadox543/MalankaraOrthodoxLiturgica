@@ -9,6 +9,10 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 - Unversioned changes
 
+### Refactor
+- Moved all prayer screens and ViewModels to :feature:prayer
+
+
 ---
 
 ## [2.2.3] - 2026-03-15
