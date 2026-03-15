@@ -1,9 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
 
-import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale

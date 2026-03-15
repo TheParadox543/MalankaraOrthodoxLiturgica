@@ -15,6 +15,7 @@ android {
 
     defaultConfig {
         minSdk = 24
+        buildConfigField("String", "VERSION_NAME", "\"${providers.gradleProperty("APP_VERSION_NAME").get()}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -38,7 +39,9 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
@@ -63,6 +66,10 @@ dependencies {
     implementation(libs.androidx.material3)           // Material Design 3 components for Compose
 
     testImplementation(libs.junit)
+
+    // Debugging & Development Tools (only for debug builds)
+    debugImplementation(libs.androidx.ui.tooling) // Compose tooling for previews and inspection
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

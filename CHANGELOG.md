@@ -11,6 +11,7 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ### Refactor
 - Moved all prayer screens and ViewModels to :feature:prayer
+- Moved all settings screens and ViewModels to :feature:settings
 
 
 ---
