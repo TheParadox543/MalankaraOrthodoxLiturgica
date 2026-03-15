@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
+package com.parodx543.malankaraorthodoxliturgica.feature.bible
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -42,7 +42,7 @@ class BibleViewModel @Inject constructor(
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Companion.WhileSubscribed(5000),
             initialValue = runBlocking { settingsRepository.language.first() },
         )
 

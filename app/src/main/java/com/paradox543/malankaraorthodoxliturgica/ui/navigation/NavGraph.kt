@@ -56,9 +56,9 @@ import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScree
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.
@@ -413,7 +413,6 @@ fun NavGraph(
                     { index ->
                         navController.navigate(AppScreen.BibleBook.createRoute(index))
                     },
-                    settingsViewModel,
                     bibleViewModel,
                     innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
@@ -438,7 +437,6 @@ fun NavGraph(
                     { bookIndex, chapterIndex ->
                         navController.navigate(AppScreen.BibleChapter.createRoute(bookIndex, chapterIndex))
                     },
-                    settingsViewModel,
                     bibleViewModel,
                     bookIndex,
                     innerPadding,
@@ -468,7 +466,6 @@ fun NavGraph(
                         ?.getString(AppScreen.BibleChapter.ARG_CHAPTER_INDEX)
                         ?.toIntOrNull() ?: 0
                 BibleChapterScreen(
-                    settingsViewModel,
                     bibleViewModel,
                     bookIndex,
                     chapterIndex,

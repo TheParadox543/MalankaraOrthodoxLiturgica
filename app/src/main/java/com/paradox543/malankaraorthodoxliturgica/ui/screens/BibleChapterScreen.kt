@@ -26,19 +26,17 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.rememberScrollAwareVisi
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
 
 @Composable
 fun BibleChapterScreen(
-    settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookIndex: Int,
     chapterIndex: Int,
     contentPadding: PaddingValues,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
-    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+    val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
     val bibleBooks = bibleViewModel.bibleBooks
     val bibleBook = bibleBooks[bookIndex]
     var showQrDialog by remember { mutableStateOf(false) }

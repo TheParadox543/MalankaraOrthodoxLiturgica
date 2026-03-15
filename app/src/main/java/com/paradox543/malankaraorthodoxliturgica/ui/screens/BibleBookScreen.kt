@@ -22,19 +22,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
 
 @Composable
 fun BibleBookScreen(
     onBibleNavigate: (Int, Int) -> Unit,
-    settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
     bookIndex: Int,
     contentPadding: PaddingValues,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
-    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+    val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
     val bibleBook = bibleViewModel.loadBibleBook(bookIndex)
     val bookName = bibleBook.book.get(selectedLanguage)
     val chapters = bibleBook.chapters

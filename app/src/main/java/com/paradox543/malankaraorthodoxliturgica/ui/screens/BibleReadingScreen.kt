@@ -20,7 +20,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReferen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerElementRenderer
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerRenderContext
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
+import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
 
 @Composable
 fun BibleReadingScreen(
