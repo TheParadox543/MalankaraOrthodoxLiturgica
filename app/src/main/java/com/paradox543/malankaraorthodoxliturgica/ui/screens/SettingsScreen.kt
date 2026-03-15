@@ -12,6 +12,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -42,7 +43,6 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -61,25 +61,24 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
+import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
+import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
-import com.paradox543.malankaraorthodoxliturgica.services.ShareService
-import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.ui.components.RestoreTimePicker
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    navController: NavController,
+    onNavigateToAbout: () -> Unit,
     settingsViewModel: SettingsViewModel,
     shareService: ShareService,
+    contentPadding: PaddingValues = PaddingValues(),
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
     val selectedFontScale by settingsViewModel.fontScale.collectAsState()
@@ -102,231 +101,227 @@ fun SettingsScreen(
                     it,
                     "Welcome to Liturgica: A digital repository for " +
                         "all your books in the Malankara Orthodox Church",
+                    appPackageName = "com.paradox543.malankaraorthodoxliturgica",
                 )
             }
         }
     }
 
-    Scaffold(
-        topBar = { TopNavBar("Settings", navController) },
-        bottomBar = { BottomNavBar(navController) },
-    ) { innerPadding ->
-        Column(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = 20.dp)
-                    .verticalScroll(scrollState),
-            horizontalAlignment = Alignment.Start,
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Settings")) }
+
+    Column(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(horizontal = 20.dp)
+                .verticalScroll(scrollState),
+        horizontalAlignment = Alignment.Start,
 //            verticalArrangement = Arrangement.Center,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Spacer(Modifier.height(12.dp))
+
+        // Language Selection
+        Row(
+            Modifier
+                .padding(12.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Spacer(Modifier.height(12.dp))
+            Text(
+                text = "Select Language",
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.weight(1f),
+            )
+            LanguageDropdownMenu(
+                selectedOption = selectedLanguage,
+                onOptionSelected = { settingsViewModel.setLanguage(it) },
+            )
+        }
 
-            // Language Selection
+        // Font Size Selection
+        Row(
+            Modifier
+                .padding(12.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = "Select Font Size",
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.weight(1f),
+            )
+            FontScaleDropdownMenu(
+                selectedFontScale = selectedFontScale,
+                onOptionSelected = { settingsViewModel.setFontScaleFromSettings(it) },
+            )
+        }
+
+        // Sound Mode Selection
+        Column(Modifier.padding(12.dp)) {
             Row(
                 Modifier
-                    .padding(12.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "Select Language",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(1f),
-                )
-                LanguageDropdownMenu(
-                    selectedOption = selectedLanguage,
-                    onOptionSelected = { settingsViewModel.setLanguage(it) },
-                )
-            }
-
-            // Font Size Selection
-            Row(
-                Modifier
-                    .padding(12.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "Select Font Size",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(1f),
-                )
-                FontScaleDropdownMenu(
-                    selectedFontScale = selectedFontScale,
-                    onOptionSelected = { settingsViewModel.setFontScaleFromSettings(it) },
-                )
-            }
-
-            // Sound Mode Selection
-            Column(Modifier.padding(12.dp)) {
-                Row(
-                    Modifier
 //                        .padding(12.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    text = "Select Sound Mode",
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier.weight(1f),
+                )
+                SoundModeDropdownMenu(
+                    selectedSoundMode = soundMode,
+                    onOptionSelected = { selectedSoundMode ->
+                        settingsViewModel.setSoundMode(selectedSoundMode)
+                    },
+                    hasPermission = hasPermission,
+                )
+            }
+            if (!hasPermission) {
+                Spacer(Modifier.height(8.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "This feature requires DND permission.",
+                        Modifier.weight(1f),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.error,
+                    )
+                    Button(
+//                            onClick = { settingsViewModel.refreshDndPermissionStatus() },
+                        onClick = { requestDndPermission(context) },
+                        modifier = Modifier.padding(top = 4.dp),
+                    ) {
+                        Text("Grant Permission")
+                    }
+                }
+            } else if (soundMode != SoundMode.OFF) {
+                Spacer(Modifier.height(8.dp))
+                Row(
+                    Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(
-                        text = "Select Sound Mode",
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.weight(1f),
-                    )
-                    SoundModeDropdownMenu(
-                        selectedSoundMode = soundMode,
-                        onOptionSelected = { selectedSoundMode ->
-                            settingsViewModel.setSoundMode(selectedSoundMode)
-                        },
-                        hasPermission = hasPermission,
-                    )
-                }
-                if (!hasPermission) {
-                    Spacer(Modifier.height(8.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "This feature requires DND permission.",
-                            Modifier.weight(1f),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.error,
-                        )
-                        Button(
-//                            onClick = { settingsViewModel.refreshDndPermissionStatus() },
-                            onClick = { requestDndPermission(context) },
-                            modifier = Modifier.padding(top = 4.dp),
-                        ) {
-                            Text("Grant Permission")
+                    val displayText =
+                        if (soundRestoreDelay >= 60) {
+                            "${soundRestoreDelay / 60} hr ${soundRestoreDelay % 60} min"
+                        } else {
+                            "$soundRestoreDelay min"
                         }
-                    }
-                } else if (soundMode != SoundMode.OFF) {
-                    Spacer(Modifier.height(8.dp))
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End,
-                        verticalAlignment = Alignment.CenterVertically,
+                    Text(
+                        "Normal restored after:",
+                        Modifier.padding(horizontal = 4.dp),
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                    Card(
+                        Modifier
+                            .requiredWidthIn(min = 120.dp)
+                            .fillMaxHeight()
+                            .clickable(onClick = { showRestoreDialog = true }),
                     ) {
-                        val displayText =
-                            if (soundRestoreDelay >= 60) {
-                                "${soundRestoreDelay / 60} hr ${soundRestoreDelay % 60} min"
-                            } else {
-                                "$soundRestoreDelay min"
-                            }
-                        Text(
-                            "Normal restored after:",
-                            Modifier.padding(horizontal = 4.dp),
-                            style = MaterialTheme.typography.bodySmall,
+                        Text(displayText, Modifier.padding(4.dp))
+                    }
+                    if (showRestoreDialog) {
+                        RestoreTimePicker(
+                            onDismiss = { showRestoreDialog = false },
+                            onConfirm = { minute ->
+                                Log.d("SettingsScreen", "Restore time after $minute")
+                                settingsViewModel.setSoundRestoreDelay(minute)
+                                showRestoreDialog = false
+                            },
+                            delayTime = soundRestoreDelay,
                         )
-                        Card(
-                            Modifier
-                                .requiredWidthIn(min = 120.dp)
-                                .fillMaxHeight()
-                                .clickable(onClick = { showRestoreDialog = true }),
-                        ) {
-                            Text(displayText, Modifier.padding(4.dp))
-                        }
-                        if (showRestoreDialog) {
-                            RestoreTimePicker(
-                                onDismiss = { showRestoreDialog = false },
-                                onConfirm = { minute ->
-                                    Log.d("SettingsScreen", "Restore time after $minute")
-                                    settingsViewModel.setSoundRestoreDelay(minute)
-                                    showRestoreDialog = false
-                                },
-                                delayTime = soundRestoreDelay,
-                            )
-                        }
                     }
                 }
             }
+        }
 
-            // Song Scroll State
-            Row(
-                Modifier
-                    .padding(12.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
+        // Song Scroll State
+        Row(
+            Modifier
+                .padding(12.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = "Text Layout for Songs",
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.weight(1f),
+            )
+            Switch(
+                checked = songScrollState,
+                onCheckedChange = { settingsViewModel.setSongScrollState(it) },
+            )
+        }
+
+        // About the app option
+        ListItem(
+            modifier = Modifier.clickable { onNavigateToAbout() },
+            leadingContent = {
+                Icon(
+                    Icons.Filled.Info,
+                    contentDescription = "About App Icon",
+                    tint = MaterialTheme.colorScheme.tertiary,
+                )
+            },
+            headlineContent = {
                 Text(
-                    text = "Text Layout for Songs",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(1f),
+                    "About the App",
+                    style = MaterialTheme.typography.bodyMedium,
                 )
-                Switch(
-                    checked = songScrollState,
-                    onCheckedChange = { settingsViewModel.setSongScrollState(it) },
+            },
+            colors =
+                ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    headlineColor = MaterialTheme.colorScheme.onBackground,
+                ),
+        )
+
+        // Share App
+        ListItem(
+            headlineContent = {
+                Text(
+                    "Share this App",
+                    style = MaterialTheme.typography.titleSmall,
                 )
-            }
+            },
+            modifier = Modifier.clickable { showShareAppBottomSheet = true },
+            leadingContent = {
+                Icon(
+                    imageVector = Icons.Default.Share,
+                    contentDescription = "Share App",
+                    tint = MaterialTheme.colorScheme.onTertiaryContainer,
+                )
+            },
+            colors =
+                ListItemDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    headlineColor = MaterialTheme.colorScheme.onBackground,
+                ),
+        )
 
-            // About the app option
-            ListItem(
-                modifier = Modifier.clickable { navController.navigate(AppScreen.About.route) },
-                leadingContent = {
-                    Icon(
-                        Icons.Filled.Info,
-                        contentDescription = "About App Icon",
-                        tint = MaterialTheme.colorScheme.tertiary,
-                    )
-                },
-                headlineContent = {
-                    Text(
-                        "About the App",
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                },
-                colors =
-                    ListItemDefaults.colors(
-                        containerColor = MaterialTheme.colorScheme.background,
-                        headlineColor = MaterialTheme.colorScheme.onBackground,
-                    ),
-            )
-
-            // Share App
-            ListItem(
-                headlineContent = {
-                    Text(
-                        "Share this App",
-                        style = MaterialTheme.typography.titleSmall,
-                    )
-                },
-                modifier = Modifier.clickable { showShareAppBottomSheet = true },
-                leadingContent = {
-                    Icon(
-                        imageVector = Icons.Default.Share,
-                        contentDescription = "Share App",
-                        tint = MaterialTheme.colorScheme.onTertiaryContainer,
-                    )
-                },
-                colors =
-                    ListItemDefaults.colors(
-                        containerColor = MaterialTheme.colorScheme.background,
-                        headlineColor = MaterialTheme.colorScheme.onBackground,
-                    ),
-            )
-
-            if (BuildConfig.DEBUG) {
-                ElevatedButton(
-                    onClick = { settingsViewModel.setOnboardingCompleted(false) },
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                ) {
-                    Text("Reset onboarding")
-                }
+        if (BuildConfig.DEBUG) {
+            ElevatedButton(
+                onClick = { settingsViewModel.setOnboardingCompleted(false) },
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            ) {
+                Text("Reset onboarding")
             }
         }
     }
 
     if (showQrCodeDialog) {
-        QrCodeShareDialog(onDismissRequest = { showQrCodeDialog = false })
+        QrCodeShareDialog(onDismissRequest = {})
     }
 
     if (showShareAppBottomSheet) {
         ModalBottomSheet(
-            onDismissRequest = {
-                showShareAppBottomSheet = false
-            },
+            onDismissRequest = {},
             sheetState = bottomSheetState,
         ) {
             Row(
@@ -368,7 +363,6 @@ fun SettingsScreen(
                         .height(200.dp)
                         .padding(8.dp)
                         .clickable {
-                            showQrCodeDialog = true
                         },
                 ) {
                     Column(

@@ -18,32 +18,31 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerElementRenderer
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerRenderContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlternativePrayersUI(
     element: PrayerElement.AlternativePrayersBlock,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
-    navController: NavController,
-    isSongHorizontalScroll: Boolean,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
 ) {
     var selectedIndex by remember { mutableIntStateOf(0) }
 
     Column(
-        Modifier.Companion.fillMaxWidth(),
+        Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         Subheading(
             element.title,
-            Modifier.Companion.padding(bottom = 8.dp),
+            Modifier.padding(bottom = 8.dp),
         )
 
-        SingleChoiceSegmentedButtonRow(Modifier.Companion.fillMaxWidth()) {
+        SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
             element.options.forEachIndexed { index, option ->
                 SegmentedButton(
                     selected = index == selectedIndex,
@@ -59,17 +58,16 @@ fun AlternativePrayersUI(
             }
         }
 
-        Spacer(Modifier.Companion.height(8.dp))
+        Spacer(Modifier.height(8.dp))
 
         // Render the selected option's content
         element.options[selectedIndex].items.forEach { child ->
             if (child !is PrayerElement.Heading) {
                 PrayerElementRenderer(
                     prayerElement = child,
-                    prayerViewModel = prayerViewModel,
+                    context = context,
                     filename = filename,
-                    navController = navController,
-                    isSongHorizontalScroll = isSongHorizontalScroll,
+                    onPrayerButtonClick = onPrayerButtonClick,
                 )
             }
         }

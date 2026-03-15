@@ -32,11 +32,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -47,14 +47,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
@@ -67,10 +64,13 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
-    navController: NavController,
     bibleViewModel: BibleViewModel,
     calendarViewModel: CalendarViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel(),
+    contentPadding: PaddingValues = PaddingValues(),
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     // Collect the StateFlows from the ViewModel
     val monthCalendarData by calendarViewModel.monthCalendarData.collectAsState()
@@ -83,69 +83,97 @@ fun CalendarScreen(
     val error by calendarViewModel.error.collectAsState()
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
 
-    Scaffold(
-        topBar = { TopNavBar("Calendar", navController) },
-        bottomBar = { BottomNavBar(navController) },
-    ) { innerPadding ->
-        Column(
-            modifier =
-                Modifier
-                    .padding(innerPadding)
-                    .padding(horizontal = 8.dp)
-                    .fillMaxSize(),
-        ) {
-            if (isLoading) {
-                // Show a loading indicator
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
-            } else if (error != null || monthCalendarData.isEmpty()) {
-                // Show an error message
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = "Error: $error",
-                            color = MaterialTheme.colorScheme.error,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(16.dp),
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Calendar")) }
+
+    Column(
+        modifier =
+            Modifier
+                .padding(contentPadding)
+                .padding(horizontal = 8.dp)
+                .fillMaxSize(),
+    ) {
+        if (isLoading) {
+            // Show a loading indicator
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (error != null || monthCalendarData.isEmpty()) {
+            // Show an error message
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Error: $error",
+                        color = MaterialTheme.colorScheme.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(16.dp),
+                    )
+                    // Add a retry button if appropriate
+                    Button(onClick = {
+                        calendarViewModel.loadMonth(
+                            currentCalendarViewDate.monthValue,
+                            currentCalendarViewDate.year,
                         )
-                        // Add a retry button if appropriate
-                        Button(onClick = {
-                            calendarViewModel.loadMonth(
-                                currentCalendarViewDate.monthValue,
-                                currentCalendarViewDate.year,
-                            )
-                        }) {
-                            Text("Retry")
-                        }
+                    }) {
+                        Text("Retry")
                     }
+                }
+            }
+        } else {
+            // Calendar content
+            val configuration = LocalConfiguration.current
+            val screenWidth = configuration.screenWidthDp.dp
+            if (screenWidth <= 600.dp) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    CalendarMainView(
+                        calendarViewModel,
+                        currentCalendarViewDate,
+                        hasPrevMonth,
+                        hasNextMonth,
+                        monthCalendarData,
+                        selectedDate,
+                        onPrayerNavigate,
+                        onBibleNavigate,
+                    )
+                }
+                if (displayEvents.isNotEmpty()) {
+                    val scrollState = rememberScrollState()
+                    HorizontalDivider(
+                        thickness = 8.dp,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
+                    DisplayEvents(
+                        scrollState,
+                        displayEvents,
+                        selectedLanguage,
+                        calendarViewModel,
+                        bibleViewModel,
+                        onBibleNavigate,
+                        onPrayerNavigate,
+                    )
                 }
             } else {
-                // Calendar content
-                val configuration = LocalConfiguration.current
-                val screenWidth = configuration.screenWidthDp.dp
-                if (screenWidth <= 600.dp) {
-                    Column(
-                        modifier = Modifier.padding(8.dp),
-                    ) {
-                        CalendarMainView(
-                            calendarViewModel,
-                            currentCalendarViewDate,
-                            hasPrevMonth,
-                            hasNextMonth,
-                            monthCalendarData,
-                            selectedDate,
-                        )
-                    }
+                Row(Modifier.padding(8.dp)) {
+                    CalendarMainView(
+                        calendarViewModel,
+                        currentCalendarViewDate,
+                        hasPrevMonth,
+                        hasNextMonth,
+                        monthCalendarData,
+                        selectedDate,
+                        onPrayerNavigate,
+                        onBibleNavigate,
+                    )
                     if (displayEvents.isNotEmpty()) {
                         val scrollState = rememberScrollState()
-                        HorizontalDivider(
+                        VerticalDivider(
                             thickness = 8.dp,
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -153,36 +181,11 @@ fun CalendarScreen(
                             scrollState,
                             displayEvents,
                             selectedLanguage,
-                            navController,
                             calendarViewModel,
                             bibleViewModel,
+                            onBibleNavigate,
+                            onPrayerNavigate,
                         )
-                    }
-                } else {
-                    Row(Modifier.padding(8.dp)) {
-                        CalendarMainView(
-                            calendarViewModel,
-                            currentCalendarViewDate,
-                            hasPrevMonth,
-                            hasNextMonth,
-                            monthCalendarData,
-                            selectedDate,
-                        )
-                        if (displayEvents.isNotEmpty()) {
-                            val scrollState = rememberScrollState()
-                            VerticalDivider(
-                                thickness = 8.dp,
-                                color = MaterialTheme.colorScheme.primary,
-                            )
-                            DisplayEvents(
-                                scrollState,
-                                displayEvents,
-                                selectedLanguage,
-                                navController,
-                                calendarViewModel,
-                                bibleViewModel,
-                            )
-                        }
                     }
                 }
             }
@@ -198,6 +201,8 @@ private fun CalendarMainView(
     hasNextMonth: Boolean,
     monthCalendarData: List<CalendarWeek>,
     selectedDate: LocalDate?,
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
 ) {
     Column(
         Modifier
@@ -414,9 +419,10 @@ private fun DisplayEvents(
     scrollState: ScrollState,
     displayEvents: List<LiturgicalEventDetails>,
     selectedLanguage: AppLanguage,
-    navController: NavController,
     calendarViewModel: CalendarViewModel,
     bibleViewModel: BibleViewModel,
+    onBibleNavigate: () -> Unit,
+    onPrayerNavigate: (String) -> Unit,
 ) {
     Column(
         Modifier
@@ -427,9 +433,10 @@ private fun DisplayEvents(
             DisplayEvent(
                 event,
                 selectedLanguage,
-                navController,
                 calendarViewModel = calendarViewModel,
                 bibleViewModel = bibleViewModel,
+                onPrayerNavigate = onPrayerNavigate,
+                onBibleNavigate = onBibleNavigate,
             )
         }
     }
@@ -439,11 +446,12 @@ private fun DisplayEvents(
 fun DisplayEvent(
     event: LiturgicalEventDetails,
     selectedLanguage: AppLanguage,
-    navController: NavController,
     modifier: Modifier = Modifier,
     calendarViewModel: CalendarViewModel,
     bibleViewModel: BibleViewModel,
     prayerViewModel: PrayerViewModel = hiltViewModel(),
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val textTitle = calendarViewModel.getFormattedDateTitle(event, selectedLanguage)
@@ -479,7 +487,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(vespersGospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -510,7 +518,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(matinsGospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -541,7 +549,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(primeGospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -569,7 +577,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate(AppScreen.BibleReader.route)
+                                        onBibleNavigate()
                                     },
                                 ) {
                                     Text(
@@ -598,7 +606,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate(AppScreen.BibleReader.route)
+                                        onBibleNavigate()
                                     },
                                 ) {
                                     Text(
@@ -620,7 +628,7 @@ fun DisplayEvent(
                                 TextButton(
                                     onClick = {
                                         bibleViewModel.setSelectedBibleReference(listOf(entry))
-                                        navController.navigate(AppScreen.BibleReader.route)
+                                        onBibleNavigate()
                                     },
                                 ) {
                                     Text(
@@ -645,7 +653,7 @@ fun DisplayEvent(
                             TextButton(
                                 onClick = {
                                     bibleViewModel.setSelectedBibleReference(gospel)
-                                    navController.navigate(AppScreen.BibleReader.route)
+                                    onBibleNavigate()
                                 },
                             ) {
                                 Text(
@@ -663,7 +671,7 @@ fun DisplayEvent(
                             val key = specialSongsKey.removeSuffix("Songs")
                             TextButton(
                                 onClick = {
-                                    navController.navigate(AppScreen.Prayer.createRoute("qurbanaSongs_$key"))
+                                    onPrayerNavigate("qurbanaSongs_$key")
                                 },
                             ) {
                                 Text(

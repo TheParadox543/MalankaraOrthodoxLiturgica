@@ -23,8 +23,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 52
-        versionName = "2.2.2"
+        versionCode = 57
+        versionName = "2.2.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         versionNameSuffix = ""
@@ -81,6 +81,14 @@ dependencies {
     implementation(project(":data:prayer"))
     implementation(project(":data:settings"))
     implementation(project(":data:translations"))
+    implementation(project(":feature:prayer"))
+
+    implementation(project(":qr"))
+
+    implementation(project(":core:ui"))
+
+    implementation(project(":core:platform"))
+    implementation(project(":platform:analytics-firebase"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
@@ -98,9 +106,6 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.ktx) // Core Navigation library for Kotlin
     implementation(libs.androidx.navigation.compose)  // Navigation integration for Compose
 
-    // Data Serialization
-    implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
-
     // Dependency Injection
     implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
     implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
@@ -114,14 +119,14 @@ dependencies {
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
 
     // QR generation and scanning
-    implementation(libs.zxing.android.embedded)
-    implementation(libs.zxing.core)
-    implementation(libs.barcode.scanning)
-
-    // Camera Scanning
-    implementation(libs.androidx.camera.camera2)
-    implementation(libs.androidx.camera.lifecycle)
-    implementation(libs.androidx.camera.view)
+//    implementation(libs.zxing.android.embedded)
+//    implementation(libs.zxing.core)
+//    implementation(libs.barcode.scanning)
+//
+//    // Camera Scanning
+//    implementation(libs.androidx.camera.camera2)
+//    implementation(libs.androidx.camera.lifecycle)
+//    implementation(libs.androidx.camera.view)
 
     // Firebase Services
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency

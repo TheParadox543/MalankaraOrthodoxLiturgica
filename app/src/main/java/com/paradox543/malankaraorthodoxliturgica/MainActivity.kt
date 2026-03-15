@@ -4,68 +4,60 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import com.paradox543.malankaraorthodoxliturgica.services.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManager
-import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManager
-import com.paradox543.malankaraorthodoxliturgica.services.ShareService
-import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
-import com.paradox543.malankaraorthodoxliturgica.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Thin Android entry point. Responsible for:
+ * - Splash screen management
+ * - In-app update/review lifecycle hooks
+ * - Sound mode management
+ * - Theme setup
+ *
+ * All navigation and UI logic lives in [NavGraph].
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    // Inject the update manager for handling in-app updates.
-    @Inject
-    lateinit var inAppUpdateManager: InAppUpdateManager
+    @Inject lateinit var inAppUpdateManager: InAppUpdateManager
 
-    @Inject
-    lateinit var inAppReviewManager: InAppReviewManager
+    @Inject lateinit var inAppReviewManager: InAppReviewManager
 
-    @Inject
-    lateinit var analyticsService: AnalyticsService
+    @Inject lateinit var analyticsService: AnalyticsService
 
-    @Inject
-    lateinit var shareService: ShareService
+    @Inject lateinit var shareService: ShareService
 
-    @Inject
-    lateinit var soundModeManager: SoundModeManager
+    @Inject lateinit var soundModeManager: SoundModeManager
 
-    // Initialize ViewModels needed for startup logic.
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val startupViewModel: StartupViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Install the splash screen.
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        // Check for app updates as soon as the app starts.
         inAppUpdateManager.checkForUpdate(this)
 
-        // Keep the splash screen active until the initial data is loaded.
         var keepSplashOn by mutableStateOf(true)
         splashScreen.setKeepOnScreenCondition { keepSplashOn }
 
-        // Launch a coroutine to load necessary data before hiding the splash screen.
         lifecycleScope.launch {
             startupViewModel.startupState.collect { state ->
                 if (state is StartupState.Ready) keepSplashOn = false
@@ -78,47 +70,27 @@ class MainActivity : ComponentActivity() {
                 is StartupState.Loading -> {}
 
                 is StartupState.Ready -> {
-                    val onboardingCompleted = s.onboardingCompleted
                     val soundMode by settingsViewModel.soundMode.collectAsState()
                     val textScale by settingsViewModel.fontScale.collectAsState()
                     val language by settingsViewModel.selectedLanguage.collectAsState()
+
+                    // Android system concern: apply the user's preferred sound/DnD mode
+                    LaunchedEffect(soundMode) {
+                        soundModeManager.apply(soundMode)
+                    }
+
                     MalankaraOrthodoxLiturgicaTheme(
                         language = language,
                         textScale = textScale,
                     ) {
-                        val snackbarHostState = remember { SnackbarHostState() }
-
-                        // 2. Collect the state from the manager.
-                        val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
-
-                        // 3. Use LaunchedEffect to react to the state change.
-                        LaunchedEffect(updateDownloaded) {
-                            if (updateDownloaded) {
-                                val result =
-                                    snackbarHostState.showSnackbar(
-                                        message = "An update has just been downloaded.",
-                                        actionLabel = "RESTART",
-                                        duration = SnackbarDuration.Indefinite, // Stays until dismissed or actioned
-                                    )
-                                // 4. Perform action based on user interaction.
-                                if (result == SnackbarResult.ActionPerformed) {
-                                    inAppUpdateManager.completeUpdate()
-                                }
-                            }
-                        }
-                        LaunchedEffect(soundMode) {
-                            soundModeManager.apply(soundMode)
-                        }
-                        @Suppress("UnusedMaterial3ScaffoldPaddingParameter")
-                        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
-                            NavGraph(
-                                onboardingCompleted,
-                                inAppReviewManager,
-                                analyticsService,
-                                shareService,
-                                settingsViewModel,
-                            )
-                        }
+                        NavGraph(
+                            onboardingCompleted = s.onboardingCompleted,
+                            inAppUpdateManager = inAppUpdateManager,
+                            inAppReviewManager = inAppReviewManager,
+                            analyticsService = analyticsService,
+                            shareService = shareService,
+                            settingsViewModel = settingsViewModel,
+                        )
                     }
                 }
             }
@@ -127,10 +99,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // The selected code from the Canvas is used here.
-        // It checks if an update was already downloaded while the app was in the background.
         inAppUpdateManager.resumeUpdate()
-
         settingsViewModel.refreshDndPermissionStatus()
         soundModeManager.cancelRestoreWork()
         val soundMode = settingsViewModel.soundMode.value
@@ -140,7 +109,6 @@ class MainActivity : ComponentActivity() {
     override fun onPause() {
         super.onPause()
         inAppUpdateManager.unregisterListener()
-        // Schedule sound restoration when app goes to background
         soundModeManager.scheduleRestore(settingsViewModel.soundRestoreDelay.value)
     }
 }

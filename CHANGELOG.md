@@ -11,6 +11,30 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ---
 
+## [2.2.3] - 2026-03-15
+
+### Added
+
+- Promyion prayers in great lent for two weeks.
+- QR module
+
+### Fix
+
+- Fixed pinch zoom logic which was broken before.
+- Updated some corrections in prayers.
+- Updated location of assets.
+- Screens no longer have their own scaffolds, instead make use of AppScaffold used by navigation.
+
+### Refactor
+
+- Refactored platform module, features use interfaces for platform services.
+- Refactored UI components to make them more reusable.
+- Refactored navController usage so that screens no longer directly call navigation properties.
+- Move UI theme, typography, colors to :core:ui.
+- Move QR generation and decoding to :qr.
+
+---
+
 ## [2.2.2] - 2026-02-22
 
 ### Added

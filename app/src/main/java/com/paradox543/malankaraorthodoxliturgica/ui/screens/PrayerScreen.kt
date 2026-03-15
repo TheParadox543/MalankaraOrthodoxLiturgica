@@ -1,16 +1,13 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
-import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,69 +28,63 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
-import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Heading
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrDialog
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Song
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Source
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subtext
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Title
+import com.paradox543.malankaraorthodoxliturgica.core.ui.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
-import com.paradox543.malankaraorthodoxliturgica.qr.QrFabScan
+import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 import com.paradox543.malankaraorthodoxliturgica.ui.components.AlternativePrayersUI
 import com.paradox543.malankaraorthodoxliturgica.ui.components.ErrorBlock
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Heading
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Prose
-import com.paradox543.malankaraorthodoxliturgica.ui.components.SectionNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Song
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Source
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Subheading
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Subtext
-import com.paradox543.malankaraorthodoxliturgica.ui.components.Title
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 import kotlinx.coroutines.delay
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PrayerScreen(
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     prayerViewModel: PrayerViewModel,
-    settingsViewModel: SettingsViewModel,
     prayerNavViewModel: PrayerNavViewModel,
     node: PageNode,
     scrollIndex: Int = 0,
+    contentPadding: PaddingValues = PaddingValues(),
+    onQrDialogShow: (String, Int) -> String,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
-    val songScrollState by settingsViewModel.songScrollState.collectAsState()
+    val songScrollState by prayerViewModel.songScrollState.collectAsState()
+    val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
+
     var title = ""
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
     }
+    var showQrDialog by remember { mutableStateOf(false) }
 
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
@@ -101,13 +92,6 @@ fun PrayerScreen(
 
     val currentFilename = node.filename ?: "NoFileNameFound"
     val (prevNodeRoute, nextNodeRoute) = prayerNavViewModel.getAdjacentRoutes(node)
-
-    // State to accumulate zoom gesture delta for triggering discrete steps
-    var cumulativeZoomFactor by remember { mutableFloatStateOf(1f) }
-
-    // Define thresholds for triggering a step up/down (adjust these for sensitivity)
-    val zoomInThreshold = 1.2f  // If accumulated zoom factor exceeds this, step up
-    val zoomOutThreshold = 0.8f // If accumulated zoom factor falls below this, step down
 
     // Ensure prayers are loaded only when filename changes
     LaunchedEffect(currentFilename) {
@@ -131,6 +115,17 @@ fun PrayerScreen(
             LazyListState()
         }
 
+    val renderContext =
+        remember(translations, dynamicSongKey, songScrollState) {
+            PrayerRenderContext(
+                translations = translations,
+                dynamicSongKey = dynamicSongKey,
+                isSongHorizontalScroll = songScrollState,
+                onDynamicSongKeyChanged = prayerViewModel::setDynamicSongKey,
+                onError = prayerViewModel::reportError,
+            )
+        }
+
     // Observe if the LazyColumn has been scrolled to its very end
     val isScrolledToTheEnd by remember {
         derivedStateOf {
@@ -145,120 +140,90 @@ fun PrayerScreen(
         }
     }
 
-    Scaffold(
+    // Read during composition so Compose tracks this state and recomposes when it changes
+    val barsVisible = isVisible.value
+
+    LaunchedEffect(title, prevNodeRoute, nextNodeRoute, barsVisible) {
+        onScaffoldStateChanged(
+            ScaffoldUiState.PrayerReading(
+                title = title,
+                prevRoute = prevNodeRoute,
+                nextRoute = nextNodeRoute,
+                onShowQrDialog = {
+                    showQrDialog = true
+                },
+                isVisible = barsVisible,
+                nestedScrollConnection = nestedScrollConnection,
+            ),
+        )
+    }
+
+    // Compute synchronously during composition. Only update when padding grows (bars visible),
+    // so the Spacers freeze at bars-visible height and never jump when bars hide.
+    contentPadding.calculateTopPadding().let { if (it > initialTopPadding.value) initialTopPadding.value = it }
+    contentPadding.calculateBottomPadding().let { if (it > initialBottomPadding.value) initialBottomPadding.value = it }
+
+    LaunchedEffect(Unit) {
+        var retryCount = 0
+        if (scrollIndex > 0) {
+            while (listState.firstVisibleItemIndex != scrollIndex && retryCount < 10) {
+                Log.d("QR in Prayer AppScreen", "Detected scroll from Qr: $scrollIndex")
+                listState.scrollToItem(scrollIndex)
+                Log.d("QR in Prayer AppScreen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
+                retryCount++
+                delay(100)
+            }
+        }
+    }
+
+    if (showQrDialog) {
+        val qrBitmap =
+            generateQrBitmap(
+                onQrDialogShow(node.route, listState.firstVisibleItemIndex),
+            )
+        QrDialog(qrBitmap) { showQrDialog = false }
+    }
+
+    LazyColumn(
         modifier =
             Modifier
-                .nestedScroll(nestedScrollConnection)
-                .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } }
-                .pointerInput(Unit) {
-                    detectTransformGestures { _, _, zoom, _ ->
-                        cumulativeZoomFactor *= zoom
-
-                        if (cumulativeZoomFactor >= zoomInThreshold) {
-                            settingsViewModel.setFontScaleDebounced(1)
-                            cumulativeZoomFactor = 1f
-                        } else if (cumulativeZoomFactor <= zoomOutThreshold) {
-                            settingsViewModel.setFontScaleDebounced(-1)
-                            cumulativeZoomFactor = 1f
-                        }
-                    }
-                },
-        topBar = {
-            AnimatedVisibility(
-                visible = isVisible.value,
-                modifier = Modifier.zIndex(1f),
-            ) {
-                TopNavBar(
-                    title,
-                    navController,
-                )
-            }
-        },
-        bottomBar = {
-            AnimatedVisibility(
-                visible = isVisible.value,
-                modifier = Modifier.zIndex(1f),
-            ) {
-                SectionNavBar(
-                    navController,
-                    prevNodeRoute,
-                    nextNodeRoute,
-                    routeProvider = {
-                        AppScreen.Prayer.createDeepLink(
-                            node.route,
-                            listState.firstVisibleItemIndex,
-                        )
-                    },
-                )
-            }
-        },
-        floatingActionButton = {
-            AnimatedVisibility(
-                visible = isVisible.value,
-                enter = fadeIn(),
-                exit = shrinkOut(),
-            ) { QrFabScan(navController) }
-        },
-    ) { innerPadding ->
-
-        // Capture the system window insets once when the composable is first launched
-        LaunchedEffect(innerPadding) {
-            if (initialTopPadding.value == 0.dp) {
-                initialTopPadding.value = innerPadding.calculateTopPadding()
-            }
-            if (initialBottomPadding.value == 0.dp) {
-                initialBottomPadding.value = innerPadding.calculateBottomPadding()
-            }
+                .padding(horizontal = if (isLandscape) 40.dp else 20.dp)
+                .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
+        state = listState,
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        item {
+            Spacer(Modifier.padding(top = initialTopPadding.value))
         }
-        LaunchedEffect(Unit) {
-            var retryCount = 0
-            if (scrollIndex > 0) {
-                while (listState.firstVisibleItemIndex != scrollIndex && retryCount < 10) {
-                    Log.d("QR in Prayer AppScreen", "Detected scroll from Qr: $scrollIndex")
-                    listState.scrollToItem(scrollIndex)
-                    Log.d("QR in Prayer AppScreen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
-                    retryCount++
-                    delay(100) // Small delay to allow UI to update
-                }
-            }
+        items(prayers) { prayerElement ->
+            PrayerElementRenderer(
+                prayerElement,
+                renderContext,
+                currentFilename,
+                onPrayerButtonClick,
+            )
         }
-
-        LazyColumn(
-            modifier =
-                Modifier
-                    .padding(horizontal = if (isLandscape) 40.dp else 20.dp),
-//                    .fillMaxWidth(if (isLandscape) 0.8f else 1f), // Limit width in landscape
-            state = listState,
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            item {
-                Spacer(Modifier.padding(top = initialTopPadding.value))
-            }
-            items(prayers) { prayerElement ->
-                PrayerElementRenderer(
-                    prayerElement,
-                    prayerViewModel,
-                    currentFilename,
-                    navController,
-                    songScrollState,
-                )
-            }
-            item {
-                Spacer(Modifier.padding(bottom = initialBottomPadding.value))
-            }
+        item {
+            Spacer(Modifier.padding(bottom = initialBottomPadding.value))
         }
     }
 }
 
+data class PrayerRenderContext(
+    val translations: Map<String, String>,
+    val dynamicSongKey: String?,
+    val isSongHorizontalScroll: Boolean,
+    val onDynamicSongKeyChanged: (String) -> Unit,
+    val onError: (String, String) -> Unit,
+)
+
 @Composable
 fun PrayerElementRenderer(
     prayerElement: PrayerElement,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
-    navController: NavController,
-    isSongHorizontalScroll: Boolean = false,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
 ) {
-    val translations by prayerViewModel.translations.collectAsState()
     when (prayerElement) {
         is PrayerElement.Title -> {
             Title(prayerElement.content)
@@ -277,7 +242,7 @@ fun PrayerElementRenderer(
         }
 
         is PrayerElement.Song -> {
-            Song(prayerElement.content, isHorizontal = isSongHorizontalScroll)
+            Song(prayerElement.content, isHorizontal = context.isSongHorizontalScroll)
         }
 
         is PrayerElement.Subtext -> {
@@ -287,8 +252,8 @@ fun PrayerElementRenderer(
         is PrayerElement.Button -> {
             PrayerButton(
                 prayerButton = prayerElement,
-                navController = navController,
-                translations = translations,
+                onPrayerButtonClick = onPrayerButtonClick,
+                translations = context.translations,
             )
         }
 
@@ -299,17 +264,16 @@ fun PrayerElementRenderer(
         is PrayerElement.CollapsibleBlock -> {
             CollapsibleTextBlock(
                 prayerElement,
-                prayerViewModel,
+                context,
                 filename,
-                navController,
-                isSongHorizontalScroll,
+                onPrayerButtonClick,
             )
         }
 
         is PrayerElement.Error -> {
             ErrorBlock(
                 "Error: ${prayerElement.content}",
-                prayerViewModel,
+                onError = context.onError,
                 filename,
             )
         }
@@ -318,10 +282,9 @@ fun PrayerElementRenderer(
             if (prayerElement.items.isNotEmpty()) {
                 DynamicSongsBlockUI(
                     prayerElement,
-                    prayerViewModel,
+                    context,
                     filename,
-                    navController,
-                    isSongHorizontalScroll,
+                    onPrayerButtonClick,
                 )
             }
         }
@@ -329,20 +292,18 @@ fun PrayerElementRenderer(
         is PrayerElement.DynamicSong -> {
             DynamicSongUI(
                 prayerElement,
-                prayerViewModel,
+                context,
                 filename,
-                navController,
-                isSongHorizontalScroll,
+                onPrayerButtonClick,
             )
         }
 
         is PrayerElement.AlternativePrayersBlock -> {
             AlternativePrayersUI(
                 prayerElement,
-                prayerViewModel,
+                context,
                 filename,
-                navController,
-                isSongHorizontalScroll,
+                onPrayerButtonClick,
             )
         }
 
@@ -351,7 +312,7 @@ fun PrayerElementRenderer(
             // Log an error or render a debug message, as it should ideally not happen.
             ErrorBlock(
                 "UI Error: Unresolved Link element encountered",
-                prayerViewModel,
+                context.onError,
                 filename,
             )
         }
@@ -360,7 +321,7 @@ fun PrayerElementRenderer(
             // Similar to 'Link', this suggests an issue in the data resolution layer.
             ErrorBlock(
                 "UI Error: Unresolved LinkCollapsible element encountered",
-                prayerViewModel,
+                context.onError,
                 filename,
             )
         }
@@ -368,7 +329,7 @@ fun PrayerElementRenderer(
         is PrayerElement.AlternativeOption -> {
             ErrorBlock(
                 "UI Error: AlternativeOption element encountered outside of AlternativePrayersBlock",
-                prayerViewModel,
+                context.onError,
                 filename,
             )
         }
@@ -378,7 +339,7 @@ fun PrayerElementRenderer(
 @Composable
 fun PrayerButton(
     prayerButton: PrayerElement.Button,
-    navController: NavController,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     translations: Map<String, String>,
     modifier: Modifier = Modifier,
 ) {
@@ -397,11 +358,7 @@ fun PrayerButton(
     ) {
         Button(
             onClick = {
-                navController.navigate(AppScreen.Prayer.createRoute(prayerButton.link)) {
-                    if (prayerButton.replace) {
-                        navController.popBackStack()
-                    }
-                }
+                onPrayerButtonClick(prayerButton.link, prayerButton.replace)
             },
         ) {
             Text(
@@ -423,13 +380,12 @@ fun PrayerButton(
 @Composable
 fun DynamicSongsBlockUI(
     dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
-    navController: NavController,
-    isSongHorizontalScroll: Boolean,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
+    val dynamicSongKey = context.dynamicSongKey
 
     val dynamicSong =
         dynamicSongsBlock.items.find { it.eventKey == dynamicSongKey }
@@ -476,7 +432,7 @@ fun DynamicSongsBlockUI(
                             DropdownMenuItem(
                                 text = { Text(song.eventTitle) },
                                 onClick = {
-                                    prayerViewModel.setDynamicSongKey(song.eventKey)
+                                    context.onDynamicSongKeyChanged(song.eventKey)
                                     expanded = false
                                 },
                             )
@@ -488,10 +444,9 @@ fun DynamicSongsBlockUI(
             if (dynamicSong != null) {
                 DynamicSongUI(
                     dynamicSong,
-                    prayerViewModel,
+                    context,
                     filename,
-                    navController,
-                    isSongHorizontalScroll,
+                    onPrayerButtonClick,
                 )
             }
         }
@@ -501,10 +456,9 @@ fun DynamicSongsBlockUI(
 @Composable
 fun DynamicSongUI(
     dynamicSong: PrayerElement.DynamicSong,
-    prayerViewModel: PrayerViewModel,
+    context: PrayerRenderContext,
     filename: String,
-    navController: NavController,
-    isSongHorizontalScroll: Boolean,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier.padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -518,10 +472,9 @@ fun DynamicSongUI(
                 -> {
                     PrayerElementRenderer(
                         item,
-                        prayerViewModel,
+                        context,
                         filename,
-                        navController,
-                        isSongHorizontalScroll,
+                        onPrayerButtonClick,
                     )
                 }
 
@@ -533,11 +486,10 @@ fun DynamicSongUI(
 
 @Composable
 fun CollapsibleTextBlock(
-    PrayerElement: PrayerElement.CollapsibleBlock,
-    prayerViewModel: PrayerViewModel,
+    prayerElement: PrayerElement.CollapsibleBlock,
+    context: PrayerRenderContext,
     filename: String,
-    navController: NavController,
-    isSongHorizontalScroll: Boolean,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -550,7 +502,7 @@ fun CollapsibleTextBlock(
                     .clickable { expanded = !expanded },
         ) {
             Heading(
-                text = PrayerElement.title,
+                text = prayerElement.title,
                 modifier = Modifier.weight(1f),
             )
             Icon(
@@ -563,15 +515,14 @@ fun CollapsibleTextBlock(
             Column {
                 Column {
                     Spacer(Modifier.padding(8.dp))
-                    PrayerElement.items.forEach { nestedItem ->
+                    prayerElement.items.forEach { nestedItem ->
                         // Loop through type-safe items
                         // Recursively call the renderer for nested items
                         PrayerElementRenderer(
                             nestedItem,
-                            prayerViewModel,
+                            context,
                             filename,
-                            navController,
-                            isSongHorizontalScroll,
+                            onPrayerButtonClick,
                         )
                         Spacer(Modifier.padding(4.dp))
                     }
@@ -579,27 +530,4 @@ fun CollapsibleTextBlock(
             }
         }
     }
-}
-
-@Composable
-fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollConnection> {
-    val isVisible = remember { mutableStateOf(true) }
-
-    val nestedScrollConnection =
-        remember {
-            object : NestedScrollConnection {
-                override fun onPreScroll(
-                    available: Offset,
-                    source: NestedScrollSource,
-                ): Offset {
-                    if (available.y > 20) {
-                        isVisible.value = true  // Scrolling UP → Show bars
-                    } else if (available.y < 0) {
-                        isVisible.value = false // Scrolling DOWN → Hide bars
-                    }
-                    return Offset.Zero
-                }
-            }
-        }
-    return isVisible to nestedScrollConnection
 }

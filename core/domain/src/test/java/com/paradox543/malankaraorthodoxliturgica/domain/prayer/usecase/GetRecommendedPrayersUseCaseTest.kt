@@ -158,12 +158,12 @@ class GetRecommendedPrayersUseCaseTest {
                     "Failed at ${case.hour}:${case.minute}. Could not find $expected",
                 )
             }
-
-//            assertEquals(
-//                case.expected,
-//                result,
-//                "Failed at ${case.hour}:${case.minute}",
-//            )
         }
     }
+    // TODO: Add these tests as well when possible
+//    Season boundary test
+//    Sunday Qurbana test
+//    Wedding window test
+//    Non-Lent weekday
+//    Midnight crossover
 }

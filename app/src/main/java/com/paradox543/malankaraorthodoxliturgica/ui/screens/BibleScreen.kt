@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,29 +15,28 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.ui.components.BottomNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.components.TopNavBar
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun BibleScreen(
-    navController: NavController,
+    onBibleNavigate: (Int) -> Unit,
     settingsViewModel: SettingsViewModel,
     bibleViewModel: BibleViewModel,
+    contentPadding: PaddingValues,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val bibleChapters = bibleViewModel.bibleBooks
     val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
@@ -52,36 +51,33 @@ fun BibleScreen(
             else -> "Bible"
         }
 
-    Scaffold(
-        topBar = { TopNavBar(title, navController) },
-        bottomBar = { BottomNavBar(navController) },
-    ) { innerPadding ->
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(180.dp),
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = 12.dp),
-        ) {
-            item(span = { GridItemSpan(maxLineSpan) }) {
-                when (selectedLanguage) {
-                    AppLanguage.MALAYALAM -> SectionCard("പഴയ നിയമം")
-                    else -> SectionCard("Old Testament")
-                }
+    LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
+
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(180.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(horizontal = 12.dp),
+    ) {
+        item(span = { GridItemSpan(maxLineSpan) }) {
+            when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> SectionCard("പഴയ നിയമം")
+                else -> SectionCard("Old Testament")
             }
-            items(oldTestamentChapters.size) { index ->
-                BibleCard(oldTestamentChapters[index], selectedLanguage, navController, index)
+        }
+        items(oldTestamentChapters.size) { index ->
+            BibleCard(oldTestamentChapters[index], selectedLanguage, onBibleNavigate, index)
+        }
+        item(span = { GridItemSpan(this.maxLineSpan) }) {
+            when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> SectionCard("പുതിയ നിയമം")
+                else -> SectionCard("New Testament")
             }
-            item(span = { GridItemSpan(this.maxLineSpan) }) {
-                when (selectedLanguage) {
-                    AppLanguage.MALAYALAM -> SectionCard("പുതിയ നിയമം")
-                    else -> SectionCard("New Testament")
-                }
-            }
-            items(newTestamentChapters.size) { index ->
-                BibleCard(newTestamentChapters[index], selectedLanguage, navController, index + oldTestamentCount)
-            }
+        }
+        items(newTestamentChapters.size) { index ->
+            BibleCard(newTestamentChapters[index], selectedLanguage, onBibleNavigate, index + oldTestamentCount)
         }
     }
 }
@@ -114,7 +110,7 @@ fun SectionCard(title: String) {
 fun BibleCard(
     bibleDetails: BibleBookDetails,
     selectedLanguage: AppLanguage,
-    navController: NavController,
+    onBibleNavigate: (Int) -> Unit,
     index: Int,
 ) {
     val bookName =
@@ -129,8 +125,7 @@ fun BibleCard(
                 .fillMaxSize()
                 .height(48.dp)
                 .clickable {
-                    Log.d("BibleScreen", "BibleCard: $bookName, Index: $index")
-                    navController.navigate(AppScreen.BibleBook.createRoute(index))
+                    onBibleNavigate(index)
                 },
         shape = RoundedCornerShape(8.dp),
         colors =
