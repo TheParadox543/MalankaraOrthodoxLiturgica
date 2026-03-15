@@ -38,6 +38,10 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerScreen
@@ -47,10 +51,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.Pra
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.ui.modifier.globalPinchZoom
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleReadingScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
@@ -58,7 +59,6 @@ import com.paradox543.malankaraorthodoxliturgica.ui.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
-import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.
@@ -470,8 +470,10 @@ fun NavGraph(
                     bookIndex,
                     chapterIndex,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                    { bookIndex, chapterIndex ->
+                        AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex)
+                    },
+                ) { scaffoldUiState = it }
             }
 
             composable(
@@ -495,8 +497,8 @@ fun NavGraph(
 
             composable(AppScreen.BibleReader.route) {
                 BibleReadingScreen(
-                    { _, _ -> },
                     bibleViewModel,
+                    { _, _ -> },
                     innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )

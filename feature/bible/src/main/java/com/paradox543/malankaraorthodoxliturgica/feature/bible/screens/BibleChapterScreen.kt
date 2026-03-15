@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.bible.screens
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,9 +24,8 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.core.ui.rememberScrollAwareVisibility
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
-import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
 
 @Composable
 fun BibleChapterScreen(
@@ -34,6 +33,7 @@ fun BibleChapterScreen(
     bookIndex: Int,
     chapterIndex: Int,
     contentPadding: PaddingValues,
+    onQrDialogShow: (Int, Int) -> String,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
@@ -74,7 +74,7 @@ fun BibleChapterScreen(
 
     val routeProvider =
         remember(bookIndex, chapterIndex) {
-            { AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex) }
+            onQrDialogShow(bookIndex, chapterIndex)
         }
 
     LaunchedEffect(title, prevRoute, nextRoute, barsVisible, routeProvider) {
@@ -106,7 +106,7 @@ fun BibleChapterScreen(
         )
     } else {
         if (showQrDialog) {
-            val qrBitmap = generateQrBitmap(routeProvider())
+            val qrBitmap = generateQrBitmap(routeProvider)
             QrDialog(qrBitmap) { showQrDialog = false }
         }
         LazyColumn(

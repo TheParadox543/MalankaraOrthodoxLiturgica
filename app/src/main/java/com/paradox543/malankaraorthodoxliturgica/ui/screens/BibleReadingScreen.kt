@@ -17,15 +17,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerElementRenderer
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerRenderContext
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerViewModel
-import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
 
 @Composable
 fun BibleReadingScreen(
-    onPrayerButtonClick: (String, Boolean) -> Unit,
     bibleViewModel: BibleViewModel,
+    onPrayerButtonClick: (String, Boolean) -> Unit,
     contentPadding: PaddingValues = PaddingValues(),
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
     prayerViewModel: PrayerViewModel = hiltViewModel(),

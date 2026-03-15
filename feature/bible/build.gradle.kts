@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.parodx543.malankaraorthodoxliturgica.feature.bible"
+    namespace = "com.paradox543.malankaraorthodoxliturgica.feature.bible"
     compileSdk {
         version = release(36)
     }

@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.bible.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.parodx543.malankaraorthodoxliturgica.feature.bible.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 
 @Composable
 fun BibleScreen(
