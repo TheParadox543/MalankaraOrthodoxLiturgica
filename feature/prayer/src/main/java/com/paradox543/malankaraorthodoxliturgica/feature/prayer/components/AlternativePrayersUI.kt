@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.components
+package com.paradox543.malankaraorthodoxliturgica.feature.prayer.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerElementRenderer
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerRenderContext
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerElementRenderer
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerRenderContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

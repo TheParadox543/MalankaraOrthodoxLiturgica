@@ -18,9 +18,9 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerElementRenderer
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens.PrayerRenderContext
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerElementRenderer
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerRenderContext
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleReadingScreen(

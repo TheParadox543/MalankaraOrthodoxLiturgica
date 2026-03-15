@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -36,8 +36,8 @@ import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.R
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.ui.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 
 @Composable
 fun PrayNowScreen(
