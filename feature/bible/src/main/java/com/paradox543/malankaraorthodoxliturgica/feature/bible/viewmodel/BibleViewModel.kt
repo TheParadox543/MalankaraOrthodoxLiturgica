@@ -95,7 +95,7 @@ class BibleViewModel @Inject constructor(
     fun loadBiblePreface(
         bibleReference: BibleReference,
         language: AppLanguage,
-    ): List<PrayerElement>? = formatBiblePrefaceUseCase(bibleReference, language)
+    ): List<PrayerElement.Prose>? = formatBiblePrefaceUseCase(bibleReference, language)
 
     fun loadBibleReading(
         bibleReferences: List<BibleReference>,

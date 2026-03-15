@@ -3,6 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.ui.screens
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -10,40 +11,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerElementRenderer
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerRenderContext
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 
 @Composable
 fun BibleReadingScreen(
     bibleViewModel: BibleViewModel,
-    onPrayerButtonClick: (String, Boolean) -> Unit,
     contentPadding: PaddingValues = PaddingValues(),
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
-    prayerViewModel: PrayerViewModel = hiltViewModel(),
 ) {
     val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
     val bibleReadings: List<BibleReference> by bibleViewModel.selectedBibleReference.collectAsState()
-    val translations by bibleViewModel.translations.collectAsState()
-
-    val context =
-        remember(translations) {
-            PrayerRenderContext(
-                translations = translations,
-                dynamicSongKey = null,           // not relevant for Bible preface
-                false,     // not relevant for Bible preface
-                onDynamicSongKeyChanged = {},    // not relevant for Bible preface
-                onError = prayerViewModel::reportError,
-            )
-        }
 
     if (bibleReadings.isEmpty()) {
         LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Bible Reading", showBottomBar = false)) }
@@ -72,13 +55,8 @@ fun BibleReadingScreen(
     ) {
         val preface = bibleReading.preface
         if (preface != null) {
-            items(preface.size) { index ->
-                PrayerElementRenderer(
-                    prayerElement = preface[index],
-                    context = context,
-                    filename = title,
-                    onPrayerButtonClick = onPrayerButtonClick,
-                )
+            items(preface) { prose ->
+                Prose(prose.content, modifier = Modifier.padding(vertical = 4.dp))
             }
             item("Divider") {
                 HorizontalDivider(

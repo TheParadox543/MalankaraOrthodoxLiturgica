@@ -498,7 +498,6 @@ fun NavGraph(
             composable(AppScreen.BibleReader.route) {
                 BibleReadingScreen(
                     bibleViewModel,
-                    { _, _ -> },
                     innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
                 )
