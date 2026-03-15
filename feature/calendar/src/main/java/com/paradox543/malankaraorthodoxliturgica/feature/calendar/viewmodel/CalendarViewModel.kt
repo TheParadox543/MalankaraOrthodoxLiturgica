@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
+package com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

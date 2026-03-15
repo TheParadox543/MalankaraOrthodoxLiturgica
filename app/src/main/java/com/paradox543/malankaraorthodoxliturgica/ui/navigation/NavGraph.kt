@@ -42,6 +42,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBook
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerScreen
@@ -58,7 +59,6 @@ import com.paradox543.malankaraorthodoxliturgica.ui.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.

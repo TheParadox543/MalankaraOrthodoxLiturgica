@@ -88,6 +88,7 @@ dependencies {
     implementation(project(":feature:settings"))
     implementation(project(":feature:prayer"))
     implementation(project(":feature:bible"))
+    implementation(project(":feature:calendar"))
 
     implementation(project(":core:platform"))
     implementation(project(":platform:analytics-firebase"))
