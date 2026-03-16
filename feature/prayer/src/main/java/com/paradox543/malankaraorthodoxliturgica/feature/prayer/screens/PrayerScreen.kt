@@ -73,6 +73,7 @@ fun PrayerScreen(
     scrollIndex: Int = 0,
     contentPadding: PaddingValues = PaddingValues(),
     onQrDialogShow: (String, Int) -> String,
+    routeProvider: (String) -> String,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val prayers by prayerViewModel.prayers.collectAsState()
@@ -149,6 +150,7 @@ fun PrayerScreen(
                 title = title,
                 prevRoute = prevNodeRoute,
                 nextRoute = nextNodeRoute,
+                routeProvider = routeProvider,
                 onShowQrDialog = {
                     showQrDialog = true
                 },

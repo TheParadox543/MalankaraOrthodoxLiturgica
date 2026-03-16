@@ -166,6 +166,20 @@ fun NavGraph(
                     }
                 }
 
+                is ScaffoldUiState.BibleChapterReading -> {
+                    AnimatedVisibility(
+                        visible = state.isVisible,
+                        modifier = Modifier.zIndex(1f),
+                    ) {
+                        TopNavBar(
+                            title = state.title,
+                            showBack = currentRoute != AppScreen.Home.route,
+                            showSettings = currentRoute != AppScreen.Settings.route,
+                            onBack = { navController.navigateUp() },
+                        ) { navController.navigate(AppScreen.Settings.route) }
+                    }
+                }
+
                 ScaffoldUiState.None -> {}
             }
         },
@@ -194,12 +208,35 @@ fun NavGraph(
                             nextNodeRoute = state.nextRoute,
                             onShowQr = state.onShowQrDialog,
                             onPrevClick = {
-                                navController.navigate(AppScreen.Prayer.createRoute(state.prevRoute!!)) {
+                                navController.navigate(state.routeProvider(state.prevRoute!!)) {
                                     navController.popBackStack()
                                 }
                             },
                             onNextClick = {
-                                navController.navigate(AppScreen.Prayer.createRoute(state.nextRoute!!)) {
+                                navController.navigate(state.routeProvider(state.nextRoute!!)) {
+                                    navController.popBackStack()
+                                }
+                            },
+                        )
+                    }
+                }
+
+                is ScaffoldUiState.BibleChapterReading -> {
+                    AnimatedVisibility(
+                        visible = state.isVisible,
+                        modifier = Modifier.zIndex(1f),
+                    ) {
+                        SectionNavBar(
+                            prevNodeRoute = state.prevRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                            nextNodeRoute = state.nextRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                            onShowQr = state.onShowQrDialog,
+                            onPrevClick = {
+                                navController.navigate(state.routeProvider(state.prevRoute!!)) {
+                                    navController.popBackStack()
+                                }
+                            },
+                            onNextClick = {
+                                navController.navigate(state.routeProvider(state.nextRoute!!)) {
                                     navController.popBackStack()
                                 }
                             },
@@ -213,6 +250,20 @@ fun NavGraph(
         floatingActionButton = {
             when (val state = scaffoldUiState) {
                 is ScaffoldUiState.PrayerReading -> {
+                    if (state.showFab) {
+                        AnimatedVisibility(
+                            visible = state.isVisible,
+                            enter = fadeIn(),
+                            exit = shrinkOut(),
+                        ) {
+                            QrFabScan(
+                                onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
+                            )
+                        }
+                    }
+                }
+
+                is ScaffoldUiState.BibleChapterReading -> {
                     if (state.showFab) {
                         AnimatedVisibility(
                             visible = state.isVisible,
@@ -354,6 +405,9 @@ fun NavGraph(
                         onQrDialogShow = { route, scrollIndex ->
                             AppScreen.Prayer.createDeepLink(route, scrollIndex)
                         },
+                        routeProvider = {
+                            AppScreen.Prayer.createRoute(it)
+                        },
                     ) { scaffoldUiState = it }
                 } else {
                     ContentNotReadyScreen(
@@ -472,6 +526,9 @@ fun NavGraph(
                     innerPadding,
                     { bookIndex, chapterIndex ->
                         AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex)
+                    },
+                    routeFactory = {
+                        AppScreen.BibleChapter.createRoute(it.bookIndex, it.chapterIndex)
                     },
                 ) { scaffoldUiState = it }
             }

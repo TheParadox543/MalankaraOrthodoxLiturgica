@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapterRef
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
@@ -65,7 +66,7 @@ class BibleViewModel @Inject constructor(
     fun getAdjacentChapters(
         bookIndex: Int,
         chapterIndex: Int,
-    ): Pair<String?, String?> = getAdjacentChaptersUseCase(bookIndex, chapterIndex)
+    ): Pair<BibleChapterRef?, BibleChapterRef?> = getAdjacentChaptersUseCase(bookIndex, chapterIndex)
 
     /**
      * Formats a complete BibleReadingEntry (a book with its list of ranges) into a readable string.

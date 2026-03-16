@@ -23,6 +23,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.core.ui.rememberScrollAwareVisibility
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapterRef
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
@@ -34,6 +35,7 @@ fun BibleChapterScreen(
     chapterIndex: Int,
     contentPadding: PaddingValues,
     onQrDialogShow: (Int, Int) -> String,
+    routeFactory: (BibleChapterRef) -> String,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
@@ -77,13 +79,14 @@ fun BibleChapterScreen(
             onQrDialogShow(bookIndex, chapterIndex)
         }
 
-    LaunchedEffect(title, prevRoute, nextRoute, barsVisible, routeProvider) {
+    LaunchedEffect(title, prevRoute, nextRoute, barsVisible) {
         onScaffoldStateChanged(
-            ScaffoldUiState.PrayerReading(
+            ScaffoldUiState.BibleChapterReading(
                 title = title,
                 prevRoute = prevRoute,
                 nextRoute = nextRoute,
                 onShowQrDialog = { showQrDialog = true },
+                routeProvider = routeFactory,
                 isVisible = barsVisible,
                 nestedScrollConnection = nestedScrollConnection,
                 showFab = false,
