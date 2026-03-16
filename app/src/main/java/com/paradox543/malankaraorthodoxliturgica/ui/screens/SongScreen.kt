@@ -39,7 +39,6 @@ import androidx.media3.common.util.UnstableApi
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewModel
 
@@ -47,7 +46,6 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewMode
 @Composable
 fun SongScreen(
     songPlayerViewModel: SongPlayerViewModel = hiltViewModel(),
-    prayerViewModel: PrayerViewModel = hiltViewModel(),
     songFilename: String,
     contentPadding: PaddingValues = PaddingValues(),
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
@@ -56,7 +54,7 @@ fun SongScreen(
     val isPlaying by songPlayerViewModel.isPlaying.collectAsState()
     val currentPosition by songPlayerViewModel.currentPosition.collectAsState()
     val duration by songPlayerViewModel.duration.collectAsState()
-    val translations by prayerViewModel.translations.collectAsState()
+    val translations by songPlayerViewModel.translations.collectAsState()
 
     var title = ""
     for (part in songFilename.substringAfter("/").removeSuffix(".mp3").split("/")) {

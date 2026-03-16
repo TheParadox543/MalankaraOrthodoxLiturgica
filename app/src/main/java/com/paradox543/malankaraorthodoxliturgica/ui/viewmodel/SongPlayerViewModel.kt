@@ -9,17 +9,26 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.paradox543.malankaraorthodoxliturgica.data.model.SongResultDto
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
 import com.paradox543.malankaraorthodoxliturgica.domain.song.repository.SongRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -27,7 +36,16 @@ import javax.inject.Inject
 class SongPlayerViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val songRepository: SongRepository,
+    private val settingsRepository: SettingsRepository,
+    private val translationsRepository: TranslationsRepository,
 ) : ViewModel() {
+    val selectedLanguage: StateFlow<AppLanguage> =
+        settingsRepository.language.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = runBlocking { settingsRepository.language.first() },
+        )
+
     // ExoPlayer managed by ViewModel (uses application context to avoid leaking Activity)
     private val exoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()
 
@@ -46,6 +64,9 @@ class SongPlayerViewModel @Inject constructor(
 
     private val _songFilename = MutableStateFlow<String?>(null)
     val songFilename = _songFilename.asStateFlow()
+
+    private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
+    val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
     private val listener =
         object : Player.Listener {
@@ -72,6 +93,19 @@ class SongPlayerViewModel @Inject constructor(
                 }
                 delay(500) // update every half second
             }
+        }
+        viewModelScope.launch {
+            selectedLanguage.collect { language ->
+                // When the language changes (from DataStore), load translations
+                loadTranslations(language)
+            }
+        }
+    }
+
+    private fun loadTranslations(language: AppLanguage) {
+        viewModelScope.launch {
+            val loadedTranslations = translationsRepository.loadTranslations(language)
+            _translations.update { loadedTranslations }
         }
     }
 
