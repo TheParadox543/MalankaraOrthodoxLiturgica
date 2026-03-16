@@ -69,6 +69,7 @@ dependencies {
 
     // Debugging & Development Tools (only for debug builds)
     debugImplementation(libs.androidx.ui.tooling) // Compose tooling for previews and inspection
+    implementation(libs.androidx.ui.tooling.preview)  // Compose tooling for previews
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
