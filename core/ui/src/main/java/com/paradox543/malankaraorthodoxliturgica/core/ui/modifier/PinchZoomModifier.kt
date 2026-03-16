@@ -2,8 +2,10 @@ package com.paradox543.malankaraorthodoxliturgica.core.ui.modifier
 
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.input.pointer.pointerInput
