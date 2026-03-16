@@ -19,6 +19,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatD
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -26,6 +27,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
@@ -35,6 +37,7 @@ import javax.inject.Inject
 class CalendarViewModel @Inject constructor(
     private val calendarRepository: CalendarRepository,
     private val settingsRepository: SettingsRepository,
+    private val translationsRepository: TranslationsRepository,
     private val formatDateTitleUseCase: FormatDateTitleUseCase,
     private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
     private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
@@ -48,6 +51,9 @@ class CalendarViewModel @Inject constructor(
                 started = SharingStarted.WhileSubscribed(5000),
                 initialValue = runBlocking { settingsRepository.language.first() },
             )
+
+    private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
+    val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
     // State for the currently displayed month's calendar data
     private val _monthCalendarData = MutableStateFlow<List<CalendarWeek>>(emptyList())
@@ -101,6 +107,19 @@ class CalendarViewModel @Inject constructor(
             } finally {
                 _isLoading.value = false
             }
+        }
+        viewModelScope.launch {
+            selectedLanguage.collect { language ->
+                // When the language changes (from DataStore), load translations
+                loadTranslations(language)
+            }
+        }
+    }
+
+    private fun loadTranslations(language: AppLanguage) {
+        viewModelScope.launch {
+            val loadedTranslations = translationsRepository.loadTranslations(language)
+            _translations.update { loadedTranslations }
         }
     }
 

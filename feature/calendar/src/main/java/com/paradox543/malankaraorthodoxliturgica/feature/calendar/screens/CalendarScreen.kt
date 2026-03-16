@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -46,14 +46,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -62,7 +60,7 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
-    calendarViewModel: CalendarViewModel = hiltViewModel(),
+    calendarViewModel: CalendarViewModel,
     contentPadding: PaddingValues = PaddingValues(),
     onPrayerNavigate: (String) -> Unit,
     onBibleNavigate: () -> Unit,
@@ -434,11 +432,10 @@ fun DisplayEvent(
     selectedLanguage: AppLanguage,
     modifier: Modifier = Modifier,
     calendarViewModel: CalendarViewModel,
-    prayerViewModel: PrayerViewModel = hiltViewModel(),
     onPrayerNavigate: (String) -> Unit,
     onBibleNavigate: () -> Unit,
 ) {
-    val translations by prayerViewModel.translations.collectAsState()
+    val translations by calendarViewModel.translations.collectAsState()
     val textTitle = calendarViewModel.getFormattedDateTitle(event, selectedLanguage)
     Card(
         modifier
