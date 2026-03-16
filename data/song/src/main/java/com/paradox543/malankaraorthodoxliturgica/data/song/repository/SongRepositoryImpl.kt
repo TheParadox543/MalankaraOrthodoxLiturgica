@@ -1,5 +1,6 @@
-package com.paradox543.malankaraorthodoxliturgica.data.repositoryImpl
+package com.paradox543.malankaraorthodoxliturgica.data.song.repository
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
@@ -18,12 +19,12 @@ import kotlinx.coroutines.withTimeout
 import java.io.File
 import javax.inject.Inject
 
-class
-SongRepositoryImpl @Inject constructor(
-    @param:ApplicationContext private val context: Context,
+class SongRepositoryImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val storage: FirebaseStorage,
 ) : SongRepository {
-    fun isNetworkAvailable(context: Context): Boolean {
+    @SuppressLint("MissingPermission")
+    private fun isNetworkAvailable(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = cm.activeNetwork ?: return false
         val capabilities = cm.getNetworkCapabilities(network) ?: return false
@@ -36,7 +37,10 @@ SongRepositoryImpl @Inject constructor(
 
             if (localFile.exists() && localFile.length() > 0) {
                 Log.d("SongRepository", "Playing from local storage: ${localFile.path}")
-                return@withContext SongResult.Success(SongSource(localFile.toUri().toString()), "Playing from local storage")
+                return@withContext SongResult.Success(
+                    source = SongSource(localFile.toUri().toString()),
+                    message = "Playing from local storage",
+                )
             }
 
             if (!isNetworkAvailable(context)) {
@@ -48,10 +52,13 @@ SongRepositoryImpl @Inject constructor(
                 val ref = storage.reference.child(songFilename)
                 val uri = withTimeout(10000) { ref.downloadUrl.await() }
 
-                // Trigger background download (non-blocking)
+                // Trigger background download (non-blocking).
                 downloadSongInBackground(songFilename, localFile)
 
-                SongResult.Success(SongSource(uri.toString()), "Streaming from Firebase")
+                SongResult.Success(
+                    source = SongSource(uri.toString()),
+                    message = "Streaming from Firebase",
+                )
             } catch (e: TimeoutCancellationException) {
                 Log.e("SongRepository", "Firebase request timed out", e)
                 SongResult.Error("Request timed out. Please check your internet connection.")
@@ -65,7 +72,6 @@ SongRepositoryImpl @Inject constructor(
         songFilename: String,
         localFile: File,
     ) {
-        // Ensure that directories exist within the device.
         localFile.parentFile?.mkdirs()
 
         val ref = storage.reference.child(songFilename)
@@ -73,6 +79,7 @@ SongRepositoryImpl @Inject constructor(
             Log.w("SongRepository", "No internet. Skipping background download")
             return
         }
+
         try {
             withTimeout(10000) {
                 ref
@@ -93,10 +100,6 @@ SongRepositoryImpl @Inject constructor(
         }
     }
 
-    /**
-     * Utility to check whether a song is already cached.
-     * @param songFilename The name of the song file.
-     */
     override fun isSongCached(songFilename: String): Boolean {
         val localFile = File(context.filesDir, songFilename)
         return localFile.exists() && localFile.length() > 0
