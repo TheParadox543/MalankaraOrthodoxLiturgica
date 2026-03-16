@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookName
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapterRef
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeBibleRepository
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -26,8 +27,8 @@ class GetAdjacentChaptersUseCaseTest {
         val books = listOf(simpleBook(5))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 2)
-        assertEquals("bible/0/1", prev)
-        assertEquals("bible/0/3", next)
+        assertEquals(BibleChapterRef(0, 1), prev)
+        assertEquals(BibleChapterRef(0, 3), next)
     }
 
     @Test
@@ -36,7 +37,7 @@ class GetAdjacentChaptersUseCaseTest {
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 0)
         assertNull(prev)
-        assertEquals("bible/0/1", next)
+        assertEquals(BibleChapterRef(0, 1), next)
     }
 
     @Test
@@ -44,8 +45,8 @@ class GetAdjacentChaptersUseCaseTest {
         val books = listOf(simpleBook(2), simpleBook(4))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 1)
-        assertEquals("bible/0/0", prev)
-        assertEquals("bible/1/0", next)
+        assertEquals(BibleChapterRef(0, 0), prev)
+        assertEquals(BibleChapterRef(1, 0), next)
     }
 
     @Test

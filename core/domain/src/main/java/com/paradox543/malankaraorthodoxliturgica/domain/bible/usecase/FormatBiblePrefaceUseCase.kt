@@ -16,7 +16,7 @@ class FormatBiblePrefaceUseCase(
     operator fun invoke(
         bibleReference: BibleReference,
         language: AppLanguage,
-    ): List<PrayerElement>? {
+    ): List<PrayerElement.Prose>? {
         val books = bibleRepository.loadBibleMetaData()
         val book = books.getOrNull(bibleReference.bookNumber - 1) ?: return null
         val prefaces = bibleRepository.loadPrefaceTemplates()
@@ -30,7 +30,7 @@ class FormatBiblePrefaceUseCase(
                     else -> return null
                 }
 
-        val sourcePreface: List<PrayerElement> =
+        val sourcePreface: List<PrayerElement.Prose> =
             when (language) {
                 AppLanguage.MALAYALAM -> prefaceContent.ml
                 AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> prefaceContent.en
@@ -55,21 +55,13 @@ class FormatBiblePrefaceUseCase(
             }
 
         return sourcePreface.map { item ->
-            when (item) {
-                is PrayerElement.Prose -> {
-                    item.copy(
-                        content =
-                            item.content
-                                .replace("{title}", title)
-                                .replace("{displayTitle}", displayTitle)
-                                .replace("{ordinal}", ordinal),
-                    )
-                }
-
-                else -> {
-                    item
-                }
-            }
+            item.copy(
+                content =
+                    item.content
+                        .replace("{title}", title)
+                        .replace("{displayTitle}", displayTitle)
+                        .replace("{ordinal}", ordinal),
+            )
         }
     }
 }

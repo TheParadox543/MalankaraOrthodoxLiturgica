@@ -21,6 +21,10 @@ interface AnalyticsService {
     /** Log that the user shared the app. */
     fun logShareEvent()
 
+    fun logQrNavigationSuccess(destinationRoute: String)
+
+    fun logLanguageSelected(language: String)
+
     /**
      * Log a screen view event.
      *
@@ -31,4 +35,8 @@ interface AnalyticsService {
         routePattern: String,
         arguments: Map<String, String?> = emptyMap(),
     )
+
+    fun logTutorialStarted()
+
+    fun logTutorialCompleted()
 }

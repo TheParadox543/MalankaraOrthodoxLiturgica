@@ -23,8 +23,8 @@ android {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
         minSdk = 26
         targetSdk = 36
-        versionCode = 57
-        versionName = "2.2.3"
+        versionCode = providers.gradleProperty("APP_VERSION_CODE").get().toInt()
+        versionName = providers.gradleProperty("APP_VERSION_NAME").get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         versionNameSuffix = ""
@@ -81,11 +81,14 @@ dependencies {
     implementation(project(":data:prayer"))
     implementation(project(":data:settings"))
     implementation(project(":data:translations"))
-    implementation(project(":feature:prayer"))
 
     implementation(project(":qr"))
 
     implementation(project(":core:ui"))
+    implementation(project(":feature:settings"))
+    implementation(project(":feature:prayer"))
+    implementation(project(":feature:bible"))
+    implementation(project(":feature:calendar"))
 
     implementation(project(":core:platform"))
     implementation(project(":platform:analytics-firebase"))

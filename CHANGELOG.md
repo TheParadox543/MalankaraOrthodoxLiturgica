@@ -11,6 +11,20 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ---
 
+## [2.2.4] - 2026-03-16
+
+### Fix
+
+- Navigating to another chapter in Bible caused the app to crash
+
+### Refactor
+
+- Moved all prayer screens and ViewModels to :feature:prayer
+- Moved all settings screens and ViewModels to :feature:settings
+
+
+---
+
 ## [2.2.3] - 2026-03-15
 
 ### Added

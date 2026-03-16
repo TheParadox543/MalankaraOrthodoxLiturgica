@@ -38,27 +38,27 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.SectionScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.AboutScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.ui.modifier.globalPinchZoom
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.AboutScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleBookScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleReadingScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayNowScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.PrayerScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.SectionScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.
@@ -166,6 +166,20 @@ fun NavGraph(
                     }
                 }
 
+                is ScaffoldUiState.BibleChapterReading -> {
+                    AnimatedVisibility(
+                        visible = state.isVisible,
+                        modifier = Modifier.zIndex(1f),
+                    ) {
+                        TopNavBar(
+                            title = state.title,
+                            showBack = currentRoute != AppScreen.Home.route,
+                            showSettings = currentRoute != AppScreen.Settings.route,
+                            onBack = { navController.navigateUp() },
+                        ) { navController.navigate(AppScreen.Settings.route) }
+                    }
+                }
+
                 ScaffoldUiState.None -> {}
             }
         },
@@ -194,12 +208,35 @@ fun NavGraph(
                             nextNodeRoute = state.nextRoute,
                             onShowQr = state.onShowQrDialog,
                             onPrevClick = {
-                                navController.navigate(AppScreen.Prayer.createRoute(state.prevRoute!!)) {
+                                navController.navigate(state.routeProvider(state.prevRoute!!)) {
                                     navController.popBackStack()
                                 }
                             },
                             onNextClick = {
-                                navController.navigate(AppScreen.Prayer.createRoute(state.nextRoute!!)) {
+                                navController.navigate(state.routeProvider(state.nextRoute!!)) {
+                                    navController.popBackStack()
+                                }
+                            },
+                        )
+                    }
+                }
+
+                is ScaffoldUiState.BibleChapterReading -> {
+                    AnimatedVisibility(
+                        visible = state.isVisible,
+                        modifier = Modifier.zIndex(1f),
+                    ) {
+                        SectionNavBar(
+                            prevNodeRoute = state.prevRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                            nextNodeRoute = state.nextRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                            onShowQr = state.onShowQrDialog,
+                            onPrevClick = {
+                                navController.navigate(state.routeProvider(state.prevRoute!!)) {
+                                    navController.popBackStack()
+                                }
+                            },
+                            onNextClick = {
+                                navController.navigate(state.routeProvider(state.nextRoute!!)) {
                                     navController.popBackStack()
                                 }
                             },
@@ -213,6 +250,20 @@ fun NavGraph(
         floatingActionButton = {
             when (val state = scaffoldUiState) {
                 is ScaffoldUiState.PrayerReading -> {
+                    if (state.showFab) {
+                        AnimatedVisibility(
+                            visible = state.isVisible,
+                            enter = fadeIn(),
+                            exit = shrinkOut(),
+                        ) {
+                            QrFabScan(
+                                onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
+                            )
+                        }
+                    }
+                }
+
+                is ScaffoldUiState.BibleChapterReading -> {
                     if (state.showFab) {
                         AnimatedVisibility(
                             visible = state.isVisible,
@@ -354,6 +405,9 @@ fun NavGraph(
                         onQrDialogShow = { route, scrollIndex ->
                             AppScreen.Prayer.createDeepLink(route, scrollIndex)
                         },
+                        routeProvider = {
+                            AppScreen.Prayer.createRoute(it)
+                        },
                     ) { scaffoldUiState = it }
                 } else {
                     ContentNotReadyScreen(
@@ -413,7 +467,6 @@ fun NavGraph(
                     { index ->
                         navController.navigate(AppScreen.BibleBook.createRoute(index))
                     },
-                    settingsViewModel,
                     bibleViewModel,
                     innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
@@ -438,7 +491,6 @@ fun NavGraph(
                     { bookIndex, chapterIndex ->
                         navController.navigate(AppScreen.BibleChapter.createRoute(bookIndex, chapterIndex))
                     },
-                    settingsViewModel,
                     bibleViewModel,
                     bookIndex,
                     innerPadding,
@@ -468,13 +520,17 @@ fun NavGraph(
                         ?.getString(AppScreen.BibleChapter.ARG_CHAPTER_INDEX)
                         ?.toIntOrNull() ?: 0
                 BibleChapterScreen(
-                    settingsViewModel,
                     bibleViewModel,
                     bookIndex,
                     chapterIndex,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                    { bookIndex, chapterIndex ->
+                        AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex)
+                    },
+                    routeFactory = {
+                        AppScreen.BibleChapter.createRoute(it.bookIndex, it.chapterIndex)
+                    },
+                ) { scaffoldUiState = it }
             }
 
             composable(
@@ -498,7 +554,6 @@ fun NavGraph(
 
             composable(AppScreen.BibleReader.route) {
                 BibleReadingScreen(
-                    { _, _ -> },
                     bibleViewModel,
                     innerPadding,
                     onScaffoldStateChanged = { scaffoldUiState = it },
@@ -508,6 +563,7 @@ fun NavGraph(
             composable(AppScreen.QrScanner.route) {
                 QrScannerView(
                     onNavigate = { route ->
+                        analyticsService.logQrNavigationSuccess(route)
                         navController.navigate(route) {
                             launchSingleTop = true
                             navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)

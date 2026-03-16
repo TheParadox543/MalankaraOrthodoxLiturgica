@@ -52,10 +52,9 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.CalendarViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -66,7 +65,6 @@ import java.util.Locale
 fun CalendarScreen(
     bibleViewModel: BibleViewModel,
     calendarViewModel: CalendarViewModel = hiltViewModel(),
-    settingsViewModel: SettingsViewModel = hiltViewModel(),
     contentPadding: PaddingValues = PaddingValues(),
     onPrayerNavigate: (String) -> Unit,
     onBibleNavigate: () -> Unit,
@@ -81,7 +79,7 @@ fun CalendarScreen(
     val displayEvents by calendarViewModel.selectedDayViewData.collectAsState()
     val isLoading by calendarViewModel.isLoading.collectAsState()
     val error by calendarViewModel.error.collectAsState()
-    val selectedLanguage by settingsViewModel.selectedLanguage.collectAsState()
+    val selectedLanguage by calendarViewModel.selectedLanguage.collectAsState()
 
     LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Calendar")) }
 
@@ -473,7 +471,7 @@ fun DisplayEvent(
                 ) {
                     bibleReadings.vespersGospel?.let  { vespersGospel ->
                         val text =
-                            bibleViewModel.formatGospelEntry(
+                            calendarViewModel.formatGospelEntry(
                                 vespersGospel,
                                 selectedLanguage,
                             )
@@ -504,7 +502,7 @@ fun DisplayEvent(
                     }
                     bibleReadings.matinsGospel?.let { matinsGospel ->
                         val text =
-                            bibleViewModel.formatGospelEntry(
+                            calendarViewModel.formatGospelEntry(
                                 matinsGospel,
                                 selectedLanguage,
                             )
@@ -535,7 +533,7 @@ fun DisplayEvent(
                     }
                     bibleReadings.primeGospel?.let { primeGospel ->
                         val text =
-                            bibleViewModel.formatGospelEntry(
+                            calendarViewModel.formatGospelEntry(
                                 primeGospel,
                                 selectedLanguage,
                             )
@@ -644,7 +642,7 @@ fun DisplayEvent(
                             }
                         }
                         val text =
-                            bibleViewModel.formatGospelEntry(
+                            calendarViewModel.formatGospelEntry(
                                 gospel,
                                 selectedLanguage,
                             )

@@ -12,6 +12,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerEleme
  * @property verses list of [BibleVerse] representing the reading body.
  */
 data class BibleReading(
-    val preface: List<PrayerElement>? = null,
+    val preface: List<PrayerElement.Prose>? = null,
     val verses: List<BibleVerse>,
 )
