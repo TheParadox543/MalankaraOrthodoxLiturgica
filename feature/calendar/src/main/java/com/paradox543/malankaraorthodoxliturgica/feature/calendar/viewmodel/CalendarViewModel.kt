@@ -3,25 +3,42 @@ package com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
     private val calendarRepository: CalendarRepository,
+    private val settingsRepository: SettingsRepository,
     private val formatDateTitleUseCase: FormatDateTitleUseCase,
+    private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
 ) : ViewModel() {
+    val selectedLanguage: StateFlow<AppLanguage> =
+        settingsRepository.language
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = runBlocking { settingsRepository.language.first() },
+            )
+
     // State for the currently displayed month's calendar data
     private val _monthCalendarData = MutableStateFlow<List<CalendarWeek>>(emptyList())
     val monthCalendarData: StateFlow<List<CalendarWeek>> = _monthCalendarData.asStateFlow()
@@ -41,7 +58,8 @@ class CalendarViewModel @Inject constructor(
     val hasPreviousMonth: StateFlow<Boolean> = _hasPreviousMonth.asStateFlow()
 
     private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
-    val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> = _selectedDayViewData.asStateFlow()
+    val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> =
+        _selectedDayViewData.asStateFlow()
 
     // State for the currently selected date for UI feedback
     private val _selectedDate = MutableStateFlow<LocalDate?>(null)
@@ -59,7 +77,10 @@ class CalendarViewModel @Inject constructor(
             _isLoading.value = true
             _error.value = null
             try {
-                loadMonth(_currentCalendarViewDate.value.monthValue, _currentCalendarViewDate.value.year)
+                loadMonth(
+                    _currentCalendarViewDate.value.monthValue,
+                    _currentCalendarViewDate.value.year,
+                )
                 loadUpcomingWeekEvents()
             } catch (e: Exception) {
                 _error.value = "Failed to load calendar data: ${e.message}"
@@ -137,4 +158,9 @@ class CalendarViewModel @Inject constructor(
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,
     ): String = formatDateTitleUseCase(event, selectedLanguage)
+
+    fun formatGospelEntry(
+        entries: List<BibleReference>,
+        language: AppLanguage,
+    ): String = formatGospelEntryUseCase(entries, language)
 }
