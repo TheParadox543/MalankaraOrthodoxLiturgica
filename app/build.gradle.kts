@@ -81,6 +81,7 @@ dependencies {
     implementation(project(":data:prayer"))
     implementation(project(":data:settings"))
     implementation(project(":data:translations"))
+    implementation(project(":data:song"))
 
     implementation(project(":qr"))
 
@@ -89,6 +90,7 @@ dependencies {
     implementation(project(":feature:prayer"))
     implementation(project(":feature:bible"))
     implementation(project(":feature:calendar"))
+    implementation(project(":feature:song"))
 
     implementation(project(":core:platform"))
     implementation(project(":platform:analytics-firebase"))
