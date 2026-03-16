@@ -34,18 +34,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.media3.common.util.UnstableApi
-import com.paradox543.malankaraorthodoxliturgica.BuildConfig
-import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.feature.song.BuildConfig
+import com.paradox543.malankaraorthodoxliturgica.feature.song.R
 import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewModel
+import dagger.hilt.android.UnstableApi
 
 @OptIn(UnstableApi::class)
 @Composable
 fun SongScreen(
-    songPlayerViewModel: SongPlayerViewModel = hiltViewModel(),
+    songPlayerViewModel: SongPlayerViewModel,
     songFilename: String,
     contentPadding: PaddingValues = PaddingValues(),
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
@@ -66,7 +65,7 @@ fun SongScreen(
             }
     }
 
-    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard(title, false)) }
 
     LaunchedEffect(songFilename) {
         songPlayerViewModel.loadSong(songFilename)

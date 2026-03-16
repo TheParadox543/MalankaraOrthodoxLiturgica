@@ -38,6 +38,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -61,6 +62,11 @@ dependencies {
     implementation(libs.androidx.ui)                  // Core Compose UI toolkit
     implementation(libs.androidx.ui.graphics)         // Compose graphics primitives
     implementation(libs.androidx.material3)           // Material Design 3 components for Compose
+
+    // Media Player
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.common)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

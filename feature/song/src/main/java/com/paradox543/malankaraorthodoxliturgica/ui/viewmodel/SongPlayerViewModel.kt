@@ -33,7 +33,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SongPlayerViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
+    @param:ApplicationContext private val context: Context,
     private val songRepository: SongRepository,
     private val settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,

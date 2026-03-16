@@ -59,6 +59,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.Sett
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.
@@ -428,10 +429,12 @@ fun NavGraph(
                     ),
             ) { backStackEntry ->
                 val prayerNavViewModel: PrayerNavViewModel = hiltViewModel(backStackEntry)
+                val songPlayerViewModel: SongPlayerViewModel = hiltViewModel(backStackEntry)
                 val route = backStackEntry.arguments?.getString(AppScreen.Song.ARG_ROUTE) ?: ""
                 val node = prayerNavViewModel.findNode(route)
                 if (node != null) {
                     SongScreen(
+                        songPlayerViewModel = songPlayerViewModel,
                         songFilename = node.filename ?: "",
                         contentPadding = innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState = it },
