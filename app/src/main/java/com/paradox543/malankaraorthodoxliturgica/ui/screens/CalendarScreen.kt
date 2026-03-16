@@ -52,7 +52,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import java.time.DayOfWeek
@@ -63,7 +62,6 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalendarScreen(
-    bibleViewModel: BibleViewModel,
     calendarViewModel: CalendarViewModel = hiltViewModel(),
     contentPadding: PaddingValues = PaddingValues(),
     onPrayerNavigate: (String) -> Unit,
@@ -137,8 +135,6 @@ fun CalendarScreen(
                         hasNextMonth,
                         monthCalendarData,
                         selectedDate,
-                        onPrayerNavigate,
-                        onBibleNavigate,
                     )
                 }
                 if (displayEvents.isNotEmpty()) {
@@ -152,7 +148,6 @@ fun CalendarScreen(
                         displayEvents,
                         selectedLanguage,
                         calendarViewModel,
-                        bibleViewModel,
                         onBibleNavigate,
                         onPrayerNavigate,
                     )
@@ -166,8 +161,6 @@ fun CalendarScreen(
                         hasNextMonth,
                         monthCalendarData,
                         selectedDate,
-                        onPrayerNavigate,
-                        onBibleNavigate,
                     )
                     if (displayEvents.isNotEmpty()) {
                         val scrollState = rememberScrollState()
@@ -180,7 +173,6 @@ fun CalendarScreen(
                             displayEvents,
                             selectedLanguage,
                             calendarViewModel,
-                            bibleViewModel,
                             onBibleNavigate,
                             onPrayerNavigate,
                         )
@@ -199,8 +191,6 @@ private fun CalendarMainView(
     hasNextMonth: Boolean,
     monthCalendarData: List<CalendarWeek>,
     selectedDate: LocalDate?,
-    onPrayerNavigate: (String) -> Unit,
-    onBibleNavigate: () -> Unit,
 ) {
     Column(
         Modifier
@@ -418,7 +408,6 @@ private fun DisplayEvents(
     displayEvents: List<LiturgicalEventDetails>,
     selectedLanguage: AppLanguage,
     calendarViewModel: CalendarViewModel,
-    bibleViewModel: BibleViewModel,
     onBibleNavigate: () -> Unit,
     onPrayerNavigate: (String) -> Unit,
 ) {
@@ -432,7 +421,6 @@ private fun DisplayEvents(
                 event,
                 selectedLanguage,
                 calendarViewModel = calendarViewModel,
-                bibleViewModel = bibleViewModel,
                 onPrayerNavigate = onPrayerNavigate,
                 onBibleNavigate = onBibleNavigate,
             )
@@ -446,7 +434,6 @@ fun DisplayEvent(
     selectedLanguage: AppLanguage,
     modifier: Modifier = Modifier,
     calendarViewModel: CalendarViewModel,
-    bibleViewModel: BibleViewModel,
     prayerViewModel: PrayerViewModel = hiltViewModel(),
     onPrayerNavigate: (String) -> Unit,
     onBibleNavigate: () -> Unit,
@@ -484,7 +471,7 @@ fun DisplayEvent(
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(vespersGospel)
+                                    calendarViewModel.setSelectedBibleReference(vespersGospel)
                                     onBibleNavigate()
                                 },
                             ) {
@@ -515,7 +502,7 @@ fun DisplayEvent(
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(matinsGospel)
+                                    calendarViewModel.setSelectedBibleReference(matinsGospel)
                                     onBibleNavigate()
                                 },
                             ) {
@@ -546,7 +533,7 @@ fun DisplayEvent(
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(primeGospel)
+                                    calendarViewModel.setSelectedBibleReference(primeGospel)
                                     onBibleNavigate()
                                 },
                             ) {
@@ -569,12 +556,12 @@ fun DisplayEvent(
                             style = MaterialTheme.typography.titleMedium,
                         )
                         oldTestament.forEach { entry ->
-                            val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
+                            val text = calendarViewModel.formatBibleReadingEntry(entry, selectedLanguage)
                             Row {
                                 Spacer(Modifier.padding(8.dp))
                                 TextButton(
                                     onClick = {
-                                        bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                        calendarViewModel.setSelectedBibleReference(listOf(entry))
                                         onBibleNavigate()
                                     },
                                 ) {
@@ -598,12 +585,12 @@ fun DisplayEvent(
                             style = MaterialTheme.typography.titleMedium,
                         )
                         bibleReadings.generalEpistle?.forEach { entry ->
-                            val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
+                            val text = calendarViewModel.formatBibleReadingEntry(entry, selectedLanguage)
                             Row {
                                 Spacer(Modifier.padding(8.dp))
                                 TextButton(
                                     onClick = {
-                                        bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                        calendarViewModel.setSelectedBibleReference(listOf(entry))
                                         onBibleNavigate()
                                     },
                                 ) {
@@ -620,12 +607,12 @@ fun DisplayEvent(
                             }
                         }
                         bibleReadings.paulEpistle?.forEach {  entry ->
-                            val text = bibleViewModel.formatBibleReadingEntry(entry, selectedLanguage)
+                            val text = calendarViewModel.formatBibleReadingEntry(entry, selectedLanguage)
                             Row {
                                 Spacer(Modifier.padding(8.dp))
                                 TextButton(
                                     onClick = {
-                                        bibleViewModel.setSelectedBibleReference(listOf(entry))
+                                        calendarViewModel.setSelectedBibleReference(listOf(entry))
                                         onBibleNavigate()
                                     },
                                 ) {
@@ -650,7 +637,7 @@ fun DisplayEvent(
                             Spacer(Modifier.padding(8.dp))
                             TextButton(
                                 onClick = {
-                                    bibleViewModel.setSelectedBibleReference(gospel)
+                                    calendarViewModel.setSelectedBibleReference(gospel)
                                     onBibleNavigate()
                                 },
                             ) {

@@ -3,13 +3,20 @@ package com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleVerse
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BookNotFoundException
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBiblePrefaceUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleReadingEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +36,10 @@ class CalendarViewModel @Inject constructor(
     private val calendarRepository: CalendarRepository,
     private val settingsRepository: SettingsRepository,
     private val formatDateTitleUseCase: FormatDateTitleUseCase,
+    private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
     private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
+    private val formatBiblePrefaceUseCase: FormatBiblePrefaceUseCase,
+    private val formatBibleReadingEntryUseCase: FormatBibleReadingEntryUseCase,
 ) : ViewModel() {
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
@@ -64,6 +74,9 @@ class CalendarViewModel @Inject constructor(
     // State for the currently selected date for UI feedback
     private val _selectedDate = MutableStateFlow<LocalDate?>(null)
     val selectedDate: StateFlow<LocalDate?> = _selectedDate.asStateFlow()
+
+    private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
+    val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
 
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -163,4 +176,55 @@ class CalendarViewModel @Inject constructor(
         entries: List<BibleReference>,
         language: AppLanguage,
     ): String = formatGospelEntryUseCase(entries, language)
+
+    /**
+     * Sets the selected BibleReference to be displayed on the BibleReaderScreen.
+     * This is called when a user clicks a Bible reading TextButton.
+     */
+    fun setSelectedBibleReference(reference: List<BibleReference>) {
+        _selectedBibleReference.value = reference
+    }
+
+    /**
+     * Formats a complete BibleReadingEntry (a book with its list of ranges) into a readable string.
+     * (e.g., "Matthew 5:1-10, 6:1-5")
+     * This function uses the currently selected language from the ViewModel's internal state.
+     * @param entry The BibleReadingEntry object containing bookNumber and a list of ranges.
+     * @return The formatted string for the entire entry.
+     */
+    fun formatBibleReadingEntry(
+        entry: BibleReference,
+        language: AppLanguage,
+    ): String = formatBibleReadingEntryUseCase(entry, language)
+
+    fun loadBiblePreface(
+        bibleReference: BibleReference,
+        language: AppLanguage,
+    ): List<PrayerElement.Prose>? = formatBiblePrefaceUseCase(bibleReference, language)
+
+    fun loadBibleReading(
+        bibleReferences: List<BibleReference>,
+        language: AppLanguage,
+    ): BibleReading =
+        try {
+            val bibleReference = bibleReferences.firstOrNull()
+            val preface =
+                if (bibleReference != null) {
+                    loadBiblePreface(bibleReference, language)
+                } else {
+                    null
+                }
+            loadBibleReadingUseCase(bibleReferences, language).copy(preface = preface)
+        } catch (e: BookNotFoundException) {
+            // Handle the case where a book or chapter is not found
+            BibleReading(
+                verses =
+                    listOf(
+                        BibleVerse(
+                            0,
+                            "Book or chapter not found: ${e.message}",
+                        ),
+                    ),
+            )
+        }
 }

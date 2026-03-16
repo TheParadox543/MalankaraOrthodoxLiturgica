@@ -96,7 +96,7 @@ fun NavGraph(
         }
     }
 
-    val bibleViewModel: BibleViewModel = hiltViewModel()
+    val calendarViewModel: CalendarViewModel = hiltViewModel()
 
     // Observe the current route to pass to bars for highlight/back logic
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -536,10 +536,8 @@ fun NavGraph(
             composable(
                 AppScreen.Calendar.route,
                 deepLinks = AppScreen.Calendar.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) { backStackEntry ->
-                val calendarViewModel: CalendarViewModel = hiltViewModel(backStackEntry)
+            ) {
                 CalendarScreen(
-                    bibleViewModel,
                     calendarViewModel,
                     contentPadding = innerPadding,
                     onBibleNavigate = {
@@ -554,10 +552,9 @@ fun NavGraph(
 
             composable(AppScreen.BibleReader.route) {
                 BibleReadingScreen(
-                    bibleViewModel,
+                    calendarViewModel,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                ) { scaffoldUiState = it }
             }
 
             composable(AppScreen.QrScanner.route) {

@@ -18,15 +18,17 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 
 @Composable
 fun BibleReadingScreen(
-    bibleViewModel: BibleViewModel,
+//    bibleViewModel: BibleViewModel,
+    calendarViewModel: CalendarViewModel,
     contentPadding: PaddingValues = PaddingValues(),
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
-    val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
-    val bibleReadings: List<BibleReference> by bibleViewModel.selectedBibleReference.collectAsState()
+    val selectedLanguage by calendarViewModel.selectedLanguage.collectAsState()
+    val bibleReadings: List<BibleReference> by calendarViewModel.selectedBibleReference.collectAsState()
 
     if (bibleReadings.isEmpty()) {
         LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Bible Reading", showBottomBar = false)) }
@@ -39,14 +41,14 @@ fun BibleReadingScreen(
     }
     val title =
         if (bibleReadings.size == 1) {
-            bibleViewModel.formatBibleReadingEntry(bibleReadings.first(), selectedLanguage)
+            calendarViewModel.formatBibleReadingEntry(bibleReadings.first(), selectedLanguage)
         } else {
-            bibleViewModel.formatGospelEntry(bibleReadings, selectedLanguage)
+            calendarViewModel.formatGospelEntry(bibleReadings, selectedLanguage)
         }
 
     LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title, showBottomBar = false)) }
 
-    val bibleReading = bibleViewModel.loadBibleReading(bibleReadings, selectedLanguage)
+    val bibleReading = calendarViewModel.loadBibleReading(bibleReadings, selectedLanguage)
     LazyColumn(
         modifier =
             Modifier
