@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.core.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,13 +18,20 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 
 @Composable
 fun ContentNotReadyScreen(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.Companion,
     message: String? = null,
     contentPadding: PaddingValues = PaddingValues(),
     onBackNavigation: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
-    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Error", showBottomBar = false)) }
+    LaunchedEffect(Unit) {
+        onScaffoldStateChanged(
+            ScaffoldUiState.Standard(
+                "Error",
+                showBottomBar = false,
+            ),
+        )
+    }
 
     Column(
         modifier =
@@ -33,20 +40,24 @@ fun ContentNotReadyScreen(
                 .padding(24.dp)
                 .padding(contentPadding),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Companion.CenterHorizontally,
     ) {
         Text(
-            text = "Content for this page is not yet ready.".replace("this page", message ?: "this page"),
+            text =
+                "Content for this page is not yet ready.".replace(
+                    "this page",
+                    message ?: "this page",
+                ),
             style = MaterialTheme.typography.headlineSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = 16.dp),
+            textAlign = TextAlign.Companion.Center,
+            modifier = Modifier.Companion.padding(bottom = 16.dp),
         )
         Text(
             text = "Please check back later for updates!",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Companion.Center,
         )
         Button(onClick = { onBackNavigation() }) {
             Text("Go Back")

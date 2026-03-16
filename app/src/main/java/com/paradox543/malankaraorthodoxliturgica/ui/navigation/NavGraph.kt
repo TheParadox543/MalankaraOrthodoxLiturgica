@@ -38,6 +38,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.core.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
@@ -56,7 +57,6 @@ import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.Settin
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
 import com.paradox543.malankaraorthodoxliturgica.ui.modifier.globalPinchZoom
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
 
