@@ -38,32 +38,30 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OnboardingScreen(
-    settingsViewModel: SettingsViewModel,
-    prayerViewModel: PrayerViewModel,
+    onboardingViewModel: OnboardingViewModel,
     contentPadding: PaddingValues = PaddingValues(),
     onNavigateToHome: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     var selectedLanguage by remember { mutableStateOf(AppLanguage.MALAYALAM) }
-    val selectedFontScale by settingsViewModel.fontScale.collectAsState()
+    val selectedFontScale by onboardingViewModel.fontScale.collectAsState()
 
     var languageExpanded by remember { mutableStateOf(false) }
-    val prayers by prayerViewModel.prayers.collectAsState()
+    val prayers by onboardingViewModel.prayers.collectAsState()
     val filename = "commonPrayers/lords.json"
 
     LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.None) }
 
     LaunchedEffect(selectedLanguage) {
-        prayerViewModel.loadPrayerElements(filename, selectedLanguage)
+        onboardingViewModel.loadPrayerElements(filename, selectedLanguage)
     }
     LaunchedEffect(Unit) {
-        settingsViewModel.logTutorialStart()
+        onboardingViewModel.logTutorialStart()
     }
 
     Column(
@@ -134,7 +132,7 @@ fun OnboardingScreen(
         Slider(
             value = selectedFontScale.scaleFactor,
             onValueChange = { sliderPositionFloat ->
-                settingsViewModel.setFontScaleFromSettings(AppFontScale.fromScale(sliderPositionFloat))
+                onboardingViewModel.setFontScaleFromSettings(AppFontScale.fromScale(sliderPositionFloat))
             },
             modifier = Modifier.width(240.dp),
             valueRange = 0.7f..1.4f,
@@ -156,9 +154,9 @@ fun OnboardingScreen(
         // --- Get Started Button ---
         Button(
             onClick = {
-                settingsViewModel.setLanguage(selectedLanguage)
-                settingsViewModel.setFontScaleFromSettings(selectedFontScale)
-                settingsViewModel.setOnboardingCompleted()
+                onboardingViewModel.setLanguage(selectedLanguage)
+                onboardingViewModel.setFontScaleFromSettings(selectedFontScale)
+                onboardingViewModel.setOnboardingCompleted()
                 onNavigateToHome()
             },
             modifier = Modifier.fillMaxWidth(),

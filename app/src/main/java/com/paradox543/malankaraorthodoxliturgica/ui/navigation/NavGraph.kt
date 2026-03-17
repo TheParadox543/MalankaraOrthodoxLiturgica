@@ -47,6 +47,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleVi
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerScreen
@@ -319,9 +320,9 @@ fun NavGraph(
 
             composable(AppScreen.Onboarding.route) {
                 val prayerViewModel: PrayerViewModel = hiltViewModel()
+                val onboardingViewModel: OnboardingViewModel = hiltViewModel()
                 OnboardingScreen(
-                    settingsViewModel,
-                    prayerViewModel,
+                    onboardingViewModel,
                     innerPadding,
                     {
                         navController.navigate(AppScreen.Home.route) {
