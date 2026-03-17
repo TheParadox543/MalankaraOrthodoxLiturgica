@@ -1,6 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica
 
 import android.app.Application
+import com.paradox543.malankaraorthodoxliturgica.di.prayerModule
 import com.paradox543.malankaraorthodoxliturgica.di.settingsModule
 import com.paradox543.malankaraorthodoxliturgica.di.songModule
 import dagger.hilt.android.HiltAndroidApp
@@ -17,6 +18,7 @@ class LiturgicaApplication : Application() {
 
             modules(
                 settingsModule,
+                prayerModule,
                 songModule,
             )
         }

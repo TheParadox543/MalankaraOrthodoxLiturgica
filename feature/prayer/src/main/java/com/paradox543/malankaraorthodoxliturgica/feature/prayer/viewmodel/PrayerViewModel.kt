@@ -10,7 +10,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKe
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -22,10 +21,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 
-@HiltViewModel
-class PrayerViewModel @Inject constructor(
+class PrayerViewModel(
     private val settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,
     private val analyticsService: AnalyticsService,
