@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.settings.screens
 
-import android.app.Activity
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
@@ -92,18 +91,15 @@ fun SettingsScreen(
     var showQrCodeDialog by remember { mutableStateOf(false) }
     var showRestoreDialog by remember { mutableStateOf(false) }
     var showShareAppBottomSheet by remember { mutableStateOf(false) }
-    val activity = LocalContext.current as? Activity
 
     LaunchedEffect(Unit) {
         settingsViewModel.shareApp.collect {
-            activity?.let {
-                shareService.shareAppLink(
-                    it,
+            shareService.shareAppLink(
+                shareSubject = "Malankara Orthodox Liturgica",
+                shareMessage =
                     "Welcome to Liturgica: A digital repository for " +
                         "all your books in the Malankara Orthodox Church",
-                    appPackageName = "com.paradox543.malankaraorthodoxliturgica",
-                )
-            }
+            )
         }
     }
 

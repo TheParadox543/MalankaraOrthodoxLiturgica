@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     // Hilt will automatically provide the Context and DataStore it needs.
     @Singleton
     @Provides

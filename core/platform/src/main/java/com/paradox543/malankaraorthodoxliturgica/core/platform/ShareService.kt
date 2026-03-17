@@ -1,7 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.core.platform
 
-import android.app.Activity
-
 /**
  * Abstraction over the system share sheet and associated analytics.
  *
@@ -11,13 +9,11 @@ interface ShareService {
     /**
      * Launches an Android share intent to share the app's Play Store link.
      *
-     * @param activity    The currently visible [Activity] used to start the chooser intent.
-     * @param shareMessage An optional custom message prepended to the Play Store link.
-     * @param appPackageName The app's package name used to build the Play Store URL.
+     * @param shareSubject   Optional subject line (for email clients, etc)
+     * @param shareMessage  An optional custom message prepended to the Play Store link.
      */
     fun shareAppLink(
-        activity: Activity,
+        shareSubject: String = "",
         shareMessage: String = "",
-        appPackageName: String = "com.paradox543.malankaraorthodoxliturgica",
     )
 }
