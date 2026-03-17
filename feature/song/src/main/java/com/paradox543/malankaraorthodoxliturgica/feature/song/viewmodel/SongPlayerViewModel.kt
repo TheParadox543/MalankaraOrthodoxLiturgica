@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.viewmodel
+package com.paradox543.malankaraorthodoxliturgica.feature.song.viewmodel
 
 import android.content.Context
 import android.net.Uri
@@ -13,9 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.Sett
 import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
 import com.paradox543.malankaraorthodoxliturgica.domain.song.repository.SongRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
-import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
+import com.paradox543.malankaraorthodoxliturgica.feature.song.model.MediaStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,11 +27,9 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-@HiltViewModel
-class SongPlayerViewModel @Inject constructor(
-    @param:ApplicationContext private val context: Context,
+class SongPlayerViewModel(
+    private val context: Context,
     private val songRepository: SongRepository,
     private val settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,
@@ -41,7 +37,7 @@ class SongPlayerViewModel @Inject constructor(
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Companion.WhileSubscribed(5000),
             initialValue = runBlocking { settingsRepository.language.first() },
         )
 

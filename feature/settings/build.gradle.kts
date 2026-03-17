@@ -3,8 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ktlint)
-    id("com.google.devtools.ksp")
-//    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -56,8 +54,6 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.koin.core)
-//    implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
-//    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
     // Jetpack Compose UI
     implementation(libs.androidx.activity.compose)    // Compose integration for Activity

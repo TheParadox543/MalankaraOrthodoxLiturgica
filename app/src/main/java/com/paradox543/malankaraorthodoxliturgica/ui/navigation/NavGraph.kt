@@ -58,9 +58,10 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.Prayer
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.song.screens.SongScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.song.viewmodel.SongPlayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.
@@ -430,7 +431,7 @@ fun NavGraph(
                     ),
             ) { backStackEntry ->
                 val prayerNavViewModel: PrayerNavViewModel = hiltViewModel(backStackEntry)
-                val songPlayerViewModel: SongPlayerViewModel = hiltViewModel(backStackEntry)
+                val songPlayerViewModel: SongPlayerViewModel = koinViewModel()
                 val route = backStackEntry.arguments?.getString(AppScreen.Song.ARG_ROUTE) ?: ""
                 val node = prayerNavViewModel.findNode(route)
                 if (node != null) {

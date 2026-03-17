@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.song.screens
 
 import androidx.annotation.OptIn
 import androidx.compose.animation.core.animateFloatAsState
@@ -34,12 +34,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.media3.common.util.UnstableApi
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.feature.song.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.feature.song.R
-import com.paradox543.malankaraorthodoxliturgica.ui.MediaStatus
-import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewModel
-import dagger.hilt.android.UnstableApi
+import com.paradox543.malankaraorthodoxliturgica.feature.song.model.MediaStatus
+import com.paradox543.malankaraorthodoxliturgica.feature.song.viewmodel.SongPlayerViewModel
 
 @OptIn(UnstableApi::class)
 @Composable
