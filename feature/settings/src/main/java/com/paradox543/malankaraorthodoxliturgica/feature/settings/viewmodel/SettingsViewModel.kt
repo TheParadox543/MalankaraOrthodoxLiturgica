@@ -8,7 +8,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontSc
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -21,10 +20,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 
-@HiltViewModel
-class SettingsViewModel @Inject constructor(
+class SettingsViewModel(
     private val settingsRepository: SettingsRepository,
     private val analyticsService: AnalyticsService,
     private val soundModeManager: SoundModeManager,

@@ -24,6 +24,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel as koinViewModel
 
 /**
  * Thin Android entry point. Responsible for:
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
     @Inject lateinit var soundModeManager: SoundModeManager
 
-    private val settingsViewModel: SettingsViewModel by viewModels()
+    private val settingsViewModel: SettingsViewModel by koinViewModel()
     private val startupViewModel: StartupViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

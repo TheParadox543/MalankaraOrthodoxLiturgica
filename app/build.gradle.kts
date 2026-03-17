@@ -117,6 +117,12 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
     ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
+    // Dependency Injection - Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.koin.androidx.compose.navigation)
+
     // Background Work Management
     implementation(libs.androidx.hilt.common)
     implementation(libs.androidx.work.runtime.ktx)
