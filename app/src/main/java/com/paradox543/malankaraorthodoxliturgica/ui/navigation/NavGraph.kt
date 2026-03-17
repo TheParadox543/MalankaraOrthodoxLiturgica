@@ -47,6 +47,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleVi
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
@@ -58,7 +59,6 @@ import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.AboutS
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.SongPlayerViewModel
 

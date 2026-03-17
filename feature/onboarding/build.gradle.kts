@@ -15,6 +15,7 @@ android {
 
     defaultConfig {
         minSdk = 24
+        buildConfigField("String", "VERSION_NAME", "\"${providers.gradleProperty("APP_VERSION_NAME").get()}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -38,6 +39,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

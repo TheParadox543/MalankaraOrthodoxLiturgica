@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.ui.screens
+package com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,12 +32,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -66,24 +66,24 @@ fun OnboardingScreen(
 
     Column(
         modifier =
-            Modifier
+            Modifier.Companion
                 .fillMaxSize()
                 .padding(contentPadding)
                 .padding(24.dp)
                 .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Companion.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
             text = "Welcome to Liturgica!",
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Companion.Center,
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
+            modifier = Modifier.Companion.padding(bottom = 16.dp).fillMaxWidth(),
         )
         Text(
             text = "Please choose your preferred language and font size.",
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(bottom = 32.dp),
+            modifier = Modifier.Companion.padding(bottom = 32.dp),
         )
 
         // --- Language Selection ---
@@ -100,14 +100,14 @@ fun OnboardingScreen(
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageExpanded)
                 },
                 modifier =
-                    Modifier
-                        .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                    Modifier.Companion
+                        .menuAnchor(MenuAnchorType.Companion.PrimaryNotEditable, true)
                         .fillMaxWidth(),
             )
             ExposedDropdownMenu(
                 expanded = languageExpanded,
                 onDismissRequest = { languageExpanded = false },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.Companion.fillMaxWidth(),
             ) {
                 AppLanguage.entries.forEach {
                     DropdownMenuItem(
@@ -122,7 +122,7 @@ fun OnboardingScreen(
             }
         }
 
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.Companion.height(24.dp))
 
         // --- Font Size Selection ---
         Text(
@@ -132,20 +132,24 @@ fun OnboardingScreen(
         Slider(
             value = selectedFontScale.scaleFactor,
             onValueChange = { sliderPositionFloat ->
-                onboardingViewModel.setFontScaleFromSettings(AppFontScale.fromScale(sliderPositionFloat))
+                onboardingViewModel.setFontScaleFromSettings(
+                    AppFontScale.Companion.fromScale(
+                        sliderPositionFloat,
+                    ),
+                )
             },
-            modifier = Modifier.width(240.dp),
+            modifier = Modifier.Companion.width(240.dp),
             valueRange = 0.7f..1.4f,
             steps = 3,
         )
 
         if (!prayers.isEmpty()) {
             Column(
-                modifier = Modifier.padding(vertical = 28.dp),
+                modifier = Modifier.Companion.padding(vertical = 28.dp),
             ) {
                 Text(
                     "Sample Prayer",
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    modifier = Modifier.Companion.align(Alignment.Companion.CenterHorizontally),
                 )
                 (prayers[1] as? PrayerElement.Prose)?.let { Prose(it.content) }
             }
@@ -159,7 +163,7 @@ fun OnboardingScreen(
                 onboardingViewModel.setOnboardingCompleted()
                 onNavigateToHome()
             },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.Companion.fillMaxWidth(),
         ) {
             Text("Get Started!")
         }
