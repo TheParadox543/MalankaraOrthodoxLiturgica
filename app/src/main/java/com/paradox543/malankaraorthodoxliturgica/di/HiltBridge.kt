@@ -4,6 +4,8 @@ import android.content.Context
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacentChaptersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
@@ -41,6 +43,10 @@ interface HiltBridge {
     fun getAdjacentSiblingRoutesUseCase(): GetAdjacentSiblingRoutesUseCase
 
     fun getPrayerNodesForCurrentTimeUseCase(): GetPrayerNodesForCurrentTimeUseCase
+
+    fun bibleRepository(): BibleRepository
+
+    fun getAdjacentChaptersUseCase(): GetAdjacentChaptersUseCase
 }
 
 fun getHiltBridge(context: Context): HiltBridge {

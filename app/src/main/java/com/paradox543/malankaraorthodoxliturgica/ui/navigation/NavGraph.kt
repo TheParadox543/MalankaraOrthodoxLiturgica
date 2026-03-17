@@ -466,7 +466,7 @@ fun NavGraph(
                 AppScreen.Bible.route,
                 deepLinks = AppScreen.Bible.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
+                val bibleViewModel: BibleViewModel = koinViewModel(viewModelStoreOwner = backStackEntry)
                 BibleScreen(
                     { index ->
                         navController.navigate(AppScreen.BibleBook.createRoute(index))
@@ -487,7 +487,7 @@ fun NavGraph(
                     ),
                 deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
+                val bibleViewModel: BibleViewModel = koinViewModel(viewModelStoreOwner = backStackEntry)
                 val bookIndex =
                     backStackEntry.arguments?.getString(AppScreen.BibleBook.ARG_BOOK_INDEX)?.toIntOrNull()
                         ?: 0
@@ -514,7 +514,7 @@ fun NavGraph(
                     AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) }
                         ?: emptyList(),
             ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
+                val bibleViewModel: BibleViewModel = koinViewModel(viewModelStoreOwner = backStackEntry)
                 val bookIndex =
                     backStackEntry.arguments
                         ?.getString(AppScreen.BibleChapter.ARG_BOOK_INDEX)

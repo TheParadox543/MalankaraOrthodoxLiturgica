@@ -9,16 +9,13 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRe
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacentChaptersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.runBlocking
-import javax.inject.Inject
 
-@HiltViewModel
-class BibleViewModel @Inject constructor(
+class BibleViewModel(
     private val bibleRepository: BibleRepository,
     private val settingsRepository: SettingsRepository,
     private val getAdjacentChaptersUseCase: GetAdjacentChaptersUseCase,
@@ -26,7 +23,7 @@ class BibleViewModel @Inject constructor(
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.Companion.WhileSubscribed(5000),
+            started = SharingStarted.WhileSubscribed(5000),
             initialValue = runBlocking { settingsRepository.language.first() },
         )
 
