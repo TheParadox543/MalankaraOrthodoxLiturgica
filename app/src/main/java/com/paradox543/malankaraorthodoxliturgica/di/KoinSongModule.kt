@@ -8,8 +8,6 @@ import org.koin.dsl.module
 
 val songModule =
     module {
-        single { getHiltBridge(androidContext()).songRepository() }
-
         viewModel {
             SongPlayerViewModel(
                 context = androidContext(),

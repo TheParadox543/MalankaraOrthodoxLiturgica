@@ -10,17 +10,15 @@ import com.google.firebase.storage.FirebaseStorage
 import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
 import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongSource
 import com.paradox543.malankaraorthodoxliturgica.domain.song.repository.SongRepository
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import java.io.File
-import javax.inject.Inject
 
-class SongRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+class SongRepositoryImpl(
+    private val context: Context,
     private val storage: FirebaseStorage,
 ) : SongRepository {
     @SuppressLint("MissingPermission")
