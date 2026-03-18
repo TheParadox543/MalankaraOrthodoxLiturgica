@@ -3,11 +3,8 @@ package com.paradox543.malankaraorthodoxliturgica.data.translations.repository
 import com.paradox543.malankaraorthodoxliturgica.data.translations.datasource.TranslationSource
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class TranslationsRepositoryImpl @Inject constructor(
+class TranslationsRepositoryImpl(
     private val source: TranslationSource,
 ) : TranslationsRepository {
     private var cachedRaw: Map<String, Map<String, String>>? = null
