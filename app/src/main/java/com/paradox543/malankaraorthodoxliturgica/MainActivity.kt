@@ -22,6 +22,7 @@ import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import javax.inject.Inject
 
@@ -36,7 +37,8 @@ import javax.inject.Inject
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject lateinit var inAppUpdateManager: InAppUpdateManager
+//    @Inject lateinit var inAppUpdateManager: InAppUpdateManager
+    private val inAppUpdateManager: InAppUpdateManager by inject()
 
     @Inject lateinit var inAppReviewManager: InAppReviewManager
 

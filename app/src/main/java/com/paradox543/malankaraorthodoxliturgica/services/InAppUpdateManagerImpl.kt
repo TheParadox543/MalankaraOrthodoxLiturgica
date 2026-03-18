@@ -11,11 +11,8 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class InAppUpdateManagerImpl @Inject constructor(
+class InAppUpdateManagerImpl(
     private val appUpdateManager: AppUpdateManager,
 ) : InAppUpdateManager {
     companion object {
