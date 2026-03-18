@@ -99,7 +99,7 @@ fun NavGraph(
         }
     }
 
-    val calendarViewModel: CalendarViewModel = hiltViewModel()
+    val calendarViewModel: CalendarViewModel = koinViewModel()
 
     // Observe the current route to pass to bars for highlight/back logic
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
