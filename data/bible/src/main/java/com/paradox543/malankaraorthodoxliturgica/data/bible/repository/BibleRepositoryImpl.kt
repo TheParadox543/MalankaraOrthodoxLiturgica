@@ -11,11 +11,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class BibleRepositoryImpl @Inject constructor(
+class BibleRepositoryImpl(
     val source: BibleSource,
 ) : BibleRepository {
     // Lazily load and cache the Bible meta-data to avoid re-reading the asset.

@@ -1,5 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBiblePrefaceUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleRangeUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleReadingEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacentChaptersUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetDynamicSongsUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
@@ -38,6 +44,41 @@ val useCaseModule =
             GetPrayerScreenContentUseCase(
                 prayerRepository = get(),
                 getDynamicSongsUseCase = get(),
+            )
+        }
+
+        single {
+            GetAdjacentChaptersUseCase(
+                bibleRepository = get(),
+            )
+        }
+
+        single {
+            LoadBibleReadingUseCase(
+                bibleRepository = get(),
+            )
+        }
+
+        single {
+            FormatBiblePrefaceUseCase(
+                bibleRepository = get(),
+            )
+        }
+
+        single {
+            FormatBibleRangeUseCase()
+        }
+
+        single {
+            FormatBibleReadingEntryUseCase(
+                bibleRepository = get(),
+                formatBibleRangeUseCase = get(),
+            )
+        }
+
+        single {
+            FormatGospelEntryUseCase(
+                formatBibleReadingEntryUseCase = get(),
             )
         }
     }

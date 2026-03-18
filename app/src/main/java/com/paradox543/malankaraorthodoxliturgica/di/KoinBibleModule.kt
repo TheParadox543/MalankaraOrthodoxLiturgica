@@ -7,9 +7,6 @@ import org.koin.dsl.module
 
 val bibleModule =
     module {
-        single { getHiltBridge(androidContext()).bibleRepository() }
-        single { getHiltBridge(androidContext()).getAdjacentChaptersUseCase() }
-
         viewModel {
             BibleViewModel(
                 bibleRepository = get(),

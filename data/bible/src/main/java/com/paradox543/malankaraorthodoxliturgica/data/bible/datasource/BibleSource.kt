@@ -4,9 +4,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleBookDetai
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleChapterDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceTemplatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
-import javax.inject.Inject
 
-class BibleSource @Inject constructor(
+class BibleSource(
     private val reader: AssetJsonReader,
 ) {
     fun readBibleDetails(): List<BibleBookDetailsDto> = reader.loadJsonAsset("bibleBookMetadata.json")

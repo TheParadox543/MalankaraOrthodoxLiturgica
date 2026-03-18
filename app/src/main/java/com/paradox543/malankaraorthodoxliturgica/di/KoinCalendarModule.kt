@@ -9,11 +9,6 @@ val calendarModule =
     module {
         single { getHiltBridge(androidContext()).calendarRepository() }
         single { getHiltBridge(androidContext()).formatDateTitleUseCase() }
-        single { getHiltBridge(androidContext()).formatBibleRangeUseCase() }
-        single { getHiltBridge(androidContext()).formatBibleReadingEntryUseCase() }
-        single { getHiltBridge(androidContext()).formatGospelEntryUseCase() }
-        single { getHiltBridge(androidContext()).formatBiblePrefaceUseCase() }
-        single { getHiltBridge(androidContext()).loadBibleReadingUseCase() }
 
         viewModel {
             CalendarViewModel(
