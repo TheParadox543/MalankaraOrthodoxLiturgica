@@ -7,9 +7,6 @@ import org.koin.dsl.module
 
 val calendarModule =
     module {
-        single { getHiltBridge(androidContext()).calendarRepository() }
-        single { getHiltBridge(androidContext()).formatDateTitleUseCase() }
-
         viewModel {
             CalendarViewModel(
                 calendarRepository = get(),

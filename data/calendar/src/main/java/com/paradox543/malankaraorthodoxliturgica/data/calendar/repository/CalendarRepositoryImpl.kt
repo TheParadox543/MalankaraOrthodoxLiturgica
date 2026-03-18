@@ -8,6 +8,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDataStore
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.EventKey
@@ -15,16 +17,11 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
-import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
-import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CalendarRepositoryImpl @Inject constructor(
+class CalendarRepositoryImpl(
     private val calendarSource: CalendarSource,
 ) : CalendarRepository {
     // Lazy initialization ensures files are read only when first accessed.
