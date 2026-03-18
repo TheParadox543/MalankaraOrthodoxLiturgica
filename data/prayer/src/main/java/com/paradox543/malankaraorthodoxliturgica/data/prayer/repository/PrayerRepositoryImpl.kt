@@ -7,11 +7,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class PrayerRepositoryImpl @Inject constructor(
+class PrayerRepositoryImpl(
     private val prayerSource: PrayerSource,
 ) : PrayerRepository {
     override suspend fun loadPrayerElements(

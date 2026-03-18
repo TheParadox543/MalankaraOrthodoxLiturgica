@@ -10,9 +10,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerParsing
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-class PrayerSource @Inject constructor(
+class PrayerSource(
     private val reader: AssetJsonReader,
 ) {
     /**

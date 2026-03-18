@@ -76,6 +76,7 @@ dependencies {
     // Project imports
     implementation(project(":shared"))
     implementation(project(":core:domain"))
+    implementation(project(":data:core"))
     implementation(project(":data:bible"))
     implementation(project(":data:calendar"))
     implementation(project(":data:prayer"))

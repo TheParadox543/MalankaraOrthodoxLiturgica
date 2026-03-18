@@ -13,10 +13,6 @@ val onboardingModule =
             getHiltBridge(androidContext()).analyticsService()
         }
 
-        single {
-            getHiltBridge(androidContext()).getPrayerScreenContentUseCase()
-        }
-
         // ViewModel (pure Kotlin constructor)
         viewModel {
             OnboardingViewModel(

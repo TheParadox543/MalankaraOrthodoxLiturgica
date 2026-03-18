@@ -10,11 +10,6 @@ val prayerModule =
     module {
         // Prayer-specific bridge deps only (avoid redefining deps already in settings/song modules)
         single { getHiltBridge(androidContext()).inAppReviewManager() }
-        single { getHiltBridge(androidContext()).prayerRepository() }
-        single { getHiltBridge(androidContext()).getPrayerScreenContentUseCase() }
-        single { getHiltBridge(androidContext()).getSongKeyPriorityUseCase() }
-        single { getHiltBridge(androidContext()).getAdjacentSiblingRoutesUseCase() }
-        single { getHiltBridge(androidContext()).getPrayerNodesForCurrentTimeUseCase() }
 
         viewModel {
             PrayerViewModel(

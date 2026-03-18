@@ -43,7 +43,7 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
-
+    implementation(libs.koin.core)
     ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
     // Data Serialization

@@ -1,6 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica
 
 import android.app.Application
+import com.paradox543.malankaraorthodoxliturgica.data.core.di.dataCoreBridgeModule
+import com.paradox543.malankaraorthodoxliturgica.data.prayer.di.prayerDataModule
 import com.paradox543.malankaraorthodoxliturgica.data.settings.di.settingsDataModule
 import com.paradox543.malankaraorthodoxliturgica.data.song.di.songDataModule
 import com.paradox543.malankaraorthodoxliturgica.data.translations.di.translationsDataModule
@@ -11,6 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.di.prayerModule
 import com.paradox543.malankaraorthodoxliturgica.di.settingsModule
 import com.paradox543.malankaraorthodoxliturgica.di.songModule
 import com.paradox543.malankaraorthodoxliturgica.di.startupModule
+import com.paradox543.malankaraorthodoxliturgica.di.useCaseModule
 import dagger.hilt.android.HiltAndroidApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -27,6 +30,9 @@ class LiturgicaApplication : Application() {
                 settingsDataModule,
                 translationsDataModule,
                 songDataModule,
+                dataCoreBridgeModule,
+                prayerDataModule,
+                useCaseModule,
                 startupModule,
                 settingsModule,
                 prayerModule,

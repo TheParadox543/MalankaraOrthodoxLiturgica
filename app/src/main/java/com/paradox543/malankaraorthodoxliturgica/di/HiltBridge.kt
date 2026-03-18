@@ -13,11 +13,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacen
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -31,16 +26,6 @@ interface HiltBridge {
     fun soundModeManager(): SoundModeManager
 
     fun inAppReviewManager(): InAppReviewManager
-
-    fun prayerRepository(): PrayerRepository
-
-    fun getPrayerScreenContentUseCase(): GetPrayerScreenContentUseCase
-
-    fun getSongKeyPriorityUseCase(): GetSongKeyPriorityUseCase
-
-    fun getAdjacentSiblingRoutesUseCase(): GetAdjacentSiblingRoutesUseCase
-
-    fun getPrayerNodesForCurrentTimeUseCase(): GetPrayerNodesForCurrentTimeUseCase
 
     fun bibleRepository(): BibleRepository
 
