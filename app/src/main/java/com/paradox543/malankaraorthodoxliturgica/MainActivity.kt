@@ -3,7 +3,6 @@ package com.paradox543.malankaraorthodoxliturgica
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,8 +22,8 @@ import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import javax.inject.Inject
-import org.koin.androidx.viewmodel.ext.android.viewModel as koinViewModel
 
 /**
  * Thin Android entry point. Responsible for:
@@ -47,8 +46,8 @@ class MainActivity : ComponentActivity() {
 
     @Inject lateinit var soundModeManager: SoundModeManager
 
-    private val settingsViewModel: SettingsViewModel by koinViewModel()
-    private val startupViewModel: StartupViewModel by viewModels()
+    private val settingsViewModel: SettingsViewModel by viewModel()
+    private val startupViewModel: StartupViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()

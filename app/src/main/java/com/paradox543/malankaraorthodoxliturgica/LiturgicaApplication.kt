@@ -7,6 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.di.onboardingModule
 import com.paradox543.malankaraorthodoxliturgica.di.prayerModule
 import com.paradox543.malankaraorthodoxliturgica.di.settingsModule
 import com.paradox543.malankaraorthodoxliturgica.di.songModule
+import com.paradox543.malankaraorthodoxliturgica.di.startupModule
 import dagger.hilt.android.HiltAndroidApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -20,6 +21,7 @@ class LiturgicaApplication : Application() {
             androidContext(this@LiturgicaApplication)
 
             modules(
+                startupModule,
                 settingsModule,
                 prayerModule,
                 calendarModule,
