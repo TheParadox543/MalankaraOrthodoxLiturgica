@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -42,14 +41,12 @@ dependencies {
     implementation(libs.material)
 
     // Dependency Injection
-    implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
     implementation(libs.koin.core)
-    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
 
     // Data Serialization
     implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
 
-    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

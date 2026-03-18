@@ -47,9 +47,6 @@ dependencies {
     // Dependency Injection
     implementation(libs.koin.core)
 
-    // Data Serialization
-    implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
-
     testImplementation(libs.kotlin.test)
     testImplementation(libs.mockk)
 

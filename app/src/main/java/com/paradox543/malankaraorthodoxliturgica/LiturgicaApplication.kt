@@ -30,11 +30,11 @@ class LiturgicaApplication : Application() {
 
             modules(
                 settingsDataModule,
+                bibleDataModule,
                 translationsDataModule,
                 songDataModule,
                 dataCoreBridgeModule,
                 prayerDataModule,
-                bibleDataModule,
                 calendarDataModule,
                 useCaseModule,
                 startupModule,
