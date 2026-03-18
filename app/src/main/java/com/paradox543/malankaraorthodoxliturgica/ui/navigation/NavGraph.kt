@@ -320,7 +320,7 @@ fun NavGraph(
             }
 
             composable(AppScreen.Onboarding.route) {
-                val onboardingViewModel: OnboardingViewModel = hiltViewModel()
+                val onboardingViewModel: OnboardingViewModel = koinViewModel()
                 OnboardingScreen(
                     onboardingViewModel,
                     innerPadding,

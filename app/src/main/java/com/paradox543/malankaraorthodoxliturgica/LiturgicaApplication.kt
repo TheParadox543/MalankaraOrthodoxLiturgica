@@ -3,6 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica
 import android.app.Application
 import com.paradox543.malankaraorthodoxliturgica.di.bibleModule
 import com.paradox543.malankaraorthodoxliturgica.di.calendarModule
+import com.paradox543.malankaraorthodoxliturgica.di.onboardingModule
 import com.paradox543.malankaraorthodoxliturgica.di.prayerModule
 import com.paradox543.malankaraorthodoxliturgica.di.settingsModule
 import com.paradox543.malankaraorthodoxliturgica.di.songModule
@@ -24,6 +25,7 @@ class LiturgicaApplication : Application() {
                 calendarModule,
                 bibleModule,
                 songModule,
+                onboardingModule,
             )
         }
     }
