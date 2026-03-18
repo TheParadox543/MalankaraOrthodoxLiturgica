@@ -18,7 +18,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjace
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.song.repository.SongRepository
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
@@ -28,8 +27,6 @@ import dagger.hilt.components.SingletonComponent
 @EntryPoint
 @InstallIn(SingletonComponent::class)
 interface HiltBridge {
-    fun settingsRepository(): SettingsRepository
-
     fun songRepository(): SongRepository
 
     fun analyticsService(): AnalyticsService

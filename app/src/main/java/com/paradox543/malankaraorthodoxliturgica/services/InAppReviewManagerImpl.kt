@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import com.google.android.play.core.review.ReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
+import com.paradox543.malankaraorthodoxliturgica.di.ReviewDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -15,7 +16,7 @@ import javax.inject.Singleton
 @Singleton
 class InAppReviewManagerImpl @Inject constructor(
     private val reviewManager: ReviewManager,
-    private val dataStore: DataStore<Preferences>,
+    @ReviewDataStore private val dataStore: DataStore<Preferences>,
 ) : InAppReviewManager {
     // Define a key for storing the prayer screen visit count in DataStore.
     private val prayerScreenVisitCountKey = intPreferencesKey("prayer_screen_visit_count")

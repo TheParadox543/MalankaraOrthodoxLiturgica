@@ -7,12 +7,7 @@ import org.koin.dsl.module
 
 val settingsModule =
     module {
-
         // Bridge Hilt dependencies into Koin
-        single {
-            getHiltBridge(androidContext()).settingsRepository()
-        }
-
         single {
             getHiltBridge(androidContext()).analyticsService()
         }

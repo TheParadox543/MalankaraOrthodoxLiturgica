@@ -8,9 +8,6 @@ import org.koin.dsl.module
 val onboardingModule =
     module {
         // Bridge Hilt dependencies into Koin
-        single {
-            getHiltBridge(androidContext()).settingsRepository()
-        }
 
         single {
             getHiltBridge(androidContext()).analyticsService()

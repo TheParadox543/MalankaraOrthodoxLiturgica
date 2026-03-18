@@ -13,11 +13,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class SettingsRepositoryImpl @Inject constructor(
+class SettingsRepositoryImpl(
     private val dataStore: DataStore<Preferences>,
 ) : SettingsRepository {
     // DataStore keys
