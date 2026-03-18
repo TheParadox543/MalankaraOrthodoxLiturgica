@@ -312,7 +312,7 @@ fun SettingsScreen(
     }
 
     if (showQrCodeDialog) {
-        QrCodeShareDialog(onDismissRequest = {})
+        QrCodeShareDialog(onDismissRequest = { showQrCodeDialog = false })
     }
 
     if (showShareAppBottomSheet) {
@@ -332,6 +332,7 @@ fun SettingsScreen(
                         .padding(8.dp)
                         .clickable(
                             onClick = {
+                                showShareAppBottomSheet = false
                                 settingsViewModel.onShareAppClicked()
                             },
                         ),
@@ -359,6 +360,8 @@ fun SettingsScreen(
                         .height(200.dp)
                         .padding(8.dp)
                         .clickable {
+                            showShareAppBottomSheet = false
+                            showQrCodeDialog = true
                         },
                 ) {
                     Column(
