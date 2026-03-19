@@ -15,8 +15,6 @@ interface HiltBridge {
     fun analyticsService(): AnalyticsService
 
     fun soundModeManager(): SoundModeManager
-
-    fun inAppReviewManager(): InAppReviewManager
 }
 
 fun getHiltBridge(context: Context): HiltBridge {

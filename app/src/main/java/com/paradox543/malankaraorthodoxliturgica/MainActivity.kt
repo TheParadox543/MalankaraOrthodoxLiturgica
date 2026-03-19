@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
 //    @Inject lateinit var inAppUpdateManager: InAppUpdateManager
     private val inAppUpdateManager: InAppUpdateManager by inject()
 
-    @Inject lateinit var inAppReviewManager: InAppReviewManager
+    private val inAppReviewManager: InAppReviewManager by inject()
 
     @Inject lateinit var analyticsService: AnalyticsService
 

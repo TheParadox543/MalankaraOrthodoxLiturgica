@@ -1,9 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
-import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.ShareServiceImpl
 import dagger.Binds
 import dagger.Module
@@ -15,10 +13,6 @@ import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class PlatformModule {
-    @Binds
-    @Singleton
-    abstract fun bindinAppReviewManager(impl: InAppReviewManagerImpl): InAppReviewManager
-
     @Binds
     @Singleton
     abstract fun bindShareServiceManager(impl: ShareServiceImpl): ShareService
