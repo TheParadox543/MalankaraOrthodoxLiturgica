@@ -37,14 +37,13 @@ import javax.inject.Inject
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-//    @Inject lateinit var inAppUpdateManager: InAppUpdateManager
     private val inAppUpdateManager: InAppUpdateManager by inject()
 
     private val inAppReviewManager: InAppReviewManager by inject()
 
     @Inject lateinit var analyticsService: AnalyticsService
 
-    @Inject lateinit var shareService: ShareService
+    private val shareService: ShareService by inject()
 
     @Inject lateinit var soundModeManager: SoundModeManager
 

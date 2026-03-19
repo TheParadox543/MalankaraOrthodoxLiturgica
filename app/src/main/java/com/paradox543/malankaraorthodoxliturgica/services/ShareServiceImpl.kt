@@ -4,12 +4,9 @@ import android.content.Context
 import android.content.Intent
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
-import javax.inject.Singleton
 
-class ShareServiceImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
+class ShareServiceImpl(
+    private val context: Context,
     private val analyticsService: AnalyticsService,
 ) : ShareService {
     companion object {
