@@ -20,7 +20,6 @@ import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.Sett
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,7 +33,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  *
  * All navigation and UI logic lives in [NavGraph].
  */
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private val inAppUpdateManager: InAppUpdateManager by inject()
 

@@ -18,12 +18,10 @@ import com.paradox543.malankaraorthodoxliturgica.di.songModule
 import com.paradox543.malankaraorthodoxliturgica.di.startupModule
 import com.paradox543.malankaraorthodoxliturgica.di.useCaseModule
 import com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase.analyticsFirebaseModule
-import dagger.hilt.android.HiltAndroidApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.context.startKoin
 
-@HiltAndroidApp
 class LiturgicaApplication : Application() {
     override fun onCreate() {
         super.onCreate()

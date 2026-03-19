@@ -449,8 +449,8 @@ fun NavGraph(
             }
 
             composable(AppScreen.PrayNow.route) { backStackEntry ->
-                val prayerViewModel: PrayerViewModel = koinViewModel() // = hiltViewModel<PrayerViewModel>(backStackEntry)
-                val prayerNavViewModel: PrayerNavViewModel = koinViewModel() // = hiltViewModel<PrayerNavViewModel>(backStackEntry)
+                val prayerViewModel: PrayerViewModel = koinViewModel()
+                val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
                 PrayNowScreen(
                     { route ->
                         navController.navigate(AppScreen.Prayer.createRoute(route))

@@ -4,11 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    // Linter plugin
-    alias(libs.plugins.ktlint)
+    alias(libs.plugins.ktlint)              // Linter plugin
     alias(libs.plugins.kotlin.serialization)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
     // Google services plugin
     id("com.google.gms.google-services")
     // Add the Crashlytics plugin
@@ -114,11 +111,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)  // Navigation integration for Compose
 
     // Dependency Injection
-    implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
-    implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
-    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
-
-    // Dependency Injection - Koin
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.compose.viewmodel)
@@ -126,7 +118,6 @@ dependencies {
     implementation(libs.koin.androidx.workmanager)
 
     // Background Work Management
-    implementation(libs.androidx.hilt.common)
     implementation(libs.androidx.work.runtime.ktx)
 
     // Data Storage
