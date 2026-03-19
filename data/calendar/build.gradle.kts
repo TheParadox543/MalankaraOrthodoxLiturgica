@@ -59,7 +59,7 @@ dependencies {
     // Data Serialization
     implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
 
-    testImplementation(libs.kotlinx.test.core)
+    testImplementation(libs.kotlin.test)
     testImplementation(libs.kotlinx.test.junit)
     testImplementation(libs.kotlinx.test.annotations.common)
     testImplementation(libs.mockk)

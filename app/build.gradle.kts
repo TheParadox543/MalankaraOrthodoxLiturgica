@@ -123,6 +123,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.compose.viewmodel)
     implementation(libs.koin.androidx.compose.navigation)
+    implementation(libs.koin.androidx.workmanager)
 
     // Background Work Management
     implementation(libs.androidx.hilt.common)

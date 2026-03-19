@@ -12,10 +12,6 @@ val settingsModule =
             getHiltBridge(androidContext()).analyticsService()
         }
 
-        single {
-            getHiltBridge(androidContext()).soundModeManager()
-        }
-
         // ViewModel (pure Kotlin constructor)
         viewModel {
             SettingsViewModel(

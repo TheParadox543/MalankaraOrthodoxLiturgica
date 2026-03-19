@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
     private val shareService: ShareService by inject()
 
-    @Inject lateinit var soundModeManager: SoundModeManager
+    private val soundModeManager: SoundModeManager by inject()
 
     private val settingsViewModel: SettingsViewModel by viewModel()
     private val startupViewModel: StartupViewModel by viewModel()

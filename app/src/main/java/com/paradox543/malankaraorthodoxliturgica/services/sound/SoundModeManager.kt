@@ -3,14 +3,11 @@ package com.paradox543.malankaraorthodoxliturgica.services.sound
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager as SoundModeManagerInterface
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Singleton
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager as SoundModeManagerInterface
 
-@Singleton
-class SoundModeManager @Inject constructor(
+class SoundModeManager(
     private val soundModeService: SoundModeService,
     private val workManager: WorkManager,
 ) : SoundModeManagerInterface {

@@ -57,10 +57,10 @@ androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-f
 app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdateKtx" }
 barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "barcodeScanning" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
+koin-androidx-workmanager = { module = "io.insert-koin:koin-androidx-workmanager", version.ref = "koin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
-kotlinx-test-core = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinx-test" }
 kotlinx-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinx-test" }
 kotlinx-test-annotations-common = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlinx-test" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "core" }

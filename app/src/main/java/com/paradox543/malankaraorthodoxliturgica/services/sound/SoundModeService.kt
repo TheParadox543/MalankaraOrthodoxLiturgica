@@ -4,11 +4,9 @@ import android.app.NotificationManager
 import android.content.Context
 import android.media.AudioManager
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
-class SoundModeService @Inject constructor(
-    @param:ApplicationContext private val context: Context,
+class SoundModeService(
+    private val context: Context,
 ) {
     private val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     private val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
