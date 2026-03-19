@@ -1,7 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
@@ -17,11 +16,11 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.ShareServiceImpl
+import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeService
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import com.paradox543.malankaraorthodoxliturgica.services.sound.SoundModeManager as SoundModeManagerImpl
 
 private const val REVIEW_DATASTORE_NAME = "review_prefs"
 private val REVIEW_DATASTORE_QUALIFIER = named("reviewDataStore")

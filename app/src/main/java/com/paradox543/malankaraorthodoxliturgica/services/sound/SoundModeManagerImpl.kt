@@ -7,7 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import java.util.concurrent.TimeUnit
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager as SoundModeManagerInterface
 
-class SoundModeManager(
+class SoundModeManagerImpl(
     private val soundModeService: SoundModeService,
     private val workManager: WorkManager,
 ) : SoundModeManagerInterface {
