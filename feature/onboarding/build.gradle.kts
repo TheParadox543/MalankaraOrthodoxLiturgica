@@ -53,6 +53,7 @@ dependencies {
 
     // Dependency Injection
     implementation(libs.koin.core)
+    implementation(libs.koin.compose.viewmodel)
 
     // Jetpack Compose UI
     implementation(libs.androidx.activity.compose)    // Compose integration for Activity

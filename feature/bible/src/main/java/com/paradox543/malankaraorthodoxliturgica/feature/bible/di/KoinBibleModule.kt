@@ -1,7 +1,6 @@
-package com.paradox543.malankaraorthodoxliturgica.di
+package com.paradox543.malankaraorthodoxliturgica.feature.bible.di
 
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
-import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 

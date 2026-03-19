@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.di
+package com.paradox543.malankaraorthodoxliturgica.feature.prayer.di
 
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel

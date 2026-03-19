@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.di
+package com.paradox543.malankaraorthodoxliturgica.feature.onboarding.di
 
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 import org.koin.core.module.dsl.viewModel

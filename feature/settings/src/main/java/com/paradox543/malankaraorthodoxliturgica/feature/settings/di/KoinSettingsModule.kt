@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.di
+package com.paradox543.malankaraorthodoxliturgica.feature.settings.di
 
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import org.koin.core.module.dsl.viewModel
