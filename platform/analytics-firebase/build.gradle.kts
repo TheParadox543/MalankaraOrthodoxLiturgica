@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ktlint)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -45,15 +43,14 @@ dependencies {
     implementation(project(":core:platform"))
 
     // Dependency Injection
-    implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
-    implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
-    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 
     // Firebase Services
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
 
-    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

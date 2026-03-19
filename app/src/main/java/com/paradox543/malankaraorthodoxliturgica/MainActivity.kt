@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import javax.inject.Inject
 
 /**
  * Thin Android entry point. Responsible for:
@@ -41,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
     private val inAppReviewManager: InAppReviewManager by inject()
 
-    @Inject lateinit var analyticsService: AnalyticsService
+    private val analyticsService: AnalyticsService by inject()
 
     private val shareService: ShareService by inject()
 

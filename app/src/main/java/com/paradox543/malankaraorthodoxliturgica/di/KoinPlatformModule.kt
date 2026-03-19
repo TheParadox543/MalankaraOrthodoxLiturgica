@@ -53,7 +53,7 @@ val platformKoinModule =
         single<ShareService> {
             ShareServiceImpl(
                 context = androidContext(),
-                analyticsService = getHiltBridge(androidContext()).analyticsService(),
+                analyticsService = get(),
             )
         }
 

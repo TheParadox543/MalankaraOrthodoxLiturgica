@@ -3,9 +3,8 @@ package com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
-import javax.inject.Inject
 
-class FirebaseAnalyticsService @Inject constructor(
+class FirebaseAnalyticsService(
     private val firebaseAnalytics: FirebaseAnalytics,
 ) : AnalyticsService {
     override fun logPrayNowItemSelection(

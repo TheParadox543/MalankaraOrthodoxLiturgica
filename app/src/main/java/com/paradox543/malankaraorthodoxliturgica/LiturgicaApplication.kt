@@ -17,6 +17,7 @@ import com.paradox543.malankaraorthodoxliturgica.di.settingsModule
 import com.paradox543.malankaraorthodoxliturgica.di.songModule
 import com.paradox543.malankaraorthodoxliturgica.di.startupModule
 import com.paradox543.malankaraorthodoxliturgica.di.useCaseModule
+import com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase.analyticsFirebaseModule
 import dagger.hilt.android.HiltAndroidApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.workmanager.koin.workManagerFactory
@@ -39,6 +40,7 @@ class LiturgicaApplication : Application() {
                 dataCoreBridgeModule,
                 prayerDataModule,
                 calendarDataModule,
+                analyticsFirebaseModule,
                 useCaseModule,
                 startupModule,
                 settingsModule,
