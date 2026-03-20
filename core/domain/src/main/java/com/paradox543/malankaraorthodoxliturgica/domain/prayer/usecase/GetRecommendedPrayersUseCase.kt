@@ -1,31 +1,45 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerRoutes
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.Month
-import java.time.format.TextStyle
-import java.util.Locale
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Month
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.plus
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.ExperimentalTime
 
 class GetRecommendedPrayersUseCase {
+    @OptIn(ExperimentalTime::class)
     operator fun invoke(civilDate: LocalDateTime): List<String> {
+        val timeZone = TimeZone.currentSystemDefault()
         val list = mutableListOf<String>()
-        val liturgicalDate = if (civilDate.hour >= 16) civilDate.plusDays(1) else civilDate
+        val civilDateInstant = civilDate.toInstant(timeZone)
+
+        val liturgicalDateInstant =
+            if (civilDate.hour >= 16) {
+                civilDateInstant.plus(1, DateTimeUnit.DAY, timeZone)
+            } else {
+                civilDateInstant
+            }
+        val liturgicalDate: LocalDateTime = liturgicalDateInstant.toLocalDateTime(timeZone)
 
         // TODO: Change the season every year, or until calendar repo can pass this data.
         // Date range check: 15 February to 29 March (inclusive) for the current year, 2026.
         val year = liturgicalDate.year
-        val today = liturgicalDate.toLocalDate()
-        val greatLentStart = LocalDate.of(2026, Month.FEBRUARY, 15)
-        val hosanna = LocalDate.of(2026, Month.MARCH, 29)
-        val isGreatLentSeason = !today.isBefore(greatLentStart) && !today.isAfter(hosanna)
+        val today = liturgicalDate.date
+        val greatLentStart = LocalDate(2026, Month.FEBRUARY, 15)
+        val hosanna = LocalDate(2026, Month.MARCH, 29)
+        val isGreatLentSeason = today >= greatLentStart && today <= hosanna
 
-        val easterDate = LocalDate.of(2026, 4, 5)
-        val sleebaDate = LocalDate.of(year, 9, 14)
-        val isKyamthaSeason = !today.isBefore(easterDate) && !today.isAfter(sleebaDate)
+        val easterDate = LocalDate(2026, 4, 5)
+        val sleebaDate = LocalDate(year, 9, 14)
+        val isKyamthaSeason = today >= easterDate && today <= sleebaDate
 
-        fun getKeyName(day: DayOfWeek): String = day.getDisplayName(TextStyle.FULL, Locale.ENGLISH).lowercase()
+        fun getKeyName(day: DayOfWeek): String = day.name.lowercase()
 
         fun addFor(option: String) {
             val civilKey = option.replace("day", getKeyName(civilDate.dayOfWeek))

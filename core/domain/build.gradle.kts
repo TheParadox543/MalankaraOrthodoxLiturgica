@@ -10,6 +10,9 @@ kotlin {
 dependencies {
     implementation(kotlin("stdlib"))
 
+    //
+    implementation(libs.kotlinx.datetime)
+
     // If you use Flow
     implementation(libs.kotlinx.coroutines.core)
 

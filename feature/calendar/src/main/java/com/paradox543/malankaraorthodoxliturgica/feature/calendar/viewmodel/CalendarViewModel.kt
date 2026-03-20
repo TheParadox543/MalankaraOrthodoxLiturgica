@@ -29,7 +29,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.time.LocalDate
+import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 
 class CalendarViewModel(
     private val calendarRepository: CalendarRepository,
@@ -61,7 +63,23 @@ class CalendarViewModel(
     val upcomingWeekEvents: StateFlow<List<CalendarDay>> = _upcomingWeekEvents.asStateFlow()
 
     // State for the currently viewed month/year in the calendar UI
-    private val _currentCalendarViewDate = MutableStateFlow(LocalDate.now())
+    private val _currentCalendarViewDate =
+        MutableStateFlow(
+            LocalDate(
+                year =
+                    java.time.LocalDate
+                        .now()
+                        .year,
+                month =
+                    java.time.LocalDate
+                        .now()
+                        .monthValue,
+                day =
+                    java.time.LocalDate
+                        .now()
+                        .dayOfMonth,
+            ),
+        )
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
 
     private val _hasNextMonth = MutableStateFlow(false)
@@ -94,7 +112,7 @@ class CalendarViewModel(
             _error.value = null
             try {
                 loadMonth(
-                    _currentCalendarViewDate.value.monthValue,
+                    _currentCalendarViewDate.value.monthNumber,
                     _currentCalendarViewDate.value.year,
                 )
                 loadUpcomingWeekEvents()
@@ -130,16 +148,16 @@ class CalendarViewModel(
             try {
                 Log.d("CalendarViewModel", "Loading month data for $month/$year")
                 _monthCalendarData.value = calendarRepository.loadMonthData(month, year)
-                _currentCalendarViewDate.value = LocalDate.of(year, month, 1) // Update viewed month
-                val previousMonth = _currentCalendarViewDate.value.minusMonths(1)
+                _currentCalendarViewDate.value = LocalDate(year, month, 1) // Update viewed month
+                val previousMonth = _currentCalendarViewDate.value.plus(DatePeriod(months = -1))
                 _hasPreviousMonth.value =
                     calendarRepository.checkMonthDataExists(
-                        previousMonth.monthValue,
+                        previousMonth.monthNumber,
                         previousMonth.year,
                     )
-                val nextMonth = _currentCalendarViewDate.value.plusMonths(1)
+                val nextMonth = _currentCalendarViewDate.value.plus(DatePeriod(months = 1))
                 _hasNextMonth.value =
-                    calendarRepository.checkMonthDataExists(nextMonth.monthValue, nextMonth.year)
+                    calendarRepository.checkMonthDataExists(nextMonth.monthNumber, nextMonth.year)
             } catch (e: Exception) {
                 _error.value = "Failed to load month data for $month/$year: ${e.message}"
                 System.err.println("Error loading month data: ${e.stackTraceToString()}")
@@ -172,21 +190,21 @@ class CalendarViewModel(
     }
 
     fun goToNextMonth() {
-        val nextMonthDate = _currentCalendarViewDate.value.plusMonths(1)
+        val nextMonthDate = _currentCalendarViewDate.value.plus(DatePeriod(months = 1))
         clearDayEvents()
-        loadMonth(nextMonthDate.monthValue, nextMonthDate.year)
+        loadMonth(nextMonthDate.monthNumber, nextMonthDate.year)
     }
 
     fun goToPreviousMonth() {
-        val prevMonthDate = _currentCalendarViewDate.value.minusMonths(1)
+        val prevMonthDate = _currentCalendarViewDate.value.plus(DatePeriod(months = -1))
         clearDayEvents()
-        loadMonth(prevMonthDate.monthValue, prevMonthDate.year)
+        loadMonth(prevMonthDate.monthNumber, prevMonthDate.year)
     }
 
     fun getFormattedDateTitle(
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,
-    ): String = formatDateTitleUseCase(event, selectedLanguage)
+    ): String = formatDateTitleUseCase(event, selectedLanguage, _currentCalendarViewDate.value.year)
 
     fun formatGospelEntry(
         entries: List<BibleReference>,

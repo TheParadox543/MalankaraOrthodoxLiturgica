@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
-import java.time.LocalDateTime
+import kotlinx.datetime.LocalDateTime
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -13,7 +13,7 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
     @Test
     fun `returns matching nodes for recommended prayer routes`() {
         // Monday at 9 AM: sheema_monday prayers should be recommended
-        val monday9am = LocalDateTime.of(2026, 2, 16, 9, 0) // Monday
+        val monday9am = LocalDateTime(2026, 2, 16, 9, 0) // Monday
 
         val keys = getRecommendedPrayers(monday9am)
         assertTrue(keys.isNotEmpty(), "Expected some recommended prayers at Monday 9am")
@@ -35,7 +35,7 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
 
     @Test
     fun `returns empty list when no routes match tree`() {
-        val monday9am = LocalDateTime.of(2026, 2, 16, 9, 0)
+        val monday9am = LocalDateTime(2026, 2, 16, 9, 0)
 
         // Build a tree with routes that won't match any recommendations
         val root =
@@ -54,7 +54,7 @@ class GetPrayerNodesForCurrentTimeUseCaseTest {
 
     @Test
     fun `filters out null results from findByRoute`() {
-        val monday9am = LocalDateTime.of(2026, 2, 16, 9, 0)
+        val monday9am = LocalDateTime(2026, 2, 16, 9, 0)
         val keys = getRecommendedPrayers(monday9am)
 
         // Only add one of the recommended routes to the tree

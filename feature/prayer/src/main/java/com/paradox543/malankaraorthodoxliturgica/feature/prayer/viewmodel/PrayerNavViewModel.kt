@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.runBlocking
+import kotlinx.datetime.LocalDateTime
 
 class PrayerNavViewModel(
     settingsRepository: SettingsRepository,
@@ -45,5 +46,20 @@ class PrayerNavViewModel(
 
     fun getAdjacentRoutes(node: PageNode): Pair<String?, String?> = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
 
-    fun getAllPrayerNodes(): List<PageNode> = getPrayerNodesForCurrentTimeUseCase(rootNode.value)
+    fun getAllPrayerNodes(): List<PageNode> =
+        // Avoid Kotlin 2.1-only Clock API; convert JVM local time to kotlinx-datetime.
+        getPrayerNodesForCurrentTimeUseCase(
+            rootNode.value,
+            java.time.LocalDateTime.now().let {
+                LocalDateTime(
+                    year = it.year,
+                    month = it.monthValue,
+                    day = it.dayOfMonth,
+                    hour = it.hour,
+                    minute = it.minute,
+                    second = it.second,
+                    nanosecond = it.nano,
+                )
+            },
+        )
 }

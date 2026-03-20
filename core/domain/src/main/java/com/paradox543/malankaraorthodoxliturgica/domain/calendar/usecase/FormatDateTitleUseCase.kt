@@ -2,14 +2,13 @@ package com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase
 
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import java.time.LocalDate
 
 class FormatDateTitleUseCase {
     operator fun invoke(
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,
+        currentYear: Int,
     ): String {
-        val currentYear = LocalDate.now().year
         return event.startedYear?.let { startedYear ->
             val yearNumber = currentYear - startedYear + 1
             val baseYearString = "$yearNumber"

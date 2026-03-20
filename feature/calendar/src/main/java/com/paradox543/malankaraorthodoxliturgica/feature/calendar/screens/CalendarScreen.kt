@@ -52,8 +52,10 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarW
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.number
 import java.time.DayOfWeek
-import java.time.LocalDate
+import java.time.Month
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -110,7 +112,7 @@ fun CalendarScreen(
                     // Add a retry button if appropriate
                     Button(onClick = {
                         calendarViewModel.loadMonth(
-                            currentCalendarViewDate.monthValue,
+                            currentCalendarViewDate.month.number,
                             currentCalendarViewDate.year,
                         )
                     }) {
@@ -237,7 +239,7 @@ private fun MonthNavigation(
         }
         Text(
             text = "${
-                currentCalendarViewDate.month.getDisplayName(
+                Month.of(currentCalendarViewDate.month.number).getDisplayName(
                     TextStyle.FULL,
                     Locale.getDefault(),
                 )
@@ -318,8 +320,9 @@ private fun RowScope.DayItem(
     calendarViewModel: CalendarViewModel,
     selectedDate: LocalDate?,
 ) {
-    val isCurrentMonth = day.date.monthValue == currentCalendarViewDate.monthValue
-    val isToday = day.date == LocalDate.now()
+    val isCurrentMonth = day.date.month.number == currentCalendarViewDate.month.number
+    val todayJvm = java.time.LocalDate.now()
+    val isToday = day.date == LocalDate(todayJvm.year, todayJvm.monthValue, todayJvm.dayOfMonth)
     val hasEvents = day.events.isNotEmpty()
     val isSelected = day.date == selectedDate
 
@@ -361,7 +364,7 @@ private fun RowScope.DayItem(
         onClick = {
             calendarViewModel.setDayEvents(day.events, day.date)
             if (!isCurrentMonth) {
-                calendarViewModel.loadMonth(day.date.monthValue, day.date.year)
+                calendarViewModel.loadMonth(day.date.month.number, day.date.year)
             }
         },
         modifier =
