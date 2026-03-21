@@ -7,13 +7,13 @@ import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWee
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.ReferenceRangeDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.TitleStrDto
-import java.time.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import java.time.LocalDate as JavaLocalDate
+import kotlinx.datetime.LocalDate as KotlinLocalDate
 
 class CalendarClassesMappersTest {
-
     // ─── TitleStrDto ─────────────────────────────────────────────────────────
 
     @Test
@@ -58,10 +58,11 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `BibleReferenceDto toDomain maps bookNumber and ranges`() {
-        val dto = BibleReferenceDto(
-            bookNumber = 43,
-            ranges = listOf(ReferenceRangeDto(1, 1, 1, 17)),
-        )
+        val dto =
+            BibleReferenceDto(
+                bookNumber = 43,
+                ranges = listOf(ReferenceRangeDto(1, 1, 1, 17)),
+            )
         val domain = dto.toDomain()
         assertEquals(43, domain.bookNumber)
         assertEquals(1, domain.ranges.size)
@@ -71,10 +72,11 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `List of BibleReferenceDto toBibleReferenceDomain maps all items`() {
-        val dtos = listOf(
-            BibleReferenceDto(bookNumber = 40, ranges = listOf(ReferenceRangeDto(1, 1, 1, 25))),
-            BibleReferenceDto(bookNumber = 41, ranges = listOf(ReferenceRangeDto(2, 1, 2, 12))),
-        )
+        val dtos =
+            listOf(
+                BibleReferenceDto(bookNumber = 40, ranges = listOf(ReferenceRangeDto(1, 1, 1, 25))),
+                BibleReferenceDto(bookNumber = 41, ranges = listOf(ReferenceRangeDto(2, 1, 2, 12))),
+            )
         val result = dtos.toBibleReferenceDomain()
         assertEquals(2, result.size)
         assertEquals(40, result[0].bookNumber)
@@ -90,9 +92,10 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `BibleReadingsDto toDomain maps only gospel when others are null`() {
-        val dto = BibleReadingsDto(
-            gospel = listOf(BibleReferenceDto(bookNumber = 43, ranges = listOf(ReferenceRangeDto(3, 16, 3, 16)))),
-        )
+        val dto =
+            BibleReadingsDto(
+                gospel = listOf(BibleReferenceDto(bookNumber = 43, ranges = listOf(ReferenceRangeDto(3, 16, 3, 16)))),
+            )
         val domain = dto.toDomain()
         assertNull(domain.vespersGospel)
         assertNull(domain.matinsGospel)
@@ -107,15 +110,16 @@ class CalendarClassesMappersTest {
     @Test
     fun `BibleReadingsDto toDomain maps all non-null reading types`() {
         val ref = BibleReferenceDto(bookNumber = 1, ranges = listOf(ReferenceRangeDto(1, 1, 1, 1)))
-        val dto = BibleReadingsDto(
-            vespersGospel = listOf(ref),
-            matinsGospel = listOf(ref),
-            primeGospel = listOf(ref),
-            oldTestament = listOf(ref),
-            generalEpistle = listOf(ref),
-            paulEpistle = listOf(ref),
-            gospel = listOf(ref),
-        )
+        val dto =
+            BibleReadingsDto(
+                vespersGospel = listOf(ref),
+                matinsGospel = listOf(ref),
+                primeGospel = listOf(ref),
+                oldTestament = listOf(ref),
+                generalEpistle = listOf(ref),
+                paulEpistle = listOf(ref),
+                gospel = listOf(ref),
+            )
         val domain = dto.toDomain()
         assertEquals(1, domain.vespersGospel?.size)
         assertEquals(1, domain.matinsGospel?.size)
@@ -130,10 +134,11 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `LiturgicalEventDetailsDto toDomain maps required fields`() {
-        val dto = LiturgicalEventDetailsDto(
-            type = "feast",
-            title = TitleStrDto(en = "Easter", ml = "ഉയിർപ്പ്"),
-        )
+        val dto =
+            LiturgicalEventDetailsDto(
+                type = "feast",
+                title = TitleStrDto(en = "Easter", ml = "ഉയിർപ്പ്"),
+            )
         val domain = dto.toDomain()
         assertEquals("feast", domain.type)
         assertEquals("Easter", domain.title.en)
@@ -146,16 +151,18 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `LiturgicalEventDetailsDto toDomain maps all optional fields when present`() {
-        val dto = LiturgicalEventDetailsDto(
-            type = "feast",
-            title = TitleStrDto(en = "Pentecost"),
-            bibleReadings = BibleReadingsDto(
-                gospel = listOf(BibleReferenceDto(43, listOf(ReferenceRangeDto(20, 19, 20, 23)))),
-            ),
-            niram = 3,
-            specialSongsKey = "pentecost_songs",
-            startedYear = 33,
-        )
+        val dto =
+            LiturgicalEventDetailsDto(
+                type = "feast",
+                title = TitleStrDto(en = "Pentecost"),
+                bibleReadings =
+                    BibleReadingsDto(
+                        gospel = listOf(BibleReferenceDto(43, listOf(ReferenceRangeDto(20, 19, 20, 23)))),
+                    ),
+                niram = 3,
+                specialSongsKey = "pentecost_songs",
+                startedYear = 33,
+            )
         val domain = dto.toDomain()
         assertEquals(3, domain.niram)
         assertEquals("pentecost_songs", domain.specialSongsKey)
@@ -165,10 +172,11 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `List of LiturgicalEventDetailsDto toLiturgicalEventsDetailsDomain maps all items`() {
-        val dtos = listOf(
-            LiturgicalEventDetailsDto(type = "feast", title = TitleStrDto(en = "Easter")),
-            LiturgicalEventDetailsDto(type = "fast", title = TitleStrDto(en = "Great Lent")),
-        )
+        val dtos =
+            listOf(
+                LiturgicalEventDetailsDto(type = "feast", title = TitleStrDto(en = "Easter")),
+                LiturgicalEventDetailsDto(type = "fast", title = TitleStrDto(en = "Great Lent")),
+            )
         val result = dtos.toLiturgicalEventsDetailsDomain()
         assertEquals(2, result.size)
         assertEquals("feast", result[0].type)
@@ -179,56 +187,61 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `CalendarDayDto toDomain maps date and events`() {
-        val date = LocalDate.of(2025, 4, 20)
-        val dto = CalendarDayDto(
-            date = date,
-            events = listOf(LiturgicalEventDetailsDto(type = "feast", title = TitleStrDto(en = "Easter"))),
-        )
+        val javaLocalDate = JavaLocalDate.of(2025, 4, 20)
+        val kotlinLocalDate = KotlinLocalDate(2025, 4, 20)
+        val dto =
+            CalendarDayDto(
+                date = javaLocalDate,
+                events = listOf(LiturgicalEventDetailsDto(type = "feast", title = TitleStrDto(en = "Easter"))),
+            )
         val domain = dto.toDomain()
-        assertEquals(date, domain.date)
+        assertEquals(kotlinLocalDate, domain.date)
         assertEquals(1, domain.events.size)
         assertEquals("Easter", domain.events[0].title.en)
     }
 
     @Test
     fun `CalendarDayDto toDomain handles empty events list`() {
-        val date = LocalDate.of(2025, 1, 1)
-        val dto = CalendarDayDto(date = date, events = emptyList())
+        val javaLocalDate = JavaLocalDate.of(2025, 1, 1)
+        val kotlinLocalDate = KotlinLocalDate(javaLocalDate.year, javaLocalDate.monthValue, javaLocalDate.dayOfMonth)
+        val dto = CalendarDayDto(date = javaLocalDate, events = emptyList())
         val domain = dto.toDomain()
-        assertEquals(date, domain.date)
+        assertEquals(kotlinLocalDate, domain.date)
         assertEquals(emptyList(), domain.events)
     }
 
     @Test
     fun `List of CalendarDayDto toCalendarDaysDomain maps all items`() {
-        val dtos = listOf(
-            CalendarDayDto(LocalDate.of(2025, 1, 1), emptyList()),
-            CalendarDayDto(LocalDate.of(2025, 1, 2), emptyList()),
-        )
+        val dtos =
+            listOf(
+                CalendarDayDto(JavaLocalDate.of(2025, 1, 1), emptyList()),
+                CalendarDayDto(JavaLocalDate.of(2025, 1, 2), emptyList()),
+            )
         val result = dtos.toCalendarDaysDomain()
         assertEquals(2, result.size)
-        assertEquals(LocalDate.of(2025, 1, 1), result[0].date)
-        assertEquals(LocalDate.of(2025, 1, 2), result[1].date)
+        assertEquals(KotlinLocalDate(2025, 1, 1), result[0].date)
+        assertEquals(KotlinLocalDate(2025, 1, 2), result[1].date)
     }
 
     // ─── CalendarWeekDto ─────────────────────────────────────────────────────
 
     @Test
     fun `CalendarWeekDto toDomain maps days list`() {
-        val days = (0..6).map { i ->
-            CalendarDayDto(LocalDate.of(2025, 4, 13 + i), emptyList())
-        }
+        val days =
+            (0..6).map { i ->
+                CalendarDayDto(JavaLocalDate.of(2025, 4, 13 + i), emptyList())
+            }
         val dto = CalendarWeekDto(days = days)
         val domain = dto.toDomain()
         assertEquals(7, domain.days.size)
-        assertEquals(LocalDate.of(2025, 4, 13), domain.days[0].date)
-        assertEquals(LocalDate.of(2025, 4, 19), domain.days[6].date)
+        assertEquals(KotlinLocalDate(2025, 4, 13), domain.days[0].date)
+        assertEquals(KotlinLocalDate(2025, 4, 19), domain.days[6].date)
     }
 
     @Test
     fun `List of CalendarWeekDto toCalendarWeeksDomain maps all weeks`() {
-        val week1 = CalendarWeekDto((0..6).map { CalendarDayDto(LocalDate.of(2025, 4, 13 + it), emptyList()) })
-        val week2 = CalendarWeekDto((0..6).map { CalendarDayDto(LocalDate.of(2025, 4, 20 + it), emptyList()) })
+        val week1 = CalendarWeekDto((0..6).map { CalendarDayDto(JavaLocalDate.of(2025, 4, 13 + it), emptyList()) })
+        val week2 = CalendarWeekDto((0..6).map { CalendarDayDto(JavaLocalDate.of(2025, 4, 20 + it), emptyList()) })
         val result = listOf(week1, week2).toCalendarWeeksDomain()
         assertEquals(2, result.size)
         assertEquals(7, result[0].days.size)

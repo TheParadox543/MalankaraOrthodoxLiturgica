@@ -17,10 +17,17 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
+import kotlinx.datetime.toJavaLocalDate
+import kotlinx.datetime.toLocalDateTime
 import java.time.DayOfWeek
-import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters
+import kotlin.time.ExperimentalTime
+import java.time.LocalDate as JavaLocalDate
 
+@OptIn(ExperimentalTime::class)
 class CalendarRepositoryImpl(
     private val calendarSource: CalendarSource,
 ) : CalendarRepository {
@@ -50,7 +57,7 @@ class CalendarRepositoryImpl(
     /**
      * Internal helper to get event keys for a specific date.
      */
-    private fun getEventKeysForDate(day: LocalDate): List<EventKey> {
+    private fun getEventKeysForDate(day: JavaLocalDate): List<EventKey> {
         return cachedLiturgicalDates[day.year.toString()]
             ?.get(day.monthValue.toString())
             ?.get(day.dayOfMonth.toString())
@@ -59,12 +66,12 @@ class CalendarRepositoryImpl(
 
     /**
      * Get detailed event information for a given date.
-     * @param date The LocalDate object for which to retrieve events.
+     * @param date The JavaLocalDate object for which to retrieve events.
      * @return A map where keys are EventKeys and values are LiturgicalEventDetails.
      * @throws IllegalArgumentException if an event key found in liturgical_calendar.json
      * is not present in liturgical_data.json.
      */
-    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsDto> {
+    fun getEventsForDate(date: JavaLocalDate): List<LiturgicalEventDetailsDto> {
         val eventKeys = getEventKeysForDate(date)
         val eventDetails = mutableListOf<LiturgicalEventDetailsDto>()
 
@@ -89,18 +96,24 @@ class CalendarRepositoryImpl(
      * Each week starts on Sunday.
      * @param month The month (1-12). Defaults to current month if null.
      * @param year The year. Defaults to current year if null.
-     * @return A list of CalendarWeekDto objects, each containing 7 CalendarDay objects.
+     * @return A list of CalendarWeek objects, each containing 7 CalendarDay objects.
      */
+    @OptIn(ExperimentalTime::class)
     override fun loadMonthData(
         month: Int?,
         year: Int?,
     ): List<CalendarWeek> {
-        val targetYear = year ?: LocalDate.now().year
-        val targetMonth = month ?: LocalDate.now().monthValue
+        val now =
+            kotlin.time.Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
+        val targetYear = year ?: now.year
+        val targetMonth = month ?: now.month.number
 
         require(targetMonth in 1..12) { "Month must be between 1 and 12." }
 
-        val firstDayOfMonth = LocalDate.of(targetYear, targetMonth, 1)
+        val firstDayOfMonth = JavaLocalDate.of(targetYear, targetMonth, 1)
         val lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth())
 
         // Calculate the first day of the calendar grid (Sunday of the first week)
@@ -126,11 +139,6 @@ class CalendarRepositoryImpl(
 
         // Add any remaining days for the last week (if not a full week)
         if (weekDays.isNotEmpty()) {
-            // Pad with empty days from next month if necessary to complete the last week,
-            // though the logic above should ensure full weeks are added already.
-            // If the loop finished on Saturday, weekDays would be empty.
-            // If it finished mid-week (e.g. month ends on Wednesday), it will contain
-            // days from the month and then days from the next month until Saturday.
             while (weekDays.size < 7) {
                 weekDays.add(CalendarDayDto(currentDay, emptyList())) // Add placeholder for visual alignment
                 currentDay = currentDay.plusDays(1)
@@ -141,15 +149,17 @@ class CalendarRepositoryImpl(
     }
 
     fun getUpcomingWeekEventsData(): List<CalendarDayDto> {
-        val today = LocalDate.now()
+        val today =
+            kotlin.time.Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
+                .toJavaLocalDate()
         val weekEvents = mutableListOf<CalendarDayDto>()
 
         for (i in 0 until 7) {
             val day = today.plusDays(i.toLong())
             val eventDetails = getEventsForDate(day)
-            // Python's code appended only if event_details != {}, but here we append
-            // CalendarDayDto regardless for consistent list size, and the `events` map
-            // will be empty if no events are found, similar to the month data.
             weekEvents.add(CalendarDayDto(day, eventDetails))
         }
         return weekEvents
@@ -157,8 +167,7 @@ class CalendarRepositoryImpl(
 
     /**
      * Get events for the upcoming week starting from today.
-     * @return A list of CalendarDayDto objects for the next 7 days, including their events.
-     * Only days with events will have non-empty event maps.
+     * @return A list of CalendarDay objects for the next 7 days, including their events.
      */
     override fun getUpcomingWeekEvents(): List<CalendarDay> = getUpcomingWeekEventsData().toCalendarDaysDomain()
 

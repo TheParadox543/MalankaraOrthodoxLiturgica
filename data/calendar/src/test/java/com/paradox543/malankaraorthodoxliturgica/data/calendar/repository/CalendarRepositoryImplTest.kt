@@ -3,56 +3,65 @@ package com.paradox543.malankaraorthodoxliturgica.data.calendar.repository
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.datasource.CalendarSource
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.TitleStrDto
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalCalendarDates
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.YearEvents
 import io.mockk.every
 import io.mockk.mockk
-import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
-import java.time.DayOfWeek
-import java.time.LocalDate
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
+import kotlin.time.ExperimentalTime
+import java.time.LocalDate as JavaLocalDate
+import kotlinx.datetime.LocalDate as KotlinLocalDate
 
+@OptIn(ExperimentalTime::class)
 class CalendarRepositoryImplTest {
-
     private val source: CalendarSource = mockk()
     private lateinit var repository: CalendarRepositoryImpl
 
     // ─── Fixtures ─────────────────────────────────────────────────────────────
 
-    private val easterDto = LiturgicalEventDetailsDto(
-        type = "feast",
-        title = TitleStrDto(en = "Easter Sunday", ml = "ഉയിർപ്പ്"),
-    )
+    private val easterDto =
+        LiturgicalEventDetailsDto(
+            type = "feast",
+            title = TitleStrDto(en = "Easter Sunday", ml = "ഉയിർപ്പ്"),
+        )
 
-    private val greatLentDto = LiturgicalEventDetailsDto(
-        type = "fast",
-        title = TitleStrDto(en = "Great Lent"),
-    )
+    private val greatLentDto =
+        LiturgicalEventDetailsDto(
+            type = "fast",
+            title = TitleStrDto(en = "Great Lent"),
+        )
 
     /**
      * Minimal liturgical calendar: April 2025 — Easter on the 20th, Great Lent starts on March 5th.
      */
-    private val fakeDates: LiturgicalCalendarDates = mapOf(
-        "2025" to mapOf(
-            "4" to mapOf(
-                "20" to listOf("easter"),
-            ),
-            "3" to mapOf(
-                "5" to listOf("great-lent"),
-            ),
-        ),
-    )
+    private val fakeDates: LiturgicalCalendarDates =
+        mapOf(
+            "2025" to
+                mapOf(
+                    "4" to
+                        mapOf(
+                            "20" to listOf("easter"),
+                        ),
+                    "3" to
+                        mapOf(
+                            "5" to listOf("great-lent"),
+                        ),
+                ),
+        )
 
-    private val fakeData = mapOf(
-        "easter" to easterDto,
-        "great-lent" to greatLentDto,
-    )
+    private val fakeData =
+        mapOf(
+            "easter" to easterDto,
+            "great-lent" to greatLentDto,
+        )
 
     /**
      * Fresh repository per test — cachedLiturgicalDates and cachedLiturgicalData are `by lazy`.
@@ -138,7 +147,11 @@ class CalendarRepositoryImplTest {
 
         assertTrue(weeks.isNotEmpty())
         weeks.forEach { week ->
-            assertEquals(DayOfWeek.SUNDAY, week.days.first().date.dayOfWeek)
+            // Use kotlinx.datetime.DayOfWeek for comparison with the domain date property
+            assertEquals(
+                DayOfWeek.SUNDAY,
+                week.days.first().date.dayOfWeek,
+            )
         }
     }
 
@@ -163,7 +176,7 @@ class CalendarRepositoryImplTest {
         val allDates = weeks.flatMap { it.days }.map { it.date }
 
         // April 2025 has 30 days — all must be present in the result
-        val aprilDays = (1..30).map { LocalDate.of(2025, 4, it) }
+        val aprilDays = (1..30).map { KotlinLocalDate(2025, 4, it) }
         assertTrue(allDates.containsAll(aprilDays))
     }
 
@@ -173,7 +186,7 @@ class CalendarRepositoryImplTest {
         every { source.readLiturgicalData() } returns fakeData
 
         val weeks = repository.loadMonthData(month = 4, year = 2025)
-        val easter = weeks.flatMap { it.days }.first { it.date == LocalDate.of(2025, 4, 20) }
+        val easter = weeks.flatMap { it.days }.first { it.date == KotlinLocalDate(2025, 4, 20) }
 
         assertEquals(1, easter.events.size)
         assertEquals("Easter Sunday", easter.events[0].title.en)
@@ -186,7 +199,7 @@ class CalendarRepositoryImplTest {
         every { source.readLiturgicalData() } returns fakeData
 
         val weeks = repository.loadMonthData(month = 4, year = 2025)
-        val noEventDay = weeks.flatMap { it.days }.first { it.date == LocalDate.of(2025, 4, 1) }
+        val noEventDay = weeks.flatMap { it.days }.first { it.date == KotlinLocalDate(2025, 4, 1) }
 
         assertEquals(emptyList(), noEventDay.events)
     }
@@ -194,9 +207,10 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData throws IllegalArgumentException when event key is missing from data store`() {
         // Calendar references a key that is not in the data store
-        val missingKeyDates: LiturgicalCalendarDates = mapOf(
-            "2025" to mapOf("4" to mapOf("20" to listOf("unknown-key"))),
-        )
+        val missingKeyDates: LiturgicalCalendarDates =
+            mapOf(
+                "2025" to mapOf("4" to mapOf("20" to listOf("unknown-key"))),
+            )
         every { source.readLiturgicalDates() } returns missingKeyDates
         every { source.readLiturgicalData() } returns emptyMap()
 
@@ -222,7 +236,11 @@ class CalendarRepositoryImplTest {
         every { source.readLiturgicalDates() } returns fakeDates
         every { source.readLiturgicalData() } returns fakeData
 
-        val today = LocalDate.now()
+        val today =
+            kotlin.time.Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
         val result = repository.getUpcomingWeekEvents()
 
         assertEquals(today, result.first().date)
@@ -233,14 +251,21 @@ class CalendarRepositoryImplTest {
     @Test
     fun `getUpcomingWeekEventItems returns flat list of all events across the week`() {
         // Build a calendar where today has two events
-        val today = LocalDate.now()
-        val datesWithTodayEvents: LiturgicalCalendarDates = mapOf(
-            today.year.toString() to mapOf(
-                today.monthValue.toString() to mapOf(
-                    today.dayOfMonth.toString() to listOf("easter", "great-lent"),
-                ),
-            ),
-        )
+        val today =
+            kotlin.time.Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
+        val datesWithTodayEvents: LiturgicalCalendarDates =
+            mapOf(
+                today.year.toString() to
+                    mapOf(
+                        today.monthNumber.toString() to
+                            mapOf(
+                                today.dayOfMonth.toString() to listOf("easter", "great-lent"),
+                            ),
+                    ),
+            )
         every { source.readLiturgicalDates() } returns datesWithTodayEvents
         every { source.readLiturgicalData() } returns fakeData
 
