@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.core.di
 
-import android.content.Context
 import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
+import com.paradox543.malankaraorthodoxliturgica.data.core.platform.PlatformAssetReader
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
@@ -14,9 +14,11 @@ val dataCoreBridgeModule =
             }
         }
 
+        single { PlatformAssetReader() }
+
         single {
             AssetJsonReader(
-                context = get<Context>(),
+                platformAssetReader = get(),
                 json = get(),
             )
         }

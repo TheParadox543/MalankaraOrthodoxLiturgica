@@ -17,7 +17,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
-import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.number
 import kotlinx.datetime.toJavaLocalDate

@@ -17,7 +17,6 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.time.ExperimentalTime
-import java.time.LocalDate as JavaLocalDate
 import kotlinx.datetime.LocalDate as KotlinLocalDate
 
 @OptIn(ExperimentalTime::class)
@@ -150,7 +149,9 @@ class CalendarRepositoryImplTest {
             // Use kotlinx.datetime.DayOfWeek for comparison with the domain date property
             assertEquals(
                 DayOfWeek.SUNDAY,
-                week.days.first().date.dayOfWeek,
+                week.days
+                    .first()
+                    .date.dayOfWeek,
             )
         }
     }
