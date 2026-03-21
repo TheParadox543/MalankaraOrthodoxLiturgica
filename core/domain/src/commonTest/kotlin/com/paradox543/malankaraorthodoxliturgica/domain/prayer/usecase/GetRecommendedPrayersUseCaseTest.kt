@@ -170,9 +170,9 @@ class GetRecommendedPrayersUseCaseTest {
         }
     }
     // TODO: Add these tests as well when possible
-//    Season boundary test
-//    Sunday Qurbana test
-//    Wedding window test
+//    Season boundary commonTest
+//    Sunday Qurbana commonTest
+//    Wedding window commonTest
 //    Non-Lent weekday
 //    Midnight crossover
 }

@@ -24,14 +24,14 @@ class GetPrayerScreenContentUseCaseTest {
         runBlocking {
             val elementsMap =
                 mapOf(
-                    "main.json" to listOf(PrayerElement.Link("linked.json")),
+                    "commonMain.json" to listOf(PrayerElement.Link("linked.json")),
                     "linked.json" to
                         listOf(
                             PrayerElement.Title("Linked Title"),
                             PrayerElement.Prose("Some prose"),
                         ),
                 )
-            val result = makeUseCase(elementsMap)("main.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
 
             assertTrue(result.any { it is PrayerElement.Title && it.content == "Linked Title" })
             assertTrue(result.any { it is PrayerElement.Prose && it.content == "Some prose" })
@@ -42,14 +42,14 @@ class GetPrayerScreenContentUseCaseTest {
         runBlocking {
             val elementsMap =
                 mapOf(
-                    "main.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
+                    "commonMain.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
                     "linked.json" to
                         listOf(
                             PrayerElement.Title("Section Title"),
                             PrayerElement.Prose("Body text"),
                         ),
                 )
-            val result = makeUseCase(elementsMap)("main.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -62,14 +62,14 @@ class GetPrayerScreenContentUseCaseTest {
         runBlocking {
             val elementsMap =
                 mapOf(
-                    "main.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
+                    "commonMain.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
                     "linked.json" to
                         listOf(
                             PrayerElement.Heading("Section Heading"),
                             PrayerElement.Prose("Body text"),
                         ),
                 )
-            val result = makeUseCase(elementsMap)("main.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -81,10 +81,10 @@ class GetPrayerScreenContentUseCaseTest {
         runBlocking {
             val elementsMap =
                 mapOf(
-                    "main.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
+                    "commonMain.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
                     "linked.json" to listOf(PrayerElement.Prose("Body text")),
                 )
-            val result = makeUseCase(elementsMap)("main.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -96,11 +96,11 @@ class GetPrayerScreenContentUseCaseTest {
         runBlocking {
             val elementsMap =
                 mapOf(
-                    "main.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
+                    "commonMain.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
                     // linked.json only has a Title, which is consumed as the heading, leaving no items
                     "linked.json" to listOf(PrayerElement.Title("Only Title")),
                 )
-            val result = makeUseCase(elementsMap)("main.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
 
             assertTrue(result.any { it is PrayerElement.Error })
         }
@@ -109,7 +109,7 @@ class GetPrayerScreenContentUseCaseTest {
     fun `Link emits Error when linked file is not found`() =
         runBlocking {
             val elementsMap =
-                mapOf("main.json" to listOf(PrayerElement.Link("missing.json")))
+                mapOf("commonMain.json" to listOf(PrayerElement.Link("missing.json")))
             // missing.json is not in the map, so loadPrayerElements returns emptyList — no error expected
             // But if we throw, it should be caught. Use a repo that throws for missing keys.
             val prayerRepo =
@@ -121,7 +121,7 @@ class GetPrayerScreenContentUseCaseTest {
             val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
             val useCase = GetPrayerScreenContentUseCase(prayerRepo, dynamicUseCase)
 
-            val result = useCase("main.json", AppLanguage.ENGLISH)
+            val result = useCase("commonMain.json", AppLanguage.ENGLISH)
 
             assertTrue(result.any { it is PrayerElement.Error })
         }
@@ -132,12 +132,12 @@ class GetPrayerScreenContentUseCaseTest {
             // The depth check is in invoke() itself, not in the recursive resolveList.
             // Link resolution calls resolveList directly, so the only way to trigger
             // the exception is to call invoke() with currentDepth already above maxLinkDepth (5).
-            val elementsMap = mapOf("main.json" to listOf(PrayerElement.Prose("content")))
+            val elementsMap = mapOf("commonMain.json" to listOf(PrayerElement.Prose("content")))
             val useCase = makeUseCase(elementsMap)
 
             var threw = false
             try {
-                useCase("main.json", AppLanguage.ENGLISH, currentDepth = 6)
+                useCase("commonMain.json", AppLanguage.ENGLISH, currentDepth = 6)
             } catch (e: PrayerLinkDepthExceededException) {
                 threw = true
             }
@@ -154,10 +154,10 @@ class GetPrayerScreenContentUseCaseTest {
                 )
             val elementsMap =
                 mapOf(
-                    "main.json" to listOf(innerBlock),
+                    "commonMain.json" to listOf(innerBlock),
                     "linked.json" to listOf(PrayerElement.Prose("Resolved prose")),
                 )
-            val result = makeUseCase(elementsMap)("main.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -179,10 +179,10 @@ class GetPrayerScreenContentUseCaseTest {
                 )
             val elementsMap =
                 mapOf(
-                    "main.json" to listOf(block),
+                    "commonMain.json" to listOf(block),
                     "linked.json" to listOf(PrayerElement.Prose("Option content")),
                 )
-            val result = makeUseCase(elementsMap)("main.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
 
             val altBlock = result.filterIsInstance<PrayerElement.AlternativePrayersBlock>().firstOrNull()
             assertNotNull(altBlock)
