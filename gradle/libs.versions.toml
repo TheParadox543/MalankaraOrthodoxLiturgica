@@ -3,11 +3,11 @@ agp = "8.13.0"
 appUpdateKtx = "2.1.0"
 barcodeScanning = "17.3.0"
 camera = "1.5.0"
-core = "3.5.3"
+zxingCore = "3.5.4"
 coreSplashscreen = "1.0.1"
 dataStoreVersion = "1.1.7"
 firebaseBom = "34.3.0"
-kotlin = "2.0.21"
+kotlin = "2.1.20"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -61,7 +61,7 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinx-test" }
 kotlinx-test-annotations-common = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlinx-test" }
-zxing-core = { module = "com.google.zxing:core", version.ref = "core" }
+zxing-core = { module = "com.google.zxing:core", version.ref = "zxingCore" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version = "22.4.0" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version = "19.4.4" }
