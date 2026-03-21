@@ -14,11 +14,11 @@ plugins {
 
 android {
     namespace = "com.paradox543.malankaraorthodoxliturgica"
-    compileSdk = 36
+    compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
 
     defaultConfig {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
-        minSdk = 26
+        minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
         targetSdk = 36
         versionCode = providers.gradleProperty("APP_VERSION_CODE").get().toInt()
         versionName = providers.gradleProperty("APP_VERSION_NAME").get()
