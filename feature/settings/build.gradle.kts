@@ -57,18 +57,25 @@ dependencies {
     implementation(libs.koin.compose.viewmodel)
 
     // Jetpack Compose UI
-    implementation(libs.androidx.activity.compose)    // Compose integration for Activity
-    implementation(platform(libs.androidx.compose.bom)) // BOM for consistent Compose library versions
-    implementation(libs.androidx.ui)                  // Core Compose UI toolkit
-    implementation(libs.androidx.ui.graphics)         // Compose graphics primitives
-    implementation(libs.androidx.material3)           // Material Design 3 components for Compose
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.material3)
 
+    // Local Unit Tests
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 
-    // Debugging & Development Tools (only for debug builds)
-    debugImplementation(libs.androidx.ui.tooling) // Compose tooling for previews and inspection
-    implementation(libs.androidx.ui.tooling.preview)  // Compose tooling for previews
-
+    // Instrumented Tests
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.test.manifest)
+    androidTestImplementation(libs.mockk) // Note: using MockK for instrumented tests
+
+    // Debugging & Development Tools
+    debugImplementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.ui.tooling.preview)
 }
