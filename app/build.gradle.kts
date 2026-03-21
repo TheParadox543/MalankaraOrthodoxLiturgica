@@ -71,7 +71,6 @@ android {
 
 dependencies {
     // Project imports
-    implementation(project(":shared"))
     implementation(project(":core:domain"))
     implementation(project(":data:core"))
     implementation(project(":data:bible"))
