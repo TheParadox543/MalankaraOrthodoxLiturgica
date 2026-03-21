@@ -1,34 +1,29 @@
 package com.paradox543.malankaraorthodoxliturgica.data.bible.datasource
 
-import android.content.Context
-import android.content.res.AssetManager
 import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
+import com.paradox543.malankaraorthodoxliturgica.data.core.platform.PlatformAssetReader
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.serialization.json.Json
-import java.io.ByteArrayInputStream
-import java.io.IOException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
-import kotlin.test.assertTrue
-import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 
 /**
  * Tests for [BibleSource].
  *
  * [AssetJsonReader.loadJsonAsset] is an `inline reified` function — Kotlin inlines its body at
  * the call site, so mockk cannot intercept a call on a mocked [AssetJsonReader]. Instead we
- * construct a *real* [AssetJsonReader] whose [Context] / [AssetManager] are mocked, and feed
+ * construct a *real* [AssetJsonReader] whose [platformAssetReader] is mocked, and feed
  * test JSON through them. This lets us verify:
  *   - the correct asset path is opened for each method, and
  *   - deserialized DTOs are returned (or AssetReadException thrown on failure).
  */
 class BibleSourceTest {
-    private val assetManager: AssetManager = mockk()
-    private val context: Context = mockk()
+    private val platformAssetReader: PlatformAssetReader = mockk()
 
     // Use lenient JSON so tests don't break if new optional fields are added to the DTOs
     private val json = Json { ignoreUnknownKeys = true }
@@ -37,8 +32,7 @@ class BibleSourceTest {
 
     @BeforeTest
     fun setup() {
-        every { context.assets } returns assetManager
-        source = BibleSource(AssetJsonReader(context, json))
+        source = BibleSource(AssetJsonReader(platformAssetReader, json))
     }
 
     // ─── Helpers ─────────────────────────────────────────────────────────────
@@ -47,11 +41,11 @@ class BibleSourceTest {
         path: String,
         jsonContent: String,
     ) {
-        every { assetManager.open(path) } returns ByteArrayInputStream(jsonContent.toByteArray())
+        every { platformAssetReader.readText(path) } returns jsonContent
     }
 
     private fun stubAssetThrows(path: String) {
-        every { assetManager.open(path) } throws IOException("Asset not found: $path")
+        every { platformAssetReader.readText(path) } throws RuntimeException("Asset not found: $path")
     }
 
     // ─── readBibleDetails ────────────────────────────────────────────────────
@@ -65,7 +59,7 @@ class BibleSourceTest {
 
         source.readBibleDetails()
 
-        verify { assetManager.open("bibleBookMetadata.json") }
+        verify { platformAssetReader.readText("bibleBookMetadata.json") }
     }
 
     @Test
@@ -78,7 +72,7 @@ class BibleSourceTest {
         val result = source.readBibleDetails()
 
         assertEquals(1, result.size)
-        assertEquals("Genesis", result[0].book?.en)
+        assertEquals("Genesis", result[0].book.en)
         assertEquals("genesis", result[0].folder)
     }
 
@@ -100,7 +94,7 @@ class BibleSourceTest {
 
         source.readPrefaceTemplates()
 
-        verify { assetManager.open("bible_preface_templates.json") }
+        verify { platformAssetReader.readText("bible_preface_templates.json") }
     }
 
     @Test
@@ -112,8 +106,8 @@ class BibleSourceTest {
 
         val result = source.readPrefaceTemplates()
 
-        assertTrue(result.prophets?.en?.isEmpty() == true)
-        assertTrue(result.paulineEpistle?.ml?.isEmpty() == true)
+        assertEquals(result.prophets.en.isEmpty(), true)
+        assertEquals(result.paulineEpistle.ml.isEmpty(), true)
     }
 
     @Test
@@ -133,7 +127,7 @@ class BibleSourceTest {
         source.readBibleChapter(path)
 
         // BibleSource must forward the path untouched — construction is BibleRepositoryImpl's job
-        verify { assetManager.open(path) }
+        verify { platformAssetReader.readText(path) }
     }
 
     @Test
@@ -145,8 +139,8 @@ class BibleSourceTest {
 
         assertEquals("Genesis", result.book)
         assertEquals(1, result.chapter)
-        assertEquals(1, result.verses?.size)
-        assertEquals("In the beginning", result.verses?.get(0)?.verse)
+        assertEquals(1, result.verses.size)
+        assertEquals("In the beginning", result.verses[0].verse)
     }
 
     @Test
@@ -164,6 +158,6 @@ class BibleSourceTest {
 
         source.readBibleChapter(path)
 
-        verify { assetManager.open(path) }
+        verify { platformAssetReader.readText(path) }
     }
 }
