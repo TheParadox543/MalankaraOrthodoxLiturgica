@@ -9,6 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerParsingException
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.withContext
 
 class PrayerSource(
@@ -48,9 +49,9 @@ class PrayerSource(
             try {
                 reader.loadJsonAsset<PageNodeDto>(filename)
             } catch (e: AssetReadException) {
-                throw PrayerContentNotFoundException("Prayer navigation tree not found: $filename", e)
+                throw Exception("Prayer navigation tree not found: $filename", e)
             } catch (e: AssetParsingException) {
-                throw PrayerContentNotFoundException("Prayer navigation tree malformed: $filename", e)
+                throw Exception("Prayer navigation tree malformed: $filename", e)
             }
         }
 }
