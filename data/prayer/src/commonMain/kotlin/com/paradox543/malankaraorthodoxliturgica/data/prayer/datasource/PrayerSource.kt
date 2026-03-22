@@ -49,9 +49,9 @@ class PrayerSource(
             try {
                 reader.loadJsonAsset<PageNodeDto>(filename)
             } catch (e: AssetReadException) {
-                throw Exception("Prayer navigation tree not found: $filename", e)
+                throw PrayerContentNotFoundException("Prayer navigation tree not found: $filename", e)
             } catch (e: AssetParsingException) {
-                throw Exception("Prayer navigation tree malformed: $filename", e)
+                throw PrayerContentNotFoundException("Prayer navigation tree malformed: $filename", e)
             }
         }
 }
