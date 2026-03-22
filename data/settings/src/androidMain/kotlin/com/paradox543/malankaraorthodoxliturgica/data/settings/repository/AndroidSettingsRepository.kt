@@ -14,7 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.Sett
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class SettingsRepositoryImpl(
+class AndroidSettingsRepository(
     private val dataStore: DataStore<Preferences>,
 ) : SettingsRepository {
     // DataStore keys

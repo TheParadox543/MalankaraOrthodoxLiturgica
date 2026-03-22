@@ -1,15 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.data.settings.repository
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.floatPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.mutablePreferencesOf
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
@@ -28,20 +23,20 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 /**
- * Unit tests for [SettingsRepositoryImpl].
+ * Unit tests for [AndroidSettingsRepository].
  *
  * A real [DataStore] backed by a temporary file is used (via [PreferenceDataStoreFactory]) so
  * that [DataStore.edit] works correctly. The temp directory is cleaned up after every test.
  * All tests run synchronously via [runTest] + [UnconfinedTestDispatcher].
  */
 @OptIn(ExperimentalCoroutinesApi::class)
-class SettingsRepositoryImplTest {
+class AndroidSettingsRepositoryTest {
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
     private val tempFolder = TemporaryFolder().also { it.create() }
 
     private lateinit var dataStore: DataStore<Preferences>
-    private lateinit var repository: SettingsRepositoryImpl
+    private lateinit var repository: AndroidSettingsRepository
 
     @BeforeTest
     fun setup() {
@@ -50,7 +45,7 @@ class SettingsRepositoryImplTest {
                 scope = testScope,
                 produceFile = { tempFolder.newFile("test_settings.preferences_pb") },
             )
-        repository = SettingsRepositoryImpl(dataStore)
+        repository = AndroidSettingsRepository(dataStore)
     }
 
     @AfterTest
