@@ -45,7 +45,7 @@ dependencies {
     // Project imports
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
-    implementation(project(":core:platform"))
+    implementation(project(":core:analytics"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

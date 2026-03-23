@@ -2,7 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase
 
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 
 class FirebaseAnalyticsService(
     private val firebaseAnalytics: FirebaseAnalytics,

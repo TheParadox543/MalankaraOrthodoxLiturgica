@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.core.platform
+package com.paradox543.malankaraorthodoxliturgica.core.analytics
 
 /**
  * Abstraction over the app's analytics backend (e.g. Firebase Analytics).

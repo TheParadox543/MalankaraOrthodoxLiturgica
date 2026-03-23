@@ -90,6 +90,7 @@ dependencies {
     implementation(project(":feature:calendar"))
     implementation(project(":feature:song"))
 
+    implementation(project(":core:analytics"))
     implementation(project(":core:platform"))
     implementation(project(":platform:analytics-firebase"))
 

@@ -2,7 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.content.Context
 import android.content.Intent
-import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 
 class ShareServiceImpl(

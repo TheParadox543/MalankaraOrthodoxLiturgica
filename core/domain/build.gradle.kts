@@ -7,8 +7,8 @@ plugins {
 kotlin {
     androidLibrary {
         namespace = "com.paradox543.malankaraorthodoxliturgica.domain"
-        compileSdk = 36
-        minSdk = 26
+        compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
+        minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
     }
 
     // Keep iOS targets if domain should be shared with iosApp

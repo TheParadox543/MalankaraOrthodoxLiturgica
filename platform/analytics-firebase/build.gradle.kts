@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
 
+    implementation(project(":core:analytics"))
     implementation(project(":core:platform"))
 
     // Dependency Injection

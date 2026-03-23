@@ -41,6 +41,7 @@ dependencies {
     // Project imports
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
+    implementation(project(":core:analytics"))
     implementation(project(":core:platform"))
 
     implementation(project(":qr"))
