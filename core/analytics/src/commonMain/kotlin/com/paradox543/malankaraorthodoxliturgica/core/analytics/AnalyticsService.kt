@@ -6,37 +6,9 @@ package com.paradox543.malankaraorthodoxliturgica.core.analytics
  * Feature modules depend on this interface; the concrete implementation lives in :app.
  */
 interface AnalyticsService {
-    /** Log a prayer selected from the Pray Now screen. */
-    fun logPrayNowItemSelection(
-        prayerName: String,
-        prayerId: String,
-    )
-
-    /** Log an application error with a description and where it occurred. */
-    fun logError(
-        description: String,
-        location: String,
-    )
-
-    /** Log that the user shared the app. */
-    fun logShareEvent()
-
-    fun logQrNavigationSuccess(destinationRoute: String)
-
-    fun logLanguageSelected(language: String)
-
-    /**
-     * Log a screen view event.
+    /** Log events that happen within the app.
      *
-     * [routePattern] is the raw navigation route pattern (may contain argument placeholders),
-     * and [arguments] is the resolved argument bundle for that destination.
-     */
-    fun logScreenVisited(
-        routePattern: String,
-        arguments: Map<String, String?> = emptyMap(),
-    )
-
-    fun logTutorialStarted()
-
-    fun logTutorialCompleted()
+     * Use [AnalyticsEvent] to differentiate different events and pass required parameters.
+     * */
+    fun logEvent(event: AnalyticsEvent)
 }

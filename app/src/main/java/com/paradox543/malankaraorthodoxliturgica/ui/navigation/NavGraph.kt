@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.MainActivity
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
@@ -112,7 +113,7 @@ fun NavGraph(
                     args?.keySet()?.associateWith { key ->
                         args.get(key)?.toString()
                     } ?: emptyMap()
-                analyticsService.logScreenVisited(destination.route ?: "", argsMap)
+                analyticsService.logEvent(AnalyticsEvent.ScreenVisited(destination.route ?: "", argsMap))
             }
         navController.addOnDestinationChangedListener(listener)
         onDispose { navController.removeOnDestinationChangedListener(listener) }
@@ -563,7 +564,7 @@ fun NavGraph(
             composable(AppScreen.QrScanner.route) {
                 QrScannerView(
                     onNavigate = { route ->
-                        analyticsService.logQrNavigationSuccess(route)
+                        analyticsService.logEvent(AnalyticsEvent.QrNavigationSuccess(route))
                         navController.navigate(route) {
                             launchSingleTop = true
                             navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)

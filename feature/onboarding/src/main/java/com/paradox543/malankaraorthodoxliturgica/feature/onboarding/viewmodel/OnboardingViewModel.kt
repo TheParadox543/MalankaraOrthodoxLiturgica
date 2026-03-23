@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
@@ -56,14 +57,14 @@ class OnboardingViewModel(
     }
 
     fun logTutorialStart() {
-        analyticsService.logTutorialStarted()
+        analyticsService.logEvent(AnalyticsEvent.TutorialStarted)
     }
 
     // Function to set (and save) language
     fun setLanguage(language: AppLanguage) {
         viewModelScope.launch {
             settingsRepository.setLanguage(language)
-            analyticsService.logLanguageSelected(language.name)
+            analyticsService.logEvent(AnalyticsEvent.LanguageSelected(language.name))
         }
     }
 
@@ -78,7 +79,7 @@ class OnboardingViewModel(
         viewModelScope.launch {
             settingsRepository.setOnboardingCompleted(completed)
             if (completed) {
-                analyticsService.logTutorialCompleted()
+                analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
             }
         }
     }

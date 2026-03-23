@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
@@ -105,14 +106,14 @@ class PrayerViewModel(
         prayerName: String,
         prayerId: String,
     ) {
-        analyticsService.logPrayNowItemSelection(prayerName, prayerId)
+        analyticsService.logEvent(AnalyticsEvent.PrayNowItemSelected(prayerName, prayerId))
     }
 
     fun reportError(
         errorMessage: String,
         errorLocation: String,
     ) {
-        analyticsService.logError(errorMessage, errorLocation)
+        analyticsService.logEvent(AnalyticsEvent.Error(errorMessage, errorLocation))
     }
 
     fun onPrayerScreenOpened() {

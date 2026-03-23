@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
@@ -78,7 +79,7 @@ class SettingsViewModel(
     fun setLanguage(language: AppLanguage) {
         viewModelScope.launch {
             settingsRepository.setLanguage(language)
-            analyticsService.logLanguageSelected(language.name)
+            analyticsService.logEvent(AnalyticsEvent.LanguageSelected(language.name))
         }
     }
 
@@ -113,15 +114,11 @@ class SettingsViewModel(
             }
     }
 
-    fun logTutorialStart() {
-        analyticsService.logTutorialStarted()
-    }
-
     fun setOnboardingCompleted(completed: Boolean = true) {
         viewModelScope.launch {
             settingsRepository.setOnboardingCompleted(completed)
             if (completed) {
-                analyticsService.logTutorialCompleted()
+                analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
             }
         }
     }

@@ -2,6 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.services
 
 import android.content.Context
 import android.content.Intent
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 
@@ -36,6 +37,6 @@ class ShareServiceImpl(
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
         context.startActivity(chooserIntent)
-        analyticsService.logShareEvent()
+        analyticsService.logEvent(AnalyticsEvent.ShareApp)
     }
 }
