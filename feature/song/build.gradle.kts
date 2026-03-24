@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.androidx.ui)                  // Core Compose UI toolkit
     implementation(libs.androidx.ui.graphics)         // Compose graphics primitives
     implementation(libs.androidx.material3)           // Material Design 3 components for Compose
+    implementation(libs.androidx.material.icons.core)
+    implementation(libs.androidx.material.icons.extended)
 
     // Media Player
     implementation(libs.androidx.media3.exoplayer)

@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:ui"))
     implementation(project(":core:analytics"))
+    implementation(project(":feature:onboarding-kmp"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

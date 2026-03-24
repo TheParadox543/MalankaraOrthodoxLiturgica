@@ -55,7 +55,6 @@ kotlin {
             dependencies {
                 // Project Imports
                 implementation(project(":core:domain"))
-                implementation(project(":core:ui"))
                 implementation(project(":core:analytics"))
 
                 implementation(libs.kotlinx.coroutines.core)
@@ -110,6 +109,6 @@ kotlin {
 
 compose.resources {
     publicResClass = true
-    packageOfResClass = "com.example.jetcaster.shared"
+    packageOfResClass = "com.paradox543.malankaraorthodoxliturgica.shared"
     generateResClass = auto
 }

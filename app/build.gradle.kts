@@ -85,6 +85,7 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":feature:settings"))
     implementation(project(":feature:onboarding"))
+    implementation(project(":feature:onboarding-kmp"))
     implementation(project(":feature:prayer"))
     implementation(project(":feature:bible"))
     implementation(project(":feature:calendar"))

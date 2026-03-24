@@ -66,24 +66,24 @@ fun OnboardingScreen(
 
     Column(
         modifier =
-            Modifier.Companion
+            Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
                 .padding(24.dp)
                 .verticalScroll(rememberScrollState()),
-        horizontalAlignment = Alignment.Companion.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
             text = "Welcome to Liturgica!",
-            textAlign = TextAlign.Companion.Center,
+            textAlign = TextAlign.Center,
             style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.Companion.padding(bottom = 16.dp).fillMaxWidth(),
+            modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth(),
         )
         Text(
             text = "Please choose your preferred language and font size.",
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.Companion.padding(bottom = 32.dp),
+            modifier = Modifier.padding(bottom = 32.dp),
         )
 
         // --- Language Selection ---
@@ -100,14 +100,14 @@ fun OnboardingScreen(
                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = languageExpanded)
                 },
                 modifier =
-                    Modifier.Companion
-                        .menuAnchor(MenuAnchorType.Companion.PrimaryNotEditable, true)
+                    Modifier
+                        .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
                         .fillMaxWidth(),
             )
             ExposedDropdownMenu(
                 expanded = languageExpanded,
                 onDismissRequest = { languageExpanded = false },
-                modifier = Modifier.Companion.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth(),
             ) {
                 AppLanguage.entries.forEach {
                     DropdownMenuItem(
@@ -122,7 +122,7 @@ fun OnboardingScreen(
             }
         }
 
-        Spacer(Modifier.Companion.height(24.dp))
+        Spacer(Modifier.height(24.dp))
 
         // --- Font Size Selection ---
         Text(
@@ -133,23 +133,23 @@ fun OnboardingScreen(
             value = selectedFontScale.scaleFactor,
             onValueChange = { sliderPositionFloat ->
                 onboardingViewModel.setFontScaleFromSettings(
-                    AppFontScale.Companion.fromScale(
+                    AppFontScale.fromScale(
                         sliderPositionFloat,
                     ),
                 )
             },
-            modifier = Modifier.Companion.width(240.dp),
+            modifier = Modifier.width(240.dp),
             valueRange = 0.7f..1.4f,
             steps = 3,
         )
 
         if (!prayers.isEmpty()) {
             Column(
-                modifier = Modifier.Companion.padding(vertical = 28.dp),
+                modifier = Modifier.padding(vertical = 28.dp),
             ) {
                 Text(
                     "Sample Prayer",
-                    modifier = Modifier.Companion.align(Alignment.Companion.CenterHorizontally),
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
                 )
                 (prayers[1] as? PrayerElement.Prose)?.let { Prose(it.content) }
             }
@@ -163,7 +163,7 @@ fun OnboardingScreen(
                 onboardingViewModel.setOnboardingCompleted()
                 onNavigateToHome()
             },
-            modifier = Modifier.Companion.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Text("Get Started!")
         }
