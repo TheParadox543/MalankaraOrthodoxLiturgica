@@ -1,11 +1,16 @@
 [versions]
 activityCompose = "1.10.1"
 agp = "8.13.0"
+androidNavigation = "2.9.0"
 appcompat = "1.7.1"
 appUpdateKtx = "2.1.0"
+androidx-lifecycle-runtime-compose = "2.10.0"
 barcodeScanning = "17.3.0"
 camera = "1.5.0"
+cmp-m3-adaptive = "1.2.0"
+componentsResources = "1.10.3"
 composeBom = "2025.06.00"
+composeMultiplatform = "1.10.3"
 coreKtx = "1.16.0"
 coreSplashscreen = "1.0.1"
 coreVersion = "1.5.0"
@@ -14,6 +19,7 @@ espressoCore = "3.6.1"
 firebaseAnalytics = "22.4.0"
 firebaseBom = "34.3.0"
 firebaseCrashalytics = "19.4.4"
+foundation = "1.10.3"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 koin = "4.1.1"
@@ -27,13 +33,17 @@ kotlinxSerializationJson = "1.8.1"
 ktlint = "13.1.0"
 lifecycleRuntimeKtx = "2.9.1"
 material = "1.13.0"
+material3 = "1.9.0"
 media3 = "1.8.0"
 mockk = "1.13.17"
-androidNavigation = "2.9.0"
+navigationCompose = "2.9.2"
 reviewKtx = "2.0.2"
 runner = "1.5.2"
+runtime = "1.10.3"
+ui = "1.10.3"
 uiTestManifest = "1.8.2"
 uiTextGoogleFonts = "1.8.3"
+uiToolingPreview = "1.10.3"
 workRuntimeKtx = "2.10.5"
 zxingAndroidEmbedded = "4.3.0"
 zxingCore = "3.5.4"
@@ -52,6 +62,7 @@ androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-f
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle-runtime-compose" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
@@ -65,12 +76,23 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdateKtx" }
 barcode-scanning = { module = "com.google.mlkit:barcode-scanning", version.ref = "barcodeScanning" }
+components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "componentsResources" }
+compose-material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "cmp-m3-adaptive" }
+compose-material3-adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout" , version.ref="cmp-m3-adaptive"}
+compose-material3-adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation" , version.ref="cmp-m3-adaptive"}
+compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+compose-ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "composeMultiplatform" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
+foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "foundation" }
 koin-androidx-workmanager = { module = "io.insert-koin:koin-androidx-workmanager", version.ref = "koin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
+runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "runtime" }
+ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "ui" }
+ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxingCore" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
@@ -96,11 +118,12 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+android-lint = { id = "com.android.lint", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
-android-lint = { id = "com.android.lint", version.ref = "agp" }
-android-library = { id = "com.android.library", version.ref = "agp" }
