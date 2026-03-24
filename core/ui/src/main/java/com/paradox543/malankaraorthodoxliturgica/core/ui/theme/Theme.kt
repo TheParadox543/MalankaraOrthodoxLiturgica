@@ -5,6 +5,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.Background
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.BackgroundDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnBackground
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnBackgroundDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnPrimary
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnPrimaryContainer
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnPrimaryContainerDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnPrimaryDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnSecondary
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnSecondaryContainer
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnSecondaryContainerDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.OnSecondaryDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.Primary
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.PrimaryContainer
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.PrimaryContainerDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.PrimaryDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.Secondary
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.SecondaryContainer
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.SecondaryContainerDark
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.SecondaryDark
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 

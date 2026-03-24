@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui.theme
+package com.paradox543.malankaraorthodoxliturgica.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

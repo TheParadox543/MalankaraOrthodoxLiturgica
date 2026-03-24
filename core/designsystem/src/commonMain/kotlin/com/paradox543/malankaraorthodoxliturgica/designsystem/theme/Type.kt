@@ -1,68 +1,34 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui.theme
+package com.paradox543.malankaraorthodoxliturgica.designsystem.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.googlefonts.Font
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.sp
-import com.paradox543.malankaraorthodoxliturgica.core.ui.R
+import com.paradox543.malankaraorthodoxliturgica.designsystem.CinzelDecorative_Regular
+import com.paradox543.malankaraorthodoxliturgica.designsystem.CormorantGaramond_VariableFont_wght
+import com.paradox543.malankaraorthodoxliturgica.designsystem.NotoSerifMalayalam_VariableFont_wght
+import com.paradox543.malankaraorthodoxliturgica.designsystem.Res
+import com.paradox543.malankaraorthodoxliturgica.designsystem.arima_variablefont_wght
+import com.paradox543.malankaraorthodoxliturgica.designsystem.notoSansMalayalam_VariableFont
+import org.jetbrains.compose.resources.Font
 
-// Set of Material typography styles to start with
+@Composable
+fun englishTypography(): Typography {
+    val cinzelDecorative =
+        FontFamily(
+            Font(Res.font.CinzelDecorative_Regular),
+        )
 
-val provider =
-    GoogleFont.Provider(
-        providerAuthority = "com.google.android.gms.fonts",
-        providerPackage = "com.google.android.gms",
-        certificates = R.array.com_google_android_gms_fonts_certs,
-    )
-
-val ArimaMalayalam =
-    FontFamily(
-        Font(
-            googleFont = GoogleFont("Arima"),
-            fontProvider = provider,
-        ),
-    )
-
-val NotoSerifMalayalam =
-    FontFamily(
-        Font(
-            googleFont = GoogleFont("Noto Serif Malayalam"),
-            fontProvider = provider,
-        ),
-    )
-
-val NotoSansMalayalam =
-    FontFamily(
-        Font(
-            googleFont = GoogleFont("Noto Sans Malayalam"),
-            fontProvider = provider,
-        ),
-    )
-
-val CinzelDecorative =
-    FontFamily(
-        Font(
-            googleFont = GoogleFont("Cinzel Decorative"),
-            fontProvider = provider,
-        ),
-    )
-
-val CormorantGaramond =
-    FontFamily(
-        Font(
-            googleFont = GoogleFont("Cormorant Garamond"),
-            fontProvider = provider,
-        ),
-    )
-
-val EnglishTypography =
-    Typography(
+    val cormorantGaramond =
+        FontFamily(
+            Font(Res.font.CormorantGaramond_VariableFont_wght),
+        )
+    return Typography(
         displayLarge =
             TextStyle(
-                fontFamily = CinzelDecorative,
+                fontFamily = cinzelDecorative,
                 fontWeight = FontWeight.Bold,
                 fontSize = 57.sp,
                 lineHeight = 64.sp,
@@ -70,49 +36,49 @@ val EnglishTypography =
             ),
         displayMedium =
             TextStyle(
-                fontFamily = CinzelDecorative,
+                fontFamily = cinzelDecorative,
                 fontWeight = FontWeight.Bold,
                 fontSize = 45.sp,
                 lineHeight = 52.sp,
             ),
         displaySmall =
             TextStyle(
-                fontFamily = CinzelDecorative,
+                fontFamily = cinzelDecorative,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp,
                 lineHeight = 44.sp,
             ),
         headlineLarge =
             TextStyle(
-                fontFamily = CinzelDecorative,
+                fontFamily = cinzelDecorative,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 32.sp,
                 lineHeight = 40.sp,
             ),
         headlineMedium =
             TextStyle(
-                fontFamily = CinzelDecorative,
+                fontFamily = cinzelDecorative,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 28.sp,
                 lineHeight = 36.sp,
             ),
         headlineSmall =
             TextStyle(
-                fontFamily = CinzelDecorative,
+                fontFamily = cinzelDecorative,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 24.sp,
                 lineHeight = 32.sp,
             ),
         titleLarge =
             TextStyle(
-                fontFamily = CormorantGaramond,
+                fontFamily = cormorantGaramond,
                 fontWeight = FontWeight.Medium,
                 fontSize = 22.sp,
                 lineHeight = 28.sp,
             ),
         titleMedium =
             TextStyle(
-                fontFamily = CormorantGaramond,
+                fontFamily = cormorantGaramond,
                 fontWeight = FontWeight.Medium,
                 fontSize = 16.sp,
                 lineHeight = 24.sp,
@@ -120,7 +86,7 @@ val EnglishTypography =
             ),
         titleSmall =
             TextStyle(
-                fontFamily = CormorantGaramond,
+                fontFamily = cormorantGaramond,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
@@ -175,12 +141,20 @@ val EnglishTypography =
                 letterSpacing = 0.5.sp,
             ),
     )
+}
 
-val MalayalamTypography =
-    Typography(
+@Composable
+fun malayalamTypography(): Typography {
+    val arimaMalayalam = FontFamily(Font(Res.font.arima_variablefont_wght))
+    val notoSerifMalayalam =
+        FontFamily(Font(Res.font.NotoSerifMalayalam_VariableFont_wght))
+
+    val notoSansMalayalam =
+        FontFamily(Font(Res.font.notoSansMalayalam_VariableFont))
+    return Typography(
         displayLarge =
             TextStyle(
-                fontFamily = ArimaMalayalam,
+                fontFamily = arimaMalayalam,
                 fontWeight = FontWeight.Bold,
                 fontSize = 57.sp,
                 lineHeight = 64.sp,
@@ -188,49 +162,49 @@ val MalayalamTypography =
             ),
         displayMedium =
             TextStyle(
-                fontFamily = ArimaMalayalam,
+                fontFamily = arimaMalayalam,
                 fontWeight = FontWeight.Bold,
                 fontSize = 45.sp,
                 lineHeight = 52.sp,
             ),
         displaySmall =
             TextStyle(
-                fontFamily = ArimaMalayalam,
+                fontFamily = arimaMalayalam,
                 fontWeight = FontWeight.Bold,
                 fontSize = 36.sp,
                 lineHeight = 44.sp,
             ),
         headlineLarge =
             TextStyle(
-                fontFamily = ArimaMalayalam,
+                fontFamily = arimaMalayalam,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 32.sp,
                 lineHeight = 40.sp,
             ),
         headlineMedium =
             TextStyle(
-                fontFamily = ArimaMalayalam,
+                fontFamily = arimaMalayalam,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 28.sp,
                 lineHeight = 36.sp,
             ),
         headlineSmall =
             TextStyle(
-                fontFamily = ArimaMalayalam,
+                fontFamily = arimaMalayalam,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 24.sp,
                 lineHeight = 32.sp,
             ),
         titleLarge =
             TextStyle(
-                fontFamily = NotoSerifMalayalam,
+                fontFamily = notoSerifMalayalam,
                 fontWeight = FontWeight.Medium,
                 fontSize = 22.sp,
                 lineHeight = 28.sp,
             ),
         titleMedium =
             TextStyle(
-                fontFamily = NotoSerifMalayalam,
+                fontFamily = notoSerifMalayalam,
                 fontWeight = FontWeight.Medium,
                 fontSize = 16.sp,
                 lineHeight = 24.sp,
@@ -238,7 +212,7 @@ val MalayalamTypography =
             ),
         titleSmall =
             TextStyle(
-                fontFamily = NotoSerifMalayalam,
+                fontFamily = notoSerifMalayalam,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
@@ -246,7 +220,7 @@ val MalayalamTypography =
             ),
         bodyLarge =
             TextStyle(
-                fontFamily = NotoSansMalayalam,
+                fontFamily = notoSansMalayalam,
                 fontWeight = FontWeight.Normal,
                 fontSize = 16.sp,
                 lineHeight = 24.sp,
@@ -254,7 +228,7 @@ val MalayalamTypography =
             ),
         bodyMedium =
             TextStyle(
-                fontFamily = NotoSansMalayalam,
+                fontFamily = notoSansMalayalam,
                 fontWeight = FontWeight.Normal,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
@@ -262,7 +236,7 @@ val MalayalamTypography =
             ),
         bodySmall =
             TextStyle(
-                fontFamily = NotoSansMalayalam,
+                fontFamily = notoSansMalayalam,
                 fontWeight = FontWeight.Normal,
                 fontSize = 12.sp,
                 lineHeight = 16.sp,
@@ -270,7 +244,7 @@ val MalayalamTypography =
             ),
         labelLarge =
             TextStyle(
-                fontFamily = NotoSansMalayalam,
+                fontFamily = notoSansMalayalam,
                 fontWeight = FontWeight.Medium,
                 fontSize = 14.sp,
                 lineHeight = 20.sp,
@@ -278,7 +252,7 @@ val MalayalamTypography =
             ),
         labelMedium =
             TextStyle(
-                fontFamily = NotoSansMalayalam,
+                fontFamily = notoSansMalayalam,
                 fontWeight = FontWeight.Medium,
                 fontSize = 12.sp,
                 lineHeight = 16.sp,
@@ -286,10 +260,11 @@ val MalayalamTypography =
             ),
         labelSmall =
             TextStyle(
-                fontFamily = NotoSansMalayalam,
+                fontFamily = notoSansMalayalam,
                 fontWeight = FontWeight.Medium,
                 fontSize = 11.sp,
                 lineHeight = 16.sp,
                 letterSpacing = 0.5.sp,
             ),
     )
+}
