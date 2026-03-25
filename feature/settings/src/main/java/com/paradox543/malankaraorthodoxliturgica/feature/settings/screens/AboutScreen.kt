@@ -25,7 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.R
 

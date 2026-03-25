@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui
+package com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -9,7 +9,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 
 /**
- * Remembers a boolean visibility flag and a [androidx.compose.ui.input.nestedscroll.NestedScrollConnection] that hides bars
+ * Remembers a boolean visibility flag and a [NestedScrollConnection] that hides bars
  * when scrolling down and reveals them when scrolling up.
  * Used by PrayerScreen and BibleChapterScreen.
  */
@@ -30,7 +30,7 @@ fun rememberScrollAwareVisibility(): Pair<MutableState<Boolean>, NestedScrollCon
                     } else if (available.y < -10) {
                         isVisible.value = false // Scrolling DOWN → Hide bars
                     }
-                    return Offset.Companion.Zero
+                    return Offset.Zero
                 }
             }
         }

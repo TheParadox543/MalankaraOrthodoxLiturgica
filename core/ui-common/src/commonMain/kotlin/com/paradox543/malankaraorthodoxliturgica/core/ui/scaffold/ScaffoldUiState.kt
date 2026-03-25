@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui
+package com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold
 
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapterRef
