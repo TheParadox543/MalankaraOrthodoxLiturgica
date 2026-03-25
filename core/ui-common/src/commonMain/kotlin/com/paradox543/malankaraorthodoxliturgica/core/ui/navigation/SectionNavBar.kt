@@ -1,8 +1,5 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui.components
+package com.paradox543.malankaraorthodoxliturgica.core.ui.navigation
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -10,8 +7,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
-import com.paradox543.malankaraorthodoxliturgica.core.ui.R
+import com.composables.icons.materialicons.MaterialIcons
+import com.composables.icons.materialicons.rounded.Arrow_back
+import com.composables.icons.materialicons.rounded.Arrow_forward
+import com.composables.icons.materialicons.rounded.Qr_code
 
 @Composable
 fun SectionNavBar(
@@ -27,10 +26,7 @@ fun SectionNavBar(
     ) {
         NavigationBarItem(
             icon = {
-                Icon(
-                    Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Previous",
-                )
+                Icon(MaterialIcons.Rounded.Arrow_back, contentDescription = "Previous")
             },
             label = { Text("Previous") },
             selected = false,
@@ -46,7 +42,7 @@ fun SectionNavBar(
         )
         NavigationBarItem(
             icon = {
-                Icon(painterResource(R.drawable.qr_code), contentDescription = "Generate QR")
+                Icon(MaterialIcons.Rounded.Qr_code, contentDescription = "Generate QR")
             },
             label = { Text("Generate QR") },
             selected = false,
@@ -62,10 +58,7 @@ fun SectionNavBar(
         )
         NavigationBarItem(
             icon = {
-                Icon(
-                    Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Next",
-                )
+                Icon(MaterialIcons.Rounded.Arrow_forward, contentDescription = "Next")
             },
             label = { Text("Next") },
             selected = false,

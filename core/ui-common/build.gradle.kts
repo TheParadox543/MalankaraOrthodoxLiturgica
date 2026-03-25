@@ -69,6 +69,9 @@ kotlin {
                 implementation(libs.ui)
                 implementation(libs.components.resources)
 
+                // Icons dependency
+                implementation("com.composables:icons-material-icons-rounded-cmp:2.2.1")
+
                 // Dependency injection
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose)
