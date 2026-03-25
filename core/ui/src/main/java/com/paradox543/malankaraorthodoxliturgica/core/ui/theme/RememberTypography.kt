@@ -4,6 +4,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.englishTypography
 import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.malayalamTypography
+import com.paradox543.malankaraorthodoxliturgica.designsystem.theme.scaledTypography
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 @Composable
