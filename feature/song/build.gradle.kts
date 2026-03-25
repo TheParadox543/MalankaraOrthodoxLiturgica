@@ -43,7 +43,6 @@ android {
 dependencies {
     // Project imports
     implementation(project(":core:domain"))
-    implementation(project(":core:ui"))
     implementation(project(":core:ui-common"))
     implementation(project(":core:platform"))
 

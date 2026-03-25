@@ -82,7 +82,6 @@ dependencies {
 
     implementation(project(":qr"))
 
-    implementation(project(":core:ui"))
     implementation(project(":core:ui-common"))
     implementation(project(":feature:settings"))
     implementation(project(":feature:onboarding"))

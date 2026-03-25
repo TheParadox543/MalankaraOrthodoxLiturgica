@@ -25,7 +25,6 @@ dependencyResolutionManagement {
 rootProject.name = "MalankaraOrthodoxLiturgica"
 include(":app")
 include(":core:domain")
-include(":core:ui")
 include(":core:analytics")
 include(":core:platform")
 include(":data:core")
