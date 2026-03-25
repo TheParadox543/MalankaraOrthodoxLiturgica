@@ -83,6 +83,7 @@ dependencies {
     implementation(project(":qr"))
 
     implementation(project(":core:ui-common"))
+    implementation(project(":core:app-info"))
     implementation(project(":feature:settings"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:onboarding-kmp"))

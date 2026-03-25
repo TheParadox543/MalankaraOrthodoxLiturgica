@@ -1,14 +1,16 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
-    alias(libs.plugins.compose.multiplatform)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ktlint)
+    alias(libs.plugins.android.lint)
 }
 
 kotlin {
+
+    // Target declarations - add or remove as needed below. These define
+    // which platforms this KMP module supports.
+    // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.paradox543.malankaraorthodoxliturgica.feature.onboarding"
+        namespace = "com.paradox543.malankaraorthodoxliturgica.info"
         compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
         minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
 
@@ -22,10 +24,14 @@ kotlin {
         }
     }
 
+    // For iOS targets, this is also where you should
+    // configure native binary output. For more information, see:
+    // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
+
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "FeatureOnboardingKmpKit"
+    val xcfName = "core:app-infoKit"
 
     iosX64 {
         binaries.framework {
@@ -53,33 +59,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // Project Imports
-                implementation(project(":core:domain"))
-                implementation(project(":core:analytics"))
-                implementation(project(":core:ui-common"))
-                implementation(project(":core:app-info"))
-
-                implementation(libs.kotlinx.coroutines.core)
-                // Dependency injection
-                implementation(libs.koin.core)
-                implementation(libs.koin.compose.viewmodel)
-                // Compose Multiplatform dependencies
-                implementation(libs.runtime)
-                implementation(libs.foundation)
-
-                implementation(libs.material3)
-                implementation(libs.compose.material3.adaptive)
-                implementation(libs.compose.material3.adaptive.layout)
-                implementation(libs.compose.material3.adaptive.navigation)
-
-                implementation(libs.ui)
-                // TODO this needs to be added, otherwise BackHandler build fails unresolved
-                implementation(libs.compose.ui.backhandler)
-                implementation(libs.ui.tooling.preview)
-                implementation(libs.components.resources)
-                implementation(libs.compose.navigation)
-
-                implementation(libs.androidx.lifecycle.runtime.compose)
+                implementation(libs.kotlin.stdlib)
+                // Add KMP dependencies here
             }
         }
 
@@ -91,6 +72,9 @@ kotlin {
 
         androidMain {
             dependencies {
+                // Add Android-specific dependencies here. Note that this source set depends on
+                // commonMain by default and will correctly pull the Android artifacts of any KMP
+                // dependencies declared in commonMain.
             }
         }
 
@@ -104,13 +88,12 @@ kotlin {
 
         iosMain {
             dependencies {
+                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
+                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
+                // part of KMP’s default source set hierarchy. Note that this source set depends
+                // on common by default and will correctly pull the iOS artifacts of any
+                // KMP dependencies declared in commonMain.
             }
         }
     }
-}
-
-compose.resources {
-    publicResClass = true
-    packageOfResClass = "com.paradox543.malankaraorthodoxliturgica.shared"
-    generateResClass = auto
 }

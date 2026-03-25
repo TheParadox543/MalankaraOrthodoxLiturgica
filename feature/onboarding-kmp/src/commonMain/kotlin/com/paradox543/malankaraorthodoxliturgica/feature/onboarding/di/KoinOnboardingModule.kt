@@ -11,6 +11,7 @@ val onboardingModule =
                 settingsRepository = get(),
                 analyticsService = get(),
                 getPrayerScreenContentUseCase = get(),
+                appInfoProvider = get(),
             )
         }
     }

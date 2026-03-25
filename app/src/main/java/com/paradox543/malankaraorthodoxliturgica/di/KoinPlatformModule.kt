@@ -9,10 +9,13 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.info.AndroidAppInfoProvider
+import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
 import com.paradox543.malankaraorthodoxliturgica.services.InAppReviewManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.InAppUpdateManagerImpl
 import com.paradox543.malankaraorthodoxliturgica.services.ShareServiceImpl
@@ -27,6 +30,12 @@ private val REVIEW_DATASTORE_QUALIFIER = named("reviewDataStore")
 
 val platformKoinModule =
     module {
+        single<AppInfoProvider> {
+            AndroidAppInfoProvider(
+                versionName = BuildConfig.VERSION_NAME,
+                versionCode = BuildConfig.VERSION_CODE.toString(),
+            )
+        }
         single<AppUpdateManager> { AppUpdateManagerFactory.create(androidContext()) }
 
         single<InAppUpdateManager> {

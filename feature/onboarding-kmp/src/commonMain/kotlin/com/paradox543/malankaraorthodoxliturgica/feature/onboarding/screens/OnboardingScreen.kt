@@ -37,7 +37,6 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiStat
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -167,6 +166,6 @@ fun OnboardingScreen(
         ) {
             Text("Get Started!")
         }
-        Text("Version: ${BuildConfig.VERSION_NAME}")
+        Text("Version: ${onboardingViewModel.version}")
     }
 }

@@ -9,6 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayer
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +22,7 @@ class OnboardingViewModel(
     private val settingsRepository: SettingsRepository,
     private val analyticsService: AnalyticsService,
     private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
+    private val appInfoProvider: AppInfoProvider,
 ) : ViewModel() {
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
@@ -38,6 +40,8 @@ class OnboardingViewModel(
 
     private val _prayers = MutableStateFlow<List<PrayerElement>>(emptyList())
     val prayers: StateFlow<List<PrayerElement>> = _prayers
+
+    val version = appInfoProvider.versionName
 
     fun loadPrayerElements(
         filename: String,
