@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui.components
+package com.paradox543.malankaraorthodoxliturgica.core.ui.navigation
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -7,7 +7,6 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
-import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.bottomNavItems
 
 @Composable
 fun BottomNavBar(

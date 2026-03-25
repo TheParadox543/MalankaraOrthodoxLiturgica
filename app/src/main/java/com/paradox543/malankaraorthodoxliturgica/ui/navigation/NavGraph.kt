@@ -34,11 +34,11 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManage
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.core.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
-import com.paradox543.malankaraorthodoxliturgica.core.ui.components.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.globalPinchZoom
+import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.SectionNavBar
+import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen

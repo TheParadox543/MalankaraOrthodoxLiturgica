@@ -1,12 +1,9 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui.components
+package com.paradox543.malankaraorthodoxliturgica.core.ui.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +18,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.composables.icons.materialicons.MaterialIcons
+import com.composables.icons.materialicons.rounded.Arrow_back
+import com.composables.icons.materialicons.rounded.Settings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,8 +50,8 @@ fun TopNavBar(
             if (showBack) {
                 IconButton(onClick = onBack) {
                     Icon(
-                        Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Previous Page",
+                        MaterialIcons.Rounded.Arrow_back,
+                        "Previous Page",
                     )
                 }
             } else {
@@ -62,8 +62,8 @@ fun TopNavBar(
             if (showSettings) {
                 IconButton(onClick = onSettingsClick) {
                     Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "Settings",
+                        MaterialIcons.Rounded.Settings,
+                        "Settings",
                     )
                 }
             } else {
