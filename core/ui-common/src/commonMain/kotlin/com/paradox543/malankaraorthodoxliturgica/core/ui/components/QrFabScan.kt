@@ -12,9 +12,12 @@ import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.paradox543.malankaraorthodoxliturgica.core.ui.R
+import com.composables.icons.materialicons.MaterialIcons
+import com.composables.icons.materialicons.rounded.Qr_code_scanner
+import com.paradox543.malankaraorthodoxliturgica.core.ui.Res
+import com.paradox543.malankaraorthodoxliturgica.core.ui.qr_scanner
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +33,7 @@ fun QrFabScan(
             Card {
                 Text(
                     "Scan QR Code",
-                    Modifier.Companion.padding(12.dp),
+                    Modifier.padding(12.dp),
                     style = MaterialTheme.typography.labelLarge,
                 )
             }
@@ -44,7 +47,7 @@ fun QrFabScan(
             contentColor = MaterialTheme.colorScheme.onPrimary,
         ) {
             Icon(
-                painterResource(R.drawable.qr_scanner),
+                painterResource(Res.drawable.qr_scanner),
                 contentDescription = "Scan QR",
             )
         }

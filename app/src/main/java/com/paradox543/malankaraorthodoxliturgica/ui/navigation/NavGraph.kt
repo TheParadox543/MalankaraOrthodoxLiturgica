@@ -281,7 +281,7 @@ fun NavGraph(
                 }
 
                 is ScaffoldUiState.Standard -> {
-                    if (state.showBottomBar) {
+                    if (state.showFab) {
                         QrFabScan(
                             onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
                         )

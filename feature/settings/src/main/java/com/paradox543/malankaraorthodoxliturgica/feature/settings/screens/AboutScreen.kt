@@ -36,7 +36,11 @@ fun AboutScreen(
 ) {
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("About", showBottomBar = false)) }
+    LaunchedEffect(Unit) {
+        onScaffoldStateChanged(
+            ScaffoldUiState.Standard("About", showBottomBar = false, showFab = false),
+        )
+    }
 
     Column(
         modifier =

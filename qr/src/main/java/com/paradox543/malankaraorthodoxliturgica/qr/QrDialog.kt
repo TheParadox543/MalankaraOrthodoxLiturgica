@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.core.ui.components
+package com.paradox543.malankaraorthodoxliturgica.qr
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image

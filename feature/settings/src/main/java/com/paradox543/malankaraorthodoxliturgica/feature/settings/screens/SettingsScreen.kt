@@ -103,7 +103,7 @@ fun SettingsScreen(
         }
     }
 
-    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Settings")) }
+    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Settings", showFab = false)) }
 
     Column(
         modifier =

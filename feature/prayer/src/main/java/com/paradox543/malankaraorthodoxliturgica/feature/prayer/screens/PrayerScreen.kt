@@ -47,7 +47,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Heading
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
-import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Song
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Source
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
@@ -61,6 +60,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.Alter
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.qr.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
 import kotlinx.coroutines.delay
 
