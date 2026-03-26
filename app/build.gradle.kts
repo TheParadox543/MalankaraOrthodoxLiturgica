@@ -85,6 +85,7 @@ dependencies {
     implementation(project(":core:ui-common"))
     implementation(project(":core:app-info"))
     implementation(project(":feature:settings"))
+    implementation(project(":feature:settings-kmp"))
     implementation(project(":feature:onboarding-kmp"))
     implementation(project(":feature:prayer"))
     implementation(project(":feature:bible"))
@@ -93,6 +94,7 @@ dependencies {
 
     implementation(project(":core:analytics"))
     implementation(project(":core:platform"))
+    implementation(project(":core:platform-kmp"))
     implementation(project(":analytics:firebase-android"))
 
     // Core AndroidX & Kotlin Extensions

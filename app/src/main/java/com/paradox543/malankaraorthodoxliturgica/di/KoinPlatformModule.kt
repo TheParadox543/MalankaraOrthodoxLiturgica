@@ -10,9 +10,11 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AndroidSoundModeCapability
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeCapability
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.info.AndroidAppInfoProvider
 import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
@@ -73,6 +75,12 @@ val platformKoinModule =
         single<SoundModeService> {
             SoundModeService(
                 context = androidContext(),
+            )
+        }
+
+        single<SoundModeCapability> {
+            AndroidSoundModeCapability(
+                manager = get(),
             )
         }
 

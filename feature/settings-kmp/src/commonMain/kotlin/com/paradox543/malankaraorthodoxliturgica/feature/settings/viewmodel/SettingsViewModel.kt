@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeCapability
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
@@ -25,7 +25,7 @@ import kotlinx.coroutines.runBlocking
 class SettingsViewModel(
     private val settingsRepository: SettingsRepository,
     private val analyticsService: AnalyticsService,
-    private val soundModeManager: SoundModeManager,
+    private val soundModeCapability: SoundModeCapability,
 ) : ViewModel() {
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
@@ -130,7 +130,7 @@ class SettingsViewModel(
     }
 
     fun refreshDndPermissionStatus() {
-        val granted = soundModeManager.checkDndPermission()
+        val granted = soundModeCapability.hasPermission
         setDndPermissionStatus(granted)
     }
 

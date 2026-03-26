@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":core:ui-common"))
     implementation(project(":core:analytics"))
     implementation(project(":core:platform"))
+    implementation(project(":feature:settings-kmp"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

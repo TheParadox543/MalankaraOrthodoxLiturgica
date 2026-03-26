@@ -10,7 +10,7 @@ val settingsModule =
             SettingsViewModel(
                 settingsRepository = get(),
                 analyticsService = get(),
-                soundModeManager = get(),
+                soundModeCapability = get(),
             )
         }
     }

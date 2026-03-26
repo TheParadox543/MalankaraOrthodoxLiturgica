@@ -8,7 +8,7 @@ plugins {
 
 kotlin {
     androidLibrary {
-        namespace = "com.paradox543.malankaraorthodoxliturgica.feature.onboarding"
+        namespace = "com.paradox543.malankaraorthodoxliturgica.feature.settings"
         compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
         minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
 
@@ -22,10 +22,7 @@ kotlin {
         }
     }
 
-    // A step-by-step guide on how to include this library in an XCode
-    // project can be found here:
-    // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "FeatureOnboardingKmpKit"
+    val xcfName = "FeatureSettingsKmpKit"
 
     iosX64 {
         binaries.framework {
@@ -49,13 +46,14 @@ kotlin {
     // Declaring a target automatically creates a source set with the same name. By default, the
     // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
     // common to share sources between related targets.
-    // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
         commonMain {
             dependencies {
                 // Project Imports
                 implementation(project(":core:domain"))
                 implementation(project(":core:analytics"))
+                implementation(project(":core:platform"))
+                implementation(project(":core:platform-kmp"))
                 implementation(project(":core:ui-common"))
                 implementation(project(":core:app-info"))
 
@@ -107,4 +105,10 @@ kotlin {
             }
         }
     }
+}
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.paradox543.malankaraorthodoxliturgica.feature.settings"
+    generateResClass = auto
 }

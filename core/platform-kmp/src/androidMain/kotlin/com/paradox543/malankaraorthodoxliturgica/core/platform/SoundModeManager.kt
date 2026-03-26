@@ -5,7 +5,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 /**
  * Abstraction over device sound/DND management.
  *
- * The concrete implementation ([SoundModeManager] + [SoundModeService] in :app) handles
+ * The concrete implementation ([SoundModeManager] in :app) handles
  * AudioManager, NotificationManager, and WorkManager scheduling.
  */
 interface SoundModeManager {
@@ -13,7 +13,7 @@ interface SoundModeManager {
     fun checkDndPermission(): Boolean
 
     /**
-     * Applies the user's preferred [SoundMode] to the device.
+     * Applies the user's preferred [com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode] to the device.
      * Should be called whenever the setting changes (e.g. from a LaunchedEffect in MainActivity).
      */
     fun apply(mode: SoundMode)
