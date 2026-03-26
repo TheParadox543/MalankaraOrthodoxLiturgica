@@ -1,9 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.settings.screens
 
-import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.Intent
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,22 +16,21 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.feature.settings.BuildConfig
-import com.paradox543.malankaraorthodoxliturgica.feature.settings.R
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.Res
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.link
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun AboutScreen(
     contentPadding: PaddingValues = PaddingValues(),
+    appVersion: String,
+    onDeveloperContact: () -> Unit,
+    onExternalLinkClick: (String) -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
-    val context = LocalContext.current
-
     LaunchedEffect(Unit) {
         onScaffoldStateChanged(
             ScaffoldUiState.Standard("About", showBottomBar = false, showFab = false),
@@ -58,7 +53,7 @@ fun AboutScreen(
             textAlign = TextAlign.Center,
         )
         Text(
-            text = "Version ${BuildConfig.VERSION_NAME}",
+            text = "Version $appVersion",
             style = MaterialTheme.typography.bodyMedium,
         )
 
@@ -96,23 +91,11 @@ fun AboutScreen(
         Text("Contact", style = MaterialTheme.typography.titleLarge)
         Text("Developer: Samuel Alex Koshy")
         TextButton(
-            onClick = {
-                val intent =
-                    Intent(Intent.ACTION_SENDTO).apply {
-                        data = "mailto:".toUri()
-                        putExtra(Intent.EXTRA_EMAIL, arrayOf("samuel.alex.koshy@gmail.com"))
-                        putExtra(Intent.EXTRA_SUBJECT, "Malankara Orthodox Liturgica App Feedback")
-                    }
-                try {
-                    context.startActivity(Intent.createChooser(intent, "Send Email"))
-                } catch (_: ActivityNotFoundException) {
-                    Toast.makeText(context, "No email apps installed", Toast.LENGTH_SHORT).show()
-                }
-            },
+            onClick = { onDeveloperContact() },
         ) {
             Text("Email: samuel.alex.koshy@gmail.com")
             Icon(
-                painter = painterResource(R.drawable.link),
+                painter = painterResource(Res.drawable.link),
                 contentDescription = "External Link Icon",
                 modifier = Modifier.size(20.dp),
             )
@@ -123,32 +106,24 @@ fun AboutScreen(
         // Links
         Text("More", style = MaterialTheme.typography.titleLarge)
         TextButton(
-            onClick = { openUrl(context, "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/terms-and-conditions.html") },
+            onClick = { onExternalLinkClick("https://theparadox543.github.io/MalankaraOrthodoxLiturgica/terms-and-conditions.html") },
         ) {
             Text("Terms of Service")
             Icon(
-                painter = painterResource(R.drawable.link),
+                painter = painterResource(Res.drawable.link),
                 contentDescription = "External Link Icon",
                 modifier = Modifier.size(20.dp),
             )
         }
         TextButton(
-            onClick = { openUrl(context, "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/privacy-policy.html") },
+            onClick = { onExternalLinkClick("https://theparadox543.github.io/MalankaraOrthodoxLiturgica/privacy-policy.html") },
         ) {
             Text("Privacy Policy")
             Icon(
-                painter = painterResource(R.drawable.link),
+                painter = painterResource(Res.drawable.link),
                 contentDescription = "External Link Icon",
                 modifier = Modifier.size(20.dp),
             )
         }
     }
-}
-
-private fun openUrl(
-    context: Context,
-    url: String,
-) {
-    val intent = Intent(Intent.ACTION_VIEW, url.toUri())
-    context.startActivity(intent)
 }

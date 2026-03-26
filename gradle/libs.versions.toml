@@ -20,6 +20,7 @@ firebaseAnalytics = "22.4.0"
 firebaseBom = "34.3.0"
 firebaseCrashalytics = "19.4.4"
 foundation = "1.10.3"
+iconsMaterialIconsRoundedCmp = "2.2.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 koin = "4.1.1"
@@ -86,6 +87,7 @@ compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-co
 compose-ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "composeMultiplatform" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
 foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "foundation" }
+icons-material-icons-rounded-cmp = { module = "com.composables:icons-material-icons-rounded-cmp", version.ref = "iconsMaterialIconsRoundedCmp" }
 koin-androidx-workmanager = { module = "io.insert-koin:koin-androidx-workmanager", version.ref = "koin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }

@@ -9,6 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontSc
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -26,6 +27,7 @@ class SettingsViewModel(
     private val settingsRepository: SettingsRepository,
     private val analyticsService: AnalyticsService,
     private val soundModeCapability: SoundModeCapability,
+    private val appInfoProvider: AppInfoProvider,
 ) : ViewModel() {
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
@@ -72,6 +74,8 @@ class SettingsViewModel(
 
     private val _shareApp = MutableSharedFlow<Unit>()
     val shareApp = _shareApp.asSharedFlow()
+
+    val versionName = appInfoProvider.versionName
 
     private var debounceJob: Job? = null
 

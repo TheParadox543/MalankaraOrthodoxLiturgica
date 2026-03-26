@@ -11,6 +11,7 @@ val settingsModule =
                 settingsRepository = get(),
                 analyticsService = get(),
                 soundModeCapability = get(),
+                appInfoProvider = get(),
             )
         }
     }

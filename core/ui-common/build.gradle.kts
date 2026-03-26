@@ -70,7 +70,7 @@ kotlin {
                 implementation(libs.components.resources)
 
                 // Icons dependency
-                implementation("com.composables:icons-material-icons-rounded-cmp:2.2.1")
+                implementation(libs.icons.material.icons.rounded.cmp)
 
                 // Dependency injection
                 implementation(libs.koin.core)

@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.settings.components
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
@@ -71,13 +70,11 @@ fun RestoreTimePicker(
             minuteIndex = maxOf((hourMark * 12) + (minuteIndex % 12), 0)
         }
         minState.scrollToItem(minuteIndex)
-        Log.d("RestoreTimePicker", "Time indices for hour: $hourIndex $minuteIndex")
     }
     LaunchedEffect(minState.firstVisibleItemIndex) {
         minuteIndex = minState.firstVisibleItemIndex
         hourIndex = (minuteIndex + 1) / 12
         hourState.scrollToItem(hourIndex)
-        Log.d("RestoreTimePicker", "Time indices for minute: $hourIndex $minuteIndex")
     }
 
     AlertDialog(

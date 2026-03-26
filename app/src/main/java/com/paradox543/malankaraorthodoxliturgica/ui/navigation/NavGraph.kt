@@ -1,5 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.navigation
 
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.shrinkOut
@@ -18,7 +22,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.zIndex
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -80,6 +86,7 @@ fun NavGraph(
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
     val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
+    val context: Context = LocalContext.current
 
     // Tracks which bars/FAB each screen requests
     var scaffoldUiState by remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
@@ -594,8 +601,25 @@ fun NavGraph(
             ) {
                 AboutScreen(
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                    settingsViewModel.versionName,
+                    {
+                        val intent =
+                            Intent(Intent.ACTION_SENDTO).apply {
+                                data = "mailto:".toUri()
+                                putExtra(Intent.EXTRA_EMAIL, arrayOf("samuel.alex.koshy@gmail.com"))
+                                putExtra(Intent.EXTRA_SUBJECT, "Malankara Orthodox Liturgica App Feedback")
+                            }
+                        try {
+                            context.startActivity(Intent.createChooser(intent, "Send Email"))
+                        } catch (_: ActivityNotFoundException) {
+                            Toast.makeText(context, "No email apps installed", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    {
+                        val intent = Intent(Intent.ACTION_VIEW, it.toUri())
+                        context.startActivity(intent)
+                    },
+                ) { scaffoldUiState = it }
             }
         }
     }

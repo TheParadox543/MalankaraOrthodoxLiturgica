@@ -11,6 +11,7 @@ kotlin {
         namespace = "com.paradox543.malankaraorthodoxliturgica.feature.settings"
         compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
         minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
+        androidResources.enable = true
 
         withHostTestBuilder {
         }
@@ -52,7 +53,7 @@ kotlin {
                 // Project Imports
                 implementation(project(":core:domain"))
                 implementation(project(":core:analytics"))
-                implementation(project(":core:platform"))
+//                implementation(project(":core:platform"))
                 implementation(project(":core:platform-kmp"))
                 implementation(project(":core:ui-common"))
                 implementation(project(":core:app-info"))
