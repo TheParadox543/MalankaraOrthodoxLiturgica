@@ -85,7 +85,6 @@ dependencies {
     implementation(project(":core:ui-common"))
     implementation(project(":core:app-info"))
     implementation(project(":feature:settings"))
-    implementation(project(":feature:onboarding"))
     implementation(project(":feature:onboarding-kmp"))
     implementation(project(":feature:prayer"))
     implementation(project(":feature:bible"))

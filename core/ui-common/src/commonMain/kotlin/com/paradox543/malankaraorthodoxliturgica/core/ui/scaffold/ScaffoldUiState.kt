@@ -14,7 +14,7 @@ sealed class ScaffoldUiState {
     data class Standard(
         val title: String,
         val showBottomBar: Boolean = true,
-        val showFab: Boolean = false,
+        val showFab: Boolean = true,
     ) : ScaffoldUiState()
 
     /**
