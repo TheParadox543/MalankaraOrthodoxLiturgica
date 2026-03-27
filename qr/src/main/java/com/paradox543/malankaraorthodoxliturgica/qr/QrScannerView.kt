@@ -131,6 +131,7 @@ fun QrScannerView(
             ScaffoldUiState.Standard(
                 title = title,
                 showBottomBar = false,
+                showFab = false,
             ),
         )
     }

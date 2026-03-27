@@ -89,8 +89,8 @@ fun PrayerScreen(
 
     val listState =
         rememberSaveable(
-            saver = LazyListState.Saver,
-            key = currentFilename,
+            LazyListState.Saver,
+            currentFilename,
         ) {
             LazyListState()
         }
