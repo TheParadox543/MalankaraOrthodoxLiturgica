@@ -28,7 +28,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.generation.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.qr.generation.generateQrMatrix
-import com.paradox543.malankaraorthodoxliturgica.qr.generation.qrMatrixToBitmap
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.qrMatrixToImageBitmap
 
 @Composable
 fun BibleChapterScreen(
@@ -112,9 +112,8 @@ fun BibleChapterScreen(
     } else {
         if (showQrDialog) {
             val matrix = generateQrMatrix(routeProvider)
-            val bitmap = qrMatrixToBitmap(matrix)
-            val qrBitmap = bitmap.asImageBitmap()
-            QrDialog(qrBitmap) { showQrDialog = false }
+            val imageBitmap = qrMatrixToImageBitmap(matrix)
+            QrDialog(imageBitmap) { showQrDialog = false }
         }
         LazyColumn(
             state = listState,

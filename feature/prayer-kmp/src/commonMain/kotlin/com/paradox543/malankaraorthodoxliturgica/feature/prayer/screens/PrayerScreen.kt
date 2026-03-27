@@ -1,35 +1,14 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens
 
-import android.content.res.Configuration
-import android.util.Log
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MenuAnchorType
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -39,12 +18,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Heading
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
@@ -58,12 +33,16 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.rememberScroll
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.AlternativePrayersUI
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.CollapsibleTextBlock
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.DynamicSongUI
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.DynamicSongsBlockUI
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.ErrorBlock
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.PrayerButton
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.generation.QrDialog
 import com.paradox543.malankaraorthodoxliturgica.qr.generation.generateQrMatrix
-import com.paradox543.malankaraorthodoxliturgica.qr.generation.qrMatrixToBitmap
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.qrMatrixToImageBitmap
 import kotlinx.coroutines.delay
 
 @Composable
@@ -89,8 +68,6 @@ fun PrayerScreen(
     }
     var showQrDialog by remember { mutableStateOf(false) }
 
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
 
     val currentFilename = node.filename ?: "NoFileNameFound"
@@ -171,9 +148,7 @@ fun PrayerScreen(
         var retryCount = 0
         if (scrollIndex > 0) {
             while (listState.firstVisibleItemIndex != scrollIndex && retryCount < 10) {
-                Log.d("QR in Prayer AppScreen", "Detected scroll from Qr: $scrollIndex")
                 listState.scrollToItem(scrollIndex)
-                Log.d("QR in Prayer AppScreen", "Scrolled to item: ${listState.firstVisibleItemIndex}")
                 retryCount++
                 delay(100)
             }
@@ -185,32 +160,38 @@ fun PrayerScreen(
             generateQrMatrix(
                 onQrDialogShow(node.route, listState.firstVisibleItemIndex),
             )
-        val bitmap = qrMatrixToBitmap(matrix)
-        val imageBitmap = bitmap.asImageBitmap()
+        val imageBitmap = qrMatrixToImageBitmap(matrix)
         QrDialog(imageBitmap) { showQrDialog = false }
     }
 
-    LazyColumn(
-        modifier =
-            Modifier
-                .padding(horizontal = if (isLandscape) 40.dp else 20.dp)
-                .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
-        state = listState,
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-        item {
-            Spacer(Modifier.padding(top = initialTopPadding.value))
-        }
-        items(prayers) { prayerElement ->
-            PrayerElementRenderer(
-                prayerElement,
-                renderContext,
-                currentFilename,
-                onPrayerButtonClick,
-            )
-        }
-        item {
-            Spacer(Modifier.padding(bottom = initialBottomPadding.value))
+    BoxWithConstraints {
+        val availableWidth = maxWidth
+        LazyColumn(
+            modifier =
+                Modifier
+                    .padding(horizontal = if (availableWidth > 600.dp) 40.dp else 20.dp)
+                    .pointerInput(Unit) {
+                        detectTapGestures {
+                            isVisible.value = !isVisible.value
+                        }
+                    },
+            state = listState,
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            item {
+                Spacer(Modifier.padding(top = initialTopPadding.value))
+            }
+            items(prayers) { prayerElement ->
+                PrayerElementRenderer(
+                    prayerElement,
+                    renderContext,
+                    currentFilename,
+                    onPrayerButtonClick,
+                )
+            }
+            item {
+                Spacer(Modifier.padding(bottom = initialBottomPadding.value))
+            }
         }
     }
 }
@@ -338,202 +319,6 @@ fun PrayerElementRenderer(
                 context.onError,
                 filename,
             )
-        }
-    }
-}
-
-@Composable
-fun PrayerButton(
-    prayerButton: PrayerElement.Button,
-    onPrayerButtonClick: (String, Boolean) -> Unit,
-    translations: Map<String, String>,
-    modifier: Modifier = Modifier,
-) {
-    val displayText: String =
-        prayerButton
-            .label
-            ?: prayerButton
-                .link
-                .split("_")
-                .mapNotNull { word -> translations[word] }
-                .joinToString(" ")
-                .ifEmpty { "Error" }
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-    ) {
-        Button(
-            onClick = {
-                onPrayerButtonClick(prayerButton.link, prayerButton.replace)
-            },
-        ) {
-            Text(
-                text = displayText,
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = modifier.padding(vertical = 8.dp),
-            )
-            Icon(
-                Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = "Go to $displayText",
-            )
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DynamicSongsBlockUI(
-    dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
-    context: PrayerRenderContext,
-    filename: String,
-    onPrayerButtonClick: (String, Boolean) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val dynamicSongKey = context.dynamicSongKey
-
-    val dynamicSong =
-        dynamicSongsBlock.items.find { it.eventKey == dynamicSongKey }
-            ?: dynamicSongsBlock.items.firstOrNull()
-    // For dropdown menu
-    val songs = dynamicSongsBlock.items
-    var expanded by remember { mutableStateOf(false) }
-
-    val titles =
-        songs.map { song ->
-            song.eventTitle
-        }
-    val selectedTitle = dynamicSong?.eventTitle ?: "Error"
-    Card(modifier) {
-        Column(Modifier.padding(4.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row(
-                Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                ExposedDropdownMenuBox(
-                    expanded = expanded,
-                    onExpandedChange = { expanded = !expanded },
-                ) {
-                    TextField(
-                        value = selectedTitle,
-                        onValueChange = {},
-                        readOnly = true,
-                        trailingIcon = {
-                            if (titles.size > 1) {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                            }
-                        },
-                        modifier =
-                            Modifier
-                                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
-                                .fillMaxWidth(),
-                    )
-
-                    ExposedDropdownMenu(
-                        expanded = expanded,
-                        onDismissRequest = { expanded = false },
-                    ) {
-                        songs.forEach { song ->
-                            DropdownMenuItem(
-                                text = { Text(song.eventTitle) },
-                                onClick = {
-                                    context.onDynamicSongKeyChanged(song.eventKey)
-                                    expanded = false
-                                },
-                            )
-                        }
-                    }
-                }
-            }
-
-            if (dynamicSong != null) {
-                DynamicSongUI(
-                    dynamicSong,
-                    context,
-                    filename,
-                    onPrayerButtonClick,
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun DynamicSongUI(
-    dynamicSong: PrayerElement.DynamicSong,
-    context: PrayerRenderContext,
-    filename: String,
-    onPrayerButtonClick: (String, Boolean) -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier.padding(vertical = 12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        dynamicSong.items.forEach { item ->
-            when (item) {
-                is PrayerElement.Song,
-                is PrayerElement.Subheading,
-                is PrayerElement.CollapsibleBlock,
-                is PrayerElement.AlternativePrayersBlock,
-                is PrayerElement.AlternativeOption,
-                -> {
-                    PrayerElementRenderer(
-                        item,
-                        context,
-                        filename,
-                        onPrayerButtonClick,
-                    )
-                }
-
-                else -> {}
-            }
-        }
-    }
-}
-
-@Composable
-fun CollapsibleTextBlock(
-    prayerElement: PrayerElement.CollapsibleBlock,
-    context: PrayerRenderContext,
-    filename: String,
-    onPrayerButtonClick: (String, Boolean) -> Unit,
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-        ) {
-            Heading(
-                text = prayerElement.title,
-                modifier = Modifier.weight(1f),
-            )
-            Icon(
-                imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                contentDescription = if (expanded) "Collapse" else "Expand",
-            )
-        }
-
-        AnimatedVisibility(visible = expanded) {
-            Column {
-                Column {
-                    Spacer(Modifier.padding(8.dp))
-                    prayerElement.items.forEach { nestedItem ->
-                        // Loop through type-safe items
-                        // Recursively call the renderer for nested items
-                        PrayerElementRenderer(
-                            nestedItem,
-                            context,
-                            filename,
-                            onPrayerButtonClick,
-                        )
-                        Spacer(Modifier.padding(4.dp))
-                    }
-                }
-            }
         }
     }
 }

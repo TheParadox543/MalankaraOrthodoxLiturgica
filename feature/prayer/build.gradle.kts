@@ -66,6 +66,9 @@ dependencies {
     implementation(libs.androidx.material.icons.core)
     implementation(libs.androidx.material.icons.extended)
 
+    // Icons dependency
+    implementation(libs.icons.material.icons.rounded.cmp)
+
     implementation(libs.androidx.appcompat)
     testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.junit)
