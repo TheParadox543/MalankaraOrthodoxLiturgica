@@ -53,7 +53,6 @@ kotlin {
                 // Project Imports
                 implementation(project(":core:domain"))
                 implementation(project(":core:analytics"))
-//                implementation(project(":core:platform"))
                 implementation(project(":core:platform-kmp"))
                 implementation(project(":core:ui-common"))
                 implementation(project(":core:app-info"))
@@ -70,6 +69,8 @@ kotlin {
                 implementation(libs.compose.material3.adaptive)
                 implementation(libs.compose.material3.adaptive.layout)
                 implementation(libs.compose.material3.adaptive.navigation)
+                // Icons dependency
+                implementation(libs.icons.material.icons.rounded.cmp)
 
                 implementation(libs.ui)
                 // TODO this needs to be added, otherwise BackHandler build fails unresolved
@@ -84,6 +85,8 @@ kotlin {
 
         commonTest {
             dependencies {
+                implementation(project(":core:platform-kmp"))
+                implementation(project(":core:app-info"))
                 implementation(libs.kotlin.test)
             }
         }

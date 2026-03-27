@@ -1,26 +1,16 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.settings.screens
 
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.assertIsOn
-import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
-import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 class SettingsScreenTest {
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -45,7 +35,18 @@ class SettingsScreenTest {
         every { repository.soundMode } returns soundModeFlow
         every { repository.soundRestoreDelay } returns soundDelayFlow
 
-        viewModel = SettingsViewModel(repository, mockk(relaxed = true), mockk(relaxed = true))
+        viewModel =
+            SettingsViewModel(
+                settingsRepository = repository,
+                analyticsService = mockk(relaxed = true),
+                soundModeCapability = mockk(relaxed = true),
+                appInfoProvider =
+                    mockk(
+                        versionName = "1.0.0",
+                        versionCode = "1",
+                        debugMode = false,
+                    ),
+            )
     }
 
     @Test
@@ -56,8 +57,9 @@ class SettingsScreenTest {
         composeTestRule.setContent {
             SettingsScreen(
                 onNavigateToAbout = {},
+                requestDndPermission = {},
                 settingsViewModel = viewModel,
-                shareService = shareService
+                shareService = shareService,
             )
         }
 
@@ -71,14 +73,15 @@ class SettingsScreenTest {
         composeTestRule.setContent {
             SettingsScreen(
                 onNavigateToAbout = {},
+                requestDndPermission = {},
                 settingsViewModel = viewModel,
-                shareService = shareService
+                shareService = shareService,
             )
         }
 
         // Verify initial state is ON based on flow
         composeTestRule.onNodeWithText("Text Layout for Songs").assertIsDisplayed()
-        
+
         // Find the switch and toggle it
         // Note: In a real test, you might use a testTag for the switch
         composeTestRule.onNodeWithText("Text Layout for Songs").performClick()
@@ -86,19 +89,20 @@ class SettingsScreenTest {
         // Verify that the repository was called to update state
         verify { viewModel.setSongScrollState(any()) }
     }
-    
+
     @Test
     fun shareApp_showsBottomSheet() {
         composeTestRule.setContent {
             SettingsScreen(
                 onNavigateToAbout = {},
+                requestDndPermission = {},
                 settingsViewModel = viewModel,
-                shareService = shareService
+                shareService = shareService,
             )
         }
 
         composeTestRule.onNodeWithText("Share this App").performClick()
-        
+
         // Verify BottomSheet content appears
         composeTestRule.onNodeWithText("Share link").assertIsDisplayed()
         composeTestRule.onNodeWithText("Generate QR code").assertIsDisplayed()

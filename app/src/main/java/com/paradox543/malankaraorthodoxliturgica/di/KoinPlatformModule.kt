@@ -36,6 +36,7 @@ val platformKoinModule =
             AndroidAppInfoProvider(
                 versionName = BuildConfig.VERSION_NAME,
                 versionCode = BuildConfig.VERSION_CODE.toString(),
+                debugMode = BuildConfig.DEBUG,
             )
         }
         single<AppUpdateManager> { AppUpdateManagerFactory.create(androidContext()) }

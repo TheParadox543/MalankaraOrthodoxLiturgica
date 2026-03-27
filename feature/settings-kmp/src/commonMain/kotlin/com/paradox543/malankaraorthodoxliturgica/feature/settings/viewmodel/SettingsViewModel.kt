@@ -76,6 +76,7 @@ class SettingsViewModel(
     val shareApp = _shareApp.asSharedFlow()
 
     val versionName = appInfoProvider.versionName
+    val debugMode = appInfoProvider.debugMode
 
     private var debounceJob: Job? = null
 

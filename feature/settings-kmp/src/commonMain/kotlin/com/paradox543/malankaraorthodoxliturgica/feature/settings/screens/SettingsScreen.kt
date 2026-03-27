@@ -1,11 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.settings.screens
 
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Intent
-import android.provider.Settings
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,9 +19,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -53,27 +44,33 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.composables.icons.materialicons.MaterialIcons
+import com.composables.icons.materialicons.rounded.Info
+import com.composables.icons.materialicons.rounded.Share
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
-import com.paradox543.malankaraorthodoxliturgica.feature.settings.BuildConfig
-import com.paradox543.malankaraorthodoxliturgica.feature.settings.R
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.Res
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.app_share_qr
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.components.RestoreTimePicker
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.play_logo
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.share_icon
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
+import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     onNavigateToAbout: () -> Unit,
+    requestDndPermission: () -> Unit,
     settingsViewModel: SettingsViewModel,
     shareService: ShareService,
     contentPadding: PaddingValues = PaddingValues(),
@@ -85,12 +82,11 @@ fun SettingsScreen(
     val soundRestoreDelay by settingsViewModel.soundRestoreDelay.collectAsState()
     val songScrollState by settingsViewModel.songScrollState.collectAsState()
     val hasPermission by settingsViewModel.hasDndPermission.collectAsState()
-    val context = LocalContext.current
     val scrollState = rememberScrollState()
     val bottomSheetState = rememberModalBottomSheetState()
-    var showQrCodeDialog by remember { mutableStateOf(false) }
+    val showQrCodeDialog = rememberSaveable { mutableStateOf(false) }
     var showRestoreDialog by remember { mutableStateOf(false) }
-    var showShareAppBottomSheet by remember { mutableStateOf(false) }
+    val showShareAppBottomSheet = rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         settingsViewModel.shareApp.collect {
@@ -188,8 +184,7 @@ fun SettingsScreen(
                         color = MaterialTheme.colorScheme.error,
                     )
                     Button(
-//                            onClick = { settingsViewModel.refreshDndPermissionStatus() },
-                        onClick = { requestDndPermission(context) },
+                        onClick = { requestDndPermission() },
                         modifier = Modifier.padding(top = 4.dp),
                     ) {
                         Text("Grant Permission")
@@ -225,7 +220,6 @@ fun SettingsScreen(
                         RestoreTimePicker(
                             onDismiss = { showRestoreDialog = false },
                             onConfirm = { minute ->
-                                Log.d("SettingsScreen", "Restore time after $minute")
                                 settingsViewModel.setSoundRestoreDelay(minute)
                                 showRestoreDialog = false
                             },
@@ -260,7 +254,7 @@ fun SettingsScreen(
             modifier = Modifier.clickable { onNavigateToAbout() },
             leadingContent = {
                 Icon(
-                    Icons.Filled.Info,
+                    MaterialIcons.Rounded.Info,
                     contentDescription = "About App Icon",
                     tint = MaterialTheme.colorScheme.tertiary,
                 )
@@ -286,10 +280,10 @@ fun SettingsScreen(
                     style = MaterialTheme.typography.titleSmall,
                 )
             },
-            modifier = Modifier.clickable { showShareAppBottomSheet = true },
+            modifier = Modifier.clickable { showShareAppBottomSheet.value = true },
             leadingContent = {
                 Icon(
-                    imageVector = Icons.Default.Share,
+                    imageVector = MaterialIcons.Rounded.Share,
                     contentDescription = "Share App",
                     tint = MaterialTheme.colorScheme.onTertiaryContainer,
                 )
@@ -301,7 +295,7 @@ fun SettingsScreen(
                 ),
         )
 
-        if (BuildConfig.DEBUG) {
+        if (settingsViewModel.debugMode) {
             ElevatedButton(
                 onClick = { settingsViewModel.setOnboardingCompleted(false) },
                 modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -311,13 +305,13 @@ fun SettingsScreen(
         }
     }
 
-    if (showQrCodeDialog) {
-        QrCodeShareDialog(onDismissRequest = { showQrCodeDialog = false })
+    if (showQrCodeDialog.value) {
+        QrCodeShareDialog(onDismissRequest = { showQrCodeDialog.value = false })
     }
 
-    if (showShareAppBottomSheet) {
+    if (showShareAppBottomSheet.value) {
         ModalBottomSheet(
-            onDismissRequest = {},
+            onDismissRequest = { showShareAppBottomSheet.value = false },
             sheetState = bottomSheetState,
         ) {
             Row(
@@ -332,7 +326,7 @@ fun SettingsScreen(
                         .padding(8.dp)
                         .clickable(
                             onClick = {
-                                showShareAppBottomSheet = false
+                                showShareAppBottomSheet.value = false
                                 settingsViewModel.onShareAppClicked()
                             },
                         ),
@@ -348,7 +342,7 @@ fun SettingsScreen(
                             textAlign = TextAlign.Center,
                         )
                         Image(
-                            painterResource(R.drawable.share_icon),
+                            painterResource(Res.drawable.share_icon),
                             "Share icon",
                             Modifier.size(60.dp),
                         )
@@ -360,8 +354,8 @@ fun SettingsScreen(
                         .height(200.dp)
                         .padding(8.dp)
                         .clickable {
-                            showShareAppBottomSheet = false
-                            showQrCodeDialog = true
+                            showShareAppBottomSheet.value = false
+                            showQrCodeDialog.value = true
                         },
                 ) {
                     Column(
@@ -373,7 +367,7 @@ fun SettingsScreen(
                             "Generate QR code",
                         )
                         Image(
-                            painterResource(R.drawable.play_logo),
+                            painterResource(Res.drawable.play_logo),
                             "Play store logo",
                         )
                     }
@@ -526,7 +520,7 @@ fun QrCodeShareDialog(onDismissRequest: () -> Unit) {
             ) {
                 // Load the pre-generated QR code image directly from drawables
                 Image(
-                    painter = painterResource(id = R.drawable.app_share_qr), // Your QR image filename
+                    painter = painterResource(Res.drawable.app_share_qr),
                     contentDescription = "QR Code for App Store Link",
                     modifier =
                         Modifier
@@ -548,18 +542,4 @@ fun QrCodeShareDialog(onDismissRequest: () -> Unit) {
             }
         },
     )
-}
-
-fun requestDndPermission(context: Context) {
-    val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    if (!notificationManager.isNotificationPolicyAccessGranted) {
-        Toast
-            .makeText(
-                context,
-                "Please grant the app access to modify DND in settings.",
-                Toast.LENGTH_LONG,
-            ).show()
-        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-        context.startActivity(intent)
-    }
 }

@@ -1,8 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.navigation
 
+import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.provider.Settings
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -588,11 +590,23 @@ fun NavGraph(
             ) {
                 SettingsScreen(
                     onNavigateToAbout = { navController.navigate(AppScreen.About.route) },
+                    requestDndPermission = {
+                        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                        if (!notificationManager.isNotificationPolicyAccessGranted) {
+                            Toast
+                                .makeText(
+                                    context,
+                                    "Please grant the app access to modify DND in settings.",
+                                    Toast.LENGTH_LONG,
+                                ).show()
+                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                            context.startActivity(intent)
+                        }
+                    },
                     settingsViewModel = settingsViewModel,
                     shareService = shareService,
                     contentPadding = innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                ) { scaffoldUiState = it }
             }
 
             composable(
