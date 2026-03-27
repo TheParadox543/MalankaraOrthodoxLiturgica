@@ -605,6 +605,7 @@ fun NavGraph(
                     },
                     settingsViewModel = settingsViewModel,
                     shareService = shareService,
+                    showSoundModeSetting = settingsViewModel.showSoundModeSetting,
                     contentPadding = innerPadding,
                 ) { scaffoldUiState = it }
             }

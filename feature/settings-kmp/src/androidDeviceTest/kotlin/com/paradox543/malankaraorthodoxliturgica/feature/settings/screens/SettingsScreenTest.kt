@@ -1,13 +1,11 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.settings.screens
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeCapability
-import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
@@ -74,8 +72,7 @@ class SettingsScreenTest {
                 requestDndPermission = {},
                 settingsViewModel = viewModel,
                 shareService = shareService,
-                contentPadding = PaddingValues(),
-                onScaffoldStateChanged = {},
+                showSoundModeSetting = viewModel.showSoundModeSetting,
             )
         }
 
@@ -90,15 +87,14 @@ class SettingsScreenTest {
                 requestDndPermission = {},
                 settingsViewModel = viewModel,
                 shareService = shareService,
-                contentPadding = PaddingValues(),
-                onScaffoldStateChanged = {},
+                showSoundModeSetting = viewModel.showSoundModeSetting,
             )
         }
 
         // Verify initial state is displayed
         composeTestRule.onNodeWithText("Text Layout for Songs").assertIsDisplayed()
 
-        // Find the switch and toggle it. 
+        // Find the switch and toggle it.
         // In the implementation, the Switch itself is what handles the click.
         // We'll click the text and hope it propagates or find the switch specifically if needed.
         composeTestRule.onNodeWithText("Text Layout for Songs").performClick()
@@ -116,8 +112,7 @@ class SettingsScreenTest {
                 requestDndPermission = {},
                 settingsViewModel = viewModel,
                 shareService = shareService,
-                contentPadding = PaddingValues(),
-                onScaffoldStateChanged = {},
+                showSoundModeSetting = viewModel.showSoundModeSetting,
             )
         }
 

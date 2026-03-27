@@ -77,6 +77,7 @@ class SettingsViewModel(
 
     val versionName = appInfoProvider.versionName
     val debugMode = appInfoProvider.debugMode
+    val showSoundModeSetting = soundModeCapability.isAvailable
 
     private var debounceJob: Job? = null
 

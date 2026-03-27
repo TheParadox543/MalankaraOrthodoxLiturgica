@@ -73,6 +73,7 @@ fun SettingsScreen(
     requestDndPermission: () -> Unit,
     settingsViewModel: SettingsViewModel,
     shareService: ShareService,
+    showSoundModeSetting: Boolean,
     contentPadding: PaddingValues = PaddingValues(),
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
@@ -153,78 +154,79 @@ fun SettingsScreen(
         }
 
         // Sound Mode Selection
-        Column(Modifier.padding(12.dp)) {
-            Row(
-                Modifier
-//                        .padding(12.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "Select Sound Mode",
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.weight(1f),
-                )
-                SoundModeDropdownMenu(
-                    selectedSoundMode = soundMode,
-                    onOptionSelected = { selectedSoundMode ->
-                        settingsViewModel.setSoundMode(selectedSoundMode)
-                    },
-                    hasPermission = hasPermission,
-                )
-            }
-            if (!hasPermission) {
-                Spacer(Modifier.height(8.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = "This feature requires DND permission.",
-                        Modifier.weight(1f),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.error,
-                    )
-                    Button(
-                        onClick = { requestDndPermission() },
-                        modifier = Modifier.padding(top = 4.dp),
-                    ) {
-                        Text("Grant Permission")
-                    }
-                }
-            } else if (soundMode != SoundMode.OFF) {
-                Spacer(Modifier.height(8.dp))
+        if (showSoundModeSetting) {
+            Column(Modifier.padding(12.dp)) {
                 Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
+                    Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    val displayText =
-                        if (soundRestoreDelay >= 60) {
-                            "${soundRestoreDelay / 60} hr ${soundRestoreDelay % 60} min"
-                        } else {
-                            "$soundRestoreDelay min"
-                        }
                     Text(
-                        "Normal restored after:",
-                        Modifier.padding(horizontal = 4.dp),
-                        style = MaterialTheme.typography.bodySmall,
+                        text = "Select Sound Mode",
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.weight(1f),
                     )
-                    Card(
-                        Modifier
-                            .requiredWidthIn(min = 120.dp)
-                            .fillMaxHeight()
-                            .clickable(onClick = { showRestoreDialog = true }),
-                    ) {
-                        Text(displayText, Modifier.padding(4.dp))
-                    }
-                    if (showRestoreDialog) {
-                        RestoreTimePicker(
-                            onDismiss = { showRestoreDialog = false },
-                            onConfirm = { minute ->
-                                settingsViewModel.setSoundRestoreDelay(minute)
-                                showRestoreDialog = false
-                            },
-                            delayTime = soundRestoreDelay,
+                    SoundModeDropdownMenu(
+                        selectedSoundMode = soundMode,
+                        onOptionSelected = { selectedSoundMode ->
+                            settingsViewModel.setSoundMode(selectedSoundMode)
+                        },
+                        hasPermission = hasPermission,
+                    )
+                }
+                if (!hasPermission) {
+                    Spacer(Modifier.height(8.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "This feature requires DND permission.",
+                            Modifier.weight(1f),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.error,
                         )
+                        Button(
+                            onClick = { requestDndPermission() },
+                            modifier = Modifier.padding(top = 4.dp),
+                        ) {
+                            Text("Grant Permission")
+                        }
+                    }
+                } else if (soundMode != SoundMode.OFF) {
+                    Spacer(Modifier.height(8.dp))
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        val displayText =
+                            if (soundRestoreDelay >= 60) {
+                                "${soundRestoreDelay / 60} hr ${soundRestoreDelay % 60} min"
+                            } else {
+                                "$soundRestoreDelay min"
+                            }
+                        Text(
+                            "Normal restored after:",
+                            Modifier.padding(horizontal = 4.dp),
+                            style = MaterialTheme.typography.bodySmall,
+                        )
+                        Card(
+                            Modifier
+                                .requiredWidthIn(min = 120.dp)
+                                .fillMaxHeight()
+                                .clickable(onClick = { showRestoreDialog = true }),
+                        ) {
+                            Text(displayText, Modifier.padding(4.dp))
+                        }
+                        if (showRestoreDialog) {
+                            RestoreTimePicker(
+                                onDismiss = { showRestoreDialog = false },
+                                onConfirm = { minute ->
+                                    settingsViewModel.setSoundRestoreDelay(minute)
+                                    showRestoreDialog = false
+                                },
+                                delayTime = soundRestoreDelay,
+                            )
+                        }
                     }
                 }
             }

@@ -85,7 +85,6 @@ compose-material3-adaptive = { module = "org.jetbrains.compose.material3.adaptiv
 compose-material3-adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout" , version.ref="cmp-m3-adaptive"}
 compose-material3-adaptive-navigation = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation" , version.ref="cmp-m3-adaptive"}
 compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-compose-ui-backhandler = { module = "org.jetbrains.compose.ui:ui-backhandler", version.ref = "composeMultiplatform" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
 foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "foundation" }
 icons-material-icons-rounded-cmp = { module = "com.composables:icons-material-icons-rounded-cmp", version.ref = "iconsMaterialIconsRoundedCmp" }

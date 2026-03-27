@@ -86,8 +86,6 @@ kotlin {
                 implementation(libs.icons.material.icons.rounded.cmp)
 
                 implementation(libs.ui)
-                // TODO this needs to be added, otherwise BackHandler build fails unresolved
-                implementation(libs.compose.ui.backhandler)
                 implementation(libs.ui.tooling.preview)
                 implementation(libs.components.resources)
                 implementation(libs.compose.navigation)
