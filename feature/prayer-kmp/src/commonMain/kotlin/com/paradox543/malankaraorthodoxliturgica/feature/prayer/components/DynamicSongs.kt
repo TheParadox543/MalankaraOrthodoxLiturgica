@@ -32,7 +32,7 @@ fun DynamicSongsBlockUI(
     context: PrayerRenderContext,
     filename: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    modifier: Modifier = Modifier.Companion,
+    modifier: Modifier = Modifier,
 ) {
     val dynamicSongKey = context.dynamicSongKey
 
@@ -50,12 +50,12 @@ fun DynamicSongsBlockUI(
     val selectedTitle = dynamicSong?.eventTitle ?: "Error"
     Card(modifier) {
         Column(
-            Modifier.Companion.padding(4.dp),
+            Modifier.padding(4.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Row(
-                Modifier.Companion.fillMaxWidth(),
-                verticalAlignment = Alignment.Companion.CenterVertically,
+                Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 ExposedDropdownMenuBox(
                     expanded = expanded,
@@ -71,7 +71,7 @@ fun DynamicSongsBlockUI(
                             }
                         },
                         modifier =
-                            Modifier.Companion
+                            Modifier
                                 .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
                                 .fillMaxWidth(),
                     )

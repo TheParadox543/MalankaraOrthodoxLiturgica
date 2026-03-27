@@ -38,7 +38,7 @@ class PrayerNavViewModel(
                 prayerRepository.getPrayerNavigationTree(lang)
             }.stateIn(
                 viewModelScope,
-                SharingStarted.Companion.WhileSubscribed(5000),
+                SharingStarted.WhileSubscribed(5000),
                 initialTree,
             )
 

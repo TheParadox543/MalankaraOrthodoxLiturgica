@@ -21,7 +21,7 @@ fun PrayerButton(
     prayerButton: PrayerElement.Button,
     onPrayerButtonClick: (String, Boolean) -> Unit,
     translations: Map<String, String>,
-    modifier: Modifier = Modifier.Companion,
+    modifier: Modifier = Modifier,
 ) {
     val displayText: String =
         prayerButton

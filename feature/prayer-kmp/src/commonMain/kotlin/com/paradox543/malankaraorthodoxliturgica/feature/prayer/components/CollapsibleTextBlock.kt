@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,6 +22,7 @@ import com.composables.icons.materialicons.rounded.Keyboard_arrow_up
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Heading
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerElementRenderer
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerRenderContext
 
 @Composable
 fun CollapsibleTextBlock(
@@ -30,17 +33,17 @@ fun CollapsibleTextBlock(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Column(modifier = Modifier.Companion.fillMaxWidth()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Row(
-            verticalAlignment = Alignment.Companion.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically,
             modifier =
-                Modifier.Companion
+                Modifier
                     .fillMaxWidth()
                     .clickable { expanded = !expanded },
         ) {
             Heading(
                 text = prayerElement.title,
-                modifier = Modifier.Companion.weight(1f),
+                modifier = Modifier.weight(1f),
             )
             Icon(
                 imageVector = if (expanded) MaterialIcons.Rounded.Keyboard_arrow_up else MaterialIcons.Rounded.Keyboard_arrow_down,
@@ -51,7 +54,7 @@ fun CollapsibleTextBlock(
         AnimatedVisibility(visible = expanded) {
             Column {
                 Column {
-                    Spacer(Modifier.Companion.padding(8.dp))
+                    Spacer(Modifier.padding(8.dp))
                     prayerElement.items.forEach { nestedItem ->
                         // Loop through type-safe items
                         // Recursively call the renderer for nested items
@@ -61,7 +64,7 @@ fun CollapsibleTextBlock(
                             filename,
                             onPrayerButtonClick,
                         )
-                        Spacer(Modifier.Companion.padding(4.dp))
+                        Spacer(Modifier.padding(4.dp))
                     }
                 }
             }
