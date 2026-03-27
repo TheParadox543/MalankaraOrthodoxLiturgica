@@ -1,16 +1,39 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel
 
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeCapability
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.verify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import org.junit.Before
+import kotlin.test.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SettingsViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var repository: SettingsRepository
     private lateinit var analyticsService: AnalyticsService
-    private lateinit var soundModeManager: SoundModeManager
+    private lateinit var soundModeCapability: SoundModeCapability
+    private lateinit var appInfoProvider: AppInfoProvider
     private lateinit var viewModel: SettingsViewModel
 
     private val languageFlow = MutableStateFlow(AppLanguage.ENGLISH)
@@ -32,9 +55,20 @@ class SettingsViewModelTest {
         every { repository.soundRestoreDelay } returns soundDelayFlow
 
         analyticsService = mockk(relaxed = true)
-        soundModeManager = mockk(relaxed = true)
+        soundModeCapability = mockk(relaxed = true)
 
-        viewModel = SettingsViewModel(repository, analyticsService, soundModeManager)
+        appInfoProvider = mockk(relaxed = true)
+        every { appInfoProvider.versionName } returns "1.0.0"
+        every { appInfoProvider.versionCode } returns "1"
+        every { appInfoProvider.debugMode } returns false
+
+        viewModel =
+            SettingsViewModel(
+                repository,
+                analyticsService,
+                soundModeCapability,
+                appInfoProvider,
+            )
     }
 
     @After
@@ -51,7 +85,7 @@ class SettingsViewModelTest {
             testDispatcher.scheduler.advanceUntilIdle()
 
             coVerify { repository.setLanguage(language) }
-            verify { analyticsService.logLanguageSelected(language.name) }
+            verify { analyticsService.logEvent(AnalyticsEvent.LanguageSelected(language.name)) }
         }
 
     @Test
@@ -90,13 +124,13 @@ class SettingsViewModelTest {
     @Test
     fun `refreshDndPermissionStatus updates hasDndPermission state`() =
         runTest {
-            every { soundModeManager.checkDndPermission() } returns true
+            every { soundModeCapability.hasPermission } returns true
 
             viewModel.refreshDndPermissionStatus()
 
             assertTrue(viewModel.hasDndPermission.value)
 
-            every { soundModeManager.checkDndPermission() } returns false
+            every { soundModeCapability.hasPermission } returns false
             viewModel.refreshDndPermissionStatus()
 
             assertFalse(viewModel.hasDndPermission.value)
