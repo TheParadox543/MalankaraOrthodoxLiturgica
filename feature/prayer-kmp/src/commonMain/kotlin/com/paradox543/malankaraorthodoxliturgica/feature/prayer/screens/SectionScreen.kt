@@ -1,11 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens
 
-import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -28,22 +26,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.R
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.Res
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.greatlent
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import kotlinx.coroutines.flow.collectLatest
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun SectionScreen(
     prayerViewModel: PrayerViewModel,
     node: PageNode,
-    inAppReviewManager: InAppReviewManager,
     contentPadding: PaddingValues,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
     onSectionNavigate: (String) -> Unit = {},
@@ -52,8 +48,6 @@ fun SectionScreen(
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val nodes = node.children
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
     var title = ""
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
@@ -61,20 +55,19 @@ fun SectionScreen(
 
     LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
-    val activity = LocalContext.current as? Activity
-
-    LaunchedEffect(activity) {
-        // Notify ViewModel that screen opened
+    LaunchedEffect(Unit) {
         prayerViewModel.onSectionScreenOpened()
+    }
 
-        // Collect review request events
-        prayerViewModel.requestReview.collect {
-            activity?.let { inAppReviewManager.checkForReview() }
+    LaunchedEffect(Unit) {
+        prayerViewModel.requestReview.collectLatest {
+            prayerViewModel.checkForReview()
         }
     }
 
-    Box {
-        if (screenWidth > 600.dp) {
+    BoxWithConstraints {
+        val width = maxWidth
+        if (width > 600.dp) {
             Row(
                 Modifier.padding(contentPadding),
             ) {
@@ -91,6 +84,7 @@ fun SectionScreen(
                         SectionCard(
                             nodes[index],
                             translations,
+                            prayerViewModel::reportBrokenNavigation,
                             onSectionNavigate,
                             onPrayerNavigate,
                             onSongNavigate,
@@ -118,6 +112,7 @@ fun SectionScreen(
                         SectionCard(
                             nodes[index],
                             translations,
+                            prayerViewModel::reportBrokenNavigation,
                             onSectionNavigate,
                             onPrayerNavigate,
                             onSongNavigate,
@@ -132,7 +127,7 @@ fun SectionScreen(
 @Composable
 private fun DisplayIconography(orientation: String) {
     Image(
-        painter = painterResource(R.drawable.greatlent),
+        painter = painterResource(Res.drawable.greatlent),
         contentDescription = "icon",
         modifier =
             if (orientation == "row") {
@@ -152,6 +147,7 @@ private fun DisplayIconography(orientation: String) {
 private fun SectionCard(
     node: PageNode,
     translations: Map<String, String>,
+    logError: (String) -> Unit,
     onSectionNavigate: (String) -> Unit,
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
@@ -164,14 +160,13 @@ private fun SectionCard(
                 .clickable {
                     val filename = node.filename
                     if (node.children.isNotEmpty()) {
-                        Log.d("SectionCard", "Navigating to section: ${node.route}")
                         onSectionNavigate(node.route)
                     } else if (filename != null && filename.endsWith(".json")) {
                         onPrayerNavigate(node.route)
                     } else if (node.type == "song" || (filename != null && filename.endsWith(".mp3"))) {
                         onSongNavigate(node.route)
                     } else {
-                        Log.w("SectionCard", "Invalid operation: Node has no children and no filename.")
+                        logError(node.route)
                     }
                 },
         colors =

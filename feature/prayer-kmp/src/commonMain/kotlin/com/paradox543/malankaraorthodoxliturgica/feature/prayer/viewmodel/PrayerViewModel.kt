@@ -34,14 +34,14 @@ class PrayerViewModel(
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.Companion.WhileSubscribed(5000),
+            started = SharingStarted.WhileSubscribed(5000),
             initialValue = runBlocking { settingsRepository.language.first() },
         )
 
     val songScrollState: StateFlow<Boolean> =
         settingsRepository.songScrollState.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.Companion.WhileSubscribed(5000),
+            started = SharingStarted.WhileSubscribed(5000),
             initialValue = false,
         )
 
@@ -116,10 +116,23 @@ class PrayerViewModel(
         analyticsService.logEvent(AnalyticsEvent.Error(errorMessage, errorLocation))
     }
 
+    fun reportBrokenNavigation(route: String) {
+        analyticsService.logEvent(
+            AnalyticsEvent.Error(
+                "Unknown route: $route",
+                route,
+            ),
+        )
+    }
+
     fun onPrayerScreenOpened() {
         viewModelScope.launch {
             inAppReviewManager.incrementAndGetPrayerScreenVisits()
         }
+    }
+
+    suspend fun checkForReview() {
+        inAppReviewManager.checkForReview()
     }
 
     fun onSectionScreenOpened() {

@@ -13,7 +13,6 @@ import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
@@ -37,8 +36,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class MainActivity : ComponentActivity() {
     private val inAppUpdateManager: InAppUpdateManager by inject()
-
-    private val inAppReviewManager: InAppReviewManager by inject()
 
     private val analyticsService: AnalyticsService by inject()
 
@@ -64,7 +61,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        registerActivityLifecycleCallbacks(
+        application.registerActivityLifecycleCallbacks(
             object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityResumed(activity: Activity) {
                     ActivityHolder.activity = activity
@@ -116,7 +113,6 @@ class MainActivity : ComponentActivity() {
                         NavGraph(
                             onboardingCompleted = s.onboardingCompleted,
                             inAppUpdateManager = inAppUpdateManager,
-                            inAppReviewManager = inAppReviewManager,
                             analyticsService = analyticsService,
                             shareService = shareService,
                             settingsViewModel = settingsViewModel,

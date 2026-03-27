@@ -59,7 +59,11 @@ kotlin {
                 // Compose Multiplatform dependencies
                 implementation(libs.runtime)
                 implementation(libs.foundation)
-                implementation(libs.ui)
+
+                implementation(libs.material3)
+                implementation(libs.compose.material3.adaptive)
+                implementation(libs.compose.material3.adaptive.layout)
+                implementation(libs.compose.material3.adaptive.navigation)
 
                 implementation(libs.ui)
                 implementation(libs.ui.tooling.preview)
@@ -94,4 +98,10 @@ kotlin {
             }
         }
     }
+}
+
+compose.resources {
+    publicResClass = true
+    packageOfResClass = "com.paradox543.malankaraorthodoxliturgica.feature.prayer"
+    generateResClass = auto
 }

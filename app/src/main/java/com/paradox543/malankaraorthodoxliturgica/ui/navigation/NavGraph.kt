@@ -38,7 +38,6 @@ import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.MainActivity
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
@@ -80,7 +79,6 @@ import org.koin.compose.viewmodel.koinViewModel
 fun NavGraph(
     onboardingCompleted: Boolean,
     inAppUpdateManager: InAppUpdateManager,
-    inAppReviewManager: InAppReviewManager,
     analyticsService: AnalyticsService,
     shareService: ShareService,
     settingsViewModel: SettingsViewModel,
@@ -319,7 +317,6 @@ fun NavGraph(
                 HomeScreen(
                     prayerViewModel,
                     prayerNavViewModel,
-                    inAppReviewManager,
                     innerPadding,
                     onSectionNavigate = { route ->
                         navController.navigate(AppScreen.Section.createRoute(route))
@@ -361,7 +358,6 @@ fun NavGraph(
                     SectionScreen(
                         prayerViewModel,
                         node,
-                        inAppReviewManager,
                         innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState = it },
                         onSectionNavigate = { route ->
