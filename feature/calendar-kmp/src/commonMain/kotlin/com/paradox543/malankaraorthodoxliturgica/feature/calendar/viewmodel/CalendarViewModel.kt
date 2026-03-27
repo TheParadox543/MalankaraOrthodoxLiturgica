@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
@@ -24,14 +23,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
 import kotlinx.datetime.plus
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 class CalendarViewModel(
     private val calendarRepository: CalendarRepository,
@@ -48,7 +50,7 @@ class CalendarViewModel(
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
-                initialValue = runBlocking { settingsRepository.language.first() },
+                initialValue = AppLanguage.ENGLISH,
             )
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
@@ -63,22 +65,13 @@ class CalendarViewModel(
     val upcomingWeekEvents: StateFlow<List<CalendarDay>> = _upcomingWeekEvents.asStateFlow()
 
     // State for the currently viewed month/year in the calendar UI
+    @OptIn(ExperimentalTime::class)
     private val _currentCalendarViewDate =
         MutableStateFlow(
-            LocalDate(
-                year =
-                    java.time.LocalDate
-                        .now()
-                        .year,
-                month =
-                    java.time.LocalDate
-                        .now()
-                        .monthValue,
-                day =
-                    java.time.LocalDate
-                        .now()
-                        .dayOfMonth,
-            ),
+            Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date,
         )
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
 
@@ -112,13 +105,13 @@ class CalendarViewModel(
             _error.value = null
             try {
                 loadMonth(
-                    _currentCalendarViewDate.value.monthNumber,
+                    _currentCalendarViewDate.value.month.number,
                     _currentCalendarViewDate.value.year,
                 )
                 loadUpcomingWeekEvents()
             } catch (e: Exception) {
                 _error.value = "Failed to load calendar data: ${e.message}"
-                System.err.println("Error initializing calendar data: ${e.stackTraceToString()}")
+//                System.err.println("Error initializing calendar data: ${e.stackTraceToString()}")
             } finally {
                 _isLoading.value = false
             }
@@ -146,21 +139,20 @@ class CalendarViewModel(
         _error.value = null
         viewModelScope.launch {
             try {
-                Log.d("CalendarViewModel", "Loading month data for $month/$year")
                 _monthCalendarData.value = calendarRepository.loadMonthData(month, year)
                 _currentCalendarViewDate.value = LocalDate(year, month, 1) // Update viewed month
-                val previousMonth = _currentCalendarViewDate.value.plus(DatePeriod(months = -1))
+                val previousMonth = _currentCalendarViewDate.value.plus(-1, DateTimeUnit.MONTH)
                 _hasPreviousMonth.value =
                     calendarRepository.checkMonthDataExists(
-                        previousMonth.monthNumber,
+                        previousMonth.month.number,
                         previousMonth.year,
                     )
-                val nextMonth = _currentCalendarViewDate.value.plus(DatePeriod(months = 1))
+                val nextMonth = _currentCalendarViewDate.value.plus(1, DateTimeUnit.MONTH)
                 _hasNextMonth.value =
-                    calendarRepository.checkMonthDataExists(nextMonth.monthNumber, nextMonth.year)
+                    calendarRepository.checkMonthDataExists(nextMonth.month.number, nextMonth.year)
             } catch (e: Exception) {
                 _error.value = "Failed to load month data for $month/$year: ${e.message}"
-                System.err.println("Error loading month data: ${e.stackTraceToString()}")
+                println("Error loading month data: ${e.stackTraceToString()}")
             } finally {
                 _isLoading.value = false
             }
@@ -172,7 +164,7 @@ class CalendarViewModel(
             _upcomingWeekEvents.value = calendarRepository.getUpcomingWeekEvents()
         } catch (e: Exception) {
             _error.value = "Failed to load upcoming week events: ${e.message}"
-            System.err.println("Error loading upcoming week events: ${e.stackTraceToString()}")
+            println("Error loading upcoming week events: ${e.stackTraceToString()}")
         }
     }
 
@@ -190,15 +182,15 @@ class CalendarViewModel(
     }
 
     fun goToNextMonth() {
-        val nextMonthDate = _currentCalendarViewDate.value.plus(DatePeriod(months = 1))
+        val nextMonthDate = _currentCalendarViewDate.value.plus(1, DateTimeUnit.MONTH)
         clearDayEvents()
-        loadMonth(nextMonthDate.monthNumber, nextMonthDate.year)
+        loadMonth(nextMonthDate.month.number, nextMonthDate.year)
     }
 
     fun goToPreviousMonth() {
-        val prevMonthDate = _currentCalendarViewDate.value.plus(DatePeriod(months = -1))
+        val prevMonthDate = _currentCalendarViewDate.value.plus(-1, DateTimeUnit.MONTH)
         clearDayEvents()
-        loadMonth(prevMonthDate.monthNumber, prevMonthDate.year)
+        loadMonth(prevMonthDate.month.number, prevMonthDate.year)
     }
 
     fun getFormattedDateTitle(

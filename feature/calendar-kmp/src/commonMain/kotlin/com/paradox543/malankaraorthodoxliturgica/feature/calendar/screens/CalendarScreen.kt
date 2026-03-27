@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -18,10 +19,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -42,22 +39,27 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import com.composables.icons.materialicons.MaterialIcons
+import com.composables.icons.materialicons.rounded.Arrow_back
+import com.composables.icons.materialicons.rounded.Arrow_forward
+import com.composables.icons.materialicons.rounded.Keyboard_arrow_right
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
+import kotlinx.datetime.TimeZone
 import kotlinx.datetime.number
-import java.time.DayOfWeek
-import java.time.Month
-import java.time.format.TextStyle
-import java.util.Locale
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -122,60 +124,62 @@ fun CalendarScreen(
             }
         } else {
             // Calendar content
-            val configuration = LocalConfiguration.current
-            val screenWidth = configuration.screenWidthDp.dp
-            if (screenWidth <= 600.dp) {
-                Column(
-                    modifier = Modifier.padding(8.dp),
-                ) {
-                    CalendarMainView(
-                        calendarViewModel,
-                        currentCalendarViewDate,
-                        hasPrevMonth,
-                        hasNextMonth,
-                        monthCalendarData,
-                        selectedDate,
-                    )
-                }
-                if (displayEvents.isNotEmpty()) {
-                    val scrollState = rememberScrollState()
-                    HorizontalDivider(
-                        thickness = 8.dp,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
-                    DisplayEvents(
-                        scrollState,
-                        displayEvents,
-                        selectedLanguage,
-                        calendarViewModel,
-                        onBibleNavigate,
-                        onPrayerNavigate,
-                    )
-                }
-            } else {
-                Row(Modifier.padding(8.dp)) {
-                    CalendarMainView(
-                        calendarViewModel,
-                        currentCalendarViewDate,
-                        hasPrevMonth,
-                        hasNextMonth,
-                        monthCalendarData,
-                        selectedDate,
-                    )
-                    if (displayEvents.isNotEmpty()) {
-                        val scrollState = rememberScrollState()
-                        VerticalDivider(
-                            thickness = 8.dp,
-                            color = MaterialTheme.colorScheme.primary,
-                        )
-                        DisplayEvents(
-                            scrollState,
-                            displayEvents,
-                            selectedLanguage,
+            BoxWithConstraints {
+                val screenWidth = maxWidth
+                if (screenWidth <= 600.dp) {
+                    Column(
+                        modifier = Modifier.padding(8.dp),
+                    ) {
+                        CalendarMainView(
                             calendarViewModel,
-                            onBibleNavigate,
-                            onPrayerNavigate,
+                            currentCalendarViewDate,
+                            hasPrevMonth,
+                            hasNextMonth,
+                            monthCalendarData,
+                            selectedDate,
                         )
+
+                        if (displayEvents.isNotEmpty()) {
+                            val scrollState = rememberScrollState()
+                            HorizontalDivider(
+                                thickness = 8.dp,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            DisplayEvents(
+                                scrollState,
+                                displayEvents,
+                                selectedLanguage,
+                                calendarViewModel,
+                                onBibleNavigate,
+                                onPrayerNavigate,
+                            )
+                        }
+                    }
+                } else {
+                    Row(Modifier.padding(8.dp)) {
+                        CalendarMainView(
+                            calendarViewModel,
+                            currentCalendarViewDate,
+                            hasPrevMonth,
+                            hasNextMonth,
+                            monthCalendarData,
+                            selectedDate,
+                        )
+                        if (displayEvents.isNotEmpty()) {
+                            val scrollState = rememberScrollState()
+                            VerticalDivider(
+                                thickness = 8.dp,
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            DisplayEvents(
+                                scrollState,
+                                displayEvents,
+                                selectedLanguage,
+                                calendarViewModel,
+                                onBibleNavigate,
+                                onPrayerNavigate,
+                            )
+                        }
                     }
                 }
             }
@@ -184,7 +188,7 @@ fun CalendarScreen(
 }
 
 @Composable
-private fun CalendarMainView(
+fun CalendarMainView(
     calendarViewModel: CalendarViewModel,
     currentCalendarViewDate: LocalDate,
     hasPrevMonth: Boolean,
@@ -233,17 +237,12 @@ private fun MonthNavigation(
             enabled = hasPrevMonth,
         ) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                imageVector = MaterialIcons.Rounded.Arrow_back,
                 contentDescription = "Previous Month",
             )
         }
         Text(
-            text = "${
-                Month.of(currentCalendarViewDate.month.number).getDisplayName(
-                    TextStyle.FULL,
-                    Locale.getDefault(),
-                )
-            } ${currentCalendarViewDate.year}",
+            text = "${currentCalendarViewDate.month.fullName()} ${currentCalendarViewDate.year}",
             modifier = Modifier.weight(0.7f), // Give more weight to the month/year text
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge,
@@ -254,7 +253,7 @@ private fun MonthNavigation(
             enabled = hasNextMonth,
         ) {
             Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                imageVector = MaterialIcons.Rounded.Arrow_forward,
                 contentDescription = "Next Month", // Corrected content description
             )
         }
@@ -282,7 +281,7 @@ private fun DayOfWeekHeaders() {
             )
         daysOfWeek.forEach { dayOfWeek ->
             Text(
-                text = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+                text = dayOfWeek.shortName(),
                 modifier = Modifier.weight(1f),
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.labelSmall,
@@ -313,16 +312,21 @@ private fun CalendarGrid(
     }
 }
 
+@OptIn(ExperimentalTime::class)
 @Composable
-private fun RowScope.DayItem(
+fun RowScope.DayItem(
     currentCalendarViewDate: LocalDate,
     day: CalendarDay,
     calendarViewModel: CalendarViewModel,
     selectedDate: LocalDate?,
 ) {
     val isCurrentMonth = day.date.month.number == currentCalendarViewDate.month.number
-    val todayJvm = java.time.LocalDate.now()
-    val isToday = day.date == LocalDate(todayJvm.year, todayJvm.monthValue, todayJvm.dayOfMonth)
+    val today =
+        Clock.System
+            .now()
+            .toLocalDateTime(TimeZone.currentSystemDefault())
+            .date
+    val isToday = day.date == today
     val hasEvents = day.events.isNotEmpty()
     val isSelected = day.date == selectedDate
 
@@ -404,7 +408,7 @@ private fun RowScope.DayItem(
 }
 
 @Composable
-private fun DisplayEvents(
+fun DisplayEvents(
     scrollState: ScrollState,
     displayEvents: List<LiturgicalEventDetails>,
     selectedLanguage: AppLanguage,
@@ -481,7 +485,7 @@ fun DisplayEvent(
                                     textDecoration = TextDecoration.Underline,
                                 )
                                 Icon(
-                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    MaterialIcons.Rounded.Keyboard_arrow_right,
                                     contentDescription = "Go to Bible Reading",
                                 )
                             }
@@ -512,7 +516,7 @@ fun DisplayEvent(
                                     textDecoration = TextDecoration.Underline,
                                 )
                                 Icon(
-                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    MaterialIcons.Rounded.Keyboard_arrow_right,
                                     contentDescription = "Go to Bible Reading",
                                 )
                             }
@@ -543,7 +547,7 @@ fun DisplayEvent(
                                     textDecoration = TextDecoration.Underline,
                                 )
                                 Icon(
-                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    MaterialIcons.Rounded.Keyboard_arrow_right,
                                     contentDescription = "Go to Bible Reading",
                                 )
                             }
@@ -571,7 +575,7 @@ fun DisplayEvent(
                                         textDecoration = TextDecoration.Underline,
                                     )
                                     Icon(
-                                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                        MaterialIcons.Rounded.Keyboard_arrow_right,
                                         contentDescription = "Go to Bible Reading",
                                     )
                                 }
@@ -600,7 +604,7 @@ fun DisplayEvent(
                                         textDecoration = TextDecoration.Underline,
                                     )
                                     Icon(
-                                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                        MaterialIcons.Rounded.Keyboard_arrow_right,
                                         contentDescription = "Go to Bible Reading",
                                     )
                                 }
@@ -622,7 +626,7 @@ fun DisplayEvent(
                                         textDecoration = TextDecoration.Underline,
                                     )
                                     Icon(
-                                        Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                        MaterialIcons.Rounded.Keyboard_arrow_right,
                                         contentDescription = "Go to Bible Reading",
                                     )
                                 }
@@ -647,7 +651,7 @@ fun DisplayEvent(
                                     textDecoration = TextDecoration.Underline,
                                 )
                                 Icon(
-                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    MaterialIcons.Rounded.Keyboard_arrow_right,
                                     contentDescription = "Go to Bible Reading",
                                 )
                             }
@@ -666,7 +670,7 @@ fun DisplayEvent(
                                     textDecoration = TextDecoration.Underline,
                                 )
                                 Icon(
-                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    MaterialIcons.Rounded.Keyboard_arrow_right,
                                     contentDescription = "Go to Bible Reading",
                                 )
                             }
@@ -677,3 +681,30 @@ fun DisplayEvent(
         }
     }
 }
+
+private fun Month.fullName(): String =
+    when (this) {
+        Month.JANUARY -> "January"
+        Month.FEBRUARY -> "February"
+        Month.MARCH -> "March"
+        Month.APRIL -> "April"
+        Month.MAY -> "May"
+        Month.JUNE -> "June"
+        Month.JULY -> "July"
+        Month.AUGUST -> "August"
+        Month.SEPTEMBER -> "September"
+        Month.OCTOBER -> "October"
+        Month.NOVEMBER -> "November"
+        Month.DECEMBER -> "December"
+    }
+
+fun DayOfWeek.shortName(): String =
+    when (this) {
+        DayOfWeek.SUNDAY -> "Sun"
+        DayOfWeek.MONDAY -> "Mon"
+        DayOfWeek.TUESDAY -> "Tue"
+        DayOfWeek.WEDNESDAY -> "Wed"
+        DayOfWeek.THURSDAY -> "Thu"
+        DayOfWeek.FRIDAY -> "Fri"
+        DayOfWeek.SATURDAY -> "Sat"
+    }

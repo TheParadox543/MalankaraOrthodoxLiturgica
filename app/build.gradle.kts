@@ -88,7 +88,7 @@ dependencies {
     implementation(project(":feature:onboarding-kmp"))
     implementation(project(":feature:prayer-kmp"))
     implementation(project(":feature:bible-kmp"))
-    implementation(project(":feature:calendar"))
+    implementation(project(":feature:calendar-kmp"))
     implementation(project(":feature:song"))
 
     implementation(project(":core:analytics"))
