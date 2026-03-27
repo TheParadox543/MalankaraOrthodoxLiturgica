@@ -1,5 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica
 
+import android.app.Activity
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -61,6 +63,36 @@ class MainActivity : ComponentActivity() {
                 if (state is StartupState.Ready) keepSplashOn = false
             }
         }
+
+        registerActivityLifecycleCallbacks(
+            object : Application.ActivityLifecycleCallbacks {
+                override fun onActivityResumed(activity: Activity) {
+                    ActivityHolder.activity = activity
+                }
+
+                override fun onActivityPaused(activity: Activity) {
+                    if (ActivityHolder.activity == activity) {
+                        ActivityHolder.activity = null
+                    }
+                }
+
+                override fun onActivityCreated(
+                    a: Activity,
+                    b: Bundle?,
+                ) {}
+
+                override fun onActivityStarted(a: Activity) {}
+
+                override fun onActivityStopped(a: Activity) {}
+
+                override fun onActivitySaveInstanceState(
+                    a: Activity,
+                    b: Bundle,
+                ) {}
+
+                override fun onActivityDestroyed(a: Activity) {}
+            },
+        )
 
         setContent {
             val startupState by startupViewModel.startupState.collectAsState()

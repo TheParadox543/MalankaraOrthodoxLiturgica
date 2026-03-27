@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.map
 class InAppReviewManagerImpl(
     private val reviewManager: ReviewManager,
     private val dataStore: DataStore<Preferences>,
+    private val activityProvider: () -> Activity?,
 ) : InAppReviewManager {
     // Define a key for storing the prayer screen visit count in DataStore.
     private val prayerScreenVisitCountKey = intPreferencesKey("prayer_screen_visit_count")
@@ -20,15 +21,14 @@ class InAppReviewManagerImpl(
     /**
      * Increments the visit count for the PrayerScreen and triggers the review flow
      * if the count is a multiple of 10.
-     *
-     * @param activity The current activity, required to launch the review flow.
      */
-    override suspend fun checkForReview(activity: Activity) {
+    override suspend fun checkForReview() {
         // Increment the stored count and get the new value.
         val currentCount = incrementAndGetPrayerScreenVisits()
 
         // Only trigger the review flow on the 10th, 20th, 30th visit, etc.
         if (currentCount > 10) {
+            val activity = activityProvider() ?: return
             launchReviewFlow(activity)
             clearPrayerScreenVisitCount()
         }

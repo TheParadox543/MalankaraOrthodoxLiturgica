@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.di
 
+import android.app.Activity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
@@ -9,6 +10,7 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.paradox543.malankaraorthodoxliturgica.ActivityHolder
 import com.paradox543.malankaraorthodoxliturgica.BuildConfig
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AndroidSoundModeCapability
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
@@ -55,10 +57,15 @@ val platformKoinModule =
             )
         }
 
+        single<() -> Activity?> {
+            { ActivityHolder.activity }
+        }
+
         single<InAppReviewManager> {
             InAppReviewManagerImpl(
                 reviewManager = get(),
                 dataStore = get(),
+                activityProvider = get(),
             )
         }
 

@@ -69,7 +69,7 @@ fun SectionScreen(
 
         // Collect review request events
         prayerViewModel.requestReview.collect {
-            activity?.let { inAppReviewManager.checkForReview(it) }
+            activity?.let { inAppReviewManager.checkForReview() }
         }
     }
 

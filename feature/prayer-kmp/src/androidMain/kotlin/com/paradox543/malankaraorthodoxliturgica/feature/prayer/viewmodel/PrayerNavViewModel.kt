@@ -15,7 +15,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.runBlocking
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 class PrayerNavViewModel(
     settingsRepository: SettingsRepository,
@@ -35,7 +38,7 @@ class PrayerNavViewModel(
                 prayerRepository.getPrayerNavigationTree(lang)
             }.stateIn(
                 viewModelScope,
-                SharingStarted.WhileSubscribed(5000),
+                SharingStarted.Companion.WhileSubscribed(5000),
                 initialTree,
             )
 
@@ -46,20 +49,10 @@ class PrayerNavViewModel(
 
     fun getAdjacentRoutes(node: PageNode): Pair<String?, String?> = getAdjacentSiblingRoutesUseCase(rootNode.value, node)
 
+    @OptIn(ExperimentalTime::class)
     fun getAllPrayerNodes(): List<PageNode> =
-        // Avoid Kotlin 2.1-only Clock API; convert JVM local time to kotlinx-datetime.
         getPrayerNodesForCurrentTimeUseCase(
             rootNode.value,
-            java.time.LocalDateTime.now().let {
-                LocalDateTime(
-                    year = it.year,
-                    month = it.monthValue,
-                    day = it.dayOfMonth,
-                    hour = it.hour,
-                    minute = it.minute,
-                    second = it.second,
-                    nanosecond = it.nano,
-                )
-            },
+            Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()),
         )
 }

@@ -34,14 +34,14 @@ class PrayerViewModel(
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Companion.WhileSubscribed(5000),
             initialValue = runBlocking { settingsRepository.language.first() },
         )
 
     val songScrollState: StateFlow<Boolean> =
         settingsRepository.songScrollState.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Companion.WhileSubscribed(5000),
             initialValue = false,
         )
 
@@ -124,8 +124,6 @@ class PrayerViewModel(
 
     fun onSectionScreenOpened() {
         viewModelScope.launch {
-            // This is safe to call every time. The manager handles the logic.
-//            inAppReviewManager.checkForReview(activity)
             _requestReview.emit(Unit)
         }
     }

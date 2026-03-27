@@ -87,6 +87,7 @@ dependencies {
     implementation(project(":feature:settings-kmp"))
     implementation(project(":feature:onboarding-kmp"))
     implementation(project(":feature:prayer"))
+    implementation(project(":feature:prayer-kmp"))
     implementation(project(":feature:bible"))
     implementation(project(":feature:calendar"))
     implementation(project(":feature:song"))
@@ -142,6 +143,7 @@ dependencies {
 
     // Google Fonts
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.compose.ui)
 
     // Testing Dependencies
     testImplementation(libs.junit)                    // Standard JUnit 4 for local unit tests

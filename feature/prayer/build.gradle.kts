@@ -43,6 +43,8 @@ dependencies {
     implementation(project(":core:ui-common"))
     implementation(project(":core:analytics"))
     implementation(project(":core:platform"))
+    implementation(project(":core:platform-kmp"))
+    implementation(project(":feature:prayer-kmp"))
 
     implementation(project(":qr"))
 
