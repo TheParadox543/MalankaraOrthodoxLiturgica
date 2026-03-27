@@ -1,10 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -30,14 +29,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.R
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.Res
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.praynow
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun PrayNowScreen(
@@ -49,15 +48,14 @@ fun PrayNowScreen(
 ) {
     val translations by prayerViewModel.translations.collectAsState()
     val nodes = prayerNavViewModel.getAllPrayerNodes()
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp.dp
     val title = translations["prayNow"] ?: "Pray Now"
 
     LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
-    Box {
+    BoxWithConstraints {
+        val screenWidth = maxWidth
         Image(
-            painter = painterResource(R.drawable.praynow),
+            painter = painterResource(Res.drawable.praynow),
             "background Image",
             modifier =
                 Modifier
@@ -88,9 +86,10 @@ fun PrayNowScreen(
                                 }
                             PrayNowCard(
                                 node,
-                                onCardClick,
                                 translatedParts,
-                                prayerViewModel,
+                                onCardClick,
+                                prayerViewModel::onPrayerSelected,
+                                prayerViewModel::reportError,
                             )
                         }
                     }
@@ -126,9 +125,10 @@ fun PrayNowScreen(
                                 }
                             PrayNowCard(
                                 node,
-                                onCardClick,
                                 translatedParts,
-                                prayerViewModel,
+                                onCardClick,
+                                prayerViewModel::onPrayerSelected,
+                                prayerViewModel::reportError,
                             )
                         }
                     }
@@ -156,11 +156,12 @@ fun PrayNowScreen(
 }
 
 @Composable
-private fun PrayNowCard(
+fun PrayNowCard(
     node: PageNode,
-    onCardClick: (String) -> Unit,
     translatedParts: String,
-    prayerViewModel: PrayerViewModel,
+    onCardClick: (String) -> Unit,
+    onPrayerSelected: (String, String) -> Unit,
+    reportError: (String, String) -> Unit,
 ) {
     var errorState = remember { false }
     Card(
@@ -170,10 +171,10 @@ private fun PrayNowCard(
                 .padding(8.dp)
                 .clickable {
                     if (node.filename != null) {
-                        prayerViewModel.onPrayerSelected(translatedParts, node.route)
+                        onPrayerSelected(translatedParts, node.route)
                         onCardClick(node.route)
                     } else {
-                        Log.w("PrayNowScreen", "No file found")
+                        reportError("No file found", "PrayNowScreen")
                         errorState = true
                     }
                 },
