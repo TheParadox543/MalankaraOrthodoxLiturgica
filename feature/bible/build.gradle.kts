@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":core:platform"))
 
     implementation(project(":qr"))
+    implementation(project(":qr-generation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

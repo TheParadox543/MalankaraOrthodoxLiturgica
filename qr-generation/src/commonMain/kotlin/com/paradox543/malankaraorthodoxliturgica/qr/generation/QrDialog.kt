@@ -1,6 +1,5 @@
-package com.paradox543.malankaraorthodoxliturgica.qr
+package com.paradox543.malankaraorthodoxliturgica.qr.generation
 
-import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.AlertDialog
@@ -8,23 +7,23 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun QrDialog(
-    qrBitmap: Bitmap?,
+    imageBitmap: ImageBitmap?,
     onDismissRequest: () -> Unit,
 ) {
-    qrBitmap?.let {
+    imageBitmap?.let {
         AlertDialog(
             onDismissRequest = onDismissRequest,
             title = { Text("QR Code") },
             text = {
                 Image(
-                    bitmap = qrBitmap.asImageBitmap(),
+                    bitmap = imageBitmap,
                     contentDescription = null,
-                    modifier = Modifier.Companion.size(250.dp),
+                    modifier = Modifier.size(250.dp),
                 )
             },
             confirmButton = {

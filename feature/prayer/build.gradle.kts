@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":feature:prayer-kmp"))
 
     implementation(project(":qr"))
+    implementation(project(":qr-generation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)

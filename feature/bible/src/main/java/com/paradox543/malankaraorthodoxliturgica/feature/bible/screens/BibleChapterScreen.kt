@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
@@ -25,8 +26,9 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.rememberScroll
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapterRef
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
-import com.paradox543.malankaraorthodoxliturgica.qr.QrDialog
-import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.QrDialog
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.generateQrMatrix
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.qrMatrixToBitmap
 
 @Composable
 fun BibleChapterScreen(
@@ -109,7 +111,9 @@ fun BibleChapterScreen(
         )
     } else {
         if (showQrDialog) {
-            val qrBitmap = generateQrBitmap(routeProvider)
+            val matrix = generateQrMatrix(routeProvider)
+            val bitmap = qrMatrixToBitmap(matrix)
+            val qrBitmap = bitmap.asImageBitmap()
             QrDialog(qrBitmap) { showQrDialog = false }
         }
         LazyColumn(

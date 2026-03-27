@@ -41,6 +41,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
@@ -60,8 +61,9 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.Alter
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
-import com.paradox543.malankaraorthodoxliturgica.qr.QrDialog
-import com.paradox543.malankaraorthodoxliturgica.qr.generateQrBitmap
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.QrDialog
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.generateQrMatrix
+import com.paradox543.malankaraorthodoxliturgica.qr.generation.qrMatrixToBitmap
 import kotlinx.coroutines.delay
 
 @Composable
@@ -179,11 +181,13 @@ fun PrayerScreen(
     }
 
     if (showQrDialog) {
-        val qrBitmap =
-            generateQrBitmap(
+        val matrix =
+            generateQrMatrix(
                 onQrDialogShow(node.route, listState.firstVisibleItemIndex),
             )
-        QrDialog(qrBitmap) { showQrDialog = false }
+        val bitmap = qrMatrixToBitmap(matrix)
+        val imageBitmap = bitmap.asImageBitmap()
+        QrDialog(imageBitmap) { showQrDialog = false }
     }
 
     LazyColumn(
