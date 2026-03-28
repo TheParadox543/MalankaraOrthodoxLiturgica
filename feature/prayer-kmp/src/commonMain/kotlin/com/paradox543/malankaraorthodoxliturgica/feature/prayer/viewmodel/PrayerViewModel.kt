@@ -12,8 +12,10 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.loadTranslations
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,6 +27,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.TimeSource
 
@@ -37,7 +40,15 @@ class PrayerViewModel(
     private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
+    private data class PrayerLoadRequest(
+        val filename: String,
+        val language: AppLanguage,
+    )
+
     private val minimumPrayerLoadingIndicatorDuration = 250.milliseconds
+    private var prayerLoadJob: Job? = null
+    private var inFlightPrayerRequest: PrayerLoadRequest? = null
+    private var lastLoadedPrayerRequest: PrayerLoadRequest? = null
 
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
@@ -77,10 +88,8 @@ class PrayerViewModel(
             }
         }
         viewModelScope.launch {
-            prayers.collect {
-                if (_dynamicSongKey.value == null) {
-                    _dynamicSongKey.value = getSongKeyPriorityUseCase()
-                }
+            if (_dynamicSongKey.value == null) {
+                _dynamicSongKey.value = getSongKeyPriorityUseCase()
             }
         }
     }
@@ -94,23 +103,42 @@ class PrayerViewModel(
         filename: String,
         passedLanguage: AppLanguage? = null,
     ) {
-        viewModelScope.launch {
+        val language: AppLanguage = passedLanguage ?: selectedLanguage.value
+        val request = PrayerLoadRequest(filename = filename, language = language)
+
+        // Skip duplicate work when we are already loading or already loaded the same request.
+        if (request == inFlightPrayerRequest || (request == lastLoadedPrayerRequest && _prayers.value.isNotEmpty())) {
+            return
+        }
+
+        inFlightPrayerRequest = request
+        prayerLoadJob?.cancel()
+        prayerLoadJob = viewModelScope.launch {
             _isLoadingPrayers.value = true
             val loadStartedAt = TimeSource.Monotonic.markNow()
-            // Launch in ViewModelScope for async operation
             try {
-                // Access the current language from SettingsViewModel
-                val language: AppLanguage = passedLanguage ?: selectedLanguage.value
-                val prayers = getPrayerScreenContentUseCase(filename, language)
+                val prayers =
+                    withContext(backgroundDispatcher) {
+                        getPrayerScreenContentUseCase(filename, language)
+                    }
                 _prayers.value = prayers
+                lastLoadedPrayerRequest = request
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
                 _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
-            } finally {
-                val remainingIndicatorTime = minimumPrayerLoadingIndicatorDuration - loadStartedAt.elapsedNow()
-                if (remainingIndicatorTime.isPositive()) {
-                    delay(remainingIndicatorTime)
+                if (inFlightPrayerRequest == request) {
+                    lastLoadedPrayerRequest = null
                 }
-                _isLoadingPrayers.value = false
+            } finally {
+                if (inFlightPrayerRequest == request) {
+                    val remainingIndicatorTime = minimumPrayerLoadingIndicatorDuration - loadStartedAt.elapsedNow()
+                    if (remainingIndicatorTime.isPositive()) {
+                        delay(remainingIndicatorTime)
+                    }
+                    _isLoadingPrayers.value = false
+                    inFlightPrayerRequest = null
+                }
             }
         }
     }
