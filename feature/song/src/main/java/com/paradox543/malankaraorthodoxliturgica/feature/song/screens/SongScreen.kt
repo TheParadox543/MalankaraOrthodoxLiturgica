@@ -160,7 +160,15 @@ private fun SongPlayerUI(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
-            painter = painterResource(id = R.drawable.cheeranachan),
+            painter =
+                painterResource(
+                    id =
+                        if ("ekkara" in title) {
+                            R.drawable.cheeranachan
+                        } else {
+                            R.drawable.biblianofrontcover
+                        },
+                ),
             contentDescription = "Song Artwork",
             modifier =
                 Modifier
