@@ -19,6 +19,10 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerEleme
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -26,6 +30,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
@@ -37,14 +42,22 @@ import kotlin.time.ExperimentalTime
 
 class CalendarViewModel(
     private val calendarRepository: CalendarRepository,
-    private val settingsRepository: SettingsRepository,
+    settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,
     private val formatDateTitleUseCase: FormatDateTitleUseCase,
     private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
     private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
     private val formatBiblePrefaceUseCase: FormatBiblePrefaceUseCase,
     private val formatBibleReadingEntryUseCase: FormatBibleReadingEntryUseCase,
+    private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
+    private data class MonthLoadResult(
+        val monthData: List<CalendarWeek>,
+        val viewDate: LocalDate,
+        val hasPreviousMonth: Boolean,
+        val hasNextMonth: Boolean,
+    )
+
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
             .stateIn(
@@ -92,6 +105,17 @@ class CalendarViewModel(
     private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
     val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
 
+    private val _selectedBibleReading = MutableStateFlow<BibleReading?>(null)
+    val selectedBibleReading: StateFlow<BibleReading?> = _selectedBibleReading.asStateFlow()
+
+    private val _isBibleReadingLoading = MutableStateFlow(false)
+    val isBibleReadingLoading: StateFlow<Boolean> = _isBibleReadingLoading.asStateFlow()
+
+    private val _bibleReadingError = MutableStateFlow<String?>(null)
+    val bibleReadingError: StateFlow<String?> = _bibleReadingError.asStateFlow()
+
+    private var loadBibleReadingJob: Job? = null
+
     private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
@@ -104,11 +128,11 @@ class CalendarViewModel(
             _isLoading.value = true
             _error.value = null
             try {
-                loadMonth(
+                loadMonthInternal(
                     _currentCalendarViewDate.value.month.number,
                     _currentCalendarViewDate.value.year,
                 )
-                loadUpcomingWeekEvents()
+                loadUpcomingWeekEventsInternal()
             } catch (e: Exception) {
                 _error.value = "Failed to load calendar data: ${e.message}"
 //                System.err.println("Error initializing calendar data: ${e.stackTraceToString()}")
@@ -117,51 +141,86 @@ class CalendarViewModel(
             }
         }
         viewModelScope.launch {
-            selectedLanguage.collect { language ->
+            selectedLanguage.collectLatest { language ->
                 // When the language changes (from DataStore), load translations
                 loadTranslations(language)
             }
         }
     }
 
-    private fun loadTranslations(language: AppLanguage) {
-        viewModelScope.launch {
-            val loadedTranslations = translationsRepository.loadTranslations(language)
-            _translations.update { loadedTranslations }
-        }
+    private suspend fun loadTranslations(language: AppLanguage) {
+        val loadedTranslations =
+            withContext(backgroundDispatcher) {
+                translationsRepository.loadTranslations(language)
+            }
+        _translations.update { loadedTranslations }
     }
 
     fun loadMonth(
         month: Int,
         year: Int,
     ) {
+        viewModelScope.launch {
+            loadMonthInternal(month, year)
+        }
+    }
+
+    private suspend fun loadMonthInternal(
+        month: Int,
+        year: Int,
+    ) {
         _isLoading.value = true
         _error.value = null
-        viewModelScope.launch {
-            try {
-                _monthCalendarData.value = calendarRepository.loadMonthData(month, year)
-                _currentCalendarViewDate.value = LocalDate(year, month, 1) // Update viewed month
-                val previousMonth = _currentCalendarViewDate.value.plus(-1, DateTimeUnit.MONTH)
-                _hasPreviousMonth.value =
-                    calendarRepository.checkMonthDataExists(
-                        previousMonth.month.number,
-                        previousMonth.year,
+        try {
+            val result =
+                withContext(backgroundDispatcher) {
+                    val monthData = calendarRepository.loadMonthData(month, year)
+                    val viewDate = LocalDate(year, month, 1)
+                    val previousMonth = viewDate.plus(-1, DateTimeUnit.MONTH)
+                    val hasPreviousMonth =
+                        calendarRepository.checkMonthDataExists(
+                            previousMonth.month.number,
+                            previousMonth.year,
+                        )
+                    val nextMonth = viewDate.plus(1, DateTimeUnit.MONTH)
+                    val hasNextMonth =
+                        calendarRepository.checkMonthDataExists(
+                            nextMonth.month.number,
+                            nextMonth.year,
+                        )
+                    MonthLoadResult(
+                        monthData = monthData,
+                        viewDate = viewDate,
+                        hasPreviousMonth = hasPreviousMonth,
+                        hasNextMonth = hasNextMonth,
                     )
-                val nextMonth = _currentCalendarViewDate.value.plus(1, DateTimeUnit.MONTH)
-                _hasNextMonth.value =
-                    calendarRepository.checkMonthDataExists(nextMonth.month.number, nextMonth.year)
-            } catch (e: Exception) {
-                _error.value = "Failed to load month data for $month/$year: ${e.message}"
-                println("Error loading month data: ${e.stackTraceToString()}")
-            } finally {
-                _isLoading.value = false
-            }
+                }
+
+            _monthCalendarData.value = result.monthData
+            _currentCalendarViewDate.value = result.viewDate
+            _hasPreviousMonth.value = result.hasPreviousMonth
+            _hasNextMonth.value = result.hasNextMonth
+        } catch (e: Exception) {
+            _error.value = "Failed to load month data for $month/$year: ${e.message}"
+            println("Error loading month data: ${e.stackTraceToString()}")
+        } finally {
+            _isLoading.value = false
         }
     }
 
     fun loadUpcomingWeekEvents() {
+        viewModelScope.launch {
+            loadUpcomingWeekEventsInternal()
+        }
+    }
+
+    private suspend fun loadUpcomingWeekEventsInternal() {
         try {
-            _upcomingWeekEvents.value = calendarRepository.getUpcomingWeekEvents()
+            val events =
+                withContext(backgroundDispatcher) {
+                    calendarRepository.getUpcomingWeekEvents()
+                }
+            _upcomingWeekEvents.value = events
         } catch (e: Exception) {
             _error.value = "Failed to load upcoming week events: ${e.message}"
             println("Error loading upcoming week events: ${e.stackTraceToString()}")
@@ -209,6 +268,8 @@ class CalendarViewModel(
      */
     fun setSelectedBibleReference(reference: List<BibleReference>) {
         _selectedBibleReference.value = reference
+        _selectedBibleReading.value = null
+        _bibleReadingError.value = null
     }
 
     /**
@@ -228,7 +289,39 @@ class CalendarViewModel(
         language: AppLanguage,
     ): List<PrayerElement.Prose>? = formatBiblePrefaceUseCase(bibleReference, language)
 
-    fun loadBibleReading(
+    fun loadSelectedBibleReading(
+        bibleReferences: List<BibleReference>,
+        language: AppLanguage,
+    ) {
+        loadBibleReadingJob?.cancel()
+
+        if (bibleReferences.isEmpty()) {
+            _selectedBibleReading.value = null
+            _bibleReadingError.value = null
+            _isBibleReadingLoading.value = false
+            return
+        }
+
+        loadBibleReadingJob =
+            viewModelScope.launch {
+                _isBibleReadingLoading.value = true
+                _bibleReadingError.value = null
+                try {
+                    val reading =
+                        withContext(backgroundDispatcher) {
+                            buildBibleReading(bibleReferences, language)
+                        }
+                    _selectedBibleReading.value = reading
+                } catch (e: Exception) {
+                    _bibleReadingError.value = "Failed to load Bible reading: ${e.message}"
+                    _selectedBibleReading.value = null
+                } finally {
+                    _isBibleReadingLoading.value = false
+                }
+            }
+    }
+
+    private fun buildBibleReading(
         bibleReferences: List<BibleReference>,
         language: AppLanguage,
     ): BibleReading =

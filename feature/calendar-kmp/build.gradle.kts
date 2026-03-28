@@ -13,6 +13,19 @@ kotlin {
         compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
         minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
 
+        packaging {
+            resources {
+                excludes += "META-INF/LICENSE.md"
+                excludes += "META-INF/LICENSE-notice.md"
+                excludes += "META-INF/AL2.0"
+                excludes += "META-INF/LGPL2.1"
+                excludes += "META-INF/LICENSE"
+                excludes += "META-INF/NOTICE"
+                excludes += "META-INF/LICENSE.txt"
+                excludes += "META-INF/NOTICE.txt"
+            }
+        }
+
         withHostTestBuilder {
         }
 
@@ -74,6 +87,16 @@ kotlin {
 
         androidMain {
             dependencies {
+                implementation(libs.androidx.ui.test.manifest)
+            }
+        }
+
+        getByName("androidHostTest") {
+            dependencies {
+                implementation(libs.kotlin.test)
+                implementation(libs.junit)
+                implementation(libs.mockk)
+                implementation(libs.kotlinx.coroutines.test)
             }
         }
 
@@ -82,6 +105,8 @@ kotlin {
                 implementation(libs.androidx.runner)
                 implementation(libs.androidx.core)
                 implementation(libs.androidx.junit)
+                implementation(libs.mockk)
+                implementation(libs.androidx.compose.ui.test.junit4)
             }
         }
 

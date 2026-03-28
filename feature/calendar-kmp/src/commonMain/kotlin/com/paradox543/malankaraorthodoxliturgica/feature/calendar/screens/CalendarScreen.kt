@@ -401,7 +401,7 @@ fun RowScope.DayItem(
         contentPadding = PaddingValues(0.dp), // Remove default padding for better centering
     ) {
         Text(
-            text = day.date.dayOfMonth.toString(),
+            text = day.date.day.toString(),
             style = MaterialTheme.typography.bodyMedium,
         )
     }

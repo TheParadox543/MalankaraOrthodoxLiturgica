@@ -6,12 +6,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.VerseItem
@@ -27,6 +31,9 @@ fun BibleReadingScreen(
 ) {
     val selectedLanguage by calendarViewModel.selectedLanguage.collectAsState()
     val bibleReadings: List<BibleReference> by calendarViewModel.selectedBibleReference.collectAsState()
+    val bibleReading by calendarViewModel.selectedBibleReading.collectAsState()
+    val isBibleReadingLoading by calendarViewModel.isBibleReadingLoading.collectAsState()
+    val bibleReadingError by calendarViewModel.bibleReadingError.collectAsState()
 
     if (bibleReadings.isEmpty()) {
         LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Bible Reading", showBottomBar = false)) }
@@ -46,14 +53,37 @@ fun BibleReadingScreen(
 
     LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title, showBottomBar = false)) }
 
-    val bibleReading = calendarViewModel.loadBibleReading(bibleReadings, selectedLanguage)
+    LaunchedEffect(bibleReadings, selectedLanguage) {
+        calendarViewModel.loadSelectedBibleReading(bibleReadings, selectedLanguage)
+    }
+
+    if (isBibleReadingLoading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center,
+        ) {
+            CircularProgressIndicator()
+        }
+        return
+    }
+
+    if (bibleReadingError != null) {
+        Text(
+            text = bibleReadingError ?: "Failed to load Bible reading.",
+            modifier = Modifier.padding(16.dp),
+            color = MaterialTheme.colorScheme.error,
+        )
+        return
+    }
+
+    val loadedBibleReading = bibleReading ?: return
     LazyColumn(
         modifier =
             Modifier
                 .padding(contentPadding)
                 .padding(horizontal = 16.dp),
     ) {
-        val preface = bibleReading.preface
+        val preface = loadedBibleReading.preface
         if (preface != null) {
             items(preface) { prose ->
                 Prose(prose.content, modifier = Modifier.padding(vertical = 4.dp))
@@ -66,9 +96,9 @@ fun BibleReadingScreen(
                 )
             }
         }
-        items(bibleReading.verses.size) { index ->
-            val verseNumber = bibleReading.verses[index].id.toString()
-            val verseText = bibleReading.verses[index].verse
+        items(loadedBibleReading.verses.size) { index ->
+            val verseNumber = loadedBibleReading.verses[index].id.toString()
+            val verseText = loadedBibleReading.verses[index].verse
             VerseItem(verseNumber, verseText)
         }
     }
