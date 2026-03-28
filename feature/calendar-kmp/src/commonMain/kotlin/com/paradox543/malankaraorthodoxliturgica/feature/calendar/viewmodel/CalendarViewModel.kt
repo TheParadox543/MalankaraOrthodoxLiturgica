@@ -19,14 +19,15 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerEleme
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.loadTranslations
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -63,7 +64,7 @@ class CalendarViewModel(
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
-                initialValue = AppLanguage.ENGLISH,
+                initialValue = AppLanguage.MALAYALAM,
             )
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
@@ -149,10 +150,7 @@ class CalendarViewModel(
     }
 
     private suspend fun loadTranslations(language: AppLanguage) {
-        val loadedTranslations =
-            withContext(backgroundDispatcher) {
-                translationsRepository.loadTranslations(language)
-            }
+        val loadedTranslations = translationsRepository.loadTranslations(language, backgroundDispatcher)
         _translations.update { loadedTranslations }
     }
 

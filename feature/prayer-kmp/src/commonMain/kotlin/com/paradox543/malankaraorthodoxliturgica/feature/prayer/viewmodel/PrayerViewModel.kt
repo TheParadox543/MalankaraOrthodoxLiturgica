@@ -11,17 +11,19 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKe
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.loadTranslations
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class PrayerViewModel(
     private val settingsRepository: SettingsRepository,
@@ -30,12 +32,13 @@ class PrayerViewModel(
     private val inAppReviewManager: InAppReviewManager,
     private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
     private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
+    private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = runBlocking { settingsRepository.language.first() },
+            initialValue = AppLanguage.MALAYALAM,
         )
 
     val songScrollState: StateFlow<Boolean> =
@@ -60,7 +63,7 @@ class PrayerViewModel(
     init {
         // Observe language from SettingsViewModel and trigger translation loading
         viewModelScope.launch {
-            selectedLanguage.collect { language ->
+            selectedLanguage.collectLatest { language ->
                 // When the language changes (from DataStore), load translations
                 loadTranslations(language)
             }
@@ -74,11 +77,9 @@ class PrayerViewModel(
         }
     }
 
-    private fun loadTranslations(language: AppLanguage) {
-        viewModelScope.launch {
-            val loadedTranslations = translationsRepository.loadTranslations(language)
-            _translations.update { loadedTranslations }
-        }
+    private suspend fun loadTranslations(language: AppLanguage) {
+        val loadedTranslations = translationsRepository.loadTranslations(language, backgroundDispatcher)
+        _translations.update { loadedTranslations }
     }
 
     fun loadPrayerElements(

@@ -13,19 +13,20 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.Sett
 import com.paradox543.malankaraorthodoxliturgica.domain.song.model.SongResult
 import com.paradox543.malankaraorthodoxliturgica.domain.song.repository.SongRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.loadTranslations
 import com.paradox543.malankaraorthodoxliturgica.feature.song.model.MediaStatus
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class SongPlayerViewModel(
@@ -33,12 +34,13 @@ class SongPlayerViewModel(
     private val songRepository: SongRepository,
     private val settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,
+    private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
             started = SharingStarted.Companion.WhileSubscribed(5000),
-            initialValue = runBlocking { settingsRepository.language.first() },
+            initialValue = AppLanguage.MALAYALAM,
         )
 
     // ExoPlayer managed by ViewModel (uses application context to avoid leaking Activity)
@@ -90,18 +92,16 @@ class SongPlayerViewModel(
             }
         }
         viewModelScope.launch {
-            selectedLanguage.collect { language ->
+            selectedLanguage.collectLatest { language ->
                 // When the language changes (from DataStore), load translations
                 loadTranslations(language)
             }
         }
     }
 
-    private fun loadTranslations(language: AppLanguage) {
-        viewModelScope.launch {
-            val loadedTranslations = translationsRepository.loadTranslations(language)
-            _translations.update { loadedTranslations }
-        }
+    private suspend fun loadTranslations(language: AppLanguage) {
+        val loadedTranslations = translationsRepository.loadTranslations(language, backgroundDispatcher)
+        _translations.update { loadedTranslations }
     }
 
     fun loadSong(songFilename: String) {
