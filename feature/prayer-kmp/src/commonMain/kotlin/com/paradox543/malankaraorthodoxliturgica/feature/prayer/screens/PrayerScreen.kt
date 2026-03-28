@@ -87,10 +87,10 @@ fun PrayerScreen(
     val initialTopPadding = remember { mutableStateOf(0.dp) }
     val initialBottomPadding = remember { mutableStateOf(0.dp) }
 
-    val listStates = remember { mutableMapOf<String, LazyListState>() }
-
     val listState =
-        listStates.getOrPut(currentFilename) {
+        rememberSaveable(
+            saver = LazyListState.Saver,
+        ) {
             LazyListState()
         }
 
