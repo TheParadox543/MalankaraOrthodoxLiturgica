@@ -71,7 +71,12 @@ android {
 }
 
 kotzilla {
-    versionName = providers.gradleProperty("APP_VERSION_NAME").get()
+    val requestedTasks = gradle.startParameter.taskNames.joinToString(" ").lowercase()
+    val isDebugBuild = requestedTasks.contains("debug") || requestedTasks.contains("testing")
+    val baseVersionName = providers.gradleProperty("APP_VERSION_NAME").get()
+
+    // Distinguish dev/test telemetry in Kotzilla from release builds.
+    versionName = if (isDebugBuild) "$baseVersionName-dev" else baseVersionName
 }
 
 dependencies {
