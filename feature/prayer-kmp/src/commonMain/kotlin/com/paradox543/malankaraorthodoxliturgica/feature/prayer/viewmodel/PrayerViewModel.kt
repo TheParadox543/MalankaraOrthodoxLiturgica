@@ -14,6 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.loadTranslations
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,6 +25,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.TimeSource
 
 class PrayerViewModel(
     private val settingsRepository: SettingsRepository,
@@ -34,6 +37,8 @@ class PrayerViewModel(
     private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
+    private val minimumPrayerLoadingIndicatorDuration = 250.milliseconds
+
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
@@ -53,6 +58,9 @@ class PrayerViewModel(
 
     private val _prayers = MutableStateFlow<List<PrayerElement>>(emptyList())
     val prayers: StateFlow<List<PrayerElement>> = _prayers
+
+    private val _isLoadingPrayers = MutableStateFlow(false)
+    val isLoadingPrayers: StateFlow<Boolean> = _isLoadingPrayers.asStateFlow()
 
     private val _dynamicSongKey = MutableStateFlow<String?>(null)
     val dynamicSongKey: StateFlow<String?> = _dynamicSongKey.asStateFlow()
@@ -87,6 +95,8 @@ class PrayerViewModel(
         passedLanguage: AppLanguage? = null,
     ) {
         viewModelScope.launch {
+            _isLoadingPrayers.value = true
+            val loadStartedAt = TimeSource.Monotonic.markNow()
             // Launch in ViewModelScope for async operation
             try {
                 // Access the current language from SettingsViewModel
@@ -95,6 +105,12 @@ class PrayerViewModel(
                 _prayers.value = prayers
             } catch (e: Exception) {
                 _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
+            } finally {
+                val remainingIndicatorTime = minimumPrayerLoadingIndicatorDuration - loadStartedAt.elapsedNow()
+                if (remainingIndicatorTime.isPositive()) {
+                    delay(remainingIndicatorTime)
+                }
+                _isLoadingPrayers.value = false
             }
         }
     }

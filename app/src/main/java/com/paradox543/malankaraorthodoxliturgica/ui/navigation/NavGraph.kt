@@ -134,6 +134,11 @@ fun NavGraph(
 
     val pinchZoomEnabled = currentRoute !in pinchZoomDisabledRoutes
 
+    // Create ViewModels once at NavGraph level to prevent recreation glitches
+    val prayerViewModel: PrayerViewModel = koinViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
+    val songPlayerViewModel: SongPlayerViewModel = koinViewModel()
+
     // Apply nestedScroll modifier only for PrayerReading state
     val baseScaffoldModifier =
         when (val state = scaffoldUiState) {
@@ -312,8 +317,6 @@ fun NavGraph(
                 AppScreen.Home.route,
                 deepLinks = AppScreen.Home.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
-                val prayerViewModel: PrayerViewModel = koinViewModel()
-                val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
                 HomeScreen(
                     prayerViewModel,
                     prayerNavViewModel,
@@ -350,8 +353,6 @@ fun NavGraph(
                     ),
                 deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
-                val prayerViewModel: PrayerViewModel = koinViewModel()
                 val route = backStackEntry.arguments?.getString(AppScreen.Section.ARG_ROUTE) ?: ""
                 val node = prayerNavViewModel.findNode(route)
                 if (node != null) {
@@ -389,8 +390,6 @@ fun NavGraph(
                     ),
                 deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val prayerViewModel: PrayerViewModel = koinViewModel()
-                val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
                 val prayerRoute = backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_ROUTE) ?: ""
                 val scrollIndex =
                     backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_SCROLL)?.toIntOrNull() ?: 0
@@ -434,8 +433,6 @@ fun NavGraph(
                         },
                     ),
             ) { backStackEntry ->
-                val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
-                val songPlayerViewModel: SongPlayerViewModel = koinViewModel()
                 val route = backStackEntry.arguments?.getString(AppScreen.Song.ARG_ROUTE) ?: ""
                 val node = prayerNavViewModel.findNode(route)
                 if (node != null) {
@@ -455,8 +452,6 @@ fun NavGraph(
             }
 
             composable(AppScreen.PrayNow.route) { backStackEntry ->
-                val prayerViewModel: PrayerViewModel = koinViewModel()
-                val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
                 PrayNowScreen(
                     { route ->
                         navController.navigate(AppScreen.Prayer.createRoute(route))
