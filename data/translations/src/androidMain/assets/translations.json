@@ -554,5 +554,77 @@
     "garbo": {
         "ml": "ഗർബോ",
         "en": "Garbo"
+    },
+    "hindiQurbanaSongs": {
+        "ml": "ഹിന്ദി കുർബാന പാട്ടുകൾ",
+        "en": "Hindi Qurbana Songs"
+    },
+    "audio": {
+        "en": "Songs",
+        "ml": "പാട്ടുകൾ"
+    },
+    "karaoke": {
+        "en": "Karaoke",
+        "ml": "കരോക്കെ"
+    },
+    "PrabhuvarSunkar": {
+        "en": "Prabhuvar Sunkar",
+        "ml": "Prabhuvar Sunkar"
+    },
+    "HeyRaja": {
+        "en": "Hey Raja",
+        "ml": "Hey Raja"
+    },
+    "ParmeshwarSe": {
+        "en": "Parmeshwar Se",
+        "ml": "Parmeshwar Se"
+    },
+    "DhanyaDhanya": {
+        "en": "Dhanya Dhanya",
+        "ml": "Dhanya Dhanya"
+    },
+    "HeleluiahHaleluiah": {
+        "en": "Haleluiah Haleluiah",
+        "ml": "Haleluiah Haleluiah"
+    },
+    "AagatHote": {
+        "en": "Aagat Hote",
+        "ml": "Aagat Hote"
+    },
+    "PrarthanaKa": {
+        "en": "Prarthana Ka",
+        "ml": "Prarthana Ka"
+    },
+    "HumAapasMein": {
+        "en": "Hum Aapas Mein",
+        "ml": "Hum Aapas Mein"
+    },
+    "AagatTere": {
+        "en": "Aagat Tere",
+        "ml": "Aagat Tere"
+    },
+    "KarnaSmaran": {
+        "en": "Karna Smaran",
+        "ml": "Karna Smaran"
+    },
+    "PaapMochan": {
+        "en": "Paap Mochan",
+        "ml": "Paap Mochan"
+    },
+    "KhadiMahima": {
+        "en": "Khadi Mahima",
+        "ml": "Khadi Mahima"
+    },
+    "HeyKrupalu": {
+        "en": "Hey Krupalu",
+        "ml": "Hey Krupalu"
+    },
+    "PrithviKaregi": {
+        "en": "Prithvi Karegi",
+        "ml": "Prithvi Karegi"
+    },
+    "MuktiDilaye": {
+        "en": "Mukti Dilaye",
+        "ml": "Mukti Dilaye"
     }
 }
