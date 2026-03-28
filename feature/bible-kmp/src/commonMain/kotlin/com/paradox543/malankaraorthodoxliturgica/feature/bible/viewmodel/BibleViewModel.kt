@@ -11,9 +11,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.runBlocking
 
 class BibleViewModel(
     private val bibleRepository: BibleRepository,
@@ -24,10 +22,10 @@ class BibleViewModel(
         settingsRepository.language.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = runBlocking { settingsRepository.language.first() },
+            initialValue = AppLanguage.MALAYALAM,
         )
 
-    val bibleBooks: List<BibleBookDetails> = bibleRepository.loadBibleMetaData()
+    val bibleBooks: List<BibleBookDetails> by lazy(LazyThreadSafetyMode.NONE) { bibleRepository.loadBibleMetaData() }
 
     fun loadBibleBook(bookNumber: Int): BibleBookDetails = bibleBooks[bookNumber]
 

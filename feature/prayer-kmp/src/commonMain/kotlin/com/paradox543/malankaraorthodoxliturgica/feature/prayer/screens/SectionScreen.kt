@@ -32,6 +32,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiStat
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.Res
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.greatlent
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.painterResource
@@ -39,6 +40,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun SectionScreen(
     prayerViewModel: PrayerViewModel,
+    prayerNavViewModel: PrayerNavViewModel,
     node: PageNode,
     contentPadding: PaddingValues,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
@@ -56,12 +58,12 @@ fun SectionScreen(
     LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
     LaunchedEffect(Unit) {
-        prayerViewModel.onSectionScreenOpened()
+        prayerNavViewModel.onSectionScreenOpened()
     }
 
     LaunchedEffect(Unit) {
-        prayerViewModel.requestReview.collectLatest {
-            prayerViewModel.checkForReview()
+        prayerNavViewModel.requestReview.collectLatest {
+            prayerNavViewModel.checkForReview()
         }
     }
 

@@ -4,10 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
-import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
@@ -18,11 +15,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -35,9 +30,8 @@ class PrayerViewModel(
     private val settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,
     private val analyticsService: AnalyticsService,
-    private val inAppReviewManager: InAppReviewManager,
-    private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
-    private val getSongKeyPriorityUseCase: GetSongKeyPriorityUseCase,
+    private val loadPrayerScreenContent: suspend (String, AppLanguage) -> List<PrayerElement>,
+    private val getSongKeyPriority: suspend () -> String,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
     private data class PrayerLoadRequest(
@@ -76,20 +70,12 @@ class PrayerViewModel(
     private val _dynamicSongKey = MutableStateFlow<String?>(null)
     val dynamicSongKey: StateFlow<String?> = _dynamicSongKey.asStateFlow()
 
-    private val _requestReview = MutableSharedFlow<Unit>()
-    val requestReview = _requestReview.asSharedFlow()
-
     init {
         // Observe language from SettingsViewModel and trigger translation loading
         viewModelScope.launch {
             selectedLanguage.collectLatest { language ->
                 // When the language changes (from DataStore), load translations
                 loadTranslations(language)
-            }
-        }
-        viewModelScope.launch {
-            if (_dynamicSongKey.value == null) {
-                _dynamicSongKey.value = getSongKeyPriorityUseCase()
             }
         }
     }
@@ -119,9 +105,12 @@ class PrayerViewModel(
             try {
                 val prayers =
                     withContext(backgroundDispatcher) {
-                        getPrayerScreenContentUseCase(filename, language)
+                        loadPrayerScreenContent(filename, language)
                     }
                 _prayers.value = prayers
+                if (_dynamicSongKey.value == null && prayers.any { it is PrayerElement.DynamicSongsBlock }) {
+                    _dynamicSongKey.value = withContext(backgroundDispatcher) { getSongKeyPriority() }
+                }
                 lastLoadedPrayerRequest = request
             } catch (e: CancellationException) {
                 throw e
@@ -170,19 +159,4 @@ class PrayerViewModel(
         )
     }
 
-    fun onPrayerScreenOpened() {
-        viewModelScope.launch {
-            inAppReviewManager.incrementAndGetPrayerScreenVisits()
-        }
-    }
-
-    suspend fun checkForReview() {
-        inAppReviewManager.checkForReview()
-    }
-
-    fun onSectionScreenOpened() {
-        viewModelScope.launch {
-            _requestReview.emit(Unit)
-        }
-    }
 }

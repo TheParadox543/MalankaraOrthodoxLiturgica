@@ -2,6 +2,8 @@ package com.paradox543.malankaraorthodoxliturgica.feature.prayer.di
 
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,9 +14,12 @@ val prayerModule =
                 settingsRepository = get(),
                 translationsRepository = get(),
                 analyticsService = get(),
-                inAppReviewManager = get(),
-                getPrayerScreenContentUseCase = get(),
-                getSongKeyPriorityUseCase = get(),
+                loadPrayerScreenContent = { filename, language ->
+                    get<GetPrayerScreenContentUseCase>().invoke(filename, language)
+                },
+                getSongKeyPriority = {
+                    get<GetSongKeyPriorityUseCase>().invoke()
+                },
             )
         }
 
@@ -24,6 +29,7 @@ val prayerModule =
                 prayerRepository = get(),
                 getAdjacentSiblingRoutesUseCase = get(),
                 getPrayerNodesForCurrentTimeUseCase = get(),
+                inAppReviewManager = get(),
             )
         }
     }

@@ -43,17 +43,18 @@ class SongPlayerViewModel(
             initialValue = AppLanguage.MALAYALAM,
         )
 
-    // ExoPlayer managed by ViewModel (uses application context to avoid leaking Activity)
-    private val exoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()
+    // ExoPlayer is created lazily to avoid work during ViewModel resolution.
+    private var exoPlayer: ExoPlayer? = null
+    private var isProgressLoopStarted = false
 
     // Playback state flows for Compose to observe
-    private val _isPlaying = MutableStateFlow(exoPlayer.isPlaying)
+    private val _isPlaying = MutableStateFlow(false)
     val isPlaying = _isPlaying.asStateFlow()
 
-    private val _currentPosition = MutableStateFlow(exoPlayer.currentPosition)
+    private val _currentPosition = MutableStateFlow(0L)
     val currentPosition = _currentPosition.asStateFlow()
 
-    private val _duration = MutableStateFlow(exoPlayer.duration)
+    private val _duration = MutableStateFlow(0L)
     val duration = _duration.asStateFlow()
 
     private val _mediaStatus = MutableStateFlow<MediaStatus>(MediaStatus.Loading)
@@ -81,22 +82,41 @@ class SongPlayerViewModel(
         }
 
     init {
-        exoPlayer.addListener(listener)
-
-        viewModelScope.launch {
-            while (isActive) {
-                if (_isPlaying.value) {
-                    _currentPosition.value = exoPlayer.currentPosition
-                }
-                delay(500) // update every half second
-            }
-        }
         viewModelScope.launch {
             selectedLanguage.collectLatest { language ->
                 // When the language changes (from DataStore), load translations
                 loadTranslations(language)
             }
         }
+    }
+
+    private fun getOrCreatePlayer(): ExoPlayer {
+        val existing = exoPlayer
+        if (existing != null) {
+            return existing
+        }
+
+        val player = ExoPlayer.Builder(context).build()
+        player.addListener(listener)
+        exoPlayer = player
+
+        if (!isProgressLoopStarted) {
+            isProgressLoopStarted = true
+            viewModelScope.launch {
+                while (isActive) {
+                    val activePlayer = exoPlayer
+                    if (activePlayer != null && _isPlaying.value) {
+                        _currentPosition.value = activePlayer.currentPosition
+                    }
+                    delay(500)
+                }
+            }
+        }
+
+        _isPlaying.value = player.isPlaying
+        _currentPosition.value = player.currentPosition
+        _duration.value = player.duration
+        return player
     }
 
     private suspend fun loadTranslations(language: AppLanguage) {
@@ -133,32 +153,34 @@ class SongPlayerViewModel(
 
     private suspend fun prepareAndPlayUri(uri: Uri) =
         withContext(Dispatchers.Main) {
-            exoPlayer.setMediaItem(MediaItem.fromUri(uri))
-            exoPlayer.prepare()
-            exoPlayer.playWhenReady = true
+            val player = getOrCreatePlayer()
+            player.setMediaItem(MediaItem.fromUri(uri))
+            player.prepare()
+            player.playWhenReady = true
         }
 
     fun play() {
-        exoPlayer.play()
+        getOrCreatePlayer().play()
     }
 
     fun pause() {
-        exoPlayer.pause()
+        exoPlayer?.pause()
     }
 
     // Seek to a new position (in milliseconds)
     fun seekTo(positionMs: Long) {
-        exoPlayer.seekTo(positionMs)
+        getOrCreatePlayer().seekTo(positionMs)
         // update the currentPosition flow immediately for snappier UI feedback
         _currentPosition.value = positionMs
     }
 
     // Expose the player reference if UI needs it (stable reference)
-    fun getPlayer(): ExoPlayer = exoPlayer
+    fun getPlayer(): ExoPlayer = getOrCreatePlayer()
 
     override fun onCleared() {
-        exoPlayer.removeListener(listener)
-        exoPlayer.release()
+        exoPlayer?.removeListener(listener)
+        exoPlayer?.release()
+        exoPlayer = null
         super.onCleared()
     }
 }

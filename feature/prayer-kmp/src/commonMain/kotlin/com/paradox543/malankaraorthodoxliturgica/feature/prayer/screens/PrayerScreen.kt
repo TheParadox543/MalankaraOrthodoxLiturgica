@@ -85,7 +85,7 @@ fun PrayerScreen(
 
     // Increment count of prayer screen visits for in-app review
     LaunchedEffect(Unit) {
-        prayerViewModel.onPrayerScreenOpened()
+        prayerNavViewModel.onPrayerScreenOpened()
     }
 
     // Store the initial system bar padding values

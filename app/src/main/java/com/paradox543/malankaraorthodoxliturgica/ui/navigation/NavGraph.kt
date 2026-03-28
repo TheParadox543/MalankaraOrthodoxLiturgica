@@ -106,8 +106,6 @@ fun NavGraph(
         }
     }
 
-    val calendarViewModel: CalendarViewModel = koinViewModel()
-
     // Observe the current route to pass to bars for highlight/back logic
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
@@ -138,6 +136,8 @@ fun NavGraph(
     val prayerViewModel: PrayerViewModel = koinViewModel()
     val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
     val songPlayerViewModel: SongPlayerViewModel = koinViewModel()
+    val bibleViewModel: BibleViewModel = koinViewModel()
+    val calendarViewModel: CalendarViewModel = koinViewModel()
 
     // Apply nestedScroll modifier only for PrayerReading state
     val baseScaffoldModifier =
@@ -358,6 +358,7 @@ fun NavGraph(
                 if (node != null) {
                     SectionScreen(
                         prayerViewModel,
+                        prayerNavViewModel,
                         node,
                         innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState = it },
@@ -465,8 +466,7 @@ fun NavGraph(
             composable(
                 AppScreen.Bible.route,
                 deepLinks = AppScreen.Bible.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = koinViewModel(viewModelStoreOwner = backStackEntry)
+            ) {
                 BibleScreen(
                     { index ->
                         navController.navigate(AppScreen.BibleBook.createRoute(index))
@@ -487,7 +487,6 @@ fun NavGraph(
                     ),
                 deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = koinViewModel(viewModelStoreOwner = backStackEntry)
                 val bookIndex =
                     backStackEntry.arguments?.getString(AppScreen.BibleBook.ARG_BOOK_INDEX)?.toIntOrNull()
                         ?: 0
@@ -514,7 +513,6 @@ fun NavGraph(
                     AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) }
                         ?: emptyList(),
             ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = koinViewModel(viewModelStoreOwner = backStackEntry)
                 val bookIndex =
                     backStackEntry.arguments
                         ?.getString(AppScreen.BibleChapter.ARG_BOOK_INDEX)

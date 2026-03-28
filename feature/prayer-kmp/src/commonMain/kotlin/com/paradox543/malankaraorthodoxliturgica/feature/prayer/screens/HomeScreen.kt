@@ -19,6 +19,7 @@ fun HomeScreen(
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
     SectionScreen(
         prayerViewModel,
+        prayerNavViewModel,
         rootNode,
         contentPadding,
         onScaffoldStateChanged,
