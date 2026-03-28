@@ -31,6 +31,7 @@ kotlinxCoroutinesPlayServices = "1.10.2"
 kotlinxCoroutinesTest = "1.10.2"
 kotlinxDatetime = "0.7.1"
 kotlinxSerializationJson = "1.8.1"
+kotzilla = "2.1.1"
 ktlint = "13.1.0"
 lifecycleRuntimeKtx = "2.9.1"
 material = "1.13.0"
@@ -94,6 +95,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+kotzilla-sdk-compose = { group = "io.kotzilla", name = "kotzilla-sdk-compose", version.ref = "kotzilla" }
 material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3" }
 runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "runtime" }
 ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "ui" }
@@ -135,3 +137,4 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotzilla = { id = "io.kotzilla.kotzilla-plugin", version.ref = "kotzilla" }

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ktlint)              // Linter plugin
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotzilla)
     // Google services plugin
     id("com.google.gms.google-services")
     // Add the Crashlytics plugin
@@ -67,6 +68,10 @@ android {
     }
     ndkVersion = "29.0.13599879 rc2"
     buildToolsVersion = "35.0.0"
+}
+
+kotzilla {
+    versionName = providers.gradleProperty("APP_VERSION_NAME").get()
 }
 
 dependencies {
