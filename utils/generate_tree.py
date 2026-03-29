@@ -275,7 +275,7 @@ def qurbana_songs_section():
         "forthiethFriday",
         "lazarusSaturday",
         "memoryOfFortyMartyrs",
-        "palmSunday",
+        "hosanna",
         "maundyThursday",
         "saturdayOfAnnunciation",
         "easter",

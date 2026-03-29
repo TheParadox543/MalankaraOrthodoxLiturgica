@@ -139,7 +139,7 @@ class GetAdjacentSiblingRoutesUseCaseTest {
     fun `return null if parent is feasts`() {
         val child1 = makeNode("christmas", "feasts")
         val child2 = makeNode("epiphany", "feasts")
-        val child3 = makeNode("palmSundayService", "feasts")
+        val child3 = makeNode("hosannaService", "feasts")
         val feasts =
             PageNode(
                 "feasts",

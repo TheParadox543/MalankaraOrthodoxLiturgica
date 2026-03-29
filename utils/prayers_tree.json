@@ -1385,9 +1385,9 @@
                                     "children": []
                                 },
                                 {
-                                    "route": "qurbanaSongs_palmSunday",
+                                    "route": "qurbanaSongs_hosanna",
                                     "parent": "qurbanaSongs",
-                                    "filename": "qurbanaSongs/palmSunday/palmSundaySongs.json",
+                                    "filename": "qurbanaSongs/hosanna/hosannaSongs.json",
                                     "languages": [
                                         "ml",
                                         "mn",
