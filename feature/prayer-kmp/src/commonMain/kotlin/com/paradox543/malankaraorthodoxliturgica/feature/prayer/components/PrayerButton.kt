@@ -46,7 +46,7 @@ fun PrayerButton(
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onPrimary,
-                modifier = modifier.padding(vertical = 8.dp),
+                modifier = modifier.weight(1f).padding(vertical = 8.dp),
             )
             Icon(
                 MaterialIcons.Rounded.Keyboard_arrow_right,
