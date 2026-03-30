@@ -11,6 +11,33 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ---
 
+## [2.3.0] - Undecided
+
+### Added
+
+- New Hindi Songs
+- Use Kotzilla monitoring
+
+### Fixed
+
+- Share bottom sheet caused the app to freeze and not respond fixed.
+- Thread blocking behaviour fixed.
+- Hosanna reference in calendar.
+
+### Change
+
+- Improve translation loading.
+
+### Refactor
+
+- Refactor to use single AppScaffold instead of overlapping scaffold.
+- Refactored screens usage of ViewModels.
+- Use koin for dependency injection instead of dagger/hilt dependency injection.
+- Refactor modules to KMP modules for multiplatform support.
+- QR generation in KMP module.
+
+---
+
 ## [2.2.4] - 2026-03-16
 
 ### Fix
@@ -21,7 +48,6 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 - Moved all prayer screens and ViewModels to :feature:prayer
 - Moved all settings screens and ViewModels to :feature:settings
-
 
 ---
 
