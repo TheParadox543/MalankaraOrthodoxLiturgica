@@ -5176,6 +5176,7 @@
             "en": "Maundy Thursday",
             "ml": "പെസഹാ വ്യാഴം"
         },
+        "specialSongsKey": "maundyThursdaySongs",
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5326,6 +5327,7 @@
             "en": "Saturday of the Annunciation (Suboro)",
             "ml": "ദുഃഖ ശനിയാഴ്ച"
         },
+        "specialSongsKey": "saturdayOfAnnunciationSongs",
         "bibleReadings": {
             "vespersGospel": [
                 {

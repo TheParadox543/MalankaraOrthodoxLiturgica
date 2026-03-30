@@ -4,11 +4,17 @@ import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.shrinkOut
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -21,7 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -89,7 +95,7 @@ fun NavGraph(
     val context: Context = LocalContext.current
 
     // Tracks which bars/FAB each screen requests
-    var scaffoldUiState by remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
+    val scaffoldUiState = remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
 
     // Show update snackbar when a new version has been downloaded
     LaunchedEffect(updateDownloaded) {
@@ -116,7 +122,7 @@ fun NavGraph(
             NavController.OnDestinationChangedListener { _, destination, args ->
                 val argsMap =
                     args?.keySet()?.associateWith { key ->
-                        args.get(key)?.toString()
+                        args.readNavArgAsString(key, destination.arguments[key]?.type)
                     } ?: emptyMap()
                 analyticsService.logEvent(AnalyticsEvent.ScreenVisited(destination.route ?: "", argsMap))
             }
@@ -138,10 +144,12 @@ fun NavGraph(
     val songPlayerViewModel: SongPlayerViewModel = koinViewModel()
     val bibleViewModel: BibleViewModel = koinViewModel()
     val calendarViewModel: CalendarViewModel = koinViewModel()
+    val prayerRootNode by prayerNavViewModel.rootNode.collectAsState()
+    val isPrayerTreeLoaded = prayerRootNode.children.isNotEmpty()
 
     // Apply nestedScroll modifier only for PrayerReading state
     val baseScaffoldModifier =
-        when (val state = scaffoldUiState) {
+        when (val state = scaffoldUiState.value) {
             is ScaffoldUiState.PrayerReading -> Modifier.nestedScroll(state.nestedScrollConnection)
             else -> Modifier
         }
@@ -157,7 +165,7 @@ fun NavGraph(
         modifier = scaffoldModifier,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
-            when (val state = scaffoldUiState) {
+            when (val state = scaffoldUiState.value) {
                 is ScaffoldUiState.Standard -> {
                     TopNavBar(
                         title = state.title,
@@ -199,7 +207,7 @@ fun NavGraph(
             }
         },
         bottomBar = {
-            when (val state = scaffoldUiState) {
+            when (val state = scaffoldUiState.value) {
                 is ScaffoldUiState.Standard -> {
                     if (state.showBottomBar) {
                         BottomNavBar(
@@ -263,7 +271,7 @@ fun NavGraph(
             }
         },
         floatingActionButton = {
-            when (val state = scaffoldUiState) {
+            when (val state = scaffoldUiState.value) {
                 is ScaffoldUiState.PrayerReading -> {
                     if (state.showFab) {
                         AnimatedVisibility(
@@ -324,7 +332,7 @@ fun NavGraph(
                     onSectionNavigate = { route ->
                         navController.navigate(AppScreen.Section.createRoute(route))
                     },
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -340,7 +348,7 @@ fun NavGraph(
                             }
                         }
                     },
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
@@ -354,14 +362,19 @@ fun NavGraph(
                 deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
                 val route = backStackEntry.arguments?.getString(AppScreen.Section.ARG_ROUTE) ?: ""
-                val node = prayerNavViewModel.findNode(route)
-                if (node != null) {
+                val node = prayerRootNode.findByRoute(route)
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else if (node != null) {
                     SectionScreen(
                         prayerViewModel,
                         prayerNavViewModel,
                         node,
                         innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
                         onSectionNavigate = { route ->
                             navController.navigate(AppScreen.Section.createRoute(route))
                         },
@@ -377,7 +390,7 @@ fun NavGraph(
                         message = route,
                         contentPadding = innerPadding,
                         onBackNavigation = { navController.navigateUp() },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 }
             }
 
@@ -394,8 +407,13 @@ fun NavGraph(
                 val prayerRoute = backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_ROUTE) ?: ""
                 val scrollIndex =
                     backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_SCROLL)?.toIntOrNull() ?: 0
-                val node = prayerNavViewModel.findNode(prayerRoute)
-                if (node != null) {
+                val node = prayerRootNode.findByRoute(prayerRoute)
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else if (node != null) {
                     PrayerScreen(
                         { route, replace ->
                             navController.navigate(AppScreen.Prayer.createRoute(route)) {
@@ -415,13 +433,13 @@ fun NavGraph(
                         routeProvider = {
                             AppScreen.Prayer.createRoute(it)
                         },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 } else {
                     ContentNotReadyScreen(
                         message = prayerRoute,
                         contentPadding = innerPadding,
                         onBackNavigation = { navController.navigateUp() },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 }
             }
 
@@ -435,24 +453,29 @@ fun NavGraph(
                     ),
             ) { backStackEntry ->
                 val route = backStackEntry.arguments?.getString(AppScreen.Song.ARG_ROUTE) ?: ""
-                val node = prayerNavViewModel.findNode(route)
-                if (node != null) {
+                val node = prayerRootNode.findByRoute(route)
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else if (node != null) {
                     SongScreen(
                         songPlayerViewModel = songPlayerViewModel,
                         songFilename = node.filename ?: "",
                         contentPadding = innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
                     )
                 } else {
                     ContentNotReadyScreen(
                         message = route,
                         contentPadding = innerPadding,
                         onBackNavigation = { navController.navigateUp() },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 }
             }
 
-            composable(AppScreen.PrayNow.route) { backStackEntry ->
+            composable(AppScreen.PrayNow.route) {
                 PrayNowScreen(
                     { route ->
                         navController.navigate(AppScreen.Prayer.createRoute(route))
@@ -460,7 +483,7 @@ fun NavGraph(
                     prayerViewModel,
                     prayerNavViewModel,
                     innerPadding,
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
@@ -473,7 +496,7 @@ fun NavGraph(
                     },
                     bibleViewModel,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -497,7 +520,7 @@ fun NavGraph(
                     bibleViewModel,
                     bookIndex,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -510,8 +533,7 @@ fun NavGraph(
                         },
                     ),
                 deepLinks =
-                    AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) }
-                        ?: emptyList(),
+                    AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
                 val bookIndex =
                     backStackEntry.arguments
@@ -532,7 +554,7 @@ fun NavGraph(
                     routeFactory = {
                         AppScreen.BibleChapter.createRoute(it.bookIndex, it.chapterIndex)
                     },
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
@@ -548,7 +570,7 @@ fun NavGraph(
                     onPrayerNavigate = { route ->
                         navController.navigate(AppScreen.Prayer.createRoute(route))
                     },
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -556,7 +578,7 @@ fun NavGraph(
                 BibleReadingScreen(
                     calendarViewModel,
                     innerPadding,
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(AppScreen.QrScanner.route) {
@@ -569,7 +591,7 @@ fun NavGraph(
                         }
                     },
                     contentPadding = innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -596,7 +618,7 @@ fun NavGraph(
                     shareService = shareService,
                     showSoundModeSetting = settingsViewModel.showSoundModeSetting,
                     contentPadding = innerPadding,
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
@@ -623,8 +645,34 @@ fun NavGraph(
                         val intent = Intent(Intent.ACTION_VIEW, it.toUri())
                         context.startActivity(intent)
                     },
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
         }
+    }
+}
+
+private fun Bundle.readNavArgAsString(
+    key: String,
+    navType: NavType<*>?,
+): String? =
+    navType
+        ?.let { type ->
+            runCatching { type[this, key]?.toString() }.getOrNull()
+        } ?: getString(key)
+
+@Composable
+private fun ContentLoadingScreen(
+    contentPadding: PaddingValues,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
+) {
+    LaunchedEffect(Unit) {
+        onScaffoldStateChanged(ScaffoldUiState.None)
+    }
+
+    Box(
+        modifier = Modifier.fillMaxSize().padding(contentPadding),
+        contentAlignment = Alignment.Center,
+    ) {
+        CircularProgressIndicator()
     }
 }
