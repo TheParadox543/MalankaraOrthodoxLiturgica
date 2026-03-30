@@ -39,7 +39,6 @@ android {
 
 dependencies {
     // Project Imports
-    implementation(project(":core:platform"))
     implementation(project(":core:ui-common"))
 
     implementation(libs.androidx.core.ktx)

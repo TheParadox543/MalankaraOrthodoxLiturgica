@@ -44,7 +44,7 @@ import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.MainActivity
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.globalPinchZoom
@@ -84,14 +84,14 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun NavGraph(
     onboardingCompleted: Boolean,
-    inAppUpdateManager: InAppUpdateManager,
+    appUpdateManager: AppUpdateManager,
     analyticsService: AnalyticsService,
     shareService: ShareService,
     settingsViewModel: SettingsViewModel,
 ) {
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
-    val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
+    val updateDownloaded by appUpdateManager.updateReady.collectAsState()
     val context: Context = LocalContext.current
 
     // Tracks which bars/FAB each screen requests
@@ -107,7 +107,7 @@ fun NavGraph(
                     duration = SnackbarDuration.Indefinite,
                 )
             if (result == SnackbarResult.ActionPerformed) {
-                inAppUpdateManager.completeUpdate()
+                appUpdateManager.completeUpdate()
             }
         }
     }

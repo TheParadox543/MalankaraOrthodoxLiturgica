@@ -41,7 +41,6 @@ dependencies {
     implementation(libs.material)
 
     implementation(project(":core:analytics"))
-    implementation(project(":core:platform"))
 
     // Dependency Injection
     implementation(libs.koin.core)

@@ -71,7 +71,10 @@ android {
 }
 
 kotzilla {
-    val requestedTasks = gradle.startParameter.taskNames.joinToString(" ").lowercase()
+    val requestedTasks =
+        gradle.startParameter.taskNames
+            .joinToString(" ")
+            .lowercase()
     val isDebugBuild = requestedTasks.contains("debug") || requestedTasks.contains("testing")
     val baseVersionName = providers.gradleProperty("APP_VERSION_NAME").get()
 
@@ -102,7 +105,6 @@ dependencies {
     implementation(project(":feature:song"))
 
     implementation(project(":core:analytics"))
-    implementation(project(":core:platform"))
     implementation(project(":core:platform-kmp"))
     implementation(project(":analytics:firebase-android"))
 

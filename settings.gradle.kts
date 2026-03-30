@@ -26,7 +26,6 @@ rootProject.name = "MalankaraOrthodoxLiturgica"
 include(":app")
 include(":core:domain")
 include(":core:analytics")
-include(":core:platform")
 include(":data:core")
 include(":data:bible")
 include(":data:calendar")

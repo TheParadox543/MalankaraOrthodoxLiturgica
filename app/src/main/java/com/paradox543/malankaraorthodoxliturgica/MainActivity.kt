@@ -13,9 +13,10 @@ import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AndroidUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
+import com.paradox543.malankaraorthodoxliturgica.core.platform.model.UpdateType
 import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
@@ -35,7 +36,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * All navigation and UI logic lives in [NavGraph].
  */
 class MainActivity : ComponentActivity() {
-    private val inAppUpdateManager: InAppUpdateManager by inject()
+    private val androidUpdateManager: AndroidUpdateManager by inject()
 
     private val analyticsService: AnalyticsService by inject()
 
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        inAppUpdateManager.checkForUpdate(this)
+        androidUpdateManager.bindActivity(this)
 
         var keepSplashOn by mutableStateOf(true)
         splashScreen.setKeepOnScreenCondition { keepSplashOn }
@@ -112,7 +113,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         NavGraph(
                             onboardingCompleted = s.onboardingCompleted,
-                            inAppUpdateManager = inAppUpdateManager,
+                            appUpdateManager = androidUpdateManager,
                             analyticsService = analyticsService,
                             shareService = shareService,
                             settingsViewModel = settingsViewModel,
@@ -125,7 +126,15 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        inAppUpdateManager.resumeUpdate()
+        androidUpdateManager.bindActivity(this)
+        androidUpdateManager.onResume()
+        lifecycleScope.launch {
+            val updateInfo = androidUpdateManager.checkForUpdate()
+            if (updateInfo?.isUpdateAvailable == true) {
+                val updateType = if (updateInfo.isForceUpdate) UpdateType.IMMEDIATE else UpdateType.FLEXIBLE
+                androidUpdateManager.startUpdate(updateType)
+            }
+        }
         settingsViewModel.refreshDndPermissionStatus()
         soundModeManager.cancelRestoreWork()
         val soundMode = settingsViewModel.soundMode.value
@@ -134,7 +143,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onPause() {
         super.onPause()
-        inAppUpdateManager.unregisterListener()
+        androidUpdateManager.onPause()
         soundModeManager.scheduleRestore(settingsViewModel.soundRestoreDelay.value)
     }
 }
