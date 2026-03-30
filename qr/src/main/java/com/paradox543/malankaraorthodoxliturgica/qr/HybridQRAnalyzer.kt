@@ -3,12 +3,10 @@ package com.paradox543.malankaraorthodoxliturgica.qr
 import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.paradox543.malankaraorthodoxliturgica.core.platform.QrService
 
 class HybridQRAnalyzer(
     private val onQrCodeScanned: (String) -> Unit,
-) : ImageAnalysis.Analyzer,
-    QrService.Analyzer {
+) : ImageAnalysis.Analyzer {
     private val mlKitAnalyzer =
         MLKitQRCodeAnalyzer { qr ->
             if (qr.isNotEmpty()) {

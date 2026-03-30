@@ -9,13 +9,11 @@ import com.google.android.play.core.review.ReviewManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class InAppReviewManagerImpl @Inject constructor(
+class InAppReviewManagerImpl(
     private val reviewManager: ReviewManager,
     private val dataStore: DataStore<Preferences>,
+    private val activityProvider: () -> Activity?,
 ) : InAppReviewManager {
     // Define a key for storing the prayer screen visit count in DataStore.
     private val prayerScreenVisitCountKey = intPreferencesKey("prayer_screen_visit_count")
@@ -23,15 +21,14 @@ class InAppReviewManagerImpl @Inject constructor(
     /**
      * Increments the visit count for the PrayerScreen and triggers the review flow
      * if the count is a multiple of 10.
-     *
-     * @param activity The current activity, required to launch the review flow.
      */
-    override suspend fun checkForReview(activity: Activity) {
+    override suspend fun checkForReview() {
         // Increment the stored count and get the new value.
         val currentCount = incrementAndGetPrayerScreenVisits()
 
         // Only trigger the review flow on the 10th, 20th, 30th visit, etc.
         if (currentCount > 10) {
+            val activity = activityProvider() ?: return
             launchReviewFlow(activity)
             clearPrayerScreenVisitCount()
         }

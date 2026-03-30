@@ -1,5 +1,5 @@
 /build
-src/main/assets/en
-src/main/assets/ml
-src/main/assets/mn
-src/main/assets/indic
+src/androidMain/assets/en
+src/androidMain/assets/ml
+src/androidMain/assets/mn
+src/androidMain/assets/indic

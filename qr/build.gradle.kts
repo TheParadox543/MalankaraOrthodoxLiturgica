@@ -29,18 +29,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "21"
     }
 }
 
 dependencies {
     // Project Imports
-    implementation(project(":core:platform"))
-    implementation(project(":core:ui"))
+    implementation(project(":core:ui-common"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

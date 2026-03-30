@@ -1,0 +1,149 @@
+package com.paradox543.malankaraorthodoxliturgica.feature.bible.screens
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
+
+@Composable
+fun BibleScreen(
+    onBibleNavigate: (Int) -> Unit,
+    bibleViewModel: BibleViewModel,
+    contentPadding: PaddingValues,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
+) {
+    val bibleChapters = bibleViewModel.bibleBooks
+    val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
+
+    val oldTestamentCount = 39
+    val oldTestamentChapters = bibleChapters.take(oldTestamentCount)
+    val newTestamentChapters = bibleChapters.drop(oldTestamentCount)
+
+    val title =
+        when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> "വേദപുസ്തകം"
+            else -> "Bible"
+        }
+
+    LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
+
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(180.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(horizontal = 12.dp),
+    ) {
+        item(span = { GridItemSpan(maxLineSpan) }) {
+            when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> SectionCard("പഴയ നിയമം")
+                else -> SectionCard("Old Testament")
+            }
+        }
+        items(oldTestamentChapters.size) { index ->
+            BibleCard(oldTestamentChapters[index], selectedLanguage, onBibleNavigate, index)
+        }
+        item(span = { GridItemSpan(this.maxLineSpan) }) {
+            when (selectedLanguage) {
+                AppLanguage.MALAYALAM -> SectionCard("പുതിയ നിയമം")
+                else -> SectionCard("New Testament")
+            }
+        }
+        items(newTestamentChapters.size) { index ->
+            BibleCard(newTestamentChapters[index], selectedLanguage, onBibleNavigate, index + oldTestamentCount)
+        }
+    }
+}
+
+@Composable
+fun SectionCard(title: String) {
+    Card(
+        modifier =
+            Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .height(60.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+            ),
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(title)
+        }
+    }
+}
+
+@Composable
+fun BibleCard(
+    bibleDetails: BibleBookDetails,
+    selectedLanguage: AppLanguage,
+    onBibleNavigate: (Int) -> Unit,
+    index: Int,
+) {
+    val bookName =
+        when (selectedLanguage) {
+            AppLanguage.MALAYALAM -> bibleDetails.book.ml
+            else -> bibleDetails.book.en
+        }
+    Card(
+        modifier =
+            Modifier
+                .padding(8.dp)
+                .fillMaxSize()
+                .height(48.dp)
+                .clickable {
+                    onBibleNavigate(index)
+                },
+        shape = RoundedCornerShape(8.dp),
+        colors =
+            CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            ),
+        elevation = CardDefaults.cardElevation(4.dp),
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                bookName,
+                maxLines = 1,
+                style = MaterialTheme.typography.bodyMedium,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+    }
+}

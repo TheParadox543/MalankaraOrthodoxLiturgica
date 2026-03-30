@@ -1,61 +1,117 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ktlint)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
 }
 
-android {
-    namespace = "com.paradox543.malankaraorthodoxliturgica.data.translations"
-    compileSdk {
-        version = release(36)
-    }
+kotlin {
+    androidLibrary {
+        namespace = "com.paradox543.malankaraorthodoxliturgica.data.translations"
+        compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
+        minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
 
-    defaultConfig {
-        minSdk = 26
+        withHostTestBuilder {
+        }
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
+        withDeviceTestBuilder {
+            sourceSetTreeName = "test"
+        }.configure {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        }
+        androidResources {
+            enable = true
+            // TODO: "Need to add resources so that it works in iOS as well"
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+
+    // For iOS targets, this is also where you should
+    // configure native binary output. For more information, see:
+    // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
+
+    // A step-by-step guide on how to include this library in an XCode
+    // project can be found here:
+    // https://developer.android.com/kotlin/multiplatform/migrate
+    val xcfName = "DataTranslationsKit"
+
+    iosX64 {
+        binaries.framework {
+            baseName = xcfName
+        }
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    iosArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
     }
-}
 
-dependencies {
-    // Project imports
-    implementation(project(":core:domain"))
-    implementation(project(":data:core"))
+    iosSimulatorArm64 {
+        binaries.framework {
+            baseName = xcfName
+        }
+    }
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    // Source set declarations.
+    // Declaring a target automatically creates a source set with the same name. By default, the
+    // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
+    // common to share sources between related targets.
+    // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
+    sourceSets {
+        commonMain {
+            dependencies {
+                // Project imports
+                implementation(project(":core:domain"))
+                implementation(project(":data:core"))
 
-    // Dependency Injection
-    implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
-    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
+                // Dependency Injection
+                implementation(libs.koin.core)
 
-    // Data Serialization
-    implementation(libs.kotlinx.serialization.json) // Kotlinx Serialization library for JSON
+                // Data Serialization
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.kotlinx.coroutines.core)
+            }
+        }
 
-    testImplementation(libs.kotlin.test)
-    testImplementation(libs.mockk)
+        commonTest {
+            dependencies {
+                implementation(libs.kotlin.test)
+                implementation(libs.kotlinx.coroutines.test)
+            }
+        }
 
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+        androidMain {
+            dependencies {
+                // Add Android-specific dependencies here. Note that this source set depends on
+                // commonMain by default and will correctly pull the Android artifacts of any KMP
+                // dependencies declared in commonMain.
+            }
+        }
+
+        getByName("androidHostTest") {
+            dependencies {
+                implementation(libs.kotlin.test)
+                implementation(libs.kotlinx.coroutines.test)
+                implementation(libs.mockk)
+            }
+        }
+
+        getByName("androidDeviceTest") {
+            dependencies {
+                implementation(libs.androidx.runner)
+                implementation(libs.androidx.core)
+                implementation(libs.androidx.junit)
+            }
+        }
+
+        iosMain {
+            dependencies {
+                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
+                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
+                // part of KMP’s default source set hierarchy. Note that this source set depends
+                // on common by default and will correctly pull the iOS artifacts of any
+                // KMP dependencies declared in commonMain.
+            }
+        }
+    }
 }

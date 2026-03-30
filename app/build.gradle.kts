@@ -4,11 +4,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    // Linter plugin
-    alias(libs.plugins.ktlint)
+    alias(libs.plugins.ktlint)              // Linter plugin
     alias(libs.plugins.kotlin.serialization)
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotzilla)
     // Google services plugin
     id("com.google.gms.google-services")
     // Add the Crashlytics plugin
@@ -17,11 +15,11 @@ plugins {
 
 android {
     namespace = "com.paradox543.malankaraorthodoxliturgica"
-    compileSdk = 36
+    compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
 
     defaultConfig {
         applicationId = "com.paradox543.malankaraorthodoxliturgica"
-        minSdk = 26
+        minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
         targetSdk = 36
         versionCode = providers.gradleProperty("APP_VERSION_CODE").get().toInt()
         versionName = providers.gradleProperty("APP_VERSION_NAME").get()
@@ -58,11 +56,11 @@ android {
         jniLibs.keepDebugSymbols += arrayOf("**/*.so")
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "21"
     }
     buildFeatures {
         compose = true
@@ -72,26 +70,43 @@ android {
     buildToolsVersion = "35.0.0"
 }
 
+kotzilla {
+    val requestedTasks =
+        gradle.startParameter.taskNames
+            .joinToString(" ")
+            .lowercase()
+    val isDebugBuild = requestedTasks.contains("debug") || requestedTasks.contains("testing")
+    val baseVersionName = providers.gradleProperty("APP_VERSION_NAME").get()
+
+    // Distinguish dev/test telemetry in Kotzilla from release builds.
+    versionName = if (isDebugBuild) "$baseVersionName-dev" else baseVersionName
+}
+
 dependencies {
     // Project imports
-    implementation(project(":shared"))
     implementation(project(":core:domain"))
+    implementation(project(":data:core"))
     implementation(project(":data:bible"))
     implementation(project(":data:calendar"))
     implementation(project(":data:prayer"))
     implementation(project(":data:settings"))
     implementation(project(":data:translations"))
+    implementation(project(":data:song"))
 
     implementation(project(":qr"))
 
-    implementation(project(":core:ui"))
-    implementation(project(":feature:settings"))
-    implementation(project(":feature:prayer"))
-    implementation(project(":feature:bible"))
-    implementation(project(":feature:calendar"))
+    implementation(project(":core:ui-common"))
+    implementation(project(":core:app-info"))
+    implementation(project(":feature:settings-kmp"))
+    implementation(project(":feature:onboarding-kmp"))
+    implementation(project(":feature:prayer-kmp"))
+    implementation(project(":feature:bible-kmp"))
+    implementation(project(":feature:calendar-kmp"))
+    implementation(project(":feature:song"))
 
-    implementation(project(":core:platform"))
-    implementation(project(":platform:analytics-firebase"))
+    implementation(project(":core:analytics"))
+    implementation(project(":core:platform-kmp"))
+    implementation(project(":analytics:firebase-android"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions
@@ -110,33 +125,23 @@ dependencies {
     implementation(libs.androidx.navigation.compose)  // Navigation integration for Compose
 
     // Dependency Injection
-    implementation(libs.hilt.android)                 // Dagger Hilt for Android dependency injection
-    implementation(libs.androidx.hilt.navigation.compose) // Hilt integration with Jetpack Compose Navigation
-    ksp(libs.hilt.android.compiler)                   // KSP annotation processor for Hilt
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.compose.viewmodel)
+    implementation(libs.koin.androidx.compose.navigation)
+    implementation(libs.koin.androidx.workmanager)
 
     // Background Work Management
-    implementation(libs.androidx.hilt.common)
     implementation(libs.androidx.work.runtime.ktx)
 
     // Data Storage
     implementation(libs.androidx.datastore.preferences) // Jetpack DataStore for preferences
-
-    // QR generation and scanning
-//    implementation(libs.zxing.android.embedded)
-//    implementation(libs.zxing.core)
-//    implementation(libs.barcode.scanning)
-//
-//    // Camera Scanning
-//    implementation(libs.androidx.camera.camera2)
-//    implementation(libs.androidx.camera.lifecycle)
-//    implementation(libs.androidx.camera.view)
 
     // Firebase Services
     implementation(platform(libs.firebase.bom))       // Firebase Bill of Materials for version consistency
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
     implementation(libs.firebase.crashlytics)         // Firebase Crashlytics for crash reporting
     implementation(libs.firebase.crashlytics.ndk)
-    implementation(libs.firebase.storage)
 
     // Media Player
     implementation(libs.androidx.media3.exoplayer)
@@ -149,6 +154,7 @@ dependencies {
 
     // Google Fonts
     implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.compose.ui)
 
     // Testing Dependencies
     testImplementation(libs.junit)                    // Standard JUnit 4 for local unit tests

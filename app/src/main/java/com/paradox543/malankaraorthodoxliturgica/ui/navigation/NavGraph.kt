@@ -1,8 +1,20 @@
 package com.paradox543.malankaraorthodoxliturgica.ui.navigation
 
+import android.app.NotificationManager
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.provider.Settings
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.shrinkOut
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -15,11 +27,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.zIndex
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -29,20 +42,26 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.paradox543.malankaraorthodoxliturgica.MainActivity
-import com.paradox543.malankaraorthodoxliturgica.core.platform.AnalyticsService
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
-import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppUpdateManager
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.AppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
-import com.paradox543.malankaraorthodoxliturgica.core.ui.ScaffoldUiState
-import com.paradox543.malankaraorthodoxliturgica.core.ui.components.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
-import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SectionNavBar
-import com.paradox543.malankaraorthodoxliturgica.core.ui.components.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.globalPinchZoom
+import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.BottomNavBar
+import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.SectionNavBar
+import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens.OnboardingScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerScreen
@@ -52,13 +71,10 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.Prayer
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.AboutScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.SettingsScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.song.screens.SongScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.song.viewmodel.SongPlayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.QrScannerView
-import com.paradox543.malankaraorthodoxliturgica.ui.modifier.globalPinchZoom
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.BibleReadingScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.CalendarScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.ContentNotReadyScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.OnboardingScreen
-import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
+import org.koin.compose.viewmodel.koinViewModel
 
 /**
  * App Compose root. Owns [NavController], the single [Scaffold], and navigation state.
@@ -68,18 +84,18 @@ import com.paradox543.malankaraorthodoxliturgica.ui.screens.SongScreen
 @Composable
 fun NavGraph(
     onboardingCompleted: Boolean,
-    inAppUpdateManager: InAppUpdateManager,
-    inAppReviewManager: InAppReviewManager,
+    appUpdateManager: AppUpdateManager,
     analyticsService: AnalyticsService,
     shareService: ShareService,
     settingsViewModel: SettingsViewModel,
 ) {
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
-    val updateDownloaded by inAppUpdateManager.updateDownloaded.collectAsState()
+    val updateDownloaded by appUpdateManager.updateReady.collectAsState()
+    val context: Context = LocalContext.current
 
     // Tracks which bars/FAB each screen requests
-    var scaffoldUiState by remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
+    val scaffoldUiState = remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
 
     // Show update snackbar when a new version has been downloaded
     LaunchedEffect(updateDownloaded) {
@@ -91,12 +107,10 @@ fun NavGraph(
                     duration = SnackbarDuration.Indefinite,
                 )
             if (result == SnackbarResult.ActionPerformed) {
-                inAppUpdateManager.completeUpdate()
+                appUpdateManager.completeUpdate()
             }
         }
     }
-
-    val bibleViewModel: BibleViewModel = hiltViewModel()
 
     // Observe the current route to pass to bars for highlight/back logic
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -108,9 +122,9 @@ fun NavGraph(
             NavController.OnDestinationChangedListener { _, destination, args ->
                 val argsMap =
                     args?.keySet()?.associateWith { key ->
-                        args.get(key)?.toString()
+                        args.readNavArgAsString(key, destination.arguments[key]?.type)
                     } ?: emptyMap()
-                analyticsService.logScreenVisited(destination.route ?: "", argsMap)
+                analyticsService.logEvent(AnalyticsEvent.ScreenVisited(destination.route ?: "", argsMap))
             }
         navController.addOnDestinationChangedListener(listener)
         onDispose { navController.removeOnDestinationChangedListener(listener) }
@@ -124,9 +138,18 @@ fun NavGraph(
 
     val pinchZoomEnabled = currentRoute !in pinchZoomDisabledRoutes
 
+    // Create ViewModels once at NavGraph level to prevent recreation glitches
+    val prayerViewModel: PrayerViewModel = koinViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
+    val songPlayerViewModel: SongPlayerViewModel = koinViewModel()
+    val bibleViewModel: BibleViewModel = koinViewModel()
+    val calendarViewModel: CalendarViewModel = koinViewModel()
+    val prayerRootNode by prayerNavViewModel.rootNode.collectAsState()
+    val isPrayerTreeLoaded = prayerRootNode.children.isNotEmpty()
+
     // Apply nestedScroll modifier only for PrayerReading state
     val baseScaffoldModifier =
-        when (val state = scaffoldUiState) {
+        when (val state = scaffoldUiState.value) {
             is ScaffoldUiState.PrayerReading -> Modifier.nestedScroll(state.nestedScrollConnection)
             else -> Modifier
         }
@@ -142,7 +165,7 @@ fun NavGraph(
         modifier = scaffoldModifier,
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         topBar = {
-            when (val state = scaffoldUiState) {
+            when (val state = scaffoldUiState.value) {
                 is ScaffoldUiState.Standard -> {
                     TopNavBar(
                         title = state.title,
@@ -184,7 +207,7 @@ fun NavGraph(
             }
         },
         bottomBar = {
-            when (val state = scaffoldUiState) {
+            when (val state = scaffoldUiState.value) {
                 is ScaffoldUiState.Standard -> {
                     if (state.showBottomBar) {
                         BottomNavBar(
@@ -248,7 +271,7 @@ fun NavGraph(
             }
         },
         floatingActionButton = {
-            when (val state = scaffoldUiState) {
+            when (val state = scaffoldUiState.value) {
                 is ScaffoldUiState.PrayerReading -> {
                     if (state.showFab) {
                         AnimatedVisibility(
@@ -278,7 +301,7 @@ fun NavGraph(
                 }
 
                 is ScaffoldUiState.Standard -> {
-                    if (state.showBottomBar) {
+                    if (state.showFab) {
                         QrFabScan(
                             onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
                         )
@@ -302,25 +325,21 @@ fun NavGraph(
                 AppScreen.Home.route,
                 deepLinks = AppScreen.Home.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
-                val prayerViewModel: PrayerViewModel = hiltViewModel()
-                val prayerNavViewModel: PrayerNavViewModel = hiltViewModel()
                 HomeScreen(
                     prayerViewModel,
                     prayerNavViewModel,
-                    inAppReviewManager,
                     innerPadding,
                     onSectionNavigate = { route ->
                         navController.navigate(AppScreen.Section.createRoute(route))
                     },
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
             composable(AppScreen.Onboarding.route) {
-                val prayerViewModel: PrayerViewModel = hiltViewModel()
+                val onboardingViewModel: OnboardingViewModel = koinViewModel()
                 OnboardingScreen(
-                    settingsViewModel,
-                    prayerViewModel,
+                    onboardingViewModel,
                     innerPadding,
                     {
                         navController.navigate(AppScreen.Home.route) {
@@ -329,7 +348,7 @@ fun NavGraph(
                             }
                         }
                     },
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
@@ -342,17 +361,20 @@ fun NavGraph(
                     ),
                 deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val prayerNavViewModel: PrayerNavViewModel = hiltViewModel(backStackEntry)
-                val prayerViewModel: PrayerViewModel = hiltViewModel(backStackEntry)
                 val route = backStackEntry.arguments?.getString(AppScreen.Section.ARG_ROUTE) ?: ""
-                val node = prayerNavViewModel.findNode(route)
-                if (node != null) {
+                val node = prayerRootNode.findByRoute(route)
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else if (node != null) {
                     SectionScreen(
                         prayerViewModel,
+                        prayerNavViewModel,
                         node,
-                        inAppReviewManager,
                         innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
                         onSectionNavigate = { route ->
                             navController.navigate(AppScreen.Section.createRoute(route))
                         },
@@ -368,7 +390,7 @@ fun NavGraph(
                         message = route,
                         contentPadding = innerPadding,
                         onBackNavigation = { navController.navigateUp() },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 }
             }
 
@@ -382,13 +404,16 @@ fun NavGraph(
                     ),
                 deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val prayerViewModel: PrayerViewModel = hiltViewModel(backStackEntry)
-                val prayerNavViewModel: PrayerNavViewModel = hiltViewModel(backStackEntry)
                 val prayerRoute = backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_ROUTE) ?: ""
                 val scrollIndex =
                     backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_SCROLL)?.toIntOrNull() ?: 0
-                val node = prayerNavViewModel.findNode(prayerRoute)
-                if (node != null) {
+                val node = prayerRootNode.findByRoute(prayerRoute)
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else if (node != null) {
                     PrayerScreen(
                         { route, replace ->
                             navController.navigate(AppScreen.Prayer.createRoute(route)) {
@@ -408,13 +433,13 @@ fun NavGraph(
                         routeProvider = {
                             AppScreen.Prayer.createRoute(it)
                         },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 } else {
                     ContentNotReadyScreen(
                         message = prayerRoute,
                         contentPadding = innerPadding,
                         onBackNavigation = { navController.navigateUp() },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 }
             }
 
@@ -427,27 +452,30 @@ fun NavGraph(
                         },
                     ),
             ) { backStackEntry ->
-                val prayerNavViewModel: PrayerNavViewModel = hiltViewModel(backStackEntry)
                 val route = backStackEntry.arguments?.getString(AppScreen.Song.ARG_ROUTE) ?: ""
-                val node = prayerNavViewModel.findNode(route)
-                if (node != null) {
+                val node = prayerRootNode.findByRoute(route)
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else if (node != null) {
                     SongScreen(
+                        songPlayerViewModel = songPlayerViewModel,
                         songFilename = node.filename ?: "",
                         contentPadding = innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState = it },
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
                     )
                 } else {
                     ContentNotReadyScreen(
                         message = route,
                         contentPadding = innerPadding,
                         onBackNavigation = { navController.navigateUp() },
-                    ) { scaffoldUiState = it }
+                    ) { scaffoldUiState.value = it }
                 }
             }
 
-            composable(AppScreen.PrayNow.route) { backStackEntry ->
-                val prayerViewModel = hiltViewModel<PrayerViewModel>(backStackEntry)
-                val prayerNavViewModel = hiltViewModel<PrayerNavViewModel>(backStackEntry)
+            composable(AppScreen.PrayNow.route) {
                 PrayNowScreen(
                     { route ->
                         navController.navigate(AppScreen.Prayer.createRoute(route))
@@ -455,21 +483,20 @@ fun NavGraph(
                     prayerViewModel,
                     prayerNavViewModel,
                     innerPadding,
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
                 AppScreen.Bible.route,
                 deepLinks = AppScreen.Bible.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
+            ) {
                 BibleScreen(
                     { index ->
                         navController.navigate(AppScreen.BibleBook.createRoute(index))
                     },
                     bibleViewModel,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -483,7 +510,6 @@ fun NavGraph(
                     ),
                 deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
                 val bookIndex =
                     backStackEntry.arguments?.getString(AppScreen.BibleBook.ARG_BOOK_INDEX)?.toIntOrNull()
                         ?: 0
@@ -494,7 +520,7 @@ fun NavGraph(
                     bibleViewModel,
                     bookIndex,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -507,10 +533,8 @@ fun NavGraph(
                         },
                     ),
                 deepLinks =
-                    AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) }
-                        ?: emptyList(),
+                    AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
-                val bibleViewModel: BibleViewModel = hiltViewModel(backStackEntry)
                 val bookIndex =
                     backStackEntry.arguments
                         ?.getString(AppScreen.BibleChapter.ARG_BOOK_INDEX)
@@ -530,16 +554,14 @@ fun NavGraph(
                     routeFactory = {
                         AppScreen.BibleChapter.createRoute(it.bookIndex, it.chapterIndex)
                     },
-                ) { scaffoldUiState = it }
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
                 AppScreen.Calendar.route,
                 deepLinks = AppScreen.Calendar.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) { backStackEntry ->
-                val calendarViewModel: CalendarViewModel = hiltViewModel(backStackEntry)
+            ) {
                 CalendarScreen(
-                    bibleViewModel,
                     calendarViewModel,
                     contentPadding = innerPadding,
                     onBibleNavigate = {
@@ -548,29 +570,28 @@ fun NavGraph(
                     onPrayerNavigate = { route ->
                         navController.navigate(AppScreen.Prayer.createRoute(route))
                     },
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
             composable(AppScreen.BibleReader.route) {
                 BibleReadingScreen(
-                    bibleViewModel,
+                    calendarViewModel,
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                ) { scaffoldUiState.value = it }
             }
 
             composable(AppScreen.QrScanner.route) {
                 QrScannerView(
                     onNavigate = { route ->
-                        analyticsService.logQrNavigationSuccess(route)
+                        analyticsService.logEvent(AnalyticsEvent.QrNavigationSuccess(route))
                         navController.navigate(route) {
                             launchSingleTop = true
                             navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)
                         }
                     },
                     contentPadding = innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
 
@@ -580,11 +601,24 @@ fun NavGraph(
             ) {
                 SettingsScreen(
                     onNavigateToAbout = { navController.navigate(AppScreen.About.route) },
+                    requestDndPermission = {
+                        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                        if (!notificationManager.isNotificationPolicyAccessGranted) {
+                            Toast
+                                .makeText(
+                                    context,
+                                    "Please grant the app access to modify DND in settings.",
+                                    Toast.LENGTH_LONG,
+                                ).show()
+                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                            context.startActivity(intent)
+                        }
+                    },
                     settingsViewModel = settingsViewModel,
                     shareService = shareService,
+                    showSoundModeSetting = settingsViewModel.showSoundModeSetting,
                     contentPadding = innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                ) { scaffoldUiState.value = it }
             }
 
             composable(
@@ -593,9 +627,52 @@ fun NavGraph(
             ) {
                 AboutScreen(
                     innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState = it },
-                )
+                    settingsViewModel.versionName,
+                    {
+                        val intent =
+                            Intent(Intent.ACTION_SENDTO).apply {
+                                data = "mailto:".toUri()
+                                putExtra(Intent.EXTRA_EMAIL, arrayOf("samuel.alex.koshy@gmail.com"))
+                                putExtra(Intent.EXTRA_SUBJECT, "Malankara Orthodox Liturgica App Feedback")
+                            }
+                        try {
+                            context.startActivity(Intent.createChooser(intent, "Send Email"))
+                        } catch (_: ActivityNotFoundException) {
+                            Toast.makeText(context, "No email apps installed", Toast.LENGTH_SHORT).show()
+                        }
+                    },
+                    {
+                        val intent = Intent(Intent.ACTION_VIEW, it.toUri())
+                        context.startActivity(intent)
+                    },
+                ) { scaffoldUiState.value = it }
             }
         }
+    }
+}
+
+private fun Bundle.readNavArgAsString(
+    key: String,
+    navType: NavType<*>?,
+): String? =
+    navType
+        ?.let { type ->
+            runCatching { type[this, key]?.toString() }.getOrNull()
+        } ?: getString(key)
+
+@Composable
+private fun ContentLoadingScreen(
+    contentPadding: PaddingValues,
+    onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
+) {
+    LaunchedEffect(Unit) {
+        onScaffoldStateChanged(ScaffoldUiState.None)
+    }
+
+    Box(
+        modifier = Modifier.fillMaxSize().padding(contentPadding),
+        contentAlignment = Alignment.Center,
+    ) {
+        CircularProgressIndicator()
     }
 }

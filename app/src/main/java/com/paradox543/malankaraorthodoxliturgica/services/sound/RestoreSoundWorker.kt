@@ -1,18 +1,19 @@
 package com.paradox543.malankaraorthodoxliturgica.services.sound
 
 import android.content.Context
-import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-@HiltWorker
-class RestoreSoundWorker @AssistedInject constructor(
-    @Assisted context: Context,
-    @Assisted workerParams: WorkerParameters,
-    private val soundModeManager: SoundModeManager,
-) : CoroutineWorker(context, workerParams) {
+class RestoreSoundWorker(
+    context: Context,
+    workerParams: WorkerParameters,
+) : CoroutineWorker(context, workerParams),
+    KoinComponent {
+    private val soundModeManager: SoundModeManager by inject()
+
     override suspend fun doWork(): Result =
         try {
             soundModeManager.restoreIfNeeded()   // <— CLEAN, no static calls

@@ -1,0 +1,160 @@
+package com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
+import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeCapability
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+
+class SettingsViewModel(
+    private val settingsRepository: SettingsRepository,
+    private val analyticsService: AnalyticsService,
+    private val soundModeCapability: SoundModeCapability,
+    private val appInfoProvider: AppInfoProvider,
+) : ViewModel() {
+    val selectedLanguage: StateFlow<AppLanguage> =
+        settingsRepository.language
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = AppLanguage.MALAYALAM,
+            )
+
+    val fontScale: StateFlow<AppFontScale> =
+        settingsRepository.fontScale
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = AppFontScale.Medium,
+            )
+
+    val songScrollState: StateFlow<Boolean> =
+        settingsRepository.songScrollState
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = false,
+            )
+
+    val soundMode: StateFlow<SoundMode> =
+        settingsRepository.soundMode
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = SoundMode.OFF,
+            )
+
+    val soundRestoreDelay: StateFlow<Int> =
+        settingsRepository.soundRestoreDelay
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = 30,
+            )
+
+    private val _hasDndPermission = MutableStateFlow(false)
+    val hasDndPermission = _hasDndPermission.asStateFlow()
+
+    private val _shareApp = MutableSharedFlow<Unit>()
+    val shareApp = _shareApp.asSharedFlow()
+
+    val versionName = appInfoProvider.versionName
+    val debugMode = appInfoProvider.debugMode
+    val showSoundModeSetting = soundModeCapability.isAvailable
+
+    private var debounceJob: Job? = null
+
+    // Function to set (and save) language
+    fun setLanguage(language: AppLanguage) {
+        viewModelScope.launch {
+            settingsRepository.setLanguage(language)
+            analyticsService.logEvent(AnalyticsEvent.LanguageSelected(language.name))
+        }
+    }
+
+    // Function to set (and save) font size
+    fun setFontScaleFromSettings(scale: AppFontScale) {
+        viewModelScope.launch {
+            settingsRepository.setFontScale(scale) // Convert TextUnit back to Int for DataStore
+        }
+    }
+
+    fun setFontScaleDebounced(direction: Int) {
+        val current = fontScale.value
+        val target =
+            when {
+                direction > 0 -> current.next()
+                direction < 0 -> current.prev()
+                else -> current
+            }
+
+        if (target == current) return
+        updateFontScaleWithDebounce(target)
+    }
+
+    fun updateFontScaleWithDebounce(newScale: AppFontScale) {
+//        _selectedAppFontScale.value = newScale
+
+        debounceJob?.cancel()
+        debounceJob =
+            viewModelScope.launch {
+                delay(300) // Example debounce time
+                settingsRepository.setFontScale(newScale)
+            }
+    }
+
+    fun setOnboardingCompleted(completed: Boolean = true) {
+        viewModelScope.launch {
+            settingsRepository.setOnboardingCompleted(completed)
+            if (completed) {
+                analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
+            }
+        }
+    }
+
+    fun setSongScrollState(isHorizontal: Boolean) {
+        viewModelScope.launch {
+            settingsRepository.setSongScrollState(isHorizontal)
+        }
+    }
+
+    fun refreshDndPermissionStatus() {
+        val granted = soundModeCapability.hasPermission
+        setDndPermissionStatus(granted)
+    }
+
+    fun setSoundMode(permissionState: SoundMode) {
+        viewModelScope.launch {
+            settingsRepository.setSoundMode(permissionState)
+        }
+    }
+
+    fun setSoundRestoreDelay(delay: Int) {
+        viewModelScope.launch {
+            settingsRepository.setSoundRestoreDelay(delay)
+        }
+    }
+
+    fun setDndPermissionStatus(granted: Boolean) {
+        _hasDndPermission.value = granted
+    }
+
+    fun onShareAppClicked() {
+        viewModelScope.launch { _shareApp.emit(Unit) }
+    }
+}
