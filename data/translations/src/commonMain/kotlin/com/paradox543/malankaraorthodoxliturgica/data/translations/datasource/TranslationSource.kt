@@ -1,14 +1,18 @@
 package com.paradox543.malankaraorthodoxliturgica.data.translations.datasource
 
-import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
+import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.ResourceTextReader
+import kotlinx.serialization.json.Json
 
 interface RawTranslationsSource {
-    fun loadRawTranslations(): Map<String, Map<String, String>>
+    suspend fun loadRawTranslations(): Map<String, Map<String, String>>
 }
 
 class TranslationSource(
-    private val reader: AssetJsonReader,
+    private val reader: ResourceTextReader,
+    private val json: Json,
 ) : RawTranslationsSource {
-    override fun loadRawTranslations(): Map<String, Map<String, String>> =
-        reader.loadJsonAsset("translations.json")
+    override suspend fun loadRawTranslations(): Map<String, Map<String, String>> {
+        val jsonString = reader.readText("translations.json")
+        return json.decodeFromString<Map<String, Map<String, String>>>(jsonString)
+    }
 }
