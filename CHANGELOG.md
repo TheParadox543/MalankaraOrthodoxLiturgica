@@ -8,6 +8,9 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ## 🔮 [Unreleased]
 
 - Unversioned changes
+### Refactor
+
+- Remove platform specific implementation for JSON file reading with composeResources implementation. 
 
 ---
 
