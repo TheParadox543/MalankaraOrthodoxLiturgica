@@ -7,11 +7,10 @@ import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWee
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.ReferenceRangeDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.TitleStrDto
+import kotlinx.datetime.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
-import java.time.LocalDate as JavaLocalDate
-import kotlinx.datetime.LocalDate as KotlinLocalDate
 
 class CalendarClassesMappersTest {
     // ─── TitleStrDto ─────────────────────────────────────────────────────────
@@ -187,26 +186,24 @@ class CalendarClassesMappersTest {
 
     @Test
     fun `CalendarDayDto toDomain maps date and events`() {
-        val javaLocalDate = JavaLocalDate.of(2025, 4, 20)
-        val kotlinLocalDate = KotlinLocalDate(2025, 4, 20)
+        val localDate = LocalDate(2025, 4, 20)
         val dto =
             CalendarDayDto(
-                date = javaLocalDate,
+                date = localDate,
                 events = listOf(LiturgicalEventDetailsDto(type = "feast", title = TitleStrDto(en = "Easter"))),
             )
         val domain = dto.toDomain()
-        assertEquals(kotlinLocalDate, domain.date)
+        assertEquals(localDate, domain.date)
         assertEquals(1, domain.events.size)
         assertEquals("Easter", domain.events[0].title.en)
     }
 
     @Test
     fun `CalendarDayDto toDomain handles empty events list`() {
-        val javaLocalDate = JavaLocalDate.of(2025, 1, 1)
-        val kotlinLocalDate = KotlinLocalDate(javaLocalDate.year, javaLocalDate.monthValue, javaLocalDate.dayOfMonth)
-        val dto = CalendarDayDto(date = javaLocalDate, events = emptyList())
+        val localDate = LocalDate(2025, 1, 1)
+        val dto = CalendarDayDto(date = localDate, events = emptyList())
         val domain = dto.toDomain()
-        assertEquals(kotlinLocalDate, domain.date)
+        assertEquals(localDate, domain.date)
         assertEquals(emptyList(), domain.events)
     }
 
@@ -214,13 +211,13 @@ class CalendarClassesMappersTest {
     fun `List of CalendarDayDto toCalendarDaysDomain maps all items`() {
         val dtos =
             listOf(
-                CalendarDayDto(JavaLocalDate.of(2025, 1, 1), emptyList()),
-                CalendarDayDto(JavaLocalDate.of(2025, 1, 2), emptyList()),
+                CalendarDayDto(LocalDate(2025, 1, 1), emptyList()),
+                CalendarDayDto(LocalDate(2025, 1, 2), emptyList()),
             )
         val result = dtos.toCalendarDaysDomain()
         assertEquals(2, result.size)
-        assertEquals(KotlinLocalDate(2025, 1, 1), result[0].date)
-        assertEquals(KotlinLocalDate(2025, 1, 2), result[1].date)
+        assertEquals(LocalDate(2025, 1, 1), result[0].date)
+        assertEquals(LocalDate(2025, 1, 2), result[1].date)
     }
 
     // ─── CalendarWeekDto ─────────────────────────────────────────────────────
@@ -229,19 +226,19 @@ class CalendarClassesMappersTest {
     fun `CalendarWeekDto toDomain maps days list`() {
         val days =
             (0..6).map { i ->
-                CalendarDayDto(JavaLocalDate.of(2025, 4, 13 + i), emptyList())
+                CalendarDayDto(LocalDate(2025, 4, 13 + i), emptyList())
             }
         val dto = CalendarWeekDto(days = days)
         val domain = dto.toDomain()
         assertEquals(7, domain.days.size)
-        assertEquals(KotlinLocalDate(2025, 4, 13), domain.days[0].date)
-        assertEquals(KotlinLocalDate(2025, 4, 19), domain.days[6].date)
+        assertEquals(LocalDate(2025, 4, 13), domain.days[0].date)
+        assertEquals(LocalDate(2025, 4, 19), domain.days[6].date)
     }
 
     @Test
     fun `List of CalendarWeekDto toCalendarWeeksDomain maps all weeks`() {
-        val week1 = CalendarWeekDto((0..6).map { CalendarDayDto(JavaLocalDate.of(2025, 4, 13 + it), emptyList()) })
-        val week2 = CalendarWeekDto((0..6).map { CalendarDayDto(JavaLocalDate.of(2025, 4, 20 + it), emptyList()) })
+        val week1 = CalendarWeekDto((0..6).map { CalendarDayDto(LocalDate(2025, 4, 13 + it), emptyList()) })
+        val week2 = CalendarWeekDto((0..6).map { CalendarDayDto(LocalDate(2025, 4, 20 + it), emptyList()) })
         val result = listOf(week1, week2).toCalendarWeeksDomain()
         assertEquals(2, result.size)
         assertEquals(7, result[0].days.size)
