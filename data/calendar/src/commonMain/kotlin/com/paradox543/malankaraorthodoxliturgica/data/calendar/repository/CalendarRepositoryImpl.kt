@@ -17,49 +17,66 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.datetime.DatePeriod
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.minus
 import kotlinx.datetime.number
-import kotlinx.datetime.toJavaLocalDate
+import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
-import java.time.DayOfWeek
-import java.time.temporal.TemporalAdjusters
 import kotlin.time.ExperimentalTime
-import java.time.LocalDate as JavaLocalDate
 
 @OptIn(ExperimentalTime::class)
 class CalendarRepositoryImpl(
     private val calendarSource: CalendarSource,
 ) : CalendarRepository {
-    // Lazy initialization ensures files are read only when first accessed.
-    // Asset exceptions are translated at this boundary so callers deal only with
-    // AssetReadException / AssetParsingException (both from :data:core).
-    private val cachedLiturgicalDates: LiturgicalCalendarDates by lazy {
-        try {
-            calendarSource.readLiturgicalDates()
-        } catch (e: AssetReadException) {
-            throw AssetReadException("Could not read assets/calendar/liturgical_calendar.json", e)
-        } catch (e: AssetParsingException) {
-            throw AssetParsingException("Could not parse assets/calendar/liturgical_calendar.json", e)
+    private val cacheMutex = Mutex()
+    private var cachedLiturgicalDates: LiturgicalCalendarDates? = null
+    private var cachedLiturgicalData: LiturgicalDataStore? = null
+
+    private suspend fun initializeIfNeeded() {
+        if (cachedLiturgicalDates != null && cachedLiturgicalData != null) {
+            return
+        }
+
+        cacheMutex.withLock {
+            if (cachedLiturgicalDates == null) {
+                try {
+                    cachedLiturgicalDates = calendarSource.readLiturgicalDates()
+                } catch (e: AssetReadException) {
+                    throw AssetReadException("Could not read assets/calendar/liturgical_calendar.json", e)
+                } catch (e: AssetParsingException) {
+                    throw AssetParsingException("Could not parse assets/calendar/liturgical_calendar.json", e)
+                }
+            }
+
+            if (cachedLiturgicalData == null) {
+                try {
+                    cachedLiturgicalData = calendarSource.readLiturgicalData()
+                } catch (e: AssetReadException) {
+                    throw AssetReadException("Could not read assets/calendar/liturgical_data.json", e)
+                } catch (e: AssetParsingException) {
+                    throw AssetParsingException("Could not parse assets/calendar/liturgical_data.json", e)
+                }
+            }
         }
     }
 
-    private val cachedLiturgicalData: LiturgicalDataStore by lazy {
-        try {
-            calendarSource.readLiturgicalData()
-        } catch (e: AssetReadException) {
-            throw AssetReadException("Could not read assets/calendar/liturgical_data.json", e)
-        } catch (e: AssetParsingException) {
-            throw AssetParsingException("Could not parse assets/calendar/liturgical_data.json", e)
-        }
-    }
+    private fun getLiturgicalDates(): LiturgicalCalendarDates = cachedLiturgicalDates ?: error("Calendar not initialized")
+
+    private fun getLiturgicalData(): LiturgicalDataStore = cachedLiturgicalData ?: error("Calendar not initialized")
 
     /**
      * Internal helper to get event keys for a specific date.
      */
-    private fun getEventKeysForDate(day: JavaLocalDate): List<EventKey> {
-        return cachedLiturgicalDates[day.year.toString()]
-            ?.get(day.monthValue.toString())
-            ?.get(day.dayOfMonth.toString())
+    private fun getEventKeysForDate(day: LocalDate): List<EventKey> {
+        return getLiturgicalDates()[day.year.toString()]
+            ?.get(day.month.number.toString())
+            ?.get(day.day.toString())
             ?: emptyList() // Return empty list if no events for the day
     }
 
@@ -70,12 +87,12 @@ class CalendarRepositoryImpl(
      * @throws IllegalArgumentException if an event key found in liturgical_calendar.json
      * is not present in liturgical_data.json.
      */
-    fun getEventsForDate(date: JavaLocalDate): List<LiturgicalEventDetailsDto> {
+    fun getEventsForDate(date: LocalDate): List<LiturgicalEventDetailsDto> {
         val eventKeys = getEventKeysForDate(date)
         val eventDetails = mutableListOf<LiturgicalEventDetailsDto>()
 
         for (key in eventKeys) {
-            val details = cachedLiturgicalData[key]
+            val details = getLiturgicalData()[key]
             if (details != null) {
                 eventDetails.add(details)
             } else {
@@ -85,10 +102,13 @@ class CalendarRepositoryImpl(
         return eventDetails
     }
 
-    override fun checkMonthDataExists(
+    override suspend fun checkMonthDataExists(
         month: Int,
         year: Int,
-    ): Boolean = cachedLiturgicalDates[year.toString()]?.get(month.toString()) is MonthEvents
+    ): Boolean {
+        initializeIfNeeded()
+        return getLiturgicalDates()[year.toString()]?.get(month.toString()) is MonthEvents
+    }
 
     /**
      * Loads the calendar data for a specific month and year, structured by weeks.
@@ -98,10 +118,11 @@ class CalendarRepositoryImpl(
      * @return A list of CalendarWeek objects, each containing 7 CalendarDay objects.
      */
     @OptIn(ExperimentalTime::class)
-    override fun loadMonthData(
+    override suspend fun loadMonthData(
         month: Int?,
         year: Int?,
     ): List<CalendarWeek> {
+        initializeIfNeeded()
         val now =
             kotlin.time.Clock.System
                 .now()
@@ -112,20 +133,25 @@ class CalendarRepositoryImpl(
 
         require(targetMonth in 1..12) { "Month must be between 1 and 12." }
 
-        val firstDayOfMonth = JavaLocalDate.of(targetYear, targetMonth, 1)
-        val lastDayOfMonth = firstDayOfMonth.with(TemporalAdjusters.lastDayOfMonth())
+        val firstDayOfMonth = LocalDate(targetYear, targetMonth, 1)
+        val daysInMonth =
+            when {
+                targetMonth == 12 -> 31
+                else -> LocalDate(targetYear, targetMonth + 1, 1).minus(DatePeriod(days = 1)).day
+            }
+        val lastDayOfMonth = LocalDate(targetYear, targetMonth, daysInMonth)
 
         // Calculate the first day of the calendar grid (Sunday of the first week)
         var currentDay = firstDayOfMonth
         while (currentDay.dayOfWeek != DayOfWeek.SUNDAY) {
-            currentDay = currentDay.minusDays(1)
+            currentDay = currentDay.minus(1, DateTimeUnit.DAY)
         }
 
         val monthData = mutableListOf<CalendarWeekDto>()
         var weekDays = mutableListOf<CalendarDayDto>()
 
         // Iterate through days, forming weeks
-        while (currentDay.isBefore(lastDayOfMonth.plusDays(1)) || currentDay.dayOfWeek != DayOfWeek.SUNDAY) {
+        while (currentDay <= lastDayOfMonth || currentDay.dayOfWeek != DayOfWeek.SUNDAY) {
             val events = getEventsForDate(currentDay)
             weekDays.add(CalendarDayDto(currentDay, events))
 
@@ -133,14 +159,14 @@ class CalendarRepositoryImpl(
                 monthData.add(CalendarWeekDto(weekDays.toList()))
                 weekDays = mutableListOf() // Start a new week
             }
-            currentDay = currentDay.plusDays(1)
+            currentDay = currentDay.plus(1, DateTimeUnit.DAY)
         }
 
         // Add any remaining days for the last week (if not a full week)
         if (weekDays.isNotEmpty()) {
             while (weekDays.size < 7) {
                 weekDays.add(CalendarDayDto(currentDay, emptyList())) // Add placeholder for visual alignment
-                currentDay = currentDay.plusDays(1)
+                currentDay = currentDay.plus(1, DateTimeUnit.DAY)
             }
             monthData.add(CalendarWeekDto(weekDays.toList()))
         }
@@ -153,11 +179,10 @@ class CalendarRepositoryImpl(
                 .now()
                 .toLocalDateTime(TimeZone.currentSystemDefault())
                 .date
-                .toJavaLocalDate()
         val weekEvents = mutableListOf<CalendarDayDto>()
 
         for (i in 0 until 7) {
-            val day = today.plusDays(i.toLong())
+            val day = today.plus(i, DateTimeUnit.DAY)
             val eventDetails = getEventsForDate(day)
             weekEvents.add(CalendarDayDto(day, eventDetails))
         }
@@ -168,9 +193,13 @@ class CalendarRepositoryImpl(
      * Get events for the upcoming week starting from today.
      * @return A list of CalendarDay objects for the next 7 days, including their events.
      */
-    override fun getUpcomingWeekEvents(): List<CalendarDay> = getUpcomingWeekEventsData().toCalendarDaysDomain()
+    override suspend fun getUpcomingWeekEvents(): List<CalendarDay> {
+        initializeIfNeeded()
+        return getUpcomingWeekEventsData().toCalendarDaysDomain()
+    }
 
-    override fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
+    override suspend fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> {
+        initializeIfNeeded()
         val weekEvents = getUpcomingWeekEventsData()
         val eventItems = mutableListOf<LiturgicalEventDetailsDto>()
         weekEvents.forEach { day ->

@@ -6,13 +6,19 @@ import com.paradox543.malankaraorthodoxliturgica.data.translations.datasource.Tr
 import com.paradox543.malankaraorthodoxliturgica.data.translations.datasource.TranslationSource
 import com.paradox543.malankaraorthodoxliturgica.data.translations.repository.TranslationsRepositoryImpl
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val translationsDataModule =
     module {
-        single<ResourceTextReader> { TranslationComposeResourceReader() }
+        single<ResourceTextReader>(named("TranslationResourceReader")) { TranslationComposeResourceReader() }
 
-        single<RawTranslationsSource> { TranslationSource(reader = get(), json = get()) }
+        single<RawTranslationsSource> {
+            TranslationSource(
+                reader = get(named("TranslationResourceReader")),
+                json = get(),
+            )
+        }
 
         single<TranslationsRepository> {
             TranslationsRepositoryImpl(source = get())

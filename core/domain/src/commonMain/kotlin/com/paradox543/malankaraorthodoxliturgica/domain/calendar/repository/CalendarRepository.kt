@@ -5,17 +5,17 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarW
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 
 interface CalendarRepository {
-    fun checkMonthDataExists(
+    suspend fun checkMonthDataExists(
         month: Int,
         year: Int,
     ): Boolean
 
-    fun loadMonthData(
+    suspend fun loadMonthData(
         month: Int? = null,
         year: Int? = null,
     ): List<CalendarWeek>
 
-    fun getUpcomingWeekEvents(): List<CalendarDay>
+    suspend fun getUpcomingWeekEvents(): List<CalendarDay>
 
-    fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails>
+    suspend fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails>
 }
