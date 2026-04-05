@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.data.prayer.datasource
 
-import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
 import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.ResourceTextReader
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
@@ -9,9 +8,6 @@ import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerContent
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElementDto
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerParsingException
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
-import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 
 class PrayerSource(
