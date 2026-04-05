@@ -6,9 +6,9 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTempl
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 
 interface BibleRepository {
-    fun loadBibleMetaData(): List<BibleBookDetails>
+    suspend fun loadBibleMetaData(): List<BibleBookDetails>
 
-    fun loadBibleChapter(
+    suspend fun loadBibleChapter(
         bookIndex: Int,
         chapterIndex: Int,
         language: AppLanguage,
@@ -25,5 +25,5 @@ interface BibleRepository {
         language: AppLanguage,
     ): String
 
-    fun loadPrefaceTemplates(): PrefaceTemplates
+    suspend fun loadPrefaceTemplates(): PrefaceTemplates
 }

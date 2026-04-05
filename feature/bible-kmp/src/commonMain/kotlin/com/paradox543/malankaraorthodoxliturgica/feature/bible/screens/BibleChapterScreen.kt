@@ -40,8 +40,13 @@ fun BibleChapterScreen(
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
-    val bibleBooks = bibleViewModel.bibleBooks
-    val bibleBook = bibleBooks[bookIndex]
+    val chapterData by bibleViewModel.chapter.collectAsState()
+    val adjacent by bibleViewModel.adjacent.collectAsState()
+    val isLoading by bibleViewModel.isLoading.collectAsState()
+    val error by bibleViewModel.error.collectAsState()
+
+    val bibleBooks = bibleViewModel.bibleBooks.value
+    val bibleBook = bibleBooks.getOrNull(bookIndex) ?: return
     var showQrDialog by remember { mutableStateOf(false) }
 
     val bookName: String =
@@ -55,8 +60,10 @@ fun BibleChapterScreen(
         } else {
             "$bookName ${chapterIndex + 1}"
         }
-    val chapterData = bibleViewModel.loadBibleChapter(bookIndex, chapterIndex, selectedLanguage)
-    val (prevRoute, nextRoute) = bibleViewModel.getAdjacentChapters(bookIndex, chapterIndex)
+    LaunchedEffect(bookIndex, chapterIndex, selectedLanguage) {
+        bibleViewModel.loadChapter(bookIndex, chapterIndex, selectedLanguage)
+    }
+    val (prevRoute, nextRoute) = adjacent
 
     // Scroll-aware visibility — same behaviour as PrayerScreen but no FAB
     val (isVisible, nestedScrollConnection) = rememberScrollAwareVisibility()
@@ -101,37 +108,37 @@ fun BibleChapterScreen(
     val initialBottomPadding = remember { mutableStateOf(0.dp) }
     contentPadding.calculateTopPadding().let { if (it > initialTopPadding.value) initialTopPadding.value = it }
     contentPadding.calculateBottomPadding().let { if (it > initialBottomPadding.value) initialBottomPadding.value = it }
-
-    if (chapterData == null) {
-        Text(
-            "Error in loading Bible content.",
-            Modifier.padding(16.dp),
-            MaterialTheme.colorScheme.error,
-        )
-    } else {
-        if (showQrDialog) {
-            val matrix = generateQrMatrix(routeProvider)
-            val imageBitmap = qrMatrixToImageBitmap(matrix)
-            QrDialog(imageBitmap) { showQrDialog = false }
+    val data =
+        chapterData ?: run {
+            Text(
+                "Error in loading Bible content.",
+                Modifier.padding(16.dp),
+                MaterialTheme.colorScheme.error,
+            )
+            return
         }
-        LazyColumn(
-            state = listState,
-            modifier =
-                Modifier
-                    .padding(horizontal = 16.dp)
-                    .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
-        ) {
-            item {
-                Spacer(Modifier.padding(top = initialTopPadding.value))
-            }
-            items(chapterData.verses.size) { index ->
-                val verseNumber = chapterData.verses[index].id.toString()
-                val verseText = chapterData.verses[index].verse
-                VerseItem(verseNumber, verseText)
-            }
-            item {
-                Spacer(Modifier.padding(bottom = initialBottomPadding.value))
-            }
+    if (showQrDialog) {
+        val matrix = generateQrMatrix(routeProvider)
+        val imageBitmap = qrMatrixToImageBitmap(matrix)
+        QrDialog(imageBitmap) { showQrDialog = false }
+    }
+    LazyColumn(
+        state = listState,
+        modifier =
+            Modifier
+                .padding(horizontal = 16.dp)
+                .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
+    ) {
+        item {
+            Spacer(Modifier.padding(top = initialTopPadding.value))
+        }
+        items(data.verses.size) { index ->
+            val verseNumber = data.verses[index].id.toString()
+            val verseText = data.verses[index].verse
+            VerseItem(verseNumber, verseText)
+        }
+        item {
+            Spacer(Modifier.padding(bottom = initialBottomPadding.value))
         }
     }
 }

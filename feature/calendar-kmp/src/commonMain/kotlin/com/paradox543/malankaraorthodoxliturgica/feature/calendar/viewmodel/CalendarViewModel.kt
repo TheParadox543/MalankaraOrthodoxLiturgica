@@ -47,9 +47,9 @@ class CalendarViewModel(
     private val translationsRepository: TranslationsRepository,
     private val formatDateTitleUseCase: FormatDateTitleUseCase,
     private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
-    private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
+    private val formatGospelEntryUseCaseLazy: Lazy<FormatGospelEntryUseCase>,
     private val formatBiblePrefaceUseCase: FormatBiblePrefaceUseCase,
-    private val formatBibleReadingEntryUseCase: FormatBibleReadingEntryUseCase,
+    private val formatBibleReadingEntryUseCaseLazy: Lazy<FormatBibleReadingEntryUseCase>,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
     private data class MonthLoadResult(
@@ -258,7 +258,7 @@ class CalendarViewModel(
     fun formatGospelEntry(
         entries: List<BibleReference>,
         language: AppLanguage,
-    ): String = formatGospelEntryUseCase(entries, language)
+    ): String = formatGospelEntryUseCaseLazy.value(entries, language)
 
     /**
      * Sets the selected BibleReference to be displayed on the BibleReaderScreen.
@@ -280,9 +280,9 @@ class CalendarViewModel(
     fun formatBibleReadingEntry(
         entry: BibleReference,
         language: AppLanguage,
-    ): String = formatBibleReadingEntryUseCase(entry, language)
+    ): String = formatBibleReadingEntryUseCaseLazy.value(entry, language)
 
-    fun loadBiblePreface(
+    suspend fun loadBiblePreface(
         bibleReference: BibleReference,
         language: AppLanguage,
     ): List<PrayerElement.Prose>? = formatBiblePrefaceUseCase(bibleReference, language)
@@ -319,7 +319,7 @@ class CalendarViewModel(
             }
     }
 
-    private fun buildBibleReading(
+    private suspend fun buildBibleReading(
         bibleReferences: List<BibleReference>,
         language: AppLanguage,
     ): BibleReading =

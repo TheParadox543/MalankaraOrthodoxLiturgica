@@ -10,7 +10,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRe
 class GetAdjacentChaptersUseCase(
     private val bibleRepository: BibleRepository,
 ) {
-    operator fun invoke(
+    suspend operator fun invoke(
         bookIndex: Int,
         chapterIndex: Int,
     ): Pair<BibleChapterRef?, BibleChapterRef?> {

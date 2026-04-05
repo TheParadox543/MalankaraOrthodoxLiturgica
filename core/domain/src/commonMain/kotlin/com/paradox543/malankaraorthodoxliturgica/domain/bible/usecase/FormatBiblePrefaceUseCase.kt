@@ -13,7 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 class FormatBiblePrefaceUseCase(
     private val bibleRepository: BibleRepository,
 ) {
-    operator fun invoke(
+    suspend operator fun invoke(
         bibleReference: BibleReference,
         language: AppLanguage,
     ): List<PrayerElement.Prose>? {

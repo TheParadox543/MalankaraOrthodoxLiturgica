@@ -36,7 +36,7 @@ fun BibleScreen(
     contentPadding: PaddingValues,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
-    val bibleChapters = bibleViewModel.bibleBooks
+    val bibleChapters = bibleViewModel.bibleBooks.collectAsState().value
     val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
 
     val oldTestamentCount = 39

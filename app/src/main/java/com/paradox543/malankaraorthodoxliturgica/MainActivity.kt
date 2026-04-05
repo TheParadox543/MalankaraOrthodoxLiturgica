@@ -18,10 +18,12 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.model.UpdateType
 import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,6 +54,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         androidUpdateManager.bindActivity(this)
+
+        // Prewarm Bible metadata cache on background thread
+        lifecycleScope.launch(Dispatchers.Default) {
+            try {
+                val bibleRepository: BibleRepository by inject() // Koin inject
+                bibleRepository.loadBibleMetaData() // Triggers lazy runBlocking once
+            } catch (e: Exception) {
+                // Log if needed, but don't crash startup
+                android.util.Log.w("MainActivity", "Bible metadata prewarm failed", e)
+            }
+        }
 
         var keepSplashOn by mutableStateOf(true)
         splashScreen.setKeepOnScreenCondition { keepSplashOn }
