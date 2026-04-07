@@ -7,20 +7,30 @@ import SwiftUI
 import sharedKit
 
 struct PrayerView: View {
-
-    private let prayer = SharedKit().prayerApi.getSamplePrayer()
+    @State private var elements: [PrayerUiElement] = []
+    @State private var isLoading = true
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text(prayer.title)
-                .font(.title)
-                .fontWeight(.bold)
-
-            ScrollView {
-                Text(prayer.content)
-                    .font(.body)
+        Group {
+            if isLoading {
+                ProgressView()
+            } else {
+                Text("Loaded \(elements.count) items")
             }
         }
-        .padding()
+        .task {
+            // Ensure Koin is initialized
+            SharedKit.shared.initialize()
+
+            do {
+                let api = SharedKit.shared.getPrayerApi()
+                let result = try await api.loadPrayer(fileName: "commonPrayers/kauma.json")
+                elements = result
+            } catch {
+                print("Error: \(error)")
+            }
+
+            isLoading = false
+        }
     }
 }

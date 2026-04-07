@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import sharedKit
 
 @main
 struct MalankaraOrthodoxLiturgicaApp: App {
+    init() {
+        SharedKit.shared.initialize()
+        }
+
     var body: some Scene {
         WindowGroup {
             PrayerView()

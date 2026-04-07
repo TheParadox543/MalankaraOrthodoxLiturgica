@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.shared.prayer
 
-data class Prayer(
-    val title: String,
+data class PrayerUiElement(
+    val type: PrayerElementType,
     val content: String,
 )

@@ -1,10 +1,19 @@
 package com.paradox543.malankaraorthodoxliturgica.shared.prayer
 
-class PrayerApi {
-    fun getSamplePrayer(): Prayer {
-        return Prayer(
-            title = "Evening Prayer",
-            content = "O Lord, grant us a peaceful night..."
-        )
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import org.koin.core.component.KoinComponent
+
+class PrayerApi(
+    private val repository: PrayerRepository,
+) {
+    suspend fun loadPrayer(fileName: String): List<PrayerUiElement> {
+        val elements =
+            repository.loadPrayerElements(
+                fileName = fileName,
+                language = AppLanguage.MALAYALAM,
+            )
+
+        return elements.map { it.toUi() }
     }
 }
