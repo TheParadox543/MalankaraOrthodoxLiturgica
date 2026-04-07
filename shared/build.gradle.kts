@@ -27,11 +27,38 @@ kotlin {
 
     val xcfName = "sharedKit"
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
+//    iosX64()
+//    iosArm64()
+//    iosSimulatorArm64()
+//
+//    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+//        binaries.framework {
+//            baseName = xcfName
+//
+//            export(project(":core:domain"))
+//            export(project(":data:prayer"))
+//            export(project(":feature:prayer-kmp"))
+//        }
+//    }
+    iosX64 {
+        binaries.framework {
+            baseName = xcfName
 
-    targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+            export(project(":core:domain"))
+            export(project(":data:prayer"))
+            export(project(":feature:prayer-kmp"))
+        }
+    }
+    iosArm64 {
+        binaries.framework {
+            baseName = xcfName
+
+            export(project(":core:domain"))
+            export(project(":data:prayer"))
+            export(project(":feature:prayer-kmp"))
+        }
+    }
+    iosSimulatorArm64{
         binaries.framework {
             baseName = xcfName
 

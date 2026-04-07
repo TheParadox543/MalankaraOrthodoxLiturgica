@@ -13,7 +13,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65C95B772F82CEF200069A23"
+               BlueprintIdentifier = "65683B5B2F84275C00B6A903"
                BuildableName = "MalankaraOrthodoxLiturgica.app"
                BlueprintName = "MalankaraOrthodoxLiturgica"
                ReferencedContainer = "container:MalankaraOrthodoxLiturgica.xcodeproj">
@@ -42,7 +42,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "65C95B772F82CEF200069A23"
+            BlueprintIdentifier = "65683B5B2F84275C00B6A903"
             BuildableName = "MalankaraOrthodoxLiturgica.app"
             BlueprintName = "MalankaraOrthodoxLiturgica"
             ReferencedContainer = "container:MalankaraOrthodoxLiturgica.xcodeproj">

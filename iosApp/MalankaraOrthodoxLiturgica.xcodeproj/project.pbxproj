@@ -7,40 +7,40 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		65C95B862F82CEF500069A23 /* PBXContainerItemProxy */ = {
+		65683B6A2F84275F00B6A903 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 65C95B702F82CEF200069A23 /* Project object */;
+			containerPortal = 65683B542F84275C00B6A903 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 65C95B772F82CEF200069A23;
+			remoteGlobalIDString = 65683B5B2F84275C00B6A903;
 			remoteInfo = MalankaraOrthodoxLiturgica;
 		};
-		65C95B902F82CEF500069A23 /* PBXContainerItemProxy */ = {
+		65683B742F84275F00B6A903 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 65C95B702F82CEF200069A23 /* Project object */;
+			containerPortal = 65683B542F84275C00B6A903 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 65C95B772F82CEF200069A23;
+			remoteGlobalIDString = 65683B5B2F84275C00B6A903;
 			remoteInfo = MalankaraOrthodoxLiturgica;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		65C95B782F82CEF300069A23 /* MalankaraOrthodoxLiturgica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MalankaraOrthodoxLiturgica.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65C95B852F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalankaraOrthodoxLiturgicaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65C95B8F2F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalankaraOrthodoxLiturgicaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65683B5C2F84275C00B6A903 /* MalankaraOrthodoxLiturgica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MalankaraOrthodoxLiturgica.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		65683B692F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalankaraOrthodoxLiturgicaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		65683B732F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MalankaraOrthodoxLiturgicaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		65C95B7A2F82CEF300069A23 /* MalankaraOrthodoxLiturgica */ = {
+		65683B5E2F84275C00B6A903 /* MalankaraOrthodoxLiturgica */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MalankaraOrthodoxLiturgica;
 			sourceTree = "<group>";
 		};
-		65C95B882F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests */ = {
+		65683B6C2F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MalankaraOrthodoxLiturgicaTests;
 			sourceTree = "<group>";
 		};
-		65C95B922F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests */ = {
+		65683B762F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MalankaraOrthodoxLiturgicaUITests;
 			sourceTree = "<group>";
@@ -48,21 +48,21 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		65C95B752F82CEF200069A23 /* Frameworks */ = {
+		65683B592F84275C00B6A903 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65C95B822F82CEF500069A23 /* Frameworks */ = {
+		65683B662F84275F00B6A903 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65C95B8C2F82CEF500069A23 /* Frameworks */ = {
+		65683B702F84275F00B6A903 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,22 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		65C95B6F2F82CEF200069A23 = {
+		65683B532F84275C00B6A903 = {
 			isa = PBXGroup;
 			children = (
-				65C95B7A2F82CEF300069A23 /* MalankaraOrthodoxLiturgica */,
-				65C95B882F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests */,
-				65C95B922F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests */,
-				65C95B792F82CEF300069A23 /* Products */,
+				65683B5E2F84275C00B6A903 /* MalankaraOrthodoxLiturgica */,
+				65683B6C2F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests */,
+				65683B762F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests */,
+				65683B5D2F84275C00B6A903 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		65C95B792F82CEF300069A23 /* Products */ = {
+		65683B5D2F84275C00B6A903 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				65C95B782F82CEF300069A23 /* MalankaraOrthodoxLiturgica.app */,
-				65C95B852F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests.xctest */,
-				65C95B8F2F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests.xctest */,
+				65683B5C2F84275C00B6A903 /* MalankaraOrthodoxLiturgica.app */,
+				65683B692F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests.xctest */,
+				65683B732F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,136 +95,135 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		65C95B772F82CEF200069A23 /* MalankaraOrthodoxLiturgica */ = {
+		65683B5B2F84275C00B6A903 /* MalankaraOrthodoxLiturgica */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65C95B992F82CEF500069A23 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgica" */;
+			buildConfigurationList = 65683B7D2F84275F00B6A903 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgica" */;
 			buildPhases = (
-				18B4C06FA7B73A42C62B6424 /* Compile Kotlin */,
-				650C7AE22F82CFCA00AD8A69 /* ShellScript */,
-				65C95B742F82CEF200069A23 /* Sources */,
-				65C95B752F82CEF200069A23 /* Frameworks */,
-				65C95B762F82CEF200069A23 /* Resources */,
+				650CDF502F842871009C7889 /* ShellScript */,
+				65683B582F84275C00B6A903 /* Sources */,
+				65683B592F84275C00B6A903 /* Frameworks */,
+				65683B5A2F84275C00B6A903 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				65C95B7A2F82CEF300069A23 /* MalankaraOrthodoxLiturgica */,
+				65683B5E2F84275C00B6A903 /* MalankaraOrthodoxLiturgica */,
 			);
 			name = MalankaraOrthodoxLiturgica;
 			packageProductDependencies = (
 			);
 			productName = MalankaraOrthodoxLiturgica;
-			productReference = 65C95B782F82CEF300069A23 /* MalankaraOrthodoxLiturgica.app */;
+			productReference = 65683B5C2F84275C00B6A903 /* MalankaraOrthodoxLiturgica.app */;
 			productType = "com.apple.product-type.application";
 		};
-		65C95B842F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests */ = {
+		65683B682F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65C95B9C2F82CEF500069A23 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaTests" */;
+			buildConfigurationList = 65683B802F84275F00B6A903 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaTests" */;
 			buildPhases = (
-				65C95B812F82CEF500069A23 /* Sources */,
-				65C95B822F82CEF500069A23 /* Frameworks */,
-				65C95B832F82CEF500069A23 /* Resources */,
+				65683B652F84275F00B6A903 /* Sources */,
+				65683B662F84275F00B6A903 /* Frameworks */,
+				65683B672F84275F00B6A903 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				65C95B872F82CEF500069A23 /* PBXTargetDependency */,
+				65683B6B2F84275F00B6A903 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				65C95B882F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests */,
+				65683B6C2F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests */,
 			);
 			name = MalankaraOrthodoxLiturgicaTests;
 			packageProductDependencies = (
 			);
 			productName = MalankaraOrthodoxLiturgicaTests;
-			productReference = 65C95B852F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests.xctest */;
+			productReference = 65683B692F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		65C95B8E2F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests */ = {
+		65683B722F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65C95B9F2F82CEF500069A23 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaUITests" */;
+			buildConfigurationList = 65683B832F84275F00B6A903 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaUITests" */;
 			buildPhases = (
-				65C95B8B2F82CEF500069A23 /* Sources */,
-				65C95B8C2F82CEF500069A23 /* Frameworks */,
-				65C95B8D2F82CEF500069A23 /* Resources */,
+				65683B6F2F84275F00B6A903 /* Sources */,
+				65683B702F84275F00B6A903 /* Frameworks */,
+				65683B712F84275F00B6A903 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				65C95B912F82CEF500069A23 /* PBXTargetDependency */,
+				65683B752F84275F00B6A903 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				65C95B922F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests */,
+				65683B762F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests */,
 			);
 			name = MalankaraOrthodoxLiturgicaUITests;
 			packageProductDependencies = (
 			);
 			productName = MalankaraOrthodoxLiturgicaUITests;
-			productReference = 65C95B8F2F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests.xctest */;
+			productReference = 65683B732F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		65C95B702F82CEF200069A23 /* Project object */ = {
+		65683B542F84275C00B6A903 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2640;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
-					65C95B772F82CEF200069A23 = {
+					65683B5B2F84275C00B6A903 = {
 						CreatedOnToolsVersion = 26.4;
 					};
-					65C95B842F82CEF500069A23 = {
+					65683B682F84275F00B6A903 = {
 						CreatedOnToolsVersion = 26.4;
-						TestTargetID = 65C95B772F82CEF200069A23;
+						TestTargetID = 65683B5B2F84275C00B6A903;
 					};
-					65C95B8E2F82CEF500069A23 = {
+					65683B722F84275F00B6A903 = {
 						CreatedOnToolsVersion = 26.4;
-						TestTargetID = 65C95B772F82CEF200069A23;
+						TestTargetID = 65683B5B2F84275C00B6A903;
 					};
 				};
 			};
-			buildConfigurationList = 65C95B732F82CEF200069A23 /* Build configuration list for PBXProject "MalankaraOrthodoxLiturgica" */;
+			buildConfigurationList = 65683B572F84275C00B6A903 /* Build configuration list for PBXProject "MalankaraOrthodoxLiturgica" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 65C95B6F2F82CEF200069A23;
+			mainGroup = 65683B532F84275C00B6A903;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 65C95B792F82CEF300069A23 /* Products */;
+			productRefGroup = 65683B5D2F84275C00B6A903 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				65C95B772F82CEF200069A23 /* MalankaraOrthodoxLiturgica */,
-				65C95B842F82CEF500069A23 /* MalankaraOrthodoxLiturgicaTests */,
-				65C95B8E2F82CEF500069A23 /* MalankaraOrthodoxLiturgicaUITests */,
+				65683B5B2F84275C00B6A903 /* MalankaraOrthodoxLiturgica */,
+				65683B682F84275F00B6A903 /* MalankaraOrthodoxLiturgicaTests */,
+				65683B722F84275F00B6A903 /* MalankaraOrthodoxLiturgicaUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		65C95B762F82CEF200069A23 /* Resources */ = {
+		65683B5A2F84275C00B6A903 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65C95B832F82CEF500069A23 /* Resources */ = {
+		65683B672F84275F00B6A903 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65C95B8D2F82CEF500069A23 /* Resources */ = {
+		65683B712F84275F00B6A903 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,21 +233,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18B4C06FA7B73A42C62B6424 /* Compile Kotlin */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Compile Kotlin";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode";
-		};
-		650C7AE22F82CFCA00AD8A69 /* ShellScript */ = {
+		650CDF502F842871009C7889 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -264,26 +249,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\n# Type a script or drag a script file from your workspace to insert its path.\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		65C95B742F82CEF200069A23 /* Sources */ = {
+		65683B582F84275C00B6A903 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65C95B812F82CEF500069A23 /* Sources */ = {
+		65683B652F84275F00B6A903 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		65C95B8B2F82CEF500069A23 /* Sources */ = {
+		65683B6F2F84275F00B6A903 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -293,20 +278,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		65C95B872F82CEF500069A23 /* PBXTargetDependency */ = {
+		65683B6B2F84275F00B6A903 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 65C95B772F82CEF200069A23 /* MalankaraOrthodoxLiturgica */;
-			targetProxy = 65C95B862F82CEF500069A23 /* PBXContainerItemProxy */;
+			target = 65683B5B2F84275C00B6A903 /* MalankaraOrthodoxLiturgica */;
+			targetProxy = 65683B6A2F84275F00B6A903 /* PBXContainerItemProxy */;
 		};
-		65C95B912F82CEF500069A23 /* PBXTargetDependency */ = {
+		65683B752F84275F00B6A903 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 65C95B772F82CEF200069A23 /* MalankaraOrthodoxLiturgica */;
-			targetProxy = 65C95B902F82CEF500069A23 /* PBXContainerItemProxy */;
+			target = 65683B5B2F84275C00B6A903 /* MalankaraOrthodoxLiturgica */;
+			targetProxy = 65683B742F84275F00B6A903 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		65C95B972F82CEF500069A23 /* Debug */ = {
+		65683B7B2F84275F00B6A903 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -370,7 +355,7 @@
 			};
 			name = Debug;
 		};
-		65C95B982F82CEF500069A23 /* Release */ = {
+		65683B7C2F84275F00B6A903 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -427,7 +412,7 @@
 			};
 			name = Release;
 		};
-		65C95B9A2F82CEF500069A23 /* Debug */ = {
+		65683B7E2F84275F00B6A903 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -448,7 +433,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = paradox543.MalankaraOrthodoxLiturgica;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradox543.MalankaraOrthodoxLiturgica;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -460,7 +445,7 @@
 			};
 			name = Debug;
 		};
-		65C95B9B2F82CEF500069A23 /* Release */ = {
+		65683B7F2F84275F00B6A903 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -481,7 +466,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = paradox543.MalankaraOrthodoxLiturgica;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradox543.MalankaraOrthodoxLiturgica;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -493,7 +478,7 @@
 			};
 			name = Release;
 		};
-		65C95B9D2F82CEF500069A23 /* Debug */ = {
+		65683B812F84275F00B6A903 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -503,7 +488,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = paradox543.MalankaraOrthodoxLiturgicaTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradox543.MalankaraOrthodoxLiturgicaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -515,7 +500,7 @@
 			};
 			name = Debug;
 		};
-		65C95B9E2F82CEF500069A23 /* Release */ = {
+		65683B822F84275F00B6A903 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -525,7 +510,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = paradox543.MalankaraOrthodoxLiturgicaTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradox543.MalankaraOrthodoxLiturgicaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -537,7 +522,7 @@
 			};
 			name = Release;
 		};
-		65C95BA02F82CEF500069A23 /* Debug */ = {
+		65683B842F84275F00B6A903 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -545,7 +530,7 @@
 				DEVELOPMENT_TEAM = P537YFZQKL;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = paradox543.MalankaraOrthodoxLiturgicaUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradox543.MalankaraOrthodoxLiturgicaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -557,7 +542,7 @@
 			};
 			name = Debug;
 		};
-		65C95BA12F82CEF500069A23 /* Release */ = {
+		65683B852F84275F00B6A903 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -565,7 +550,7 @@
 				DEVELOPMENT_TEAM = P537YFZQKL;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = paradox543.MalankaraOrthodoxLiturgicaUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.paradox543.MalankaraOrthodoxLiturgicaUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -580,43 +565,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		65C95B732F82CEF200069A23 /* Build configuration list for PBXProject "MalankaraOrthodoxLiturgica" */ = {
+		65683B572F84275C00B6A903 /* Build configuration list for PBXProject "MalankaraOrthodoxLiturgica" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65C95B972F82CEF500069A23 /* Debug */,
-				65C95B982F82CEF500069A23 /* Release */,
+				65683B7B2F84275F00B6A903 /* Debug */,
+				65683B7C2F84275F00B6A903 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65C95B992F82CEF500069A23 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgica" */ = {
+		65683B7D2F84275F00B6A903 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgica" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65C95B9A2F82CEF500069A23 /* Debug */,
-				65C95B9B2F82CEF500069A23 /* Release */,
+				65683B7E2F84275F00B6A903 /* Debug */,
+				65683B7F2F84275F00B6A903 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65C95B9C2F82CEF500069A23 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaTests" */ = {
+		65683B802F84275F00B6A903 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65C95B9D2F82CEF500069A23 /* Debug */,
-				65C95B9E2F82CEF500069A23 /* Release */,
+				65683B812F84275F00B6A903 /* Debug */,
+				65683B822F84275F00B6A903 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65C95B9F2F82CEF500069A23 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaUITests" */ = {
+		65683B832F84275F00B6A903 /* Build configuration list for PBXNativeTarget "MalankaraOrthodoxLiturgicaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				65C95BA02F82CEF500069A23 /* Debug */,
-				65C95BA12F82CEF500069A23 /* Release */,
+				65683B842F84275F00B6A903 /* Debug */,
+				65683B852F84275F00B6A903 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 65C95B702F82CEF200069A23 /* Project object */;
+	rootObject = 65683B542F84275C00B6A903 /* Project object */;
 }

@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  MalankaraOrthodoxLiturgica
 //
-//  Created by Samuel ALex Koshy on 05/04/26.
+//  Created by Samuel Alex Koshy on 05/04/26.
 //
 
 import SwiftUI
@@ -10,9 +10,14 @@ import sharedKit
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello from iOS")
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("Hello, world!")
+        }
+        .padding()
     }
-    let result = FormatBibleRangeUseCase().invoke(range: <#T##ReferenceRange#>)
 }
 
 #Preview {

@@ -2,7 +2,7 @@
 //  MalankaraOrthodoxLiturgicaUITests.swift
 //  MalankaraOrthodoxLiturgicaUITests
 //
-//  Created by FCI on 05/04/26.
+//  Created by Samuel Alex Koshy on 05/04/26.
 //
 
 import XCTest
