@@ -19,8 +19,6 @@ local.properties
 /.idea
 /.kotlin
 .idea/kotlinc.xml
-/app/google-services.json
 /app/apk
 gradle/gradle-daemon-jvm.properties
 keystore.properties
-iosApp/MalankaraOrthodoxLiturgica.xcodeproj/project.xcworkspace/xcuserdata/fci.xcuserdatad/UserInterfaceState.xcuserstate

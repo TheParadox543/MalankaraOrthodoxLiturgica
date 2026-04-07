@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MalankaraOrthodoxLiturgica"
-include(":app")
+include(":androidApp")
 include(":core:domain")
 include(":core:analytics")
 include(":data:core")
