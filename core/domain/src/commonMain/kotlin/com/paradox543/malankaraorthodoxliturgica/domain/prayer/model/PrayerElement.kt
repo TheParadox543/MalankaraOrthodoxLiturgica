@@ -66,7 +66,7 @@ sealed interface PrayerElement {
 
     data class DynamicSongsBlock(
         val timeKey: String,
-        val items: MutableList<DynamicSong> = mutableListOf(),
+        val items: List<DynamicSong> = emptyList(),
         val defaultContent: DynamicSong? = null,
     ) : PrayerElement
 
