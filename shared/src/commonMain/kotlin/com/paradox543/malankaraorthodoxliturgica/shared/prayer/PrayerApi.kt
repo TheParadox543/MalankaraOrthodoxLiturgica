@@ -7,13 +7,12 @@ import org.koin.core.component.KoinComponent
 class PrayerApi(
     private val repository: PrayerRepository,
 ) {
-    suspend fun loadPrayer(fileName: String): List<PrayerUiElement> {
+    suspend fun loadPrayer(fileName: String): String {
         val elements =
             repository.loadPrayerElements(
                 fileName = fileName,
                 language = AppLanguage.MALAYALAM,
             )
-
-        return elements.map { it.toUi() }
+        return PrayerExportService.export(elements)
     }
 }

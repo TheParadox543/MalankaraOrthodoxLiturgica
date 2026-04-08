@@ -16,6 +16,10 @@ class PrayerViewModel: ObservableObject {
 
     private var hasLoaded = false
 
+    // 👇 Add these
+    private let parser = PrayerParser()
+    private let mapper = PrayerUiMapper()
+
     func loadPrayer(fileName: String) async {
         guard !hasLoaded else { return }
         hasLoaded = true
@@ -25,8 +29,19 @@ class PrayerViewModel: ObservableObject {
 
         do {
             let api = SharedKit.shared.getPrayerApi()
-            let result = try await api.loadPrayer(fileName: fileName)
-            state.elements = result
+
+            // 1. Get JSON string from Kotlin
+            let json = try await api.loadPrayer(fileName: fileName)
+
+            // 2. Decode JSON → DTO
+            let dto = parser.parse(json: json)
+
+            // 3. Map DTO → UI model
+            let uiElements = mapper.map(dto: dto)
+
+            // 4. Assign to state
+            state.elements = uiElements
+
         } catch {
             state.error = error.localizedDescription
         }

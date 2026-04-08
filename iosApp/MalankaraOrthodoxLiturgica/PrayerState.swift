@@ -9,7 +9,7 @@ import Foundation
 import sharedKit
 
 struct PrayerState {
-    var elements: [PrayerUiElement] = []
+    var elements: [PrayerElementUi] = []
     var isLoading: Bool = false
     var error: String? = nil
 }

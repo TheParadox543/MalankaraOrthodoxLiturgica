@@ -181,7 +181,7 @@ sealed interface PrayerElementDto {
     @SerialName("dynamic-songs-block") // Represents content fetched dynamically based on context
     data class DynamicSongsBlock(
         val timeKey: String, // The time context for the content (e.g., "afterGospel", "hoothomo")
-        val items: MutableList<DynamicSong> = mutableListOf(), // The dynamic songs for this time context
+        val items: List<DynamicSong> = emptyList(), // The dynamic songs for this time context
         val defaultContent: DynamicSong? = null, // Fallback content if no dynamic songs match
     ) : PrayerElementDto
 

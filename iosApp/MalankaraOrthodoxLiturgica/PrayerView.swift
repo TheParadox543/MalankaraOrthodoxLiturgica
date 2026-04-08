@@ -16,37 +16,18 @@ struct PrayerView: View {
             } else if let error = viewModel.state.error {
                 Text(error)
             } else {
-                Text("Loaded \(viewModel.state.elements.count) items")
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 12) {
+                        ForEach(Array(viewModel.state.elements.enumerated()), id: \.offset) { _, element in
+                            PrayerElementView(element: element)
+                        }
+                    }
+                    .padding()
+                }
             }
         }
         .task {
             await viewModel.loadPrayer(fileName: "commonPrayers/kauma.json")
         }
     }
-//    @State private var elements: [PrayerUiElement] = []
-//    @State private var isLoading = true
-//
-//    var body: some View {
-//        Group {
-//            if isLoading {
-//                ProgressView()
-//            } else {
-//                Text("Loaded \(elements.count) items")
-//            }
-//        }
-//        .task {
-//            // Ensure Koin is initialized
-//            SharedKit.shared.initialize()
-//
-//            do {
-//                let api = SharedKit.shared.getPrayerApi()
-//                let result = try await api.loadPrayer(fileName: "commonPrayers/kauma.json")
-//                elements = result
-//            } catch {
-//                print("Error: \(error)")
-//            }
-//
-//            isLoading = false
-//        }
-//    }
 }

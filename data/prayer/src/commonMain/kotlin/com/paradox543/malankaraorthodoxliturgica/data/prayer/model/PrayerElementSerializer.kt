@@ -9,9 +9,11 @@ import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonEncoder
+import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 object PrayerElementSerializer : KSerializer<PrayerElementDto> {
     // Descriptor for the serializer itself. For polymorphic types, it's often simple.
@@ -140,75 +142,86 @@ object PrayerElementSerializer : KSerializer<PrayerElementDto> {
             encoder as? JsonEncoder
                 ?: throw SerializationException("This serializer can only be used with JsonEncoder")
 
-        val jsonElement =
+        val (type, payload) =
             when (value) {
                 is PrayerElementDto.Title -> {
-                    json.encodeToJsonElement(PrayerElementDto.Title.serializer(), value)
+                    "title" to json.encodeToJsonElement(PrayerElementDto.Title.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Heading -> {
-                    json.encodeToJsonElement(PrayerElementDto.Heading.serializer(), value)
+                    "heading" to json.encodeToJsonElement(PrayerElementDto.Heading.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Subheading -> {
-                    json.encodeToJsonElement(PrayerElementDto.Subheading.serializer(), value)
+                    "subheading" to json.encodeToJsonElement(PrayerElementDto.Subheading.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Prose -> {
-                    json.encodeToJsonElement(PrayerElementDto.Prose.serializer(), value)
+                    "prose" to json.encodeToJsonElement(PrayerElementDto.Prose.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Song -> {
-                    json.encodeToJsonElement(PrayerElementDto.Song.serializer(), value)
+                    "song" to json.encodeToJsonElement(PrayerElementDto.Song.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Subtext -> {
-                    json.encodeToJsonElement(PrayerElementDto.Subtext.serializer(), value)
+                    "subtext" to json.encodeToJsonElement(PrayerElementDto.Subtext.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Source -> {
-                    json.encodeToJsonElement(PrayerElementDto.Source.serializer(), value)
+                    "source" to json.encodeToJsonElement(PrayerElementDto.Source.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Button -> {
-                    json.encodeToJsonElement(PrayerElementDto.Button.serializer(), value)
+                    "button" to json.encodeToJsonElement(PrayerElementDto.Button.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.CollapsibleBlock -> {
-                    json.encodeToJsonElement(PrayerElementDto.CollapsibleBlock.serializer(), value)
+                    "collapsible-block" to json.encodeToJsonElement(PrayerElementDto.CollapsibleBlock.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Link -> {
-                    json.encodeToJsonElement(PrayerElementDto.Link.serializer(), value)
+                    "link" to json.encodeToJsonElement(PrayerElementDto.Link.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.LinkCollapsible -> {
-                    json.encodeToJsonElement(PrayerElementDto.LinkCollapsible.serializer(), value)
+                    "link-collapsible" to json.encodeToJsonElement(PrayerElementDto.LinkCollapsible.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.DynamicSong -> {
-                    json.encodeToJsonElement(PrayerElementDto.DynamicSong.serializer(), value)
+                    "dynamic-song" to json.encodeToJsonElement(PrayerElementDto.DynamicSong.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.DynamicSongsBlock -> {
-                    json.encodeToJsonElement(PrayerElementDto.DynamicSongsBlock.serializer(), value)
+                    "dynamic-songs-block" to json.encodeToJsonElement(PrayerElementDto.DynamicSongsBlock.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.AlternativePrayersBlock -> {
-                    json.encodeToJsonElement(
-                        PrayerElementDto.AlternativePrayersBlock.serializer(),
-                        value,
-                    )
+                    "alternative-prayers-block" to
+                        json
+                            .encodeToJsonElement(
+                                PrayerElementDto.AlternativePrayersBlock.serializer(),
+                                value,
+                            ).jsonObject
                 }
 
                 is PrayerElementDto.AlternativeOption -> {
-                    json.encodeToJsonElement(PrayerElementDto.AlternativeOption.serializer(), value)
+                    "alternative-option" to json.encodeToJsonElement(PrayerElementDto.AlternativeOption.serializer(), value).jsonObject
                 }
 
                 is PrayerElementDto.Error -> {
-                    json.encodeToJsonElement(PrayerElementDto.Error.serializer(), value)
+                    "error" to json.encodeToJsonElement(PrayerElementDto.Error.serializer(), value).jsonObject
                 }
             }
+
+        val jsonElement =
+            buildJsonObject {
+                put("type", type)
+                payload.forEach { (key, jsonValue) ->
+                    if (key != "type") put(key, jsonValue)
+                }
+            }
+
         jsonEncoder.encodeJsonElement(jsonElement)
     }
 }
