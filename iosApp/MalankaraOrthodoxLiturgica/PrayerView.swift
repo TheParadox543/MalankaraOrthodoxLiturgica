@@ -7,30 +7,46 @@ import SwiftUI
 import sharedKit
 
 struct PrayerView: View {
-    @State private var elements: [PrayerUiElement] = []
-    @State private var isLoading = true
+    @StateObject private var viewModel = PrayerViewModel()
 
     var body: some View {
         Group {
-            if isLoading {
+            if viewModel.state.isLoading {
                 ProgressView()
+            } else if let error = viewModel.state.error {
+                Text(error)
             } else {
-                Text("Loaded \(elements.count) items")
+                Text("Loaded \(viewModel.state.elements.count) items")
             }
         }
         .task {
-            // Ensure Koin is initialized
-            SharedKit.shared.initialize()
-
-            do {
-                let api = SharedKit.shared.getPrayerApi()
-                let result = try await api.loadPrayer(fileName: "commonPrayers/kauma.json")
-                elements = result
-            } catch {
-                print("Error: \(error)")
-            }
-
-            isLoading = false
+            await viewModel.loadPrayer(fileName: "commonPrayers/kauma.json")
         }
     }
+//    @State private var elements: [PrayerUiElement] = []
+//    @State private var isLoading = true
+//
+//    var body: some View {
+//        Group {
+//            if isLoading {
+//                ProgressView()
+//            } else {
+//                Text("Loaded \(elements.count) items")
+//            }
+//        }
+//        .task {
+//            // Ensure Koin is initialized
+//            SharedKit.shared.initialize()
+//
+//            do {
+//                let api = SharedKit.shared.getPrayerApi()
+//                let result = try await api.loadPrayer(fileName: "commonPrayers/kauma.json")
+//                elements = result
+//            } catch {
+//                print("Error: \(error)")
+//            }
+//
+//            isLoading = false
+//        }
+//    }
 }
