@@ -14,6 +14,12 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ---
 
+## [2.3.2] - 11/04/2026
+
+### Added
+
+- Calendar data for 2026 April and May
+
 ## [2.3.0] - Undecided
 
 ### Added
