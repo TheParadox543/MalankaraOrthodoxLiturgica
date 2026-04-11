@@ -1,17 +1,15 @@
 package com.paradox543.malankaraorthodoxliturgica.data.prayer.datasource
 
-import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
-import com.paradox543.malankaraorthodoxliturgica.data.core.platform.PlatformAssetReader
+import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.ResourceTextReader
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerContentNotFoundException
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElementDto
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerParsingException
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
-import java.io.ByteArrayInputStream
 import java.io.IOException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -21,37 +19,29 @@ import kotlin.test.assertIs
 
 /**
  * Unit tests for [PrayerSource].
- *
- * [AssetJsonReader.loadJsonAsset] is `inline reified` — mockk cannot intercept it on a mocked
- * [AssetJsonReader]. Instead we build a *real* [AssetJsonReader] whose [PlatformAssetReader]
- * are mocked, and feed JSON through [ByteArrayInputStream].
- *
- * android.util.Log stubs are suppressed via
- *   testOptions { unitTests { isReturnDefaultValues = true } }
- * in build.gradle.kts.
  */
 class PrayerSourceTest {
-    private val platformAssetReader: PlatformAssetReader = mockk()
+    private val reader: ResourceTextReader = mockk()
     private val json = Json { ignoreUnknownKeys = true }
 
     private lateinit var source: PrayerSource
 
     @BeforeTest
     fun setup() {
-        source = PrayerSource(AssetJsonReader(platformAssetReader, json))
+        source = PrayerSource(reader, json)
     }
 
     // ─── Helpers ─────────────────────────────────────────────────────────────
 
-    private fun stubAsset(
+    private fun stubText(
         path: String,
         jsonContent: String,
     ) {
-        every { platformAssetReader.readText(path) } returns jsonContent
+        coEvery { reader.readText(path) } returns jsonContent
     }
 
-    private fun stubAssetThrows(path: String) {
-        every { platformAssetReader.readText(path) } throws IOException("Asset not found: $path")
+    private fun stubThrows(path: String) {
+        coEvery { reader.readText(path) } throws IOException("Asset not found: $path")
     }
 
     // ─── loadPrayerElements: path construction ────────────────────────────────
@@ -59,32 +49,32 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerElements opens correct path for ENGLISH`(): Unit =
         runBlocking {
-            stubAsset("en/prayers/vespers.json", "[]")
+            stubText("en/prayers/vespers.json", "[]")
 
             source.loadPrayerElements("vespers.json", AppLanguage.ENGLISH)
 
-            verify { platformAssetReader.readText("en/prayers/vespers.json") }
+            coVerify { reader.readText("en/prayers/vespers.json") }
         }
 
     @Test
     fun `loadPrayerElements opens correct path for MALAYALAM`(): Unit =
         runBlocking {
-            stubAsset("ml/prayers/vespers.json", "[]")
+            stubText("ml/prayers/vespers.json", "[]")
 
             source.loadPrayerElements("vespers.json", AppLanguage.MALAYALAM)
 
-            verify { platformAssetReader.readText("ml/prayers/vespers.json") }
+            coVerify { reader.readText("ml/prayers/vespers.json") }
         }
 
     @Test
     fun `loadPrayerElements passes fileName through unmodified`(): Unit =
         runBlocking {
             val fileName = "sub/compline.json"
-            stubAsset("en/prayers/$fileName", "[]")
+            stubText("en/prayers/$fileName", "[]")
 
             source.loadPrayerElements(fileName, AppLanguage.ENGLISH)
 
-            verify { platformAssetReader.readText("en/prayers/$fileName") }
+            coVerify { reader.readText("en/prayers/$fileName") }
         }
 
     // ─── loadPrayerElements: deserialization ─────────────────────────────────
@@ -92,7 +82,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerElements returns empty list for empty JSON array`(): Unit =
         runBlocking {
-            stubAsset("en/prayers/empty.json", "[]")
+            stubText("en/prayers/empty.json", "[]")
 
             val result = source.loadPrayerElements("empty.json", AppLanguage.ENGLISH)
 
@@ -102,7 +92,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerElements parses a prose element`(): Unit =
         runBlocking {
-            stubAsset(
+            stubText(
                 "en/prayers/vespers.json",
                 """[{"type":"prose","content":"Glory to God"}]""",
             )
@@ -126,7 +116,7 @@ class PrayerSourceTest {
                   {"type":"link","file":"common.json"}
                 ]
                 """.trimIndent()
-            stubAsset("en/prayers/vespers.json", json)
+            stubText("en/prayers/vespers.json", json)
 
             val result = source.loadPrayerElements("vespers.json", AppLanguage.ENGLISH)
 
@@ -141,7 +131,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerElements throws PrayerParsingException when asset is missing`(): Unit =
         runBlocking {
-            stubAssetThrows("en/prayers/missing.json")
+            stubThrows("en/prayers/missing.json")
 
             assertFailsWith<PrayerParsingException> {
                 source.loadPrayerElements("missing.json", AppLanguage.ENGLISH)
@@ -153,27 +143,27 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerNavigationTree opens correct path for ENGLISH`(): Unit =
         runBlocking {
-            stubAsset(
+            stubText(
                 "en/prayers_tree.json",
                 """{"route":"root","parent":null}""",
             )
 
             source.loadPrayerNavigationTree(AppLanguage.ENGLISH)
 
-            verify { platformAssetReader.readText("en/prayers_tree.json") }
+            coVerify { reader.readText("en/prayers_tree.json") }
         }
 
     @Test
     fun `loadPrayerNavigationTree opens correct path for MALAYALAM`(): Unit =
         runBlocking {
-            stubAsset(
+            stubText(
                 "ml/prayers_tree.json",
                 """{"route":"root","parent":null}""",
             )
 
             source.loadPrayerNavigationTree(AppLanguage.MALAYALAM)
 
-            verify { platformAssetReader.readText("ml/prayers_tree.json") }
+            coVerify { reader.readText("ml/prayers_tree.json") }
         }
 
     // ─── loadPrayerNavigationTree: deserialization ────────────────────────────
@@ -181,7 +171,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerNavigationTree parses route and parent`(): Unit =
         runBlocking {
-            stubAsset(
+            stubText(
                 "en/prayers_tree.json",
                 """{"route":"root","type":"section","parent":null,"children":[],"languages":["en","ml"]}""",
             )
@@ -207,7 +197,7 @@ class PrayerSourceTest {
                   ]
                 }
                 """.trimIndent()
-            stubAsset("en/prayers_tree.json", treeJson)
+            stubText("en/prayers_tree.json", treeJson)
 
             val result = source.loadPrayerNavigationTree(AppLanguage.ENGLISH)
 
@@ -219,7 +209,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerNavigationTree throws PrayerContentNotFoundException when asset is missing`(): Unit =
         runBlocking {
-            stubAssetThrows("en/prayers_tree.json")
+            stubThrows("en/prayers_tree.json")
 
             assertFailsWith<PrayerContentNotFoundException> {
                 source.loadPrayerNavigationTree(AppLanguage.ENGLISH)

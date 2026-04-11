@@ -1,5 +1,2 @@
 /build
-src/androidMain/assets/en
-src/androidMain/assets/ml
-src/androidMain/assets/mn
-src/androidMain/assets/indic
+src/commonMain/composeResources/files

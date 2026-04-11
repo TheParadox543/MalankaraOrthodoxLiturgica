@@ -1,29 +1,25 @@
 package com.paradox543.malankaraorthodoxliturgica.data.bible.datasource
 
-import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.AssetJsonReader
+import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.ResourceTextReader
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
-import com.paradox543.malankaraorthodoxliturgica.data.core.platform.PlatformAssetReader
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertIs
+import kotlin.test.fail
 
 /**
  * Tests for [BibleSource].
  *
- * [AssetJsonReader.loadJsonAsset] is an `inline reified` function — Kotlin inlines its body at
- * the call site, so mockk cannot intercept a call on a mocked [AssetJsonReader]. Instead we
- * construct a *real* [AssetJsonReader] whose [platformAssetReader] is mocked, and feed
- * test JSON through them. This lets us verify:
- *   - the correct asset path is opened for each method, and
- *   - deserialized DTOs are returned (or AssetReadException thrown on failure).
  */
 class BibleSourceTest {
-    private val platformAssetReader: PlatformAssetReader = mockk()
+    private val reader: ResourceTextReader = mockk()
 
     // Use lenient JSON so tests don't break if new optional fields are added to the DTOs
     private val json = Json { ignoreUnknownKeys = true }
@@ -32,132 +28,151 @@ class BibleSourceTest {
 
     @BeforeTest
     fun setup() {
-        source = BibleSource(AssetJsonReader(platformAssetReader, json))
+        source = BibleSource(reader, json)
     }
 
     // ─── Helpers ─────────────────────────────────────────────────────────────
 
-    private fun stubAsset(
+    private fun stubContent(
         path: String,
         jsonContent: String,
     ) {
-        every { platformAssetReader.readText(path) } returns jsonContent
+        coEvery { reader.readText(path) } returns jsonContent
     }
 
-    private fun stubAssetThrows(path: String) {
-        every { platformAssetReader.readText(path) } throws RuntimeException("Asset not found: $path")
+    private fun stubThrows(path: String) {
+        coEvery { reader.readText(path) } throws RuntimeException("File not found: $path")
     }
+
+    private suspend inline fun <reified T : Throwable> assertFailsWithSuspend(crossinline block: suspend () -> Unit): T =
+        try {
+            block()
+            fail("Expected ${T::class.simpleName} to be thrown")
+        } catch (t: Throwable) {
+            assertIs<T>(t)
+            t
+        }
 
     // ─── readBibleDetails ────────────────────────────────────────────────────
 
     @Test
-    fun `readBibleDetails opens the correct asset path`() {
-        stubAsset(
-            "bibleBookMetadata.json",
-            """[{"book":{"en":"Genesis","ml":"ഉൽപ്പത്തി"},"folder":"genesis","verseCount":[31]}]""",
-        )
+    fun `readBibleDetails opens the correct asset path`(): Unit =
+        runTest {
+            stubContent(
+                "bibleBookMetadata.json",
+                """[{"book":{"en":"Genesis","ml":"ഉൽപ്പത്തി"},"folder":"genesis","verseCount":[31]}]""",
+            )
 
-        source.readBibleDetails()
+            source.readBibleDetails()
 
-        verify { platformAssetReader.readText("bibleBookMetadata.json") }
-    }
-
-    @Test
-    fun `readBibleDetails returns parsed list when asset is available`() {
-        stubAsset(
-            "bibleBookMetadata.json",
-            """[{"book":{"en":"Genesis","ml":"ഉൽപ്പത്തി"},"folder":"genesis","verseCount":[31]}]""",
-        )
-
-        val result = source.readBibleDetails()
-
-        assertEquals(1, result.size)
-        assertEquals("Genesis", result[0].book.en)
-        assertEquals("genesis", result[0].folder)
-    }
+            coVerify { reader.readText("bibleBookMetadata.json") }
+        }
 
     @Test
-    fun `readBibleDetails throws AssetReadException when asset cannot be opened`() {
-        stubAssetThrows("bibleBookMetadata.json")
+    fun `readBibleDetails returns parsed list when asset is available`(): Unit =
+        runTest {
+            stubContent(
+                "bibleBookMetadata.json",
+                """[{"book":{"en":"Genesis","ml":"ഉൽപ്പത്തി"},"folder":"genesis","verseCount":[31]}]""",
+            )
 
-        assertFailsWith<AssetReadException> { source.readBibleDetails() }
-    }
+            val result = source.readBibleDetails()
+
+            assertEquals(1, result.size)
+            assertEquals("Genesis", result[0].book.en)
+            assertEquals("genesis", result[0].folder)
+        }
+
+    @Test
+    fun `readBibleDetails throws AssetReadException when asset cannot be opened`(): Unit =
+        runTest {
+            stubThrows("bibleBookMetadata.json")
+
+            assertFailsWith<AssetReadException> { source.readBibleDetails() }
+        }
 
     // ─── readPrefaceTemplates ────────────────────────────────────────────────
 
     @Test
-    fun `readPrefaceTemplates opens the correct asset path`() {
-        stubAsset(
-            "bible_preface_templates.json",
-            """{"prophets":{"en":[],"ml":[]},"generalEpistle":{"en":[],"ml":[]},"paulineEpistle":{"en":[],"ml":[]}}""",
-        )
+    fun `readPrefaceTemplates opens the correct asset path`(): Unit =
+        runTest {
+            stubContent(
+                "bible_preface_templates.json",
+                """{"prophets":{"en":[],"ml":[]},"generalEpistle":{"en":[],"ml":[]},"paulineEpistle":{"en":[],"ml":[]}}""",
+            )
 
-        source.readPrefaceTemplates()
+            source.readPrefaceTemplates()
 
-        verify { platformAssetReader.readText("bible_preface_templates.json") }
-    }
-
-    @Test
-    fun `readPrefaceTemplates returns parsed templates when asset is available`() {
-        stubAsset(
-            "bible_preface_templates.json",
-            """{"prophets":{"en":[],"ml":[]},"generalEpistle":{"en":[],"ml":[]},"paulineEpistle":{"en":[],"ml":[]}}""",
-        )
-
-        val result = source.readPrefaceTemplates()
-
-        assertEquals(result.prophets.en.isEmpty(), true)
-        assertEquals(result.paulineEpistle.ml.isEmpty(), true)
-    }
+            coVerify { reader.readText("bible_preface_templates.json") }
+        }
 
     @Test
-    fun `readPrefaceTemplates throws AssetReadException when asset cannot be opened`() {
-        stubAssetThrows("bible_preface_templates.json")
+    fun `readPrefaceTemplates returns parsed templates when asset is available`(): Unit =
+        runTest {
+            stubContent(
+                "bible_preface_templates.json",
+                """{"prophets":{"en":[],"ml":[]},"generalEpistle":{"en":[],"ml":[]},"paulineEpistle":{"en":[],"ml":[]}}""",
+            )
 
-        assertFailsWith<AssetReadException> { source.readPrefaceTemplates() }
-    }
+            val result = source.readPrefaceTemplates()
+
+            assertEquals(result.prophets.en.isEmpty(), true)
+            assertEquals(result.paulineEpistle.ml.isEmpty(), true)
+        }
+
+    @Test
+    fun `readPrefaceTemplates throws AssetReadException when asset cannot be opened`(): Unit =
+        runTest {
+            stubThrows("bible_preface_templates.json")
+
+            assertFailsWith<AssetReadException> { source.readPrefaceTemplates() }
+        }
 
     // ─── readBibleChapter ────────────────────────────────────────────────────
 
     @Test
-    fun `readBibleChapter opens the exact path it receives`() {
-        val path = "en/bible/genesis/001.json"
-        stubAsset(path, """{"book":"Genesis","chapter":1,"verses":[{"id":1,"verse":"In the beginning"}]}""")
+    fun `readBibleChapter opens the exact path it receives`(): Unit =
+        runTest {
+            val path = "en/bible/genesis/001.json"
+            stubContent(path, """{"book":"Genesis","chapter":1,"verses":[{"id":1,"verse":"In the beginning"}]}""")
 
-        source.readBibleChapter(path)
+            source.readBibleChapter(path)
 
-        // BibleSource must forward the path untouched — construction is BibleRepositoryImpl's job
-        verify { platformAssetReader.readText(path) }
-    }
-
-    @Test
-    fun `readBibleChapter returns parsed chapter when asset is available`() {
-        val path = "en/bible/genesis/001.json"
-        stubAsset(path, """{"book":"Genesis","chapter":1,"verses":[{"id":1,"verse":"In the beginning"}]}""")
-
-        val result = source.readBibleChapter(path)
-
-        assertEquals("Genesis", result.book)
-        assertEquals(1, result.chapter)
-        assertEquals(1, result.verses.size)
-        assertEquals("In the beginning", result.verses[0].verse)
-    }
+            // BibleSource must forward the path untouched — construction is BibleRepositoryImpl's job
+            coVerify { reader.readText(path) }
+        }
 
     @Test
-    fun `readBibleChapter throws AssetReadException when asset cannot be opened`() {
-        val path = "en/bible/genesis/001.json"
-        stubAssetThrows(path)
+    fun `readBibleChapter returns parsed chapter when asset is available`(): Unit =
+        runTest {
+            val path = "en/bible/genesis/001.json"
+            stubContent(path, """{"book":"Genesis","chapter":1,"verses":[{"id":1,"verse":"In the beginning"}]}""")
 
-        assertFailsWith<AssetReadException> { source.readBibleChapter(path) }
-    }
+            val result = source.readBibleChapter(path)
+
+            assertEquals("Genesis", result.book)
+            assertEquals(1, result.chapter)
+            assertEquals(1, result.verses.size)
+            assertEquals("In the beginning", result.verses[0].verse)
+        }
 
     @Test
-    fun `readBibleChapter forwards arbitrary paths untransformed`() {
-        val path = "ml/bible/exodus/012.json"
-        stubAsset(path, """{"book":"Exodus","chapter":12,"verses":[]}""")
+    fun `readBibleChapter throws AssetReadException when asset cannot be opened`(): Unit =
+        runTest {
+            val path = "en/bible/genesis/001.json"
+            stubThrows(path)
 
-        source.readBibleChapter(path)
+            assertFailsWithSuspend<AssetReadException> { source.readBibleChapter(path) }
+        }
 
-        verify { platformAssetReader.readText(path) }
-    }
+    @Test
+    fun `readBibleChapter forwards arbitrary paths untransformed`(): Unit =
+        runTest {
+            val path = "ml/bible/exodus/012.json"
+            stubContent(path, """{"book":"Exodus","chapter":12,"verses":[]}""")
+
+            source.readBibleChapter(path)
+
+            coVerify { reader.readText(path) }
+        }
 }

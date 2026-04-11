@@ -237,7 +237,41 @@
             "2": ["maundyThursday"],
             "3": ["goodFriday"],
             "4": ["saturdayOfAnnunciation"],
-            "5": ["easter"]
+            "5": ["easter"],
+            "6": ["hevoraeMonday"],
+            "7": ["hevoraeTuesday", "valiyaMarDionysius"],
+            "8": ["hevoraeWednesday"],
+            "9": ["hevoraeThursday"],
+            "10": ["hevoraeFriday"],
+            "11": ["hevoraeSaturday"],
+            "12": ["newSunday", "geevargheseMarIvanios"],
+            "14": ["marthomaSecond"],
+            "17": ["geevargheseMarPhiloxenos"],
+            "19": ["firstSundayAfterNewSunday"],
+            "21": ["yuhanonMarIvanios"],
+            "22": ["marthomaThird"],
+            "23": ["feastStGeorge"],
+            "25": ["marthomaFirst"],
+            "26": ["secondSundayAfterNewSunday"],
+            "27": ["gregoriosAbdelJaleel"],
+            "29": ["marSaborMarAfroth"]
+        },
+        "5": {
+            "1": ["stJamesApostle"],
+            "3": ["thirdSundayAfterNewSunday", "baseliosPaulose"],
+            "8": ["feastStJohnTheApostle", "marthomaFifth"],
+            "10": ["fourthSundayAfterNewSunday", "feastStSimonTheZealot"],
+            "14": ["ascension"],
+            "15": ["feastStMaryHarvest", "stIsaac"],
+            "16": ["yuhanonMarSeverios"],
+            "17": ["sundayBeforePentecost"],
+            "19": ["marDionysius"],
+            "20": ["constantineHelen", "evangelistsEcumenicalSynods"],
+            "24": ["pentecost"],
+            "25": ["stAaron"],
+            "26": ["baseliosMarthomaDidymus"],
+            "29": ["goldenFriday"],
+            "31": ["firstSundayAfterPentecost"]
         }
     }
 }

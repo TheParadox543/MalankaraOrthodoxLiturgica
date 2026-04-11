@@ -14,6 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.TitleStr
+import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDate as KotlinLocalDate
 
 fun TitleStrDto.toDomain(): TitleStr =
@@ -36,7 +37,7 @@ fun List<LiturgicalEventDetailsDto>.toLiturgicalEventsDetailsDomain(): List<Litu
 
 fun CalendarDayDto.toDomain(): CalendarDay =
     CalendarDay(
-        date = KotlinLocalDate(this.date.year, this.date.monthValue, this.date.dayOfMonth),
+        date = KotlinLocalDate(this.date.year, this.date.month, date.day),
         events = this.events.toLiturgicalEventsDetailsDomain(),
     )
 

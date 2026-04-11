@@ -1,5 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.calendar.di
 
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleReadingEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -13,9 +15,9 @@ val calendarModule =
                 translationsRepository = get(),
                 formatDateTitleUseCase = get(),
                 loadBibleReadingUseCase = get(),
-                formatGospelEntryUseCase = get(),
+                formatGospelEntryUseCaseLazy = lazy { get<FormatGospelEntryUseCase>() },
                 formatBiblePrefaceUseCase = get(),
-                formatBibleReadingEntryUseCase = get(),
+                formatBibleReadingEntryUseCaseLazy = lazy { get<FormatBibleReadingEntryUseCase>() },
             )
         }
     }

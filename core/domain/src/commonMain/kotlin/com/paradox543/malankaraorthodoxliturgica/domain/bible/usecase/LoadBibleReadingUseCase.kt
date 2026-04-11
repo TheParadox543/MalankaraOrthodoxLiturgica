@@ -14,7 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 class LoadBibleReadingUseCase(
     private val bibleRepository: BibleRepository,
 ) {
-    operator fun invoke(
+    suspend operator fun invoke(
         bibleReferences: List<BibleReference>,
         language: AppLanguage,
     ): BibleReading {

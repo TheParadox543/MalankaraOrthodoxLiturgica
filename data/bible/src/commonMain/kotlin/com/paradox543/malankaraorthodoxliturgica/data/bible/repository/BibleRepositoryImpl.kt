@@ -11,33 +11,46 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapter
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.PrefaceTemplates
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 class BibleRepositoryImpl(
     val source: BibleSource,
 ) : BibleRepository {
-    // Lazily load and cache the Bible meta-data to avoid re-reading the asset.
-    // Asset exceptions are translated to BibleParsingException at this boundary.
-    private val cachedBibleMetaData: List<BibleBookDetails> by lazy {
-        try {
-            source.readBibleDetails().toBibleDetailsDomain()
-        } catch (e: AssetReadException) {
-            throw BibleParsingException("Missing Bible metadata.", e)
-        } catch (e: AssetParsingException) {
-            throw BibleParsingException("Invalid Bible metadata.", e)
+    private val prefaceMutex = Mutex()
+    private val cachedBibleMetaData: List<BibleBookDetails> by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+        runBlocking {
+            try {
+                source.readBibleDetails().toBibleDetailsDomain()
+            } catch (e: AssetReadException) {
+                throw BibleParsingException("Missing Bible metadata.", e)
+            } catch (e: AssetParsingException) {
+                throw BibleParsingException("Invalid Bible metadata.", e)
+            }
+        }
+    }
+    private var cachedPrefaceTemplates: PrefaceTemplates? = null
+
+    private suspend fun getOrLoadPrefaceTemplates(): PrefaceTemplates {
+        cachedPrefaceTemplates?.let { return it }
+
+        return prefaceMutex.withLock {
+            cachedPrefaceTemplates?.let { return@withLock it }
+            val loaded =
+                try {
+                    source.readPrefaceTemplates().toDomain()
+                } catch (e: AssetReadException) {
+                    throw BibleParsingException("Missing preface templates.", e)
+                } catch (e: AssetParsingException) {
+                    throw BibleParsingException("Invalid preface templates.", e)
+                }
+            cachedPrefaceTemplates = loaded
+            loaded
         }
     }
 
-    private val cachedPrefaceTemplates: PrefaceTemplates by lazy {
-        try {
-            source.readPrefaceTemplates().toDomain()
-        } catch (e: AssetReadException) {
-            throw BibleParsingException("Missing preface templates.", e)
-        } catch (e: AssetParsingException) {
-            throw BibleParsingException("Invalid preface templates.", e)
-        }
-    }
-
-    override fun loadBibleMetaData(): List<BibleBookDetails> = cachedBibleMetaData
+    override suspend fun loadBibleMetaData(): List<BibleBookDetails> = cachedBibleMetaData
 
     /**
      * Loads a specific Bible chapter from its JSON file.
@@ -47,14 +60,17 @@ class BibleRepositoryImpl(
      * @param language The language code (e.g., "ml", "en").
      * @return A [BibleChapter] with the parsed verse content.
      */
-    override fun loadBibleChapter(
+    override suspend fun loadBibleChapter(
         bookIndex: Int,
         chapterIndex: Int,
         language: AppLanguage,
-    ): BibleChapter {
+    ): BibleChapter? {
+        val meta = cachedBibleMetaData
+        val book = meta.getOrNull(bookIndex) ?: return null
+
         val bibleLanguage = language.properLanguageMapper()
-        val bookFolder = cachedBibleMetaData[bookIndex].folder
-        val path = "$bibleLanguage/bible/$bookFolder/${"%03d".format(chapterIndex + 1)}.json"
+        val path = "$bibleLanguage/bible/${book.folder}/${(chapterIndex + 1).toString().padStart(3, '0')}.json"
+
         return try {
             source.readBibleChapter(path).toDomain()
         } catch (e: AssetReadException) {
@@ -80,5 +96,5 @@ class BibleRepositoryImpl(
         return book.book.get(language)
     }
 
-    override fun loadPrefaceTemplates() = cachedPrefaceTemplates
+    override suspend fun loadPrefaceTemplates() = getOrLoadPrefaceTemplates()
 }

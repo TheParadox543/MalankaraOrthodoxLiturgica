@@ -9,16 +9,18 @@ import com.paradox543.malankaraorthodoxliturgica.data.bible.model.BibleVerseDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceContentDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.PrefaceTemplatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.bible.model.ProseDto
+import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFailsWith
-import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
+import kotlin.test.assertIs
+import kotlin.test.fail
 
 class BibleRepositoryImplTest {
     private val source: BibleSource = mockk()
@@ -59,7 +61,7 @@ class BibleRepositoryImplTest {
         )
 
     /**
-     * Creates a fresh repository instance before every test.
+     * Creates a fresh repository instance before coEvery test.
      * This is critical because [BibleRepositoryImpl.cachedBibleMetaData] and
      * [BibleRepositoryImpl.cachedPrefaceTemplates] are `by lazy` — the mock
      * stubs must be configured before the first access, and each test should
@@ -70,118 +72,136 @@ class BibleRepositoryImplTest {
         repository = BibleRepositoryImpl(source)
     }
 
+    private suspend inline fun <reified T : Throwable> assertFailsWithSuspend(crossinline block: suspend () -> Unit): T =
+        try {
+            block()
+            fail("Expected ${T::class.simpleName} to be thrown")
+        } catch (t: Throwable) {
+            assertIs<T>(t)
+            t
+        }
+
     // ─── loadBibleMetaData ───────────────────────────────────────────────────
 
     @Test
-    fun `loadBibleMetaData returns mapped domain list`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+    fun `loadBibleMetaData returns mapped domain list`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
 
-        val result = repository.loadBibleMetaData()
+            val result = repository.loadBibleMetaData()
 
-        assertEquals(1, result.size)
-        assertEquals("Genesis", result[0].book.en)
-        assertEquals("genesis", result[0].folder)
-        assertEquals(50, result[0].chapters)
-    }
-
-    @Test
-    fun `loadBibleMetaData caches result and only calls source once`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-
-        repository.loadBibleMetaData()
-        repository.loadBibleMetaData()
-
-        verify(exactly = 1) { source.readBibleDetails() }
-    }
-
-    @Test
-    fun `loadBibleMetaData throws BibleParsingException when source throws AssetReadException`() {
-        every { source.readBibleDetails() } throws AssetReadException("not found")
-
-        assertFailsWith<BibleParsingException> {
-            repository.loadBibleMetaData()
+            assertEquals(1, result.size)
+            assertEquals("Genesis", result[0].book.en)
+            assertEquals("genesis", result[0].folder)
+            assertEquals(50, result[0].chapters)
         }
-    }
 
     @Test
-    fun `loadBibleMetaData maps empty list correctly`() {
-        every { source.readBibleDetails() } returns emptyList()
+    fun `loadBibleMetaData caches result and only calls source once`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
 
-        val result = repository.loadBibleMetaData()
+            repository.loadBibleMetaData()
+            repository.loadBibleMetaData()
 
-        assertEquals(emptyList<Any>(), result)
-    }
+            coVerify(exactly = 1) { source.readBibleDetails() }
+        }
+
+    @Test
+    fun `loadBibleMetaData throws BibleParsingException when source throws AssetReadException`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } throws AssetReadException("not found")
+
+            assertFailsWithSuspend<BibleParsingException> {
+                repository.loadBibleMetaData()
+            }
+        }
+
+    @Test
+    fun `loadBibleMetaData maps empty list correctly`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns emptyList()
+
+            val result = repository.loadBibleMetaData()
+
+            assertEquals(emptyList<Any>(), result)
+        }
 
     // ─── loadBibleChapter ────────────────────────────────────────────────────
 
     @Test
-    fun `loadBibleChapter calls source with correct path for English`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-        every { source.readBibleChapter("en/bible/genesis/001.json") } returns fakeChapterDto
+    fun `loadBibleChapter calls source with correct path for English`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+            coEvery { source.readBibleChapter("en/bible/genesis/001.json") } returns fakeChapterDto
 
-        repository.loadBibleChapter(bookIndex = 0, chapterIndex = 0, language = AppLanguage.ENGLISH)
+            repository.loadBibleChapter(bookIndex = 0, chapterIndex = 0, language = AppLanguage.ENGLISH)
 
-        verify { source.readBibleChapter("en/bible/genesis/001.json") }
-    }
-
-    @Test
-    fun `loadBibleChapter calls source with correct path for Malayalam`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-        every { source.readBibleChapter("ml/bible/genesis/001.json") } returns fakeChapterDto
-
-        repository.loadBibleChapter(bookIndex = 0, chapterIndex = 0, language = AppLanguage.MALAYALAM)
-
-        verify { source.readBibleChapter("ml/bible/genesis/001.json") }
-    }
-
-    @Test
-    fun `loadBibleChapter zero-pads chapter index to 3 digits`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-        // Chapter 10 → zero-padded to "010"
-        every { source.readBibleChapter("en/bible/genesis/010.json") } returns fakeChapterDto
-
-        repository.loadBibleChapter(bookIndex = 0, chapterIndex = 9, language = AppLanguage.ENGLISH)
-
-        verify { source.readBibleChapter("en/bible/genesis/010.json") }
-    }
-
-    @Test
-    fun `loadBibleChapter returns correctly mapped BibleChapter`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-        every { source.readBibleChapter(any()) } returns fakeChapterDto
-
-        val result =
-            repository.loadBibleChapter(
-                bookIndex = 0,
-                chapterIndex = 0,
-                language = AppLanguage.ENGLISH,
-            )
-
-        assertEquals("Genesis", result.book)
-        assertEquals(1, result.chapter)
-        assertEquals(2, result.verses.size)
-        assertEquals("In the beginning", result.verses[0].verse)
-    }
-
-    @Test
-    fun `loadBibleChapter throws BibleParsingException when source throws AssetReadException`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-        every { source.readBibleChapter(any()) } throws AssetReadException("not found")
-
-        assertFailsWith<BibleParsingException> {
-            repository.loadBibleChapter(
-                bookIndex = 0,
-                chapterIndex = 0,
-                language = AppLanguage.ENGLISH,
-            )
+            coVerify { source.readBibleChapter("en/bible/genesis/001.json") }
         }
-    }
+
+    @Test
+    fun `loadBibleChapter calls source with correct path for Malayalam`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+            coEvery { source.readBibleChapter("ml/bible/genesis/001.json") } returns fakeChapterDto
+
+            repository.loadBibleChapter(bookIndex = 0, chapterIndex = 0, language = AppLanguage.MALAYALAM)
+
+            coVerify { source.readBibleChapter("ml/bible/genesis/001.json") }
+        }
+
+    @Test
+    fun `loadBibleChapter zero-pads chapter index to 3 digits`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+            // Chapter 10 → zero-padded to "010"
+            coEvery { source.readBibleChapter("en/bible/genesis/010.json") } returns fakeChapterDto
+
+            repository.loadBibleChapter(bookIndex = 0, chapterIndex = 9, language = AppLanguage.ENGLISH)
+
+            coVerify { source.readBibleChapter("en/bible/genesis/010.json") }
+        }
+
+    @Test
+    fun `loadBibleChapter returns correctly mapped BibleChapter`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+            coEvery { source.readBibleChapter(any()) } returns fakeChapterDto
+
+            val result =
+                repository.loadBibleChapter(
+                    bookIndex = 0,
+                    chapterIndex = 0,
+                    language = AppLanguage.ENGLISH,
+                )
+
+            assertEquals("Genesis", result?.book ?: "")
+            assertEquals(1, result?.chapter ?: 0)
+            assertEquals(2, result?.verses?.size ?: 0)
+            assertEquals("In the beginning", result?.verses[0]?.verse ?: "Error")
+        }
+
+    @Test
+    fun `loadBibleChapter throws BibleParsingException when source throws AssetReadException`(): Unit =
+        runTest {
+            coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+            coEvery { source.readBibleChapter(any()) } throws AssetReadException("not found")
+
+            assertFailsWithSuspend<BibleParsingException> {
+                repository.loadBibleChapter(
+                    bookIndex = 0,
+                    chapterIndex = 0,
+                    language = AppLanguage.ENGLISH,
+                )
+            }
+        }
 
     // ─── getBibleBookName ────────────────────────────────────────────────────
 
     @Test
     fun `getBibleBookName returns English name for AppLanguage ENGLISH`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+        coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
 
         val result = repository.getBibleBookName(bookIndex = 0, language = AppLanguage.ENGLISH)
 
@@ -190,7 +210,7 @@ class BibleRepositoryImplTest {
 
     @Test
     fun `getBibleBookName returns Malayalam name for AppLanguage MALAYALAM`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+        coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
 
         val result = repository.getBibleBookName(bookIndex = 0, language = AppLanguage.MALAYALAM)
 
@@ -199,7 +219,7 @@ class BibleRepositoryImplTest {
 
     @Test
     fun `getBibleBookName returns Error string when bookIndex is out of range`() {
-        every { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
+        coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
 
         val result = repository.getBibleBookName(bookIndex = 99, language = AppLanguage.ENGLISH)
 
@@ -209,32 +229,35 @@ class BibleRepositoryImplTest {
     // ─── loadPrefaceTemplates ────────────────────────────────────────────────
 
     @Test
-    fun `loadPrefaceTemplates returns correctly mapped templates`() {
-        every { source.readPrefaceTemplates() } returns fakePrefaceTemplatesDto
+    fun `loadPrefaceTemplates returns correctly mapped templates`(): Unit =
+        runTest {
+            coEvery { source.readPrefaceTemplates() } returns fakePrefaceTemplatesDto
 
-        val result = repository.loadPrefaceTemplates()
+            val result = repository.loadPrefaceTemplates()
 
-        assertEquals("EN preface", (result.prophets.en[0] as PrayerElement.Prose).content)
-        assertEquals("ML preface", (result.generalEpistle.ml[0] as PrayerElement.Prose).content)
-        assertEquals("EN preface", (result.paulineEpistle.en[0] as PrayerElement.Prose).content)
-    }
-
-    @Test
-    fun `loadPrefaceTemplates caches result and only calls source once`() {
-        every { source.readPrefaceTemplates() } returns fakePrefaceTemplatesDto
-
-        repository.loadPrefaceTemplates()
-        repository.loadPrefaceTemplates()
-
-        verify(exactly = 1) { source.readPrefaceTemplates() }
-    }
-
-    @Test
-    fun `loadPrefaceTemplates throws BibleParsingException when source throws AssetReadException`() {
-        every { source.readPrefaceTemplates() } throws AssetReadException("not found")
-
-        assertFailsWith<BibleParsingException> {
-            repository.loadPrefaceTemplates()
+            assertEquals("EN preface", result.prophets.en[0].content)
+            assertEquals("ML preface", result.generalEpistle.ml[0].content)
+            assertEquals("EN preface", result.paulineEpistle.en[0].content)
         }
-    }
+
+    @Test
+    fun `loadPrefaceTemplates caches result and only calls source once`(): Unit =
+        runTest {
+            coEvery { source.readPrefaceTemplates() } returns fakePrefaceTemplatesDto
+
+            repository.loadPrefaceTemplates()
+            repository.loadPrefaceTemplates()
+
+            coVerify(exactly = 1) { source.readPrefaceTemplates() }
+        }
+
+    @Test
+    fun `loadPrefaceTemplates throws BibleParsingException when source throws AssetReadException`(): Unit =
+        runTest {
+            coEvery { source.readPrefaceTemplates() } throws AssetReadException("not found")
+
+            assertFailsWithSuspend<BibleParsingException> {
+                repository.loadPrefaceTemplates()
+            }
+        }
 }

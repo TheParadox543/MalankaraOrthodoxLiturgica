@@ -1,6 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.data.calendar.model
 
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 data class CalendarDayDto(
     val date: LocalDate,
