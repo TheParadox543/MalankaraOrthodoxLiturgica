@@ -16,14 +16,7 @@ struct PrayerView: View {
             } else if let error = viewModel.state.error {
                 Text(error)
             } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 12) {
-                        ForEach(Array(viewModel.state.elements.enumerated()), id: \.offset) { _, element in
-                            PrayerElementView(element: element)
-                        }
-                    }
-                    .padding()
-                }
+                PrayerContentView(elements: viewModel.state.elements)
             }
         }
         .task {
