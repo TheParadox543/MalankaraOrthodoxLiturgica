@@ -7,14 +7,18 @@ import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toLiturgi
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDayDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDataStore
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarData
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.EventKey
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalCalendarDates
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import kotlinx.coroutines.sync.Mutex
@@ -23,11 +27,13 @@ import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.minus
 import kotlinx.datetime.number
 import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
@@ -37,6 +43,7 @@ class CalendarRepositoryImpl(
     private val cacheMutex = Mutex()
     private var cachedLiturgicalDates: LiturgicalCalendarDates? = null
     private var cachedLiturgicalData: LiturgicalDataStore? = null
+    private var calendarData: CalendarData = emptyMap()
 
     private suspend fun initializeIfNeeded() {
         if (cachedLiturgicalDates != null && cachedLiturgicalData != null) {
@@ -70,6 +77,27 @@ class CalendarRepositoryImpl(
 
     private fun getLiturgicalData(): LiturgicalDataStore = cachedLiturgicalData ?: error("Calendar not initialized")
 
+    private suspend fun loadCalendar() {
+        val yearlyData: List<LiturgicalDatesDto> = calendarSource.loadAllYears()
+
+        calendarData =
+            yearlyData
+                .flatMap { it.data.entries }
+                .associate { (dateString, dto) ->
+
+                    val date = LocalDateTime.parse(dateString).date
+
+                    date to
+                        LiturgicalDay(
+                            date = date,
+                            eventKeys = dto.eventKeys,
+                            season = dto.season,
+                            tune = dto.tune,
+                            lent = dto.lent,
+                        )
+                }
+    }
+
     /**
      * Internal helper to get event keys for a specific date.
      */
@@ -100,6 +128,63 @@ class CalendarRepositoryImpl(
             }
         }
         return eventDetails
+    }
+
+    override suspend fun getDay(day: LocalDate): LiturgicalDay? = calendarData[day]
+
+    override suspend fun getRange(
+        start: LocalDate,
+        end: LocalDate,
+    ): List<LiturgicalDay> =
+        calendarData
+            .filterKeys { it in start..end }
+//            .toSortedMap()
+            .values
+            .toList()
+
+    override suspend fun getSeasonDays(season: String): List<LiturgicalDay> =
+        calendarData
+            .filterValues { it.season == season }
+//            .toSortedMap(compareBy { it })
+            .values
+            .toList()
+
+    override suspend fun getSeasonWeeks(season: String): List<LiturgicalWeek> {
+        val days = getSeasonDays(season)
+
+        if (days.isEmpty()) return emptyList()
+
+        val weeks = mutableListOf<LiturgicalWeek>()
+        var currentWeek = mutableListOf<LiturgicalDay>()
+
+        for (day in days) {
+            if (day.date.dayOfWeek == DayOfWeek.SUNDAY && currentWeek.isNotEmpty()) {
+                weeks.add(LiturgicalWeek(currentWeek))
+                currentWeek = mutableListOf()
+            }
+
+            currentWeek.add(day)
+        }
+
+        if (currentWeek.isNotEmpty()) {
+            weeks.add(LiturgicalWeek(currentWeek))
+        }
+
+        return weeks
+    }
+
+    override suspend fun getUpcomingDays(count: Int): List<LiturgicalDay> {
+        val today =
+            Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
+
+        return calendarData
+            .filterKeys { it >= today }
+//            .toSortedMap()
+            .values
+            .take(count)
     }
 
     override suspend fun checkMonthDataExists(

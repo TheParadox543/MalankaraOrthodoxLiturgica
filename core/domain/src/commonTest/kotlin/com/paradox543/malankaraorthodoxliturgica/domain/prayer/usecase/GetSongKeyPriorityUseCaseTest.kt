@@ -17,7 +17,7 @@ class GetSongKeyPriorityUseCaseTest {
                     title = TitleStr(en = "E", ml = null),
                     specialSongsKey = "specialSongs",
                     bibleReadings = null,
-                    niram = null,
+                    tune = null,
                     startedYear = null,
                 )
             val repo = FakeCalendarRepository(upcomingEventItems = listOf(details))
@@ -37,7 +37,7 @@ class GetSongKeyPriorityUseCaseTest {
                     title = TitleStr(en = "E", ml = null),
                     specialSongsKey = null,
                     bibleReadings = null,
-                    niram = null,
+                    tune = null,
                     startedYear = null,
                 )
             val repo = FakeCalendarRepository(upcomingEventItems = listOf(details))

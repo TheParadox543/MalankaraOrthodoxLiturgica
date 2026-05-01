@@ -143,7 +143,7 @@ class CalendarClassesMappersTest {
         assertEquals("Easter", domain.title.en)
         assertEquals("ഉയിർപ്പ്", domain.title.ml)
         assertNull(domain.bibleReadings)
-        assertNull(domain.niram)
+        assertNull(domain.tune)
         assertNull(domain.specialSongsKey)
         assertNull(domain.startedYear)
     }
@@ -158,12 +158,12 @@ class CalendarClassesMappersTest {
                     BibleReadingsDto(
                         gospel = listOf(BibleReferenceDto(43, listOf(ReferenceRangeDto(20, 19, 20, 23)))),
                     ),
-                niram = 3,
+                tune = 3,
                 specialSongsKey = "pentecost_songs",
                 startedYear = 33,
             )
         val domain = dto.toDomain()
-        assertEquals(3, domain.niram)
+        assertEquals(3, domain.tune)
         assertEquals("pentecost_songs", domain.specialSongsKey)
         assertEquals(33, domain.startedYear)
         assertEquals(1, domain.bibleReadings?.gospel?.size)

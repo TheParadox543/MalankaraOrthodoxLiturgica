@@ -1618,7 +1618,7 @@
             "ml": "യൽദോയ്ക്ക് ശേഷമുള്ള രണ്ടാം ഞായറാഴ്‌ച"
         },
         "specialSongsKey": "afterChristmasSongs",
-        "niram": 2,
+        "tune": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1729,7 +1729,7 @@
             "ml": "ദനഹാ പെരുന്നാൾ"
         },
         "specialSongsKey": "epiphanySongs",
-        "niram": 2,
+        "tune": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1862,7 +1862,7 @@
             "ml": "യോഹന്നാൻ സ്നാപകന്റെ ശിരച്ഛേദ"
         },
         "specialSongsKey": "beheadingStJohnSongs",
-        "niram": 8,
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1991,7 +1991,7 @@
             "ml": "മാർ സ്തേഫാനോസ് സഹദായുടെ ഓർമ്മാ"
         },
         "specialSongsKey": "feastStStephenSongs",
-        "niram": 8,
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2108,7 +2108,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ള ഒന്നാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
-        "niram": 3,
+        "tune": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2231,7 +2231,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ളരണ്ടാം രണ്ടാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
-        "niram": 4,
+        "tune": 4,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2353,7 +2353,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ള മൂന്നാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
-        "niram": 5,
+        "tune": 5,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2453,7 +2453,7 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ള നാലാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
-        "niram": 3,
+        "tune": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -2768,7 +2768,7 @@
             "ml": "മായൽത്തോ"
         },
         "specialSongsKey": "mayalthoSongs",
-        "niram": 3,
+        "tune": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3001,7 +3001,7 @@
             "ml": "ആചാര്യന്മാരുടെ ഞായറാഴ്ച"
         },
         "specialSongsKey": "allDepartedPriestsSongs",
-        "niram": 7,
+        "tune": 7,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3134,7 +3134,7 @@
             "ml": "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്ച"
         },
         "specialSongsKey": "allDepartedFaithfulSongs",
-        "niram": 8,
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3256,7 +3256,7 @@
             "ml": "കൊത്തിനെ ഞായർ"
         },
         "specialSongsKey": "kothineSongs",
-        "niram": 1,
+        "tune": 1,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3388,7 +3388,7 @@
             "en": "Commomoration of St. Ephrem and Mar Theodorus",
             "ml": "മാർ അപ്രേം, മാർ തേവോദോറോസ് എന്നിവരുടെ ഓർമ്മ"
         },
-        "niram": 8,
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3510,7 +3510,7 @@
             "ml": "നോമ്പിലെ രണ്ടാം ഞായറാഴ്ച (ഗർബോ-കുഷ്ഠരോഗി)"
         },
         "specialSongsKey": "lepersSundaySongs",
-        "niram": 2,
+        "tune": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3716,7 +3716,7 @@
             "ml": "നോമ്പിലെ മൂന്നാം ഞായറാഴ്ച്‌ച (മ്ശറിയോ-തളർവാതരോഗി)"
         },
         "specialSongsKey": "palsySundaySongs",
-        "niram": 3,
+        "tune": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3943,7 +3943,7 @@
             "ml": "നോമ്പിലെ നാലാം ഞായറാഴ്‌ച (ാനൊയ‌ത്തോ - ക്ന‌ാനായക്കാരി)"
         },
         "specialSongsKey": "canaaniteWomanSongs",
-        "niram": 4,
+        "tune": 4,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4054,7 +4054,7 @@
             "ml": "പകുതിനോമ്പ് ബുധനാഴ്ച"
         },
         "specialSongsKey": "midLentSongs",
-        "niram": 8,
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4282,7 +4282,7 @@
             "ml": "നോമ്പിലെ അഞ്ചാം ഞായറാഴ്ച (ക്‌പിപ്ത്തോ-കൂനി)"
         },
         "specialSongsKey": "crippledWomanSongs",
-        "niram": 5,
+        "tune": 5,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4476,7 +4476,7 @@
             "ml": "നോമ്പിലെ ആറാം ഞായറാഴ്‌ച (സമിയോ - കുരുടൻ)"
         },
         "specialSongsKey": "blindManSongs",
-        "niram": 6,
+        "tune": 6,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4637,7 +4637,7 @@
             "ml": "നാൽപ്പതാം വെള്ളിയാഴ്ച"
         },
         "specialSongsKey": "fortiethFridaySongs",
-        "niram": 2,
+        "tune": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4759,7 +4759,7 @@
             "ml": "ലോവോസോറിന്റെ ശനിയാഴ്ച"
         },
         "specialSongsKey": "lazarusSaturdaySongs",
-        "niram": 8,
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -4980,7 +4980,7 @@
             "ml": "ഓശാന ഞായർ"
         },
         "specialSongsKey": "hosannaSongs",
-        "niram": 7,
+        "tune": 7,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -6560,7 +6560,7 @@
             "ml": "പുതു ഞായറാഴ്ചക്കു ശേഷം ഒന്നാം ഞായർ"
         },
         "specialSongsKey": "afterNewSundaySongs",
-        "niram": 2,
+        "tune": 2,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -6671,7 +6671,7 @@
             "ml": "പുതു ഞായറാഴ്ചക്കു ശേഷം രണ്ടാം ഞായർ"
         },
         "specialSongsKey": "afterNewSundaySongs",
-        "niram": 3,
+        "tune": 3,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -6793,7 +6793,7 @@
             "ml": "പുതു ഞായറാഴ്ചക്കു ശേഷം മൂന്നാം ഞായർ"
         },
         "specialSongsKey": "afterNewSundaySongs",
-        "niram": 4,
+        "tune": 4,
         "bibleReadings": {
             "vespersGospel": [
                 {

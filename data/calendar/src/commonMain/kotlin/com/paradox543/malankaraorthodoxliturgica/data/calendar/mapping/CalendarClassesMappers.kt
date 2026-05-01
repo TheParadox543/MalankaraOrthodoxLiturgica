@@ -4,6 +4,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.BibleReadin
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.BibleReferenceDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDayDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.ReferenceRangeDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.TitleStrDto
@@ -12,6 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReferen
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.TitleStr
 import kotlinx.datetime.LocalDate
@@ -28,7 +30,7 @@ fun LiturgicalEventDetailsDto.toDomain(): LiturgicalEventDetails =
         type = this.type,
         title = this.title.toDomain(),
         bibleReadings = this.bibleReadings?.toDomain(),
-        niram = this.niram,
+        tune = this.tune,
         specialSongsKey = this.specialSongsKey,
         startedYear = this.startedYear,
     )
@@ -79,3 +81,19 @@ fun BibleReadingsDto.toDomain(): BibleReadingsSelection =
         paulEpistle = this.paulEpistle?.map { it.toDomain() },
         gospel = this.gospel?.map { it.toDomain() },
     )
+
+fun LiturgicalDatesDto.toDomain(): Map<LocalDate, LiturgicalDay> =
+    data
+        .map { (dateString, dto) ->
+
+            val date = LocalDate.parse(dateString.substring(0, 10))
+
+            date to
+                LiturgicalDay(
+                    date = date,
+                    eventKeys = dto.eventKeys,
+                    season = dto.season,
+                    tune = dto.tune,
+                    lent = dto.lent,
+                )
+        }.toMap()
