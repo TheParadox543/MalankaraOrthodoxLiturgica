@@ -19,6 +19,16 @@ interface CalendarRepository {
 
     suspend fun getSeasonWeeks(season: String): List<LiturgicalWeek>
 
+    suspend fun getMonthDays(
+        year: Int,
+        month: Int,
+    ): List<LiturgicalDay>
+
+    suspend fun getMonthWeeks(
+        year: Int,
+        month: Int,
+    ): List<LiturgicalWeek>
+
     suspend fun getUpcomingDays(count: Int): List<LiturgicalDay>
 
     suspend fun checkMonthDataExists(

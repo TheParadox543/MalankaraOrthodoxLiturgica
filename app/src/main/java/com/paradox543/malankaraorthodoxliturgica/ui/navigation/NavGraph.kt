@@ -58,6 +58,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChap
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarLiturgicalSeasonScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens.OnboardingScreen
@@ -316,7 +317,7 @@ fun NavGraph(
             navController,
             startDestination =
                 if (onboardingCompleted) {
-                    AppScreen.Home.route
+                    AppScreen.Calendar.route
                 } else {
                     AppScreen.Onboarding.route
                 },
@@ -561,15 +562,20 @@ fun NavGraph(
                 AppScreen.Calendar.route,
                 deepLinks = AppScreen.Calendar.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
-                CalendarScreen(
+//                CalendarScreen(
+//                    calendarViewModel,
+//                    contentPadding = innerPadding,
+//                    onBibleNavigate = {
+//                        navController.navigate(AppScreen.BibleReader.route)
+//                    },
+//                    onPrayerNavigate = { route ->
+//                        navController.navigate(AppScreen.Prayer.createRoute(route))
+//                    },
+//                    onScaffoldStateChanged = { scaffoldUiState.value = it },
+//                )
+                CalendarLiturgicalSeasonScreen(
                     calendarViewModel,
                     contentPadding = innerPadding,
-                    onBibleNavigate = {
-                        navController.navigate(AppScreen.BibleReader.route)
-                    },
-                    onPrayerNavigate = { route ->
-                        navController.navigate(AppScreen.Prayer.createRoute(route))
-                    },
                     onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }

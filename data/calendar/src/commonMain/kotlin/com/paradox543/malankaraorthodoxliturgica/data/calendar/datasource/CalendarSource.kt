@@ -49,8 +49,15 @@ class CalendarSource(
             )
 
         return files.map { file ->
+            val jsonString =
+                try {
+                    reader.readText("calendar/$file")
+                } catch (t: Throwable) {
+                    throw AssetReadException("Failed to read asset at path: calendar/$file", t)
+                }
+
             try {
-                json.decodeFromString<LiturgicalDatesDto>(file)
+                json.decodeFromString<LiturgicalDatesDto>(jsonString)
             } catch (t: Throwable) {
                 throw AssetParsingException("Failed to parse asset at path: calendar/$file", t)
             }

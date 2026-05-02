@@ -5,7 +5,18 @@ import kotlinx.datetime.LocalDate
 data class LiturgicalDay(
     val date: LocalDate,
     val eventKeys: List<String>, // List of EventKeys associated with this day
-    val season: String,
+    val season: String?,
     val tune: Int?,
     val lent: Int?,
-)
+) {
+    companion object {
+        fun empty(date: LocalDate) =
+            LiturgicalDay(
+                date = date,
+                eventKeys = emptyList(),
+                season = null,
+                tune = null,
+                lent = null,
+            )
+    }
+}

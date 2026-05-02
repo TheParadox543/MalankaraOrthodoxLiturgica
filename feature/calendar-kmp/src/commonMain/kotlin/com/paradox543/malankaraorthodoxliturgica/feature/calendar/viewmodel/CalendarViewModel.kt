@@ -20,6 +20,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.loadTranslations
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarUiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -58,6 +60,18 @@ class CalendarViewModel(
         val hasPreviousMonth: Boolean,
         val hasNextMonth: Boolean,
     )
+
+    private val seasons =
+        listOf(
+            "annunciation",
+            "epiphany",
+            "greatLent",
+            "resurrection",
+            "pentecost",
+            "transfiguration",
+            "holyCross",
+        )
+    private var currentSeasonIndex = 0
 
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
@@ -98,6 +112,10 @@ class CalendarViewModel(
     private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
     val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> =
         _selectedDayViewData.asStateFlow()
+
+    private val _state =
+        MutableStateFlow(CalendarUiState(mode = CalendarMode.Season(seasons.first()), isLoading = true, weeks = emptyList()))
+    val state: StateFlow<CalendarUiState> = _state.asStateFlow()
 
     // State for the currently selected date for UI feedback
     private val _selectedDate = MutableStateFlow<LocalDate?>(null)
@@ -147,11 +165,63 @@ class CalendarViewModel(
                 loadTranslations(language)
             }
         }
+        loadSeason(seasons.first())
     }
 
     private suspend fun loadTranslations(language: AppLanguage) {
         val loadedTranslations = translationsRepository.loadTranslations(language, backgroundDispatcher)
         _translations.update { loadedTranslations }
+    }
+
+    fun load(mode: CalendarMode) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(isLoading = true)
+
+            val weeks =
+                when (mode) {
+                    is CalendarMode.Season -> {
+                        calendarRepository.getSeasonWeeks(mode.name)
+                    }
+
+                    is CalendarMode.Month -> {
+                        calendarRepository.getMonthWeeks(mode.year, mode.month)
+                    }
+                }
+
+            _state.value =
+                CalendarUiState(
+                    mode = mode,
+                    weeks = weeks,
+                    isLoading = false,
+                )
+        }
+    }
+
+    fun loadSeason(season: String) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(isLoading = true, error = null)
+
+            try {
+                val weeks = calendarRepository.getSeasonWeeks(season)
+
+                currentSeasonIndex = seasons.indexOf(season)
+
+                _state.value =
+                    CalendarUiState(
+                        mode = CalendarMode.Season(season),
+                        weeks = weeks,
+                        isLoading = false,
+                    )
+            } catch (e: Exception) {
+                _state.value =
+                    CalendarUiState(
+                        mode = CalendarMode.Season(season),
+                        weeks = emptyList(),
+                        isLoading = false,
+                        error = e.message,
+                    )
+            }
+        }
     }
 
     fun loadMonth(
@@ -206,6 +276,21 @@ class CalendarViewModel(
         }
     }
 
+    @OptIn(ExperimentalTime::class)
+    fun loadTodaySeason() {
+        viewModelScope.launch {
+            val today =
+                Clock.System
+                    .now()
+                    .toLocalDateTime(TimeZone.currentSystemDefault())
+                    .date
+
+            val day = calendarRepository.getDay(today)
+
+            day?.season?.let { loadSeason(it) }
+        }
+    }
+
     fun loadUpcomingWeekEvents() {
         viewModelScope.launch {
             loadUpcomingWeekEventsInternal()
@@ -244,10 +329,24 @@ class CalendarViewModel(
         loadMonth(nextMonthDate.month.number, nextMonthDate.year)
     }
 
+    fun nextSeason() {
+        if (currentSeasonIndex < seasons.lastIndex) {
+            val next = seasons[currentSeasonIndex + 1]
+            loadSeason(next)
+        }
+    }
+
     fun goToPreviousMonth() {
         val prevMonthDate = _currentCalendarViewDate.value.plus(-1, DateTimeUnit.MONTH)
         clearDayEvents()
         loadMonth(prevMonthDate.month.number, prevMonthDate.year)
+    }
+
+    fun previousSeason() {
+        if (currentSeasonIndex > 0) {
+            val prev = seasons[currentSeasonIndex - 1]
+            loadSeason(prev)
+        }
     }
 
     fun getFormattedDateTitle(
