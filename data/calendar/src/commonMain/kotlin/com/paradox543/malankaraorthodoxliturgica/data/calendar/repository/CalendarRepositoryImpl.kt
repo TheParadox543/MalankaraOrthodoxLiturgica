@@ -8,8 +8,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toLiturgi
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDayDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDataStore
-import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalYearlyDatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarData
@@ -95,19 +95,23 @@ class CalendarRepositoryImpl(
     private fun getLiturgicalData(): LiturgicalDataStore = cachedLiturgicalData ?: error("Calendar not initialized")
 
     private suspend fun loadCalendar() {
-        val yearlyData: List<LiturgicalDatesDto> = calendarSource.loadAllYears()
+        val yearlyData: List<LiturgicalYearlyDatesDto> = calendarSource.loadAllYears()
         AppLogger.d("CalendarRepo") { "loadCalendar: yearlyData.size=${yearlyData.size}" }
 
         calendarData =
             yearlyData
-                .flatMap { it.data.entries }
-                .associate { (dateString, dto) ->
+                .flatMap { yearlyDatesDto ->
+                    yearlyDatesDto.data.entries.map { (dateString, dto) ->
+                        Triple(yearlyDatesDto.liturgicalYear, dateString, dto)
+                    }
+                }.associate { (liturgicalYear, dateString, dto) ->
 
                     val date = LocalDateTime.parse(dateString).date
 
                     date to
                         LiturgicalDay(
                             date = date,
+                            liturgicalYear = liturgicalYear,
                             eventKeys = dto.eventKeys,
                             season = dto.season,
                             tune = dto.tune,
@@ -210,11 +214,14 @@ class CalendarRepositoryImpl(
         return weeks
     }
 
-    override suspend fun getSeasonDays(season: String): List<LiturgicalDay> {
+    override suspend fun getSeasonDays(
+        liturgicalYear: String,
+        season: String,
+    ): List<LiturgicalDay> {
         initializeCalendarDataIfNeeded()
         val days =
             calendarData
-                .filterValues { it.season == season }
+                .filterValues { it.season == season && it.liturgicalYear == liturgicalYear }
 //            .toSortedMap(compareBy { it })
                 .values
                 .toList()
@@ -222,8 +229,11 @@ class CalendarRepositoryImpl(
         return days
     }
 
-    override suspend fun getSeasonWeeks(season: String): List<LiturgicalWeek> {
-        val days = getSeasonDays(season)
+    override suspend fun getSeasonWeeks(
+        liturgicalYear: String,
+        season: String,
+    ): List<LiturgicalWeek> {
+        val days = getSeasonDays(liturgicalYear, season)
         return loadWeeks(days)
     }
 

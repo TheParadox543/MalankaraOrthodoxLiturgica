@@ -15,9 +15,15 @@ interface CalendarRepository {
         end: LocalDate,
     ): List<LiturgicalDay>
 
-    suspend fun getSeasonDays(season: String): List<LiturgicalDay>
+    suspend fun getSeasonDays(
+        liturgicalYear: String,
+        season: String,
+    ): List<LiturgicalDay>
 
-    suspend fun getSeasonWeeks(season: String): List<LiturgicalWeek>
+    suspend fun getSeasonWeeks(
+        liturgicalYear: String,
+        season: String,
+    ): List<LiturgicalWeek>
 
     suspend fun getMonthDays(
         year: Int,

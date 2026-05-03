@@ -73,6 +73,8 @@ class CalendarViewModel(
         )
     private var currentSeasonIndex = 0
 
+    private var liturgicalYear = "2025-26"
+
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
             .stateIn(
@@ -113,8 +115,11 @@ class CalendarViewModel(
     val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> =
         _selectedDayViewData.asStateFlow()
 
+    // TODO: Initial mode for state is hardcoded to season. It should be dynamic with Month view as well.
     private val _state =
-        MutableStateFlow(CalendarUiState(mode = CalendarMode.Season(seasons.first()), isLoading = true, weeks = emptyList()))
+        MutableStateFlow(
+            CalendarUiState(mode = CalendarMode.Season(liturgicalYear, seasons.first()), isLoading = true, weeks = emptyList()),
+        )
     val state: StateFlow<CalendarUiState> = _state.asStateFlow()
 
     // State for the currently selected date for UI feedback
@@ -165,7 +170,7 @@ class CalendarViewModel(
                 loadTranslations(language)
             }
         }
-        loadSeason(seasons.first())
+        loadSeason(liturgicalYear, seasons.first())
     }
 
     private suspend fun loadTranslations(language: AppLanguage) {
@@ -180,7 +185,8 @@ class CalendarViewModel(
             val weeks =
                 when (mode) {
                     is CalendarMode.Season -> {
-                        calendarRepository.getSeasonWeeks(mode.name)
+                        // TODO: Currently hardcoding the liturgical year, but this should be dynamic based on the current date.
+                        calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, season = mode.name)
                     }
 
                     is CalendarMode.Month -> {
@@ -197,25 +203,29 @@ class CalendarViewModel(
         }
     }
 
-    fun loadSeason(season: String) {
+    fun loadSeason(
+        liturgicalYear: String,
+        season: String,
+    ) {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true, error = null)
 
             try {
-                val weeks = calendarRepository.getSeasonWeeks(season)
+                // TODO: Currently hardcoding the liturgical year, but this should be dynamic based on the current date.
+                val weeks = calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, season = season)
 
                 currentSeasonIndex = seasons.indexOf(season)
 
                 _state.value =
                     CalendarUiState(
-                        mode = CalendarMode.Season(season),
+                        mode = CalendarMode.Season(liturgicalYear, season),
                         weeks = weeks,
                         isLoading = false,
                     )
             } catch (e: Exception) {
                 _state.value =
                     CalendarUiState(
-                        mode = CalendarMode.Season(season),
+                        mode = CalendarMode.Season(liturgicalYear, season),
                         weeks = emptyList(),
                         isLoading = false,
                         error = e.message,
@@ -287,7 +297,7 @@ class CalendarViewModel(
 
             val day = calendarRepository.getDay(today)
 
-            day?.season?.let { loadSeason(it) }
+            day?.season?.let { loadSeason(liturgicalYear, it) }
         }
     }
 
@@ -332,7 +342,7 @@ class CalendarViewModel(
     fun nextSeason() {
         if (currentSeasonIndex < seasons.lastIndex) {
             val next = seasons[currentSeasonIndex + 1]
-            loadSeason(next)
+            loadSeason(liturgicalYear, next)
         }
     }
 
@@ -345,7 +355,7 @@ class CalendarViewModel(
     fun previousSeason() {
         if (currentSeasonIndex > 0) {
             val prev = seasons[currentSeasonIndex - 1]
-            loadSeason(prev)
+            loadSeason(liturgicalYear, prev)
         }
     }
 

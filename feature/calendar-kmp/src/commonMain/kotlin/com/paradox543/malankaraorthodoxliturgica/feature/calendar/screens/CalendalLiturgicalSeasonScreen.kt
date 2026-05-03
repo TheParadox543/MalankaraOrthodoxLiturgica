@@ -106,7 +106,7 @@ fun CalendarHeader(
         Text(
             text =
                 when (mode) {
-                    is CalendarMode.Season -> mode.name.replaceFirstChar { it.uppercase() }
+                    is CalendarMode.Season -> mode.name.replaceFirstChar { it.uppercase() } + " ${mode.liturgicalYear}"
                     is CalendarMode.Month -> "${mode.month} ${mode.year}"
                 },
             style = MaterialTheme.typography.titleLarge,

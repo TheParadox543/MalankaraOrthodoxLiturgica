@@ -1,7 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.data.calendar.datasource
 
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDataStore
-import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDatesDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalYearlyDatesDto
 import com.paradox543.malankaraorthodoxliturgica.data.core.datasource.ResourceTextReader
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetParsingException
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
@@ -42,9 +42,10 @@ class CalendarSource(
         }
     }
 
-    suspend fun loadAllYears(): List<LiturgicalDatesDto> {
+    suspend fun loadAllYears(): List<LiturgicalYearlyDatesDto> {
         val files =
             listOf(
+                "liturgical_2024-25.json",
                 "liturgical_2025-26.json",
             )
 
@@ -57,7 +58,7 @@ class CalendarSource(
                 }
 
             try {
-                json.decodeFromString<LiturgicalDatesDto>(jsonString)
+                json.decodeFromString<LiturgicalYearlyDatesDto>(jsonString)
             } catch (t: Throwable) {
                 throw AssetParsingException("Failed to parse asset at path: calendar/$file", t)
             }
