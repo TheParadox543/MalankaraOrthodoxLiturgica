@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -27,6 +28,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Arrow_back
@@ -36,7 +38,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalWeek
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
-import kotlinx.datetime.LocalDate
 
 @Composable
 fun CalendarLiturgicalSeasonScreen(
@@ -59,29 +60,25 @@ fun CalendarLiturgicalSeasonScreen(
         }
         return
     } else {
-        LazyColumn(
+        Column(
             Modifier
                 .padding(contentPadding),
         ) {
-            stickyHeader("header") {
-                CalendarHeader(
-                    mode = state.mode,
-                    onNext = { calendarViewModel.nextSeason() },
-                    onPrev = { calendarViewModel.previousSeason() },
-                )
-            }
-
-            stickyHeader("weekday_header") {
-                WeekdayHeader()
-            }
-
-            items(state.weeks) { week ->
-                WeekRow(
-                    week = week,
-                    onDayClick = { day ->
+            CalendarHeader(
+                mode = state.mode,
+                onNext = { calendarViewModel.nextSeason() },
+                onPrev = { calendarViewModel.previousSeason() },
+            )
+            WeekdayHeader()
+            LazyColumn {
+                items(state.weeks) { week ->
+                    WeekRow(
+                        week = week,
+                        onDayClick = { day ->
 //                    calendarViewModel.onDayClicked(day)
-                    },
-                )
+                        },
+                    )
+                }
             }
         }
     }
@@ -98,7 +95,7 @@ fun CalendarHeader(
             Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface)
-                .padding(12.dp),
+                .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
@@ -112,7 +109,7 @@ fun CalendarHeader(
                     is CalendarMode.Season -> mode.name.replaceFirstChar { it.uppercase() }
                     is CalendarMode.Month -> "${mode.month} ${mode.year}"
                 },
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.titleLarge,
         )
 
         IconButton(onClick = onNext) {
@@ -182,12 +179,12 @@ fun DayCell(
                 .padding(8.dp)
                 .then(
                     if (isClickable) {
-                        Modifier
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.primary,
-                                shape = CircleShape,
-                            ).clickable { onClick() }
+                        Modifier.clickable { onClick() }
+//                            .border(
+//                                width = 1.dp,
+//                                color = MaterialTheme.colorScheme.primary,
+//                                shape = CircleShape,
+//                            )
                     } else {
                         Modifier
                     },
@@ -196,33 +193,47 @@ fun DayCell(
     ) {
         if (!isVisible) return@Box
 
+        // Tune
+        day.tune?.let {
+            Text(
+                it.toString(),
+                Modifier.align(Alignment.TopEnd),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.secondary,
+            )
+        }
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             // Date
             Text(
                 text = day.date.day.toString(),
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyLarge,
+                color =
+                    if (day.lent != null) {
+                        Color.Blue
+                    } else {
+                        MaterialTheme.colorScheme.onSurface
+                    },
             )
 
-            // Tune
-            day.tune?.let {
-                Text(
-                    text = it.toString(),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.secondary,
-                )
-            }
-
-            // Lent indicator
-            if (day.lent != null) {
-                Box(
-                    modifier =
+            Box(
+                Modifier.height(6.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                if (isClickable) {
+                    Box(
                         Modifier
-                            .height(2.dp)
-                            .fillMaxWidth(0.6f)
-                            .background(MaterialTheme.colorScheme.error),
-                )
+//                            .padding(top = 4.dp)
+                            .height(6.dp)
+                            .width(6.dp)
+                            .border(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.primary,
+                                shape = CircleShape,
+                            ),
+                    )
+                }
             }
         }
     }
