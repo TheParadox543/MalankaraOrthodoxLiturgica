@@ -12,6 +12,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGosp
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
@@ -170,7 +171,10 @@ class CalendarViewModel(
                 loadTranslations(language)
             }
         }
-        loadSeason(liturgicalYear, seasons.first())
+        viewModelScope.launch {
+            val day = getToday()
+            loadSeason(liturgicalYear, day?.season ?: seasons.first())
+        }
     }
 
     private suspend fun loadTranslations(language: AppLanguage) {
@@ -185,8 +189,7 @@ class CalendarViewModel(
             val weeks =
                 when (mode) {
                     is CalendarMode.Season -> {
-                        // TODO: Currently hardcoding the liturgical year, but this should be dynamic based on the current date.
-                        calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, season = mode.name)
+                        calendarRepository.getSeasonWeeks(mode.liturgicalYear, mode.name)
                     }
 
                     is CalendarMode.Month -> {
@@ -287,18 +290,15 @@ class CalendarViewModel(
     }
 
     @OptIn(ExperimentalTime::class)
-    fun loadTodaySeason() {
-        viewModelScope.launch {
-            val today =
-                Clock.System
-                    .now()
-                    .toLocalDateTime(TimeZone.currentSystemDefault())
-                    .date
+    suspend fun getToday(): LiturgicalDay? {
+        val today =
+            Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
 
-            val day = calendarRepository.getDay(today)
-
-            day?.season?.let { loadSeason(liturgicalYear, it) }
-        }
+        val day = calendarRepository.getDay(today)
+        return day
     }
 
     fun loadUpcomingWeekEvents() {
