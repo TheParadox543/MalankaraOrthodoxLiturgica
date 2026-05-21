@@ -1,10 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.calendar.model
 
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 
 data class CalendarUiState(
     val mode: CalendarMode,
-    val weeks: List<LiturgicalWeek>,
+    val weeks: List<WeekItem>,
     val isLoading: Boolean = false,
     val error: String? = null,
 )

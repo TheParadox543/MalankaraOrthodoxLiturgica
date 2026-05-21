@@ -4,7 +4,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import kotlinx.datetime.LocalDate
 
 interface CalendarRepository {
@@ -23,7 +23,7 @@ interface CalendarRepository {
     suspend fun getSeasonWeeks(
         liturgicalYear: String,
         season: String,
-    ): List<LiturgicalWeek>
+    ): List<WeekItem>
 
     suspend fun getMonthDays(
         year: Int,
@@ -33,7 +33,7 @@ interface CalendarRepository {
     suspend fun getMonthWeeks(
         year: Int,
         month: Int,
-    ): List<LiturgicalWeek>
+    ): List<WeekItem>
 
     suspend fun getUpcomingDays(count: Int): List<LiturgicalDay>
 

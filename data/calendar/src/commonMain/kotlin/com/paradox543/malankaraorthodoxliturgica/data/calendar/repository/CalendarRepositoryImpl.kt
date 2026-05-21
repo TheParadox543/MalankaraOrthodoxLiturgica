@@ -19,8 +19,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.EventKey
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalCalendarDates
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -169,12 +169,36 @@ class CalendarRepositoryImpl(
             .toList()
     }
 
-    fun loadWeeks(days: List<LiturgicalDay>): List<LiturgicalWeek> {
+    fun loadWeeks(days: List<LiturgicalDay>): List<WeekItem> {
         if (days.isEmpty()) return emptyList()
 
         val sortedDays = days.sortedBy { it.date }
-        val weeks = mutableListOf<LiturgicalWeek>()
+        val result = mutableListOf<WeekItem>()
         var currentWeek = mutableListOf<LiturgicalDay>()
+        var lastMonthName: String? = null
+
+        fun monthNameFor(day: LiturgicalDay): String =
+            day.date.month.name
+                .lowercase()
+                .replaceFirstChar { it.uppercase() }
+
+        fun firstRealDay(week: List<LiturgicalDay>): LiturgicalDay? = week.firstOrNull { it.season != null } ?: week.firstOrNull()
+
+        fun addWeekIfNeeded() {
+            if (currentWeek.isEmpty()) return
+
+            val week = currentWeek.toList()
+            val anchorDay = firstRealDay(week) ?: return
+            val monthName = monthNameFor(anchorDay)
+
+            if (monthName != lastMonthName) {
+                result.add(WeekItem.HeaderLabel(monthName))
+                lastMonthName = monthName
+            }
+
+            result.add(WeekItem.LiturgicalWeek(week))
+            currentWeek = mutableListOf()
+        }
 
         // Step 1: pad first week
         val firstDay = sortedDays.first()
@@ -195,8 +219,7 @@ class CalendarRepositoryImpl(
             currentWeek.add(day)
 
             if (currentWeek.size == 7) {
-                weeks.add(LiturgicalWeek(currentWeek))
-                currentWeek = mutableListOf()
+                addWeekIfNeeded()
             }
         }
 
@@ -208,10 +231,10 @@ class CalendarRepositoryImpl(
                     LiturgicalDay.empty(date),
                 )
             }
-            weeks.add(LiturgicalWeek(currentWeek))
+            addWeekIfNeeded()
         }
 
-        return weeks
+        return result
     }
 
     override suspend fun getSeasonDays(
@@ -232,7 +255,7 @@ class CalendarRepositoryImpl(
     override suspend fun getSeasonWeeks(
         liturgicalYear: String,
         season: String,
-    ): List<LiturgicalWeek> {
+    ): List<WeekItem> {
         val days = getSeasonDays(liturgicalYear, season)
         return loadWeeks(days)
     }
@@ -250,7 +273,7 @@ class CalendarRepositoryImpl(
     override suspend fun getMonthWeeks(
         year: Int,
         month: Int,
-    ): List<LiturgicalWeek> {
+    ): List<WeekItem> {
         val days = getMonthDays(year, month)
         return loadWeeks(days)
     }

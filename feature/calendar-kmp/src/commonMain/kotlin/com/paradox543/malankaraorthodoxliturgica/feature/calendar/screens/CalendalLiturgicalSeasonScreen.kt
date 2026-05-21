@@ -35,7 +35,7 @@ import com.composables.icons.materialicons.rounded.Arrow_back
 import com.composables.icons.materialicons.rounded.Arrow_forward
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 
@@ -71,13 +71,33 @@ fun CalendarLiturgicalSeasonScreen(
             )
             WeekdayHeader()
             LazyColumn {
-                items(state.weeks) { week ->
-                    WeekRow(
-                        week = week,
-                        onDayClick = { day ->
-//                    calendarViewModel.onDayClicked(day)
-                        },
-                    )
+                state.weeks.forEach { weekItem ->
+                    when (weekItem) {
+                        is WeekItem.HeaderLabel -> {
+                            stickyHeader {
+                                Text(
+                                    text = weekItem.name,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    modifier =
+                                        Modifier
+                                            .fillMaxWidth()
+                                            .background(MaterialTheme.colorScheme.surface)
+                                            .padding(8.dp),
+                                )
+                            }
+                        }
+
+                        is WeekItem.LiturgicalWeek -> {
+                            item {
+                                WeekRow(
+                                    week = weekItem,
+                                    onDayClick = { day ->
+//                                   calendarViewModel.onDayClicked(day)
+                                    },
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -147,7 +167,7 @@ fun WeekdayHeader() {
 
 @Composable
 fun WeekRow(
-    week: LiturgicalWeek,
+    week: WeekItem.LiturgicalWeek,
     onDayClick: (LiturgicalDay) -> Unit = {},
 ) {
     Row(
