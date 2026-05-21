@@ -9,6 +9,7 @@ data class LiturgicalDay(
     val season: String?,
     val tune: Int?,
     val lent: Int?,
+    val isToday: Boolean = false,
 ) {
     companion object {
         fun empty(date: LocalDate) =

@@ -74,7 +74,7 @@ class CalendarViewModel(
         )
     private var currentSeasonIndex = 0
 
-    private var liturgicalYear = "2025-26"
+    private var liturgicalYear = "2024-25"
 
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
@@ -173,6 +173,7 @@ class CalendarViewModel(
         }
         viewModelScope.launch {
             val day = getToday()
+            liturgicalYear = day?.liturgicalYear ?: ""
             loadSeason(liturgicalYear, day?.season ?: seasons.first())
         }
     }

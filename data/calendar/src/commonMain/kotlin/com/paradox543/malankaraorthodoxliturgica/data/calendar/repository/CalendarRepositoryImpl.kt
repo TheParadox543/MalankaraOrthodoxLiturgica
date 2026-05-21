@@ -176,6 +176,11 @@ class CalendarRepositoryImpl(
         val result = mutableListOf<WeekItem>()
         var currentWeek = mutableListOf<LiturgicalDay>()
         var lastMonthName: String? = null
+        val today =
+            Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
 
         fun monthNameFor(day: LiturgicalDay): String =
             day.date.month.name
@@ -216,7 +221,7 @@ class CalendarRepositoryImpl(
 
         // Step 2: fill weeks
         for (day in sortedDays) {
-            currentWeek.add(day)
+            currentWeek.add(day.copy(isToday = day.date == today))
 
             if (currentWeek.size == 7) {
                 addWeekIfNeeded()
