@@ -17,7 +17,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,6 +40,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiStat
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarUiState
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 
 @Composable
@@ -47,6 +50,25 @@ fun CalendarLiturgicalSeasonScreen(
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val state by calendarViewModel.state.collectAsState()
+    val selectedMonth =
+        state.selectedDay
+            ?.date
+            ?.month
+            ?.let {
+                WeekItem.HeaderLabel(
+                    it.name
+                        .lowercase()
+                        .replaceFirstChar { it.uppercase() },
+                )
+            }
+    val selectedWeek: WeekItem.LiturgicalWeek? =
+        state.weeks
+            .filterIsInstance<WeekItem.LiturgicalWeek>()
+            .firstOrNull { week ->
+                state.selectedDay?.let { selected ->
+                    week.days.any { it.date == selected.date }
+                } == true
+            }
 
     LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Calendar")) }
 
@@ -73,36 +95,81 @@ fun CalendarLiturgicalSeasonScreen(
                 onPrev = { calendarViewModel.previousSeason() },
             )
             WeekdayHeader()
-            LazyColumn {
-                state.weeks.forEach { weekItem ->
-                    when (weekItem) {
-                        is WeekItem.HeaderLabel -> {
-                            stickyHeader {
-                                Text(
-                                    text = weekItem.name,
-                                    style = MaterialTheme.typography.titleSmall,
-                                    modifier =
-                                        Modifier
-                                            .fillMaxWidth()
-                                            .background(MaterialTheme.colorScheme.surfaceVariant)
-                                            .padding(8.dp),
-                                )
-                            }
-                        }
 
-                        is WeekItem.LiturgicalWeek -> {
-                            item {
-                                WeekRow(
-                                    week = weekItem,
-                                    selectedDay = state.selectedDay,
-                                    onDayClick = calendarViewModel::selectDay,
-                                )
-                            }
-                        }
+            if (state.selectedDay == null) {
+                BrowseMode(state, calendarViewModel)
+            } else {
+                InspectMode(state.selectedDay, selectedWeek, selectedMonth, calendarViewModel)
+            }
+        }
+    }
+}
+
+@Composable
+private fun BrowseMode(
+    state: CalendarUiState,
+    calendarViewModel: CalendarViewModel,
+) {
+    LazyColumn {
+        state.weeks.forEach { weekItem ->
+            when (weekItem) {
+                is WeekItem.HeaderLabel -> {
+                    stickyHeader {
+                        MonthHeader(weekItem)
+                    }
+                }
+
+                is WeekItem.LiturgicalWeek -> {
+                    item {
+                        WeekRow(
+                            week = weekItem,
+                            selectedDay = state.selectedDay,
+                            onDayClick = calendarViewModel::selectDay,
+                        )
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun InspectMode(
+    selectedDay: LiturgicalDay?,
+    selectedWeek: WeekItem.LiturgicalWeek?,
+    selectedMonth: WeekItem.HeaderLabel?,
+    calendarViewModel: CalendarViewModel,
+) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        selectedMonth?.let { MonthHeader(selectedMonth) }
+
+        selectedWeek?.let {
+            WeekRow(
+                week = selectedWeek,
+                selectedDay = selectedDay,
+                onDayClick = calendarViewModel::selectDay,
+            )
+        }
+
+        HorizontalDivider()
+        Card(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp),
+        ) {
+            Text("Testing Day Details on click for ${selectedDay?.date}")
+        }
+//        Box(
+//            modifier = Modifier.weight(1f)
+//        ) {
+//            DayDetails(
+//                day = selectedDay,
+//                onClose = onClose
+//            )
+//        }
     }
 }
 
@@ -165,6 +232,19 @@ fun WeekdayHeader() {
             }
         }
     }
+}
+
+@Composable
+private fun MonthHeader(weekItem: WeekItem.HeaderLabel) {
+    Text(
+        text = weekItem.name,
+        style = MaterialTheme.typography.titleSmall,
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+                .padding(8.dp),
+    )
 }
 
 @Composable
