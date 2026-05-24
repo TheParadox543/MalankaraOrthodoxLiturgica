@@ -62,7 +62,9 @@ fun CalendarLiturgicalSeasonScreen(
     } else {
         Column(
             Modifier
-                .padding(contentPadding),
+                .padding(contentPadding)
+                .padding(horizontal = 4.dp)
+                .background(MaterialTheme.colorScheme.surface),
         ) {
             CalendarHeader(
                 mode = state.mode,
@@ -77,11 +79,11 @@ fun CalendarLiturgicalSeasonScreen(
                             stickyHeader {
                                 Text(
                                     text = weekItem.name,
-                                    style = MaterialTheme.typography.titleMedium,
+                                    style = MaterialTheme.typography.titleSmall,
                                     modifier =
                                         Modifier
                                             .fillMaxWidth()
-                                            .background(MaterialTheme.colorScheme.surface)
+                                            .background(MaterialTheme.colorScheme.surfaceVariant)
                                             .padding(8.dp),
                                 )
                             }
@@ -114,13 +116,13 @@ fun CalendarHeader(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.surfaceDim)
                 .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         IconButton(onClick = onPrev) {
-            Icon(MaterialIcons.Rounded.Arrow_back, contentDescription = null)
+            Icon(MaterialIcons.Rounded.Arrow_back, contentDescription = "Back Arrow")
         }
 
         Text(
@@ -133,7 +135,7 @@ fun CalendarHeader(
         )
 
         IconButton(onClick = onNext) {
-            Icon(MaterialIcons.Rounded.Arrow_forward, contentDescription = null)
+            Icon(MaterialIcons.Rounded.Arrow_forward, contentDescription = "Forward Arrow")
         }
     }
 }
@@ -145,8 +147,8 @@ fun WeekdayHeader() {
     Row(
         modifier =
             Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.background),
+                .fillMaxWidth(),
+//                .background(MaterialTheme.colorScheme.background),
     ) {
         days.forEach { day ->
             Box(
@@ -196,7 +198,7 @@ fun DayCell(
         modifier =
             modifier
                 .aspectRatio(1f)
-                .padding(8.dp)
+                .padding(vertical = 4.dp, horizontal = 2.dp)
                 .then(
                     if (isClickable) {
                         Modifier.clickable { onClick() }
@@ -228,8 +230,10 @@ fun DayCell(
             Text(
                 it.toString(),
                 Modifier.align(Alignment.TopEnd).padding(end = 2.dp, top = 2.dp),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.secondary,
+                style =
+                    MaterialTheme.typography.labelSmall.copy(
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    ),
             )
         }
         Column(
