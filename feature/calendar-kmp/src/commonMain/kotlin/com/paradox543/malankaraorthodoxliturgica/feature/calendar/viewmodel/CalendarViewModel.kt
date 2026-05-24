@@ -334,6 +334,23 @@ class CalendarViewModel(
         _selectedDate.value = null // Clear the selected date
     }
 
+    fun selectDay(day: LiturgicalDay) {
+        _state.update { current ->
+
+            // deselect if same day tapped again
+            val newSelection =
+                if (current.selectedDay?.date == day.date) {
+                    null
+                } else {
+                    day
+                }
+
+            current.copy(
+                selectedDay = newSelection,
+            )
+        }
+    }
+
     fun goToNextMonth() {
         val nextMonthDate = _currentCalendarViewDate.value.plus(1, DateTimeUnit.MONTH)
         clearDayEvents()

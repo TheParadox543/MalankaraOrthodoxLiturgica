@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -93,9 +94,8 @@ fun CalendarLiturgicalSeasonScreen(
                             item {
                                 WeekRow(
                                     week = weekItem,
-                                    onDayClick = { day ->
-//                                   calendarViewModel.onDayClicked(day)
-                                    },
+                                    selectedDay = state.selectedDay,
+                                    onDayClick = calendarViewModel::selectDay,
                                 )
                             }
                         }
@@ -170,6 +170,7 @@ fun WeekdayHeader() {
 @Composable
 fun WeekRow(
     week: WeekItem.LiturgicalWeek,
+    selectedDay: LiturgicalDay?,
     onDayClick: (LiturgicalDay) -> Unit = {},
 ) {
     Row(
@@ -177,8 +178,9 @@ fun WeekRow(
     ) {
         week.days.forEach { day ->
             DayCell(
-                day = day,
                 modifier = Modifier.weight(1f),
+                day = day,
+                isSelected = day.date == selectedDay?.date,
                 onClick = { onDayClick(day) },
             )
         }
@@ -187,36 +189,45 @@ fun WeekRow(
 
 @Composable
 fun DayCell(
-    day: LiturgicalDay,
     modifier: Modifier = Modifier,
+    day: LiturgicalDay,
+    isSelected: Boolean = false,
     onClick: () -> Unit,
 ) {
     val isClickable = day.eventKeys.isNotEmpty()
     val isVisible = day.season != null
+    val isToday = day.isToday
+
+    val border =
+        when {
+            isSelected -> {
+                BorderStroke(
+                    2.dp,
+                    MaterialTheme.colorScheme.primary,
+                )
+            }
+
+            isToday -> {
+                BorderStroke(
+                    1.dp,
+                    MaterialTheme.colorScheme.outline,
+                )
+            }
+
+            else -> {
+                BorderStroke(0.dp, Color.Transparent)
+            }
+        }
 
     Box(
         modifier =
             modifier
                 .aspectRatio(1f)
                 .padding(vertical = 4.dp, horizontal = 2.dp)
+                .border(border, shape = RectangleShape)
                 .then(
                     if (isClickable) {
                         Modifier.clickable { onClick() }
-//                            .border(
-//                                width = 1.dp,
-//                                color = MaterialTheme.colorScheme.primary,
-//                                shape = CircleShape,
-//                            )
-                    } else {
-                        Modifier
-                    },
-                ).then(
-                    if (day.isToday) {
-                        Modifier.border(
-                            width = 2.dp,
-                            color = MaterialTheme.colorScheme.primary,
-                            shape = RectangleShape,
-                        )
                     } else {
                         Modifier
                     },
