@@ -56,6 +56,7 @@ fun CalendarLiturgicalSeasonScreen(
 ) {
     val state by calendarViewModel.state.collectAsState()
     val selectedLanguage by calendarViewModel.selectedLanguage.collectAsState()
+    val translations by calendarViewModel.translations.collectAsState()
     val selectedMonth =
         state.selectedDay
             ?.date
@@ -76,7 +77,11 @@ fun CalendarLiturgicalSeasonScreen(
                 } == true
             }
 
-    LaunchedEffect(Unit) { onScaffoldStateChanged(ScaffoldUiState.Standard("Calendar")) }
+    LaunchedEffect(selectedLanguage, translations) {
+        onScaffoldStateChanged(
+            ScaffoldUiState.Standard(translations["calendar"] ?: "Calendar"),
+        )
+    }
 
     if (state.isLoading) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -101,6 +106,8 @@ fun CalendarLiturgicalSeasonScreen(
                 onPrev = { calendarViewModel.previousSeason() },
                 hasNext = state.hasNextSeason,
                 hasPrevious = state.hasPreviousSeason,
+                selectedLanguage = selectedLanguage,
+                translations = translations,
             )
             WeekdayHeader()
 
@@ -114,6 +121,7 @@ fun CalendarLiturgicalSeasonScreen(
                     selectedDayEvents = state.selectedDayEvents,
                     isSelectedDayEventsLoading = state.isSelectedDayEventsLoading,
                     selectedLanguage = selectedLanguage,
+                    translations = translations,
                     calendarViewModel = calendarViewModel,
                     onPrayerNavigate = onPrayerNavigate,
                     onBibleNavigate = onBibleNavigate,
@@ -159,6 +167,7 @@ private fun InspectMode(
     selectedDayEvents: List<LiturgicalEventDetails>,
     isSelectedDayEventsLoading: Boolean,
     selectedLanguage: AppLanguage,
+    translations: Map<String, String>,
     calendarViewModel: CalendarViewModel,
     onPrayerNavigate: (String) -> Unit,
     onBibleNavigate: () -> Unit,
@@ -186,6 +195,7 @@ private fun InspectMode(
                     events = selectedDayEvents,
                     isEventsLoading = isSelectedDayEventsLoading,
                     selectedLanguage = selectedLanguage,
+                    translations = translations,
                     calendarViewModel = calendarViewModel,
                     onPrayerNavigate = onPrayerNavigate,
                     onBibleNavigate = onBibleNavigate,
@@ -202,6 +212,8 @@ fun CalendarHeader(
     onPrev: () -> Unit,
     hasNext: Boolean,
     hasPrevious: Boolean,
+    selectedLanguage: AppLanguage,
+    translations: Map<String, String>,
 ) {
     Row(
         modifier =
@@ -222,7 +234,7 @@ fun CalendarHeader(
         Text(
             text =
                 when (mode) {
-                    is CalendarMode.Season -> mode.name.replaceFirstChar { it.uppercase() } + " ${mode.liturgicalYear}"
+                    is CalendarMode.Season -> "${formatSeasonTitle(mode.name, selectedLanguage, translations)} ${mode.liturgicalYear}"
                     is CalendarMode.Month -> "${mode.month} ${mode.year}"
                 },
             style = MaterialTheme.typography.titleLarge,
@@ -398,6 +410,7 @@ fun DayDetails(
     events: List<LiturgicalEventDetails>,
     isEventsLoading: Boolean,
     selectedLanguage: AppLanguage,
+    translations: Map<String, String>,
     calendarViewModel: CalendarViewModel,
     onPrayerNavigate: (String) -> Unit,
     onBibleNavigate: () -> Unit,
@@ -430,7 +443,7 @@ fun DayDetails(
 
             day.season?.let {
                 Text(
-                    text = it.replaceFirstChar(Char::uppercase),
+                    text = formatSeasonTitle(it, selectedLanguage, translations),
                     style = MaterialTheme.typography.labelMedium,
                 )
             }
@@ -472,3 +485,26 @@ fun DayDetails(
         }
     }
 }
+
+private fun formatSeasonTitle(
+    season: String,
+    selectedLanguage: AppLanguage,
+    translations: Map<String, String>,
+): String {
+    val seasonName = translations[seasonTranslationKey(season)] ?: season.toDisplayName()
+    return if (selectedLanguage == AppLanguage.MALAYALAM) {
+        "${seasonName}കാലം"
+    } else {
+        "Season of $seasonName"
+    }
+}
+
+private fun seasonTranslationKey(season: String): String =
+    when (season) {
+        "transfiguration" -> "transfigurationSeason"
+        else -> season
+    }
+
+private fun String.toDisplayName(): String =
+    replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
+        .replaceFirstChar(Char::uppercase)

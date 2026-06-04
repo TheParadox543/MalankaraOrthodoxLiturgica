@@ -317,7 +317,7 @@ fun NavGraph(
             navController,
             startDestination =
                 if (onboardingCompleted) {
-                    AppScreen.Calendar.route
+                    AppScreen.Home.route
                 } else {
                     AppScreen.Onboarding.route
                 },

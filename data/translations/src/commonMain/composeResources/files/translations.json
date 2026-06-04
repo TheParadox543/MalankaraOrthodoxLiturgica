@@ -228,7 +228,7 @@
         "en": "Feast of Ascension"
     },
     "pentecost": {
-        "ml": "പെന്തികൊസ്തി പെരുന്നാൾ",
+        "ml": "പെന്തികൊസ്തി",
         "en": "Pentecost"
     },
     "prayNow": {
@@ -626,5 +626,25 @@
     "MuktiDilaye": {
         "en": "Mukti Dilaye",
         "ml": "Mukti Dilaye"
+    },
+    "annunciation":  {
+        "en": "Annunciation",
+        "ml": "അറിയിപ്പു"
+    },
+    "resurrection":  {
+        "en": "Resurrection",
+        "ml": "ഉയിർപ്പു"
+    },
+    "transfigurationSeason":  {
+        "en": "Transfiguration",
+        "ml": "തേജസ്കരണ"
+    },
+    "holyCross": {
+        "en": "Holy Cross",
+        "ml": "സ്ലീബാ"
+    },
+    "calendar": {
+        "en": "Calendar",
+        "ml": "പഞ്ചാംഗം"
     }
 }
