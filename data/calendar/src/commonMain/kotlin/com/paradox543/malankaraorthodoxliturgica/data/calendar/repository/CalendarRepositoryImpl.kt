@@ -44,6 +44,7 @@ class CalendarRepositoryImpl(
     private val cacheMutex = Mutex()
     private var cachedLiturgicalDates: LiturgicalCalendarDates? = null
     private var cachedLiturgicalData: LiturgicalDataStore? = null
+    private val cachedEventDetailsByKeys = mutableMapOf<List<String>, List<LiturgicalEventDetails>>()
     private var calendarData: CalendarData = emptyMap()
 
     private suspend fun initializeLiturgicalDatesIfNeeded() {
@@ -405,5 +406,30 @@ class CalendarRepositoryImpl(
             eventItems.addAll(day.events)
         }
         return eventItems.toLiturgicalEventsDetailsDomain()
+    }
+
+    override suspend fun getEvents(eventKeys: List<String>): List<LiturgicalEventDetails> {
+        if (eventKeys.isEmpty()) return emptyList()
+
+        val cacheKey = eventKeys.toList()
+        val cachedEvents = cacheMutex.withLock { cachedEventDetailsByKeys[cacheKey] }
+        if (cachedEvents != null) return cachedEvents
+
+        initializeLiturgicalDataIfNeeded()
+        val events =
+            eventKeys
+                .map { key ->
+                    getLiturgicalData()[key]
+                        ?: throw IllegalArgumentException("Could not find event key '$key' in liturgical_data.json.")
+                }.toLiturgicalEventsDetailsDomain()
+
+        return cacheMutex.withLock {
+            cachedEventDetailsByKeys.getOrPut(cacheKey) { events }
+        }
+    }
+
+    override suspend fun hasLiturgicalYear(liturgicalYear: String): Boolean {
+        initializeCalendarDataIfNeeded()
+        return calendarData.values.any { it.liturgicalYear == liturgicalYear }
     }
 }

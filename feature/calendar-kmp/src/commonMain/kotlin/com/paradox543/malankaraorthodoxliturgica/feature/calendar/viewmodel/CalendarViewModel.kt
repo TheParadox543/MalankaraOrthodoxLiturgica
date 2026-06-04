@@ -187,6 +187,13 @@ class CalendarViewModel(
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
 
+            val seasonNavigation =
+                if (mode is CalendarMode.Season) {
+                    getSeasonNavigation(mode.liturgicalYear, mode.name)
+                } else {
+                    SeasonNavigation()
+                }
+
             val weeks =
                 when (mode) {
                     is CalendarMode.Season -> {
@@ -198,11 +205,18 @@ class CalendarViewModel(
                     }
                 }
 
+            if (mode is CalendarMode.Season) {
+                currentSeasonIndex = seasons.indexOf(mode.name)
+                liturgicalYear = mode.liturgicalYear
+            }
+
             _state.value =
                 CalendarUiState(
                     mode = mode,
                     weeks = weeks,
                     isLoading = false,
+                    hasPreviousSeason = seasonNavigation.hasPrevious,
+                    hasNextSeason = seasonNavigation.hasNext,
                 )
         }
     }
@@ -217,14 +231,18 @@ class CalendarViewModel(
             try {
                 // TODO: Currently hardcoding the liturgical year, but this should be dynamic based on the current date.
                 val weeks = calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, season = season)
+                val seasonNavigation = getSeasonNavigation(liturgicalYear, season)
 
                 currentSeasonIndex = seasons.indexOf(season)
+                this@CalendarViewModel.liturgicalYear = liturgicalYear
 
                 _state.value =
                     CalendarUiState(
                         mode = CalendarMode.Season(liturgicalYear, season),
                         weeks = weeks,
                         isLoading = false,
+                        hasPreviousSeason = seasonNavigation.hasPrevious,
+                        hasNextSeason = seasonNavigation.hasNext,
                     )
             } catch (e: Exception) {
                 _state.value =
@@ -335,6 +353,8 @@ class CalendarViewModel(
     }
 
     fun selectDay(day: LiturgicalDay) {
+        var dayToLoad: LiturgicalDay? = null
+
         _state.update { current ->
 
             // deselect if same day tapped again
@@ -345,9 +365,46 @@ class CalendarViewModel(
                     day
                 }
 
+            dayToLoad = newSelection
             current.copy(
                 selectedDay = newSelection,
+                selectedDayEvents = emptyList(),
+                isSelectedDayEventsLoading = newSelection?.eventKeys?.isNotEmpty() == true,
             )
+        }
+
+        val selected = dayToLoad ?: return
+        if (selected.eventKeys.isEmpty()) return
+
+        viewModelScope.launch {
+            try {
+                val events =
+                    withContext(backgroundDispatcher) {
+                        calendarRepository.getEvents(selected.eventKeys)
+                    }
+
+                _state.update { current ->
+                    if (current.selectedDay?.date == selected.date) {
+                        current.copy(
+                            selectedDayEvents = events,
+                            isSelectedDayEventsLoading = false,
+                        )
+                    } else {
+                        current
+                    }
+                }
+            } catch (e: Exception) {
+                _state.update { current ->
+                    if (current.selectedDay?.date == selected.date) {
+                        current.copy(
+                            error = e.message,
+                            isSelectedDayEventsLoading = false,
+                        )
+                    } else {
+                        current
+                    }
+                }
+            }
         }
     }
 
@@ -358,9 +415,17 @@ class CalendarViewModel(
     }
 
     fun nextSeason() {
-        if (currentSeasonIndex < seasons.lastIndex) {
-            val next = seasons[currentSeasonIndex + 1]
-            loadSeason(liturgicalYear, next)
+        val currentYear = liturgicalYear
+        when {
+            currentSeasonIndex in 0 until seasons.lastIndex -> {
+                loadSeason(currentYear, seasons[currentSeasonIndex + 1])
+            }
+
+            currentSeasonIndex == seasons.lastIndex -> {
+                nextLiturgicalYear(currentYear)?.let { nextYear ->
+                    loadSeason(nextYear, seasons.first())
+                }
+            }
         }
     }
 
@@ -371,10 +436,57 @@ class CalendarViewModel(
     }
 
     fun previousSeason() {
-        if (currentSeasonIndex > 0) {
-            val prev = seasons[currentSeasonIndex - 1]
-            loadSeason(liturgicalYear, prev)
+        val currentYear = liturgicalYear
+        when {
+            currentSeasonIndex > 0 -> {
+                loadSeason(currentYear, seasons[currentSeasonIndex - 1])
+            }
+
+            currentSeasonIndex == 0 -> {
+                previousLiturgicalYear(currentYear)?.let { previousYear ->
+                    loadSeason(previousYear, seasons.last())
+                }
+            }
         }
+    }
+
+    private data class SeasonNavigation(
+        val hasPrevious: Boolean = false,
+        val hasNext: Boolean = false,
+    )
+
+    private suspend fun getSeasonNavigation(
+        liturgicalYear: String,
+        season: String,
+    ): SeasonNavigation {
+        val seasonIndex = seasons.indexOf(season)
+        if (seasonIndex == -1) return SeasonNavigation()
+
+        val hasPrevious =
+            seasonIndex > 0 ||
+                previousLiturgicalYear(liturgicalYear)?.let { calendarRepository.hasLiturgicalYear(it) } == true
+        val hasNext =
+            seasonIndex < seasons.lastIndex ||
+                nextLiturgicalYear(liturgicalYear)?.let { calendarRepository.hasLiturgicalYear(it) } == true
+
+        return SeasonNavigation(
+            hasPrevious = hasPrevious,
+            hasNext = hasNext,
+        )
+    }
+
+    private fun nextLiturgicalYear(liturgicalYear: String): String? = shiftLiturgicalYear(liturgicalYear, 1)
+
+    private fun previousLiturgicalYear(liturgicalYear: String): String? = shiftLiturgicalYear(liturgicalYear, -1)
+
+    private fun shiftLiturgicalYear(
+        liturgicalYear: String,
+        offset: Int,
+    ): String? {
+        val startYear = liturgicalYear.substringBefore("-").toIntOrNull() ?: return null
+        val shiftedStartYear = startYear + offset
+        val shiftedEndYear = (shiftedStartYear + 1).mod(100).toString().padStart(2, '0')
+        return "$shiftedStartYear-$shiftedEndYear"
     }
 
     fun getFormattedDateTitle(

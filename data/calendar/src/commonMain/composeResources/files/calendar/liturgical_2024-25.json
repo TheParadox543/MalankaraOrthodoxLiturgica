@@ -1628,7 +1628,7 @@
       ],
       "season": "pentecost",
       "tune": 4,
-      "lent": null
+      "lent": 1
     },
     "2025-06-17T00:00:00": {
       "events": [],
@@ -2203,11 +2203,10 @@
     },
     "2025-09-05T00:00:00": {
       "events": [
-        "thirdSundayAfterHolyCross",
         "seminaryDay"
       ],
       "season": "transfiguration",
-      "tune": 3,
+      "tune": 7,
       "lent": 1
     },
     "2025-09-06T00:00:00": {
@@ -2253,11 +2252,9 @@
       "lent": null
     },
     "2025-09-12T00:00:00": {
-      "events": [
-        "fourthSundayAfterHolyCross"
-      ],
+      "events": [],
       "season": "transfiguration",
-      "tune": 4,
+      "tune": 8,
       "lent": 1
     },
     "2025-09-13T00:00:00": {
@@ -2301,11 +2298,9 @@
       "lent": null
     },
     "2025-09-19T00:00:00": {
-      "events": [
-        "fifthSundayAfterHolyCross"
-      ],
+      "events": [],
       "season": "holyCross",
-      "tune": 5,
+      "tune": 4,
       "lent": 1
     },
     "2025-09-20T00:00:00": {
@@ -2353,11 +2348,9 @@
       "lent": null
     },
     "2025-09-26T00:00:00": {
-      "events": [
-        "sixthSundayAfterHolyCross"
-      ],
+      "events": [],
       "season": "holyCross",
-      "tune": 6,
+      "tune": 5,
       "lent": 1
     },
     "2025-09-27T00:00:00": {
@@ -2415,6 +2408,200 @@
       "events": [],
       "season": "holyCross",
       "tune": 2,
+      "lent": null
+    },
+    "2025-10-05T00:00:00": {
+      "events": [
+        "thirdSundayAfterHolyCross"
+      ],
+      "season": "holyCross",
+      "tune": 3,
+      "lent": null
+    },
+    "2025-10-06T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 7,
+      "lent": null
+    },
+    "2025-10-07T00:00:00": {
+      "events": [
+        "feastSargisBakos"
+      ],
+      "season": "holyCross",
+      "tune": 3,
+      "lent": null
+    },
+    "2025-10-08T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 7,
+      "lent": 1
+    },
+    "2025-10-09T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 3,
+      "lent": null
+    },
+    "2025-10-10T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 7,
+      "lent": 1
+    },
+    "2025-10-11T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 3,
+      "lent": null
+    },
+    "2025-10-12T00:00:00": {
+      "events": [
+        "fourthSundayAfterHolyCross",
+        "philiposeMarDionysius",
+        "yuhannonMarAthanasios"
+      ],
+      "season": "holyCross",
+      "tune": 4,
+      "lent": null
+    },
+    "2025-10-13T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 8,
+      "lent": null
+    },
+    "2025-10-14T00:00:00": {
+      "events": [
+        "athanasiosAlexandria"
+      ],
+      "season": "holyCross",
+      "tune": 4,
+      "lent": null
+    },
+    "2025-10-15T00:00:00": {
+      "events": [
+        "enthronementBaseliosMarthomaMathews",
+        "feastStOsyo"
+      ],
+      "season": "holyCross",
+      "tune": 8,
+      "lent": 1
+    },
+    "2025-10-16T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 4,
+      "lent": null
+    },
+    "2025-10-17T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 8,
+      "lent": 1
+    },
+    "2025-10-18T00:00:00": {
+      "events": [
+        "feastStLuke"
+      ],
+      "season": "holyCross",
+      "tune": 4,
+      "lent": null
+    },
+    "2025-10-19T00:00:00": {
+      "events": [
+        "fifthSundayAfterHolyCross"
+      ],
+      "season": "holyCross",
+      "tune": 5,
+      "lent": null
+    },
+    "2025-10-20T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 1,
+      "lent": null
+    },
+    "2025-10-21T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 5,
+      "lent": null
+    },
+    "2025-10-22T00:00:00": {
+      "events": [
+        "marBaseliosShakralla",
+        "feastStJamesApostle"
+      ],
+      "season": "holyCross",
+      "tune": 1,
+      "lent": 1
+    },
+    "2025-10-23T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 5,
+      "lent": null
+    },
+    "2025-10-24T00:00:00": {
+      "events": [
+        "zachariahMarTheophilos"
+      ],
+      "season": "holyCross",
+      "tune": 1,
+      "lent": 1
+    },
+    "2025-10-25T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 5,
+      "lent": null
+    },
+    "2025-10-26T00:00:00": {
+      "events": [
+        "sixthSundayAfterHolyCross"
+      ],
+      "season": "holyCross",
+      "tune": 6,
+      "lent": null
+    },
+    "2025-10-27T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 2,
+      "lent": null
+    },
+    "2025-10-28T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 6,
+      "lent": null
+    },
+    "2025-10-29T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 2,
+      "lent": 1
+    },
+    "2025-10-30T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 6,
+      "lent": null
+    },
+    "2025-10-31T00:00:00": {
+      "events": [],
+      "season": "holyCross",
+      "tune": 2,
+      "lent": 1
+    },
+    "2025-11-01T00:00:00": {
+      "events": [
+        "feastAllSaints"
+      ],
+      "season": "holyCross",
+      "tune": 6,
       "lent": null
     }
   }

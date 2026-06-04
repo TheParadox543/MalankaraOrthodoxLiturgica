@@ -17,8 +17,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -39,7 +39,9 @@ import com.composables.icons.materialicons.rounded.Arrow_back
 import com.composables.icons.materialicons.rounded.Arrow_forward
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarUiState
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
@@ -48,9 +50,12 @@ import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.Cale
 fun CalendarLiturgicalSeasonScreen(
     calendarViewModel: CalendarViewModel,
     contentPadding: PaddingValues = PaddingValues(),
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit = {},
 ) {
     val state by calendarViewModel.state.collectAsState()
+    val selectedLanguage by calendarViewModel.selectedLanguage.collectAsState()
     val selectedMonth =
         state.selectedDay
             ?.date
@@ -94,13 +99,25 @@ fun CalendarLiturgicalSeasonScreen(
                 mode = state.mode,
                 onNext = { calendarViewModel.nextSeason() },
                 onPrev = { calendarViewModel.previousSeason() },
+                hasNext = state.hasNextSeason,
+                hasPrevious = state.hasPreviousSeason,
             )
             WeekdayHeader()
 
             if (state.selectedDay == null) {
                 BrowseMode(state, calendarViewModel)
             } else {
-                InspectMode(state.selectedDay, selectedWeek, selectedMonth, calendarViewModel)
+                InspectMode(
+                    selectedDay = state.selectedDay,
+                    selectedWeek = selectedWeek,
+                    selectedMonth = selectedMonth,
+                    selectedDayEvents = state.selectedDayEvents,
+                    isSelectedDayEventsLoading = state.isSelectedDayEventsLoading,
+                    selectedLanguage = selectedLanguage,
+                    calendarViewModel = calendarViewModel,
+                    onPrayerNavigate = onPrayerNavigate,
+                    onBibleNavigate = onBibleNavigate,
+                )
             }
         }
     }
@@ -139,7 +156,12 @@ private fun InspectMode(
     selectedDay: LiturgicalDay?,
     selectedWeek: WeekItem.LiturgicalWeek?,
     selectedMonth: WeekItem.HeaderLabel?,
+    selectedDayEvents: List<LiturgicalEventDetails>,
+    isSelectedDayEventsLoading: Boolean,
+    selectedLanguage: AppLanguage,
     calendarViewModel: CalendarViewModel,
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -161,6 +183,12 @@ private fun InspectMode(
             ) {
                 DayDetails(
                     day = selectedDay,
+                    events = selectedDayEvents,
+                    isEventsLoading = isSelectedDayEventsLoading,
+                    selectedLanguage = selectedLanguage,
+                    calendarViewModel = calendarViewModel,
+                    onPrayerNavigate = onPrayerNavigate,
+                    onBibleNavigate = onBibleNavigate,
                 )
             }
         }
@@ -172,6 +200,8 @@ fun CalendarHeader(
     mode: CalendarMode,
     onNext: () -> Unit,
     onPrev: () -> Unit,
+    hasNext: Boolean,
+    hasPrevious: Boolean,
 ) {
     Row(
         modifier =
@@ -182,7 +212,10 @@ fun CalendarHeader(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        IconButton(onClick = onPrev) {
+        IconButton(
+            onClick = onPrev,
+            enabled = hasPrevious,
+        ) {
             Icon(MaterialIcons.Rounded.Arrow_back, contentDescription = "Back Arrow")
         }
 
@@ -195,7 +228,10 @@ fun CalendarHeader(
             style = MaterialTheme.typography.titleLarge,
         )
 
-        IconButton(onClick = onNext) {
+        IconButton(
+            onClick = onNext,
+            enabled = hasNext,
+        ) {
             Icon(MaterialIcons.Rounded.Arrow_forward, contentDescription = "Forward Arrow")
         }
     }
@@ -359,6 +395,12 @@ fun DayCell(
 @Composable
 fun DayDetails(
     day: LiturgicalDay,
+    events: List<LiturgicalEventDetails>,
+    isEventsLoading: Boolean,
+    selectedLanguage: AppLanguage,
+    calendarViewModel: CalendarViewModel,
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -400,36 +442,33 @@ fun DayDetails(
 
         Spacer(Modifier.height(12.dp))
 
-        // Events
-        if (day.eventKeys.isEmpty()) {
+        if (isEventsLoading) {
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (day.eventKeys.isEmpty()) {
             Text(
                 text = "No commemorations",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         } else {
-            Column(
+            LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
-                day.eventKeys.forEach { key ->
-
-                    EventCard(
-                        eventKey = key,
+                items(events) { event ->
+                    DisplayEvent(
+                        event = event,
+                        selectedLanguage = selectedLanguage,
+                        calendarViewModel = calendarViewModel,
+                        onPrayerNavigate = onPrayerNavigate,
+                        onBibleNavigate = onBibleNavigate,
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun EventCard(eventKey: String) {
-    Card(
-        modifier = Modifier.fillMaxWidth(),
-    ) {
-        Text(
-            text = eventKey,
-            modifier = Modifier.padding(12.dp),
-        )
     }
 }

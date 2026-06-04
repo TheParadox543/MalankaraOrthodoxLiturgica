@@ -576,6 +576,12 @@ fun NavGraph(
                 CalendarLiturgicalSeasonScreen(
                     calendarViewModel,
                     contentPadding = innerPadding,
+                    onBibleNavigate = {
+                        navController.navigate(AppScreen.BibleReader.route)
+                    },
+                    onPrayerNavigate = { route ->
+                        navController.navigate(AppScreen.Prayer.createRoute(route))
+                    },
                     onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }

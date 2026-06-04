@@ -50,4 +50,8 @@ interface CalendarRepository {
     suspend fun getUpcomingWeekEvents(): List<CalendarDay>
 
     suspend fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails>
+
+    suspend fun getEvents(eventKeys: List<String>): List<LiturgicalEventDetails>
+
+    suspend fun hasLiturgicalYear(liturgicalYear: String): Boolean
 }
