@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -154,22 +155,15 @@ private fun InspectMode(
         }
 
         HorizontalDivider()
-        Card(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp),
-        ) {
-            Text("Testing Day Details on click for ${selectedDay?.date}")
+        selectedDay?.let {
+            Box(
+                modifier = Modifier.weight(1f),
+            ) {
+                DayDetails(
+                    day = selectedDay,
+                )
+            }
         }
-//        Box(
-//            modifier = Modifier.weight(1f)
-//        ) {
-//            DayDetails(
-//                day = selectedDay,
-//                onClose = onClose
-//            )
-//        }
     }
 }
 
@@ -215,7 +209,6 @@ fun WeekdayHeader() {
         modifier =
             Modifier
                 .fillMaxWidth(),
-//                .background(MaterialTheme.colorScheme.background),
     ) {
         days.forEach { day ->
             Box(
@@ -349,7 +342,6 @@ fun DayCell(
                 if (isClickable) {
                     Box(
                         Modifier
-//                            .padding(top = 4.dp)
                             .height(6.dp)
                             .width(6.dp)
                             .border(
@@ -361,5 +353,83 @@ fun DayCell(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun DayDetails(
+    day: LiturgicalDay,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier =
+            modifier
+                .fillMaxSize()
+                .padding(12.dp),
+    ) {
+        // Date
+        Text(
+            text = day.date.toString(),
+            style = MaterialTheme.typography.titleLarge,
+        )
+
+        Spacer(Modifier.height(4.dp))
+
+        // Metadata row
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            day.tune?.let {
+                Text(
+                    text = "Tune $it",
+                    style = MaterialTheme.typography.labelMedium,
+                )
+            }
+
+            day.season?.let {
+                Text(
+                    text = it.replaceFirstChar(Char::uppercase),
+                    style = MaterialTheme.typography.labelMedium,
+                )
+            }
+        }
+
+        Spacer(Modifier.height(12.dp))
+
+        HorizontalDivider()
+
+        Spacer(Modifier.height(12.dp))
+
+        // Events
+        if (day.eventKeys.isEmpty()) {
+            Text(
+                text = "No commemorations",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        } else {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                day.eventKeys.forEach { key ->
+
+                    EventCard(
+                        eventKey = key,
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun EventCard(eventKey: String) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Text(
+            text = eventKey,
+            modifier = Modifier.padding(12.dp),
+        )
     }
 }
