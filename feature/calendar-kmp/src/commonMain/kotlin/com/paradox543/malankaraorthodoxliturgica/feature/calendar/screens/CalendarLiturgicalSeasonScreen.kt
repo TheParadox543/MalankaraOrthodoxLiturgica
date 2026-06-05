@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -318,6 +319,7 @@ fun DayCell(
     val isClickable = day.eventKeys.isNotEmpty()
     val isVisible = day.season != null
     val isToday = day.isToday
+    val lentDayColor = lentDayColor()
 
     val border =
         when {
@@ -377,7 +379,7 @@ fun DayCell(
                 style = MaterialTheme.typography.bodyLarge,
                 color =
                     if (day.lent != null) {
-                        Color.Blue
+                        lentDayColor
                     } else {
                         MaterialTheme.colorScheme.onSurface
                     },
@@ -508,3 +510,11 @@ private fun seasonTranslationKey(season: String): String =
 private fun String.toDisplayName(): String =
     replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
         .replaceFirstChar(Char::uppercase)
+
+@Composable
+private fun lentDayColor(): Color =
+    if (isSystemInDarkTheme()) {
+        Color(0xFF90CAF9)
+    } else {
+        Color(0xFF1565C0)
+    }
