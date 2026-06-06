@@ -6,7 +6,7 @@ data class LiturgicalEventDetails(
     val type: String,
     val title: TitleStr,
     val bibleReadings: BibleReadingsSelection? = null,
-    val niram: Int? = null,
+    val tune: Int? = null,
     val specialSongsKey: String? = null,
     val startedYear: Int? = null,
 )

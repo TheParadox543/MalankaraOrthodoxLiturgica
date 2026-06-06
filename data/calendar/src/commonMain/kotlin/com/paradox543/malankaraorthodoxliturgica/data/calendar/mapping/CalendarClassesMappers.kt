@@ -14,7 +14,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.TitleStr
-import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDate as KotlinLocalDate
 
 fun TitleStrDto.toDomain(): TitleStr =
@@ -28,7 +27,7 @@ fun LiturgicalEventDetailsDto.toDomain(): LiturgicalEventDetails =
         type = this.type,
         title = this.title.toDomain(),
         bibleReadings = this.bibleReadings?.toDomain(),
-        niram = this.niram,
+        tune = this.tune,
         specialSongsKey = this.specialSongsKey,
         startedYear = this.startedYear,
     )

@@ -12,6 +12,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGosp
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
@@ -20,6 +21,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.TranslationsRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.translations.repository.loadTranslations
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarUiState
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -58,6 +61,20 @@ class CalendarViewModel(
         val hasPreviousMonth: Boolean,
         val hasNextMonth: Boolean,
     )
+
+    private val seasons =
+        listOf(
+            "annunciation",
+            "epiphany",
+            "greatLent",
+            "resurrection",
+            "pentecost",
+            "transfiguration",
+            "holyCross",
+        )
+    private var currentSeasonIndex = 0
+
+    private var liturgicalYear = "2024-25"
 
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language
@@ -98,6 +115,13 @@ class CalendarViewModel(
     private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
     val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> =
         _selectedDayViewData.asStateFlow()
+
+    // TODO: Initial mode for state is hardcoded to season. It should be dynamic with Month view as well.
+    private val _state =
+        MutableStateFlow(
+            CalendarUiState(mode = CalendarMode.Season(liturgicalYear, seasons.first()), isLoading = true, weeks = emptyList()),
+        )
+    val state: StateFlow<CalendarUiState> = _state.asStateFlow()
 
     // State for the currently selected date for UI feedback
     private val _selectedDate = MutableStateFlow<LocalDate?>(null)
@@ -147,11 +171,89 @@ class CalendarViewModel(
                 loadTranslations(language)
             }
         }
+        viewModelScope.launch {
+            val day = getToday()
+            liturgicalYear = day?.liturgicalYear ?: ""
+            loadSeason(liturgicalYear, day?.season ?: seasons.first())
+        }
     }
 
     private suspend fun loadTranslations(language: AppLanguage) {
         val loadedTranslations = translationsRepository.loadTranslations(language, backgroundDispatcher)
         _translations.update { loadedTranslations }
+    }
+
+    fun load(mode: CalendarMode) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(isLoading = true)
+
+            val seasonNavigation =
+                if (mode is CalendarMode.Season) {
+                    getSeasonNavigation(mode.liturgicalYear, mode.name)
+                } else {
+                    SeasonNavigation()
+                }
+
+            val weeks =
+                when (mode) {
+                    is CalendarMode.Season -> {
+                        calendarRepository.getSeasonWeeks(mode.liturgicalYear, mode.name)
+                    }
+
+                    is CalendarMode.Month -> {
+                        calendarRepository.getMonthWeeks(mode.year, mode.month)
+                    }
+                }
+
+            if (mode is CalendarMode.Season) {
+                currentSeasonIndex = seasons.indexOf(mode.name)
+                liturgicalYear = mode.liturgicalYear
+            }
+
+            _state.value =
+                CalendarUiState(
+                    mode = mode,
+                    weeks = weeks,
+                    isLoading = false,
+                    hasPreviousSeason = seasonNavigation.hasPrevious,
+                    hasNextSeason = seasonNavigation.hasNext,
+                )
+        }
+    }
+
+    fun loadSeason(
+        liturgicalYear: String,
+        season: String,
+    ) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(isLoading = true, error = null)
+
+            try {
+                // TODO: Currently hardcoding the liturgical year, but this should be dynamic based on the current date.
+                val weeks = calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, season = season)
+                val seasonNavigation = getSeasonNavigation(liturgicalYear, season)
+
+                currentSeasonIndex = seasons.indexOf(season)
+                this@CalendarViewModel.liturgicalYear = liturgicalYear
+
+                _state.value =
+                    CalendarUiState(
+                        mode = CalendarMode.Season(liturgicalYear, season),
+                        weeks = weeks,
+                        isLoading = false,
+                        hasPreviousSeason = seasonNavigation.hasPrevious,
+                        hasNextSeason = seasonNavigation.hasNext,
+                    )
+            } catch (e: Exception) {
+                _state.value =
+                    CalendarUiState(
+                        mode = CalendarMode.Season(liturgicalYear, season),
+                        weeks = emptyList(),
+                        isLoading = false,
+                        error = e.message,
+                    )
+            }
+        }
     }
 
     fun loadMonth(
@@ -206,6 +308,18 @@ class CalendarViewModel(
         }
     }
 
+    @OptIn(ExperimentalTime::class)
+    suspend fun getToday(): LiturgicalDay? {
+        val today =
+            Clock.System
+                .now()
+                .toLocalDateTime(TimeZone.currentSystemDefault())
+                .date
+
+        val day = calendarRepository.getDay(today)
+        return day
+    }
+
     fun loadUpcomingWeekEvents() {
         viewModelScope.launch {
             loadUpcomingWeekEventsInternal()
@@ -238,16 +352,141 @@ class CalendarViewModel(
         _selectedDate.value = null // Clear the selected date
     }
 
+    fun selectDay(day: LiturgicalDay) {
+        var dayToLoad: LiturgicalDay? = null
+
+        _state.update { current ->
+
+            // deselect if same day tapped again
+            val newSelection =
+                if (current.selectedDay?.date == day.date) {
+                    null
+                } else {
+                    day
+                }
+
+            dayToLoad = newSelection
+            current.copy(
+                selectedDay = newSelection,
+                selectedDayEvents = emptyList(),
+                isSelectedDayEventsLoading = newSelection?.eventKeys?.isNotEmpty() == true,
+            )
+        }
+
+        val selected = dayToLoad ?: return
+        if (selected.eventKeys.isEmpty()) return
+
+        viewModelScope.launch {
+            try {
+                val events =
+                    withContext(backgroundDispatcher) {
+                        calendarRepository.getEvents(selected.eventKeys)
+                    }
+
+                _state.update { current ->
+                    if (current.selectedDay?.date == selected.date) {
+                        current.copy(
+                            selectedDayEvents = events,
+                            isSelectedDayEventsLoading = false,
+                        )
+                    } else {
+                        current
+                    }
+                }
+            } catch (e: Exception) {
+                _state.update { current ->
+                    if (current.selectedDay?.date == selected.date) {
+                        current.copy(
+                            error = e.message,
+                            isSelectedDayEventsLoading = false,
+                        )
+                    } else {
+                        current
+                    }
+                }
+            }
+        }
+    }
+
     fun goToNextMonth() {
         val nextMonthDate = _currentCalendarViewDate.value.plus(1, DateTimeUnit.MONTH)
         clearDayEvents()
         loadMonth(nextMonthDate.month.number, nextMonthDate.year)
     }
 
+    fun nextSeason() {
+        val currentYear = liturgicalYear
+        when {
+            currentSeasonIndex in 0 until seasons.lastIndex -> {
+                loadSeason(currentYear, seasons[currentSeasonIndex + 1])
+            }
+
+            currentSeasonIndex == seasons.lastIndex -> {
+                nextLiturgicalYear(currentYear)?.let { nextYear ->
+                    loadSeason(nextYear, seasons.first())
+                }
+            }
+        }
+    }
+
     fun goToPreviousMonth() {
         val prevMonthDate = _currentCalendarViewDate.value.plus(-1, DateTimeUnit.MONTH)
         clearDayEvents()
         loadMonth(prevMonthDate.month.number, prevMonthDate.year)
+    }
+
+    fun previousSeason() {
+        val currentYear = liturgicalYear
+        when {
+            currentSeasonIndex > 0 -> {
+                loadSeason(currentYear, seasons[currentSeasonIndex - 1])
+            }
+
+            currentSeasonIndex == 0 -> {
+                previousLiturgicalYear(currentYear)?.let { previousYear ->
+                    loadSeason(previousYear, seasons.last())
+                }
+            }
+        }
+    }
+
+    private data class SeasonNavigation(
+        val hasPrevious: Boolean = false,
+        val hasNext: Boolean = false,
+    )
+
+    private suspend fun getSeasonNavigation(
+        liturgicalYear: String,
+        season: String,
+    ): SeasonNavigation {
+        val seasonIndex = seasons.indexOf(season)
+        if (seasonIndex == -1) return SeasonNavigation()
+
+        val hasPrevious =
+            seasonIndex > 0 ||
+                previousLiturgicalYear(liturgicalYear)?.let { calendarRepository.hasLiturgicalYear(it) } == true
+        val hasNext =
+            seasonIndex < seasons.lastIndex ||
+                nextLiturgicalYear(liturgicalYear)?.let { calendarRepository.hasLiturgicalYear(it) } == true
+
+        return SeasonNavigation(
+            hasPrevious = hasPrevious,
+            hasNext = hasNext,
+        )
+    }
+
+    private fun nextLiturgicalYear(liturgicalYear: String): String? = shiftLiturgicalYear(liturgicalYear, 1)
+
+    private fun previousLiturgicalYear(liturgicalYear: String): String? = shiftLiturgicalYear(liturgicalYear, -1)
+
+    private fun shiftLiturgicalYear(
+        liturgicalYear: String,
+        offset: Int,
+    ): String? {
+        val startYear = liturgicalYear.substringBefore("-").toIntOrNull() ?: return null
+        val shiftedStartYear = startYear + offset
+        val shiftedEndYear = (shiftedStartYear + 1).mod(100).toString().padStart(2, '0')
+        return "$shiftedStartYear-$shiftedEndYear"
     }
 
     fun getFormattedDateTitle(
