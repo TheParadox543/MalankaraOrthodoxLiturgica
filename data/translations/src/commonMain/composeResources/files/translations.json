@@ -215,6 +215,22 @@
         "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ",
         "en": "For the Apostles"
     },
+    "sheemaRepentance": {
+        "ml": "അനുതാപത്തിന്റെ",
+        "en": "For Repentance"
+    },
+    "sheemaPriest": {
+        "ml": "പുരോഹിതന്മ‌മാരുടെ ഓർമ്മയിൽ",
+        "en": "For the Priests"
+    },
+    "sheemaOneSaint": {
+        "ml": "ഒരു പരിശുദ്ധൻ്റെ ഓർമ്മയിൽ",
+        "en": "For a Saint"
+    },
+    "sheemaOneMartyr": {
+        "ml": "ഒരു സഹദായുടെ ഓർമ്മയിൽ",
+        "en": "For a Martyr"
+    },
     "cyclicPrayers": {
         "ml": "ധൂപപ്രാർത്ഥനകൾ",
         "en": "Cyclic prayers"
