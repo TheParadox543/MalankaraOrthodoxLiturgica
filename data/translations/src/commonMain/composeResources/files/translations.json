@@ -215,6 +215,10 @@
         "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ",
         "en": "For the Apostles"
     },
+    "sheemaSaintOrMartyr": {
+        "ml": "ഒരു പരിശുദ്ധയുടെയോ ഒരു രക്തസാക്ഷിയുടെയോ ഓർമ്മയിൽ",
+        "en": "For a Saint or a Martyr"
+    },
     "sheemaRepentance": {
         "ml": "അനുതാപത്തിന്റെ",
         "en": "For Repentance"
@@ -230,6 +234,14 @@
     "sheemaOneMartyr": {
         "ml": "ഒരു സഹദായുടെ ഓർമ്മയിൽ",
         "en": "For a Martyr"
+    },
+    "sheemaDeparted": {
+        "ml": "പരേതരുടെ ഓർമ്മ",
+        "en": "For the Departed"
+    },
+    "sheemaGeneral": {
+        "ml": "പൊതുവായ ഓർമ്മയിൽ",
+        "en": "General Promiyon"
     },
     "cyclicPrayers": {
         "ml": "ധൂപപ്രാർത്ഥനകൾ",

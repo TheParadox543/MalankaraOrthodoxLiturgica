@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Arrow_back
@@ -227,6 +228,7 @@ fun CalendarHeader(
     ) {
         IconButton(
             onClick = onPrev,
+            modifier = Modifier.width(36.dp),
             enabled = hasPrevious,
         ) {
             Icon(MaterialIcons.Rounded.Arrow_back, contentDescription = "Back Arrow")
@@ -239,10 +241,13 @@ fun CalendarHeader(
                     is CalendarMode.Month -> "${mode.month} ${mode.year}"
                 },
             style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.weight(1f),
+            textAlign = TextAlign.Center,
         )
 
         IconButton(
             onClick = onNext,
+            modifier = Modifier.width(36.dp),
             enabled = hasNext,
         ) {
             Icon(MaterialIcons.Rounded.Arrow_forward, contentDescription = "Forward Arrow")
@@ -494,10 +499,14 @@ private fun formatSeasonTitle(
     translations: Map<String, String>,
 ): String {
     val seasonName = translations[seasonTranslationKey(season)] ?: season.toDisplayName()
-    return if (selectedLanguage == AppLanguage.MALAYALAM) {
-        "${seasonName}കാലം"
-    } else {
-        "Season of $seasonName"
+    return when (selectedLanguage) {
+        AppLanguage.MALAYALAM -> {
+            "${seasonName}കാലം"
+        }
+
+        AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> {
+            "Season of $seasonName"
+        }
     }
 }
 
