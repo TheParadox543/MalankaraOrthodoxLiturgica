@@ -42,6 +42,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.Dynam
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.DynamicSongsBlockUI
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.ErrorBlock
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.PrayerButton
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.components.SelectedBibleReadingUI
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.qr.generation.QrDialog
@@ -306,6 +307,10 @@ fun PrayerElementRenderer(
                 filename,
                 onPrayerButtonClick,
             )
+        }
+
+        is PrayerElement.PrayerBibleReading -> {
+            SelectedBibleReadingUI(prayerElement)
         }
 
         is PrayerElement.Link -> {

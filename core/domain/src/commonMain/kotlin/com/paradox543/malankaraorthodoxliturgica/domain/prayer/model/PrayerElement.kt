@@ -1,5 +1,7 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.model
 
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReading
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.EventKey
 
 /**
@@ -78,6 +80,11 @@ sealed interface PrayerElement {
     data class AlternativePrayersBlock(
         val title: String,
         val options: List<AlternativeOption>,
+    ) : PrayerElement
+
+    data class PrayerBibleReading(
+        val references: List<BibleReference>,
+        val readingContent: BibleReading? = null,
     ) : PrayerElement
 
     data class Error(

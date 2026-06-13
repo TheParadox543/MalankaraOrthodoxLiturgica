@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerLinkDepthExceededException
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
@@ -12,6 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 class GetPrayerScreenContentUseCase(
     private val prayerRepository: PrayerRepository,
     private val getDynamicSongsUseCase: GetDynamicSongsUseCase,
+    private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
 ) {
     private val maxLinkDepth = 5
 
@@ -106,9 +108,30 @@ class GetPrayerScreenContentUseCase(
                     out.add(PrayerElement.AlternativePrayersBlock(element.title, resolvedOptions))
                 }
 
-                else -> {
-                    // Title, Heading, Prose, Song, Subtext, Source, Button, Error etc.
+                is PrayerElement.PrayerBibleReading -> {
+                    val reading = loadBibleReadingUseCase(element.references, language)
+                    out.add(PrayerElement.PrayerBibleReading(references = element.references, readingContent = reading))
+                }
+
+                is PrayerElement.Title,
+                is PrayerElement.Heading,
+                is PrayerElement.Subheading,
+                is PrayerElement.Prose,
+                is PrayerElement.Song,
+                is PrayerElement.Subtext,
+                is PrayerElement.Source,
+                is PrayerElement.Button,
+                is PrayerElement.Error,
+                -> {
                     out.add(element)
+                }
+
+                is PrayerElement.AlternativeOption -> {
+                    out.add(
+                        PrayerElement.Error(
+                            "Unexpected AlternativeOption with label ${element.label} found while resolving.",
+                        ),
+                    )
                 }
             }
         }
