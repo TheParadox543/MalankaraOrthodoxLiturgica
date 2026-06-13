@@ -84,6 +84,7 @@ sealed interface PrayerElement {
 
     data class PrayerBibleReading(
         val references: List<BibleReference>,
+        val formattedReference: String? = null,
         val readingContent: BibleReading? = null,
     ) : PrayerElement
 

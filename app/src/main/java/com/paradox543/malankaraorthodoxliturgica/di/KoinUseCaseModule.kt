@@ -46,6 +46,7 @@ val useCaseModule =
                 prayerRepository = get(),
                 getDynamicSongsUseCase = get(),
                 loadBibleReadingUseCase = get(),
+                formatGospelEntryUseCase = get(),
             )
         }
 

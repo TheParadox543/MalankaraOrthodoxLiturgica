@@ -310,7 +310,12 @@ fun PrayerElementRenderer(
         }
 
         is PrayerElement.PrayerBibleReading -> {
-            SelectedBibleReadingUI(prayerElement)
+            SelectedBibleReadingUI(
+                prayerElement,
+                context,
+                filename,
+                onPrayerButtonClick,
+            )
         }
 
         is PrayerElement.Link -> {

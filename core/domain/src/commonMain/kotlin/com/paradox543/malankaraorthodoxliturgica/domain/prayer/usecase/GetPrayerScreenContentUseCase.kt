@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerLinkDepthExceededException
@@ -14,6 +15,7 @@ class GetPrayerScreenContentUseCase(
     private val prayerRepository: PrayerRepository,
     private val getDynamicSongsUseCase: GetDynamicSongsUseCase,
     private val loadBibleReadingUseCase: LoadBibleReadingUseCase,
+    private val formatGospelEntryUseCase: FormatGospelEntryUseCase,
 ) {
     private val maxLinkDepth = 5
 
@@ -110,7 +112,14 @@ class GetPrayerScreenContentUseCase(
 
                 is PrayerElement.PrayerBibleReading -> {
                     val reading = loadBibleReadingUseCase(element.references, language)
-                    out.add(PrayerElement.PrayerBibleReading(references = element.references, readingContent = reading))
+                    val formattedReference = formatGospelEntryUseCase(element.references, language)
+                    out.add(
+                        PrayerElement.PrayerBibleReading(
+                            references = element.references,
+                            formattedReference = formattedReference,
+                            readingContent = reading,
+                        ),
+                    )
                 }
 
                 is PrayerElement.Title,
