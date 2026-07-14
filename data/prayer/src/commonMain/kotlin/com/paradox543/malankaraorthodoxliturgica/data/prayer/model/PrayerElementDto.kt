@@ -222,4 +222,24 @@ sealed interface PrayerElementDto {
     data class Error(
         val content: String, // e.g., "Error: File not found."
     ) : PrayerElementDto
+
+    @Serializable
+    data class ReferenceRange(
+        val startChapter: Int,
+        val startVerse: Int,
+        val endChapter: Int,
+        val endVerse: Int,
+    )
+
+    @Serializable
+    data class BibleReference(
+        val bookNumber: Int,
+        val ranges: List<ReferenceRange>,
+    ) : PrayerElementDto
+
+    @Serializable
+    @SerialName("references")
+    data class PrayerBibleReading(
+        val readings: List<BibleReference>,
+    ) : PrayerElementDto
 }

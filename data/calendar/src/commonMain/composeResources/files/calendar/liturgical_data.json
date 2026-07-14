@@ -2688,6 +2688,7 @@
             "ml": "മാർ പത്രോസ് മാർ പൗലോസ് ശ്ലീഹന്മാരുടെ ഓർമ്മ"
         },
         "specialSongsKey": "feastOfApostlesFastSongs",
+        "tune": 5,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3080,6 +3081,7 @@
             "en": "Feast of the Twelve Apostles",
             "ml": "പന്ത്രണ്ട് ശ്ലീഹന്മാരുടെ ഓർമ്മ"
         },
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -3737,7 +3739,6 @@
             "ml": "ദനഹായ്ക്ക് ശേഷമുള്ള അഞ്ചാം ഞായറാഴ്ച"
         },
         "specialSongsKey": "afterEpiphanySongs",
-        "tune": 6,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -5048,7 +5049,7 @@
         }
     },
     "fourthSaturdayOfGreatLent": {
-        "type": "feast",
+        "type": "event",
         "title": {
             "en": "Fourth Saturday of Great Lent",
             "ml": "നോമ്പിലെ നാലാം ശനിയാഴ്ച"
@@ -9425,7 +9426,7 @@
         }
     },
     "secondSaturdayOfGreatLent": {
-        "type": "feast",
+        "type": "event",
         "title": {
             "en": "Second Saturday of Great Lent",
             "ml": "നോമ്പിലെ രണ്ടാം ശനിയാഴ്ച"
@@ -11335,7 +11336,7 @@
         }
     },
     "thirdSaturdayOfGreatLent": {
-        "type": "feast",
+        "type": "event",
         "title": {
             "en": "Third Saturday of Great Lent",
             "ml": "നോമ്പിലെ മൂന്നാം ശനിയാഴ്ച"

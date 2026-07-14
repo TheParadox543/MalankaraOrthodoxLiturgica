@@ -45,6 +45,8 @@ val useCaseModule =
             GetPrayerScreenContentUseCase(
                 prayerRepository = get(),
                 getDynamicSongsUseCase = get(),
+                loadBibleReadingUseCase = get(),
+                formatGospelEntryUseCase = get(),
             )
         }
 

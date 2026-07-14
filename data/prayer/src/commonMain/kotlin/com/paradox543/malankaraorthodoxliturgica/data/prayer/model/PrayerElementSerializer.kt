@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.data.prayer.model
 
-import android.util.Log
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -111,6 +110,10 @@ object PrayerElementSerializer : KSerializer<PrayerElementDto> {
                     json.decodeFromJsonElement(PrayerElementDto.AlternativeOption.serializer(), element)
                 }
 
+                "references" -> {
+                    json.decodeFromJsonElement(PrayerElementDto.PrayerBibleReading.serializer(), element)
+                }
+
                 // If you explicitly serialize PrayerElement.Error in your JSON, handle it:
                 "error" -> {
                     json.decodeFromJsonElement(PrayerElementDto.Error.serializer(), element)
@@ -125,7 +128,7 @@ object PrayerElementSerializer : KSerializer<PrayerElementDto> {
         } catch (_: Exception) {
             // Catch any serialization exceptions that might occur even for known types
             // (e.g., missing required fields, type mismatch for a property)
-            Log.d("PrayerElementSerializer", "Error parsing PrayerElement: $element")
+//            Log.d("PrayerElementSerializer", "Error parsing PrayerElement: $element")
             PrayerElementDto.Error("Error parsing PrayerElement: ${element.toString().substring(0, 50)}")
         }
     }
@@ -208,6 +211,14 @@ object PrayerElementSerializer : KSerializer<PrayerElementDto> {
 
                 is PrayerElementDto.Error -> {
                     json.encodeToJsonElement(PrayerElementDto.Error.serializer(), value)
+                }
+
+                is PrayerElementDto.PrayerBibleReading -> {
+                    json.encodeToJsonElement(PrayerElementDto.PrayerBibleReading.serializer(), value)
+                }
+
+                is PrayerElementDto.BibleReference -> {
+                    json.encodeToJsonElement(PrayerElementDto.BibleReference.serializer(), value)
                 }
             }
         jsonEncoder.encodeJsonElement(jsonElement)
