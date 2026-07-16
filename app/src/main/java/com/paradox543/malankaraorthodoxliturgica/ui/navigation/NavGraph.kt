@@ -59,7 +59,6 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScre
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarLiturgicalSeasonScreen
-import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
@@ -562,17 +561,6 @@ fun NavGraph(
                 AppScreen.Calendar.route,
                 deepLinks = AppScreen.Calendar.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
-//                CalendarScreen(
-//                    calendarViewModel,
-//                    contentPadding = innerPadding,
-//                    onBibleNavigate = {
-//                        navController.navigate(AppScreen.BibleReader.route)
-//                    },
-//                    onPrayerNavigate = { route ->
-//                        navController.navigate(AppScreen.Prayer.createRoute(route))
-//                    },
-//                    onScaffoldStateChanged = { scaffoldUiState.value = it },
-//                )
                 CalendarLiturgicalSeasonScreen(
                     calendarViewModel,
                     contentPadding = innerPadding,

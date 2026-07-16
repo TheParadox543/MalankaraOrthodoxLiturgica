@@ -67,7 +67,9 @@ fun CalendarLiturgicalSeasonScreen(
                 WeekItem.HeaderLabel(
                     it.name
                         .lowercase()
-                        .replaceFirstChar { it.uppercase() },
+                        .replaceFirstChar { character ->
+                            character.uppercase()
+                        },
                 )
             }
     val selectedWeek: WeekItem.LiturgicalWeek? =

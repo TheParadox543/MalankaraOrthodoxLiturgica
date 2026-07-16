@@ -11,7 +11,6 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibl
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
@@ -35,11 +34,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.number
-import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -55,13 +51,6 @@ class CalendarViewModel(
     private val formatBibleReadingEntryUseCaseLazy: Lazy<FormatBibleReadingEntryUseCase>,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
-    private data class MonthLoadResult(
-        val monthData: List<CalendarWeek>,
-        val viewDate: LocalDate,
-        val hasPreviousMonth: Boolean,
-        val hasNextMonth: Boolean,
-    )
-
     private val seasons =
         listOf(
             "annunciation",
@@ -87,10 +76,6 @@ class CalendarViewModel(
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
 
-    // State for the currently displayed month's calendar data
-    private val _monthCalendarData = MutableStateFlow<List<CalendarWeek>>(emptyList())
-    val monthCalendarData: StateFlow<List<CalendarWeek>> = _monthCalendarData.asStateFlow()
-
     // State for upcoming week's events
     private val _upcomingWeekEvents = MutableStateFlow<List<CalendarDay>>(emptyList())
     val upcomingWeekEvents: StateFlow<List<CalendarDay>> = _upcomingWeekEvents.asStateFlow()
@@ -106,26 +91,12 @@ class CalendarViewModel(
         )
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
 
-    private val _hasNextMonth = MutableStateFlow(false)
-    val hasNextMonth: StateFlow<Boolean> = _hasNextMonth.asStateFlow()
-
-    private val _hasPreviousMonth = MutableStateFlow(false)
-    val hasPreviousMonth: StateFlow<Boolean> = _hasPreviousMonth.asStateFlow()
-
-    private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
-    val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> =
-        _selectedDayViewData.asStateFlow()
-
     // TODO: Initial mode for state is hardcoded to season. It should be dynamic with Month view as well.
     private val _state =
         MutableStateFlow(
             CalendarUiState(mode = CalendarMode.Season(liturgicalYear, seasons.first()), isLoading = true, weeks = emptyList()),
         )
     val state: StateFlow<CalendarUiState> = _state.asStateFlow()
-
-    // State for the currently selected date for UI feedback
-    private val _selectedDate = MutableStateFlow<LocalDate?>(null)
-    val selectedDate: StateFlow<LocalDate?> = _selectedDate.asStateFlow()
 
     private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
     val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
@@ -153,14 +124,9 @@ class CalendarViewModel(
             _isLoading.value = true
             _error.value = null
             try {
-                loadMonthInternal(
-                    _currentCalendarViewDate.value.month.number,
-                    _currentCalendarViewDate.value.year,
-                )
                 loadUpcomingWeekEventsInternal()
             } catch (e: Exception) {
                 _error.value = "Failed to load calendar data: ${e.message}"
-//                System.err.println("Error initializing calendar data: ${e.stackTraceToString()}")
             } finally {
                 _isLoading.value = false
             }
@@ -174,7 +140,8 @@ class CalendarViewModel(
         viewModelScope.launch {
             val day = getToday()
             liturgicalYear = day?.liturgicalYear ?: ""
-            loadSeason(liturgicalYear, day?.season ?: seasons.first())
+//            loadSeason(liturgicalYear, day?.season ?: seasons.first())
+            load(CalendarMode.Season(liturgicalYear, day?.season ?: seasons.first()))
         }
     }
 
@@ -256,58 +223,6 @@ class CalendarViewModel(
         }
     }
 
-    fun loadMonth(
-        month: Int,
-        year: Int,
-    ) {
-        viewModelScope.launch {
-            loadMonthInternal(month, year)
-        }
-    }
-
-    private suspend fun loadMonthInternal(
-        month: Int,
-        year: Int,
-    ) {
-        _isLoading.value = true
-        _error.value = null
-        try {
-            val result =
-                withContext(backgroundDispatcher) {
-                    val monthData = calendarRepository.loadMonthData(month, year)
-                    val viewDate = LocalDate(year, month, 1)
-                    val previousMonth = viewDate.plus(-1, DateTimeUnit.MONTH)
-                    val hasPreviousMonth =
-                        calendarRepository.checkMonthDataExists(
-                            previousMonth.month.number,
-                            previousMonth.year,
-                        )
-                    val nextMonth = viewDate.plus(1, DateTimeUnit.MONTH)
-                    val hasNextMonth =
-                        calendarRepository.checkMonthDataExists(
-                            nextMonth.month.number,
-                            nextMonth.year,
-                        )
-                    MonthLoadResult(
-                        monthData = monthData,
-                        viewDate = viewDate,
-                        hasPreviousMonth = hasPreviousMonth,
-                        hasNextMonth = hasNextMonth,
-                    )
-                }
-
-            _monthCalendarData.value = result.monthData
-            _currentCalendarViewDate.value = result.viewDate
-            _hasPreviousMonth.value = result.hasPreviousMonth
-            _hasNextMonth.value = result.hasNextMonth
-        } catch (e: Exception) {
-            _error.value = "Failed to load month data for $month/$year: ${e.message}"
-            println("Error loading month data: ${e.stackTraceToString()}")
-        } finally {
-            _isLoading.value = false
-        }
-    }
-
     @OptIn(ExperimentalTime::class)
     suspend fun getToday(): LiturgicalDay? {
         val today =
@@ -318,12 +233,6 @@ class CalendarViewModel(
 
         val day = calendarRepository.getDay(today)
         return day
-    }
-
-    fun loadUpcomingWeekEvents() {
-        viewModelScope.launch {
-            loadUpcomingWeekEventsInternal()
-        }
     }
 
     private suspend fun loadUpcomingWeekEventsInternal() {
@@ -337,19 +246,6 @@ class CalendarViewModel(
             _error.value = "Failed to load upcoming week events: ${e.message}"
             println("Error loading upcoming week events: ${e.stackTraceToString()}")
         }
-    }
-
-    fun setDayEvents(
-        events: List<LiturgicalEventDetails>,
-        date: LocalDate,
-    ) {
-        _selectedDayViewData.value = events
-        _selectedDate.value = date // Keep the selected date in sync
-    }
-
-    private fun clearDayEvents() {
-        _selectedDayViewData.value = emptyList()
-        _selectedDate.value = null // Clear the selected date
     }
 
     fun selectDay(day: LiturgicalDay) {
@@ -408,31 +304,19 @@ class CalendarViewModel(
         }
     }
 
-    fun goToNextMonth() {
-        val nextMonthDate = _currentCalendarViewDate.value.plus(1, DateTimeUnit.MONTH)
-        clearDayEvents()
-        loadMonth(nextMonthDate.month.number, nextMonthDate.year)
-    }
-
     fun nextSeason() {
         val currentYear = liturgicalYear
-        when {
-            currentSeasonIndex in 0 until seasons.lastIndex -> {
+        when (currentSeasonIndex) {
+            in 0 until seasons.lastIndex -> {
                 loadSeason(currentYear, seasons[currentSeasonIndex + 1])
             }
 
-            currentSeasonIndex == seasons.lastIndex -> {
+            seasons.lastIndex -> {
                 nextLiturgicalYear(currentYear)?.let { nextYear ->
                     loadSeason(nextYear, seasons.first())
                 }
             }
         }
-    }
-
-    fun goToPreviousMonth() {
-        val prevMonthDate = _currentCalendarViewDate.value.plus(-1, DateTimeUnit.MONTH)
-        clearDayEvents()
-        loadMonth(prevMonthDate.month.number, prevMonthDate.year)
     }
 
     fun previousSeason() {
