@@ -8,9 +8,19 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ## 🔮 [Unreleased]
 
 - Unversioned changes
-### Refactor
+### Feature
 
-- Remove platform specific implementation for JSON file reading with composeResources implementation. 
+- Better UI for calendar.
+- Added legend for calendar.
+- Bold and Italics formatting for prose and song blocks.
+
+---
+
+## [2.4.1] - 15/7/2026
+
+### Added
+
+- Prayers in sheema namaskaram (promiyon and sedra for each of the weekdays)
 
 ---
 
@@ -19,6 +29,8 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ### Added
 
 - Calendar data for 2026 April and May
+
+---
 
 ## [2.3.0] - Undecided
 

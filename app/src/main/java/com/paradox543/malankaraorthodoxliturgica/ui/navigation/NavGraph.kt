@@ -325,12 +325,27 @@ fun NavGraph(
                 AppScreen.Home.route,
                 deepLinks = AppScreen.Home.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
+                val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
+                val recommendedPrayers = prayerNavViewModel.getAllPrayerNodes()
+                val topPrayer = recommendedPrayers.firstOrNull()
+
                 HomeScreen(
-                    prayerViewModel,
-                    prayerNavViewModel,
-                    innerPadding,
+                    prayerViewModel = prayerViewModel,
+                    prayerNavViewModel = prayerNavViewModel,
+                    liturgicalDay = liturgicalDay,
+                    topRecommendedPrayer = topPrayer,
+                    contentPadding = innerPadding,
                     onSectionNavigate = { route ->
                         navController.navigate(AppScreen.Section.createRoute(route))
+                    },
+                    onPrayerNavigate = { route ->
+                        navController.navigate(AppScreen.Prayer.createRoute(route))
+                    },
+                    onSongNavigate = { route ->
+                        navController.navigate(AppScreen.Song.createRoute(route))
+                    },
+                    onPrayNowNavigate = {
+                        navController.navigate(AppScreen.PrayNow.route)
                     },
                     onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )

@@ -702,5 +702,9 @@
     "calendar_normalDay": {
         "en": "Normal Day",
         "ml": "സാധാരണ ദിവസം"
+    },
+    "otherRecommendedPrayers": {
+        "en": "Other appropriate prayers",
+        "ml": "മറ്റ് അനുയോജ്യമായ പ്രാർത്ഥനകൾ"
     }
 }

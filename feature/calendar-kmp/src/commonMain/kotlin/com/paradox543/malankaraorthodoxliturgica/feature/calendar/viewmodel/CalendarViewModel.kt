@@ -118,6 +118,9 @@ class CalendarViewModel(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
+    private val _todayLiturgicalDay = MutableStateFlow<LiturgicalDay?>(null)
+    val todayLiturgicalDay: StateFlow<LiturgicalDay?> = _todayLiturgicalDay.asStateFlow()
+
     init {
         // Initialize the repository and load initial data
         viewModelScope.launch {
@@ -139,6 +142,7 @@ class CalendarViewModel(
         }
         viewModelScope.launch {
             val day = getToday()
+            _todayLiturgicalDay.value = day
             liturgicalYear = day?.liturgicalYear ?: ""
 //            loadSeason(liturgicalYear, day?.season ?: seasons.first())
             load(CalendarMode.Season(liturgicalYear, day?.season ?: seasons.first()))
