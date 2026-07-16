@@ -241,13 +241,13 @@ fun SettingsScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Text Layout for Songs",
+                text = "Wrap Song lines",
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.weight(1f),
             )
             Switch(
-                checked = songScrollState,
-                onCheckedChange = { settingsViewModel.setSongScrollState(it) },
+                checked = !songScrollState,
+                onCheckedChange = { settingsViewModel.setSongScrollState(!it) },
             )
         }
 
