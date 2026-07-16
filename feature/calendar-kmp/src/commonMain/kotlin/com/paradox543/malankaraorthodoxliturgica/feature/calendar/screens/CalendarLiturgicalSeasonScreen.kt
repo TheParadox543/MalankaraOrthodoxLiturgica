@@ -438,17 +438,17 @@ fun DayDetails(
         ) {
             day.tune?.let {
                 Text(
-                    text = "Tune $it",
+                    text = "${translations["tune"]} $it",
                     style = MaterialTheme.typography.labelMedium,
                 )
             }
 
-            day.season?.let {
-                Text(
-                    text = formatSeasonTitle(it, selectedLanguage, translations),
-                    style = MaterialTheme.typography.labelMedium,
-                )
-            }
+//            day.season?.let {
+//                Text(
+//                    text = formatSeasonTitle(it, selectedLanguage, translations),
+//                    style = MaterialTheme.typography.labelMedium,
+//                )
+//            }
         }
 
         Spacer(Modifier.height(12.dp))

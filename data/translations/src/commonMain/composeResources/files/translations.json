@@ -678,5 +678,9 @@
     "calendar": {
         "en": "Calendar",
         "ml": "പഞ്ചാംഗം"
+    },
+    "tune": {
+        "en": "Tune / Mode",
+        "ml": "നിറം / രാഗം"
     }
 }
