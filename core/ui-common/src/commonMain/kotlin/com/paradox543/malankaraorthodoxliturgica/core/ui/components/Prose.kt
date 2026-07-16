@@ -13,9 +13,9 @@ fun Prose(
     modifier: Modifier = Modifier,
 ) {
     Text(
-        text = text,
+        text = text.toPrayerAnnotatedString(),
         style = MaterialTheme.typography.bodyLarge,
-        textAlign = TextAlign.Companion.Left,
+        textAlign = TextAlign.Left,
         modifier = modifier.fillMaxWidth(),
     )
 }
