@@ -682,5 +682,25 @@
     "tune": {
         "en": "Tune / Mode",
         "ml": "നിറം / രാഗം"
+    },
+    "calendar_today": {
+        "en": "Today",
+        "ml": "ഇന്ന്"
+    },
+    "calendar_selectedDay": {
+        "en": "Selected Day",
+        "ml": "തിരഞ്ഞെടുത്ത ദിവസം"
+    },
+    "calendar_commemorations": {
+        "en": "Commemorations",
+        "ml": "ഓർമ്മപ്പെരുന്നാളുകൾ"
+    },
+    "calendar_fasting": {
+        "en": "Fasting",
+        "ml": "നോമ്പ്"
+    },
+    "calendar_normalDay": {
+        "en": "Normal Day",
+        "ml": "സാധാരണ ദിവസം"
     }
 }
