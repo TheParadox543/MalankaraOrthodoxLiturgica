@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -327,6 +328,7 @@ fun DayCell(
     val isVisible = day.season != null
     val isToday = day.isToday
     val lentDayColor = lentDayColor()
+    val cellShape = RoundedCornerShape(8.dp)
 
     val border =
         when {
@@ -354,7 +356,16 @@ fun DayCell(
             modifier
                 .aspectRatio(1f)
                 .padding(vertical = 4.dp, horizontal = 2.dp)
-                .border(border, shape = RectangleShape)
+                .background(
+                    if (isSelected) {
+                        MaterialTheme.colorScheme.primaryContainer.copy(0.5f)
+                    } else if (isClickable) {
+                        MaterialTheme.colorScheme.secondaryContainer.copy(0.5f)
+                    } else {
+                        Color.Transparent
+                    },
+                    shape = cellShape,
+                ).border(border, shape = cellShape)
                 .then(
                     if (isClickable) {
                         Modifier.clickable { onClick() }
@@ -391,24 +402,6 @@ fun DayCell(
                         MaterialTheme.colorScheme.onSurface
                     },
             )
-
-            Box(
-                Modifier.height(6.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                if (isClickable) {
-                    Box(
-                        Modifier
-                            .height(6.dp)
-                            .width(6.dp)
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.primary,
-                                shape = CircleShape,
-                            ),
-                    )
-                }
-            }
         }
     }
 }
