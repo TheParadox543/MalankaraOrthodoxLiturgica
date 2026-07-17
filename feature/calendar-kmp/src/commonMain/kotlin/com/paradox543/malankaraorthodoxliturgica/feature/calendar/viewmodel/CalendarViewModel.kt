@@ -380,7 +380,15 @@ class CalendarViewModel(
     fun getFormattedDateTitle(
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,
-    ): String = formatDateTitleUseCase(event, selectedLanguage, _currentCalendarViewDate.value.year)
+    ): String =
+        formatDateTitleUseCase(
+            event,
+            selectedLanguage,
+            currentYear =
+                state.value.selectedDay
+                    ?.date
+                    ?.year ?: _currentCalendarViewDate.value.year,
+        )
 
     fun formatGospelEntry(
         entries: List<BibleReference>,
