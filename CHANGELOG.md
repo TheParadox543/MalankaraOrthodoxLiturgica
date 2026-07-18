@@ -13,6 +13,12 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 - Better UI for calendar.
 - Added legend for calendar.
 - Bold and Italics formatting for prose and song blocks.
+- Improved onboarding flow: Divided different features into stages.
+- Added dynamic image loading in prayer screen.
+- Top prayer from pray now can be seen in home screen.
+
+### Fix
+- Wrong anniversary count given in calendar.
 
 ---
 
