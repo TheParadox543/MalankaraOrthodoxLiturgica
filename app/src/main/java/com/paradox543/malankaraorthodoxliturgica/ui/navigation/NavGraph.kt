@@ -83,16 +83,24 @@ import org.koin.compose.viewmodel.koinViewModel
  */
 @Composable
 fun NavGraph(
-    onboardingCompleted: Boolean,
+    onboardingStage: Int,
     appUpdateManager: AppUpdateManager,
     analyticsService: AnalyticsService,
     shareService: ShareService,
     settingsViewModel: SettingsViewModel,
+    onNavigateToOnboarding: ((NavController) -> Unit)? = null,
 ) {
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
     val updateDownloaded by appUpdateManager.updateReady.collectAsState()
     val context: Context = LocalContext.current
+
+    // Only force onboarding for brand-new users (Stage 0: Welcome)
+    val onboardingCompleted = onboardingStage > 0
+
+    LaunchedEffect(onNavigateToOnboarding) {
+        onNavigateToOnboarding?.invoke(navController)
+    }
 
     // Tracks which bars/FAB each screen requests
     val scaffoldUiState = remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
@@ -354,16 +362,31 @@ fun NavGraph(
             composable(AppScreen.Onboarding.route) {
                 val onboardingViewModel: OnboardingViewModel = koinViewModel()
                 OnboardingScreen(
-                    onboardingViewModel,
-                    innerPadding,
-                    {
+                    onboardingViewModel = onboardingViewModel,
+                    contentPadding = innerPadding,
+                    onNavigateToHome = {
                         navController.navigate(AppScreen.Home.route) {
                             popUpTo(AppScreen.Onboarding.route) {
                                 inclusive = true
                             }
                         }
                     },
-                ) { scaffoldUiState.value = it }
+                    requestDndPermission = {
+                        val notificationManager =
+                            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                        if (!notificationManager.isNotificationPolicyAccessGranted) {
+                            Toast
+                                .makeText(
+                                    context,
+                                    "Please grant the app access to modify DND in settings.",
+                                    Toast.LENGTH_LONG,
+                                ).show()
+                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                            context.startActivity(intent)
+                        }
+                    },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
+                )
             }
 
             composable(

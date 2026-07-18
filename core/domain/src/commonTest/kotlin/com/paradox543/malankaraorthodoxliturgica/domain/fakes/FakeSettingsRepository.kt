@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class FakeSettingsRepository(
     initialLanguage: AppLanguage = AppLanguage.ENGLISH,
     initialOnboarding: Boolean = false,
+    initialOnboardingStage: Int = 0,
     initialFontScale: AppFontScale = AppFontScale.Medium,
     initialSongScroll: Boolean = false,
     initialSoundMode: SoundMode = SoundMode.OFF,
@@ -20,6 +21,7 @@ class FakeSettingsRepository(
 ) : SettingsRepository {
     private val languageFlow = MutableStateFlow(initialLanguage)
     private val onboardingFlow = MutableStateFlow(initialOnboarding)
+    private val onboardingStageFlow = MutableStateFlow(initialOnboardingStage)
     private val fontScaleFlow = MutableStateFlow(initialFontScale)
     private val songScrollFlow = MutableStateFlow(initialSongScroll)
     private val soundModeFlow = MutableStateFlow(initialSoundMode)
@@ -27,6 +29,7 @@ class FakeSettingsRepository(
 
     override val language: Flow<AppLanguage> = languageFlow
     override val onboardingCompleted: Flow<Boolean> = onboardingFlow
+    override val onboardingStage: Flow<Int> = onboardingStageFlow
     override val fontScale: Flow<AppFontScale> = fontScaleFlow
     override val songScrollState: Flow<Boolean> = songScrollFlow
     override val soundMode: Flow<SoundMode> = soundModeFlow
@@ -42,6 +45,12 @@ class FakeSettingsRepository(
 
     override suspend fun setOnboardingCompleted(completed: Boolean) {
         onboardingFlow.value = completed
+        onboardingStageFlow.value = if (completed) 3 else 0
+    }
+
+    override suspend fun setOnboardingStage(stage: Int) {
+        onboardingStageFlow.value = stage
+        onboardingFlow.value = stage >= 3
     }
 
     override suspend fun setSongScrollState(isHorizontal: Boolean) {

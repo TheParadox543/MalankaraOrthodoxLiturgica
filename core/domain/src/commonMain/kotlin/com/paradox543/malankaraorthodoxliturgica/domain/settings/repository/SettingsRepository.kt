@@ -9,6 +9,7 @@ interface SettingsRepository {
     // Reactive flows for state - provides both initial and ongoing values
     val language: Flow<AppLanguage>
     val onboardingCompleted: Flow<Boolean>
+    val onboardingStage: Flow<Int>
     val fontScale: Flow<AppFontScale>
     val songScrollState: Flow<Boolean>
     val soundMode: Flow<SoundMode>
@@ -20,6 +21,8 @@ interface SettingsRepository {
     suspend fun setFontScale(fontScale: AppFontScale)
 
     suspend fun setOnboardingCompleted(completed: Boolean)
+
+    suspend fun setOnboardingStage(stage: Int)
 
     suspend fun setSongScrollState(isHorizontal: Boolean)
 

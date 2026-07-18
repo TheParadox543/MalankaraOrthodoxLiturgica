@@ -67,6 +67,14 @@ class SettingsViewModel(
                 initialValue = 30,
             )
 
+    val onboardingStage: StateFlow<Int> =
+        settingsRepository.onboardingStage
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = 0,
+            )
+
     private val _hasDndPermission = MutableStateFlow(false)
     val hasDndPermission = _hasDndPermission.asStateFlow()
 
@@ -124,6 +132,12 @@ class SettingsViewModel(
             if (completed) {
                 analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
             }
+        }
+    }
+
+    fun setOnboardingStage(stage: Int) {
+        viewModelScope.launch {
+            settingsRepository.setOnboardingStage(stage)
         }
     }
 

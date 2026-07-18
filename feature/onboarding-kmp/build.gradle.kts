@@ -69,6 +69,7 @@ kotlin {
                 // Project Imports
                 implementation(project(":core:domain"))
                 implementation(project(":core:analytics"))
+                implementation(project(":core:platform-kmp"))
                 implementation(project(":core:ui-common"))
                 implementation(project(":core:app-info"))
 
@@ -84,6 +85,8 @@ kotlin {
                 implementation(libs.compose.material3.adaptive)
                 implementation(libs.compose.material3.adaptive.layout)
                 implementation(libs.compose.material3.adaptive.navigation)
+                // Icons dependency
+                implementation(libs.icons.material.icons.rounded.cmp)
 
                 implementation(libs.ui)
                 implementation(libs.ui.tooling.preview)

@@ -5,10 +5,14 @@ import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
@@ -19,9 +23,12 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.model.UpdateType
 import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
+import androidx.navigation.NavController
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -115,6 +122,11 @@ class MainActivity : ComponentActivity() {
                     val textScale by settingsViewModel.fontScale.collectAsState()
                     val language by settingsViewModel.selectedLanguage.collectAsState()
 
+                    var showNewFeaturesDialog by remember {
+                        mutableStateOf(s.onboardingStage > 0 && s.onboardingStage < OnboardingStage.COMPLETE.value)
+                    }
+                    var navigateToOnboarding by remember { mutableStateOf<((NavController) -> Unit)?>(null) }
+
                     // Android system concern: apply the user's preferred sound/DnD mode
                     LaunchedEffect(soundMode) {
                         soundModeManager.apply(soundMode)
@@ -125,12 +137,44 @@ class MainActivity : ComponentActivity() {
                         textScale = textScale,
                     ) {
                         NavGraph(
-                            onboardingCompleted = s.onboardingCompleted,
+                            onboardingStage = s.onboardingStage,
                             appUpdateManager = androidUpdateManager,
                             analyticsService = analyticsService,
                             shareService = shareService,
                             settingsViewModel = settingsViewModel,
+                            onNavigateToOnboarding = navigateToOnboarding,
                         )
+
+                        if (showNewFeaturesDialog) {
+                            AlertDialog(
+                                onDismissRequest = { showNewFeaturesDialog = false },
+                                title = { Text("New Features") },
+                                text = { Text("New features have been added since your last update. Would you like a quick tour?") },
+                                confirmButton = {
+                                    TextButton(
+                                        onClick = {
+                                            showNewFeaturesDialog = false
+                                            navigateToOnboarding = { navController ->
+                                                navController.navigate(AppScreen.Onboarding.route)
+                                            }
+                                        },
+                                    ) {
+                                        Text("Show Me")
+                                    }
+                                },
+                                dismissButton = {
+                                    TextButton(
+                                        onClick = {
+                                            showNewFeaturesDialog = false
+                                            // Mark as complete so they don't see it again
+                                            settingsViewModel.setOnboardingCompleted(true)
+                                        },
+                                    ) {
+                                        Text("Not Now")
+                                    }
+                                },
+                            )
+                        }
                     }
                 }
             }
