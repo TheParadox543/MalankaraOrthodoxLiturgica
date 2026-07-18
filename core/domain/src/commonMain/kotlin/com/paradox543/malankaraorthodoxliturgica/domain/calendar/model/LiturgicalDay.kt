@@ -6,7 +6,7 @@ data class LiturgicalDay(
     val date: LocalDate,
     val liturgicalYear: String?,
     val eventKeys: List<String>, // List of EventKeys associated with this day
-    val season: String?,
+    val seasonName: SeasonName?,
     val tune: Int?,
     val lent: Int?,
     val isToday: Boolean = false,
@@ -17,7 +17,7 @@ data class LiturgicalDay(
                 date = date,
                 liturgicalYear = null,
                 eventKeys = emptyList(),
-                season = null,
+                seasonName = null,
                 tune = null,
                 lent = null,
             )

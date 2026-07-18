@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -33,7 +32,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -42,12 +40,21 @@ import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Arrow_forward
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.Res
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.greatlent
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.annunciation
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.default
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.epiphany
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.great_lent
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.holy_cross
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.pentecost
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.resurrection
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.transfiguration
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import kotlinx.coroutines.flow.collectLatest
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -70,6 +77,18 @@ fun SectionScreen(
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
     }
+    val displayIcon =
+        when (liturgicalDay?.seasonName) {
+            SeasonName.ANNUNCIATION -> Res.drawable.annunciation
+            SeasonName.EPIPHANY -> Res.drawable.epiphany
+            SeasonName.GREAT_LENT -> Res.drawable.great_lent
+            SeasonName.RESURRECTION -> Res.drawable.resurrection
+            SeasonName.PENTECOST -> Res.drawable.pentecost
+            SeasonName.TRANSFIGURATION -> Res.drawable.transfiguration
+            SeasonName.HOLY_CROSS -> Res.drawable.holy_cross
+            SeasonName.DUMMY -> Res.drawable.default
+            null -> Res.drawable.default
+        }
 
     LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
@@ -89,7 +108,7 @@ fun SectionScreen(
             Row(
                 Modifier.padding(contentPadding),
             ) {
-                DisplayIconography("row")
+                DisplayIconography(displayIcon, "row")
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(240.dp),
                     modifier =
@@ -135,7 +154,7 @@ fun SectionScreen(
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
-                        DisplayIconography("column")
+                        DisplayIconography(displayIcon, "column")
                     }
                     if (node.route == "malankara") {
                         item(span = { GridItemSpan(maxLineSpan) }) {
@@ -165,18 +184,21 @@ fun SectionScreen(
 }
 
 @Composable
-private fun DisplayIconography(orientation: String) {
+private fun DisplayIconography(
+    icon: DrawableResource,
+    orientation: String,
+) {
     Image(
-        painter = painterResource(Res.drawable.greatlent),
+        painter = painterResource(icon),
         contentDescription = "icon",
         modifier =
             if (orientation == "row") {
                 Modifier
-                    .requiredWidthIn(min = 200.dp, max = 400.dp)
+                    .requiredWidthIn(min = 200.dp, max = 240.dp)
                     .fillMaxHeight()
             } else {
                 Modifier
-                    .requiredWidthIn(max = 400.dp)
+                    .requiredWidthIn(max = 240.dp)
             },
         alignment = Alignment.TopStart,
         contentScale = ContentScale.Crop,
@@ -245,7 +267,7 @@ private fun PrayNowHeroCard(
 ) {
     if (topPrayer == null) return
 
-    val season = liturgicalDay?.season
+    val season = liturgicalDay?.seasonName
     val tune = liturgicalDay?.tune
 
     val routeParts = topPrayer.route.split("_")
@@ -257,7 +279,12 @@ private fun PrayNowHeroCard(
                 translations[part] ?: part
             }
         }
-    val seasonTitle = translations[season] ?: season ?: ""
+    val seasonTitle =
+        translations[
+            seasonTranslationKey(
+                season ?: SeasonName.DUMMY,
+            ),
+        ] ?: season?.toDisplayName() ?: ""
 
     Card(
         modifier =
@@ -327,3 +354,15 @@ private fun PrayNowHeroCard(
         }
     }
 }
+
+private fun seasonTranslationKey(season: SeasonName): String =
+    when (season) {
+        SeasonName.TRANSFIGURATION -> "transfigurationSeason"
+        else -> season.toString().lowercase()
+    }
+
+private fun SeasonName.toDisplayName(): String =
+    toString()
+        .lowercase()
+        .replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
+        .replaceFirstChar(Char::uppercase)

@@ -13,6 +13,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleR
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
@@ -62,6 +63,7 @@ class CalendarViewModel(
             "holyCross",
         )
     private var currentSeasonIndex = 0
+    private var currentSeason: SeasonName = SeasonName.ANNUNCIATION
 
     private var liturgicalYear = "2024-25"
 
@@ -91,10 +93,10 @@ class CalendarViewModel(
         )
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
 
-    // TODO: Initial mode for state is hardcoded to season. It should be dynamic with Month view as well.
+    // TODO: Initial mode for state is hardcoded to seasonName. It should be dynamic with Month view as well.
     private val _state =
         MutableStateFlow(
-            CalendarUiState(mode = CalendarMode.Season(liturgicalYear, seasons.first()), isLoading = true, weeks = emptyList()),
+            CalendarUiState(mode = CalendarMode.Season(liturgicalYear, SeasonName.ANNUNCIATION), isLoading = true, weeks = emptyList()),
         )
     val state: StateFlow<CalendarUiState> = _state.asStateFlow()
 
@@ -144,8 +146,8 @@ class CalendarViewModel(
             val day = getToday()
             _todayLiturgicalDay.value = day
             liturgicalYear = day?.liturgicalYear ?: ""
-//            loadSeason(liturgicalYear, day?.season ?: seasons.first())
-            load(CalendarMode.Season(liturgicalYear, day?.season ?: seasons.first()))
+//            loadSeason(liturgicalYear, day?.seasonName ?: seasons.first())
+            load(CalendarMode.Season(liturgicalYear, day?.seasonName ?: SeasonName.ANNUNCIATION))
         }
     }
 
@@ -177,7 +179,8 @@ class CalendarViewModel(
                 }
 
             if (mode is CalendarMode.Season) {
-                currentSeasonIndex = seasons.indexOf(mode.name)
+                currentSeasonIndex = mode.name.ordinal
+                currentSeason = mode.name
                 liturgicalYear = mode.liturgicalYear
             }
 
@@ -194,17 +197,18 @@ class CalendarViewModel(
 
     fun loadSeason(
         liturgicalYear: String,
-        season: String,
+        season: SeasonName,
     ) {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true, error = null)
 
             try {
                 // TODO: Currently hardcoding the liturgical year, but this should be dynamic based on the current date.
-                val weeks = calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, season = season)
+                val weeks = calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, seasonName = season)
                 val seasonNavigation = getSeasonNavigation(liturgicalYear, season)
 
-                currentSeasonIndex = seasons.indexOf(season)
+                currentSeasonIndex = season.ordinal
+                currentSeason = season
                 this@CalendarViewModel.liturgicalYear = liturgicalYear
 
                 _state.value =
@@ -312,12 +316,12 @@ class CalendarViewModel(
         val currentYear = liturgicalYear
         when (currentSeasonIndex) {
             in 0 until seasons.lastIndex -> {
-                loadSeason(currentYear, seasons[currentSeasonIndex + 1])
+                loadSeason(currentYear, currentSeason.nextCircular())
             }
 
             seasons.lastIndex -> {
                 nextLiturgicalYear(currentYear)?.let { nextYear ->
-                    loadSeason(nextYear, seasons.first())
+                    loadSeason(nextYear, SeasonName.ANNUNCIATION)
                 }
             }
         }
@@ -327,12 +331,12 @@ class CalendarViewModel(
         val currentYear = liturgicalYear
         when {
             currentSeasonIndex > 0 -> {
-                loadSeason(currentYear, seasons[currentSeasonIndex - 1])
+                loadSeason(currentYear, currentSeason.prevCircular())
             }
 
             currentSeasonIndex == 0 -> {
                 previousLiturgicalYear(currentYear)?.let { previousYear ->
-                    loadSeason(previousYear, seasons.last())
+                    loadSeason(previousYear, SeasonName.HOLY_CROSS)
                 }
             }
         }
@@ -345,9 +349,9 @@ class CalendarViewModel(
 
     private suspend fun getSeasonNavigation(
         liturgicalYear: String,
-        season: String,
+        season: SeasonName,
     ): SeasonNavigation {
-        val seasonIndex = seasons.indexOf(season)
+        val seasonIndex = season.ordinal
         if (seasonIndex == -1) return SeasonNavigation()
 
         val hasPrevious =

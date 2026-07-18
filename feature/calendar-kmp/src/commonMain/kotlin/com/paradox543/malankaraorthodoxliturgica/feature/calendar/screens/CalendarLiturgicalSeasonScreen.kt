@@ -44,6 +44,7 @@ import com.composables.icons.materialicons.rounded.Arrow_forward
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
@@ -174,9 +175,9 @@ private fun BrowseMode(
 @Composable
 private fun CalendarLegend(translations: Map<String, String>) {
     val dummyDate = LocalDate(2026, 1, 1)
-    val normalDay = LiturgicalDay.empty(dummyDate).copy(season = "dummy")
-    val fastingDay = LiturgicalDay.empty(dummyDate).copy(lent = 1, season = "dummy")
-    val commemorationDay = LiturgicalDay.empty(dummyDate).copy(eventKeys = listOf("event"), season = "dummy")
+    val normalDay = LiturgicalDay.empty(dummyDate).copy(seasonName = SeasonName.DUMMY)
+    val fastingDay = LiturgicalDay.empty(dummyDate).copy(lent = 1, seasonName = SeasonName.DUMMY)
+    val commemorationDay = LiturgicalDay.empty(dummyDate).copy(eventKeys = listOf("event"), seasonName = SeasonName.DUMMY)
 
     Column(
         modifier =
@@ -404,7 +405,7 @@ fun DayCell(
     onClick: () -> Unit,
 ) {
     val isClickable = day.eventKeys.isNotEmpty()
-    val isVisible = day.season != null
+    val isVisible = day.seasonName != null
     val isToday = day.isToday
     val lentDayColor = lentDayColor()
     val cellShape = RoundedCornerShape(8.dp)
@@ -585,7 +586,7 @@ fun DayDetails(
 }
 
 private fun formatSeasonTitle(
-    season: String,
+    season: SeasonName,
     selectedLanguage: AppLanguage,
     translations: Map<String, String>,
 ): String {
@@ -601,14 +602,16 @@ private fun formatSeasonTitle(
     }
 }
 
-private fun seasonTranslationKey(season: String): String =
+private fun seasonTranslationKey(season: SeasonName): String =
     when (season) {
-        "transfiguration" -> "transfigurationSeason"
-        else -> season
+        SeasonName.TRANSFIGURATION -> "transfigurationSeason"
+        else -> season.toString().lowercase()
     }
 
-private fun String.toDisplayName(): String =
-    replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
+private fun SeasonName.toDisplayName(): String =
+    toString()
+        .lowercase()
+        .replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
         .replaceFirstChar(Char::uppercase)
 
 @Composable

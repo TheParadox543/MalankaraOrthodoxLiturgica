@@ -27,6 +27,10 @@
         "en": "Great Lent",
         "ml": "വലിയ നോമ്പ്"
     },
+    "great_lent": {
+        "en": "Great Lent",
+        "ml": "വലിയ നോമ്പ്"
+    },
     "qurbana": {
         "en": "Holy Qurbana",
         "ml": "വി. കുർബാന"
@@ -672,6 +676,10 @@
         "ml": "തേജസ്കരണ"
     },
     "holyCross": {
+        "en": "Holy Cross",
+        "ml": "സ്ലീബാ"
+    },
+    "holy_cross": {
         "en": "Holy Cross",
         "ml": "സ്ലീബാ"
     },

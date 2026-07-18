@@ -377,6 +377,7 @@ fun NavGraph(
                 deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
                 val route = backStackEntry.arguments?.getString(AppScreen.Section.ARG_ROUTE) ?: ""
+                val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
                 val node = prayerRootNode.findByRoute(route)
                 if (!isPrayerTreeLoaded) {
                     ContentLoadingScreen(
@@ -389,6 +390,7 @@ fun NavGraph(
                         prayerNavViewModel,
                         node,
                         innerPadding,
+                        liturgicalDay = liturgicalDay,
                         onScaffoldStateChanged = { scaffoldUiState.value = it },
                         onSectionNavigate = { route ->
                             navController.navigate(AppScreen.Section.createRoute(route))
