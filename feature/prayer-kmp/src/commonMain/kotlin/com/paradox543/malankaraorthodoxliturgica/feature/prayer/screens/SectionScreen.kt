@@ -290,7 +290,7 @@ private fun PrayNowHeroCard(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(vertical = 4.dp, horizontal = 8.dp)
                 .clickable { onPrayerNavigate(topPrayer.route) },
         colors =
             CardDefaults.cardColors(
@@ -298,9 +298,9 @@ private fun PrayNowHeroCard(
                 contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
             ),
         shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(8.dp),
+        elevation = CardDefaults.cardElevation(12.dp),
     ) {
-        Column(Modifier.fillMaxWidth().padding(16.dp)) {
+        Column(Modifier.fillMaxWidth().padding(12.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -309,7 +309,7 @@ private fun PrayNowHeroCard(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = prayerTitle,
-                        style = MaterialTheme.typography.headlineSmall,
+                        style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                     )
                     if (seasonTitle.isNotEmpty()) {
