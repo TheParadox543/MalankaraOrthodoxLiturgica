@@ -19,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Song
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.components.OnboardingHeader
@@ -29,19 +30,20 @@ import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.On
 fun SongWrapPage(
     onboardingViewModel: OnboardingViewModel,
     contentPadding: PaddingValues,
+    columnPadding: Dp,
     onNext: () -> Unit,
     onBack: () -> Unit,
     onSkip: () -> Unit,
 ) {
     val songScrollState by onboardingViewModel.songScrollState.collectAsState()
-    val sampleText = "♪ Praise the Lord with all your heart and with all your soul, for His mercy endures forever.\nAlleluia!"
+    val sampleText = "♪ Praise the Lord with all your heart and with all your soul, for His mercy endures forever.\nHallelujah!"
 
     Column(
         modifier =
             Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .padding(16.dp),
+                .padding(columnPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         OnboardingHeader(

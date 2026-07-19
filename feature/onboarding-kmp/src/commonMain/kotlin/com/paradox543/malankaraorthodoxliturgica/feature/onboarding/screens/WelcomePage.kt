@@ -24,6 +24,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.LanguageDropdownMenu
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
@@ -35,6 +36,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.On
 fun WelcomePage(
     onboardingViewModel: OnboardingViewModel,
     contentPadding: PaddingValues,
+    columnPadding: Dp,
     onContinue: () -> Unit,
     onSkip: () -> Unit,
     onNavigateToHome: () -> Unit,
@@ -53,7 +55,7 @@ fun WelcomePage(
             Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .padding(16.dp),
+                .padding(columnPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {

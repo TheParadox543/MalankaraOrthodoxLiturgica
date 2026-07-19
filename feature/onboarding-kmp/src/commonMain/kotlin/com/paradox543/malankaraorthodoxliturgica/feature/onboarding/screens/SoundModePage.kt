@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SoundModeDropdownMenu
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
@@ -40,6 +41,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.On
 fun SoundModePage(
     onboardingViewModel: OnboardingViewModel,
     contentPadding: PaddingValues,
+    columnPadding: Dp,
     requestDndPermission: () -> Unit,
     onNext: () -> Unit,
     onBack: () -> Unit,
@@ -54,7 +56,7 @@ fun SoundModePage(
             Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .padding(16.dp)
+                .padding(columnPadding)
                 .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

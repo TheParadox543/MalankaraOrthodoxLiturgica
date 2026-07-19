@@ -11,6 +11,7 @@ kotlin {
         namespace = "com.paradox543.malankaraorthodoxliturgica.feature.onboarding"
         compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
         minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
+        androidResources.enable = true
 
         packaging {
             resources {
@@ -105,6 +106,9 @@ kotlin {
 
         androidMain {
             dependencies {
+                implementation(libs.androidx.media3.exoplayer)
+                implementation(libs.androidx.media3.ui)
+                implementation(libs.androidx.media3.common)
             }
         }
 

@@ -43,7 +43,7 @@ class AndroidSettingsRepository(
         }
 
     override val onboardingCompleted: Flow<Boolean> =
-        onboardingStage.map { it >= 3 }
+        onboardingStage.map { it >= 4 }
 
     override val fontScale: Flow<AppFontScale> =
         dataStore.data.map { prefs ->

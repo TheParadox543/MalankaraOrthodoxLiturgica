@@ -13,6 +13,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -31,6 +32,7 @@ fun OnboardingScreen(
 ) {
     val stage by onboardingViewModel.onboardingStage.collectAsState()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val columnPadding = 16.dp
 
     DisposableEffect(lifecycleOwner) {
         val observer =
@@ -70,6 +72,7 @@ fun OnboardingScreen(
                 WelcomePage(
                     onboardingViewModel = onboardingViewModel,
                     contentPadding = contentPadding,
+                    columnPadding = columnPadding,
                     onContinue = { onboardingViewModel.nextPage() },
                     onSkip = {
                         onboardingViewModel.skipOnboarding()
@@ -83,27 +86,39 @@ fun OnboardingScreen(
                 SongWrapPage(
                     onboardingViewModel = onboardingViewModel,
                     contentPadding = contentPadding,
+                    columnPadding = columnPadding,
                     onNext = { onboardingViewModel.nextPage() },
                     onBack = { onboardingViewModel.previousPage() },
-                    onSkip = {
-                        onboardingViewModel.skipOnboarding()
-                        onNavigateToHome()
-                    },
-                )
+                ) {
+                    onboardingViewModel.skipOnboarding()
+                    onNavigateToHome()
+                }
+            }
+
+            OnboardingStage.QR_NAVIGATION -> {
+                QRNavigationPage(
+                    contentPadding = contentPadding,
+                    columnPadding = columnPadding,
+                    onNext = { onboardingViewModel.nextPage() },
+                    onBack = { onboardingViewModel.previousPage() },
+                ) {
+                    onboardingViewModel.skipOnboarding()
+                    onNavigateToHome()
+                }
             }
 
             OnboardingStage.SOUND_MODE -> {
                 SoundModePage(
                     onboardingViewModel = onboardingViewModel,
                     contentPadding = contentPadding,
+                    columnPadding = columnPadding,
                     requestDndPermission = requestDndPermission,
                     onNext = { onboardingViewModel.nextPage() },
                     onBack = { onboardingViewModel.previousPage() },
-                    onSkip = {
-                        onboardingViewModel.skipOnboarding()
-                        onNavigateToHome()
-                    },
-                )
+                ) {
+                    onboardingViewModel.skipOnboarding()
+                    onNavigateToHome()
+                }
             }
 
             OnboardingStage.COMPLETE -> {
