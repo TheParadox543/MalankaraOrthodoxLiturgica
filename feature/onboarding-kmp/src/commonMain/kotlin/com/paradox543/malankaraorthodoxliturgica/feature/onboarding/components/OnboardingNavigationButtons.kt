@@ -20,6 +20,7 @@ fun OnboardingNavigationButtons(
     onNext: () -> Unit,
     onBack: () -> Unit,
     onSkip: () -> Unit,
+    skipBack: Boolean = false,
 ) {
     Row(
         modifier =
@@ -29,8 +30,12 @@ fun OnboardingNavigationButtons(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        TextButton(onClick = onBack) {
-            Text("Back")
+        if (!skipBack) {
+            TextButton(onClick = onBack) {
+                Text("Back")
+            }
+        } else {
+            Spacer(Modifier.weight(1f))
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             TextButton(onClick = onSkip) {

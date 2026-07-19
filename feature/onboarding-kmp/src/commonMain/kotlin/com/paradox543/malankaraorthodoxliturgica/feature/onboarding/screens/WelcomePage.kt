@@ -30,6 +30,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.LanguageDrop
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Prose
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.components.OnboardingNavigationButtons
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 
 @Composable
@@ -39,7 +40,6 @@ fun WelcomePage(
     columnPadding: Dp,
     onContinue: () -> Unit,
     onSkip: () -> Unit,
-    onNavigateToHome: () -> Unit,
 ) {
     val selectedLanguage by onboardingViewModel.selectedLanguage.collectAsState()
     val selectedFontScale by onboardingViewModel.fontScale.collectAsState()
@@ -123,23 +123,15 @@ fun WelcomePage(
                 )
                 (prayers[1] as? PrayerElement.Prose)?.let { Prose(it.content) }
             }
+        } else {
+            Spacer(Modifier.weight(1f))
         }
 
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            TextButton(onClick = onSkip) {
-                Text("Skip", color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-            Spacer(Modifier.width(8.dp))
-            Button(
-                onClick = onContinue,
-                modifier = Modifier.weight(1f),
-            ) {
-                Text("Continue")
-            }
-        }
+        OnboardingNavigationButtons(
+            onNext = onContinue,
+            onBack = {  },
+            onSkip = onSkip,
+            skipBack = true,
+        )
     }
 }

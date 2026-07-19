@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
@@ -43,7 +44,7 @@ class AndroidSettingsRepository(
         }
 
     override val onboardingCompleted: Flow<Boolean> =
-        onboardingStage.map { it >= 4 }
+        onboardingStage.map { it >= OnboardingStage.COMPLETE.value }
 
     override val fontScale: Flow<AppFontScale> =
         dataStore.data.map { prefs ->

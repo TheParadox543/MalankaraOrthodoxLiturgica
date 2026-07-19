@@ -23,13 +23,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -215,7 +215,7 @@ fun SettingsScreen(
                         ExposedDropdownMenuBox(
                             expanded = timeExpanded,
                             onExpandedChange = { timeExpanded = it },
-                            modifier = Modifier.width(160.dp)
+                            modifier = Modifier.width(160.dp),
                         ) {
                             TextField(
                                 value = displayText,
@@ -224,13 +224,14 @@ fun SettingsScreen(
                                 trailingIcon = {
                                     ExposedDropdownMenuDefaults.TrailingIcon(expanded = timeExpanded)
                                 },
-                                modifier = Modifier
-                                    .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true)
-                                    .fillMaxWidth()
+                                modifier =
+                                    Modifier
+                                        .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true)
+                                        .fillMaxWidth(),
                             )
                             ExposedDropdownMenu(
                                 expanded = timeExpanded,
-                                onDismissRequest = { timeExpanded = false }
+                                onDismissRequest = { timeExpanded = false },
                             ) {
                                 options.forEach { minutes ->
                                     val label = if (minutes >= 60) "${minutes / 60} hour" else "$minutes minutes"
@@ -239,7 +240,7 @@ fun SettingsScreen(
                                         onClick = {
                                             settingsViewModel.setSoundRestoreDelay(minutes)
                                             timeExpanded = false
-                                        }
+                                        },
                                     )
                                 }
                             }
@@ -315,9 +316,9 @@ fun SettingsScreen(
         )
 
         if (settingsViewModel.debugMode) {
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(8.dp))
             Text("Debug Settings", style = MaterialTheme.typography.titleSmall)
-            
+
             var debugExpanded by remember { mutableStateOf(false) }
             val currentStageInt by settingsViewModel.onboardingStage.collectAsState()
             val currentStage = OnboardingStage.fromInt(currentStageInt)
@@ -325,13 +326,13 @@ fun SettingsScreen(
             Row(
                 Modifier.fillMaxWidth().padding(12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text("Onboarding Stage")
                 ExposedDropdownMenuBox(
                     expanded = debugExpanded,
                     onExpandedChange = { debugExpanded = it },
-                    modifier = Modifier.width(160.dp)
+                    modifier = Modifier.width(160.dp),
                 ) {
                     TextField(
                         value = currentStage.name,
@@ -340,11 +341,11 @@ fun SettingsScreen(
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = debugExpanded)
                         },
-                        modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true).fillMaxWidth()
+                        modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true).fillMaxWidth(),
                     )
                     ExposedDropdownMenu(
                         expanded = debugExpanded,
-                        onDismissRequest = { debugExpanded = false }
+                        onDismissRequest = { debugExpanded = false },
                     ) {
                         OnboardingStage.entries.forEach { stage ->
                             DropdownMenuItem(
@@ -352,7 +353,7 @@ fun SettingsScreen(
                                 onClick = {
                                     settingsViewModel.setOnboardingStage(stage.value)
                                     debugExpanded = false
-                                }
+                                },
                             )
                         }
                     }

@@ -74,29 +74,15 @@ fun OnboardingScreen(
                     contentPadding = contentPadding,
                     columnPadding = columnPadding,
                     onContinue = { onboardingViewModel.nextPage() },
-                    onSkip = {
-                        onboardingViewModel.skipOnboarding()
-                        onNavigateToHome()
-                    },
-                    onNavigateToHome = onNavigateToHome,
-                )
-            }
-
-            OnboardingStage.SONG_WRAP -> {
-                SongWrapPage(
-                    onboardingViewModel = onboardingViewModel,
-                    contentPadding = contentPadding,
-                    columnPadding = columnPadding,
-                    onNext = { onboardingViewModel.nextPage() },
-                    onBack = { onboardingViewModel.previousPage() },
                 ) {
                     onboardingViewModel.skipOnboarding()
                     onNavigateToHome()
                 }
             }
 
-            OnboardingStage.QR_NAVIGATION -> {
-                QRNavigationPage(
+            OnboardingStage.SONG_WRAP -> {
+                SongWrapPage(
+                    onboardingViewModel = onboardingViewModel,
                     contentPadding = contentPadding,
                     columnPadding = columnPadding,
                     onNext = { onboardingViewModel.nextPage() },
@@ -131,6 +117,8 @@ fun OnboardingScreen(
                     onBack = { onboardingViewModel.previousPage() },
                 )
             }
+            
+            else -> {}
         }
     }
 }
