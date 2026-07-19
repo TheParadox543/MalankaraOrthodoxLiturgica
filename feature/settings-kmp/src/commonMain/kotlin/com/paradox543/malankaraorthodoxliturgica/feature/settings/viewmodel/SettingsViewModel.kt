@@ -7,6 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeCapability
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
@@ -126,12 +127,10 @@ class SettingsViewModel(
             }
     }
 
-    fun setOnboardingCompleted(completed: Boolean = true) {
+    fun skipOnboarding() {
         viewModelScope.launch {
-            settingsRepository.setOnboardingCompleted(completed)
-            if (completed) {
-                analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
-            }
+            settingsRepository.setOnboardingStage(OnboardingStage.COMPLETE.value)
+            analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
         }
     }
 

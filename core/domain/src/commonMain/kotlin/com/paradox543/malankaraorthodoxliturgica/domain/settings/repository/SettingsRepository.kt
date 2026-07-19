@@ -20,8 +20,6 @@ interface SettingsRepository {
 
     suspend fun setFontScale(fontScale: AppFontScale)
 
-    suspend fun setOnboardingCompleted(completed: Boolean)
-
     suspend fun setOnboardingStage(stage: Int)
 
     suspend fun setSongScrollState(isHorizontal: Boolean)

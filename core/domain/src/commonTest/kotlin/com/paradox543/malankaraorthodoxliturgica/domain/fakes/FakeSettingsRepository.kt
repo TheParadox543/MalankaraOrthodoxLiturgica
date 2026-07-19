@@ -43,11 +43,6 @@ class FakeSettingsRepository(
         fontScaleFlow.value = fontScale
     }
 
-    override suspend fun setOnboardingCompleted(completed: Boolean) {
-        onboardingFlow.value = completed
-        onboardingStageFlow.value = if (completed) 3 else 0
-    }
-
     override suspend fun setOnboardingStage(stage: Int) {
         onboardingStageFlow.value = stage
         onboardingFlow.value = stage >= 3

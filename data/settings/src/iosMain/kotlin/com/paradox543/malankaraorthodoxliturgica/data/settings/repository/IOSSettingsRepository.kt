@@ -23,10 +23,6 @@ class IOSSettingsRepository(
         TODO("Not yet implemented")
     }
 
-    override suspend fun setOnboardingCompleted(completed: Boolean) {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun setOnboardingStage(stage: Int) {
         TODO("Not yet implemented")
     }

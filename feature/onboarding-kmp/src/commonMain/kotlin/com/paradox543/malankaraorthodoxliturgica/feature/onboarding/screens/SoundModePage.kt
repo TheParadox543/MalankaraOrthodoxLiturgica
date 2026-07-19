@@ -31,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SoundModeDropdownMenu
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.components.OnboardingHeader
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.components.OnboardingNavigationButtons
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

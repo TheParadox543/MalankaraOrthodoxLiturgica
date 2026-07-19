@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AndroidUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
@@ -26,9 +27,8 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.repository.BibleRe
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
 import com.paradox543.malankaraorthodoxliturgica.ui.StartupState
-import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
-import androidx.navigation.NavController
 import com.paradox543.malankaraorthodoxliturgica.ui.navigation.AppScreen
+import com.paradox543.malankaraorthodoxliturgica.ui.navigation.NavGraph
 import com.paradox543.malankaraorthodoxliturgica.ui.viewmodel.StartupViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -167,7 +167,7 @@ class MainActivity : ComponentActivity() {
                                         onClick = {
                                             showNewFeaturesDialog = false
                                             // Mark as complete so they don't see it again
-                                            settingsViewModel.setOnboardingCompleted(true)
+                                            settingsViewModel.skipOnboarding()
                                         },
                                     ) {
                                         Text("Not Now")

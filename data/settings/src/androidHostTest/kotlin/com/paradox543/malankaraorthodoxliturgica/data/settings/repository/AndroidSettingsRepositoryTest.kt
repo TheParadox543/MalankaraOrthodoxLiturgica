@@ -102,23 +102,6 @@ class AndroidSettingsRepositoryTest {
             assertFalse(repository.onboardingCompleted.first())
         }
 
-    @Test
-    fun `setOnboardingCompleted true makes flow emit true`() =
-        testScope.runTest {
-            repository.setOnboardingCompleted(true)
-
-            assertTrue(repository.onboardingCompleted.first())
-        }
-
-    @Test
-    fun `setOnboardingCompleted false makes flow emit false`() =
-        testScope.runTest {
-            repository.setOnboardingCompleted(true)
-            repository.setOnboardingCompleted(false)
-
-            assertFalse(repository.onboardingCompleted.first())
-        }
-
     // ─── fontScale ───────────────────────────────────────────────────────────
 
     @Test

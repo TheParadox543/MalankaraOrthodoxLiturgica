@@ -82,11 +82,6 @@ class AndroidSettingsRepository(
         }
     }
 
-    override suspend fun setOnboardingCompleted(completed: Boolean) {
-        // Legacy implementation, only for migration purposes.
-        // No longer updating hasCompletedOnboardingKey for new users.
-    }
-
     override suspend fun setOnboardingStage(stage: Int) {
         dataStore.edit { preferences ->
             preferences[onboardingStageKey] = stage

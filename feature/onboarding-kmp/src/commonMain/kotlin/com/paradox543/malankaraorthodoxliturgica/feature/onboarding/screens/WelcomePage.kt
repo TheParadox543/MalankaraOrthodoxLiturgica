@@ -36,6 +36,7 @@ fun WelcomePage(
     onboardingViewModel: OnboardingViewModel,
     contentPadding: PaddingValues,
     onContinue: () -> Unit,
+    onSkip: () -> Unit,
     onNavigateToHome: () -> Unit,
 ) {
     val selectedLanguage by onboardingViewModel.selectedLanguage.collectAsState()
@@ -127,10 +128,7 @@ fun WelcomePage(
             horizontalArrangement = Arrangement.End,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            TextButton(onClick = {
-                onboardingViewModel.skipOnboarding()
-                onNavigateToHome()
-            }) {
+            TextButton(onClick = onSkip) {
                 Text("Skip", color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
             Spacer(Modifier.width(8.dp))
