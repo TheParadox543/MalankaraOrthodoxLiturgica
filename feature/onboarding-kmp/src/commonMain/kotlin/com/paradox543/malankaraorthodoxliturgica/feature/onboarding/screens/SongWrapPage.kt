@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,8 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -38,49 +42,77 @@ fun SongWrapPage(
     val songScrollState by onboardingViewModel.songScrollState.collectAsState()
     val sampleText = "♪ Praise the Lord with all your heart and with all your soul, for His mercy endures forever.\nHallelujah!"
 
+    val wrappingEnabled = !songScrollState
+
     Column(
         modifier =
             Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .padding(columnPadding),
+                .padding(columnPadding)
+                .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         OnboardingHeader(
             title = "Song Text Wrapping",
             description =
                 """Choose how song lyrics are displayed.
-                    |Wrapped text allows long lines to
-                    | continue onto the next line when needed.
-                    |Original formatting preserves
-                    | the manually inserted line breaks from the hymn.
+                    |
+                    |Wrapped text allows long lines to stay within the screen.
+                    |
+                    |Original formatting preserves the line as it is in printed books.
                 """.trimMargin(),
         )
 
         Spacer(Modifier.height(12.dp))
 
-        Text(
-            "Preview:",
-            style = MaterialTheme.typography.titleMedium,
-            modifier = Modifier.align(Alignment.Start),
-        )
-        Spacer(Modifier.height(8.dp))
+        // Wrapped Preview
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = { onboardingViewModel.setSongScrollState(false) })
+                    .border(
+                        width = if (wrappingEnabled) 2.dp else 0.dp,
+                        color = if (wrappingEnabled) MaterialTheme.colorScheme.primary else androidx.compose.ui.graphics.Color.Transparent,
+                        shape = RoundedCornerShape(12.dp),
+                    ).padding(if (wrappingEnabled) 4.dp else 0.dp),
+        ) {
+            Text(
+                "Wrapped: Songs fit within the screen.",
+                style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier.padding(start = 4.dp, bottom = 4.dp),
+            )
+            Song(text = sampleText, isHorizontal = false)
+        }
 
-        Text(
-            "Wrapped",
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.align(Alignment.Start),
-        )
-        Song(text = sampleText, isHorizontal = false)
+        Spacer(Modifier.height(24.dp))
 
-        Spacer(Modifier.height(16.dp))
-
-        Text(
-            "Original",
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.align(Alignment.Start),
-        )
-        Song(text = sampleText, isHorizontal = true)
+        // Original Preview
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .clickable(onClick = { onboardingViewModel.setSongScrollState(true) })
+                    .border(
+                        width = if (!wrappingEnabled) 2.dp else 0.dp,
+                        color = if (!wrappingEnabled) MaterialTheme.colorScheme.primary else androidx.compose.ui.graphics.Color.Transparent,
+                        shape = RoundedCornerShape(12.dp),
+                    ).padding(if (!wrappingEnabled) 4.dp else 0.dp),
+        ) {
+            Text(
+                "Original: Songs match printed books. Swipe sideways to see the remaining lyrics.",
+                style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier.padding(start = 4.dp, bottom = 4.dp),
+            )
+            Song(text = sampleText, isHorizontal = true)
+            Text(
+                "Swipe right to see the remaining lyrics.",
+                style = MaterialTheme.typography.labelSmall,
+                modifier = Modifier.fillMaxWidth().padding(start = 4.dp, top = 4.dp),
+                textAlign = TextAlign.End,
+            )
+        }
 
         Spacer(Modifier.height(24.dp))
 
@@ -97,33 +129,19 @@ fun SongWrapPage(
 
         Spacer(Modifier.height(24.dp))
 
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .clickable { onboardingViewModel.setSongScrollState(false) },
-            ) {
-                RadioButton(
-                    selected = !songScrollState,
-                    onClick = { onboardingViewModel.setSongScrollState(false) },
-                )
-                Text("Wrap song text")
-            }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .clickable { onboardingViewModel.setSongScrollState(true) },
-            ) {
-                RadioButton(
-                    selected = songScrollState,
-                    onClick = { onboardingViewModel.setSongScrollState(true) },
-                )
-                Text("Preserve original line formatting")
-            }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = "Wrap song text",
+                style = MaterialTheme.typography.bodyLarge,
+            )
+            Switch(
+                checked = wrappingEnabled,
+                onCheckedChange = { onboardingViewModel.setSongScrollState(!it) },
+            )
         }
 
         Spacer(Modifier.weight(1f))
