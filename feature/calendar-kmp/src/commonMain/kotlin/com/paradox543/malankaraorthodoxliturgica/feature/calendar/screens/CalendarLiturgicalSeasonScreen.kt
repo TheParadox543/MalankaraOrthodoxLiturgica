@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -146,8 +147,26 @@ private fun BrowseMode(
     calendarViewModel: CalendarViewModel,
     translations: Map<String, String>,
 ) {
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(state.weeks) {
+        val todayWeekIndex = state.weeks.indexOfFirst { weekItem ->
+            weekItem is WeekItem.LiturgicalWeek && weekItem.days.any { it.isToday }
+        }
+
+        if (todayWeekIndex != -1) {
+            val isVisible = listState.layoutInfo.visibleItemsInfo.any { it.index == todayWeekIndex }
+            if (!isVisible) {
+                listState.scrollToItem(todayWeekIndex)
+            }
+        }
+    }
+
     Column {
-        LazyColumn(Modifier.weight(1f)) {
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            state = listState,
+        ) {
             state.weeks.forEach { weekItem ->
                 when (weekItem) {
                     is WeekItem.HeaderLabel -> {
