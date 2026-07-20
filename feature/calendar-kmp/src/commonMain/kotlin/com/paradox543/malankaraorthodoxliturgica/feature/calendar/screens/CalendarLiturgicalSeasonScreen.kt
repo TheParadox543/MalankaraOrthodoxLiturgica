@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Arrow_back
 import com.composables.icons.materialicons.rounded.Arrow_forward
+import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.verticalScrollbar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
@@ -150,9 +151,10 @@ private fun BrowseMode(
     val listState = rememberLazyListState()
 
     LaunchedEffect(state.weeks) {
-        val todayWeekIndex = state.weeks.indexOfFirst { weekItem ->
-            weekItem is WeekItem.LiturgicalWeek && weekItem.days.any { it.isToday }
-        }
+        val todayWeekIndex =
+            state.weeks.indexOfFirst { weekItem ->
+                weekItem is WeekItem.LiturgicalWeek && weekItem.days.any { it.isToday }
+            }
 
         if (todayWeekIndex != -1) {
             val isVisible = listState.layoutInfo.visibleItemsInfo.any { it.index == todayWeekIndex }
@@ -164,8 +166,13 @@ private fun BrowseMode(
 
     Column {
         LazyColumn(
-            modifier = Modifier.weight(1f),
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .padding(horizontal = 8.dp)
+                    .verticalScrollbar(listState),
             state = listState,
+            contentPadding = PaddingValues(end = 8.dp),
         ) {
             state.weeks.forEach { weekItem ->
                 when (weekItem) {

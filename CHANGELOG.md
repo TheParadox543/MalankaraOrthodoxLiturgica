@@ -16,6 +16,8 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 - Improved onboarding flow: Divided different features into stages.
 - Added dynamic image loading in prayer screen.
 - Top prayer from pray now can be seen in home screen.
+- Auto scroll to current date.
+- Add scrollbar for calendar.
 
 ### Fix
 - Wrong anniversary count given in calendar.
