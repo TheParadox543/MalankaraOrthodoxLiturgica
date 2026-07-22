@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.prayer.di
 
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
-import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -29,6 +29,7 @@ val prayerModule =
                 prayerRepository = get(),
                 getAdjacentSiblingRoutesUseCase = get(),
                 getPrayerNodesForCurrentTimeUseCase = get(),
+                createPrayerIndexUseCase = get(),
                 inAppReviewManager = get(),
             )
         }

@@ -18,13 +18,14 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 - Top prayer from pray now can be seen in home screen.
 - Auto scroll to current date.
 - Add scrollbar for calendar.
+- Index for prayers: Prayers can be searched and ordered by Title.
 
 ### Fix
 - Wrong anniversary count given in calendar.
 
 ---
 
-## [2.4.1] - 15/7/2026
+## [2.4.1] - 15/07/2026
 
 ### Added
 

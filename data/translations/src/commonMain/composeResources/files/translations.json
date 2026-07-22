@@ -714,5 +714,9 @@
     "otherRecommendedPrayers": {
         "en": "Other appropriate prayers",
         "ml": "മറ്റ് അനുയോജ്യമായ പ്രാർത്ഥനകൾ"
+    },
+    "indexOfPrayers": {
+        "en": "Index of prayers",
+        "ml": "പ്രാർത്ഥനകളുടെ സൂചിക"
     }
 }

@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.core.platform.InAppReviewManager
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerIndexItem
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.repository.PrayerRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.CreatePrayerIndexUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
@@ -13,6 +15,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.mapLatest
@@ -28,6 +31,7 @@ class PrayerNavViewModel(
     private val prayerRepository: PrayerRepository,
     private val getAdjacentSiblingRoutesUseCase: GetAdjacentSiblingRoutesUseCase,
     private val getPrayerNodesForCurrentTimeUseCase: GetPrayerNodesForCurrentTimeUseCase,
+    private val createPrayerIndexUseCase: CreatePrayerIndexUseCase,
     private val inAppReviewManager: InAppReviewManager,
 ) : ViewModel() {
     private val initialTree = PageNode(route = "root", parent = null)
@@ -43,11 +47,33 @@ class PrayerNavViewModel(
                 initialTree,
             )
 
+    val selectedLanguage: StateFlow<AppLanguage> =
+        settingsRepository.language.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = AppLanguage.MALAYALAM,
+        )
+
     private val _currentNode = MutableStateFlow<PageNode?>(null)
     val currentNode = _currentNode.asStateFlow()
 
     private val _requestReview = MutableSharedFlow<Unit>()
     val requestReview = _requestReview.asSharedFlow()
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val prayerIndex: StateFlow<List<PrayerIndexItem>> =
+        rootNode
+            .mapLatest { node ->
+                if (node.children.isEmpty()) {
+                    emptyList()
+                } else {
+                    createPrayerIndexUseCase(node, selectedLanguage.value)
+                }
+            }.stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                emptyList(),
+            )
 
     fun findNode(route: String) = rootNode.value.findByRoute(route)
 

@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -38,6 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Arrow_forward
+import com.composables.icons.materialicons.rounded.Info
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
@@ -68,6 +70,7 @@ fun SectionScreen(
     onPrayerNavigate: (String) -> Unit = {},
     onSongNavigate: (String) -> Unit = {},
     onPrayNowNavigate: () -> Unit = {},
+    onIndexNavigate: () -> Unit = {},
     topRecommendedPrayer: PageNode? = null,
     liturgicalDay: LiturgicalDay? = null,
 ) {
@@ -127,6 +130,20 @@ fun SectionScreen(
                                 onPrayNowNavigate,
                             )
                         }
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            ListItem(
+                                headlineContent = {
+                                    Text(translations["indexOfPrayers"] ?: "Index of prayers")
+                                },
+                                modifier = Modifier.clickable(onClick = { onIndexNavigate() }),
+                                leadingContent = {
+                                    Icon(
+                                        MaterialIcons.Rounded.Info,
+                                        contentDescription = "Index of prayers",
+                                    )
+                                },
+                            )
+                        }
                     }
                     items(nodes.size) { index ->
                         SectionCard(
@@ -164,6 +181,20 @@ fun SectionScreen(
                                 translations,
                                 onPrayerNavigate,
                                 onPrayNowNavigate,
+                            )
+                        }
+                        item(span = { GridItemSpan(maxLineSpan) }) {
+                            ListItem(
+                                headlineContent = {
+                                    Text(translations["indexOfPrayers"] ?: "Index of prayers")
+                                },
+                                modifier = Modifier.clickable(onClick = { onIndexNavigate() }),
+                                leadingContent = {
+                                    Icon(
+                                        MaterialIcons.Rounded.Info,
+                                        contentDescription = "Index of prayers",
+                                    )
+                                },
                             )
                         }
                     }

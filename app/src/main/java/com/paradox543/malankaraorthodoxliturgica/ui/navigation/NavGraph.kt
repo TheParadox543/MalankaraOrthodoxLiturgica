@@ -63,6 +63,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.Cale
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.IndexScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.SectionScreen
@@ -355,6 +356,9 @@ fun NavGraph(
                     onPrayNowNavigate = {
                         navController.navigate(AppScreen.PrayNow.route)
                     },
+                    onIndexNavigate = {
+                        navController.navigate(AppScreen.Index.route)
+                    },
                     onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
             }
@@ -423,6 +427,9 @@ fun NavGraph(
                         },
                         onSongNavigate = { route ->
                             navController.navigate(AppScreen.Song.createRoute(route))
+                        },
+                        onIndexNavigate = {
+                            navController.navigate(AppScreen.Index.route)
                         },
                     )
                 } else {
@@ -524,6 +531,24 @@ fun NavGraph(
                     prayerNavViewModel,
                     innerPadding,
                 ) { scaffoldUiState.value = it }
+            }
+
+            composable(AppScreen.Index.route) {
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else {
+                    IndexScreen(
+                        prayerViewModel = prayerViewModel,
+                        prayerNavViewModel = prayerNavViewModel,
+                        contentPadding = innerPadding,
+                        onPrayerNavigate = { route ->
+                            navController.navigate(AppScreen.Prayer.createRoute(route))
+                        },
+                    ) { scaffoldUiState.value = it }
+                }
             }
 
             composable(

@@ -21,6 +21,7 @@ fun HomeScreen(
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
     onPrayNowNavigate: () -> Unit,
+    onIndexNavigate: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
@@ -35,6 +36,7 @@ fun HomeScreen(
         onPrayerNavigate = onPrayerNavigate,
         onSongNavigate = onSongNavigate,
         onPrayNowNavigate = onPrayNowNavigate,
+        onIndexNavigate = onIndexNavigate,
         topRecommendedPrayer = topRecommendedPrayer,
         liturgicalDay = liturgicalDay,
     )
