@@ -27,6 +27,10 @@
         "en": "Great Lent",
         "ml": "വലിയ നോമ്പ്"
     },
+    "great_lent": {
+        "en": "Great Lent",
+        "ml": "വലിയ നോമ്പ്"
+    },
     "qurbana": {
         "en": "Holy Qurbana",
         "ml": "വി. കുർബാന"
@@ -675,8 +679,44 @@
         "en": "Holy Cross",
         "ml": "സ്ലീബാ"
     },
+    "holy_cross": {
+        "en": "Holy Cross",
+        "ml": "സ്ലീബാ"
+    },
     "calendar": {
         "en": "Calendar",
         "ml": "പഞ്ചാംഗം"
+    },
+    "tune": {
+        "en": "Tune / Mode",
+        "ml": "നിറം / രാഗം"
+    },
+    "calendar_today": {
+        "en": "Today",
+        "ml": "ഇന്ന്"
+    },
+    "calendar_selectedDay": {
+        "en": "Selected Day",
+        "ml": "തിരഞ്ഞെടുത്ത ദിവസം"
+    },
+    "calendar_commemorations": {
+        "en": "Commemorations",
+        "ml": "ഓർമ്മപ്പെരുന്നാളുകൾ"
+    },
+    "calendar_fasting": {
+        "en": "Fasting",
+        "ml": "നോമ്പ്"
+    },
+    "calendar_normalDay": {
+        "en": "Normal Day",
+        "ml": "സാധാരണ ദിവസം"
+    },
+    "otherRecommendedPrayers": {
+        "en": "Other appropriate prayers",
+        "ml": "മറ്റ് അനുയോജ്യമായ പ്രാർത്ഥനകൾ"
+    },
+    "indexOfPrayers": {
+        "en": "Index of prayers",
+        "ml": "പ്രാർത്ഥനകളുടെ സൂചിക"
     }
 }

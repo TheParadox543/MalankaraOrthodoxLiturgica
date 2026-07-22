@@ -11,6 +11,7 @@ kotlin {
         namespace = "com.paradox543.malankaraorthodoxliturgica.feature.onboarding"
         compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
         minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
+        androidResources.enable = true
 
         packaging {
             resources {
@@ -69,6 +70,7 @@ kotlin {
                 // Project Imports
                 implementation(project(":core:domain"))
                 implementation(project(":core:analytics"))
+                implementation(project(":core:platform-kmp"))
                 implementation(project(":core:ui-common"))
                 implementation(project(":core:app-info"))
 
@@ -84,6 +86,8 @@ kotlin {
                 implementation(libs.compose.material3.adaptive)
                 implementation(libs.compose.material3.adaptive.layout)
                 implementation(libs.compose.material3.adaptive.navigation)
+                // Icons dependency
+                implementation(libs.icons.material.icons.rounded.cmp)
 
                 implementation(libs.ui)
                 implementation(libs.ui.tooling.preview)
@@ -102,6 +106,9 @@ kotlin {
 
         androidMain {
             dependencies {
+//                implementation(libs.androidx.media3.exoplayer)
+//                implementation(libs.androidx.media3.ui)
+//                implementation(libs.androidx.media3.common)
             }
         }
 

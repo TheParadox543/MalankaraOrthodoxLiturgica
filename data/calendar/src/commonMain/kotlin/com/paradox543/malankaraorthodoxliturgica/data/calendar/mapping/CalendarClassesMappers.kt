@@ -6,6 +6,7 @@ import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.ReferenceRangeDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.SeasonDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.TitleStrDto
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReadingsSelection
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
@@ -13,6 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRan
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.TitleStr
 import kotlinx.datetime.LocalDate as KotlinLocalDate
 
@@ -33,6 +35,17 @@ fun LiturgicalEventDetailsDto.toDomain(): LiturgicalEventDetails =
     )
 
 fun List<LiturgicalEventDetailsDto>.toLiturgicalEventsDetailsDomain(): List<LiturgicalEventDetails> = map { it.toDomain() }
+
+fun SeasonDto.toDomain(): SeasonName =
+    when (this) {
+        SeasonDto.ANNUNCIATION -> SeasonName.ANNUNCIATION
+        SeasonDto.EPIPHANY -> SeasonName.EPIPHANY
+        SeasonDto.GREAT_LENT -> SeasonName.GREAT_LENT
+        SeasonDto.RESURRECTION -> SeasonName.RESURRECTION
+        SeasonDto.PENTECOST -> SeasonName.PENTECOST
+        SeasonDto.TRANSFIGURATION -> SeasonName.TRANSFIGURATION
+        SeasonDto.HOLY_CROSS -> SeasonName.HOLY_CROSS
+    }
 
 fun CalendarDayDto.toDomain(): CalendarDay =
     CalendarDay(

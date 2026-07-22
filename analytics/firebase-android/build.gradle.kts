@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.material)
 
     implementation(project(":core:analytics"))
+    implementation(project(":core:app-info"))
 
     // Dependency Injection
     implementation(libs.koin.core)
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.firebase.analytics)           // Firebase Analytics for app usage data
 
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

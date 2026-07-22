@@ -8,6 +8,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,10 +17,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -33,20 +37,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Arrow_back
 import com.composables.icons.materialicons.rounded.Arrow_forward
+import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.verticalScrollbar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarMode
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.model.CalendarUiState
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import kotlinx.datetime.LocalDate
 
 @Composable
 fun CalendarLiturgicalSeasonScreen(
@@ -67,7 +73,9 @@ fun CalendarLiturgicalSeasonScreen(
                 WeekItem.HeaderLabel(
                     it.name
                         .lowercase()
-                        .replaceFirstChar { it.uppercase() },
+                        .replaceFirstChar { character ->
+                            character.uppercase()
+                        },
                 )
             }
     val selectedWeek: WeekItem.LiturgicalWeek? =
@@ -81,7 +89,7 @@ fun CalendarLiturgicalSeasonScreen(
 
     LaunchedEffect(selectedLanguage, translations) {
         onScaffoldStateChanged(
-            ScaffoldUiState.Standard(translations["calendar"] ?: "Calendar"),
+            ScaffoldUiState.Standard(translations["calendar"] ?: "Calendar", showFab = false),
         )
     }
 
@@ -98,6 +106,7 @@ fun CalendarLiturgicalSeasonScreen(
     } else {
         Column(
             Modifier
+                .fillMaxSize()
                 .padding(contentPadding)
                 .padding(horizontal = 4.dp)
                 .background(MaterialTheme.colorScheme.surface),
@@ -114,7 +123,7 @@ fun CalendarLiturgicalSeasonScreen(
             WeekdayHeader()
 
             if (state.selectedDay == null) {
-                BrowseMode(state, calendarViewModel)
+                BrowseMode(state, calendarViewModel, translations)
             } else {
                 InspectMode(
                     selectedDay = state.selectedDay,
@@ -137,27 +146,126 @@ fun CalendarLiturgicalSeasonScreen(
 private fun BrowseMode(
     state: CalendarUiState,
     calendarViewModel: CalendarViewModel,
+    translations: Map<String, String>,
 ) {
-    LazyColumn {
-        state.weeks.forEach { weekItem ->
-            when (weekItem) {
-                is WeekItem.HeaderLabel -> {
-                    stickyHeader {
-                        MonthHeader(weekItem)
-                    }
-                }
+    val listState = rememberLazyListState()
 
-                is WeekItem.LiturgicalWeek -> {
-                    item {
-                        WeekRow(
-                            week = weekItem,
-                            selectedDay = state.selectedDay,
-                            onDayClick = calendarViewModel::selectDay,
-                        )
+    LaunchedEffect(state.weeks) {
+        val todayWeekIndex =
+            state.weeks.indexOfFirst { weekItem ->
+                weekItem is WeekItem.LiturgicalWeek && weekItem.days.any { it.isToday }
+            }
+
+        if (todayWeekIndex != -1) {
+            val isVisible = listState.layoutInfo.visibleItemsInfo.any { it.index == todayWeekIndex }
+            if (!isVisible) {
+                listState.scrollToItem(todayWeekIndex)
+            }
+        }
+    }
+
+    Column {
+        LazyColumn(
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .padding(horizontal = 8.dp)
+                    .verticalScrollbar(listState),
+            state = listState,
+            contentPadding = PaddingValues(end = 8.dp),
+        ) {
+            state.weeks.forEach { weekItem ->
+                when (weekItem) {
+                    is WeekItem.HeaderLabel -> {
+                        stickyHeader {
+                            MonthHeader(weekItem)
+                        }
+                    }
+
+                    is WeekItem.LiturgicalWeek -> {
+                        item {
+                            WeekRow(
+                                week = weekItem,
+                                selectedDay = state.selectedDay,
+                                onDayClick = calendarViewModel::selectDay,
+                            )
+                        }
                     }
                 }
             }
         }
+        CalendarLegend(translations)
+    }
+}
+
+@Composable
+private fun CalendarLegend(translations: Map<String, String>) {
+    val dummyDate = LocalDate(2026, 1, 1)
+    val normalDay = LiturgicalDay.empty(dummyDate).copy(seasonName = SeasonName.DUMMY)
+    val fastingDay = LiturgicalDay.empty(dummyDate).copy(lent = 1, seasonName = SeasonName.DUMMY)
+    val commemorationDay = LiturgicalDay.empty(dummyDate).copy(eventKeys = listOf("event"), seasonName = SeasonName.DUMMY)
+
+    Column(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        HorizontalDivider(Modifier.padding(bottom = 4.dp))
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+        ) {
+            LegendItem(
+                modifier = Modifier.weight(1f),
+                day = normalDay,
+                showDate = false,
+                label = translations["calendar_normalDay"] ?: "Normal Day",
+            )
+            LegendItem(
+                modifier = Modifier.weight(1f),
+                day = fastingDay,
+                showDate = false,
+                label = translations["calendar_fasting"] ?: "Fasting",
+            )
+            LegendItem(
+                modifier = Modifier.weight(1.5f),
+                day = commemorationDay,
+                showDate = true,
+                label = translations["calendar_commemorations"] ?: "Commemorations",
+            )
+        }
+    }
+}
+
+@Composable
+private fun LegendItem(
+    modifier: Modifier = Modifier,
+    day: LiturgicalDay,
+    isSelected: Boolean = false,
+    showDate: Boolean = true,
+    label: String,
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Box(modifier = Modifier.width(32.dp)) {
+            DayCell(
+                day = day,
+                isSelected = isSelected,
+                showDate = showDate,
+                onClick = {},
+            )
+        }
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
     }
 }
 
@@ -319,12 +427,14 @@ fun DayCell(
     modifier: Modifier = Modifier,
     day: LiturgicalDay,
     isSelected: Boolean = false,
+    showDate: Boolean = true,
     onClick: () -> Unit,
 ) {
     val isClickable = day.eventKeys.isNotEmpty()
-    val isVisible = day.season != null
+    val isVisible = day.seasonName != null
     val isToday = day.isToday
     val lentDayColor = lentDayColor()
+    val cellShape = RoundedCornerShape(8.dp)
 
     val border =
         when {
@@ -352,7 +462,16 @@ fun DayCell(
             modifier
                 .aspectRatio(1f)
                 .padding(vertical = 4.dp, horizontal = 2.dp)
-                .border(border, shape = RectangleShape)
+                .background(
+                    if (isSelected) {
+                        MaterialTheme.colorScheme.primaryContainer.copy(0.5f)
+                    } else if (isClickable) {
+                        MaterialTheme.colorScheme.secondaryContainer.copy(0.5f)
+                    } else {
+                        Color.Transparent
+                    },
+                    shape = cellShape,
+                ).border(border, shape = cellShape)
                 .then(
                     if (isClickable) {
                         Modifier.clickable { onClick() }
@@ -379,33 +498,32 @@ fun DayCell(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             // Date
-            Text(
-                text = day.date.day.toString(),
-                style = MaterialTheme.typography.bodyLarge,
-                color =
-                    if (day.lent != null) {
-                        lentDayColor
-                    } else {
-                        MaterialTheme.colorScheme.onSurface
-                    },
-            )
-
-            Box(
-                Modifier.height(6.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                if (isClickable) {
-                    Box(
+            if (showDate) {
+                Text(
+                    text = day.date.day.toString(),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color =
+                        if (day.lent != null) {
+                            lentDayColor
+                        } else {
+                            MaterialTheme.colorScheme.onSurface
+                        },
+                )
+            } else {
+                Box(
+                    modifier =
                         Modifier
-                            .height(6.dp)
-                            .width(6.dp)
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.primary,
+                            .size(10.dp)
+                            .background(
+                                color =
+                                    if (day.lent != null) {
+                                        lentDayColor
+                                    } else {
+                                        MaterialTheme.colorScheme.onSurface
+                                    },
                                 shape = CircleShape,
                             ),
-                    )
-                }
+                )
             }
         }
     }
@@ -443,17 +561,17 @@ fun DayDetails(
         ) {
             day.tune?.let {
                 Text(
-                    text = "Tune $it",
+                    text = "${translations["tune"]}: $it",
                     style = MaterialTheme.typography.labelMedium,
                 )
             }
 
-            day.season?.let {
-                Text(
-                    text = formatSeasonTitle(it, selectedLanguage, translations),
-                    style = MaterialTheme.typography.labelMedium,
-                )
-            }
+//            day.season?.let {
+//                Text(
+//                    text = formatSeasonTitle(it, selectedLanguage, translations),
+//                    style = MaterialTheme.typography.labelMedium,
+//                )
+//            }
         }
 
         Spacer(Modifier.height(12.dp))
@@ -494,7 +612,7 @@ fun DayDetails(
 }
 
 private fun formatSeasonTitle(
-    season: String,
+    season: SeasonName,
     selectedLanguage: AppLanguage,
     translations: Map<String, String>,
 ): String {
@@ -510,14 +628,16 @@ private fun formatSeasonTitle(
     }
 }
 
-private fun seasonTranslationKey(season: String): String =
+private fun seasonTranslationKey(season: SeasonName): String =
     when (season) {
-        "transfiguration" -> "transfigurationSeason"
-        else -> season
+        SeasonName.TRANSFIGURATION -> "transfigurationSeason"
+        else -> season.toString().lowercase()
     }
 
-private fun String.toDisplayName(): String =
-    replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
+private fun SeasonName.toDisplayName(): String =
+    toString()
+        .lowercase()
+        .replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
         .replaceFirstChar(Char::uppercase)
 
 @Composable

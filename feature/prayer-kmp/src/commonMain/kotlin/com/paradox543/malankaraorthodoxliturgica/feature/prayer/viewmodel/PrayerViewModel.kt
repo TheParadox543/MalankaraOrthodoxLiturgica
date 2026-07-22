@@ -14,11 +14,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -99,37 +99,38 @@ class PrayerViewModel(
 
         inFlightPrayerRequest = request
         prayerLoadJob?.cancel()
-        prayerLoadJob = viewModelScope.launch {
-            _isLoadingPrayers.value = true
-            val loadStartedAt = TimeSource.Monotonic.markNow()
-            try {
-                val prayers =
-                    withContext(backgroundDispatcher) {
-                        loadPrayerScreenContent(filename, language)
+        prayerLoadJob =
+            viewModelScope.launch {
+                _isLoadingPrayers.value = true
+                val loadStartedAt = TimeSource.Monotonic.markNow()
+                try {
+                    val prayers =
+                        withContext(backgroundDispatcher) {
+                            loadPrayerScreenContent(filename, language)
+                        }
+                    _prayers.value = prayers
+                    if (_dynamicSongKey.value == null && prayers.any { it is PrayerElement.DynamicSongsBlock }) {
+                        _dynamicSongKey.value = withContext(backgroundDispatcher) { getSongKeyPriority() }
                     }
-                _prayers.value = prayers
-                if (_dynamicSongKey.value == null && prayers.any { it is PrayerElement.DynamicSongsBlock }) {
-                    _dynamicSongKey.value = withContext(backgroundDispatcher) { getSongKeyPriority() }
-                }
-                lastLoadedPrayerRequest = request
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
-                if (inFlightPrayerRequest == request) {
-                    lastLoadedPrayerRequest = null
-                }
-            } finally {
-                if (inFlightPrayerRequest == request) {
-                    val remainingIndicatorTime = minimumPrayerLoadingIndicatorDuration - loadStartedAt.elapsedNow()
-                    if (remainingIndicatorTime.isPositive()) {
-                        delay(remainingIndicatorTime)
+                    lastLoadedPrayerRequest = request
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))
+                    if (inFlightPrayerRequest == request) {
+                        lastLoadedPrayerRequest = null
                     }
-                    _isLoadingPrayers.value = false
-                    inFlightPrayerRequest = null
+                } finally {
+                    if (inFlightPrayerRequest == request) {
+                        val remainingIndicatorTime = minimumPrayerLoadingIndicatorDuration - loadStartedAt.elapsedNow()
+                        if (remainingIndicatorTime.isPositive()) {
+                            delay(remainingIndicatorTime)
+                        }
+                        _isLoadingPrayers.value = false
+                        inFlightPrayerRequest = null
+                    }
                 }
             }
-        }
     }
 
     fun setDynamicSongKey(key: String) {
@@ -158,5 +159,4 @@ class PrayerViewModel(
             ),
         )
     }
-
 }

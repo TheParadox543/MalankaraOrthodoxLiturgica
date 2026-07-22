@@ -4,6 +4,6 @@ sealed class StartupState {
     object Loading : StartupState()
 
     data class Ready(
-        val onboardingCompleted: Boolean,
+        val onboardingStage: Int,
     ) : StartupState()
 }

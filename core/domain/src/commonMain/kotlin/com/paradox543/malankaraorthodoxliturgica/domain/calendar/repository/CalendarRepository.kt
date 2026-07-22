@@ -4,6 +4,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import kotlinx.datetime.LocalDate
 
@@ -17,12 +18,12 @@ interface CalendarRepository {
 
     suspend fun getSeasonDays(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<LiturgicalDay>
 
     suspend fun getSeasonWeeks(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<WeekItem>
 
     suspend fun getMonthDays(

@@ -4,15 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
+import com.paradox543.malankaraorthodoxliturgica.core.platform.SoundModeCapability
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.info.AppInfoProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -21,7 +26,17 @@ class OnboardingViewModel(
     private val analyticsService: AnalyticsService,
     private val getPrayerScreenContentUseCase: GetPrayerScreenContentUseCase,
     private val appInfoProvider: AppInfoProvider,
+    private val soundModeCapability: SoundModeCapability,
 ) : ViewModel() {
+    val onboardingStage: StateFlow<OnboardingStage> =
+        settingsRepository.onboardingStage
+            .map { OnboardingStage.fromInt(it) }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = OnboardingStage.WELCOME,
+            )
+
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(
             scope = viewModelScope,
@@ -36,10 +51,69 @@ class OnboardingViewModel(
             initialValue = AppFontScale.Medium,
         )
 
+    val songScrollState: StateFlow<Boolean> =
+        settingsRepository.songScrollState.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = false,
+        )
+
+    val soundMode: StateFlow<SoundMode> =
+        settingsRepository.soundMode.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = SoundMode.OFF,
+        )
+
+    val soundRestoreDelay: StateFlow<Int> =
+        settingsRepository.soundRestoreDelay.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = 30,
+        )
+
+    private val _hasDndPermission = MutableStateFlow(false)
+    val hasDndPermission = _hasDndPermission.asStateFlow()
+
     private val _prayers = MutableStateFlow<List<PrayerElement>>(emptyList())
     val prayers: StateFlow<List<PrayerElement>> = _prayers
 
     val version = appInfoProvider.versionName
+
+    init {
+        refreshDndPermissionStatus()
+    }
+
+    fun nextPage() {
+        val current = onboardingStage.value.value
+        if (current < OnboardingStage.COMPLETE.value) {
+            setOnboardingStage(current + 1)
+        }
+    }
+
+    fun previousPage() {
+        val current = onboardingStage.value.value
+        if (current > OnboardingStage.WELCOME.value) {
+            setOnboardingStage(current - 1)
+        }
+    }
+
+    fun skipOnboarding() {
+        setOnboardingStage(OnboardingStage.COMPLETE.value)
+    }
+
+    fun finishOnboarding() {
+        setOnboardingStage(OnboardingStage.COMPLETE.value)
+    }
+
+    private fun setOnboardingStage(stage: Int) {
+        viewModelScope.launch {
+            settingsRepository.setOnboardingStage(stage)
+            if (stage == OnboardingStage.COMPLETE.value) {
+                analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
+            }
+        }
+    }
 
     fun loadPrayerElements(
         filename: String,
@@ -77,12 +151,25 @@ class OnboardingViewModel(
         }
     }
 
-    fun setOnboardingCompleted(completed: Boolean = true) {
+    fun setSongScrollState(isHorizontal: Boolean) {
         viewModelScope.launch {
-            settingsRepository.setOnboardingCompleted(completed)
-            if (completed) {
-                analyticsService.logEvent(AnalyticsEvent.TutorialCompleted)
-            }
+            settingsRepository.setSongScrollState(isHorizontal)
         }
+    }
+
+    fun setSoundMode(mode: SoundMode) {
+        viewModelScope.launch {
+            settingsRepository.setSoundMode(mode)
+        }
+    }
+
+    fun setSoundRestoreDelay(delay: Int) {
+        viewModelScope.launch {
+            settingsRepository.setSoundRestoreDelay(delay)
+        }
+    }
+
+    fun refreshDndPermissionStatus() {
+        _hasDndPermission.value = soundModeCapability.hasPermission
     }
 }

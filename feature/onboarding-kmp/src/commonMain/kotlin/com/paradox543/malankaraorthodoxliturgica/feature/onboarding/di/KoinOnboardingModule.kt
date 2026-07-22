@@ -12,6 +12,7 @@ val onboardingModule =
                 analyticsService = get(),
                 getPrayerScreenContentUseCase = get(),
                 appInfoProvider = get(),
+                soundModeCapability = get(),
             )
         }
     }

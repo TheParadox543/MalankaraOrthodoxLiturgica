@@ -19,13 +19,13 @@ class StartupViewModel(
         viewModelScope.launch {
             // Use drop(1).first() to skip the initial default value and wait for the actual DataStore value
             // Or better yet, collect once to ensure we get the real stored value
-            val onboarding = settingsRepository.onboardingCompleted.first()
+            val onboardingStage = settingsRepository.onboardingStage.first()
 
             // preload tree OR any other critical init work here
 
             _startupState.value =
                 StartupState.Ready(
-                    onboardingCompleted = onboarding,
+                    onboardingStage = onboardingStage,
                 )
         }
     }

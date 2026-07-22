@@ -83,11 +83,18 @@ sealed class AnalyticsEvent {
 
                 val screenClass =
                     when {
-                        routePattern.startsWith("section/") -> "SectionScreen"
-                        routePattern.startsWith("prayer/") -> "PrayerScreen"
-                        routePattern.startsWith("song/") -> "SongScreen"
+                        routePattern == "home" -> "HomeScreen"
+                        routePattern == "onboarding" -> "OnboardingScreen"
+                        routePattern == "prayNow" -> "PrayNowScreen"
+                        routePattern == "index" -> "IndexScreen"
+                        routePattern == "settings" -> "SettingsScreen"
+                        routePattern == "about" -> "AboutScreen"
                         routePattern == "calendar" -> "CalendarScreen"
                         routePattern == "qrScanner" -> "QrScannerScreen"
+                        routePattern == "bibleReader" -> "BibleReadingScreen"
+                        routePattern.startsWith("section") -> "SectionScreen"
+                        routePattern.startsWith("prayer") -> "PrayerScreen"
+                        routePattern.startsWith("song") -> "SongScreen"
                         routePattern.startsWith("bible") -> "BibleScreen"
                         else -> "StaticScreen"
                     }

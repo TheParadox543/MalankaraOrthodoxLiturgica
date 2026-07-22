@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
 
@@ -12,17 +14,30 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.Prayer
 fun HomeScreen(
     prayerViewModel: PrayerViewModel,
     prayerNavViewModel: PrayerNavViewModel,
+    liturgicalDay: LiturgicalDay?,
+    topRecommendedPrayer: PageNode?,
     contentPadding: PaddingValues,
     onSectionNavigate: (String) -> Unit,
+    onPrayerNavigate: (String) -> Unit,
+    onSongNavigate: (String) -> Unit,
+    onPrayNowNavigate: () -> Unit,
+    onIndexNavigate: () -> Unit,
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
+
     SectionScreen(
-        prayerViewModel,
-        prayerNavViewModel,
-        rootNode,
-        contentPadding,
-        onScaffoldStateChanged,
+        prayerViewModel = prayerViewModel,
+        prayerNavViewModel = prayerNavViewModel,
+        node = rootNode,
+        contentPadding = contentPadding,
+        onScaffoldStateChanged = onScaffoldStateChanged,
         onSectionNavigate = onSectionNavigate,
+        onPrayerNavigate = onPrayerNavigate,
+        onSongNavigate = onSongNavigate,
+        onPrayNowNavigate = onPrayNowNavigate,
+        onIndexNavigate = onIndexNavigate,
+        topRecommendedPrayer = topRecommendedPrayer,
+        liturgicalDay = liturgicalDay,
     )
 }

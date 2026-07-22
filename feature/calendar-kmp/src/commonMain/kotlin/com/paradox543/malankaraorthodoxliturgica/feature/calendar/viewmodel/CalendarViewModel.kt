@@ -11,9 +11,9 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibl
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarDay
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
@@ -35,11 +35,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.number
-import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -55,13 +52,6 @@ class CalendarViewModel(
     private val formatBibleReadingEntryUseCaseLazy: Lazy<FormatBibleReadingEntryUseCase>,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
-    private data class MonthLoadResult(
-        val monthData: List<CalendarWeek>,
-        val viewDate: LocalDate,
-        val hasPreviousMonth: Boolean,
-        val hasNextMonth: Boolean,
-    )
-
     private val seasons =
         listOf(
             "annunciation",
@@ -73,6 +63,7 @@ class CalendarViewModel(
             "holyCross",
         )
     private var currentSeasonIndex = 0
+    private var currentSeason: SeasonName = SeasonName.ANNUNCIATION
 
     private var liturgicalYear = "2024-25"
 
@@ -86,10 +77,6 @@ class CalendarViewModel(
 
     private val _translations = MutableStateFlow<Map<String, String>>(emptyMap())
     val translations: StateFlow<Map<String, String>> = _translations.asStateFlow()
-
-    // State for the currently displayed month's calendar data
-    private val _monthCalendarData = MutableStateFlow<List<CalendarWeek>>(emptyList())
-    val monthCalendarData: StateFlow<List<CalendarWeek>> = _monthCalendarData.asStateFlow()
 
     // State for upcoming week's events
     private val _upcomingWeekEvents = MutableStateFlow<List<CalendarDay>>(emptyList())
@@ -106,26 +93,12 @@ class CalendarViewModel(
         )
     val currentCalendarViewDate: StateFlow<LocalDate> = _currentCalendarViewDate.asStateFlow()
 
-    private val _hasNextMonth = MutableStateFlow(false)
-    val hasNextMonth: StateFlow<Boolean> = _hasNextMonth.asStateFlow()
-
-    private val _hasPreviousMonth = MutableStateFlow(false)
-    val hasPreviousMonth: StateFlow<Boolean> = _hasPreviousMonth.asStateFlow()
-
-    private val _selectedDayViewData = MutableStateFlow<List<LiturgicalEventDetails>>(emptyList())
-    val selectedDayViewData: StateFlow<List<LiturgicalEventDetails>> =
-        _selectedDayViewData.asStateFlow()
-
-    // TODO: Initial mode for state is hardcoded to season. It should be dynamic with Month view as well.
+    // TODO: Initial mode for state is hardcoded to seasonName. It should be dynamic with Month view as well.
     private val _state =
         MutableStateFlow(
-            CalendarUiState(mode = CalendarMode.Season(liturgicalYear, seasons.first()), isLoading = true, weeks = emptyList()),
+            CalendarUiState(mode = CalendarMode.Season(liturgicalYear, SeasonName.ANNUNCIATION), isLoading = true, weeks = emptyList()),
         )
     val state: StateFlow<CalendarUiState> = _state.asStateFlow()
-
-    // State for the currently selected date for UI feedback
-    private val _selectedDate = MutableStateFlow<LocalDate?>(null)
-    val selectedDate: StateFlow<LocalDate?> = _selectedDate.asStateFlow()
 
     private val _selectedBibleReference = MutableStateFlow<List<BibleReference>>(listOf())
     val selectedBibleReference: StateFlow<List<BibleReference>> = _selectedBibleReference.asStateFlow()
@@ -147,20 +120,18 @@ class CalendarViewModel(
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
 
+    private val _todayLiturgicalDay = MutableStateFlow<LiturgicalDay?>(null)
+    val todayLiturgicalDay: StateFlow<LiturgicalDay?> = _todayLiturgicalDay.asStateFlow()
+
     init {
         // Initialize the repository and load initial data
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
             try {
-                loadMonthInternal(
-                    _currentCalendarViewDate.value.month.number,
-                    _currentCalendarViewDate.value.year,
-                )
                 loadUpcomingWeekEventsInternal()
             } catch (e: Exception) {
                 _error.value = "Failed to load calendar data: ${e.message}"
-//                System.err.println("Error initializing calendar data: ${e.stackTraceToString()}")
             } finally {
                 _isLoading.value = false
             }
@@ -173,8 +144,10 @@ class CalendarViewModel(
         }
         viewModelScope.launch {
             val day = getToday()
+            _todayLiturgicalDay.value = day
             liturgicalYear = day?.liturgicalYear ?: ""
-            loadSeason(liturgicalYear, day?.season ?: seasons.first())
+//            loadSeason(liturgicalYear, day?.seasonName ?: seasons.first())
+            load(CalendarMode.Season(liturgicalYear, day?.seasonName ?: SeasonName.ANNUNCIATION))
         }
     }
 
@@ -206,7 +179,8 @@ class CalendarViewModel(
                 }
 
             if (mode is CalendarMode.Season) {
-                currentSeasonIndex = seasons.indexOf(mode.name)
+                currentSeasonIndex = mode.name.ordinal
+                currentSeason = mode.name
                 liturgicalYear = mode.liturgicalYear
             }
 
@@ -223,17 +197,18 @@ class CalendarViewModel(
 
     fun loadSeason(
         liturgicalYear: String,
-        season: String,
+        season: SeasonName,
     ) {
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true, error = null)
 
             try {
                 // TODO: Currently hardcoding the liturgical year, but this should be dynamic based on the current date.
-                val weeks = calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, season = season)
+                val weeks = calendarRepository.getSeasonWeeks(liturgicalYear = liturgicalYear, seasonName = season)
                 val seasonNavigation = getSeasonNavigation(liturgicalYear, season)
 
-                currentSeasonIndex = seasons.indexOf(season)
+                currentSeasonIndex = season.ordinal
+                currentSeason = season
                 this@CalendarViewModel.liturgicalYear = liturgicalYear
 
                 _state.value =
@@ -256,58 +231,6 @@ class CalendarViewModel(
         }
     }
 
-    fun loadMonth(
-        month: Int,
-        year: Int,
-    ) {
-        viewModelScope.launch {
-            loadMonthInternal(month, year)
-        }
-    }
-
-    private suspend fun loadMonthInternal(
-        month: Int,
-        year: Int,
-    ) {
-        _isLoading.value = true
-        _error.value = null
-        try {
-            val result =
-                withContext(backgroundDispatcher) {
-                    val monthData = calendarRepository.loadMonthData(month, year)
-                    val viewDate = LocalDate(year, month, 1)
-                    val previousMonth = viewDate.plus(-1, DateTimeUnit.MONTH)
-                    val hasPreviousMonth =
-                        calendarRepository.checkMonthDataExists(
-                            previousMonth.month.number,
-                            previousMonth.year,
-                        )
-                    val nextMonth = viewDate.plus(1, DateTimeUnit.MONTH)
-                    val hasNextMonth =
-                        calendarRepository.checkMonthDataExists(
-                            nextMonth.month.number,
-                            nextMonth.year,
-                        )
-                    MonthLoadResult(
-                        monthData = monthData,
-                        viewDate = viewDate,
-                        hasPreviousMonth = hasPreviousMonth,
-                        hasNextMonth = hasNextMonth,
-                    )
-                }
-
-            _monthCalendarData.value = result.monthData
-            _currentCalendarViewDate.value = result.viewDate
-            _hasPreviousMonth.value = result.hasPreviousMonth
-            _hasNextMonth.value = result.hasNextMonth
-        } catch (e: Exception) {
-            _error.value = "Failed to load month data for $month/$year: ${e.message}"
-            println("Error loading month data: ${e.stackTraceToString()}")
-        } finally {
-            _isLoading.value = false
-        }
-    }
-
     @OptIn(ExperimentalTime::class)
     suspend fun getToday(): LiturgicalDay? {
         val today =
@@ -318,12 +241,6 @@ class CalendarViewModel(
 
         val day = calendarRepository.getDay(today)
         return day
-    }
-
-    fun loadUpcomingWeekEvents() {
-        viewModelScope.launch {
-            loadUpcomingWeekEventsInternal()
-        }
     }
 
     private suspend fun loadUpcomingWeekEventsInternal() {
@@ -337,19 +254,6 @@ class CalendarViewModel(
             _error.value = "Failed to load upcoming week events: ${e.message}"
             println("Error loading upcoming week events: ${e.stackTraceToString()}")
         }
-    }
-
-    fun setDayEvents(
-        events: List<LiturgicalEventDetails>,
-        date: LocalDate,
-    ) {
-        _selectedDayViewData.value = events
-        _selectedDate.value = date // Keep the selected date in sync
-    }
-
-    private fun clearDayEvents() {
-        _selectedDayViewData.value = emptyList()
-        _selectedDate.value = null // Clear the selected date
     }
 
     fun selectDay(day: LiturgicalDay) {
@@ -408,43 +312,31 @@ class CalendarViewModel(
         }
     }
 
-    fun goToNextMonth() {
-        val nextMonthDate = _currentCalendarViewDate.value.plus(1, DateTimeUnit.MONTH)
-        clearDayEvents()
-        loadMonth(nextMonthDate.month.number, nextMonthDate.year)
-    }
-
     fun nextSeason() {
         val currentYear = liturgicalYear
-        when {
-            currentSeasonIndex in 0 until seasons.lastIndex -> {
-                loadSeason(currentYear, seasons[currentSeasonIndex + 1])
+        when (currentSeasonIndex) {
+            in 0 until seasons.lastIndex -> {
+                loadSeason(currentYear, currentSeason.nextCircular())
             }
 
-            currentSeasonIndex == seasons.lastIndex -> {
+            seasons.lastIndex -> {
                 nextLiturgicalYear(currentYear)?.let { nextYear ->
-                    loadSeason(nextYear, seasons.first())
+                    loadSeason(nextYear, SeasonName.ANNUNCIATION)
                 }
             }
         }
-    }
-
-    fun goToPreviousMonth() {
-        val prevMonthDate = _currentCalendarViewDate.value.plus(-1, DateTimeUnit.MONTH)
-        clearDayEvents()
-        loadMonth(prevMonthDate.month.number, prevMonthDate.year)
     }
 
     fun previousSeason() {
         val currentYear = liturgicalYear
         when {
             currentSeasonIndex > 0 -> {
-                loadSeason(currentYear, seasons[currentSeasonIndex - 1])
+                loadSeason(currentYear, currentSeason.prevCircular())
             }
 
             currentSeasonIndex == 0 -> {
                 previousLiturgicalYear(currentYear)?.let { previousYear ->
-                    loadSeason(previousYear, seasons.last())
+                    loadSeason(previousYear, SeasonName.HOLY_CROSS)
                 }
             }
         }
@@ -457,9 +349,9 @@ class CalendarViewModel(
 
     private suspend fun getSeasonNavigation(
         liturgicalYear: String,
-        season: String,
+        season: SeasonName,
     ): SeasonNavigation {
-        val seasonIndex = seasons.indexOf(season)
+        val seasonIndex = season.ordinal
         if (seasonIndex == -1) return SeasonNavigation()
 
         val hasPrevious =
@@ -492,7 +384,15 @@ class CalendarViewModel(
     fun getFormattedDateTitle(
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,
-    ): String = formatDateTitleUseCase(event, selectedLanguage, _currentCalendarViewDate.value.year)
+    ): String =
+        formatDateTitleUseCase(
+            event,
+            selectedLanguage,
+            currentYear =
+                state.value.selectedDay
+                    ?.date
+                    ?.year ?: _currentCalendarViewDate.value.year,
+        )
 
     fun formatGospelEntry(
         entries: List<BibleReference>,

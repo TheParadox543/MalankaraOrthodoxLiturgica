@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class LiturgicalDayDto(
     @SerialName("events")
     val eventKeys: List<String>, // List of EventKeys associated with this day
-    val season: String,
+    val season: SeasonDto,
     val tune: Int?,
     val lent: Int?,
 )

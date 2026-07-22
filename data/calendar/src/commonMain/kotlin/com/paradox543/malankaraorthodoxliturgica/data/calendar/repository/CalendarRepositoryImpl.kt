@@ -1,9 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.data.calendar.repository
 
-import com.paradox543.malankaraorthodoxliturgica.data.calendar.AppLogger
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.datasource.CalendarSource
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toCalendarDaysDomain
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toCalendarWeeksDomain
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toDomain
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toLiturgicalEventsDetailsDomain
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarDayDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.CalendarWeekDto
@@ -20,8 +20,10 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.Liturgica
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEvents
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.logging.AppLogger
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.datetime.DatePeriod
@@ -114,7 +116,7 @@ class CalendarRepositoryImpl(
                             date = date,
                             liturgicalYear = liturgicalYear,
                             eventKeys = dto.eventKeys,
-                            season = dto.season,
+                            seasonName = dto.season.toDomain(),
                             tune = dto.tune,
                             lent = dto.lent,
                         )
@@ -188,7 +190,7 @@ class CalendarRepositoryImpl(
                 .lowercase()
                 .replaceFirstChar { it.uppercase() }
 
-        fun firstRealDay(week: List<LiturgicalDay>): LiturgicalDay? = week.firstOrNull { it.season != null } ?: week.firstOrNull()
+        fun firstRealDay(week: List<LiturgicalDay>): LiturgicalDay? = week.firstOrNull { it.seasonName != null } ?: week.firstOrNull()
 
         fun addWeekIfNeeded() {
             if (currentWeek.isEmpty()) return
@@ -245,24 +247,24 @@ class CalendarRepositoryImpl(
 
     override suspend fun getSeasonDays(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<LiturgicalDay> {
         initializeCalendarDataIfNeeded()
         val days =
             calendarData
-                .filterValues { it.season == season && it.liturgicalYear == liturgicalYear }
+                .filterValues { it.seasonName == seasonName && it.liturgicalYear == liturgicalYear }
 //            .toSortedMap(compareBy { it })
                 .values
                 .toList()
-        AppLogger.d("getSeasonDays") { "Found ${days.size} days for season '$season'" }
+        AppLogger.d("getSeasonDays") { "Found ${days.size} days for seasonName '$seasonName'" }
         return days
     }
 
     override suspend fun getSeasonWeeks(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<WeekItem> {
-        val days = getSeasonDays(liturgicalYear, season)
+        val days = getSeasonDays(liturgicalYear, seasonName)
         return loadWeeks(days)
     }
 

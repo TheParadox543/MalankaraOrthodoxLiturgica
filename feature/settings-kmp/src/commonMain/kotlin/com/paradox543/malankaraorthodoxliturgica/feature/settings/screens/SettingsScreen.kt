@@ -8,12 +8,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -25,13 +23,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -54,13 +52,16 @@ import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Info
 import com.composables.icons.materialicons.rounded.Share
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.FontScaleDropdownMenu
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.LanguageDropdownMenu
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.SoundModeDropdownMenu
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.Res
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.app_share_qr
-import com.paradox543.malankaraorthodoxliturgica.feature.settings.components.RestoreTimePicker
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.play_logo
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.share_icon
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
@@ -86,7 +87,6 @@ fun SettingsScreen(
     val scrollState = rememberScrollState()
     val bottomSheetState = rememberModalBottomSheetState()
     val showQrCodeDialog = rememberSaveable { mutableStateOf(false) }
-    var showRestoreDialog by remember { mutableStateOf(false) }
     val showShareAppBottomSheet = rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -110,7 +110,6 @@ fun SettingsScreen(
                 .padding(horizontal = 20.dp)
                 .verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start,
-//            verticalArrangement = Arrangement.Center,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Spacer(Modifier.height(12.dp))
@@ -195,37 +194,56 @@ fun SettingsScreen(
                     Spacer(Modifier.height(8.dp))
                     Row(
                         Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End,
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         val displayText =
                             if (soundRestoreDelay >= 60) {
-                                "${soundRestoreDelay / 60} hr ${soundRestoreDelay % 60} min"
+                                "${soundRestoreDelay / 60} hour"
                             } else {
-                                "$soundRestoreDelay min"
+                                "$soundRestoreDelay minutes"
                             }
                         Text(
                             "Normal restored after:",
-                            Modifier.padding(horizontal = 4.dp),
+                            Modifier.weight(1f),
                             style = MaterialTheme.typography.bodySmall,
                         )
-                        Card(
-                            Modifier
-                                .requiredWidthIn(min = 120.dp)
-                                .fillMaxHeight()
-                                .clickable(onClick = { showRestoreDialog = true }),
+
+                        var timeExpanded by remember { mutableStateOf(false) }
+                        val options = listOf(5, 15, 30, 60)
+
+                        ExposedDropdownMenuBox(
+                            expanded = timeExpanded,
+                            onExpandedChange = { timeExpanded = it },
+                            modifier = Modifier.width(160.dp),
                         ) {
-                            Text(displayText, Modifier.padding(4.dp))
-                        }
-                        if (showRestoreDialog) {
-                            RestoreTimePicker(
-                                onDismiss = { showRestoreDialog = false },
-                                onConfirm = { minute ->
-                                    settingsViewModel.setSoundRestoreDelay(minute)
-                                    showRestoreDialog = false
+                            TextField(
+                                value = displayText,
+                                onValueChange = {},
+                                readOnly = true,
+                                trailingIcon = {
+                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = timeExpanded)
                                 },
-                                delayTime = soundRestoreDelay,
+                                modifier =
+                                    Modifier
+                                        .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true)
+                                        .fillMaxWidth(),
                             )
+                            ExposedDropdownMenu(
+                                expanded = timeExpanded,
+                                onDismissRequest = { timeExpanded = false },
+                            ) {
+                                options.forEach { minutes ->
+                                    val label = if (minutes >= 60) "${minutes / 60} hour" else "$minutes minutes"
+                                    DropdownMenuItem(
+                                        text = { Text(label) },
+                                        onClick = {
+                                            settingsViewModel.setSoundRestoreDelay(minutes)
+                                            timeExpanded = false
+                                        },
+                                    )
+                                }
+                            }
                         }
                     }
                 }
@@ -241,13 +259,13 @@ fun SettingsScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "Text Layout for Songs",
+                text = "Wrap Song lines",
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.weight(1f),
             )
             Switch(
-                checked = songScrollState,
-                onCheckedChange = { settingsViewModel.setSongScrollState(it) },
+                checked = !songScrollState,
+                onCheckedChange = { settingsViewModel.setSongScrollState(!it) },
             )
         }
 
@@ -298,11 +316,48 @@ fun SettingsScreen(
         )
 
         if (settingsViewModel.debugMode) {
-            ElevatedButton(
-                onClick = { settingsViewModel.setOnboardingCompleted(false) },
-                modifier = Modifier.align(Alignment.CenterHorizontally),
+            Spacer(Modifier.height(8.dp))
+            Text("Debug Settings", style = MaterialTheme.typography.titleSmall)
+
+            var debugExpanded by remember { mutableStateOf(false) }
+            val currentStageInt by settingsViewModel.onboardingStage.collectAsState()
+            val currentStage = OnboardingStage.fromInt(currentStageInt)
+
+            Row(
+                Modifier.fillMaxWidth().padding(12.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text("Reset onboarding")
+                Text("Onboarding Stage")
+                ExposedDropdownMenuBox(
+                    expanded = debugExpanded,
+                    onExpandedChange = { debugExpanded = it },
+                    modifier = Modifier.width(160.dp),
+                ) {
+                    TextField(
+                        value = currentStage.name,
+                        onValueChange = {},
+                        readOnly = true,
+                        trailingIcon = {
+                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = debugExpanded)
+                        },
+                        modifier = Modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true).fillMaxWidth(),
+                    )
+                    ExposedDropdownMenu(
+                        expanded = debugExpanded,
+                        onDismissRequest = { debugExpanded = false },
+                    ) {
+                        OnboardingStage.entries.forEach { stage ->
+                            DropdownMenuItem(
+                                text = { Text(stage.name) },
+                                onClick = {
+                                    settingsViewModel.setOnboardingStage(stage.value)
+                                    debugExpanded = false
+                                },
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -374,134 +429,6 @@ fun SettingsScreen(
                         )
                     }
                 }
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun LanguageDropdownMenu(
-    selectedOption: AppLanguage,
-    onOptionSelected: (AppLanguage) -> Unit,
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = !expanded },
-    ) {
-        TextField(
-            value = selectedOption.displayName.split(" ")[0],
-            onValueChange = {},
-            readOnly = true,
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            },
-            modifier =
-                Modifier
-                    .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
-                    .width(160.dp),
-        )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
-            AppLanguage.entries.forEach { language ->
-                DropdownMenuItem(
-                    text = { Text(language.displayName) },
-                    onClick = {
-                        onOptionSelected(language)
-                        expanded = false
-                    },
-                    enabled = language != selectedOption,
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun FontScaleDropdownMenu(
-    selectedFontScale: AppFontScale,
-    onOptionSelected: (AppFontScale) -> Unit,
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = !expanded },
-    ) {
-        TextField(
-            value = selectedFontScale.displayName,
-            onValueChange = {},
-            readOnly = true,
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            },
-            modifier =
-                Modifier
-                    .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
-                    .width(160.dp),
-        )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
-            AppFontScale.entries.forEach { appFontSize ->
-                DropdownMenuItem(
-                    text = { Text(appFontSize.displayName) },
-                    onClick = {
-                        onOptionSelected(appFontSize)
-                        expanded = false
-                    },
-                    enabled = appFontSize != selectedFontScale,
-                )
-            }
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SoundModeDropdownMenu(
-    selectedSoundMode: SoundMode,
-    onOptionSelected: (SoundMode) -> Unit,
-    hasPermission: Boolean,
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { if (hasPermission) expanded = !expanded },
-    ) {
-        TextField(
-            value = selectedSoundMode.name,
-            onValueChange = {},
-            enabled = hasPermission,
-            readOnly = true,
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-            },
-            modifier =
-                Modifier
-                    .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
-                    .width(160.dp),
-        )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
-            SoundMode.entries.forEach { soundMode ->
-                DropdownMenuItem(
-                    text = { Text(soundMode.name) },
-                    onClick = {
-                        onOptionSelected(soundMode)
-                        expanded = false
-                    },
-                    enabled = soundMode != selectedSoundMode,
-                )
             }
         }
     }
