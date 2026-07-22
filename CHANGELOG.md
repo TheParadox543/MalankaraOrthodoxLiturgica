@@ -23,6 +23,10 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ### Fix
 - Wrong anniversary count given in calendar.
 
+### Change
+- Move logger to dedicated module.
+
+
 ---
 
 ## [2.4.1] - 15/07/2026

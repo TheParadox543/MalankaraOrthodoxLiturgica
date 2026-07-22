@@ -1,4 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.calendar
+package com.paradox543.malankaraorthodoxliturgica.logging
 
 enum class LogLevel { VERBOSE, DEBUG, INFO, WARN, ERROR, NONE }
 

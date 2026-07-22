@@ -1,6 +1,5 @@
 package com.paradox543.malankaraorthodoxliturgica.data.calendar.repository
 
-import com.paradox543.malankaraorthodoxliturgica.data.calendar.AppLogger
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.datasource.CalendarSource
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toCalendarDaysDomain
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.mapping.toCalendarWeeksDomain
@@ -24,6 +23,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.MonthEven
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
+import com.paradox543.malankaraorthodoxliturgica.logging.AppLogger
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.datetime.DatePeriod

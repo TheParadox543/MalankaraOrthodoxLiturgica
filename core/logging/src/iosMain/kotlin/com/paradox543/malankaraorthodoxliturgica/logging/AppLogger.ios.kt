@@ -1,6 +1,4 @@
-package com.paradox543.malankaraorthodoxliturgica.data.calendar
-
-import android.util.Log
+package com.paradox543.malankaraorthodoxliturgica.logging
 
 actual object AppLogger {
     actual var level: LogLevel = LogLevel.INFO
@@ -11,28 +9,28 @@ actual object AppLogger {
         tag: String,
         message: () -> String,
     ) {
-        if (enabled(LogLevel.VERBOSE)) Log.v(tag, message())
+        if (enabled(LogLevel.VERBOSE)) println("VERBOSE: [$tag] ${message()}")
     }
 
     actual fun d(
         tag: String,
         message: () -> String,
     ) {
-        if (enabled(LogLevel.DEBUG)) Log.d(tag, message())
+        if (enabled(LogLevel.DEBUG)) println("DEBUG: [$tag] ${message()}")
     }
 
     actual fun i(
         tag: String,
         message: () -> String,
     ) {
-        if (enabled(LogLevel.INFO)) Log.i(tag, message())
+        if (enabled(LogLevel.INFO)) println("INFO: [$tag] ${message()}")
     }
 
     actual fun w(
         tag: String,
         message: () -> String,
     ) {
-        if (enabled(LogLevel.WARN)) Log.w(tag, message())
+        if (enabled(LogLevel.WARN)) println("WARN: [$tag] ${message()}")
     }
 
     actual fun e(
@@ -40,6 +38,9 @@ actual object AppLogger {
         throwable: Throwable?,
         message: () -> String,
     ) {
-        if (enabled(LogLevel.ERROR)) Log.e(tag, message(), throwable)
+        if (enabled(LogLevel.ERROR)) {
+            println("ERROR: [$tag] ${message()}")
+            throwable?.printStackTrace()
+        }
     }
 }
