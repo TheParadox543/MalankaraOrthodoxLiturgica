@@ -12,19 +12,27 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.material3.PermanentDrawerSheet
+import androidx.compose.material3.PermanentNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -32,10 +40,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -174,26 +178,13 @@ fun NavGraph(
         }
 
     val windowSize = adaptiveInfo.windowSizeClass
-    val isBottomBarMode =
-        showNavSuite &&
-            windowSize.windowHeightSizeClass != WindowHeightSizeClass.COMPACT &&
-            windowSize.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED
+    val isCompactHeight = windowSize.windowHeightSizeClass == WindowHeightSizeClass.COMPACT
+    val isExpandedWidth = windowSize.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED
 
-    val navSuiteType =
-        if (showNavSuite) {
-            if (windowSize.windowHeightSizeClass == WindowHeightSizeClass.COMPACT) {
-                // For phone landscape (compact height), Navigation Rail is usually preferred
-                NavigationSuiteType.NavigationRail
-            } else if (windowSize.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
-                // For large screens (tablets), use Navigation Drawer
-                NavigationSuiteType.NavigationDrawer
-            } else {
-                // Use custom NavigationBar in Scaffold for Bottom Bar mode to control height
-                NavigationSuiteType.None
-            }
-        } else {
-            NavigationSuiteType.None
-        }
+    val isSideNavVisible = showNavSuite && (isCompactHeight || isExpandedWidth)
+    val isDrawerMode = showNavSuite && isExpandedWidth && !isCompactHeight
+    val isRailMode = showNavSuite && isCompactHeight
+    val isBottomBarMode = showNavSuite && !isSideNavVisible
 
     // Create ViewModels once at NavGraph level to prevent recreation glitches
     val prayerViewModel: PrayerViewModel = koinViewModel()
@@ -218,104 +209,82 @@ fun NavGraph(
             onZoomOutStep = { settingsViewModel.setFontScaleDebounced(-1) },
         )
 
-    val navSuiteItemColors =
-        NavigationSuiteDefaults.itemColors(
-            navigationBarItemColors =
-                NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                ),
-            navigationRailItemColors =
-                NavigationRailItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                ),
-            navigationDrawerItemColors =
-                NavigationDrawerItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                ),
-        )
-
     val systemBottomInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
     val dynamicBarHeight = 65.dp + systemBottomInset
 
-    NavigationSuiteScaffold(
-        layoutType = navSuiteType,
-        navigationSuiteItems = {
-            navItems.forEach { item ->
-                item(
-                    selected = currentRoute == item.route,
-                    onClick = {
-                        navController.navigate(item.route) {
-                            navController.popBackStack(item.route, inclusive = true)
-                        }
-                    },
-                    icon = item.icon,
-                    label = { Text(item.label) },
-                    colors = navSuiteItemColors,
-                )
-            }
-        },
-        navigationSuiteColors =
-            NavigationSuiteDefaults.colors(
-                navigationBarContainerColor = MaterialTheme.colorScheme.primary,
-                navigationBarContentColor = MaterialTheme.colorScheme.onPrimary,
-                navigationRailContainerColor = MaterialTheme.colorScheme.primary,
-                navigationRailContentColor = MaterialTheme.colorScheme.onPrimary,
-                navigationDrawerContainerColor = MaterialTheme.colorScheme.primary,
-                navigationDrawerContentColor = MaterialTheme.colorScheme.onPrimary,
-            ),
-    ) {
+    val bottomBarItemColors =
+        NavigationBarItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+        )
+
+    val railItemColors =
+        NavigationRailItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+        )
+
+    val drawerItemColors =
+        NavigationDrawerItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+            selectedContainerColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.1f),
+            unselectedContainerColor = androidx.compose.ui.graphics.Color.Transparent,
+        )
+
+    @Composable
+    fun AppScaffold() {
         Scaffold(
             modifier = scaffoldModifier,
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
             topBar = {
-                when (val state = scaffoldUiState.value) {
-                    is ScaffoldUiState.Standard -> {
-                        TopNavBar(
-                            title = state.title,
-                            showBack = currentRoute != AppScreen.Home.route,
-                            showSettings = currentRoute != AppScreen.Settings.route,
-                            onBack = { navController.navigateUp() },
-                        ) { navController.navigate(AppScreen.Settings.route) }
-                    }
-
-                    is ScaffoldUiState.PrayerReading -> {
-                        AnimatedVisibility(
-                            visible = state.isVisible,
-                            modifier = Modifier.zIndex(1f),
-                        ) {
+                if (!isCompactHeight) {
+                    when (val state = scaffoldUiState.value) {
+                        is ScaffoldUiState.Standard -> {
                             TopNavBar(
                                 title = state.title,
                                 showBack = currentRoute != AppScreen.Home.route,
-                                showSettings = currentRoute != AppScreen.Settings.route,
+                                showSettings = !isSideNavVisible && currentRoute != AppScreen.Settings.route,
                                 onBack = { navController.navigateUp() },
                             ) { navController.navigate(AppScreen.Settings.route) }
                         }
-                    }
 
-                    is ScaffoldUiState.BibleChapterReading -> {
-                        AnimatedVisibility(
-                            visible = state.isVisible,
-                            modifier = Modifier.zIndex(1f),
-                        ) {
-                            TopNavBar(
-                                title = state.title,
-                                showBack = currentRoute != AppScreen.Home.route,
-                                showSettings = currentRoute != AppScreen.Settings.route,
-                                onBack = { navController.navigateUp() },
-                            ) { navController.navigate(AppScreen.Settings.route) }
+                        is ScaffoldUiState.PrayerReading -> {
+                            AnimatedVisibility(
+                                visible = state.isVisible,
+                                modifier = Modifier.zIndex(1f),
+                            ) {
+                                TopNavBar(
+                                    title = state.title,
+                                    showBack = currentRoute != AppScreen.Home.route,
+                                    showSettings = !isSideNavVisible && currentRoute != AppScreen.Settings.route,
+                                    onBack = { navController.navigateUp() },
+                                ) { navController.navigate(AppScreen.Settings.route) }
+                            }
                         }
-                    }
 
-                    ScaffoldUiState.None -> {}
+                        is ScaffoldUiState.BibleChapterReading -> {
+                            AnimatedVisibility(
+                                visible = state.isVisible,
+                                modifier = Modifier.zIndex(1f),
+                            ) {
+                                TopNavBar(
+                                    title = state.title,
+                                    showBack = currentRoute != AppScreen.Home.route,
+                                    showSettings = !isSideNavVisible && currentRoute != AppScreen.Settings.route,
+                                    onBack = { navController.navigateUp() },
+                                ) { navController.navigate(AppScreen.Settings.route) }
+                            }
+                        }
+
+                        ScaffoldUiState.None -> {}
+                    }
                 }
             },
             bottomBar = {
@@ -326,7 +295,7 @@ fun NavGraph(
                                 modifier = Modifier.height(dynamicBarHeight),
                                 containerColor = MaterialTheme.colorScheme.primary,
                             ) {
-                                navItems.forEach { item ->
+                                navItems.filter { !it.isRailOnly }.forEach { item ->
                                     NavigationBarItem(
                                         icon = item.icon,
                                         label = { Text(item.label) },
@@ -336,13 +305,7 @@ fun NavGraph(
                                                 navController.popBackStack(item.route, inclusive = true)
                                             }
                                         },
-                                        colors =
-                                            NavigationBarItemDefaults.colors(
-                                                selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-                                                unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                                                selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                                                unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                                            ),
+                                        colors = bottomBarItemColors,
                                     )
                                 }
                             }
@@ -832,6 +795,90 @@ fun NavGraph(
                     ) { scaffoldUiState.value = it }
                 }
             }
+        }
+    }
+
+    if (isDrawerMode) {
+        PermanentNavigationDrawer(
+            drawerContent = {
+                PermanentDrawerSheet(
+                    drawerContainerColor = MaterialTheme.colorScheme.primary,
+                    drawerContentColor = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.width(240.dp),
+                ) {
+                    Spacer(Modifier.height(16.dp))
+                    navItems.filter { !it.isRailOnly }.forEach { item ->
+                        NavigationDrawerItem(
+                            icon = item.icon,
+                            label = { Text(item.label) },
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                navController.navigate(item.route) {
+                                    navController.popBackStack(item.route, inclusive = true)
+                                }
+                            },
+                            colors = drawerItemColors,
+                            modifier = Modifier.padding(horizontal = 12.dp),
+                        )
+                    }
+                    Spacer(Modifier.weight(1f))
+                    navItems.filter { it.isRailOnly }.forEach { item ->
+                        NavigationDrawerItem(
+                            icon = item.icon,
+                            label = { Text(item.label) },
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                navController.navigate(item.route) {
+                                    navController.popBackStack(item.route, inclusive = true)
+                                }
+                            },
+                            colors = drawerItemColors,
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
+                        )
+                    }
+                }
+            },
+        ) {
+            AppScaffold()
+        }
+    } else {
+        Row(Modifier.fillMaxSize()) {
+            if (isRailMode) {
+                NavigationRail(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                ) {
+                    Spacer(Modifier.height(16.dp))
+                    navItems.filter { !it.isRailOnly }.forEach { item ->
+                        NavigationRailItem(
+                            icon = item.icon,
+                            label = { Text(item.label) },
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                navController.navigate(item.route) {
+                                    navController.popBackStack(item.route, inclusive = true)
+                                }
+                            },
+                            colors = railItemColors,
+                        )
+                    }
+                    Spacer(Modifier.weight(1f))
+                    navItems.filter { it.isRailOnly }.forEach { item ->
+                        NavigationRailItem(
+                            icon = item.icon,
+                            label = { Text(item.label) },
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                navController.navigate(item.route) {
+                                    navController.popBackStack(item.route, inclusive = true)
+                                }
+                            },
+                            colors = railItemColors,
+                        )
+                    }
+                }
+            }
+            AppScaffold()
         }
     }
 }

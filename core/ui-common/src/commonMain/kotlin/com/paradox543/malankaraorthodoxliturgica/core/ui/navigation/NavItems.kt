@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Calendar_month
 import com.composables.icons.materialicons.rounded.Home
+import com.composables.icons.materialicons.rounded.Settings
 import com.paradox543.malankaraorthodoxliturgica.core.ui.Res
 import com.paradox543.malankaraorthodoxliturgica.core.ui.bible
 import com.paradox543.malankaraorthodoxliturgica.core.ui.clock
@@ -48,6 +49,13 @@ val navItems =
                 painterResource(Res.drawable.bible),
                 "Bible",
                 modifier = Modifier.size(iconSize),
+            )
+        },
+        NavigationItem("settings", "Settings", isRailOnly = true) {
+            Icon(
+                MaterialIcons.Rounded.Settings,
+                "Settings",
+                Modifier.size(iconSize),
             )
         },
     )
