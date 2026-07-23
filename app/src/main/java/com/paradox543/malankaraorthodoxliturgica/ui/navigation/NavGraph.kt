@@ -13,9 +13,12 @@ import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRailItemDefaults
@@ -43,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.core.net.toUri
 import androidx.navigation.NavController
@@ -62,6 +66,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.globalPinchZoom
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.TopNavBar
+import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.navItems
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.core.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
@@ -165,9 +170,14 @@ fun NavGraph(
             else -> false
         }
 
+    val windowSize = adaptiveInfo.windowSizeClass
+    val isBottomBarMode =
+        showNavSuite &&
+            windowSize.windowHeightSizeClass != WindowHeightSizeClass.COMPACT &&
+            windowSize.windowWidthSizeClass != WindowWidthSizeClass.EXPANDED
+
     val navSuiteType =
         if (showNavSuite) {
-            val windowSize = adaptiveInfo.windowSizeClass
             if (windowSize.windowHeightSizeClass == WindowHeightSizeClass.COMPACT) {
                 // For phone landscape (compact height), Navigation Rail is usually preferred
                 NavigationSuiteType.NavigationRail
@@ -175,7 +185,8 @@ fun NavGraph(
                 // For large screens (tablets), use Navigation Drawer
                 NavigationSuiteType.NavigationDrawer
             } else {
-                NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(adaptiveInfo)
+                // Use custom NavigationBar in Scaffold for Bottom Bar mode to control height
+                NavigationSuiteType.None
             }
         } else {
             NavigationSuiteType.None
@@ -204,31 +215,35 @@ fun NavGraph(
             onZoomOutStep = { settingsViewModel.setFontScaleDebounced(-1) },
         )
 
-    val navSuiteItemColors = NavigationSuiteDefaults.itemColors(
-        navigationBarItemColors = NavigationBarItemDefaults.colors(
-            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-        ),
-        navigationRailItemColors = NavigationRailItemDefaults.colors(
-            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-        ),
-        navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
-            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
-            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
-        ),
-    )
+    val navSuiteItemColors =
+        NavigationSuiteDefaults.itemColors(
+            navigationBarItemColors =
+                NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                ),
+            navigationRailItemColors =
+                NavigationRailItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                ),
+            navigationDrawerItemColors =
+                NavigationDrawerItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                ),
+        )
 
     NavigationSuiteScaffold(
         layoutType = navSuiteType,
         navigationSuiteItems = {
-            com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.bottomNavItems.forEach { item ->
+            navItems.forEach { item ->
                 item(
                     selected = currentRoute == item.route,
                     onClick = {
@@ -300,7 +315,32 @@ fun NavGraph(
             bottomBar = {
                 when (val state = scaffoldUiState.value) {
                     is ScaffoldUiState.Standard -> {
-                        // BottomNavBar is now handled by NavigationSuiteScaffold
+                        if (isBottomBarMode) {
+                            NavigationBar(
+                                modifier = Modifier.height(110.dp),
+                                containerColor = MaterialTheme.colorScheme.primary,
+                            ) {
+                                navItems.forEach { item ->
+                                    NavigationBarItem(
+                                        icon = item.icon,
+                                        label = { Text(item.label) },
+                                        selected = currentRoute == item.route,
+                                        onClick = {
+                                            navController.navigate(item.route) {
+                                                navController.popBackStack(item.route, inclusive = true)
+                                            }
+                                        },
+                                        colors =
+                                            NavigationBarItemDefaults.colors(
+                                                selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+                                                unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                                                selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                                                unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                                            ),
+                                    )
+                                }
+                            }
+                        }
                     }
 
                     is ScaffoldUiState.PrayerReading -> {
@@ -394,104 +434,29 @@ fun NavGraph(
                 }
             },
         ) { innerPadding ->
-        NavHost(
-            navController,
-            startDestination =
-                if (onboardingCompleted) {
-                    AppScreen.Home.route
-                } else {
-                    AppScreen.Onboarding.route
-                },
-        ) {
-            composable(
-                AppScreen.Home.route,
-                deepLinks = AppScreen.Home.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+            NavHost(
+                navController,
+                startDestination =
+                    if (onboardingCompleted) {
+                        AppScreen.Home.route
+                    } else {
+                        AppScreen.Onboarding.route
+                    },
             ) {
-                val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
-                val recommendedPrayers = prayerNavViewModel.getAllPrayerNodes()
-                val topPrayer = recommendedPrayers.firstOrNull()
+                composable(
+                    AppScreen.Home.route,
+                    deepLinks = AppScreen.Home.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+                ) {
+                    val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
+                    val recommendedPrayers = prayerNavViewModel.getAllPrayerNodes()
+                    val topPrayer = recommendedPrayers.firstOrNull()
 
-                HomeScreen(
-                    prayerViewModel = prayerViewModel,
-                    prayerNavViewModel = prayerNavViewModel,
-                    liturgicalDay = liturgicalDay,
-                    topRecommendedPrayer = topPrayer,
-                    contentPadding = innerPadding,
-                    onSectionNavigate = { route ->
-                        navController.navigate(AppScreen.Section.createRoute(route))
-                    },
-                    onPrayerNavigate = { route ->
-                        navController.navigate(AppScreen.Prayer.createRoute(route))
-                    },
-                    onSongNavigate = { route ->
-                        navController.navigate(AppScreen.Song.createRoute(route))
-                    },
-                    onPrayNowNavigate = {
-                        navController.navigate(AppScreen.PrayNow.route)
-                    },
-                    onIndexNavigate = {
-                        navController.navigate(AppScreen.Index.route)
-                    },
-                    onScaffoldStateChanged = { scaffoldUiState.value = it },
-                )
-            }
-
-            composable(AppScreen.Onboarding.route) {
-                val onboardingViewModel: OnboardingViewModel = koinViewModel()
-                OnboardingScreen(
-                    onboardingViewModel = onboardingViewModel,
-                    contentPadding = innerPadding,
-                    onNavigateToHome = {
-                        navController.navigate(AppScreen.Home.route) {
-                            popUpTo(AppScreen.Onboarding.route) {
-                                inclusive = true
-                            }
-                        }
-                    },
-                    requestDndPermission = {
-                        val notificationManager =
-                            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                        if (!notificationManager.isNotificationPolicyAccessGranted) {
-                            Toast
-                                .makeText(
-                                    context,
-                                    "Please grant the app access to modify DND in settings.",
-                                    Toast.LENGTH_LONG,
-                                ).show()
-                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                            context.startActivity(intent)
-                        }
-                    },
-                    onScaffoldStateChanged = { scaffoldUiState.value = it },
-                )
-            }
-
-            composable(
-                route = AppScreen.Section.route,
-                arguments =
-                    listOf(
-                        navArgument(AppScreen.Section.ARG_ROUTE) {
-                            type = NavType.StringType
-                        },
-                    ),
-                deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
-            ) { backStackEntry ->
-                val route = backStackEntry.arguments?.getString(AppScreen.Section.ARG_ROUTE) ?: ""
-                val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
-                val node = prayerRootNode.findByRoute(route)
-                if (!isPrayerTreeLoaded) {
-                    ContentLoadingScreen(
-                        contentPadding = innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState.value = it },
-                    )
-                } else if (node != null) {
-                    SectionScreen(
-                        prayerViewModel,
-                        prayerNavViewModel,
-                        node,
-                        innerPadding,
+                    HomeScreen(
+                        prayerViewModel = prayerViewModel,
+                        prayerNavViewModel = prayerNavViewModel,
                         liturgicalDay = liturgicalDay,
-                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                        topRecommendedPrayer = topPrayer,
+                        contentPadding = innerPadding,
                         onSectionNavigate = { route ->
                             navController.navigate(AppScreen.Section.createRoute(route))
                         },
@@ -501,293 +466,368 @@ fun NavGraph(
                         onSongNavigate = { route ->
                             navController.navigate(AppScreen.Song.createRoute(route))
                         },
+                        onPrayNowNavigate = {
+                            navController.navigate(AppScreen.PrayNow.route)
+                        },
                         onIndexNavigate = {
                             navController.navigate(AppScreen.Index.route)
                         },
-                    )
-                } else {
-                    ContentNotReadyScreen(
-                        message = route,
-                        contentPadding = innerPadding,
-                        onBackNavigation = { navController.navigateUp() },
-                    ) { scaffoldUiState.value = it }
-                }
-            }
-
-            composable(
-                route = AppScreen.Prayer.route,
-                arguments =
-                    listOf(
-                        navArgument(AppScreen.Prayer.ARG_ROUTE) {
-                            type = NavType.StringType
-                        },
-                    ),
-                deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
-            ) { backStackEntry ->
-                val prayerRoute = backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_ROUTE) ?: ""
-                val scrollIndex =
-                    backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_SCROLL)?.toIntOrNull() ?: 0
-                val node = prayerRootNode.findByRoute(prayerRoute)
-                if (!isPrayerTreeLoaded) {
-                    ContentLoadingScreen(
-                        contentPadding = innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState.value = it },
                     )
-                } else if (node != null) {
-                    PrayerScreen(
-                        { route, replace ->
-                            navController.navigate(AppScreen.Prayer.createRoute(route)) {
-                                if (replace) {
-                                    navController.popBackStack()
+                }
+
+                composable(AppScreen.Onboarding.route) {
+                    val onboardingViewModel: OnboardingViewModel = koinViewModel()
+                    OnboardingScreen(
+                        onboardingViewModel = onboardingViewModel,
+                        contentPadding = innerPadding,
+                        onNavigateToHome = {
+                            navController.navigate(AppScreen.Home.route) {
+                                popUpTo(AppScreen.Onboarding.route) {
+                                    inclusive = true
                                 }
                             }
                         },
+                        requestDndPermission = {
+                            val notificationManager =
+                                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                            if (!notificationManager.isNotificationPolicyAccessGranted) {
+                                Toast
+                                    .makeText(
+                                        context,
+                                        "Please grant the app access to modify DND in settings.",
+                                        Toast.LENGTH_LONG,
+                                    ).show()
+                                val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                                context.startActivity(intent)
+                            }
+                        },
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                }
+
+                composable(
+                    route = AppScreen.Section.route,
+                    arguments =
+                        listOf(
+                            navArgument(AppScreen.Section.ARG_ROUTE) {
+                                type = NavType.StringType
+                            },
+                        ),
+                    deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
+                ) { backStackEntry ->
+                    val route = backStackEntry.arguments?.getString(AppScreen.Section.ARG_ROUTE) ?: ""
+                    val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
+                    val node = prayerRootNode.findByRoute(route)
+                    if (!isPrayerTreeLoaded) {
+                        ContentLoadingScreen(
+                            contentPadding = innerPadding,
+                            onScaffoldStateChanged = { scaffoldUiState.value = it },
+                        )
+                    } else if (node != null) {
+                        SectionScreen(
+                            prayerViewModel,
+                            prayerNavViewModel,
+                            node,
+                            innerPadding,
+                            liturgicalDay = liturgicalDay,
+                            onScaffoldStateChanged = { scaffoldUiState.value = it },
+                            onSectionNavigate = { route ->
+                                navController.navigate(AppScreen.Section.createRoute(route))
+                            },
+                            onPrayerNavigate = { route ->
+                                navController.navigate(AppScreen.Prayer.createRoute(route))
+                            },
+                            onSongNavigate = { route ->
+                                navController.navigate(AppScreen.Song.createRoute(route))
+                            },
+                            onIndexNavigate = {
+                                navController.navigate(AppScreen.Index.route)
+                            },
+                        )
+                    } else {
+                        ContentNotReadyScreen(
+                            message = route,
+                            contentPadding = innerPadding,
+                            onBackNavigation = { navController.navigateUp() },
+                        ) { scaffoldUiState.value = it }
+                    }
+                }
+
+                composable(
+                    route = AppScreen.Prayer.route,
+                    arguments =
+                        listOf(
+                            navArgument(AppScreen.Prayer.ARG_ROUTE) {
+                                type = NavType.StringType
+                            },
+                        ),
+                    deepLinks = AppScreen.Prayer.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
+                ) { backStackEntry ->
+                    val prayerRoute = backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_ROUTE) ?: ""
+                    val scrollIndex =
+                        backStackEntry.arguments?.getString(AppScreen.Prayer.ARG_SCROLL)?.toIntOrNull() ?: 0
+                    val node = prayerRootNode.findByRoute(prayerRoute)
+                    if (!isPrayerTreeLoaded) {
+                        ContentLoadingScreen(
+                            contentPadding = innerPadding,
+                            onScaffoldStateChanged = { scaffoldUiState.value = it },
+                        )
+                    } else if (node != null) {
+                        PrayerScreen(
+                            { route, replace ->
+                                navController.navigate(AppScreen.Prayer.createRoute(route)) {
+                                    if (replace) {
+                                        navController.popBackStack()
+                                    }
+                                }
+                            },
+                            prayerViewModel,
+                            prayerNavViewModel,
+                            node,
+                            scrollIndex,
+                            innerPadding,
+                            onQrDialogShow = { route, scrollIndex ->
+                                AppScreen.Prayer.createDeepLink(route, scrollIndex)
+                            },
+                            routeProvider = {
+                                AppScreen.Prayer.createRoute(it)
+                            },
+                        ) { scaffoldUiState.value = it }
+                    } else {
+                        ContentNotReadyScreen(
+                            message = prayerRoute,
+                            contentPadding = innerPadding,
+                            onBackNavigation = { navController.navigateUp() },
+                        ) { scaffoldUiState.value = it }
+                    }
+                }
+
+                composable(
+                    route = AppScreen.Song.route,
+                    arguments =
+                        listOf(
+                            navArgument(AppScreen.Song.ARG_ROUTE) {
+                                type = NavType.StringType
+                            },
+                        ),
+                ) { backStackEntry ->
+                    val route = backStackEntry.arguments?.getString(AppScreen.Song.ARG_ROUTE) ?: ""
+                    val node = prayerRootNode.findByRoute(route)
+                    if (!isPrayerTreeLoaded) {
+                        ContentLoadingScreen(
+                            contentPadding = innerPadding,
+                            onScaffoldStateChanged = { scaffoldUiState.value = it },
+                        )
+                    } else if (node != null) {
+                        SongScreen(
+                            songPlayerViewModel = songPlayerViewModel,
+                            songFilename = node.filename ?: "",
+                            contentPadding = innerPadding,
+                            onScaffoldStateChanged = { scaffoldUiState.value = it },
+                        )
+                    } else {
+                        ContentNotReadyScreen(
+                            message = route,
+                            contentPadding = innerPadding,
+                            onBackNavigation = { navController.navigateUp() },
+                        ) { scaffoldUiState.value = it }
+                    }
+                }
+
+                composable(AppScreen.PrayNow.route) {
+                    PrayNowScreen(
+                        { route ->
+                            navController.navigate(AppScreen.Prayer.createRoute(route))
+                        },
                         prayerViewModel,
                         prayerNavViewModel,
-                        node,
-                        scrollIndex,
                         innerPadding,
-                        onQrDialogShow = { route, scrollIndex ->
-                            AppScreen.Prayer.createDeepLink(route, scrollIndex)
-                        },
-                        routeProvider = {
-                            AppScreen.Prayer.createRoute(it)
-                        },
-                    ) { scaffoldUiState.value = it }
-                } else {
-                    ContentNotReadyScreen(
-                        message = prayerRoute,
-                        contentPadding = innerPadding,
-                        onBackNavigation = { navController.navigateUp() },
                     ) { scaffoldUiState.value = it }
                 }
-            }
 
-            composable(
-                route = AppScreen.Song.route,
-                arguments =
-                    listOf(
-                        navArgument(AppScreen.Song.ARG_ROUTE) {
-                            type = NavType.StringType
+                composable(AppScreen.Index.route) {
+                    if (!isPrayerTreeLoaded) {
+                        ContentLoadingScreen(
+                            contentPadding = innerPadding,
+                            onScaffoldStateChanged = { scaffoldUiState.value = it },
+                        )
+                    } else {
+                        IndexScreen(
+                            prayerViewModel = prayerViewModel,
+                            prayerNavViewModel = prayerNavViewModel,
+                            contentPadding = innerPadding,
+                            onPrayerNavigate = { route ->
+                                navController.navigate(AppScreen.Prayer.createRoute(route))
+                            },
+                        ) { scaffoldUiState.value = it }
+                    }
+                }
+
+                composable(
+                    AppScreen.Bible.route,
+                    deepLinks = AppScreen.Bible.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+                ) {
+                    BibleScreen(
+                        { index ->
+                            navController.navigate(AppScreen.BibleBook.createRoute(index))
                         },
-                    ),
-            ) { backStackEntry ->
-                val route = backStackEntry.arguments?.getString(AppScreen.Song.ARG_ROUTE) ?: ""
-                val node = prayerRootNode.findByRoute(route)
-                if (!isPrayerTreeLoaded) {
-                    ContentLoadingScreen(
-                        contentPadding = innerPadding,
+                        bibleViewModel,
+                        innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState.value = it },
                     )
-                } else if (node != null) {
-                    SongScreen(
-                        songPlayerViewModel = songPlayerViewModel,
-                        songFilename = node.filename ?: "",
-                        contentPadding = innerPadding,
+                }
+
+                composable(
+                    route = AppScreen.BibleBook.route,
+                    arguments =
+                        listOf(
+                            navArgument(AppScreen.BibleBook.ARG_BOOK_INDEX) {
+                                type = NavType.StringType
+                            },
+                        ),
+                    deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
+                ) { backStackEntry ->
+                    val bookIndex =
+                        backStackEntry.arguments?.getString(AppScreen.BibleBook.ARG_BOOK_INDEX)?.toIntOrNull()
+                            ?: 0
+                    BibleBookScreen(
+                        { bookIndex, chapterIndex ->
+                            navController.navigate(AppScreen.BibleChapter.createRoute(bookIndex, chapterIndex))
+                        },
+                        bibleViewModel,
+                        bookIndex,
+                        innerPadding,
                         onScaffoldStateChanged = { scaffoldUiState.value = it },
                     )
-                } else {
-                    ContentNotReadyScreen(
-                        message = route,
-                        contentPadding = innerPadding,
-                        onBackNavigation = { navController.navigateUp() },
+                }
+
+                composable(
+                    route = AppScreen.BibleChapter.route,
+                    arguments =
+                        listOf(
+                            navArgument(AppScreen.BibleChapter.ARG_BOOK_INDEX) {
+                                type = NavType.StringType
+                            },
+                        ),
+                    deepLinks =
+                        AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
+                ) { backStackEntry ->
+                    val bookIndex =
+                        backStackEntry.arguments
+                            ?.getString(AppScreen.BibleChapter.ARG_BOOK_INDEX)
+                            ?.toIntOrNull() ?: 0
+                    val chapterIndex =
+                        backStackEntry.arguments
+                            ?.getString(AppScreen.BibleChapter.ARG_CHAPTER_INDEX)
+                            ?.toIntOrNull() ?: 0
+                    BibleChapterScreen(
+                        bibleViewModel,
+                        bookIndex,
+                        chapterIndex,
+                        innerPadding,
+                        { bookIndex, chapterIndex ->
+                            AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex)
+                        },
+                        routeFactory = {
+                            AppScreen.BibleChapter.createRoute(it.bookIndex, it.chapterIndex)
+                        },
                     ) { scaffoldUiState.value = it }
                 }
-            }
 
-            composable(AppScreen.PrayNow.route) {
-                PrayNowScreen(
-                    { route ->
-                        navController.navigate(AppScreen.Prayer.createRoute(route))
-                    },
-                    prayerViewModel,
-                    prayerNavViewModel,
-                    innerPadding,
-                ) { scaffoldUiState.value = it }
-            }
-
-            composable(AppScreen.Index.route) {
-                if (!isPrayerTreeLoaded) {
-                    ContentLoadingScreen(
+                composable(
+                    AppScreen.Calendar.route,
+                    deepLinks = AppScreen.Calendar.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+                ) {
+                    CalendarLiturgicalSeasonScreen(
+                        calendarViewModel,
                         contentPadding = innerPadding,
-                        onScaffoldStateChanged = { scaffoldUiState.value = it },
-                    )
-                } else {
-                    IndexScreen(
-                        prayerViewModel = prayerViewModel,
-                        prayerNavViewModel = prayerNavViewModel,
-                        contentPadding = innerPadding,
+                        onBibleNavigate = {
+                            navController.navigate(AppScreen.BibleReader.route)
+                        },
                         onPrayerNavigate = { route ->
                             navController.navigate(AppScreen.Prayer.createRoute(route))
                         },
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                }
+
+                composable(AppScreen.BibleReader.route) {
+                    BibleReadingScreen(
+                        calendarViewModel,
+                        innerPadding,
+                    ) { scaffoldUiState.value = it }
+                }
+
+                composable(AppScreen.QrScanner.route) {
+                    QrScannerView(
+                        onNavigate = { route ->
+                            analyticsService.logEvent(AnalyticsEvent.QrNavigationSuccess(route))
+                            navController.navigate(route) {
+                                launchSingleTop = true
+                                navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)
+                            }
+                        },
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                }
+
+                composable(
+                    AppScreen.Settings.route,
+                    deepLinks = AppScreen.Settings.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+                ) {
+                    SettingsScreen(
+                        onNavigateToAbout = { navController.navigate(AppScreen.About.route) },
+                        requestDndPermission = {
+                            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                            if (!notificationManager.isNotificationPolicyAccessGranted) {
+                                Toast
+                                    .makeText(
+                                        context,
+                                        "Please grant the app access to modify DND in settings.",
+                                        Toast.LENGTH_LONG,
+                                    ).show()
+                                val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                                context.startActivity(intent)
+                            }
+                        },
+                        settingsViewModel = settingsViewModel,
+                        shareService = shareService,
+                        showSoundModeSetting = settingsViewModel.showSoundModeSetting,
+                        contentPadding = innerPadding,
+                    ) { scaffoldUiState.value = it }
+                }
+
+                composable(
+                    AppScreen.About.route,
+                    deepLinks = AppScreen.About.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
+                ) {
+                    AboutScreen(
+                        innerPadding,
+                        settingsViewModel.versionName,
+                        {
+                            val intent =
+                                Intent(Intent.ACTION_SENDTO).apply {
+                                    data = "mailto:".toUri()
+                                    putExtra(Intent.EXTRA_EMAIL, arrayOf("samuel.alex.koshy@gmail.com"))
+                                    putExtra(Intent.EXTRA_SUBJECT, "Malankara Orthodox Liturgica App Feedback")
+                                }
+                            try {
+                                context.startActivity(Intent.createChooser(intent, "Send Email"))
+                            } catch (_: ActivityNotFoundException) {
+                                Toast.makeText(context, "No email apps installed", Toast.LENGTH_SHORT).show()
+                            }
+                        },
+                        {
+                            val intent = Intent(Intent.ACTION_VIEW, it.toUri())
+                            context.startActivity(intent)
+                        },
                     ) { scaffoldUiState.value = it }
                 }
             }
-
-            composable(
-                AppScreen.Bible.route,
-                deepLinks = AppScreen.Bible.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) {
-                BibleScreen(
-                    { index ->
-                        navController.navigate(AppScreen.BibleBook.createRoute(index))
-                    },
-                    bibleViewModel,
-                    innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState.value = it },
-                )
-            }
-
-            composable(
-                route = AppScreen.BibleBook.route,
-                arguments =
-                    listOf(
-                        navArgument(AppScreen.BibleBook.ARG_BOOK_INDEX) {
-                            type = NavType.StringType
-                        },
-                    ),
-                deepLinks = AppScreen.BibleBook.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
-            ) { backStackEntry ->
-                val bookIndex =
-                    backStackEntry.arguments?.getString(AppScreen.BibleBook.ARG_BOOK_INDEX)?.toIntOrNull()
-                        ?: 0
-                BibleBookScreen(
-                    { bookIndex, chapterIndex ->
-                        navController.navigate(AppScreen.BibleChapter.createRoute(bookIndex, chapterIndex))
-                    },
-                    bibleViewModel,
-                    bookIndex,
-                    innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState.value = it },
-                )
-            }
-
-            composable(
-                route = AppScreen.BibleChapter.route,
-                arguments =
-                    listOf(
-                        navArgument(AppScreen.BibleChapter.ARG_BOOK_INDEX) {
-                            type = NavType.StringType
-                        },
-                    ),
-                deepLinks =
-                    AppScreen.BibleChapter.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
-            ) { backStackEntry ->
-                val bookIndex =
-                    backStackEntry.arguments
-                        ?.getString(AppScreen.BibleChapter.ARG_BOOK_INDEX)
-                        ?.toIntOrNull() ?: 0
-                val chapterIndex =
-                    backStackEntry.arguments
-                        ?.getString(AppScreen.BibleChapter.ARG_CHAPTER_INDEX)
-                        ?.toIntOrNull() ?: 0
-                BibleChapterScreen(
-                    bibleViewModel,
-                    bookIndex,
-                    chapterIndex,
-                    innerPadding,
-                    { bookIndex, chapterIndex ->
-                        AppScreen.BibleChapter.createDeepLink(bookIndex, chapterIndex)
-                    },
-                    routeFactory = {
-                        AppScreen.BibleChapter.createRoute(it.bookIndex, it.chapterIndex)
-                    },
-                ) { scaffoldUiState.value = it }
-            }
-
-            composable(
-                AppScreen.Calendar.route,
-                deepLinks = AppScreen.Calendar.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) {
-                CalendarLiturgicalSeasonScreen(
-                    calendarViewModel,
-                    contentPadding = innerPadding,
-                    onBibleNavigate = {
-                        navController.navigate(AppScreen.BibleReader.route)
-                    },
-                    onPrayerNavigate = { route ->
-                        navController.navigate(AppScreen.Prayer.createRoute(route))
-                    },
-                    onScaffoldStateChanged = { scaffoldUiState.value = it },
-                )
-            }
-
-            composable(AppScreen.BibleReader.route) {
-                BibleReadingScreen(
-                    calendarViewModel,
-                    innerPadding,
-                ) { scaffoldUiState.value = it }
-            }
-
-            composable(AppScreen.QrScanner.route) {
-                QrScannerView(
-                    onNavigate = { route ->
-                        analyticsService.logEvent(AnalyticsEvent.QrNavigationSuccess(route))
-                        navController.navigate(route) {
-                            launchSingleTop = true
-                            navController.popBackStack(AppScreen.QrScanner.route, inclusive = true)
-                        }
-                    },
-                    contentPadding = innerPadding,
-                    onScaffoldStateChanged = { scaffoldUiState.value = it },
-                )
-            }
-
-            composable(
-                AppScreen.Settings.route,
-                deepLinks = AppScreen.Settings.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) {
-                SettingsScreen(
-                    onNavigateToAbout = { navController.navigate(AppScreen.About.route) },
-                    requestDndPermission = {
-                        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                        if (!notificationManager.isNotificationPolicyAccessGranted) {
-                            Toast
-                                .makeText(
-                                    context,
-                                    "Please grant the app access to modify DND in settings.",
-                                    Toast.LENGTH_LONG,
-                                ).show()
-                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                            context.startActivity(intent)
-                        }
-                    },
-                    settingsViewModel = settingsViewModel,
-                    shareService = shareService,
-                    showSoundModeSetting = settingsViewModel.showSoundModeSetting,
-                    contentPadding = innerPadding,
-                ) { scaffoldUiState.value = it }
-            }
-
-            composable(
-                AppScreen.About.route,
-                deepLinks = AppScreen.About.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
-            ) {
-                AboutScreen(
-                    innerPadding,
-                    settingsViewModel.versionName,
-                    {
-                        val intent =
-                            Intent(Intent.ACTION_SENDTO).apply {
-                                data = "mailto:".toUri()
-                                putExtra(Intent.EXTRA_EMAIL, arrayOf("samuel.alex.koshy@gmail.com"))
-                                putExtra(Intent.EXTRA_SUBJECT, "Malankara Orthodox Liturgica App Feedback")
-                            }
-                        try {
-                            context.startActivity(Intent.createChooser(intent, "Send Email"))
-                        } catch (_: ActivityNotFoundException) {
-                            Toast.makeText(context, "No email apps installed", Toast.LENGTH_SHORT).show()
-                        }
-                    },
-                    {
-                        val intent = Intent(Intent.ACTION_VIEW, it.toUri())
-                        context.startActivity(intent)
-                    },
-                ) { scaffoldUiState.value = it }
-            }
         }
     }
-}
 }
 
 private fun Bundle.readNavArgAsString(

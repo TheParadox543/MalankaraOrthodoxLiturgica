@@ -2,7 +2,7 @@ package com.paradox543.malankaraorthodoxliturgica.core.ui.navigation
 
 import androidx.compose.runtime.Composable
 
-data class BottomNavItem(
+data class NavigationItem(
     val route: String,
     val label: String,
     val icon: @Composable () -> Unit,
