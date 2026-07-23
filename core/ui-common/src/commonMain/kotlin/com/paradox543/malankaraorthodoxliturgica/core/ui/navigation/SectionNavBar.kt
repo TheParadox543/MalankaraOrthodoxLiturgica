@@ -1,6 +1,9 @@
 package com.paradox543.malankaraorthodoxliturgica.core.ui.navigation
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -23,10 +26,13 @@ fun SectionNavBar(
     onPrevClick: () -> Unit,
     onNextClick: () -> Unit,
 ) {
+    val systemBottomInset = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    val dynamicBarHeight = 80.dp + systemBottomInset
+
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onPrimary,
-        modifier = Modifier.height(110.dp),
+        modifier = Modifier.height(dynamicBarHeight),
     ) {
         NavigationBarItem(
             icon = {
