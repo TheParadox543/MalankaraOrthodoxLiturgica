@@ -15,11 +15,23 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.NavigationDrawerItemDefaults
+import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
+import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
+import androidx.window.core.layout.WindowHeightSizeClass
+import androidx.window.core.layout.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -48,7 +60,6 @@ import com.paradox543.malankaraorthodoxliturgica.core.platform.AppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.globalPinchZoom
-import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.BottomNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.SectionNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
@@ -147,6 +158,29 @@ fun NavGraph(
 
     val pinchZoomEnabled = currentRoute !in pinchZoomDisabledRoutes
 
+    val adaptiveInfo = currentWindowAdaptiveInfo()
+    val showNavSuite =
+        when (val state = scaffoldUiState.value) {
+            is ScaffoldUiState.Standard -> state.showBottomBar
+            else -> false
+        }
+
+    val navSuiteType =
+        if (showNavSuite) {
+            val windowSize = adaptiveInfo.windowSizeClass
+            if (windowSize.windowHeightSizeClass == WindowHeightSizeClass.COMPACT) {
+                // For phone landscape (compact height), Navigation Rail is usually preferred
+                NavigationSuiteType.NavigationRail
+            } else if (windowSize.windowWidthSizeClass == WindowWidthSizeClass.EXPANDED) {
+                // For large screens (tablets), use Navigation Drawer
+                NavigationSuiteType.NavigationDrawer
+            } else {
+                NavigationSuiteScaffoldDefaults.calculateFromAdaptiveInfo(adaptiveInfo)
+            }
+        } else {
+            NavigationSuiteType.None
+        }
+
     // Create ViewModels once at NavGraph level to prevent recreation glitches
     val prayerViewModel: PrayerViewModel = koinViewModel()
     val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
@@ -170,25 +204,60 @@ fun NavGraph(
             onZoomOutStep = { settingsViewModel.setFontScaleDebounced(-1) },
         )
 
-    Scaffold(
-        modifier = scaffoldModifier,
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
-        topBar = {
-            when (val state = scaffoldUiState.value) {
-                is ScaffoldUiState.Standard -> {
-                    TopNavBar(
-                        title = state.title,
-                        showBack = currentRoute != AppScreen.Home.route,
-                        showSettings = currentRoute != AppScreen.Settings.route,
-                        onBack = { navController.navigateUp() },
-                    ) { navController.navigate(AppScreen.Settings.route) }
-                }
+    val navSuiteItemColors = NavigationSuiteDefaults.itemColors(
+        navigationBarItemColors = NavigationBarItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+        ),
+        navigationRailItemColors = NavigationRailItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+        ),
+        navigationDrawerItemColors = NavigationDrawerItemDefaults.colors(
+            selectedIconColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
+            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+            selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+        ),
+    )
 
-                is ScaffoldUiState.PrayerReading -> {
-                    AnimatedVisibility(
-                        visible = state.isVisible,
-                        modifier = Modifier.zIndex(1f),
-                    ) {
+    NavigationSuiteScaffold(
+        layoutType = navSuiteType,
+        navigationSuiteItems = {
+            com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.bottomNavItems.forEach { item ->
+                item(
+                    selected = currentRoute == item.route,
+                    onClick = {
+                        navController.navigate(item.route) {
+                            navController.popBackStack(item.route, inclusive = true)
+                        }
+                    },
+                    icon = item.icon,
+                    label = { Text(item.label) },
+                    colors = navSuiteItemColors,
+                )
+            }
+        },
+        navigationSuiteColors =
+            NavigationSuiteDefaults.colors(
+                navigationBarContainerColor = MaterialTheme.colorScheme.primary,
+                navigationBarContentColor = MaterialTheme.colorScheme.onPrimary,
+                navigationRailContainerColor = MaterialTheme.colorScheme.primary,
+                navigationRailContentColor = MaterialTheme.colorScheme.onPrimary,
+                navigationDrawerContainerColor = MaterialTheme.colorScheme.primary,
+                navigationDrawerContentColor = MaterialTheme.colorScheme.onPrimary,
+            ),
+    ) {
+        Scaffold(
+            modifier = scaffoldModifier,
+            snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+            topBar = {
+                when (val state = scaffoldUiState.value) {
+                    is ScaffoldUiState.Standard -> {
                         TopNavBar(
                             title = state.title,
                             showBack = currentRoute != AppScreen.Home.route,
@@ -196,131 +265,135 @@ fun NavGraph(
                             onBack = { navController.navigateUp() },
                         ) { navController.navigate(AppScreen.Settings.route) }
                     }
-                }
 
-                is ScaffoldUiState.BibleChapterReading -> {
-                    AnimatedVisibility(
-                        visible = state.isVisible,
-                        modifier = Modifier.zIndex(1f),
-                    ) {
-                        TopNavBar(
-                            title = state.title,
-                            showBack = currentRoute != AppScreen.Home.route,
-                            showSettings = currentRoute != AppScreen.Settings.route,
-                            onBack = { navController.navigateUp() },
-                        ) { navController.navigate(AppScreen.Settings.route) }
-                    }
-                }
-
-                ScaffoldUiState.None -> {}
-            }
-        },
-        bottomBar = {
-            when (val state = scaffoldUiState.value) {
-                is ScaffoldUiState.Standard -> {
-                    if (state.showBottomBar) {
-                        BottomNavBar(
-                            currentRoute = currentRoute,
-                            onNavItemClick = { route ->
-                                navController.navigate(route) {
-                                    navController.popBackStack(route, inclusive = true)
-                                }
-                            },
-                        )
-                    }
-                }
-
-                is ScaffoldUiState.PrayerReading -> {
-                    AnimatedVisibility(
-                        visible = state.isVisible,
-                        modifier = Modifier.zIndex(1f),
-                    ) {
-                        SectionNavBar(
-                            prevNodeRoute = state.prevRoute,
-                            nextNodeRoute = state.nextRoute,
-                            onShowQr = state.onShowQrDialog,
-                            onPrevClick = {
-                                navController.navigate(state.routeProvider(state.prevRoute!!)) {
-                                    navController.popBackStack()
-                                }
-                            },
-                            onNextClick = {
-                                navController.navigate(state.routeProvider(state.nextRoute!!)) {
-                                    navController.popBackStack()
-                                }
-                            },
-                        )
-                    }
-                }
-
-                is ScaffoldUiState.BibleChapterReading -> {
-                    AnimatedVisibility(
-                        visible = state.isVisible,
-                        modifier = Modifier.zIndex(1f),
-                    ) {
-                        SectionNavBar(
-                            prevNodeRoute = state.prevRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
-                            nextNodeRoute = state.nextRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
-                            onShowQr = state.onShowQrDialog,
-                            onPrevClick = {
-                                navController.navigate(state.routeProvider(state.prevRoute!!)) {
-                                    navController.popBackStack()
-                                }
-                            },
-                            onNextClick = {
-                                navController.navigate(state.routeProvider(state.nextRoute!!)) {
-                                    navController.popBackStack()
-                                }
-                            },
-                        )
-                    }
-                }
-
-                ScaffoldUiState.None -> {}
-            }
-        },
-        floatingActionButton = {
-            when (val state = scaffoldUiState.value) {
-                is ScaffoldUiState.PrayerReading -> {
-                    if (state.showFab) {
+                    is ScaffoldUiState.PrayerReading -> {
                         AnimatedVisibility(
                             visible = state.isVisible,
-                            enter = fadeIn(),
-                            exit = shrinkOut(),
+                            modifier = Modifier.zIndex(1f),
                         ) {
+                            TopNavBar(
+                                title = state.title,
+                                showBack = currentRoute != AppScreen.Home.route,
+                                showSettings = currentRoute != AppScreen.Settings.route,
+                                onBack = { navController.navigateUp() },
+                            ) { navController.navigate(AppScreen.Settings.route) }
+                        }
+                    }
+
+                    is ScaffoldUiState.BibleChapterReading -> {
+                        AnimatedVisibility(
+                            visible = state.isVisible,
+                            modifier = Modifier.zIndex(1f),
+                        ) {
+                            TopNavBar(
+                                title = state.title,
+                                showBack = currentRoute != AppScreen.Home.route,
+                                showSettings = currentRoute != AppScreen.Settings.route,
+                                onBack = { navController.navigateUp() },
+                            ) { navController.navigate(AppScreen.Settings.route) }
+                        }
+                    }
+
+                    ScaffoldUiState.None -> {}
+                }
+            },
+            bottomBar = {
+                when (val state = scaffoldUiState.value) {
+                    is ScaffoldUiState.Standard -> {
+                        // BottomNavBar is now handled by NavigationSuiteScaffold
+                    }
+
+                    is ScaffoldUiState.PrayerReading -> {
+                        AnimatedVisibility(
+                            visible = state.isVisible,
+                            modifier = Modifier.zIndex(1f),
+                        ) {
+                            SectionNavBar(
+                                prevNodeRoute = state.prevRoute,
+                                nextNodeRoute = state.nextRoute,
+                                onShowQr = state.onShowQrDialog,
+                                onPrevClick = {
+                                    navController.navigate(state.routeProvider(state.prevRoute!!)) {
+                                        navController.popBackStack()
+                                    }
+                                },
+                                onNextClick = {
+                                    navController.navigate(state.routeProvider(state.nextRoute!!)) {
+                                        navController.popBackStack()
+                                    }
+                                },
+                            )
+                        }
+                    }
+
+                    is ScaffoldUiState.BibleChapterReading -> {
+                        AnimatedVisibility(
+                            visible = state.isVisible,
+                            modifier = Modifier.zIndex(1f),
+                        ) {
+                            SectionNavBar(
+                                prevNodeRoute = state.prevRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                                nextNodeRoute = state.nextRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                                onShowQr = state.onShowQrDialog,
+                                onPrevClick = {
+                                    navController.navigate(state.routeProvider(state.prevRoute!!)) {
+                                        navController.popBackStack()
+                                    }
+                                },
+                                onNextClick = {
+                                    navController.navigate(state.routeProvider(state.nextRoute!!)) {
+                                        navController.popBackStack()
+                                    }
+                                },
+                            )
+                        }
+                    }
+
+                    ScaffoldUiState.None -> {}
+                }
+            },
+            floatingActionButton = {
+                when (val state = scaffoldUiState.value) {
+                    is ScaffoldUiState.PrayerReading -> {
+                        if (state.showFab) {
+                            AnimatedVisibility(
+                                visible = state.isVisible,
+                                enter = fadeIn(),
+                                exit = shrinkOut(),
+                            ) {
+                                QrFabScan(
+                                    onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
+                                )
+                            }
+                        }
+                    }
+
+                    is ScaffoldUiState.BibleChapterReading -> {
+                        if (state.showFab) {
+                            AnimatedVisibility(
+                                visible = state.isVisible,
+                                enter = fadeIn(),
+                                exit = shrinkOut(),
+                            ) {
+                                QrFabScan(
+                                    onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
+                                )
+                            }
+                        }
+                    }
+
+                    is ScaffoldUiState.Standard -> {
+                        if (state.showFab) {
                             QrFabScan(
                                 onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
                             )
                         }
                     }
-                }
 
-                is ScaffoldUiState.BibleChapterReading -> {
-                    if (state.showFab) {
-                        AnimatedVisibility(
-                            visible = state.isVisible,
-                            enter = fadeIn(),
-                            exit = shrinkOut(),
-                        ) {
-                            QrFabScan(
-                                onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
-                            )
-                        }
-                    }
+                    ScaffoldUiState.None -> {}
                 }
-
-                is ScaffoldUiState.Standard -> {
-                    if (state.showFab) {
-                        QrFabScan(
-                            onScanClick = { navController.navigate(AppScreen.QrScanner.route) },
-                        )
-                    }
-                }
-
-                ScaffoldUiState.None -> {}
-            }
-        },
-    ) { innerPadding ->
+            },
+        ) { innerPadding ->
         NavHost(
             navController,
             startDestination =
@@ -714,6 +787,7 @@ fun NavGraph(
             }
         }
     }
+}
 }
 
 private fun Bundle.readNavArgAsString(

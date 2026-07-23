@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -225,14 +226,16 @@ private fun DisplayIconography(
         modifier =
             if (orientation == "row") {
                 Modifier
-                    .requiredWidthIn(min = 200.dp, max = 240.dp)
                     .fillMaxHeight()
+                    .aspectRatio(1f)
             } else {
                 Modifier
+                    .fillMaxWidth()
                     .requiredWidthIn(max = 240.dp)
+                    .aspectRatio(1f)
             },
-        alignment = Alignment.TopStart,
-        contentScale = ContentScale.Crop,
+        alignment = Alignment.Center,
+        contentScale = ContentScale.Fit,
     )
 }
 
