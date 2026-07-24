@@ -718,5 +718,13 @@
     "indexOfPrayers": {
         "en": "Index of prayers",
         "ml": "പ്രാർത്ഥനകളുടെ സൂചിക"
+    },
+    "institutionBlessing": {
+        "en": "Blessing of Institutions",
+        "ml": "സ്ഥാപന ശുദ്ധീകരണം"
+    },
+    "vehicleBlessing": {
+        "en": "Blessing of Vehicles",
+        "ml": ""
     }
 }
