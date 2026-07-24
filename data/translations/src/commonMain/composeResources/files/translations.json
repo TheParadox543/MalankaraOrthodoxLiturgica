@@ -143,6 +143,22 @@
         "en": "Appendix I",
         "ml": "അനുബന്ധം I"
     },
+    "appendixThree": {
+        "en": "Appendix III",
+        "ml": "അനുബന്ധം III"
+    },
+    "appendixFourteen": {
+        "en": "Appendix XIV",
+        "ml": "അനുബന്ധം XIV"
+    },
+    "appendixFifteen": {
+        "en": "Appendix XV",
+        "ml": "അനുബന്ധം XV"
+    },
+    "appendix": {
+        "en": "Appendices",
+        "ml": "അനുബന്ധങ്ങൾ"
+    },
     "men": {
         "en": "Men",
         "ml": "പുരുഷന്മാർ"

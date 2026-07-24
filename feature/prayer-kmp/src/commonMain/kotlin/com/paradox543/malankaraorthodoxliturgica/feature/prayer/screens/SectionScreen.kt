@@ -340,13 +340,13 @@ private fun PrayNowHeroCard(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = prayerTitle,
-                        style = MaterialTheme.typography.titleLarge,
+                        style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                     )
                     if (seasonTitle.isNotEmpty()) {
                         Text(
                             text = seasonTitle,
-                            style = MaterialTheme.typography.bodyMedium,
+                            style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                         )
                     }
@@ -377,7 +377,7 @@ private fun PrayNowHeroCard(
                     Icon(
                         imageVector = MaterialIcons.Rounded.Arrow_forward,
                         contentDescription = "See full list",
-                        modifier = Modifier.size(20.dp),
+                        modifier = Modifier.size(16.dp),
                         tint = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 }
