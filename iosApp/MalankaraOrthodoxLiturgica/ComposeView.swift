@@ -8,7 +8,7 @@ struct ComposeView: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> UIViewController {
         return Platform_iosKt.getPrayerViewController(
-            fileName: fileName,
+            route: fileName,
             onPrayerButtonClick: { link, replace in
                 onPrayerButtonClick(link, replace.boolValue)
             },

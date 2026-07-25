@@ -91,6 +91,8 @@ kotlin {
                 api(project(":feature:onboarding-kmp"))
 
                 implementation(libs.koin.core)
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
                 implementation(libs.kotlinx.serialization.json)
 
                 implementation(libs.runtime)

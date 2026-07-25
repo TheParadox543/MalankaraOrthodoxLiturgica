@@ -1,10 +1,15 @@
 package com.paradox543.malankaraorthodoxliturgica.shared
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
@@ -34,6 +39,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.koin.compose.viewmodel.koinViewModel
 import org.koin.mp.KoinPlatform.getKoin
 import platform.UIKit.UIViewController
 
@@ -58,42 +64,45 @@ private fun ScaffoldUiState.toChromeState(): Pair<String, Boolean> =
 
 @Composable
 fun PrayerScreenWrapper(
-    fileName: String,
+    route: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val prayerViewModel: PrayerViewModel = koin.get()
-    val prayerNavViewModel: PrayerNavViewModel = koin.get()
+    val prayerViewModel: PrayerViewModel = koinViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
 
-    val node = remember(fileName) {
-        PageNode(
-            route = fileName.substringBeforeLast("."),
-            filename = fileName,
-            parent = null
+    val rootNode by prayerNavViewModel.rootNode.collectAsState()
+    val node = rootNode.findByRoute(route)
+
+    if (node == null) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+        LaunchedEffect(Unit) {
+            onChromeStateChanged("", false)
+        }
+    } else {
+        PrayerScreen(
+            onPrayerButtonClick = onPrayerButtonClick,
+            prayerViewModel = prayerViewModel,
+            prayerNavViewModel = prayerNavViewModel,
+            node = node,
+            onQrDialogShow = { _, _ -> "" },
+            routeProvider = { it },
+            onScaffoldStateChanged = { state ->
+                val (title, showFab) = state.toChromeState()
+                onChromeStateChanged(title, showFab)
+            }
         )
     }
-
-    PrayerScreen(
-        onPrayerButtonClick = onPrayerButtonClick,
-        prayerViewModel = prayerViewModel,
-        prayerNavViewModel = prayerNavViewModel,
-        node = node,
-        onQrDialogShow = { _, _ -> "" },
-        routeProvider = { it },
-        onScaffoldStateChanged = { state ->
-            val (title, showFab) = state.toChromeState()
-            onChromeStateChanged(title, showFab)
-        }
-    )
 }
 
 fun getPrayerViewController(
-    fileName: String,
+    route: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
-    PrayerScreenWrapper(fileName, onPrayerButtonClick, onChromeStateChanged)
+    PrayerScreenWrapper(route, onPrayerButtonClick, onChromeStateChanged)
 }
 
 @Composable
@@ -105,10 +114,9 @@ fun HomeScreenWrapper(
     onIndexNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val prayerViewModel: PrayerViewModel = koin.get()
-    val prayerNavViewModel: PrayerNavViewModel = koin.get()
-    val calendarViewModel: CalendarViewModel = koin.get()
+    val prayerViewModel: PrayerViewModel = koinViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
+    val calendarViewModel: CalendarViewModel = koinViewModel()
 
     val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
     val recommendedPrayers = prayerNavViewModel.getAllPrayerNodes()
@@ -159,10 +167,9 @@ fun SectionScreenWrapper(
     onIndexNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val prayerViewModel: PrayerViewModel = koin.get()
-    val prayerNavViewModel: PrayerNavViewModel = koin.get()
-    val calendarViewModel: CalendarViewModel = koin.get()
+    val prayerViewModel: PrayerViewModel = koinViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
+    val calendarViewModel: CalendarViewModel = koinViewModel()
 
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
     val node = rootNode.findByRoute(route) ?: PageNode(route = route, parent = null)
@@ -208,9 +215,8 @@ fun IndexScreenWrapper(
     onPrayerNavigate: (String) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val prayerViewModel: PrayerViewModel = koin.get()
-    val prayerNavViewModel: PrayerNavViewModel = koin.get()
+    val prayerViewModel: PrayerViewModel = koinViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
 
     IndexScreen(
         prayerViewModel = prayerViewModel,
@@ -236,9 +242,8 @@ fun PrayNowScreenWrapper(
     onPrayerNavigate: (String) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val prayerViewModel: PrayerViewModel = koin.get()
-    val prayerNavViewModel: PrayerNavViewModel = koin.get()
+    val prayerViewModel: PrayerViewModel = koinViewModel()
+    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
 
     PrayNowScreen(
         onCardClick = onPrayerNavigate,
@@ -264,8 +269,7 @@ fun BibleScreenWrapper(
     onBibleNavigate: (Int) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val bibleViewModel: BibleViewModel = koin.get()
+    val bibleViewModel: BibleViewModel = koinViewModel()
 
     BibleScreen(
         onBibleNavigate = onBibleNavigate,
@@ -291,8 +295,7 @@ fun BibleBookScreenWrapper(
     onBibleNavigate: (Int, Int) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val bibleViewModel: BibleViewModel = koin.get()
+    val bibleViewModel: BibleViewModel = koinViewModel()
 
     BibleBookScreen(
         onBibleNavigate = onBibleNavigate,
@@ -320,8 +323,7 @@ fun BibleChapterScreenWrapper(
     chapterIndex: Int,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val bibleViewModel: BibleViewModel = koin.get()
+    val bibleViewModel: BibleViewModel = koinViewModel()
 
     BibleChapterScreen(
         bibleViewModel = bibleViewModel,
@@ -351,8 +353,7 @@ fun CalendarScreenWrapper(
     onBibleNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val calendarViewModel: CalendarViewModel = koin.get()
+    val calendarViewModel: CalendarViewModel = koinViewModel()
 
     CalendarLiturgicalSeasonScreen(
         calendarViewModel = calendarViewModel,
@@ -378,8 +379,7 @@ fun getCalendarViewController(
 fun BibleReaderScreenWrapper(
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val calendarViewModel: CalendarViewModel = koin.get()
+    val calendarViewModel: CalendarViewModel = koinViewModel()
 
     BibleReadingScreen(
         calendarViewModel = calendarViewModel,
@@ -402,9 +402,8 @@ fun SettingsScreenWrapper(
     onNavigateToAbout: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val koin = getKoin()
-    val settingsViewModel: SettingsViewModel = koin.get()
-    val shareService: ShareService = koin.get()
+    val settingsViewModel: SettingsViewModel = koinViewModel()
+    val shareService: ShareService = getKoin().get()
 
     SettingsScreen(
         onNavigateToAbout = onNavigateToAbout,
@@ -462,8 +461,7 @@ fun getAboutViewController(
 fun OnboardingScreenWrapper(
     onNavigateToHome: () -> Unit
 ) {
-    val koin = getKoin()
-    val onboardingViewModel: OnboardingViewModel = koin.get()
+    val onboardingViewModel: OnboardingViewModel = koinViewModel()
 
     OnboardingScreen(
         onboardingViewModel = onboardingViewModel,
