@@ -1,22 +1,23 @@
-//
-//  MalankaraOrthodoxLiturgicaApp.swift
-//  MalankaraOrthodoxLiturgica
-//
-//  Created by Samuel Alex Koshy on 05/04/26.
-//
-
 import SwiftUI
 import sharedKit
 
 @main
 struct MalankaraOrthodoxLiturgicaApp: App {
+    @StateObject private var router = AppRouter()
+
     init() {
         SharedKit.shared.initialize()
-        }
+    }
 
     var body: some Scene {
         WindowGroup {
-            PrayerView()
+            RootTabView()
+                .environmentObject(router)
+                .onOpenURL { url in
+                    if let route = AppRoute(url: url) {
+                        router.push(route)
+                    }
+                }
         }
     }
 }
