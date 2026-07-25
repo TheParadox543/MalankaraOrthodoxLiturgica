@@ -492,3 +492,15 @@ fun getOnboardingCompleted(onResult: (Boolean) -> Unit) {
         onResult(settingsRepository.onboardingCompleted.first())
     }
 }
+
+data class SongMetadata(
+    val filename: String
+)
+
+fun getSongMetadata(route: String): SongMetadata? {
+    val koin = getKoin()
+    val prayerNavViewModel: PrayerNavViewModel = koin.get()
+    val node = prayerNavViewModel.rootNode.value.findByRoute(route) ?: return null
+    val filename = node.filename ?: return null
+    return SongMetadata(filename = filename)
+}
