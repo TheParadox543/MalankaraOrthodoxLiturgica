@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
+import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
@@ -21,10 +22,28 @@ import platform.UIKit.UIViewController
 
 actual fun platformName(): String = "iOS"
 
+/**
+ * `ScaffoldUiState` is intentionally not exported to Swift (it would widen
+ * the framework's public surface for a single enum). Every screen wrapper
+ * flattens it to primitives here before it crosses the bridge. `showBack`
+ * and `showSettings` are NOT included — on Android those are computed by
+ * `NavGraph.kt` from route identity (`currentRoute != AppScreen.Home.route`
+ * etc.), not from `ScaffoldUiState`, so Swift's `AppRouter` computes them the
+ * same way locally.
+ */
+private fun ScaffoldUiState.toChromeState(): Pair<String, Boolean> =
+    when (this) {
+        is ScaffoldUiState.Standard -> title to showFab
+        is ScaffoldUiState.PrayerReading -> title to showFab
+        is ScaffoldUiState.BibleChapterReading -> title to showFab
+        ScaffoldUiState.None -> "" to false
+    }
+
 @Composable
 fun PrayerScreenWrapper(
     fileName: String,
-    onPrayerButtonClick: (String, Boolean) -> Unit
+    onPrayerButtonClick: (String, Boolean) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ) {
     val koin = getKoin()
     val prayerViewModel: PrayerViewModel = koin.get()
@@ -45,15 +64,19 @@ fun PrayerScreenWrapper(
         node = node,
         onQrDialogShow = { _, _ -> "" },
         routeProvider = { it },
-        onScaffoldStateChanged = { }
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
     )
 }
 
 fun getPrayerViewController(
     fileName: String,
-    onPrayerButtonClick: (String, Boolean) -> Unit
+    onPrayerButtonClick: (String, Boolean) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
-    PrayerScreenWrapper(fileName, onPrayerButtonClick)
+    PrayerScreenWrapper(fileName, onPrayerButtonClick, onChromeStateChanged)
 }
 
 @Composable
@@ -62,7 +85,8 @@ fun HomeScreenWrapper(
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
     onPrayNowNavigate: () -> Unit,
-    onIndexNavigate: () -> Unit
+    onIndexNavigate: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ) {
     val koin = getKoin()
     val prayerViewModel: PrayerViewModel = koin.get()
@@ -84,7 +108,10 @@ fun HomeScreenWrapper(
         onSongNavigate = onSongNavigate,
         onPrayNowNavigate = onPrayNowNavigate,
         onIndexNavigate = onIndexNavigate,
-        onScaffoldStateChanged = { }
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
     )
 }
 
@@ -93,14 +120,16 @@ fun getHomeViewController(
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
     onPrayNowNavigate: () -> Unit,
-    onIndexNavigate: () -> Unit
+    onIndexNavigate: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
     HomeScreenWrapper(
         onSectionNavigate,
         onPrayerNavigate,
         onSongNavigate,
         onPrayNowNavigate,
-        onIndexNavigate
+        onIndexNavigate,
+        onChromeStateChanged
     )
 }
 
@@ -110,7 +139,8 @@ fun SectionScreenWrapper(
     onSectionNavigate: (String) -> Unit,
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
-    onIndexNavigate: () -> Unit
+    onIndexNavigate: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ) {
     val koin = getKoin()
     val prayerViewModel: PrayerViewModel = koin.get()
@@ -126,7 +156,10 @@ fun SectionScreenWrapper(
         prayerNavViewModel = prayerNavViewModel,
         node = node,
         contentPadding = PaddingValues(0.dp),
-        onScaffoldStateChanged = { },
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        },
         onSectionNavigate = onSectionNavigate,
         onPrayerNavigate = onPrayerNavigate,
         onSongNavigate = onSongNavigate,
@@ -140,20 +173,23 @@ fun getSectionViewController(
     onSectionNavigate: (String) -> Unit,
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
-    onIndexNavigate: () -> Unit
+    onIndexNavigate: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
     SectionScreenWrapper(
         route,
         onSectionNavigate,
         onPrayerNavigate,
         onSongNavigate,
-        onIndexNavigate
+        onIndexNavigate,
+        onChromeStateChanged
     )
 }
 
 @Composable
 fun IndexScreenWrapper(
-    onPrayerNavigate: (String) -> Unit
+    onPrayerNavigate: (String) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ) {
     val koin = getKoin()
     val prayerViewModel: PrayerViewModel = koin.get()
@@ -164,19 +200,24 @@ fun IndexScreenWrapper(
         prayerNavViewModel = prayerNavViewModel,
         contentPadding = PaddingValues(0.dp),
         onPrayerNavigate = onPrayerNavigate,
-        onScaffoldStateChanged = { }
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
     )
 }
 
 fun getIndexViewController(
-    onPrayerNavigate: (String) -> Unit
+    onPrayerNavigate: (String) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
-    IndexScreenWrapper(onPrayerNavigate)
+    IndexScreenWrapper(onPrayerNavigate, onChromeStateChanged)
 }
 
 @Composable
 fun PrayNowScreenWrapper(
-    onPrayerNavigate: (String) -> Unit
+    onPrayerNavigate: (String) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ) {
     val koin = getKoin()
     val prayerViewModel: PrayerViewModel = koin.get()
@@ -187,12 +228,16 @@ fun PrayNowScreenWrapper(
         prayerViewModel = prayerViewModel,
         prayerNavViewModel = prayerNavViewModel,
         contentPadding = PaddingValues(0.dp),
-        onScaffoldStateChanged = { }
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
     )
 }
 
 fun getPrayNowViewController(
-    onPrayerNavigate: (String) -> Unit
+    onPrayerNavigate: (String) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
-    PrayNowScreenWrapper(onPrayerNavigate)
+    PrayNowScreenWrapper(onPrayerNavigate, onChromeStateChanged)
 }
