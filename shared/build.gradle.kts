@@ -78,6 +78,7 @@ kotlin {
                 api(project(":core:ui-common"))
                 api(project(":core:platform-kmp"))
                 api(project(":core:app-info"))
+                api(project(":analytics:firebase"))
                 api(project(":data:core"))
                 api(project(":data:bible"))
                 api(project(":data:calendar"))

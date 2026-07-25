@@ -107,7 +107,7 @@ dependencies {
     implementation(project(":core:di"))
     implementation(project(":core:analytics"))
     implementation(project(":core:platform-kmp"))
-    implementation(project(":analytics:firebase-android"))
+    implementation(project(":analytics:firebase"))
 
     // Core AndroidX & Kotlin Extensions
     implementation(libs.androidx.core.ktx)            // Core Android system utilities with Kotlin extensions

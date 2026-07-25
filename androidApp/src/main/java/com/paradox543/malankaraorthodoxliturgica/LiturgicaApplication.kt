@@ -18,6 +18,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.di.onboardin
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.di.prayerModule
 import com.paradox543.malankaraorthodoxliturgica.feature.settings.di.settingsModule
 import com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase.analyticsFirebaseModule
+import com.paradox543.malankaraorthodoxliturgica.platform.analytics.firebase.platformAnalyticsModule
 import io.kotzilla.generated.monitoring
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.workmanager.koin.workManagerFactory
@@ -41,6 +42,7 @@ class LiturgicaApplication : Application() {
                 prayerDataModule,
                 calendarDataModule,
                 analyticsFirebaseModule,
+                platformAnalyticsModule(),
                 useCaseModule,
                 startupModule,
                 settingsModule,

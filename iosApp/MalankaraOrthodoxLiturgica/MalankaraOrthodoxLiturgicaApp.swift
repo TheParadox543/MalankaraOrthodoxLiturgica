@@ -6,7 +6,7 @@ struct MalankaraOrthodoxLiturgicaApp: App {
     @StateObject private var router = AppRouter()
 
     init() {
-        SharedKit.shared.initialize()
+        SharedKit.shared.initialize(nativeAnalyticsLogger: SwiftFirebaseAnalyticsLogger())
     }
 
     var body: some Scene {
