@@ -45,7 +45,7 @@ fun BibleChapterScreen(
     val isLoading by bibleViewModel.isLoading.collectAsState()
     val error by bibleViewModel.error.collectAsState()
 
-    val bibleBooks = bibleViewModel.bibleBooks.value
+    val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
     val bibleBook = bibleBooks.getOrNull(bookIndex) ?: return
     var showQrDialog by remember { mutableStateOf(false) }
 
