@@ -84,6 +84,7 @@ kotlin {
                 api(project(":data:translations"))
                 api(project(":feature:prayer-kmp"))
                 api(project(":feature:calendar-kmp"))
+                api(project(":feature:bible-kmp"))
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.serialization.json)

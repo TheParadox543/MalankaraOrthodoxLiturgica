@@ -9,6 +9,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.IndexScreen
@@ -240,4 +244,90 @@ fun getPrayNowViewController(
     onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
     PrayNowScreenWrapper(onPrayerNavigate, onChromeStateChanged)
+}
+
+@Composable
+fun BibleScreenWrapper(
+    onBibleNavigate: (Int) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+) {
+    val koin = getKoin()
+    val bibleViewModel: BibleViewModel = koin.get()
+
+    BibleScreen(
+        onBibleNavigate = onBibleNavigate,
+        bibleViewModel = bibleViewModel,
+        contentPadding = PaddingValues(0.dp),
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
+    )
+}
+
+fun getBibleViewController(
+    onBibleNavigate: (Int) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+): UIViewController = ComposeUIViewController {
+    BibleScreenWrapper(onBibleNavigate, onChromeStateChanged)
+}
+
+@Composable
+fun BibleBookScreenWrapper(
+    bookIndex: Int,
+    onBibleNavigate: (Int, Int) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+) {
+    val koin = getKoin()
+    val bibleViewModel: BibleViewModel = koin.get()
+
+    BibleBookScreen(
+        onBibleNavigate = onBibleNavigate,
+        bibleViewModel = bibleViewModel,
+        bookIndex = bookIndex,
+        contentPadding = PaddingValues(0.dp),
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
+    )
+}
+
+fun getBibleBookViewController(
+    bookIndex: Int,
+    onBibleNavigate: (Int, Int) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+): UIViewController = ComposeUIViewController {
+    BibleBookScreenWrapper(bookIndex, onBibleNavigate, onChromeStateChanged)
+}
+
+@Composable
+fun BibleChapterScreenWrapper(
+    bookIndex: Int,
+    chapterIndex: Int,
+    onChromeStateChanged: (String, Boolean) -> Unit
+) {
+    val koin = getKoin()
+    val bibleViewModel: BibleViewModel = koin.get()
+
+    BibleChapterScreen(
+        bibleViewModel = bibleViewModel,
+        bookIndex = bookIndex,
+        chapterIndex = chapterIndex,
+        contentPadding = PaddingValues(0.dp),
+        onQrDialogShow = { _, _ -> "" },
+        routeFactory = { ref -> "bible/${ref.bookIndex}/${ref.chapterIndex}" },
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
+    )
+}
+
+fun getBibleChapterViewController(
+    bookIndex: Int,
+    chapterIndex: Int,
+    onChromeStateChanged: (String, Boolean) -> Unit
+): UIViewController = ComposeUIViewController {
+    BibleChapterScreenWrapper(bookIndex, chapterIndex, onChromeStateChanged)
 }
