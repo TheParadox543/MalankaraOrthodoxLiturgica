@@ -2,25 +2,16 @@
 // Created by Sam Alex Koshy on 07/04/26.
 //
 
-import Foundation
 import SwiftUI
 import sharedKit
 
 struct PrayerView: View {
-    @StateObject private var viewModel = PrayerViewModel()
-
     var body: some View {
-        Group {
-            if viewModel.state.isLoading {
-                ProgressView()
-            } else if let error = viewModel.state.error {
-                Text(error)
-            } else {
-                PrayerContentView(elements: viewModel.state.elements)
+        ComposeView(
+            fileName: "commonPrayers/kauma.json",
+            onPrayerButtonClick: { link, replace in
+                print("Button clicked: \(link), replace: \(replace)")
             }
-        }
-        .task {
-            await viewModel.loadPrayer(fileName: "commonPrayers/kauma.json")
-        }
+        )
     }
 }

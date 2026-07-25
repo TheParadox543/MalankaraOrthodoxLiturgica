@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.kotlin.multiplatform.library)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.android.lint)
 }
 
@@ -72,9 +74,24 @@ kotlin {
         commonMain {
             dependencies {
                 api(project(":core:domain"))
+                api(project(":core:di"))
                 api(project(":core:ui-common"))
+                api(project(":data:core"))
+                api(project(":data:bible"))
+                api(project(":data:calendar"))
                 api(project(":data:prayer"))
+                api(project(":data:settings"))
+                api(project(":data:translations"))
                 api(project(":feature:prayer-kmp"))
+
+                implementation(libs.koin.core)
+                implementation(libs.kotlinx.serialization.json)
+
+                implementation(libs.runtime)
+                implementation(libs.foundation)
+                implementation(libs.ui)
+                implementation(libs.material3)
+                implementation(libs.components.resources)
             }
         }
 
