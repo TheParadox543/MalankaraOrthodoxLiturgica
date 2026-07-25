@@ -8,7 +8,9 @@ import com.paradox543.malankaraorthodoxliturgica.data.translations.di.translatio
 import com.paradox543.malankaraorthodoxliturgica.di.useCaseModule
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.di.bibleModule
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.di.calendarModule
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.di.onboardingModule
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.di.prayerModule
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.di.settingsModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
@@ -26,6 +28,8 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) {
             prayerModule,
             calendarModule,
             bibleModule,
+            settingsModule,
+            onboardingModule,
             sharedModule,
             *platformModules().toTypedArray()
         )

@@ -76,6 +76,8 @@ kotlin {
                 api(project(":core:domain"))
                 api(project(":core:di"))
                 api(project(":core:ui-common"))
+                api(project(":core:platform-kmp"))
+                api(project(":core:app-info"))
                 api(project(":data:core"))
                 api(project(":data:bible"))
                 api(project(":data:calendar"))
@@ -85,6 +87,8 @@ kotlin {
                 api(project(":feature:prayer-kmp"))
                 api(project(":feature:calendar-kmp"))
                 api(project(":feature:bible-kmp"))
+                api(project(":feature:settings-kmp"))
+                api(project(":feature:onboarding-kmp"))
 
                 implementation(libs.koin.core)
                 implementation(libs.kotlinx.serialization.json)
