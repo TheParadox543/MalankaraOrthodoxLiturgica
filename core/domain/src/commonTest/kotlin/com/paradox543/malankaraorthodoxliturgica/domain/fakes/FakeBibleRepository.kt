@@ -25,9 +25,9 @@ class FakeBibleRepository(
             paulineEpistle = PrefaceContent(emptyList(), emptyList()),
         ),
 ) : BibleRepository {
-    override fun loadBibleMetaData(): List<BibleBookDetails> = meta
+    override suspend fun loadBibleMetaData(): List<BibleBookDetails> = meta
 
-    override fun loadBibleChapter(
+    override suspend fun loadBibleChapter(
         bookIndex: Int,
         chapterIndex: Int,
         language: AppLanguage,
@@ -41,5 +41,5 @@ class FakeBibleRepository(
         return name?.get(language) ?: "Unknown Book"
     }
 
-    override fun loadPrefaceTemplates(): PrefaceTemplates = prefaceTemplates
+    override suspend fun loadPrefaceTemplates(): PrefaceTemplates = prefaceTemplates
 }
