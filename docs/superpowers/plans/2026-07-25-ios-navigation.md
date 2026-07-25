@@ -2843,6 +2843,78 @@ git commit -m "feat(ios): add native AVFoundation QR scanner, wire FAB entry poi
 
 ---
 
+### Task 14B: Kotlin — fix non-reactive `bibleBooks` reads (unblocks Bible book/chapter screens)
+
+**Inserted after Task 14, before Task 15** — not in the original spec/plan. Task 8 first found and fully root-caused this bug while verifying Bible tab wiring; Task 15's first run reproduced it via both deep links and real taps, confirming it blocks 2 of the plan's own end-to-end checks (deep-linking into `bible/{bookIndex}` / `bible/{bookIndex}/{chapterIndex}`, and reaching 3-taps-deep for the tab-reselect check). Same category as Task 11B: a pre-existing bug in shared Kotlin code no task's file list covered, now confirmed load-bearing.
+
+**Root cause:** `feature/bible-kmp/.../screens/BibleBookScreen.kt:36` and `.../BibleChapterScreen.kt:48` read `BibleViewModel`'s `bibleBooks` `StateFlow` non-reactively (`bibleViewModel.getBookOrNull(bookIndex)` / `bibleViewModel.bibleBooks.value`) instead of via `.collectAsState()`. iOS's per-push fresh-`BibleViewModel`-instance pattern (Task 6) means the book list is still empty at first composition; because the read isn't reactive, the composable never recomposes once the async load completes, leaving the screen permanently blank. `BibleScreen.kt` (the tab root) already does this correctly via `.collectAsState()`, which is why only the two pushed screens are affected.
+
+**Files:**
+- Modify: `feature/bible-kmp/src/commonMain/kotlin/com/paradox543/malankaraorthodoxliturgica/feature/bible/screens/BibleBookScreen.kt`
+- Modify: `feature/bible-kmp/src/commonMain/kotlin/com/paradox543/malankaraorthodoxliturgica/feature/bible/screens/BibleChapterScreen.kt`
+
+**Interfaces:**
+- Consumes: `BibleViewModel.bibleBooks: StateFlow<List<BibleBookDetails>>` (already exists, already used reactively elsewhere in the same file in both cases — both files already import `collectAsState`/`getValue`, used for `selectedLanguage` and other flows, so no new imports are needed).
+- Produces: no interface change — same function signatures, same behavior for Android (which never hit this bug, since its shared-`BibleViewModel`-across-nav-graph pattern means the list is already loaded by the time these screens are reached).
+
+This is Android-safe: `.collectAsState()` on an already-loaded `StateFlow` behaves identically to a plain `.value` read on that same already-loaded flow — Android's timing characteristics (shared VM, already-loaded list) mean this change is a no-op there, not a behavior change.
+
+- [ ] **Step 1: Fix `BibleBookScreen.kt`**
+
+Read the current file first, then change:
+
+```kotlin
+    val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
+    val bibleBook = bibleViewModel.getBookOrNull(bookIndex) ?: return
+```
+
+to:
+
+```kotlin
+    val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
+    val books by bibleViewModel.bibleBooks.collectAsState()
+    val bibleBook = books.getOrNull(bookIndex) ?: return
+```
+
+- [ ] **Step 2: Fix `BibleChapterScreen.kt`**
+
+Read the current file first, then change:
+
+```kotlin
+    val bibleBooks = bibleViewModel.bibleBooks.value
+    val bibleBook = bibleBooks.getOrNull(bookIndex) ?: return
+```
+
+to:
+
+```kotlin
+    val bibleBooks by bibleViewModel.bibleBooks.collectAsState()
+    val bibleBook = bibleBooks.getOrNull(bookIndex) ?: return
+```
+
+- [ ] **Step 3: Build to verify Kotlin compiles**
+
+Run: `cd /Users/praneethm/Projects/sam/MalankaraOrthodoxLiturgica && ./gradlew :shared:compileKotlinIosSimulatorArm64 2>&1 | tail -40`
+Expected: `BUILD SUCCESSFUL`.
+
+Also run the Android compile to confirm no regression there, since these files are shared:
+`./gradlew :feature:bible-kmp:compileDebugKotlinAndroid 2>&1 | tail -40` (or the nearest equivalent Android Kotlin compile task if that exact task name doesn't exist — check `./gradlew :feature:bible-kmp:tasks --all | grep -i compile` if unsure).
+Expected: `BUILD SUCCESSFUL`.
+
+- [ ] **Step 4: Full app build and on-device crash-repro verification**
+
+Run the Global Constraints build command, then the deploy/screenshot loop. Deep-link directly into the two previously-failing patterns (`xcrun simctl openurl <udid> "liturgica://bible/0"` and `"liturgica://bible/0/0"`, each on a fresh `simctl terminate`+`simctl launch` to avoid the stacking-navigation confound Task 15 already identified) and confirm the content area now renders real content (chapter grid for `bible/0`, verse text for `bible/0/0`) instead of permanently blank.
+
+- [ ] **Step 5: Commit**
+
+```bash
+cd /Users/praneethm/Projects/sam/MalankaraOrthodoxLiturgica
+git add feature/bible-kmp/src/commonMain/kotlin/com/paradox543/malankaraorthodoxliturgica/feature/bible/screens/BibleBookScreen.kt feature/bible-kmp/src/commonMain/kotlin/com/paradox543/malankaraorthodoxliturgica/feature/bible/screens/BibleChapterScreen.kt
+git commit -m "fix: read bibleBooks reactively in BibleBookScreen/BibleChapterScreen"
+```
+
+---
+
 ### Task 15: End-to-end verification pass
 
 **Files:** none (verification only).
