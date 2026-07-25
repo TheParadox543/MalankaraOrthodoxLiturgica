@@ -2232,6 +2232,144 @@ git commit -m "feat(ios): wire Settings/About/Onboarding screens, global setting
 
 ---
 
+### Task 11B: Kotlin — fix `IOSSettingsRepository` persistence (unblocks onboarding)
+
+**Inserted after Task 11** — not in the original spec/plan. Task 11's implementer discovered, while verifying onboarding gating, that `data/settings/src/iosMain/kotlin/com/paradox543/malankaraorthodoxliturgica/data/settings/repository/IOSSettingsRepository.kt` hardcodes `onboardingCompleted = MutableStateFlow(false)` and every setter (`setLanguage`, `setFontScale`, `setOnboardingStage`, `setSongScrollState`, `setSoundMode`, `setSoundRestoreDelay`) is a `TODO()` stub. `TODO()` throws `NotImplementedError`, which is fatal on Kotlin/Native — so tapping Skip/Next-to-complete in onboarding (Task 11's `OnboardingComposeView`), or changing any setting in the real `SettingsComposeView` Task 11 just wired up, crashes the app. This file was never in any task's file list; confirmed by independent review as real and load-bearing for Task 15's onboarding-persistence check.
+
+**Files:**
+- Modify: `data/settings/src/iosMain/kotlin/com/paradox543/malankaraorthodoxliturgica/data/settings/repository/IOSSettingsRepository.kt`
+
+**Interfaces:**
+- Consumes: `SettingsRepository` interface (`core/domain`), `AppLanguage`/`AppFontScale`/`SoundMode`/`OnboardingStage` (`core/domain/.../domain/settings/model/`), Kotlin/Native's `platform.Foundation.NSUserDefaults`.
+- Produces: same public constructor/property surface as today (`IOSSettingsRepository(defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults)` — the new constructor param is defaulted, so the existing zero-arg call site in `IOSSettingsKoinModule.kt`'s `IOSSettingsRepository()` keeps compiling unchanged). No other file needs to change.
+
+Mirrors `AndroidSettingsRepository.kt`'s persistence semantics (same keys' intent, same `onboardingCompleted = onboardingStage >= OnboardingStage.COMPLETE.value` derivation) using `NSUserDefaults` instead of Android's `DataStore<Preferences>`, since iOS has no bridged pref library, and the repository is Compose-`MutableStateFlow`-shaped already, unlike Android's Flow-mapped-over-DataStore shape.
+
+- [ ] **Step 1: Rewrite `IOSSettingsRepository.kt`**
+
+Read the current file first, then replace its full contents with:
+
+```kotlin
+package com.paradox543.malankaraorthodoxliturgica.data.settings.repository
+
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import platform.Foundation.NSUserDefaults
+
+private const val LANGUAGE_KEY = "selected_language"
+private const val FONT_SCALE_KEY = "font_scale"
+private const val ONBOARDING_STAGE_KEY = "onboarding_stage"
+private const val SONG_SCROLL_STATE_KEY = "song_scroll_state"
+private const val SOUND_MODE_KEY = "sound_mode"
+private const val SOUND_RESTORE_DELAY_KEY = "sound_restore_delay"
+
+/**
+ * Persists settings via NSUserDefaults, mirroring AndroidSettingsRepository's
+ * DataStore-backed semantics (same keys' intent, same onboardingCompleted
+ * derivation from onboardingStage) with MutableStateFlow instead of
+ * Flow-mapped-over-DataStore, since callers already expect StateFlow-shaped
+ * properties from the constructor-default pattern this class used before.
+ */
+class IOSSettingsRepository(
+    private val defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults,
+) : SettingsRepository {
+    override val language: MutableStateFlow<AppLanguage> =
+        MutableStateFlow(
+            defaults.stringForKey(LANGUAGE_KEY)?.let { AppLanguage.fromCode(it) } ?: AppLanguage.MALAYALAM,
+        )
+
+    override val fontScale: MutableStateFlow<AppFontScale> =
+        MutableStateFlow(
+            if (defaults.objectForKey(FONT_SCALE_KEY) != null) {
+                AppFontScale.fromScale(defaults.floatForKey(FONT_SCALE_KEY))
+            } else {
+                AppFontScale.Medium
+            },
+        )
+
+    override val onboardingStage: MutableStateFlow<Int> =
+        MutableStateFlow(defaults.integerForKey(ONBOARDING_STAGE_KEY).toInt())
+
+    override val onboardingCompleted: MutableStateFlow<Boolean> =
+        MutableStateFlow(onboardingStage.value >= OnboardingStage.COMPLETE.value)
+
+    override val songScrollState: MutableStateFlow<Boolean> =
+        MutableStateFlow(defaults.boolForKey(SONG_SCROLL_STATE_KEY))
+
+    override val soundMode: MutableStateFlow<SoundMode> =
+        MutableStateFlow(
+            when (defaults.stringForKey(SOUND_MODE_KEY)) {
+                "SILENT" -> SoundMode.SILENT
+                "DND" -> SoundMode.DND
+                else -> SoundMode.OFF
+            },
+        )
+
+    override val soundRestoreDelay: MutableStateFlow<Int> =
+        MutableStateFlow(
+            if (defaults.objectForKey(SOUND_RESTORE_DELAY_KEY) != null) {
+                defaults.integerForKey(SOUND_RESTORE_DELAY_KEY).toInt()
+            } else {
+                30
+            },
+        )
+
+    override suspend fun setLanguage(language: AppLanguage) {
+        defaults.setObject(language.code, forKey = LANGUAGE_KEY)
+        this.language.value = language
+    }
+
+    override suspend fun setFontScale(fontScale: AppFontScale) {
+        defaults.setFloat(fontScale.scaleFactor, forKey = FONT_SCALE_KEY)
+        this.fontScale.value = fontScale
+    }
+
+    override suspend fun setOnboardingStage(stage: Int) {
+        defaults.setInteger(stage.toLong(), forKey = ONBOARDING_STAGE_KEY)
+        onboardingStage.value = stage
+        onboardingCompleted.value = stage >= OnboardingStage.COMPLETE.value
+    }
+
+    override suspend fun setSongScrollState(isHorizontal: Boolean) {
+        defaults.setBool(isHorizontal, forKey = SONG_SCROLL_STATE_KEY)
+        songScrollState.value = isHorizontal
+    }
+
+    override suspend fun setSoundMode(permissionState: SoundMode) {
+        defaults.setObject(permissionState.name, forKey = SOUND_MODE_KEY)
+        soundMode.value = permissionState
+    }
+
+    override suspend fun setSoundRestoreDelay(delay: Int) {
+        defaults.setInteger(delay.toLong(), forKey = SOUND_RESTORE_DELAY_KEY)
+        soundRestoreDelay.value = delay
+    }
+}
+```
+
+- [ ] **Step 2: Build to verify Kotlin compiles**
+
+Run: `cd /Users/praneethm/Projects/sam/MalankaraOrthodoxLiturgica && ./gradlew :shared:compileKotlinIosSimulatorArm64 2>&1 | tail -40`
+Expected: `BUILD SUCCESSFUL`. (`data/settings` compiles transitively as a dependency of `shared`; a direct `:data:settings:compileKotlinIosSimulatorArm64` run is also fine if faster.)
+
+- [ ] **Step 3: Full app build and crash-repro verification**
+
+Run the Global Constraints build command, then the deploy/screenshot loop with a fresh install (`xcrun simctl uninstall` before `install`, per Task 11's established pattern) so onboarding starts unshown. On the simulator: tap through onboarding to completion (or tap Skip). Confirm the app does **not** crash (process stays alive — check `xcrun simctl spawn <udid> launchctl list | grep -i malankara` a few seconds after the tap, or just that a subsequent screenshot still shows app UI, not the springboard). Then relaunch the app (`xcrun simctl terminate` + `xcrun simctl launch`) and confirm the onboarding cover does **not** reappear — proving the `NSUserDefaults` write actually persisted across a process restart, not just in-memory for the current run.
+
+- [ ] **Step 4: Commit**
+
+```bash
+cd /Users/praneethm/Projects/sam/MalankaraOrthodoxLiturgica
+git add data/settings/src/iosMain/kotlin/com/paradox543/malankaraorthodoxliturgica/data/settings/repository/IOSSettingsRepository.kt
+git commit -m "fix(ios): persist settings via NSUserDefaults, unblocking onboarding completion"
+```
+
+---
+
 ### Task 12: Kotlin — song metadata bridge function
 
 **Files:**
