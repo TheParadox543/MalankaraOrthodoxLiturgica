@@ -50,7 +50,7 @@ struct RootTabView: View {
         case .about: AboutPushedView()
         case .section(let sectionRoute): SectionPushedView(route: sectionRoute)
         case .prayer(let prayerRoute, let scroll): PrayerPushedView(route: prayerRoute, scroll: scroll)
-        case .song(let songRoute): SongPushedView(route: songRoute)
+        case .song(let songRoute): SongPlayerView(route: songRoute)
         case .bibleBook(let bookIndex): BibleBookPushedView(bookIndex: bookIndex)
         case .bibleChapter(let bookIndex, let chapterIndex):
             BibleChapterPushedView(bookIndex: bookIndex, chapterIndex: chapterIndex)
