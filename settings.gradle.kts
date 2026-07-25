@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "MalankaraOrthodoxLiturgica"
-include(":app")
+include(":androidApp")
 include(":core:domain")
 include(":core:analytics")
 include(":data:core")
@@ -46,4 +46,6 @@ include(":core:platform-kmp")
 include(":feature:prayer-kmp")
 include(":qr-generation")
 include(":feature:bible-kmp")
+include(":shared")
+include(":core:di")
 include(":core:logging")
