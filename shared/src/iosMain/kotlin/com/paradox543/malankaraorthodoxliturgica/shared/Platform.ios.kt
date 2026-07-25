@@ -7,8 +7,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
+import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
@@ -16,6 +18,8 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleVi
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarLiturgicalSeasonScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens.OnboardingScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.IndexScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
@@ -23,6 +27,13 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerSc
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.SectionScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.AboutScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.screens.SettingsScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.settings.viewmodel.SettingsViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import org.koin.mp.KoinPlatform.getKoin
 import platform.UIKit.UIViewController
 
@@ -384,4 +395,100 @@ fun getBibleReaderViewController(
     onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
     BibleReaderScreenWrapper(onChromeStateChanged)
+}
+
+@Composable
+fun SettingsScreenWrapper(
+    onNavigateToAbout: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+) {
+    val koin = getKoin()
+    val settingsViewModel: SettingsViewModel = koin.get()
+    val shareService: ShareService = koin.get()
+
+    SettingsScreen(
+        onNavigateToAbout = onNavigateToAbout,
+        // iOS has no notification-interruption API equivalent to Android's DND
+        // access request; IOSSoundModeCapability.isAvailable is already false,
+        // so this button is hidden below and this callback is unreachable.
+        requestDndPermission = { },
+        settingsViewModel = settingsViewModel,
+        shareService = shareService,
+        showSoundModeSetting = false,
+        contentPadding = PaddingValues(0.dp),
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
+    )
+}
+
+fun getSettingsViewController(
+    onNavigateToAbout: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+): UIViewController = ComposeUIViewController {
+    SettingsScreenWrapper(onNavigateToAbout, onChromeStateChanged)
+}
+
+@Composable
+fun AboutScreenWrapper(
+    appVersion: String,
+    onDeveloperContact: () -> Unit,
+    onExternalLinkClick: (String) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+) {
+    AboutScreen(
+        contentPadding = PaddingValues(0.dp),
+        appVersion = appVersion,
+        onDeveloperContact = onDeveloperContact,
+        onExternalLinkClick = onExternalLinkClick,
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
+    )
+}
+
+fun getAboutViewController(
+    appVersion: String,
+    onDeveloperContact: () -> Unit,
+    onExternalLinkClick: (String) -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+): UIViewController = ComposeUIViewController {
+    AboutScreenWrapper(appVersion, onDeveloperContact, onExternalLinkClick, onChromeStateChanged)
+}
+
+@Composable
+fun OnboardingScreenWrapper(
+    onNavigateToHome: () -> Unit
+) {
+    val koin = getKoin()
+    val onboardingViewModel: OnboardingViewModel = koin.get()
+
+    OnboardingScreen(
+        onboardingViewModel = onboardingViewModel,
+        contentPadding = PaddingValues(0.dp),
+        onNavigateToHome = onNavigateToHome,
+        requestDndPermission = { },
+        onScaffoldStateChanged = { }
+    )
+}
+
+fun getOnboardingViewController(
+    onNavigateToHome: () -> Unit
+): UIViewController = ComposeUIViewController {
+    OnboardingScreenWrapper(onNavigateToHome)
+}
+
+/**
+ * Snapshot-reads whether onboarding is complete, matching the intent of
+ * Android's `onboardingCompleted` check in `NavGraph.kt` (which derives it
+ * from `onboardingStage > 0`) but reads `SettingsRepository.onboardingCompleted`
+ * directly since that flow already exists for exactly this purpose.
+ */
+fun getOnboardingCompleted(onResult: (Boolean) -> Unit) {
+    val settingsRepository: SettingsRepository = getKoin().get()
+    CoroutineScope(Dispatchers.Main).launch {
+        onResult(settingsRepository.onboardingCompleted.first())
+    }
 }
