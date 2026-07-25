@@ -44,7 +44,7 @@ struct RootTabView: View {
         case .onboarding:
             EmptyView() // reached only via .fullScreenCover, never pushed
         case .bibleReader: BibleReaderPushedView()
-        case .qrScanner: QrScannerPushedView()
+        case .qrScanner: QrScannerView()
         case .index: IndexPushedView()
         case .settings: SettingsPushedView()
         case .about: AboutPushedView()

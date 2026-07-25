@@ -16,5 +16,18 @@ struct HomeTabRootView: View {
         .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
+        .overlay(alignment: .bottomTrailing) {
+            if chromeState.showFab {
+                Button {
+                    router.push(.qrScanner)
+                } label: {
+                    Image(systemName: "qrcode.viewfinder")
+                        .font(.title2)
+                        .padding()
+                        .background(.thinMaterial, in: Circle())
+                }
+                .padding()
+            }
+        }
     }
 }

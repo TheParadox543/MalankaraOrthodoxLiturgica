@@ -84,4 +84,15 @@ final class AppRouter: ObservableObject {
             self.showOnboarding = !completed.boolValue
         }
     }
+
+    /// Mirrors Android's `QrScannerView`'s `onNavigate(route: String)` contract:
+    /// a successful scan re-enters the router exactly like a tapped deep link.
+    /// Returns whether the scanned string resolved to a known route.
+    func route(fromScannedString scanned: String) -> Bool {
+        guard let url = URL(string: scanned), let route = AppRoute(url: url) else {
+            return false
+        }
+        push(route)
+        return true
+    }
 }
