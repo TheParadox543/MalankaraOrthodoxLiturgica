@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseCore
 import sharedKit
 
 @main
@@ -6,6 +7,7 @@ struct MalankaraOrthodoxLiturgicaApp: App {
     @StateObject private var router = AppRouter()
 
     init() {
+        FirebaseApp.configure()
         SharedKit.shared.initialize(nativeAnalyticsLogger: SwiftFirebaseAnalyticsLogger())
     }
 

@@ -10,7 +10,7 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.paradox543.MalankaraOrthodoxLiturgica</string>
+			<string>com.paradox543.malankaraorthodoxliturgica</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>liturgica</string>
