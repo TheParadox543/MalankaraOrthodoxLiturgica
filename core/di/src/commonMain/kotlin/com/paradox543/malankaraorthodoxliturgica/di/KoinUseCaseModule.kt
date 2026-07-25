@@ -7,6 +7,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGosp
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.GetAdjacentChaptersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.usecase.FormatDateTitleUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.CreatePrayerIndexUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjacentSiblingRoutesUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetDynamicSongsUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
@@ -45,6 +46,8 @@ val useCaseModule =
             GetPrayerScreenContentUseCase(
                 prayerRepository = get(),
                 getDynamicSongsUseCase = get(),
+                loadBibleReadingUseCase = get(),
+                formatGospelEntryUseCase = get(),
             )
         }
 
@@ -52,6 +55,10 @@ val useCaseModule =
             GetAdjacentChaptersUseCase(
                 bibleRepository = get(),
             )
+        }
+
+        single {
+            CreatePrayerIndexUseCase()
         }
 
         single {

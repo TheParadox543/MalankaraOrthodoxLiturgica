@@ -14,6 +14,7 @@ val analyticsFirebaseModule =
         single<AnalyticsService> {
             FirebaseAnalyticsService(
                 firebaseAnalytics = get(),
+                appInfoProvider = get(),
             )
         }
     }

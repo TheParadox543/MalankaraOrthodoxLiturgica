@@ -18,6 +18,8 @@ sealed class AppScreen(
 
     object QrScanner : AppScreen("qrScanner")
 
+    object Index: AppScreen("index", "app://liturgica/index")
+
     object Settings : AppScreen("settings", "app://liturgica/settings")
 
     object About : AppScreen("about", "app://liturgica/about")

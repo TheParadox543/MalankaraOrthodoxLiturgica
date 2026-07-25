@@ -8,13 +8,13 @@ class FormatDateTitleUseCase {
         event: LiturgicalEventDetails,
         selectedLanguage: AppLanguage,
         currentYear: Int,
-    ): String {
-        return event.startedYear?.let { startedYear ->
+    ): String =
+        event.startedYear?.let { startedYear ->
             val yearNumber = currentYear - startedYear + 1
             val baseYearString = "$yearNumber"
 
             if (selectedLanguage == AppLanguage.MALAYALAM && event.title.ml != null) {
-                "$baseYearString-ാം${event.title.ml}"
+                event.title.ml.replace("{YEAR}", baseYearString)
             } else {
                 "$baseYearString${generateYearSuffix(yearNumber)} ${event.title.en}"
             }
@@ -22,7 +22,6 @@ class FormatDateTitleUseCase {
             AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
             else -> event.title.en
         }
-    }
 
     private fun generateYearSuffix(year: Int): String =
         when (year % 10) {

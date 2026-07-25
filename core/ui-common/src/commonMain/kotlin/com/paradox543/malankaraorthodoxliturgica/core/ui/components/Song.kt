@@ -38,7 +38,7 @@ fun Song(
                 ),
     ) {
         Text(
-            text = text,
+            text = text.toPrayerAnnotatedString(),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Start,
             modifier =

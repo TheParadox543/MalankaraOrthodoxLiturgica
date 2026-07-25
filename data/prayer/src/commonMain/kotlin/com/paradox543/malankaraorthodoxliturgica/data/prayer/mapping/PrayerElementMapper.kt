@@ -1,6 +1,8 @@
 package com.paradox543.malankaraorthodoxliturgica.data.prayer.mapping
 
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.model.PrayerElementDto
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleReference
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 
 // Helper extensions to reduce duplication for DynamicSong conversions
@@ -12,13 +14,22 @@ private fun PrayerElementDto.DynamicSong.toDomainSong(): PrayerElement.DynamicSo
         items = items.map { it.toDomain() },
     )
 
-private fun PrayerElement.DynamicSong.toDataSong(): PrayerElementDto.DynamicSong =
-    PrayerElementDto.DynamicSong(
-        eventKey = eventKey,
-        eventTitle = eventTitle,
-        timeKey = timeKey,
-        items = items.map { it.toData() },
+// Map the nested Bible reference DTOs found inside prayer JSON -> domain bible models
+private fun PrayerElementDto.ReferenceRange.toDomainRef(): ReferenceRange =
+    ReferenceRange(
+        startChapter = startChapter,
+        endChapter = endChapter,
+        startVerse = startVerse,
+        endVerse = endVerse,
     )
+
+private fun PrayerElementDto.BibleReference.toDomainBibleReference(): BibleReference =
+    BibleReference(
+        bookNumber = bookNumber,
+        ranges = ranges.map { it.toDomainRef() },
+    )
+
+private fun List<PrayerElementDto.BibleReference>.toDomainBibleReferences(): List<BibleReference> = map { it.toDomainBibleReference() }
 
 // Extension-based mappers: data -> domain
 fun PrayerElementDto.toDomain(): PrayerElement =
@@ -103,102 +114,19 @@ fun PrayerElementDto.toDomain(): PrayerElement =
             )
         }
 
+        is PrayerElementDto.PrayerBibleReading -> {
+            PrayerElement.PrayerBibleReading(readings.toDomainBibleReferences())
+        }
+
+        is PrayerElementDto.BibleReference -> {
+            // This DTO type is used only as a nested type inside PrayerBibleReading,
+            // not as a standalone PrayerElement. Handle it defensively here.
+            PrayerElement.Error("Unexpected bible reference element in prayer content")
+        }
+
         is PrayerElementDto.Error -> {
             PrayerElement.Error(content)
         }
     }
 
 fun List<PrayerElementDto>.toDomainList(): List<PrayerElement> = map { it.toDomain() }
-
-// Reverse mapping: domain -> data
-fun PrayerElement.toData(): PrayerElementDto =
-    when (this) {
-        is PrayerElement.Title -> {
-            PrayerElementDto.Title(content)
-        }
-
-        is PrayerElement.Heading -> {
-            PrayerElementDto.Heading(content)
-        }
-
-        is PrayerElement.Subheading -> {
-            PrayerElementDto.Subheading(content)
-        }
-
-        is PrayerElement.Prose -> {
-            PrayerElementDto.Prose(content)
-        }
-
-        is PrayerElement.Song -> {
-            PrayerElementDto.Song(content)
-        }
-
-        is PrayerElement.Subtext -> {
-            PrayerElementDto.Subtext(content)
-        }
-
-        is PrayerElement.Source -> {
-            PrayerElementDto.Source(content)
-        }
-
-        is PrayerElement.Button -> {
-            PrayerElementDto.Button(
-                link = link,
-                label = label,
-                replace = replace,
-            )
-        }
-
-        is PrayerElement.Link -> {
-            PrayerElementDto.Link(file)
-        }
-
-        is PrayerElement.LinkCollapsible -> {
-            PrayerElementDto.LinkCollapsible(file)
-        }
-
-        is PrayerElement.CollapsibleBlock -> {
-            PrayerElementDto.CollapsibleBlock(
-                title = title,
-                items = items.map { it.toData() },
-            )
-        }
-
-        is PrayerElement.DynamicSong -> {
-            this.toDataSong()
-        }
-
-        is PrayerElement.DynamicSongsBlock -> {
-            PrayerElementDto.DynamicSongsBlock(
-                timeKey = timeKey,
-                items = items.map { ds -> ds.toDataSong() }.toMutableList(),
-                defaultContent = defaultContent?.toDataSong(),
-            )
-        }
-
-        is PrayerElement.AlternativeOption -> {
-            PrayerElementDto.AlternativeOption(
-                label = label,
-                items = items.map { it.toData() },
-            )
-        }
-
-        is PrayerElement.AlternativePrayersBlock -> {
-            PrayerElementDto.AlternativePrayersBlock(
-                title = title,
-                options =
-                    options.map { opt ->
-                        PrayerElementDto.AlternativeOption(
-                            opt.label,
-                            opt.items.map { it.toData() },
-                        )
-                    },
-            )
-        }
-
-        is PrayerElement.Error -> {
-            PrayerElementDto.Error(content)
-        }
-    }
-
-fun List<PrayerElement>.toDataList(): List<PrayerElementDto> = map { it.toData() }

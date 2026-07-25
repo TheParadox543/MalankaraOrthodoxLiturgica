@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppFontScale
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.OnboardingStage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
@@ -21,6 +22,7 @@ class AndroidSettingsRepository(
     private val languageKey = stringPreferencesKey("selected_language")
     private val fontScaleKey = floatPreferencesKey("font_scale")
     private val hasCompletedOnboardingKey = booleanPreferencesKey("has_completed_onboarding")
+    private val onboardingStageKey = intPreferencesKey("onboarding_stage")
     private val songScrollStateKey = booleanPreferencesKey("song_scroll_state")
     private val soundModeKey = stringPreferencesKey("sound_mode")
     private val soundRestoreDelayKey = intPreferencesKey("sound_restore_delay")
@@ -31,10 +33,18 @@ class AndroidSettingsRepository(
             AppLanguage.fromCode(code) ?: AppLanguage.MALAYALAM
         }
 
-    override val onboardingCompleted: Flow<Boolean> =
+    override val onboardingStage: Flow<Int> =
         dataStore.data.map { preferences ->
-            preferences[hasCompletedOnboardingKey] == true
+            val stage = preferences[onboardingStageKey]
+            if (stage != null) return@map stage
+
+            // Migration logic: if old boolean exists and is true, user has finished Welcome (stage 0)
+            // and should now be on the next new page: Song Wrap (stage 1).
+            if (preferences[hasCompletedOnboardingKey] == true) 1 else 0
         }
+
+    override val onboardingCompleted: Flow<Boolean> =
+        onboardingStage.map { it >= OnboardingStage.COMPLETE.value }
 
     override val fontScale: Flow<AppFontScale> =
         dataStore.data.map { prefs ->
@@ -73,9 +83,9 @@ class AndroidSettingsRepository(
         }
     }
 
-    override suspend fun setOnboardingCompleted(completed: Boolean) {
+    override suspend fun setOnboardingStage(stage: Int) {
         dataStore.edit { preferences ->
-            preferences[hasCompletedOnboardingKey] = completed
+            preferences[onboardingStageKey] = stage
         }
     }
 

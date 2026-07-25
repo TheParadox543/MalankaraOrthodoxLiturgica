@@ -58,11 +58,12 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChap
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
-import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarLiturgicalSeasonScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.screens.OnboardingScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.onboarding.viewmodel.OnboardingViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.IndexScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayNowScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.SectionScreen
@@ -83,16 +84,24 @@ import org.koin.compose.viewmodel.koinViewModel
  */
 @Composable
 fun NavGraph(
-    onboardingCompleted: Boolean,
+    onboardingStage: Int,
     appUpdateManager: AppUpdateManager,
     analyticsService: AnalyticsService,
     shareService: ShareService,
     settingsViewModel: SettingsViewModel,
+    onNavigateToOnboarding: ((NavController) -> Unit)? = null,
 ) {
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
     val updateDownloaded by appUpdateManager.updateReady.collectAsState()
     val context: Context = LocalContext.current
+
+    // Only force onboarding for brand-new users (Stage 0: Welcome)
+    val onboardingCompleted = onboardingStage > 0
+
+    LaunchedEffect(onNavigateToOnboarding) {
+        onNavigateToOnboarding?.invoke(navController)
+    }
 
     // Tracks which bars/FAB each screen requests
     val scaffoldUiState = remember { mutableStateOf<ScaffoldUiState>(ScaffoldUiState.None) }
@@ -325,12 +334,30 @@ fun NavGraph(
                 AppScreen.Home.route,
                 deepLinks = AppScreen.Home.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
+                val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
+                val recommendedPrayers = prayerNavViewModel.getAllPrayerNodes()
+                val topPrayer = recommendedPrayers.firstOrNull()
+
                 HomeScreen(
-                    prayerViewModel,
-                    prayerNavViewModel,
-                    innerPadding,
+                    prayerViewModel = prayerViewModel,
+                    prayerNavViewModel = prayerNavViewModel,
+                    liturgicalDay = liturgicalDay,
+                    topRecommendedPrayer = topPrayer,
+                    contentPadding = innerPadding,
                     onSectionNavigate = { route ->
                         navController.navigate(AppScreen.Section.createRoute(route))
+                    },
+                    onPrayerNavigate = { route ->
+                        navController.navigate(AppScreen.Prayer.createRoute(route))
+                    },
+                    onSongNavigate = { route ->
+                        navController.navigate(AppScreen.Song.createRoute(route))
+                    },
+                    onPrayNowNavigate = {
+                        navController.navigate(AppScreen.PrayNow.route)
+                    },
+                    onIndexNavigate = {
+                        navController.navigate(AppScreen.Index.route)
                     },
                     onScaffoldStateChanged = { scaffoldUiState.value = it },
                 )
@@ -339,16 +366,31 @@ fun NavGraph(
             composable(AppScreen.Onboarding.route) {
                 val onboardingViewModel: OnboardingViewModel = koinViewModel()
                 OnboardingScreen(
-                    onboardingViewModel,
-                    innerPadding,
-                    {
+                    onboardingViewModel = onboardingViewModel,
+                    contentPadding = innerPadding,
+                    onNavigateToHome = {
                         navController.navigate(AppScreen.Home.route) {
                             popUpTo(AppScreen.Onboarding.route) {
                                 inclusive = true
                             }
                         }
                     },
-                ) { scaffoldUiState.value = it }
+                    requestDndPermission = {
+                        val notificationManager =
+                            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                        if (!notificationManager.isNotificationPolicyAccessGranted) {
+                            Toast
+                                .makeText(
+                                    context,
+                                    "Please grant the app access to modify DND in settings.",
+                                    Toast.LENGTH_LONG,
+                                ).show()
+                            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                            context.startActivity(intent)
+                        }
+                    },
+                    onScaffoldStateChanged = { scaffoldUiState.value = it },
+                )
             }
 
             composable(
@@ -362,6 +404,7 @@ fun NavGraph(
                 deepLinks = AppScreen.Section.DEEP_LINK_PATTERN.let { listOf(navDeepLink { uriPattern = it }) },
             ) { backStackEntry ->
                 val route = backStackEntry.arguments?.getString(AppScreen.Section.ARG_ROUTE) ?: ""
+                val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
                 val node = prayerRootNode.findByRoute(route)
                 if (!isPrayerTreeLoaded) {
                     ContentLoadingScreen(
@@ -374,6 +417,7 @@ fun NavGraph(
                         prayerNavViewModel,
                         node,
                         innerPadding,
+                        liturgicalDay = liturgicalDay,
                         onScaffoldStateChanged = { scaffoldUiState.value = it },
                         onSectionNavigate = { route ->
                             navController.navigate(AppScreen.Section.createRoute(route))
@@ -383,6 +427,9 @@ fun NavGraph(
                         },
                         onSongNavigate = { route ->
                             navController.navigate(AppScreen.Song.createRoute(route))
+                        },
+                        onIndexNavigate = {
+                            navController.navigate(AppScreen.Index.route)
                         },
                     )
                 } else {
@@ -486,6 +533,24 @@ fun NavGraph(
                 ) { scaffoldUiState.value = it }
             }
 
+            composable(AppScreen.Index.route) {
+                if (!isPrayerTreeLoaded) {
+                    ContentLoadingScreen(
+                        contentPadding = innerPadding,
+                        onScaffoldStateChanged = { scaffoldUiState.value = it },
+                    )
+                } else {
+                    IndexScreen(
+                        prayerViewModel = prayerViewModel,
+                        prayerNavViewModel = prayerNavViewModel,
+                        contentPadding = innerPadding,
+                        onPrayerNavigate = { route ->
+                            navController.navigate(AppScreen.Prayer.createRoute(route))
+                        },
+                    ) { scaffoldUiState.value = it }
+                }
+            }
+
             composable(
                 AppScreen.Bible.route,
                 deepLinks = AppScreen.Bible.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
@@ -561,7 +626,7 @@ fun NavGraph(
                 AppScreen.Calendar.route,
                 deepLinks = AppScreen.Calendar.deepLink?.let { listOf(navDeepLink { uriPattern = it }) } ?: emptyList(),
             ) {
-                CalendarScreen(
+                CalendarLiturgicalSeasonScreen(
                     calendarViewModel,
                     contentPadding = innerPadding,
                     onBibleNavigate = {

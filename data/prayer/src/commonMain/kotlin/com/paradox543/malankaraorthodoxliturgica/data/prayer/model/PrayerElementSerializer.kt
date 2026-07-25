@@ -112,6 +112,10 @@ object PrayerElementSerializer : KSerializer<PrayerElementDto> {
                     json.decodeFromJsonElement(PrayerElementDto.AlternativeOption.serializer(), element)
                 }
 
+                "references" -> {
+                    json.decodeFromJsonElement(PrayerElementDto.PrayerBibleReading.serializer(), element)
+                }
+
                 // If you explicitly serialize PrayerElement.Error in your JSON, handle it:
                 "error" -> {
                     json.decodeFromJsonElement(PrayerElementDto.Error.serializer(), element)
@@ -211,6 +215,14 @@ object PrayerElementSerializer : KSerializer<PrayerElementDto> {
 
                 is PrayerElementDto.Error -> {
                     "error" to json.encodeToJsonElement(PrayerElementDto.Error.serializer(), value).jsonObject
+                }
+
+                is PrayerElementDto.PrayerBibleReading -> {
+                    json.encodeToJsonElement(PrayerElementDto.PrayerBibleReading.serializer(), value)
+                }
+
+                is PrayerElementDto.BibleReference -> {
+                    json.encodeToJsonElement(PrayerElementDto.BibleReference.serializer(), value)
                 }
             }
 

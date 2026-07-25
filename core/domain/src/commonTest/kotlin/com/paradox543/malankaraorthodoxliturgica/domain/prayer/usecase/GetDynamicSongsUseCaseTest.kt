@@ -45,7 +45,7 @@ class GetDynamicSongsUseCaseTest {
                     title = TitleStr(en = "E"),
                     specialSongsKey = "defaultKey",
                     bibleReadings = null,
-                    niram = null,
+                    tune = null,
                     startedYear = null,
                 )
 

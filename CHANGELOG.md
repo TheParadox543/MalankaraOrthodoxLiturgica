@@ -8,9 +8,40 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ## 🔮 [Unreleased]
 
 - Unversioned changes
-### Refactor
+### Feature
 
-- Remove platform specific implementation for JSON file reading with composeResources implementation. 
+- Better UI for calendar.
+- Added legend for calendar.
+- Bold and Italics formatting for prose and song blocks.
+- Improved onboarding flow: Divided different features into stages.
+- Added dynamic image loading in prayer screen.
+- Top prayer from pray now can be seen in home screen.
+- Auto scroll to current date.
+- Add scrollbar for calendar.
+- Index for prayers: Prayers can be searched and ordered by Title.
+
+### Fix
+- Wrong anniversary count given in calendar.
+
+### Change
+- Move logger to dedicated module.
+
+
+---
+
+## [2.4.1] - 15/07/2026
+
+### Added
+
+- Prayers in sheema namaskaram (promiyon and sedra for each of the weekdays)
+
+---
+
+## [2.3.2] - 11/04/2026
+
+### Added
+
+- Calendar data for 2026 April and May
 
 ---
 

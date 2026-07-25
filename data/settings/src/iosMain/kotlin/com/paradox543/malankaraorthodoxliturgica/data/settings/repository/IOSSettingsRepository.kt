@@ -10,6 +10,7 @@ class IOSSettingsRepository(
     override val fontScale: MutableStateFlow<AppFontScale> = MutableStateFlow(AppFontScale.Medium),
     override val language: MutableStateFlow<AppLanguage> = MutableStateFlow(AppLanguage.MALAYALAM),
     override val onboardingCompleted: MutableStateFlow<Boolean> = MutableStateFlow(false),
+    override val onboardingStage: MutableStateFlow<Int> = MutableStateFlow(0),
     override val songScrollState: MutableStateFlow<Boolean> = MutableStateFlow(false),
     override val soundMode: MutableStateFlow<SoundMode> = MutableStateFlow(SoundMode.OFF),
     override val soundRestoreDelay: MutableStateFlow<Int> = MutableStateFlow(30),
@@ -22,7 +23,7 @@ class IOSSettingsRepository(
         TODO("Not yet implemented")
     }
 
-    override suspend fun setOnboardingCompleted(completed: Boolean) {
+    override suspend fun setOnboardingStage(stage: Int) {
         TODO("Not yet implemented")
     }
 

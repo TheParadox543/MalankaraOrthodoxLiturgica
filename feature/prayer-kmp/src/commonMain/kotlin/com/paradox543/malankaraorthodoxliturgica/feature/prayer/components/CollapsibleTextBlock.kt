@@ -20,6 +20,7 @@ import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Keyboard_arrow_down
 import com.composables.icons.materialicons.rounded.Keyboard_arrow_up
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Heading
+import com.paradox543.malankaraorthodoxliturgica.core.ui.components.Subheading
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerElementRenderer
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerRenderContext
@@ -30,6 +31,7 @@ fun CollapsibleTextBlock(
     context: PrayerRenderContext,
     filename: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
+    subheading: Boolean = false,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -41,10 +43,17 @@ fun CollapsibleTextBlock(
                     .fillMaxWidth()
                     .clickable { expanded = !expanded },
         ) {
-            Heading(
-                text = prayerElement.title,
-                modifier = Modifier.weight(1f),
-            )
+            if (subheading) {
+                Subheading(
+                    text = prayerElement.title,
+                    modifier = Modifier.weight(1f),
+                )
+            } else {
+                Heading(
+                    text = prayerElement.title,
+                    modifier = Modifier.weight(1f),
+                )
+            }
             Icon(
                 imageVector = if (expanded) MaterialIcons.Rounded.Keyboard_arrow_up else MaterialIcons.Rounded.Keyboard_arrow_down,
                 contentDescription = if (expanded) "Collapse" else "Expand",

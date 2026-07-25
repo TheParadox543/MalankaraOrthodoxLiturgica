@@ -27,6 +27,10 @@
         "en": "Great Lent",
         "ml": "വലിയ നോമ്പ്"
     },
+    "great_lent": {
+        "en": "Great Lent",
+        "ml": "വലിയ നോമ്പ്"
+    },
     "qurbana": {
         "en": "Holy Qurbana",
         "ml": "വി. കുർബാന"
@@ -135,6 +139,26 @@
         "en": "Part II Chapter 5",
         "ml": "രണ്ടാം ഭാഗം അഞ്ചാം അദ്ധ്യായം"
     },
+    "appendixOne": {
+        "en": "Appendix I",
+        "ml": "അനുബന്ധം I"
+    },
+    "appendixThree": {
+        "en": "Appendix III",
+        "ml": "അനുബന്ധം III"
+    },
+    "appendixFourteen": {
+        "en": "Appendix XIV",
+        "ml": "അനുബന്ധം XIV"
+    },
+    "appendixFifteen": {
+        "en": "Appendix XV",
+        "ml": "അനുബന്ധം XV"
+    },
+    "appendix": {
+        "en": "Appendices",
+        "ml": "അനുബന്ധങ്ങൾ"
+    },
     "men": {
         "en": "Men",
         "ml": "പുരുഷന്മാർ"
@@ -215,6 +239,34 @@
         "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ",
         "en": "For the Apostles"
     },
+    "sheemaSaintOrMartyr": {
+        "ml": "ഒരു പരിശുദ്ധയുടെയോ ഒരു രക്തസാക്ഷിയുടെയോ ഓർമ്മയിൽ",
+        "en": "For a Saint or a Martyr"
+    },
+    "sheemaRepentance": {
+        "ml": "അനുതാപത്തിന്റെ",
+        "en": "For Repentance"
+    },
+    "sheemaPriest": {
+        "ml": "പുരോഹിതന്മ‌മാരുടെ ഓർമ്മയിൽ",
+        "en": "For the Priests"
+    },
+    "sheemaOneSaint": {
+        "ml": "ഒരു പരിശുദ്ധൻ്റെ ഓർമ്മയിൽ",
+        "en": "For a Saint"
+    },
+    "sheemaOneMartyr": {
+        "ml": "ഒരു സഹദായുടെ ഓർമ്മയിൽ",
+        "en": "For a Martyr"
+    },
+    "sheemaDeparted": {
+        "ml": "പരേതരുടെ ഓർമ്മ",
+        "en": "For the Departed"
+    },
+    "sheemaGeneral": {
+        "ml": "പൊതുവായ ഓർമ്മയിൽ",
+        "en": "General Promiyon"
+    },
     "cyclicPrayers": {
         "ml": "ധൂപപ്രാർത്ഥനകൾ",
         "en": "Cyclic prayers"
@@ -228,7 +280,7 @@
         "en": "Feast of Ascension"
     },
     "pentecost": {
-        "ml": "പെന്തികൊസ്തി പെരുന്നാൾ",
+        "ml": "പെന്തികൊസ്തി",
         "en": "Pentecost"
     },
     "prayNow": {
@@ -626,5 +678,69 @@
     "MuktiDilaye": {
         "en": "Mukti Dilaye",
         "ml": "Mukti Dilaye"
+    },
+    "annunciation":  {
+        "en": "Annunciation",
+        "ml": "അറിയിപ്പു"
+    },
+    "resurrection":  {
+        "en": "Resurrection",
+        "ml": "ഉയിർപ്പു"
+    },
+    "transfigurationSeason":  {
+        "en": "Transfiguration",
+        "ml": "തേജസ്കരണ"
+    },
+    "holyCross": {
+        "en": "Holy Cross",
+        "ml": "സ്ലീബാ"
+    },
+    "holy_cross": {
+        "en": "Holy Cross",
+        "ml": "സ്ലീബാ"
+    },
+    "calendar": {
+        "en": "Calendar",
+        "ml": "പഞ്ചാംഗം"
+    },
+    "tune": {
+        "en": "Tune / Mode",
+        "ml": "നിറം / രാഗം"
+    },
+    "calendar_today": {
+        "en": "Today",
+        "ml": "ഇന്ന്"
+    },
+    "calendar_selectedDay": {
+        "en": "Selected Day",
+        "ml": "തിരഞ്ഞെടുത്ത ദിവസം"
+    },
+    "calendar_commemorations": {
+        "en": "Commemorations",
+        "ml": "ഓർമ്മപ്പെരുന്നാളുകൾ"
+    },
+    "calendar_fasting": {
+        "en": "Fasting",
+        "ml": "നോമ്പ്"
+    },
+    "calendar_normalDay": {
+        "en": "Normal Day",
+        "ml": "സാധാരണ ദിവസം"
+    },
+    "otherRecommendedPrayers": {
+        "en": "Other appropriate prayers",
+        "ml": "മറ്റ് അനുയോജ്യമായ പ്രാർത്ഥനകൾ"
+    },
+    "indexOfPrayers": {
+        "en": "Index of prayers",
+        "ml": "പ്രാർത്ഥനകളുടെ സൂചിക"
+    },
+    "institutionBlessing": {
+        "en": "Blessing of Institutions",
+        "ml": "സ്ഥാപന ശുദ്ധീകരണം"
+    },
+    "vehicleBlessing": {
+        "en": "Blessing of Vehicles",
+        "ml": ""
     }
 }
