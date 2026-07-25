@@ -282,8 +282,7 @@
     },
     "2025-12-10T00:00:00": {
       "events": [
-        "feastStBehanam",
-        "feastMarPhiloxenos"
+        "feastStBehanam"
       ],
       "season": "annunciation",
       "tune": 2,
@@ -361,6 +360,7 @@
     },
     "2025-12-21T00:00:00": {
       "events": [
+        "dukhrono",
         "sundayBeforeChristmas"
       ],
       "season": "annunciation",
@@ -1180,7 +1180,8 @@
     "2026-04-12T00:00:00": {
       "events": [
         "geevargheseMarIvanios",
-        "newSunday"
+        "newSunday",
+        "sundayOfStThomas"
       ],
       "season": "resurrection",
       "tune": 1,
@@ -1272,7 +1273,8 @@
     },
     "2026-04-25T00:00:00": {
       "events": [
-        "marthomaFirst"
+        "marthomaFirst",
+        "markTheEvangelist"
       ],
       "season": "resurrection",
       "tune": 2,
@@ -1732,7 +1734,7 @@
         "feastOfApostlesFast"
       ],
       "season": "pentecost",
-      "tune": 8,
+      "tune": 5,
       "lent": null
     },
     "2026-06-30T00:00:00": {
@@ -1740,7 +1742,7 @@
         "feastOfTwelveApostles"
       ],
       "season": "pentecost",
-      "tune": 4,
+      "tune": 8,
       "lent": null
     },
     "2026-07-01T00:00:00": {
