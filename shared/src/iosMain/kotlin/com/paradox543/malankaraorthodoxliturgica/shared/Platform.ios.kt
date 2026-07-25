@@ -13,6 +13,8 @@ import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBook
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.viewmodel.BibleViewModel
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.BibleReadingScreen
+import com.paradox543.malankaraorthodoxliturgica.feature.calendar.screens.CalendarLiturgicalSeasonScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.calendar.viewmodel.CalendarViewModel
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.HomeScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.IndexScreen
@@ -330,4 +332,56 @@ fun getBibleChapterViewController(
     onChromeStateChanged: (String, Boolean) -> Unit
 ): UIViewController = ComposeUIViewController {
     BibleChapterScreenWrapper(bookIndex, chapterIndex, onChromeStateChanged)
+}
+
+@Composable
+fun CalendarScreenWrapper(
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+) {
+    val koin = getKoin()
+    val calendarViewModel: CalendarViewModel = koin.get()
+
+    CalendarLiturgicalSeasonScreen(
+        calendarViewModel = calendarViewModel,
+        contentPadding = PaddingValues(0.dp),
+        onPrayerNavigate = onPrayerNavigate,
+        onBibleNavigate = onBibleNavigate,
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
+    )
+}
+
+fun getCalendarViewController(
+    onPrayerNavigate: (String) -> Unit,
+    onBibleNavigate: () -> Unit,
+    onChromeStateChanged: (String, Boolean) -> Unit
+): UIViewController = ComposeUIViewController {
+    CalendarScreenWrapper(onPrayerNavigate, onBibleNavigate, onChromeStateChanged)
+}
+
+@Composable
+fun BibleReaderScreenWrapper(
+    onChromeStateChanged: (String, Boolean) -> Unit
+) {
+    val koin = getKoin()
+    val calendarViewModel: CalendarViewModel = koin.get()
+
+    BibleReadingScreen(
+        calendarViewModel = calendarViewModel,
+        contentPadding = PaddingValues(0.dp),
+        onScaffoldStateChanged = { state ->
+            val (title, showFab) = state.toChromeState()
+            onChromeStateChanged(title, showFab)
+        }
+    )
+}
+
+fun getBibleReaderViewController(
+    onChromeStateChanged: (String, Boolean) -> Unit
+): UIViewController = ComposeUIViewController {
+    BibleReaderScreenWrapper(onChromeStateChanged)
 }
