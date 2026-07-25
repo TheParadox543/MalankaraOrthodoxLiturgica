@@ -147,6 +147,41 @@ final class MalankaraOrthodoxLiturgicaUITests: XCTestCase {
         }
     }
 
+    // MARK: - Task 11 verification: onboarding gate on fresh launch.
+    //
+    // Confirms the fullScreenCover onboarding gate shows on a fresh install
+    // (`AppRouter.checkOnboardingStatus()` -> `getOnboardingCompleted` reporting
+    // `false` from `IOSSettingsRepository`, whose `onboardingCompleted` flow is
+    // hardcoded to `MutableStateFlow(false)` -- see Platform.ios.kt and
+    // data/settings/src/iosMain/.../IOSSettingsRepository.kt).
+    //
+    // Deliberately does NOT tap "Skip"/"Next" through onboarding: doing so calls
+    // `OnboardingViewModel.skipOnboarding()` -> `settingsRepository.setOnboardingStage()`,
+    // which is a `TODO("Not yet implemented")` stub on iOS today (pre-existing gap in
+    // `IOSSettingsRepository`, outside Task 11's file list -- that repository isn't
+    // touched by this task). That `TODO()` throws inside a `viewModelScope.launch {}`
+    // coroutine with no exception handler, which is fatal on Kotlin/Native and crashes
+    // the whole app process. This was confirmed manually: tapping Skip synthesizes
+    // correctly (XCUITest's activity log shows the tap event landing), the Home tab
+    // renders behind the dismissing cover for a moment, and then the process dies
+    // (XCUITest logs "Unable to monitor event loop" and the simulator falls back to
+    // the springboard). The gear-toolbar-then-Settings-push flow was instead verified
+    // by a one-off manual build with the onboarding check temporarily disabled --
+    // see the Task 11 report for screenshots. Once a real `IOSSettingsRepository` is
+    // wired up (persisting via NSUserDefaults or similar, in a later task), this test
+    // should be extended to tap through onboarding and assert the gear/Settings push,
+    // the same way `testHomeTabPushSectionAndPopBack` above exercises the tab bar.
+    @MainActor
+    func testOnboardingGateAppearsOnFreshLaunch() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let skipButton = app.buttons["Skip"]
+        let onboardingShown = skipButton.waitForExistence(timeout: 10)
+        attachScreenshot(app: app, name: "11-01-launch-state")
+        XCTAssertTrue(onboardingShown, "Onboarding cover (Skip button) did not appear on fresh launch")
+    }
+
     private func attachScreenshot(app: XCUIApplication, name: String) {
         let screenshot = app.windows.firstMatch.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)

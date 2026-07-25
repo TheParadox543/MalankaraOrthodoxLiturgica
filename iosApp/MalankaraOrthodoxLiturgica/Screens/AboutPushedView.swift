@@ -1,12 +1,10 @@
 import SwiftUI
 
-struct BibleChapterPushedView: View {
-    let bookIndex: Int
-    let chapterIndex: Int
+struct AboutPushedView: View {
     @StateObject private var chromeState = ChromeState()
 
     var body: some View {
-        BibleChapterComposeView(bookIndex: bookIndex, chapterIndex: chapterIndex, chromeState: chromeState)
+        AboutComposeView(chromeState: chromeState)
             .ignoresSafeArea(edges: .bottom)
             .navigationBarTitleDisplayMode(.inline)
             .withSettingsGear()

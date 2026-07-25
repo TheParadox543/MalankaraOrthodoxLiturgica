@@ -1,17 +1,15 @@
 import SwiftUI
 
-struct CalendarTabRootView: View {
+struct SettingsPushedView: View {
     @EnvironmentObject var router: AppRouter
     @StateObject private var chromeState = ChromeState()
 
     var body: some View {
-        CalendarComposeView(
-            onPrayerNavigate: { router.push(.prayer($0)) },
-            onBibleNavigate: { router.push(.bibleReader) },
+        SettingsComposeView(
+            onNavigateToAbout: { router.push(.about) },
             chromeState: chromeState
         )
         .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
-        .withSettingsGear()
     }
 }

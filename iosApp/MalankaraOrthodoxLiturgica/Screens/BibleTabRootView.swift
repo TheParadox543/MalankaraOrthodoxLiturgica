@@ -11,5 +11,6 @@ struct BibleTabRootView: View {
         )
         .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
+        .withSettingsGear()
     }
 }

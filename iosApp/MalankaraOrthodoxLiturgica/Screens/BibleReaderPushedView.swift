@@ -7,5 +7,6 @@ struct BibleReaderPushedView: View {
         BibleReaderComposeView(chromeState: chromeState)
             .ignoresSafeArea(edges: .bottom)
             .navigationBarTitleDisplayMode(.inline)
+            .withSettingsGear()
     }
 }

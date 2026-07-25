@@ -13,5 +13,6 @@ struct PrayerPushedView: View {
         )
         .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
+        .withSettingsGear()
     }
 }

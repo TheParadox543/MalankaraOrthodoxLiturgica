@@ -15,5 +15,6 @@ struct HomeTabRootView: View {
         )
         .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
+        .withSettingsGear()
     }
 }

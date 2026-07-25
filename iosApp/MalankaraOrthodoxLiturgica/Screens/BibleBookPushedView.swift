@@ -13,5 +13,6 @@ struct BibleBookPushedView: View {
         )
         .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
+        .withSettingsGear()
     }
 }

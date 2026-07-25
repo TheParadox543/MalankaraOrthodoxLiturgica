@@ -13,6 +13,7 @@ struct MalankaraOrthodoxLiturgicaApp: App {
         WindowGroup {
             RootTabView()
                 .environmentObject(router)
+                .onAppear { router.checkOnboardingStatus() }
                 .onOpenURL { url in
                     if let route = AppRoute(url: url) {
                         router.push(route)

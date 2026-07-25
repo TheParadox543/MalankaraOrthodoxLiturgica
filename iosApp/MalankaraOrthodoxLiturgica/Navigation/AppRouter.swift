@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import sharedKit
 
 enum AppTab: String, CaseIterable, Hashable {
     case home, prayNow, calendar, bible
@@ -75,6 +76,12 @@ final class AppRouter: ObservableObject {
             popToRoot(tappedTab)
         } else {
             selectedTab = tappedTab
+        }
+    }
+
+    func checkOnboardingStatus() {
+        Platform_iosKt.getOnboardingCompleted { completed in
+            self.showOnboarding = !completed.boolValue
         }
     }
 }

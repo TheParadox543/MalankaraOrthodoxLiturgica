@@ -16,5 +16,6 @@ struct SectionPushedView: View {
         )
         .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
+        .withSettingsGear()
     }
 }
