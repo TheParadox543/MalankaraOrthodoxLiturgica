@@ -49,6 +49,7 @@ uiToolingPreview = "1.10.3"
 workRuntimeKtx = "2.10.5"
 zxingAndroidEmbedded = "4.3.0"
 zxingCore = "3.5.4"
+qrcodeKotlin = "4.5.0"
 uiTestJunit4 = "1.10.6"
 uiVersion = "1.10.6"
 
@@ -101,6 +102,7 @@ runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "run
 ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "ui" }
 ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxingCore" }
+qrcode-kotlin = { module = "io.github.g0dkar:qrcode-kotlin", version.ref = "qrcodeKotlin" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashalytics" }
