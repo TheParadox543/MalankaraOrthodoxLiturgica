@@ -44,4 +44,19 @@ struct AppRouterTests {
         #expect(router.selectedTab == .calendar)
         #expect(router.calendarPath == [.bibleReader])
     }
+
+    @Test func replaceSwapsOnlyTheLastElementOfSelectedTabsPath() async throws {
+        let router = AppRouter()
+        router.selectedTab = .home
+        router.homePath = [.section(route: "commonPrayers"), .prayer(route: "morning", scroll: 0)]
+        router.replace(.prayer(route: "evening", scroll: 0))
+        #expect(router.homePath == [.section(route: "commonPrayers"), .prayer(route: "evening", scroll: 0)])
+    }
+
+    @Test func replaceOnEmptyPathJustPushes() async throws {
+        let router = AppRouter()
+        router.selectedTab = .bible
+        router.replace(.bibleChapter(bookIndex: 1, chapterIndex: 1))
+        #expect(router.biblePath == [.bibleChapter(bookIndex: 1, chapterIndex: 1)])
+    }
 }

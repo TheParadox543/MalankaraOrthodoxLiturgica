@@ -50,16 +50,29 @@ final class AppRouter: ObservableObject {
     /// used by `SectionNavBar`'s prev/next taps: swaps the current screen for
     /// the sibling instead of pushing on top, so repeatedly tapping
     /// next/previous doesn't grow the stack unbounded.
+    ///
+    /// Pops then pushes rather than assigning `path[path.count - 1] = route`
+    /// directly: `NavigationStack`'s `.navigationDestination(for:)` is
+    /// keyed off structural changes to the path (push/pop), and in-place
+    /// mutation of an existing element at the same index doesn't reliably
+    /// force it to reconstruct the destination view — the same length-preserving
+    /// write can silently leave the old, stale screen on screen. Two separate
+    /// mutations (a real pop, then a real push) goes through the exact same
+    /// code path as ordinary navigation, which is already known to work.
     func replace(_ route: AppRoute) {
         switch selectedTab {
         case .home:
-            if homePath.isEmpty { homePath.append(route) } else { homePath[homePath.count - 1] = route }
+            if !homePath.isEmpty { homePath.removeLast() }
+            homePath.append(route)
         case .prayNow:
-            if prayNowPath.isEmpty { prayNowPath.append(route) } else { prayNowPath[prayNowPath.count - 1] = route }
+            if !prayNowPath.isEmpty { prayNowPath.removeLast() }
+            prayNowPath.append(route)
         case .calendar:
-            if calendarPath.isEmpty { calendarPath.append(route) } else { calendarPath[calendarPath.count - 1] = route }
+            if !calendarPath.isEmpty { calendarPath.removeLast() }
+            calendarPath.append(route)
         case .bible:
-            if biblePath.isEmpty { biblePath.append(route) } else { biblePath[biblePath.count - 1] = route }
+            if !biblePath.isEmpty { biblePath.removeLast() }
+            biblePath.append(route)
         }
     }
 
