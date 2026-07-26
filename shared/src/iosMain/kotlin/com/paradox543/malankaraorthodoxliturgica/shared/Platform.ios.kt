@@ -46,6 +46,25 @@ import platform.UIKit.UIViewController
 actual fun platformName(): String = "iOS"
 
 /**
+ * Every `getXViewController()` below is its own `ComposeUIViewController`, so
+ * unlike Android's single NavGraph composable (which creates these once and
+ * threads them down — see `NavGraph.kt`'s "Create ViewModels once ... to
+ * prevent recreation glitches" comment), there is no shared Compose scope to
+ * hoist into. `koinViewModel()` would resolve a brand-new instance — with a
+ * brand-new async-loading `rootNode`/`selectedLanguage` — on every single
+ * screen push. Resolving directly through Koin once, cached here for the
+ * process lifetime, gives iOS the same "created once" guarantee Android gets
+ * from NavGraph, without needing a persistent ViewModelStoreOwner.
+ */
+private object IOSSharedViewModels {
+    val prayerViewModel: PrayerViewModel by lazy { getKoin().get() }
+    val prayerNavViewModel: PrayerNavViewModel by lazy { getKoin().get() }
+    val bibleViewModel: BibleViewModel by lazy { getKoin().get() }
+    val calendarViewModel: CalendarViewModel by lazy { getKoin().get() }
+    val settingsViewModel: SettingsViewModel by lazy { getKoin().get() }
+}
+
+/**
  * `ScaffoldUiState` is intentionally not exported to Swift (it would widen
  * the framework's public surface for a single enum). Every screen wrapper
  * flattens it to primitives here before it crosses the bridge. `showBack`
@@ -68,8 +87,8 @@ fun PrayerScreenWrapper(
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val prayerViewModel: PrayerViewModel = koinViewModel()
-    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
+    val prayerViewModel = IOSSharedViewModels.prayerViewModel
+    val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
 
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
     val node = rootNode.findByRoute(route)
@@ -114,9 +133,9 @@ fun HomeScreenWrapper(
     onIndexNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val prayerViewModel: PrayerViewModel = koinViewModel()
-    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
-    val calendarViewModel: CalendarViewModel = koinViewModel()
+    val prayerViewModel = IOSSharedViewModels.prayerViewModel
+    val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
+    val calendarViewModel = IOSSharedViewModels.calendarViewModel
 
     val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
     val recommendedPrayers = prayerNavViewModel.getAllPrayerNodes()
@@ -167,9 +186,9 @@ fun SectionScreenWrapper(
     onIndexNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val prayerViewModel: PrayerViewModel = koinViewModel()
-    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
-    val calendarViewModel: CalendarViewModel = koinViewModel()
+    val prayerViewModel = IOSSharedViewModels.prayerViewModel
+    val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
+    val calendarViewModel = IOSSharedViewModels.calendarViewModel
 
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
     val node = rootNode.findByRoute(route) ?: PageNode(route = route, parent = null)
@@ -215,8 +234,8 @@ fun IndexScreenWrapper(
     onPrayerNavigate: (String) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val prayerViewModel: PrayerViewModel = koinViewModel()
-    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
+    val prayerViewModel = IOSSharedViewModels.prayerViewModel
+    val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
 
     IndexScreen(
         prayerViewModel = prayerViewModel,
@@ -242,8 +261,8 @@ fun PrayNowScreenWrapper(
     onPrayerNavigate: (String) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val prayerViewModel: PrayerViewModel = koinViewModel()
-    val prayerNavViewModel: PrayerNavViewModel = koinViewModel()
+    val prayerViewModel = IOSSharedViewModels.prayerViewModel
+    val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
 
     PrayNowScreen(
         onCardClick = onPrayerNavigate,
@@ -269,7 +288,7 @@ fun BibleScreenWrapper(
     onBibleNavigate: (Int) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val bibleViewModel: BibleViewModel = koinViewModel()
+    val bibleViewModel = IOSSharedViewModels.bibleViewModel
 
     BibleScreen(
         onBibleNavigate = onBibleNavigate,
@@ -295,7 +314,7 @@ fun BibleBookScreenWrapper(
     onBibleNavigate: (Int, Int) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val bibleViewModel: BibleViewModel = koinViewModel()
+    val bibleViewModel = IOSSharedViewModels.bibleViewModel
 
     BibleBookScreen(
         onBibleNavigate = onBibleNavigate,
@@ -323,7 +342,7 @@ fun BibleChapterScreenWrapper(
     chapterIndex: Int,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val bibleViewModel: BibleViewModel = koinViewModel()
+    val bibleViewModel = IOSSharedViewModels.bibleViewModel
 
     BibleChapterScreen(
         bibleViewModel = bibleViewModel,
@@ -353,7 +372,7 @@ fun CalendarScreenWrapper(
     onBibleNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val calendarViewModel: CalendarViewModel = koinViewModel()
+    val calendarViewModel = IOSSharedViewModels.calendarViewModel
 
     CalendarLiturgicalSeasonScreen(
         calendarViewModel = calendarViewModel,
@@ -379,7 +398,7 @@ fun getCalendarViewController(
 fun BibleReaderScreenWrapper(
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val calendarViewModel: CalendarViewModel = koinViewModel()
+    val calendarViewModel = IOSSharedViewModels.calendarViewModel
 
     BibleReadingScreen(
         calendarViewModel = calendarViewModel,
@@ -402,7 +421,7 @@ fun SettingsScreenWrapper(
     onNavigateToAbout: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
 ) {
-    val settingsViewModel: SettingsViewModel = koinViewModel()
+    val settingsViewModel = IOSSharedViewModels.settingsViewModel
     val shareService: ShareService = getKoin().get()
 
     SettingsScreen(
@@ -496,9 +515,7 @@ data class SongMetadata(
 )
 
 fun getSongMetadata(route: String): SongMetadata? {
-    val koin = getKoin()
-    val prayerNavViewModel: PrayerNavViewModel = koin.get()
-    val node = prayerNavViewModel.rootNode.value.findByRoute(route) ?: return null
+    val node = IOSSharedViewModels.prayerNavViewModel.rootNode.value.findByRoute(route) ?: return null
     val filename = node.filename ?: return null
     return SongMetadata(filename = filename)
 }
