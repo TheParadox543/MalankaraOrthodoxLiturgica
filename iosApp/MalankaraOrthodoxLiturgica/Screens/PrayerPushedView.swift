@@ -12,6 +12,7 @@ struct PrayerPushedView: View {
     var body: some View {
         ComposeView(
             fileName: route,
+            scroll: scroll,
             onPrayerButtonClick: { _, _ in },
             chromeState: chromeState,
             onSectionNavChanged: { prev, next, onGenerateQr in

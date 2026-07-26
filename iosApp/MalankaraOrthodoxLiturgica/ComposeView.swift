@@ -3,6 +3,7 @@ import sharedKit
 
 struct ComposeView: UIViewControllerRepresentable {
     let fileName: String
+    let scroll: Int
     let onPrayerButtonClick: (String, Bool) -> Void
     @ObservedObject var chromeState: ChromeState
     let onSectionNavChanged: (String?, String?, @escaping () -> Void) -> Void
@@ -10,6 +11,7 @@ struct ComposeView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         return Platform_iosKt.getPrayerViewController(
             route: fileName,
+            scrollIndex: Int32(scroll),
             onPrayerButtonClick: { link, replace in
                 onPrayerButtonClick(link, replace.boolValue)
             },

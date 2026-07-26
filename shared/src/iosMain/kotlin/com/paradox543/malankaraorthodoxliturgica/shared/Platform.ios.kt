@@ -84,6 +84,7 @@ private fun ScaffoldUiState.toChromeState(): Pair<String, Boolean> =
 @Composable
 fun PrayerScreenWrapper(
     route: String,
+    scrollIndex: Int,
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit,
     onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
@@ -107,6 +108,7 @@ fun PrayerScreenWrapper(
             prayerViewModel = prayerViewModel,
             prayerNavViewModel = prayerNavViewModel,
             node = node,
+            scrollIndex = scrollIndex,
             onQrDialogShow = { qrRoute, scroll -> "app://liturgica/prayer/$qrRoute/$scroll" },
             routeProvider = { it },
             onScaffoldStateChanged = { state ->
@@ -122,11 +124,12 @@ fun PrayerScreenWrapper(
 
 fun getPrayerViewController(
     route: String,
+    scrollIndex: Int,
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit,
     onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
 ): UIViewController = ComposeUIViewController {
-    PrayerScreenWrapper(route, onPrayerButtonClick, onChromeStateChanged, onSectionNavChanged)
+    PrayerScreenWrapper(route, scrollIndex, onPrayerButtonClick, onChromeStateChanged, onSectionNavChanged)
 }
 
 @Composable
