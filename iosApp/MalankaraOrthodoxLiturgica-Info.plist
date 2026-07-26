@@ -4,6 +4,8 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>CFBundleDisplayName</key>
+	<string>Liturgica</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to scan QR codes that link to prayers, Bible chapters, and other content in the app.</string>
 	<key>CFBundleURLTypes</key>
