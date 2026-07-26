@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		135EC43C3015FEE900B4AA21 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 135EC43B3015FEE900B4AA21 /* FirebaseAnalytics */; };
+		135EC43E3015FEE900B4AA21 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 135EC43D3015FEE900B4AA21 /* FirebaseAnalyticsCore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		65683B6A2F84275F00B6A903 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				135EC43C3015FEE900B4AA21 /* FirebaseAnalytics in Frameworks */,
+				135EC43E3015FEE900B4AA21 /* FirebaseAnalyticsCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +121,8 @@
 			);
 			name = MalankaraOrthodoxLiturgica;
 			packageProductDependencies = (
+				135EC43B3015FEE900B4AA21 /* FirebaseAnalytics */,
+				135EC43D3015FEE900B4AA21 /* FirebaseAnalyticsCore */,
 			);
 			productName = MalankaraOrthodoxLiturgica;
 			productReference = 65683B5C2F84275C00B6A903 /* MalankaraOrthodoxLiturgica.app */;
@@ -197,6 +206,9 @@
 			);
 			mainGroup = 65683B532F84275C00B6A903;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				135EC43A3015FEE900B4AA21 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 65683B5D2F84275C00B6A903 /* Products */;
 			projectDirPath = "";
@@ -347,7 +359,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = P537YFZQKL;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -447,7 +459,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MalankaraOrthodoxLiturgica-Info.plist;
+				INFOPLIST_FILE = "MalankaraOrthodoxLiturgica-Info.plist";
 				INFOPLIST_KEY_CADisableMinimumFrameDurationOnPhone = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -482,7 +494,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MalankaraOrthodoxLiturgica-Info.plist;
+				INFOPLIST_FILE = "MalankaraOrthodoxLiturgica-Info.plist";
 				INFOPLIST_KEY_CADisableMinimumFrameDurationOnPhone = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -630,6 +642,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		135EC43A3015FEE900B4AA21 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.16.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		135EC43B3015FEE900B4AA21 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 135EC43A3015FEE900B4AA21 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		135EC43D3015FEE900B4AA21 /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 135EC43A3015FEE900B4AA21 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65683B542F84275C00B6A903 /* Project object */;
 }

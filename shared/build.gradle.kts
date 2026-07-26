@@ -40,6 +40,7 @@ kotlin {
             export(project(":core:domain"))
             export(project(":data:prayer"))
             export(project(":feature:prayer-kmp"))
+            export(project(":analytics:firebase"))
         }
     }
 //    iosX64 {
