@@ -9,7 +9,6 @@ struct SettingsPushedView: View {
             onNavigateToAbout: { router.push(.about) },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

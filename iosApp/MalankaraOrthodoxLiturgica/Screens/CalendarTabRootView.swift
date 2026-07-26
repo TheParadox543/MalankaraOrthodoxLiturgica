@@ -10,7 +10,6 @@ struct CalendarTabRootView: View {
             onBibleNavigate: { router.push(.bibleReader) },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
     }

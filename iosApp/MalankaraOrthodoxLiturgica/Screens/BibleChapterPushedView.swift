@@ -7,7 +7,6 @@ struct BibleChapterPushedView: View {
 
     var body: some View {
         BibleChapterComposeView(bookIndex: bookIndex, chapterIndex: chapterIndex, chromeState: chromeState)
-            .ignoresSafeArea(edges: .bottom)
             .navigationBarTitleDisplayMode(.inline)
             .withSettingsGear()
     }

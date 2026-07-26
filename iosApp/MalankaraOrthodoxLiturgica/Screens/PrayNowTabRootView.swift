@@ -9,7 +9,6 @@ struct PrayNowTabRootView: View {
             onPrayerNavigate: { router.push(.prayer($0)) },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
     }

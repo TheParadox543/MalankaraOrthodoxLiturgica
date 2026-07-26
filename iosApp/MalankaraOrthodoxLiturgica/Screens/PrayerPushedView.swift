@@ -11,7 +11,6 @@ struct PrayerPushedView: View {
             onPrayerButtonClick: { _, _ in },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
     }

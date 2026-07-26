@@ -13,7 +13,6 @@ struct HomeTabRootView: View {
             onIndexNavigate: { router.push(.index) },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
         .overlay(alignment: .bottomTrailing) {

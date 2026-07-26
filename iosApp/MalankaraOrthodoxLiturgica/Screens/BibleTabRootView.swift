@@ -9,7 +9,6 @@ struct BibleTabRootView: View {
             onBibleNavigate: { router.push(.bibleBook(bookIndex: $0)) },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
     }

@@ -14,7 +14,6 @@ struct SectionPushedView: View {
             onIndexNavigate: { router.push(.index) },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
     }

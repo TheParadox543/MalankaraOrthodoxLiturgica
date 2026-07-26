@@ -11,7 +11,6 @@ struct BibleBookPushedView: View {
             onBibleNavigate: { book, chapter in router.push(.bibleChapter(bookIndex: book, chapterIndex: chapter)) },
             chromeState: chromeState
         )
-        .ignoresSafeArea(edges: .bottom)
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
     }
