@@ -16,5 +16,6 @@ struct SectionPushedView: View {
         )
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
+        .withQrFab(chromeState)
     }
 }

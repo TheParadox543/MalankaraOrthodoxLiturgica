@@ -12,5 +12,6 @@ struct CalendarTabRootView: View {
         )
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
+        .withQrFab(chromeState)
     }
 }

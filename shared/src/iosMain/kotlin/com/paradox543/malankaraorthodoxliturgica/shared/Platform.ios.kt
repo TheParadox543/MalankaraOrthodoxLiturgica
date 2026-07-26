@@ -85,7 +85,8 @@ private fun ScaffoldUiState.toChromeState(): Pair<String, Boolean> =
 fun PrayerScreenWrapper(
     route: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    onChromeStateChanged: (String, Boolean) -> Unit
+    onChromeStateChanged: (String, Boolean) -> Unit,
+    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
 ) {
     val prayerViewModel = IOSSharedViewModels.prayerViewModel
     val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
@@ -106,11 +107,14 @@ fun PrayerScreenWrapper(
             prayerViewModel = prayerViewModel,
             prayerNavViewModel = prayerNavViewModel,
             node = node,
-            onQrDialogShow = { _, _ -> "" },
+            onQrDialogShow = { qrRoute, scroll -> "liturgica://prayer/$qrRoute/$scroll" },
             routeProvider = { it },
             onScaffoldStateChanged = { state ->
                 val (title, showFab) = state.toChromeState()
                 onChromeStateChanged(title, showFab)
+                if (state is ScaffoldUiState.PrayerReading) {
+                    onSectionNavChanged(state.prevRoute, state.nextRoute, state.onShowQrDialog)
+                }
             }
         )
     }
@@ -119,9 +123,10 @@ fun PrayerScreenWrapper(
 fun getPrayerViewController(
     route: String,
     onPrayerButtonClick: (String, Boolean) -> Unit,
-    onChromeStateChanged: (String, Boolean) -> Unit
+    onChromeStateChanged: (String, Boolean) -> Unit,
+    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
 ): UIViewController = ComposeUIViewController {
-    PrayerScreenWrapper(route, onPrayerButtonClick, onChromeStateChanged)
+    PrayerScreenWrapper(route, onPrayerButtonClick, onChromeStateChanged, onSectionNavChanged)
 }
 
 @Composable
@@ -340,7 +345,8 @@ fun getBibleBookViewController(
 fun BibleChapterScreenWrapper(
     bookIndex: Int,
     chapterIndex: Int,
-    onChromeStateChanged: (String, Boolean) -> Unit
+    onChromeStateChanged: (String, Boolean) -> Unit,
+    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
 ) {
     val bibleViewModel = IOSSharedViewModels.bibleViewModel
 
@@ -349,11 +355,18 @@ fun BibleChapterScreenWrapper(
         bookIndex = bookIndex,
         chapterIndex = chapterIndex,
         contentPadding = PaddingValues(0.dp),
-        onQrDialogShow = { _, _ -> "" },
+        onQrDialogShow = { book, chapter -> "liturgica://bible/$book/$chapter" },
         routeFactory = { ref -> "bible/${ref.bookIndex}/${ref.chapterIndex}" },
         onScaffoldStateChanged = { state ->
             val (title, showFab) = state.toChromeState()
             onChromeStateChanged(title, showFab)
+            if (state is ScaffoldUiState.BibleChapterReading) {
+                onSectionNavChanged(
+                    state.prevRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                    state.nextRoute?.let { "${it.bookIndex}/${it.chapterIndex}" },
+                    state.onShowQrDialog
+                )
+            }
         }
     )
 }
@@ -361,9 +374,10 @@ fun BibleChapterScreenWrapper(
 fun getBibleChapterViewController(
     bookIndex: Int,
     chapterIndex: Int,
-    onChromeStateChanged: (String, Boolean) -> Unit
+    onChromeStateChanged: (String, Boolean) -> Unit,
+    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
 ): UIViewController = ComposeUIViewController {
-    BibleChapterScreenWrapper(bookIndex, chapterIndex, onChromeStateChanged)
+    BibleChapterScreenWrapper(bookIndex, chapterIndex, onChromeStateChanged, onSectionNavChanged)
 }
 
 @Composable

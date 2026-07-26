@@ -10,5 +10,6 @@ struct SettingsPushedView: View {
             chromeState: chromeState
         )
         .navigationBarTitleDisplayMode(.inline)
+        .withQrFab(chromeState)
     }
 }

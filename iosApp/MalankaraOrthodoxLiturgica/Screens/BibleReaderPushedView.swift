@@ -7,5 +7,7 @@ struct BibleReaderPushedView: View {
         BibleReaderComposeView(chromeState: chromeState)
             .navigationBarTitleDisplayMode(.inline)
             .withSettingsGear()
+            .withQrFab(chromeState)
+            .toolbar(.hidden, for: .tabBar)
     }
 }

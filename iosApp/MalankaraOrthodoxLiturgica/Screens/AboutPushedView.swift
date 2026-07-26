@@ -7,5 +7,7 @@ struct AboutPushedView: View {
         AboutComposeView(chromeState: chromeState)
             .navigationBarTitleDisplayMode(.inline)
             .withSettingsGear()
+            .withQrFab(chromeState)
+            .toolbar(.hidden, for: .tabBar)
     }
 }

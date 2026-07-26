@@ -13,5 +13,6 @@ struct BibleBookPushedView: View {
         )
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
+        .withQrFab(chromeState)
     }
 }

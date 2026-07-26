@@ -11,5 +11,6 @@ struct PrayNowTabRootView: View {
         )
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
+        .withQrFab(chromeState)
     }
 }

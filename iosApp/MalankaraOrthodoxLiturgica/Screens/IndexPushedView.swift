@@ -11,5 +11,6 @@ struct IndexPushedView: View {
         )
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()
+        .withQrFab(chromeState)
     }
 }

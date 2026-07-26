@@ -46,6 +46,23 @@ final class AppRouter: ObservableObject {
         }
     }
 
+    /// Mirrors Android's `navController.navigate(route) { popBackStack() }`
+    /// used by `SectionNavBar`'s prev/next taps: swaps the current screen for
+    /// the sibling instead of pushing on top, so repeatedly tapping
+    /// next/previous doesn't grow the stack unbounded.
+    func replace(_ route: AppRoute) {
+        switch selectedTab {
+        case .home:
+            if homePath.isEmpty { homePath.append(route) } else { homePath[homePath.count - 1] = route }
+        case .prayNow:
+            if prayNowPath.isEmpty { prayNowPath.append(route) } else { prayNowPath[prayNowPath.count - 1] = route }
+        case .calendar:
+            if calendarPath.isEmpty { calendarPath.append(route) } else { calendarPath[calendarPath.count - 1] = route }
+        case .bible:
+            if biblePath.isEmpty { biblePath.append(route) } else { biblePath[biblePath.count - 1] = route }
+        }
+    }
+
     func popToRoot(_ tab: AppTab) {
         switch tab {
         case .home: homePath.removeAll()
