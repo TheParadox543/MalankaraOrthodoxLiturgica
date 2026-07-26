@@ -10,20 +10,18 @@ struct BibleChapterPushedView: View {
     @State private var generateQr: (() -> Void)?
 
     var body: some View {
-        BibleChapterComposeView(
-            bookIndex: bookIndex,
-            chapterIndex: chapterIndex,
-            chromeState: chromeState,
-            onSectionNavChanged: { prev, next, onGenerateQr in
-                prevRoute = prev
-                nextRoute = next
-                generateQr = onGenerateQr
-            }
-        )
-        .navigationBarTitleDisplayMode(.inline)
-        .withSettingsGear()
-        .toolbar(.hidden, for: .tabBar)
-        .safeAreaInset(edge: .bottom) {
+        VStack(spacing: 0) {
+            BibleChapterComposeView(
+                bookIndex: bookIndex,
+                chapterIndex: chapterIndex,
+                chromeState: chromeState,
+                onSectionNavChanged: { prev, next, onGenerateQr in
+                    prevRoute = prev
+                    nextRoute = next
+                    generateQr = onGenerateQr
+                }
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             SectionNavBar(
                 hasPrev: prevRoute != nil,
                 hasNext: nextRoute != nil,
@@ -32,6 +30,9 @@ struct BibleChapterPushedView: View {
                 onGenerateQr: { generateQr?() }
             )
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .withSettingsGear()
+        .toolbar(.hidden, for: .tabBar)
     }
 
     /// `prevRoute`/`nextRoute` arrive as `"bookIndex/chapterIndex"`
