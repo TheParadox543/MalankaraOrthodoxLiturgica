@@ -107,7 +107,7 @@ fun PrayerScreenWrapper(
             prayerViewModel = prayerViewModel,
             prayerNavViewModel = prayerNavViewModel,
             node = node,
-            onQrDialogShow = { qrRoute, scroll -> "liturgica://prayer/$qrRoute/$scroll" },
+            onQrDialogShow = { qrRoute, scroll -> "app://liturgica/prayer/$qrRoute/$scroll" },
             routeProvider = { it },
             onScaffoldStateChanged = { state ->
                 val (title, showFab) = state.toChromeState()
@@ -355,7 +355,7 @@ fun BibleChapterScreenWrapper(
         bookIndex = bookIndex,
         chapterIndex = chapterIndex,
         contentPadding = PaddingValues(0.dp),
-        onQrDialogShow = { book, chapter -> "liturgica://bible/$book/$chapter" },
+        onQrDialogShow = { book, chapter -> "app://liturgica/bible/$book/$chapter" },
         routeFactory = { ref -> "bible/${ref.bookIndex}/${ref.chapterIndex}" },
         onScaffoldStateChanged = { state ->
             val (title, showFab) = state.toChromeState()
