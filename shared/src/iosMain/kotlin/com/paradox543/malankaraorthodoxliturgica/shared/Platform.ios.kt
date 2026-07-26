@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ComposeUIViewController
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
+import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
@@ -63,6 +64,22 @@ private object IOSSharedViewModels {
     val calendarViewModel: CalendarViewModel by lazy { getKoin().get() }
     val settingsViewModel: SettingsViewModel by lazy { getKoin().get() }
 }
+
+/**
+ * Every `getXViewController()` uses this instead of `ComposeUIViewController`
+ * directly. Android applies `MalankaraOrthodoxLiturgicaTheme` exactly once,
+ * around the whole `NavGraph` in `MainActivity.kt` — iOS has no equivalent
+ * single root Composable to wrap (see `IOSSharedViewModels`'s doc), so
+ * without this every screen silently fell back to Compose Multiplatform's
+ * default Material theme instead of the app's actual colors/typography.
+ */
+private fun themedComposeUIViewController(content: @Composable () -> Unit): UIViewController =
+    ComposeUIViewController {
+        val settingsViewModel = IOSSharedViewModels.settingsViewModel
+        val language by settingsViewModel.selectedLanguage.collectAsState()
+        val textScale by settingsViewModel.fontScale.collectAsState()
+        MalankaraOrthodoxLiturgicaTheme(language = language, textScale = textScale, content = content)
+    }
 
 /**
  * `ScaffoldUiState` is intentionally not exported to Swift (it would widen
@@ -128,7 +145,7 @@ fun getPrayerViewController(
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit,
     onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     PrayerScreenWrapper(route, scrollIndex, onPrayerButtonClick, onChromeStateChanged, onSectionNavChanged)
 }
 
@@ -174,7 +191,7 @@ fun getHomeViewController(
     onPrayNowNavigate: () -> Unit,
     onIndexNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     HomeScreenWrapper(
         onSectionNavigate,
         onPrayerNavigate,
@@ -226,7 +243,7 @@ fun getSectionViewController(
     onSongNavigate: (String) -> Unit,
     onIndexNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     SectionScreenWrapper(
         route,
         onSectionNavigate,
@@ -260,7 +277,7 @@ fun IndexScreenWrapper(
 fun getIndexViewController(
     onPrayerNavigate: (String) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     IndexScreenWrapper(onPrayerNavigate, onChromeStateChanged)
 }
 
@@ -287,7 +304,7 @@ fun PrayNowScreenWrapper(
 fun getPrayNowViewController(
     onPrayerNavigate: (String) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     PrayNowScreenWrapper(onPrayerNavigate, onChromeStateChanged)
 }
 
@@ -312,7 +329,7 @@ fun BibleScreenWrapper(
 fun getBibleViewController(
     onBibleNavigate: (Int) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     BibleScreenWrapper(onBibleNavigate, onChromeStateChanged)
 }
 
@@ -340,7 +357,7 @@ fun getBibleBookViewController(
     bookIndex: Int,
     onBibleNavigate: (Int, Int) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     BibleBookScreenWrapper(bookIndex, onBibleNavigate, onChromeStateChanged)
 }
 
@@ -379,7 +396,7 @@ fun getBibleChapterViewController(
     chapterIndex: Int,
     onChromeStateChanged: (String, Boolean) -> Unit,
     onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     BibleChapterScreenWrapper(bookIndex, chapterIndex, onChromeStateChanged, onSectionNavChanged)
 }
 
@@ -407,7 +424,7 @@ fun getCalendarViewController(
     onPrayerNavigate: (String) -> Unit,
     onBibleNavigate: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     CalendarScreenWrapper(onPrayerNavigate, onBibleNavigate, onChromeStateChanged)
 }
 
@@ -429,7 +446,7 @@ fun BibleReaderScreenWrapper(
 
 fun getBibleReaderViewController(
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     BibleReaderScreenWrapper(onChromeStateChanged)
 }
 
@@ -461,7 +478,7 @@ fun SettingsScreenWrapper(
 fun getSettingsViewController(
     onNavigateToAbout: () -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     SettingsScreenWrapper(onNavigateToAbout, onChromeStateChanged)
 }
 
@@ -489,7 +506,7 @@ fun getAboutViewController(
     onDeveloperContact: () -> Unit,
     onExternalLinkClick: (String) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     AboutScreenWrapper(appVersion, onDeveloperContact, onExternalLinkClick, onChromeStateChanged)
 }
 
@@ -510,7 +527,7 @@ fun OnboardingScreenWrapper(
 
 fun getOnboardingViewController(
     onNavigateToHome: () -> Unit
-): UIViewController = ComposeUIViewController {
+): UIViewController = themedComposeUIViewController {
     OnboardingScreenWrapper(onNavigateToHome)
 }
 
