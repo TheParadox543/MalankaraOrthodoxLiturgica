@@ -25,3 +25,11 @@ keystore.properties
 /.artifacts/
 /iosApp/MalankaraOrthodoxLiturgica.xcodeproj/xcuserdata
 /.superpowers/
+
+# Xcode Organizer export output (ipa + logs), named "<scheme> <date> <time>/"
+/iosApp/*.ipa
+/iosApp/*/*.ipa
+/iosApp/Packaging.log
+/iosApp/*/Packaging.log
+/iosApp/DistributionSummary.plist
+/iosApp/*/DistributionSummary.plist
