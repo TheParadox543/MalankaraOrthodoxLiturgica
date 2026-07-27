@@ -25,3 +25,4 @@ keystore.properties
 /.artifacts/
 /iosApp/MalankaraOrthodoxLiturgica.xcodeproj/xcuserdata
 /.superpowers/
+/.vscode/

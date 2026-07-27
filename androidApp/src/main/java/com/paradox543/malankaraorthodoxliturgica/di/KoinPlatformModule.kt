@@ -99,6 +99,7 @@ val platformKoinModule =
 
         single<SoundModeManager> {
             SoundModeManagerImpl(
+                context = androidContext(),
                 soundModeService = get(),
                 workManager = get(),
             )

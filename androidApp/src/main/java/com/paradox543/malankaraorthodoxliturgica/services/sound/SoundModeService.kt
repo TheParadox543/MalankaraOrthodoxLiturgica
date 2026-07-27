@@ -3,6 +3,8 @@ package com.paradox543.malankaraorthodoxliturgica.services.sound
 import android.app.NotificationManager
 import android.content.Context
 import android.media.AudioManager
+import android.widget.Toast
+import com.paradox543.malankaraorthodoxliturgica.R
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.SoundMode
 
 class SoundModeService(
@@ -16,42 +18,54 @@ class SoundModeService(
 
     // ---- PUBLIC API --------------------------------------------------------
 
-    fun applyUserPreference(mode: SoundMode): Boolean {
+    fun applyUserPreference(mode: SoundMode, previouslyModified: Boolean): Boolean {
         if (!hasDndPermission()) return false
         val internal = mapPreferenceToInternal(mode)
+
+        // If we are turning it off, just reset currentMode and return false
+        if (internal == SoundModeInternal.DISABLED) {
+            currentMode = internal
+            return false
+        }
+
+        // Check if device is already in a non-normal state AND we didn't cause it
+        val wasAlreadyModified = !isCurrentlyNormal() && !previouslyModified
+
         currentMode = internal
 
         return when (internal) {
-            SoundModeInternal.DISABLED -> {
-                false
-            }
-
             SoundModeInternal.SILENT -> {
-                setSilent()
-                true
+                if (!wasAlreadyModified) setSilent()
+                !wasAlreadyModified
             }
 
             SoundModeInternal.DND -> {
-                setDnd()
-                true
+                if (!wasAlreadyModified) setDnd()
+                !wasAlreadyModified
             }
 
-            SoundModeInternal.NORMAL -> { // never triggered directly by user
-                false
-            }
+            else -> false
         }
     }
 
-    fun restoreIfNeeded() {
-        // Only restore if we actually modified the sound
-        if (currentMode == SoundModeInternal.SILENT ||
-            currentMode == SoundModeInternal.DND
-        ) {
-            setNormal()
-        }
-
-        // Reset for safety
+    fun restoreToNormal() {
+        setNormal()
         currentMode = SoundModeInternal.DISABLED
+    }
+
+    fun showRestoreToast(delayMinutes: Int) {
+        val message = context.getString(R.string.sound_restore_scheduled, delayMinutes)
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showNoChangeToast() {
+        Toast.makeText(context, R.string.sound_not_modified, Toast.LENGTH_SHORT).show()
+    }
+
+    fun isCurrentlyNormal(): Boolean {
+        val ringerNormal = audioManager.ringerMode == AudioManager.RINGER_MODE_NORMAL
+        val dndNormal = notificationManager.currentInterruptionFilter == NotificationManager.INTERRUPTION_FILTER_ALL
+        return ringerNormal && dndNormal
     }
 
     fun hasDndPermission(): Boolean {

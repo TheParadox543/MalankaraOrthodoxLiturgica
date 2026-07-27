@@ -210,7 +210,10 @@ fun SettingsScreen(
                         )
 
                         var timeExpanded by remember { mutableStateOf(false) }
-                        val options = listOf(5, 15, 30, 60)
+                        val options = remember(settingsViewModel.debugMode) {
+                            if (settingsViewModel.debugMode) listOf(1, 5, 15, 30, 60)
+                            else listOf(5, 15, 30, 60)
+                        }
 
                         ExposedDropdownMenuBox(
                             expanded = timeExpanded,
