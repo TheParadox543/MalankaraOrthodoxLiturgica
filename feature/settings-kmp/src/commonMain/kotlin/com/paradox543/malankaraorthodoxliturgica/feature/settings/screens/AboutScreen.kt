@@ -78,6 +78,7 @@ fun AboutScreen(
                 """
                 - Samuel Alex Koshy – Development, Implementation, UI Design, and Text Translations
                 - Shriganesh Keshrimal Purohit – Guidance, Structural Planning, and Development Insights.
+                - Praneeth M - iOS version implementation.
                 - Jerin M George – Assistance with Color Theme Fixes and Image Selection.
                 - Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, Nohan George & Anoop Alex Koshy – Additional Text Translations and Preparation.
                 - Prasad Joseph Cheeran - Audio files for Ekkara Songs.
