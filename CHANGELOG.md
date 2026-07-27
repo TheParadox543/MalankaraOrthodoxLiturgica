@@ -8,6 +8,11 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ## 🔮 [Unreleased]
 
 - Unversioned changes
+
+---
+
+## [2.5.0] - 27/07/2026
+
 ### Feature
 
 - Better UI for calendar.
