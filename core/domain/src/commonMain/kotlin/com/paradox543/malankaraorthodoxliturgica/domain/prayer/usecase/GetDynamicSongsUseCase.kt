@@ -19,9 +19,9 @@ class GetDynamicSongsUseCase(
         dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
         currentDepth: Int = 0,
     ): PrayerElement.DynamicSongsBlock {
-        val resolvedBlock = dynamicSongsBlock.copy(items = dynamicSongsBlock.items.toMutableList())
+        val resolvedList = mutableListOf<PrayerElement.DynamicSong>()
 
-        // Handle default content (may be a link which needs to be resolved)
+        // Handle default content (maybe a link which needs to be resolved)
         val defaultContent = dynamicSongsBlock.defaultContent
         if (defaultContent != null) {
             val firstItem = defaultContent.items.firstOrNull()
@@ -30,9 +30,9 @@ class GetDynamicSongsUseCase(
                 val file = firstItem.file
                 val loadedItems = prayerRepository.loadPrayerElements(file, language)
                 val newDynamicSong = defaultContent.copy(items = loadedItems)
-                resolvedBlock.items.add(newDynamicSong)
+                resolvedList.add(newDynamicSong)
             } else {
-                resolvedBlock.items.add(defaultContent)
+                resolvedList.add(defaultContent)
             }
         }
 
@@ -57,7 +57,7 @@ class GetDynamicSongsUseCase(
                         AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> event.title.en
                     }
 
-                resolvedBlock.items.add(
+                resolvedList.add(
                     PrayerElement.DynamicSong(
                         eventKey = specialSongsKey,
                         eventTitle = title,
@@ -69,7 +69,7 @@ class GetDynamicSongsUseCase(
         }
 
         // Add prayers for the departed at the end if not already added
-        if (resolvedBlock.items.none { it.eventKey == "allDepartedFaithful" }) {
+        if (resolvedList.none { it.eventKey == "allDepartedFaithful" }) {
             val departedFilename = "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/${dynamicSongsBlock.timeKey}.json"
             val departedSongElements =
                 try {
@@ -84,7 +84,7 @@ class GetDynamicSongsUseCase(
                         AppLanguage.MALAYALAM -> "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്\u200Cച"
                         AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> "All Departed Faithful"
                     }
-                resolvedBlock.items.add(
+                resolvedList.add(
                     PrayerElement.DynamicSong(
                         eventKey = "allDepartedFaithful",
                         eventTitle = title,
@@ -94,7 +94,6 @@ class GetDynamicSongsUseCase(
                 )
             }
         }
-
-        return resolvedBlock
+        return dynamicSongsBlock.copy(items = resolvedList)
     }
 }

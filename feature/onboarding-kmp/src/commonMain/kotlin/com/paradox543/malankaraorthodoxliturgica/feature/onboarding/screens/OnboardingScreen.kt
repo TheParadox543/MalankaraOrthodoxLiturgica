@@ -117,8 +117,6 @@ fun OnboardingScreen(
                     onBack = { onboardingViewModel.previousPage() },
                 )
             }
-            
-            else -> {}
         }
     }
 }

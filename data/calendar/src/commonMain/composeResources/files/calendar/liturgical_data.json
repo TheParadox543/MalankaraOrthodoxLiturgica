@@ -2,7 +2,8 @@
     "alexiosMarTheodosios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Malankarayude Dharmayogy H. G. Alexios Mar Theodosios Metropolitan (Bethany Ashram, Ranni-Perunad)"
+            "en": "Commemoration of Malankarayude Dharmayogy H. G. Alexios Mar Theodosios Metropolitan (Bethany Ashram, Ranni-Perunad)",
+            "ml": "മലങ്കരയുടെ ധർമ്മയോഗി അലക്സിയോസ് മാർ തേവോദോസിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പെരുനാട് ബഥനി ആശ്രമം)"
         },
         "startedYear": 1966
     },
@@ -375,14 +376,16 @@
     "alvarezMarJulius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Antonio Fracisco Xavier Alvarez Mar Julius Metropolitan (Panjim St. Mary's Church, Goa)"
+            "en": "Commemoration of H. G. Antonio Fracisco Xavier Alvarez Mar Julius Metropolitan (Panjim St. Mary's Church, Goa)",
+            "ml": "വാഴ്ത്തപ്പെട്ട അൻ്റോണിയോ ഫ്രാൻസിസ്കോ സേവ്യർ അൽവാറീസ് മാർ യൂലിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പഞ്ചിം സെൻ്റ് മേരീസ് പള്ളി, ഗോവ)"
         },
         "startedYear": 1924
     },
     "ambattuGeevargheseMarCoorilos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Ambattu Geevarghese Mar Coorilos Metropolitan (Angamaly Cheriyapally)"
+            "en": "Commemoration of Ambattu Geevarghese Mar Coorilos Metropolitan (Angamaly Cheriyapally)",
+            "ml": "അമ്പാട്ട് ഗീവർഗീസ് മാർ കൂറീലോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (അങ്കമാലി ചെറിയ പള്ളി)"
         },
         "startedYear": 1892
     },
@@ -529,7 +532,8 @@
     "apostlesFastBeginning": {
         "type": "event",
         "title": {
-            "en": "Beginning of Apostles' Fast (13 days Sleeha Fast)"
+            "en": "Beginning of Apostles' Fast (13 days Sleeha Fast)",
+            "ml": "ശ്ലീഹാ നോമ്പ് (13 നോമ്പ്) ആരംഭം"
         }
     },
     "ascension": {
@@ -822,81 +826,93 @@
     "assumptionFastBeginning": {
         "type": "event",
         "title": {
-            "en": "Beginning of Assumption (Shoonoyo) Fast (15 days)"
+            "en": "Beginning of Assumption (Shoonoyo) Fast (15 days)",
+            "ml": "ശൂനോയോ നോമ്പ് (15 നോമ്പ്) ആരംഭം"
         }
     },
     "athanasiosAlexandria": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of St. Athanasios of Alexandria"
+            "en": "Commemoration of St. Athanasios of Alexandria",
+            "ml": "അലക്സന്ത്രിയായിലെ മാർ അത്താനാസിയോസിൻ്റെ ഓർമ്മ"
         }
     },
     "augenMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Augen Mar Dionysius Metropolitan (Vallikkattu Dayara, Vakathanam)"
+            "en": "Commemoration of H. G. Augen Mar Dionysius Metropolitan (Vallikkattu Dayara, Vakathanam)",
+            "ml": "ഔഗേൻ മാർ ദീവന്നാസ്യോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (വള്ളിക്കാട്ട് ദയറാ)"
         },
         "startedYear": 2008
     },
     "augenTheMonk": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of St. Augen the Monk"
+            "en": "Commemoration of St. Augen the Monk",
+            "ml": "സന്യാസ ശ്രേഷ്‌ഠനായ മാർ ഔഗേൻ്റെ ഓർമ്മ"
         }
     },
     "baseliosGeevargheseCatholicos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Baselios Geevarghese II Catholicos (Catholicate Aramana, Devalokam)"
+            "en": "Commemoration of H. H. Baselios Geevarghese II Catholicos (Catholicate Aramana, Devalokam)",
+            "ml": "പ. ബസേലിയോസ് ഗീവർഗീസ് ദ്വിതീയൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ. (കോട്ടയം ദേവലോകം കാതോലിക്കേറ്റ് അരമന)"
         },
         "startedYear": 1965
     },
     "baseliosMarAugen": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Baselios Mar Augen I Catholicos (Catholicate Aramana, Devalokam)"
+            "en": "Commemoration of H. H. Baselios Mar Augen I Catholicos (Catholicate Aramana, Devalokam)",
+            "ml": "പ. ബസേലിയോസ് ഔഗേൻ പ്രഥമൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (ദേവലോകം കാതോലിക്കേറ്റ് അരമന)"
         },
         "startedYear": 1976
     },
     "baseliosMarGeevargheseFirstCatholicos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H Baselios Mar Geevarghese I Catholicos (Vallikattu Dayara, Vakathanam)"
+            "en": "Commemoration of H. H Baselios Mar Geevarghese I Catholicos (Vallikattu Dayara, Vakathanam)",
+            "ml": "പ. ബസേലിയോസ് ഗീവർഗീസ് പ്രഥമൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (വാക ത്താനം വള്ളിക്കാട്ടു ദയറാ)"
         },
         "startedYear": 1929
     },
     "baseliosMarthomaDidymus": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Baselios Marthoma Didymus I Catholicos (Mount Tabor Dayara, Pathanapuram)"
+            "en": "Commemoration of H. H. Baselios Marthoma Didymus I Catholicos (Mount Tabor Dayara, Pathanapuram)",
+            "ml": "പ. ബസ്സേലിയോസ് മാർത്തോമ്മാ ദിദിമോസ് പ്രഥമൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (പത്തനാപുരം മൗണ്ട് താബോർ ദയറാ)"
         },
         "startedYear": 2015
     },
     "baseliosMarthomaMathewsFirstCatholicos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Mar Baselios Marthoma Mathews I Catholicos (Catholicate Aramana, Devalokam)"
+            "en": "Commemoration of H. H. Mar Baselios Marthoma Mathews I Catholicos (Catholicate Aramana, Devalokam)",
+            "ml": "പ. ബസേലിയോസ് മാർത്തോമ്മാ മാത്യുസ് പ്രഥമൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (ദേവലോകം കാതോലിക്കേറ്റ് അരമന)"
         },
         "startedYear": 1997
     },
     "baseliosMarthomaMathewsSecondCatholicos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Baselios Marthoma Mathews II Catholicos (Mount Horeb Ashram, Sasthamcotta)"
+            "en": "Commemoration of H. H. Baselios Marthoma Mathews II Catholicos (Mount Horeb Ashram, Sasthamcotta)",
+            "ml": "പ. ബസ്സേലിയോസ് മാർത്തോമ്മാ മാത്യൂസ് ദ്വിതീയൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ. (ശാസ്താംകോട്ട മൗണ്ട് ഹോറേബ് ആശ്രമം)"
         },
         "startedYear": 2007
     },
     "baseliosMarthomaPaulose": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Baselios Marthoma Paulose II Catholicos (Catholicate Aramana, Devalokam)"
+            "en": "Commemoration of H. H. Baselios Marthoma Paulose II Catholicos (Catholicate Aramana, Devalokam)",
+            "ml": "പ. ബസേലിയോസ് മാർത്തോമ്മാ പൗലോസ് ദ്വിതീയൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (കോട്ടയം ദേവലോകം കാതോലിക്കേറ്റ് അരമന)"
         },
         "startedYear": 2022
     },
     "baseliosPaulose": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Baselios Paulose I Catholicos (Pampakuda Cheriyapally)"
+            "en": "Commemoration of H. H. Baselios Paulose I Catholicos (Pampakuda Cheriyapally)",
+            "ml": "പ. ബസ്സേലിയോസ് പൗലോസ് പ്രഥമൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (പാമ്പാക്കുട ചെറിയ പള്ളി)"
         },
         "startedYear": 1914
     },
@@ -904,7 +920,7 @@
         "type": "feast",
         "title": {
             "en": "Beheading of St. John the Baptist",
-            "ml": "യോഹന്നാൻ സ്നാപകന്റെ ശിരച്ഛേദ"
+            "ml": "യോഹന്നാൻ സ്നാപകന്റെ ശിരച്ഛേദം"
         },
         "specialSongsKey": "beheadingStJohnSongs",
         "tune": 8,
@@ -1154,7 +1170,8 @@
     "birthStJohn": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of the Birth of St. John the Baptist"
+            "en": "Commemoration of the Birth of St. John the Baptist",
+            "ml": "മാർ യോഹന്നാൻ മാംദാനായുടെ ജനനത്തിന്റെ ഓർമ്മ"
         }
     },
     "blindMan": {
@@ -1432,21 +1449,23 @@
     "catholicate": {
         "type": "event",
         "title": {
-            "en": "Anniversary of the Establishment of Catholicate in Malankara"
+            "en": "Anniversary of the Establishment of Catholicate in Malankara",
+            "ml": "മലങ്കരയിലെ കാതോലിക്കേറ്റ് സ്ഥാപനത്തിന്റെ {YEAR}-ാം വാർഷികം"
         },
         "startedYear": 1913
     },
     "catholicateDay": {
         "type": "event",
         "title": {
-            "en": "Catholicate Day"
+            "en": "Catholicate Day",
+            "ml": "മലങ്കര ഓർത്തഡോക്സ‌് സഭാദിനം - കാതോലിക്കാ ദിനം"
         }
     },
     "circumcision": {
         "type": "feast",
         "title": {
             "en": "Circumcision (New Year)",
-            "ml": "ആണ്ടാരംഭം"
+            "ml": "വർഷാരംഭം. നമ്മുടെ കർത്താവിൻ്റെ ചേലാകർമ്മപ്പെരുന്നാൾ"
         },
         "specialSongsKey": "newYearSongs",
         "tune": 8,
@@ -1573,7 +1592,8 @@
     "constantineHelen": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of the King Constantine and Helen the Queen"
+            "en": "Commemoration of the King Constantine and Helen the Queen",
+            "ml": "കുസ്‌തന്തീനോസ് ചക്രവർത്തിയുടെയും, മാതാവ് ഹെലനിയുടെയും ഓർമ്മ"
         }
     },
     "crippledWoman": {
@@ -1679,7 +1699,8 @@
     "danielMarPhiloxenos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Daniel Mar Philoxenos Metropolitan. (Basil Aramana, Pathanamthitta)"
+            "en": "Commemoration of H. G. Daniel Mar Philoxenos Metropolitan. (Basil Aramana, Pathanamthitta)",
+            "ml": "ദാനിയേൽ മാർ ഫീലക്‌സീനോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പത്തനംതിട്ട ബേസിൽ അരമന)"
         },
         "startedYear": 1991
     },
@@ -1826,15 +1847,17 @@
     "devalokam": {
         "type": "event",
         "title": {
-            "en": "Kottayam Devalokam Catholicate Aramana Chapel Perunal "
+            "en": "Kottayam Devalokam Catholicate Aramana Chapel Perunal ",
+            "ml": "കോട്ടയം ദേവലോകം കാതോലിക്കേറ്റ് അരമന ചാപ്പൽ പെരുന്നാൾ"
         }
     },
     "dukharonoStThomas": {
         "type": "feast",
         "title": {
             "en": "Dukharono of St. Thomas",
-            "ml": "തോമ്മാ ശ്ളീഹായുടെ ഓർമ്മ"
+            "ml": "വി. മാർതോമ്മാ ശ്ലീഹായുടെ ദുക്റോനോ"
         },
+        "tune": 8,
         "bibleReadings": {
             "vespersGospel": [
                 {
@@ -1958,6 +1981,13 @@
                     ]
                 }
             ]
+        }
+    },
+    "dukhrono": {
+        "type": "feastSaint",
+        "title": {
+            "en": "Dukhrono of St. Thomas The Apostle",
+            "ml": "വി. മാർതോമ്മാ ശ്ലീഹാ രക്തസാക്ഷിമരണം പ്രാപിച്ചതിന്റെ ഓർമ്മ"
         }
     },
     "easter": {
@@ -2446,20 +2476,23 @@
     "enthronementBaseliosMarthomaMathews": {
         "type": "anniversary",
         "title": {
-            "en": "Anniversary of the Enthronement of H. H. Baselios Marthoma Mathews III Catholicos"
+            "en": "Anniversary of the Enthronement of H. H. Baselios Marthoma Mathews III Catholicos",
+            "ml": "പ. ബസേലിയോസ് മാർത്തോമ്മാ മാത്യൂസ് തൃതീയൻ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം കാതോലിക്കാ സ്ഥാനാരോഹണ വാർഷികം"
         },
         "startedYear": 2022
     },
     "entryStMary": {
         "type": "commemoration",
         "title": {
-            "en": "Commemorating the Entry of St. Mary to the Temple of Jerusalem "
+            "en": "Commemorating the Entry of St. Mary to the Temple of Jerusalem ",
+            "ml": "വി. ദൈവമാതാവിൻ്റെ ദേവാലയ പ്രവേശന പെരുന്നാൾ"
         }
     },
     "environmentDay": {
         "type": "event",
         "title": {
-            "en": "World Environment Day"
+            "en": "World Environment Day",
+            "ml": "ലോക പരിസ്ഥിതി ദിനം"
         }
     },
     "epiphany": {
@@ -2598,87 +2631,94 @@
     "evangelistsEcumenicalSynods": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of the 4 Evangelists & All Fathers of the 3 Ecumenical Synods"
+            "en": "Commemoration of the 4 Evangelists & All Fathers of the 3 Ecumenical Synods",
+            "ml": "നാല് ഏവൻഗേലിസ്ഥന്മാരുടെയും, മൂന്ന് പൊതുസുന്നഹദോസുകളിലെ പിതാക്കന്മാരുടെയും ഓർമ്മ"
         }
     },
     "feastAdai": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Evangelist Adai, Abahai the Martyr & Mar Malke"
+            "en": "Feast of Evangelist Adai, Abahai the Martyr & Mar Malke",
+            "ml": "അറിയിപ്പുകാരനായ മാർ ആദായി ശ്ലീഹായുടെയും, മാർ അബഹായി സഹദായുടെയും, മാർ മൽക്കേയുടെയും ഓർമ്മ"
         }
     },
     "feastAllProphets": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of All Prophets "
+            "en": "Feast of All Prophets ",
+            "ml": "സകല നിബിയന്മാരുടെയും ഓർമ്മ"
         }
     },
     "feastAllSaints": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of All Saints"
+            "en": "Feast of All Saints",
+            "ml": "സകല ശുദ്ധിമാന്മാരുടെയും, ശുദ്ധിമതികളുടെയും, സകല സഹദേന്മാരുടെയും, രക്തസാക്ഷിണികളുടെയും ഓർമ്മ"
         }
     },
     "feastBeheadingStJohn": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of the Beheading of St. John the Baptist"
+            "en": "Feast of the Beheading of St. John the Baptist",
+            "ml": "മാർ യോഹന്നാൻ മാംദാനായുടെ ശിര:ഛേദത്തിന്റെ ഓർമ്മ"
         }
     },
     "feastBirthStMary": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of the Birth of St. Mary, the Mother of God"
+            "en": "Feast of the Birth of St. Mary, the Mother of God",
+            "ml": "വി. ദൈവമാതാവിന്റെ ജനനപ്പെരുന്നാൾ"
         },
         "tune": 1
     },
     "feastMarEpiphanios": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Mar Epiphanios of Cyprus"
+            "en": "Feast of Mar Epiphanios of Cyprus",
+            "ml": "കുപ്രൊസിലെ മാർ എപ്പിഫാനിയോസിന്റെ ഓർമ്മ"
         }
     },
     "feastMarGregorios": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Mar Gregorios Bar Hebraeus"
+            "en": "Feast of Mar Gregorios Bar Hebraeus",
+            "ml": "മാർ ഗ്രീഗോറിയോസ് ബാർ എബ്രായയുടെ {YEAR}-ാം ഓർമ്മ"
         },
         "startedYear": 1287
     },
     "feastMarIgnatiusNourono": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Mar Ignatius Nourono of Antioch"
+            "en": "Feast of Mar Ignatius Nourono of Antioch",
+            "ml": "മാർ ഇഗ്നാത്തിയോസ് നൂറോനോയുടെ ഓർമ്മ"
         }
     },
     "feastMarJacobBaradaeus": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Mar Jacob Baradaeus & Mar Dionysius Barsleebi"
+            "en": "Feast of Mar Jacob Baradaeus & Mar Dionysius Barsleebi",
+            "ml": "മാർ യാക്കോബ് ബുർദ്ദാന, മാർ ദീവന്നാസ്യോസ് ബർസ്ളീബി ഇവരുടെ ഓർമ്മ"
         }
     },
     "feastMarJacobSerugh": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Mar Jacob of Serugh"
-        }
-    },
-    "feastMarPhiloxenos": {
-        "type": "feastSaint",
-        "title": {
-            "en": "Feast of Mar Philoxenos of Mabugh"
+            "en": "Feast of Mar Jacob of Serugh",
+            "ml": "സുഗിലെ മാർ യാക്കോബിൻ്റെ ഓർമ്മ"
         }
     },
     "feastMarthBarbara": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of the Martyrs Marth Barbara and Marth Juliana"
+            "en": "Feast of the Martyrs Marth Barbara and Marth Juliana",
+            "ml": "സഹദാ സ്ത്രീകളായ മർത്ത് ബർബാറായുടെയും, മർത്ത് യൂലിയാനായുടെയും ഓർമ്മ"
         }
     },
     "feastMarthShmuni": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Martyrs Marth Shmuni, her 7 children and Eliazar their teacher"
+            "en": "Feast of Martyrs Marth Shmuni, her 7 children and Eliazar their teacher",
+            "ml": "രക്തസാക്ഷികളായ മർത്ത് ശ്‌മൂനിയുടെയും, ഏഴ് മക്കളുടെയും, ഗുരുവായ മാർ ഏലിയാസറിന്റെയും ഓർമ്മ"
         }
     },
     "feastOfApostlesFast": {
@@ -3210,75 +3250,88 @@
     "feastProphetMarElijah": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Prophet Mar Elijah"
+            "en": "Feast of Prophet Mar Elijah",
+            "ml": "മാർ ഏലിയാ ദീർഘദർശിയുടെ ഓർമ്മ"
         }
     },
     "feastSargisBakos": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Martyrs Sargis & Bakos"
+            "en": "Feast of Martyrs Sargis & Bakos",
+            "ml": "മാർ സർഗീസ്, മാർ ബാക്കോസ് എന്നീ സഹദേന്മാരുടെ ഓർമ്മ"
         }
     },
     "feastSeveriosAntioch": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Mar Severios of Antioch"
+            "en": "Feast of Mar Severios of Antioch",
+            "ml": "മാർ സേവേറിയോസ് പാത്രിയർക്കീസിന്റെ ഓർമ്മ "
         }
     },
     "feastStAndrewApostle": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Andrew the Apostle"
-        }
+            "en": "Feast of St. Andrew the Apostle",
+            "ml": "മാർ അന്ത്രയോസ് ശ്ലീഹായുടെ ഓർമ്മ"
+        },
+        "tune": 5
     },
     "feastStAzazayel": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Azazayel the Martyr"
+            "en": "Feast of St. Azazayel the Martyr",
+            "ml": "മാർ അസ്സസ്സായേൽ സഹദായുടെ ഓർമ്മ"
         }
     },
     "feastStBarSoumo": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Bar Soumo - the Chief Among Mourners & Mar Kauma"
+            "en": "Feast of St. Bar Soumo - the Chief Among Mourners & Mar Kauma",
+            "ml": "വിലാപക്കാരിൽ പ്രധാനിയായ മാർ ബർസൗമായുടെയും താപസനും വിലാപക്കാരനുമായ മാർ കൗമായുടെയും ഓർമ്മ"
         }
     },
     "feastStBartholomew": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Bartholomew the Apostle"
+            "en": "Feast of St. Bartholomew the Apostle",
+            "ml": "മാർ ബർത്തുൽമായി ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "feastStBaselios": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Baselios Yeldho Catholicos (Kothamangalam Cheriyapally)"
+            "en": "Feast of St. Baselios Yeldho Catholicos (Kothamangalam Cheriyapally)",
+            "ml": "വി. ബസ്സേലിയോസ് യൽദോ കാതോലിക്കാ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (കോതമംഗലം ചെറിയ പള്ളി)"
         },
         "startedYear": 1686
     },
     "feastStBasilStGregory": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Basil and St. Gregory & All the Holy Fathers"
+            "en": "Feast of St. Basil and St. Gregory & All the Holy Fathers",
+            "ml": "മാർ ബസേലിയോസ്, മാർ ഗ്രീഗോറിയോസ് പിതാക്കന്മാരുടെയും, സകല വിശുദ്ധ മൽപ്പാന്മാരുടെയും ഓർമ്മ"
         },
         "tune": 8
     },
     "feastStBehanam": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of the Martyrs, St. Behanam, his sister, St. Sarah, and Co-Martyrs."
+            "en": "Feast of the Martyrs, St. Behanam, his sister, St. Sarah, and Co-Martyrs Mar Philoxenos of Mabugh",
+            "ml": "മാർ ബഹനാം സഹദായുടെയും, സഹോദരി സാറായുടെയും, സഹസഹദേൻമാരുടെയും, മാബൂഗിലെ മാർ ഫീലക്സീനോസിന്റെയും ഓർമ്മ"
         }
     },
     "feastStDemetrios": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Demetrios of Thesselonica"
+            "en": "Feast of St. Demetrios of Thesselonica",
+            "ml": "തെസലോനിക്യയിലെ വി. ദെമത്രിയോസിൻ്റെ ഓർമ്മ"
         }
     },
     "feastStDimeth": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Dimeth of Persia"
+            "en": "Feast of St. Dimeth of Persia",
+            "ml": "പേർഷ്യക്കാരനായ മാർ ദീമത്തിൻ്റെ ഓർമ്മ"
         }
     },
     "feastStEphrem": {
@@ -3405,131 +3458,152 @@
     "feastStGeorge": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. George"
+            "en": "Feast of St. George",
+            "ml": "മാർ ഗീവർഗീസ് സഹദായുടെ ഓർമ്മ"
         }
     },
     "feastStJamesApostle": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. James the Apostle, Son of Alphaeus"
+            "en": "Feast of St. James the Apostle, Son of Alphaeus",
+            "ml": "അൽഫായിയുടെ പുത്രനായ മാർ യാക്കോബ് ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "feastStJamesBrother": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. James, Brother of Jesus and the First Bishop of Jerusalem"
+            "en": "Feast of St. James, Brother of Jesus and the First Bishop of Jerusalem",
+            "ml": "കർത്താവിന്റെ സഹോദരനും, യരുശലേമിന്റെ ഒന്നാമത്തെ എപ്പിസ്കോപ്പായും, ശ്ലീഹായും, സഹദായും, ആദ്യം വി. കുർബ്ബാന അനുഷ്ഠിച്ചയാളുമായ മാർ യാക്കോബിൻ്റെ ഓർമ്മ"
         }
     },
     "feastStJohnChrysostom": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. John Chrysostom"
+            "en": "Feast of St. John Chrysostom",
+            "ml": "സ്വർണ്ണനാവുകാരനായ മാർ ഈവാനിയോ സിൻ്റെ ഓർമ്മ"
         }
     },
     "feastStJohnTheApostle": {
         "type": "commemoration",
         "title": {
-            "en": "Feast of St. John the Apostle"
+            "en": "Feast of St. John the Apostle",
+            "ml": "ഏവൻഗേലിസ്ഥനായ മാർ യോഹന്നാൻ ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "feastStKuriakose": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Kuriakose the Martyr and his mother Marth Yulity  St. Abahai of Nicea"
+            "en": "Feast of St. Kuriakose the Martyr and his mother Marth Yulity St. Abahai of Nicea",
+            "ml": "മാർ കുറിയാക്കോസ് സഹദായുടെയും, മാതാവ് മർത്ത് യൂലിത്തിയുടെയും, നിഖ്യായിലെ മാർ അബഹായിയുടെയും ഓർമ്മ"
         }
     },
     "feastStLabbaeus": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Labbaeus (Thaddeus) the Apostle"
+            "en": "Feast of St. Labbaeus (Thaddeus) the Apostle",
+            "ml": "മാർ ലാബി ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "feastStLuke": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Luke the Evangelist"
+            "en": "Feast of St. Luke the Evangelist",
+            "ml": "ഏവൻഗേലിസ്ഥനായ മാർ ലൂക്കോസിന്റെ ഓർമ്മ"
         }
     },
     "feastStMary": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Mary, Commemoration of the Establishment of the First Church in St. Mary's Name"
+            "en": "Feast of St. Mary, Commemoration of the Establishment of the First Church in St. Mary's Name",
+            "ml": "വി. ദൈവമാതാവിൻ്റെ നാമത്തിൽ ആദ്യം പളളി സ്ഥാപിച്ചതിന്റെ ഓർമ്മ"
         }
     },
     "feastStMaryHarvest": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Mary for Good Crops & Harvest"
+            "en": "Feast of St. Mary for Good Crops & Harvest",
+            "ml": "കതിരുകൾക്കുവേണ്ടി വി. ദൈവമാതാവിന്റെ പെരുന്നാൾ"
         }
     },
     "feastStMaryMagdalene": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Mary Magdalene"
+            "en": "Feast of St. Mary Magdalene",
+            "ml": "മറിയം മഗ്ദ‌ലൈത്തായുടെ ഓർമ്മ"
         }
     },
     "feastStMaryParents": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Mary's Parents, Youyakim and Hanna"
+            "en": "Feast of St. Mary's Parents, Youyakim and Hanna",
+            "ml": "വി. ദൈവമാതാവിൻ്റെ മാതാപിതാക്കളായ യൂയാക്കീമിന്റെയും, ഹന്നായുടെയും ഓർമ്മ"
         }
     },
     "feastStMarySeeds": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast Of St. Mary for Seeds"
+            "en": "Feast Of St. Mary for Seeds",
+            "ml": "വിത്തുകൾക്കുവേണ്ടി വി. ദൈവമാതാവിന്റെ പെരുന്നാൾ"
         }
     },
     "feastStMatthiasApostle": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Matthias the Apostle"
+            "en": "Feast of St. Matthias the Apostle",
+            "ml": "മാർ മത്ഥ്യാസ് ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "feastStOsyo": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Osyo the Ascetic"
+            "en": "Feast of St. Osyo the Ascetic",
+            "ml": "താപസനായ മാർ ഓസിയോയുടെ ഓർമ്മ"
         }
     },
     "feastStPhilipApostle": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Philip the Apostle"
+            "en": "Feast of St. Philip the Apostle",
+            "ml": "മാർ ഫീലിപ്പോസ് ശ്ലീഹായുടെ ഓർമ്മ."
         }
     },
     "feastStSamuelStSimonStAntony": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Samuel, St. Simon & St. Antony"
+            "en": "Feast of St. Samuel, St. Simon & St. Antony",
+            "ml": "മാർ ശ്‌മൂയേലിൻ്റെയും, മാർ ശെമവൂന്റെയും, മാർ അന്തോനിയോസിന്റെയും ഓർമ്മ"
         }
     },
     "feastStSimonStylite": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Simon the Stylite"
+            "en": "Feast of St. Simon the Stylite",
+            "ml": "മാർ ശെമവൂൻ ദെസ്‌തുനോയോയുടെ ഓർമ്മ"
         }
     },
     "feastStSimonTheZealot": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Simon the Zealot"
+            "en": "Feast of St. Simon the Zealot",
+            "ml": "തീക്ഷ്‌ണവാനായ മാർ ശെമവൂൻ ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "feastStSokhe": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Sokhe, Bishop of Myre (St. Nikolas, Christmas Father)"
+            "en": "Feast of St. Sokhe, Bishop of Myre (St. Nikolas, Christmas Father)",
+            "ml": "മുറായുടെ എപ്പിസ്കോപ്പാ ആയ നിക്കലാവോസ് എന്ന മാർ സോഖേയുടെ ഓർമ്മ"
         }
     },
     "feastStThomas": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Thomas the Apostle (Commemoration of the Day he was stabbed by Spear)."
+            "en": "Feast of St. Thomas the Apostle (Commemoration of the Day he was stabbed by Spear).",
+            "ml": "വി. മാർത്തോമ്മാ ശ്ലീഹാ കുന്തമേറ്റതിന്റെ ഓർമ്മ"
         }
     },
     "fifthSaturdayOfGreatLent": {
-        "type": "feast",
+        "type": "event",
         "title": {
             "en": "Fifth Saturday of Great Lent",
             "ml": "നോമ്പിലെ അഞ്ചാം ശനിയാഴ്ച"
@@ -5731,42 +5805,48 @@
     "geevargheseMarDionysius": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of Malankara Sabha Bhasuran St. Geevarghees Mar Dionysius Metropolitan Vattasseril (Old Seminary, Kottayam)"
+            "en": "Feast of Malankara Sabha Bhasuran St. Geevarghees Mar Dionysius Metropolitan Vattasseril (Old Seminary, Kottayam)",
+            "ml": "മലങ്കര സഭാ ഭാസുരൻ പരിശുദ്ധ വട്ടശ്ശേരിൽ ഗീവർഗീസ് മാർ ദീവന്നാസ്യോസ് മെത്രാപ്പോലിത്തായുടെ {YEAR}-ാം ഓർമ്മ ദിനം"
         },
         "startedYear": 1935
     },
     "geevargheseMarDioscoros": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Geevarghese Mar Dioscoros Metropolitan (Holy Trinity Ashram, Ranni)"
+            "en": "Commemoration of H. G. Geevarghese Mar Dioscoros Metropolitan (Holy Trinity Ashram, Ranni)",
+            "ml": "ഗീവർഗീസ് മാർ ദീയസ്കോറോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (റാന്നി ഹോളി ട്രിനിറ്റി ആശ്രമം)"
         },
         "startedYear": 2000
     },
     "geevargheseMarGregorios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of St. Geevarghese Mar Gregorios of Parumala (Parumala Seminary)"
+            "en": "Commemoration of St. Geevarghese Mar Gregorios of Parumala (Parumala Seminary)",
+            "ml": "പരിശുദ്ധ പരുമല ഗീവർഗീസ് മാർ ഗ്രീഗോറിയോസ് മെത്രാപ്പോലീത്തായുടെ (പ. പരുമല തിരുമേനി) {YEAR}-ാം ഓർമ്മ (പരുമല സെമിനാരി)"
         },
         "startedYear": 1903
     },
     "geevargheseMarIvanios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Geevarghese Mar Ivanios Metropolitan (Mar Baselios Dayara, Njaliakuzhy)"
+            "en": "Commemoration of H. G. Geevarghese Mar Ivanios Metropolitan (Mar Baselios Dayara, Njaliakuzhy)",
+            "ml": "ഗീവർഗീസ് മാർ ഈവാനിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ഞാലിയാകുഴി മാർ ബസേലിയോസ് ദയറാ)"
         },
         "startedYear": 2014
     },
     "geevargheseMarOsthathios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Sabha Ratnam H. G. Dr. Geevarghese Mar Osthathios Metropolitan (St. Paul's Chapel, Mavelikkara)"
+            "en": "Commemoration of Sabha Ratnam H. G. Dr. Geevarghese Mar Osthathios Metropolitan (St. Paul's Chapel, Mavelikkara)",
+            "ml": "സഭാരത്നം ഡോ. ഗീവർഗീസ് മാർ ഒസ്‌താത്തിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (മാവേലിക്കര സെൻ്റ് പോൾസ് ചാപ്പൽ)"
         },
         "startedYear": 2013
     },
     "geevargheseMarPhiloxenos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Catholicate Ratnadeepam H. G. Geevarghese Mar Philoxenos Metropolitan (Puthencavu Cathedral)"
+            "en": "Commemoration of Catholicate Ratnadeepam H. G. Geevarghese Mar Philoxenos Metropolitan (Puthencavu Cathedral)",
+            "ml": "കാതോലിക്കേറ്റ് രത്ന‌ദീപം ഗീവർഗീസ് മാർ ഫീലക്സീനോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (പുത്തൻകാവ് കത്തീഡ്രൽ)"
         },
         "startedYear": 1952
     },
@@ -6041,7 +6121,8 @@
     "gregoriosAbdelJaleel": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Mar Gregorios Abdel Jaleel Bava (Vadakan Paravur Church)"
+            "en": "Commemoration of Mar Gregorios Abdel Jaleel Bava (Vadakan Paravur Church)",
+            "ml": "മാർ ഗ്രീഗോറിയോസ് അബ്‌ദൽ ജലീൽ ബാവായുടെ {YEAR}-ാം ഓർമ്മ (വടക്കൻ പറവൂർ പള്ളി)"
         },
         "startedYear": 1672
     },
@@ -6813,55 +6894,63 @@
     "ignatiusElias": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Patriarch Ignatius Elias III (Manjinikkara Dayara)"
+            "en": "Commemoration of Patriarch Ignatius Elias III (Manjinikkara Dayara)",
+            "ml": "മാർ ഇഗ്നാത്തിയോസ് ഏലിയാസ് തൃതീയൻ പാത്രിയർക്കീസ് ബാവായുടെ {YEAR}-ാം ഓർമ്മ. (മഞ്ഞനിക്കര ദയറാ)"
         },
         "startedYear": 1933
     },
     "independence": {
         "type": "event",
         "title": {
-            "en": "Indian Independence Day"
+            "en": "Indian Independence Day",
+            "ml": "ഇന്ത്യൻ സ്വാതന്ത്ര്യദിനം"
         }
     },
     "jobMarPhiloxenos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Job Mar Philoxenos Metropolitan (Mount Tabor Dayara, Pathanapuram)"
+            "en": "Commemoration of H. G. Job Mar Philoxenos Metropolitan (Mount Tabor Dayara, Pathanapuram)",
+            "ml": "ഇയ്യോബ് മാർ ഫീലക്‌സീനോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പത്തനാപുരം, മൗണ്ട് താബോർ ദയറാ)"
         },
         "startedYear": 2012
     },
     "josephMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Malankara Sabha Thejus H. G. Pulikkottil Joseph Mar Dionysius V Metropolitan, Founder of the Kottayam M. D. Seminary (Old Semeniary, Kottayam)"
+            "en": "Commemoration of Malankara Sabha Thejus H. G. Pulikkottil Joseph Mar Dionysius V Metropolitan, Founder of the Kottayam M. D. Seminary (Old Semeniary, Kottayam)",
+            "ml": "കോട്ടയം എം. ഡി. സെമിനാരി സ്ഥാപകൻ മലങ്കര സഭാ തേജസ് പുലിക്കോട്ടിൽ ജോസഫ് മാർ ദീവന്നാസ്യോസ് V മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (കോട്ടയം പഴയ സെമിനാരി)"
         },
         "startedYear": 1910
     },
     "josephMarPachomios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Joseph Mar Pachomios Metropolitan (Carmelkunnu Pally, Mulakkulam)"
+            "en": "Commemoration of H. G. Joseph Mar Pachomios Metropolitan (Carmelkunnu Pally, Mulakkulam)",
+            "ml": "ജോസഫ് മാർ പക്കോമിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (മുളക്കുളം കർ മ്മേൽകുന്ന് പള്ളി)"
         },
         "startedYear": 1992
     },
     "kadavilPauloseMarAthanasios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Kadavil Paulose Mar Athanasios Metropolitan (Thrikknnathu Seminary, Aluva)"
+            "en": "Commemoration of H. G. Kadavil Paulose Mar Athanasios Metropolitan (Thrikknnathu Seminary, Aluva)",
+            "ml": "കടവിൽ പൗലോസ് മാർ അത്താനാസിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ആലുവാ തൃക്കുന്നത്ത് സെമിനാരി)"
         },
         "startedYear": 1908
     },
     "konattuGeevargheseMarJulius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Konattu Geevarghese Mar Julius Metropolitan (Pampakuda Valiyapally)"
+            "en": "Commemoration of Konattu Geevarghese Mar Julius Metropolitan (Pampakuda Valiyapally)",
+            "ml": "കോനാട്ട് ഗീവർഗീസ് മാർ യൂലിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (പാമ്പാക്കുട വലിയപള്ളി)"
         },
         "startedYear": 1886
     },
     "koonamCross": {
         "type": "event",
         "title": {
-            "en": "Memorial Day of Oath of Koonan Cross"
+            "en": "Memorial Day of Oath of Koonan Cross",
+            "ml": "കൂനൻകുരിശുസത്യ സ്‌മരണാദിനം. (മട്ടാഞ്ചേരി സെന്റ് ജോർജ്ജ് പള്ളി)"
         }
     },
     "kothine": {
@@ -7000,7 +7089,8 @@
     "kuriakoseMarGregorios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Kuriakose Mar Gregorios Metropolitan (Pampady Dayara)"
+            "en": "Commemoration of H. G. Kuriakose Mar Gregorios Metropolitan (Pampady Dayara)",
+            "ml": "കുറിയാക്കോസ് മാർ ഗ്രീഗോറിയോസ് മെത്രാപ്പോലീത്തായുടെ (പാമ്പാടി തിരുമേനി) {YEAR}-ാം ഓർമ്മ. (പാമ്പാടി ദയറാ)"
         },
         "startedYear": 1966
     },
@@ -7241,28 +7331,32 @@
     "marBaseliosShakralla": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. H. Mar Baselios Shakralla (Kandanadu Cathedral)"
+            "en": "Commemoration of H. H. Mar Baselios Shakralla (Kandanadu Cathedral)",
+            "ml": "മാർ ബസേലിയോസ് ശക്രള്ളാ മഫ്രിയാനായുടെ {YEAR}-ാം ഓർമ്മ (കണ്ടനാട് പള്ളി)"
         },
         "startedYear": 1765
     },
     "marDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Mar Dionysius III (Punnathra) Metropolitan (Kottayam Cheriyapally)"
+            "en": "Commemoration of H. G. Mar Dionysius III (Punnathra) Metropolitan (Kottayam Cheriyapally)",
+            "ml": "പുന്നത്ര മാർ ദീവന്നാസ്യോസ് III മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (കോട്ടയം ചെറിയ പള്ളി)"
         },
         "startedYear": 1826
     },
     "marIvaniosHidayatulla": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Mar Ivanios Hidayatulla Episcopa (Mulanthuruthy Cathedral)"
+            "en": "Commemoration of Mar Ivanios Hidayatulla Episcopa (Mulanthuruthy Cathedral)",
+            "ml": "മാർ ഈവാനിയോസ് ഹിദായത്തുള്ളാ എപ്പിസ്കോപ്പായുടെ {YEAR}-ാം ഓർമ്മ (മുളന്തുരുത്തി പള്ളി)"
         },
         "startedYear": 1694
     },
     "marSaborMarAfroth": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Mar Sabor & Mar Afroth"
+            "en": "Commemoration of Mar Sabor & Mar Afroth",
+            "ml": "മാർ ശാബോർ, മാർ അഫ്രോത്ത് പിതാക്കന്മാരുടെ (കാദീശന്മാരുടെ) ഓർമ്മ"
         }
     },
     "marSeveriosPatriarch": {
@@ -7272,58 +7366,73 @@
             "ml": "മാർ സേവേറിയോസ് പാത്രിയർകീസിന്ടെ ഓർമ്മ"
         }
     },
+    "markTheEvangelist": {
+        "type": "feastSaint",
+        "title": {
+            "en": "Feast of St. Mark the Evangelist",
+            "ml": "ഏവൻഗേലിസ്ഥനായ മാർ മർക്കോസിൻ്റെ ഓർമ്മ"
+        }
+    },
     "marthaMariam": {
         "type": "event",
         "title": {
-            "en": "Martha Mariam Samajam Day"
+            "en": "Martha Mariam Samajam Day",
+            "ml": "മർത്തമറിയം വനിതാ സമാജദിനം"
         }
     },
     "marthomaEighth": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Marthoma VIII (Puthencavu Cathedral)"
+            "en": "Commemoration of Marthoma VIII (Puthencavu Cathedral)",
+            "ml": "എട്ടാം മാർത്തോമ്മായുടെ {YEAR}-ാം ഓർമ്മ. (പുത്തൻകാവ് കത്തീഡ്രൽ)"
         },
         "startedYear": 1817
     },
     "marthomaFifth": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Marthoma V (Niranam Valiyapally) "
+            "en": "Commemoration of Marthoma V (Niranam Valiyapally) ",
+            "ml": "അഞ്ചാം മാർത്തോമ്മായുടെ {YEAR}-ാം ഓർമ്മ (നിരണം വലിയ പള്ളി)"
         },
         "startedYear": 2006
     },
     "marthomaFirst": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Marthoma I, the Great (Ankamali Cheriyapally)"
+            "en": "Commemoration of Marthoma I, the Great (Ankamali Cheriyapally)",
+            "ml": "മഹാനായ ഒന്നാം മാർത്തോമ്മായുടെ {YEAR}-ാം ഓർമ്മ. (അങ്കമാലി ചെറിയ പള്ളി)"
         },
         "startedYear": 1671
     },
     "marthomaFourth": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Marthoma IV (Kandanadu Cathedral)"
+            "en": "Commemoration of Marthoma IV (Kandanadu Cathedral)",
+            "ml": "നാലാം മാർത്തോമ്മായുടെ {YEAR}-ാം ഓർമ്മ. (കണ്ടനാട് പള്ളി)"
         },
         "startedYear": 1729
     },
     "marthomaSecond": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Marthoma II (Niranam Valiyapally)"
+            "en": "Commemoration of Marthoma II (Niranam Valiyapally)",
+            "ml": "രണ്ടാം മാർത്തോമ്മായുടെ {YEAR}-ാം ഓർമ്മ. (നിരണം വലിയ പള്ളി)"
         },
         "startedYear": 1697
     },
     "marthomaSeventh": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Marthoma VII (Kolencherry Church)"
+            "en": "Commemoration of Marthoma VII (Kolencherry Church)",
+            "ml": "ഏഴാം മാർത്തോമ്മായുടെ {YEAR}-ാം ഓർമ്മ (കോലഞ്ചേരി പള്ളി)"
         },
         "startedYear": 1810
     },
     "marthomaThird": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Marthoma III (Kadampanadu Cathedral) "
+            "en": "Commemoration of Marthoma III (Kadampanadu Cathedral) ",
+            "ml": "മൂന്നാം മാർത്തോമ്മായുടെ {YEAR}-ാം ഓർമ്മ. (കടമ്പനാട് സെൻ്റ് തോമസ് കത്തീഡ്രൽ)"
         },
         "startedYear": 1689
     },
@@ -7452,20 +7561,23 @@
     "mathewTheEvangelist": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Mathew the Evangelist"
+            "en": "Feast of St. Mathew the Evangelist",
+            "ml": "ഏവൻഗേലിസ്ഥനായ മാർ മത്തായി ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "mathewsMarBarnabas": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Mathews Mar Barnabas Metropolitan. (St. Peter's & St. Paul's Church, Valayanchirangara)"
+            "en": "Commemoration of H. G. Mathews Mar Barnabas Metropolitan. (St. Peter's & St. Paul's Church, Valayanchirangara)",
+            "ml": "മാത്യൂസ് മാർ ബർന്നബാസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (വളയംചിറങ്ങര സെന്റ്റ് പീറ്റേഴ്‌സ് & സെൻ്റ് പോൾസ് പള്ളി)"
         },
         "startedYear": 2013
     },
     "mathewsMarEpiphanios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Mathews Mar Epiphanios Metropolitan (St. Thomas Cathedral, Kollam)"
+            "en": "Commemoration of H. G. Mathews Mar Epiphanios Metropolitan (St. Thomas Cathedral, Kollam)",
+            "ml": "മാത്യൂസ് മാർ എപ്പിഫാനിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (കൊല്ലം സെന്റ്റ് തോമസ് കത്തീഡ്രൽ)"
         },
         "startedYear": 2010
     },
@@ -7740,7 +7852,7 @@
         "type": "feast",
         "title": {
             "en": "Memory of Forty Martyrs",
-            "ml": "നാൽപ്പതു സഹദേന്മാർ"
+            "ml": "സെബസ്ത്യായിലെ നാൽപത് സഹദേന്മാരുടെ ഓർമ്മ"
         },
         "specialSongsKey": "memoryOfFortyMartyrsSongs",
         "bibleReadings": {
@@ -7994,7 +8106,8 @@
     "missionSunday": {
         "type": "event",
         "title": {
-            "en": "Mission Sunday"
+            "en": "Mission Sunday",
+            "ml": "മിഷൻ സൺഡേ"
         }
     },
     "mondayOfHolyWeek": {
@@ -8006,7 +8119,8 @@
     "nativityFastBeginning": {
         "type": "event",
         "title": {
-            "en": "Beginning of the Fast of the Nativity"
+            "en": "Beginning of the Fast of the Nativity",
+            "ml": "ഇരുപത്തഞ്ച് നോമ്പ് (യൽദോ നോമ്പ്) ആരംഭം"
         }
     },
     "newSunday": {
@@ -8610,62 +8724,71 @@
     "paretMathewsMarIvanios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Paret Mathews Mar Ivanios Metropolitan (Mar Kuriakose Dayara, Pampady)"
+            "en": "Commemoration of H. G. Paret Mathews Mar Ivanios Metropolitan (Mar Kuriakose Dayara, Pampady)",
+            "ml": "പാറേട്ട് മാത്യൂസ് മാർ ഈവാനിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പാമ്പാടി മാർ കുറിയാക്കോസ് ദയറാ)"
         },
         "startedYear": 1981
     },
     "pathroseMarOsthathios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Pathrose Mar Osthathios Metropolitan, Mookkancheril (Carmel Dayara, Kandanadu)"
+            "en": "Commemoration of H. G. Pathrose Mar Osthathios Metropolitan, Mookkancheril (Carmel Dayara, Kandanadu)",
+            "ml": "മുക്കഞ്ചേരിൽ പത്രോസ് മാർ ഒസ്‌താത്തിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (കണ്ടനാട് കർമ്മേൽ ദയറാ)"
         },
         "startedYear": 1969
     },
     "patriarchMarIgnatios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Patriarch Mar Ignatios Abded Meshiha II (Kurkuma Dayara)"
+            "en": "Commemoration of Patriarch Mar Ignatios Abded Meshiha II (Kurkuma Dayara)",
+            "ml": "മാർ ഇഗ്നാത്തിയോസ് അദ്ദേദ് മശിഹാ ദ്വിതീയൻ പാത്രിയർക്കീസ് ബാവായുടെ {YEAR}-ാം ഓർമ്മ (കുർക്കുമാ ദയറാ)"
         },
         "startedYear": 1916
     },
     "patriarchMarIgnatius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Patriarch Mar Ignatius Peter III of Antioch "
+            "en": "Commemoration of Patriarch Mar Ignatius Peter III of Antioch ",
+            "ml": "അന്ത്യോഖ്യായുടെ മാർ ഇഗ്നാത്തിയോസ് പത്രോസ് തൃതീയൻ പാത്രിയർക്കീസ് ബാവാ യുടെ {YEAR}-ാം ഓർമ്മ"
         },
         "startedYear": 1895
     },
     "paulTheMonk": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Paul the Monk"
+            "en": "Commemoration of Paul the Monk",
+            "ml": "താപസനായ മാർ പൗലോയുടെ ഓർമ്മ"
         }
     },
     "pauloseMarAthanasios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Paulose Mar Athanasios Metropolitan, Kuttikkathil (Thrikkunnathu Seminary, Aluva)"
+            "en": "Commemoration of H. G. Paulose Mar Athanasios Metropolitan, Kuttikkathil (Thrikkunnathu Seminary, Aluva)",
+            "ml": "കുറ്റിക്കാട്ടിൽ പൗലോസ് മാർ അത്താനാ സിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (ആലുവാ തൃക്കുന്നത്ത് സെമിനാരി)"
         },
         "startedYear": 1955
     },
     "pauloseMarGregorios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Paulose Mar Gregorios Metroplitan. (Old Seminary, Kottayam)"
+            "en": "Commemoration of H. G. Paulose Mar Gregorios Metroplitan. (Old Seminary, Kottayam)",
+            "ml": "പൗലോസ് മാർ ഗ്രീഗോറിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (കോട്ടയം പഴയ സെമിനാരി)"
         },
         "startedYear": 1997
     },
     "pauloseMarPachomios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Paulose Mar Pachomios Metropolitan (Bethany Ashram, Ranni Perunad)"
+            "en": "Commemoration of H. G. Paulose Mar Pachomios Metropolitan (Bethany Ashram, Ranni Perunad)",
+            "ml": "പൗലോസ് മാർ പക്കോമിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (റാന്നി - പെരുനാട് ബഥനി ആശ്രമം)"
         },
         "startedYear": 2013
     },
     "pauloseMarSeverios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Paulose Mar Severios Metropolitan, Mulayirickal (Kunnamkulam Arthat Puthen Pally)"
+            "en": "Commemoration of H. G. Paulose Mar Severios Metropolitan, Mulayirickal (Kunnamkulam Arthat Puthen Pally)",
+            "ml": "മുളയിരിക്കൽ പൗലോസ് മാർ സേവേറിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (കുന്നംകുളം ആർത്താറ്റ് പുത്തൻ പള്ളി)"
         },
         "startedYear": 1963
     },
@@ -8811,60 +8934,69 @@
     "philiposeMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Cheppad Philipose Mar Dionysisus IV Metropolitan (Cheppad Church)"
+            "en": "Commemoration of H. G. Cheppad Philipose Mar Dionysisus IV Metropolitan (Cheppad Church)",
+            "ml": "ചേപ്പാട് ഫീലിപ്പോസ് മാർ ദീവന്നാസിയോസ് IV മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ചേപ്പാട് പള്ളി)"
         },
         "startedYear": 1856
     },
     "philiposeMarEusebius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Philipose Mar Eusebius Metropolitan (St. Basil Dayara, Pathanamthitta"
+            "en": "Commemoration of H. G. Philipose Mar Eusebius Metropolitan (St. Basil Dayara, Pathanamthitta",
+            "ml": "ഫിലിപ്പോസ് മാർ യൗസേബിയോസ് മെത്രാപ്പോ ലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (പത്തനംതിട്ട മാർ ബേസിൽ ദയറാ)"
         },
         "startedYear": 2010
     },
     "philiposeMarTheophilos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Philipose Mar Theophilos Metropolitan (Aluva Thrikkunathu Seminary)"
+            "en": "Commemoration of H. G. Philipose Mar Theophilos Metropolitan (Aluva Thrikkunathu Seminary)",
+            "ml": "ഫീലിപ്പോസ് മാർ തെയോഫിലോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ആലുവാ തൃക്കുന്നത്ത് സെമിനാരി)"
         },
         "startedYear": 1998
     },
     "philiposeRamban": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Veda Ratnam Kayamkulam Philipose Ramban (Kannamkode Cathedral, Adoor)"
+            "en": "Commemoration of Veda Ratnam Kayamkulam Philipose Ramban (Kannamkode Cathedral, Adoor)",
+            "ml": "വേദരത്നം കായംകുളം ഫീലിപ്പോസ് റമ്പാൻ {YEAR}-ാം ഓർമ്മ (കണ്ണംകോട് സെൻ്റ് തോമസ് കത്തീഡ്രൽ)"
         },
         "startedYear": 1813
     },
     "policarpos": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of St. Policarpos of Smyrna"
+            "en": "Feast of St. Policarpos of Smyrna",
+            "ml": "സ്‌മിർണായിലെ പോളിക്കാർപ്പോസിന്റെ ഓർമ്മ"
         }
     },
     "prophetMicah": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Prophet Micah"
+            "en": "Commemoration of Prophet Micah",
+            "ml": "മീഖാ നിബിയുടെ ഓർമ്മ"
         }
     },
     "prophetSamuel": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Prophet Samuel "
+            "en": "Commemoration of Prophet Samuel ",
+            "ml": "മാർ ശമുവേൽ നിബിയുടെ ഓർമ്മ"
         }
     },
     "pulikkottilJosephMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Malankara Sabha Jyothis H. G. Pulikkottil Joseph Mar Dionysius II, the founder of Old Seminary"
+            "en": "Commemoration of Malankara Sabha Jyothis H. G. Pulikkottil Joseph Mar Dionysius II, the founder of Old Seminary",
+            "ml": "പഴയ സെമിനാരി സ്ഥാപകൻ സഭാജ്യോതിസ് പുലിക്കോട്ടിൽ ജോസഫ് മാർ ദീവന്നാസ്യോസ് II മെത്രാപ്പോലീത്തായുടെ 209-ാം ഓർമ്മ"
         },
         "startedYear": 1817
     },
     "republicDay": {
         "type": "event",
         "title": {
-            "en": "Republic Day"
+            "en": "Republic Day",
+            "ml": "റിപ്പബ്ലിക് ദിനം"
         }
     },
     "revelationToJoseph": {
@@ -10340,7 +10472,8 @@
     "seminaryDay": {
         "type": "event",
         "title": {
-            "en": "Seminary Day"
+            "en": "Seminary Day",
+            "ml": "വൈദിക സെമിനാരി ദിനം"
         }
     },
     "seventhSundayAfterHolyCross": {
@@ -10589,20 +10722,23 @@
     "seventyTwoEvangelists": {
         "type": "feastSaint",
         "title": {
-            "en": "Feast of the Seventy-Two Evangelists"
+            "en": "Feast of the Seventy-Two Evangelists",
+            "ml": "എഴുപത്തിരണ്ട് അറിയിപ്പുകാരുടെ ഓർമ്മ"
         }
     },
     "shemavoonMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Karottu Veettil Shemavoon Mar Dionysius"
+            "en": "Commemoration of Karottu Veettil Shemavoon Mar Dionysius",
+            "ml": "കരവട്ടുവീട്ടിൽ ശെമവൂൻ മാർ ദീവന്നാസ്യോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (കടും ഗമംഗലം പള്ളി)"
         },
         "startedYear": 1889
     },
     "simonMarAthanasios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Simon Mar Athanasios Metropolitan (Kottayam Puthen Pally)"
+            "en": "Commemoration of H. G. Simon Mar Athanasios Metropolitan (Kottayam Puthen Pally)",
+            "ml": "ശെമവൂൻ മാർ അത്താനാസ്യോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (കോട്ടയം പുത്തൻപള്ളി)"
         },
         "startedYear": 1890
     },
@@ -10951,38 +11087,44 @@
     "sleebaMarOsthathios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Sleeba Mar Osthathios Metropolitan (Kunnamkulam Arthat Puthen Pally)"
+            "en": "Commemoration of H. G. Sleeba Mar Osthathios Metropolitan (Kunnamkulam Arthat Puthen Pally)",
+            "ml": "സ്ലീബാ മാർ ഒസ്താത്തിയോസ് മെത്രാപ്പോലിത്തായുടെ {YEAR}-ാം ഓർമ്മ. (കുന്നംകുളം ആർത്താറ്റ് പുത്തൻ പള്ളി)"
         },
         "startedYear": 1931
     },
     "stAaron": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of St. Aaron the Monk"
+            "en": "Commemoration of St. Aaron the Monk",
+            "ml": "താപസന്മാരിൽ പ്രധാനിയായ മാർ അഹറോന്റെ ഓർമ്മ"
         }
     },
     "stIsaac": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of St. Isaac"
+            "en": "Commemoration of St. Isaac",
+            "ml": "മാർ ഇസ്ഹാക്കിന്റെ ഓർമ്മ"
         }
     },
     "stJamesApostle": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of St. James the Apostle (Son of Zebedee)"
+            "en": "Commemoration of St. James the Apostle (Son of Zebedee)",
+            "ml": "സെബദി പുത്രനായ മാർ യാക്കോബ് ശ്ലീഹായുടെ ഓർമ്മ"
         }
     },
     "stSimonHanna": {
         "type": "feastSaint",
         "title": {
-            "en": "Commemoration of St. Simon and Hanna (Elder's Day)"
+            "en": "Commemoration of St. Simon and Hanna (Elder's Day)",
+            "ml": "വൃദ്ധനായ ശെമവോൻ്റെയും, മർത്ത് ഹന്നായു ടെയും ഓർമ്മ"
         }
     },
     "stephanosMarTheodosius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Stephanos Mar Theodosius Metropolitan (St. Thomas Ashram, Bhilai)"
+            "en": "Commemoration of H. G. Stephanos Mar Theodosius Metropolitan (St. Thomas Ashram, Bhilai)",
+            "ml": "സ്തേഫാനോസ് മാർ തേവോദോസിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ഭിലായ് സെൻ്റ് തോമസ് ആശ്രമം)"
         },
         "startedYear": 2008
     },
@@ -11223,6 +11365,13 @@
                     ]
                 }
             ]
+        }
+    },
+    "sundayOfStThomas": {
+        "type": "feastSaint",
+        "title": {
+            "en": "Sunday of St. Thomas",
+            "ml": "മാർത്തോമ്മാ ശ്ലീഹായുടെ ഞായർ"
         }
     },
     "tenthSundayAfterPentecost": {
@@ -12006,21 +12155,24 @@
     "thomaMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Thoma Mar Dionysius Metropolitan. (Mount Tabor Dayara, Pathanapuram)"
+            "en": "Commemoration of H. G. Thoma Mar Dionysius Metropolitan. (Mount Tabor Dayara, Pathanapuram)",
+            "ml": "തോമ്മാ മാർ ദീവന്നാസിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പത്തനാപുരം താബോർ ദയറാ)"
         },
         "startedYear": 1973
     },
     "thomasMarAthanasios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Thomas Mar Athanasios Metropolitan (St. George Dayara, Othera)"
+            "en": "Commemoration of H. G. Thomas Mar Athanasios Metropolitan (St. George Dayara, Othera)",
+            "ml": "തോമസ് മാർ അത്താനാസിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ഓതറ സെന്റ് ജോർജ്ജ് ദയറാ)"
         },
         "startedYear": 2019
     },
     "thomasMarMakarios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Dr. Thomas Mar Makarios Metropolitan (Catholicate Aramana, Devalokam)"
+            "en": "Commemoration of H. G. Dr. Thomas Mar Makarios Metropolitan (Catholicate Aramana, Devalokam)",
+            "ml": "തോമസ് മാർ മക്കാറിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ. (ദേവലോകം കാതോലി ക്കേറ്റ് അരമന)"
         },
         "startedYear": 2009
     },
@@ -12282,14 +12434,16 @@
     "valiyaMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Valiya Mar Dionysius Metropolitan (Marthoma VI) Puthencavu Cathedral)"
+            "en": "Commemoration of Valiya Mar Dionysius Metropolitan (Marthoma VI) Puthencavu Cathedral)",
+            "ml": "വലിയ മാർ ദീവന്നാസ്യോസ് മെത്രാപ്പോലീത്തായുടെ (ആറാം മാർത്തോമ്മാ ) {YEAR}-ാം ഓർമ്മ (പുത്തൻകാവ് കത്തീഡ്രൽ)"
         },
         "startedYear": 1809
     },
     "vayaliparambilGeevargheseMarGregorios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Vayaliparambil Geevarghese Mar Gregorios Metropolitan (Thrikknnathu Seminary, Aluva)"
+            "en": "Commemoration of H. G. Vayaliparambil Geevarghese Mar Gregorios Metropolitan (Thrikknnathu Seminary, Aluva)",
+            "ml": "വയലിപ്പറമ്പിൽ ഗീവർഗീസ് മാർ ഗ്രീഗോറിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ആലുവാ തൃക്കുന്നത്ത് സെമിനാരി)"
         },
         "startedYear": 1967
     },
@@ -12435,14 +12589,16 @@
     "yakobMarPolicarpos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Yakob Mar Policarpos Metropolitan (Zion Seminary, Koratty)"
+            "en": "Commemoration of H. G. Yakob Mar Policarpos Metropolitan (Zion Seminary, Koratty)",
+            "ml": "യാക്കോബ് മാർ പോളിക്കാർപ്പോസ് മെത്രാപ്പോ ലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (കൊരട്ടി സീയോൻ സെമിനാരി)"
         },
         "startedYear": 1987
     },
     "yathivaryan": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Yathivaryan Fr. Younan (Anchal Achen)"
+            "en": "Commemoration of Yathivaryan Fr. Younan (Anchal Achen)",
+            "ml": "യതിവര്യൻ യൗനാൻ കത്തനാരുടെ (അഞ്ചലച്ചൻ) ഓർമ്മ"
         }
     },
     "yeldho": {
@@ -12559,63 +12715,72 @@
     "yuhannonMarAthanasios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Yuhannon Mar Athanasios Episcopa (Bethany Ashram, Ranni-Perunadu)"
+            "en": "Commemoration of H. G. Yuhannon Mar Athanasios Episcopa (Bethany Ashram, Ranni-Perunadu)",
+            "ml": "യൂഹാനോൻ മാർ അത്താനാസിയോസ് എപ്പിസ്കോപ്പായുടെ {YEAR}-ാം ഓർമ്മ (പെരുനാട് ബഥനി ആശ്രമം)"
         },
         "startedYear": 1981
     },
     "yuhannonMarGregorios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Yuhannon Mar Gregorios Metropolitan (Mulanthuruthy Cathedral)"
+            "en": "Commemoration of H. G. Yuhannon Mar Gregorios Metropolitan (Mulanthuruthy Cathedral)",
+            "ml": "യൂഹാനോൻ മാർ ഗ്രീഗോറിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (മുളന്തുരുത്തി പള്ളി)"
         },
         "startedYear": 1774
     },
     "yuhanonMarIvanios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Yuhanon Mar Ivanios Episcopa (Chengannur Old Syrian Church)"
+            "en": "Commemoration of Yuhanon Mar Ivanios Episcopa (Chengannur Old Syrian Church)",
+            "ml": "യൂഹാനോൻ മാർ ഈവാനിയോസ് എപ്പിസ്കോപ്പായുടെ {YEAR}-ാം ഓർമ്മ (ചെങ്ങന്നൂർ പഴയ സുറിയാനിപള്ളി)"
         },
         "startedYear": 1795
     },
     "yuhanonMarSeverios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Yuhanon Mar Severios Metropolitan (Zion Seminary, Koratty)"
+            "en": "Commemoration of H. G. Yuhanon Mar Severios Metropolitan (Zion Seminary, Koratty)",
+            "ml": "യൂഹാനോൻ മാർ സേവേറിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (കൊരട്ടി സീയോൻ സെമിനാരി)"
         },
         "startedYear": 1991
     },
     "yuyakimMarCoorilos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Yuyakim Mar Coorilos Metropolitan (Mulanthuruthy Cathedral)"
+            "en": "Commemoration of H. G. Yuyakim Mar Coorilos Metropolitan (Mulanthuruthy Cathedral)",
+            "ml": "യൂയാക്കീം മാർ കൂറീലോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (മുളന്തുരുത്തിപള്ളി)"
         },
         "startedYear": 1875
     },
     "yuyakimMarIvanios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of Karottuveettil H. G. Yuyakim Mar Ivanios Metropolitan (Parumala Seminary)"
+            "en": "Commemoration of Karottuveettil H. G. Yuyakim Mar Ivanios Metropolitan (Parumala Seminary)",
+            "ml": "കരോട്ടുവീട്ടിൽ യൂയാക്കിം മാർ ഈവാനി യോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പരുമല സെമിനാരി)"
         },
         "startedYear": 1925
     },
     "zachariahMarAnthonios": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Zachariah Mar Anthonios Metropolitan (Mount Horeb Ashram, Sastamcotta)"
+            "en": "Commemoration of H. G. Zachariah Mar Anthonios Metropolitan (Mount Horeb Ashram, Sastamcotta)",
+            "ml": "സഖറിയാ മാർ അന്തോനിയോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (ശാസ്‌താംകോട്ട മൗണ്ട് ഹോറേബ് ആശ്രമം)"
         },
         "startedYear": 2024
     },
     "zachariahMarDionysius": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Zachariah Mar Dionysius Metropolitan (Mount Tabor Dayara, Pathanapuram)"
+            "en": "Commemoration of H. G. Zachariah Mar Dionysius Metropolitan (Mount Tabor Dayara, Pathanapuram)",
+            "ml": "സഖറിയാ മാർ ദീവന്നാസ്യോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (പത്തനാപുരം മൗണ്ട് താബോർ ദയറാ)"
         },
         "startedYear": 1998
     },
     "zachariahMarTheophilos": {
         "type": "commemoration",
         "title": {
-            "en": "Commemoration of H. G. Zachariah Mar Theophilos Metropolitan (Thadagam Ashram, Coimbatore)"
+            "en": "Commemoration of H. G. Zachariah Mar Theophilos Metropolitan (Thadagam Ashram, Coimbatore)",
+            "ml": "സഖറിയാ മാർ തെയോഫിലോസ് മെത്രാപ്പോലീത്തായുടെ {YEAR}-ാം ഓർമ്മ (തടാകം ക്രിസ്‌ത ശിഷ്യ ആശ്രമം)"
         },
         "startedYear": 2018
     }

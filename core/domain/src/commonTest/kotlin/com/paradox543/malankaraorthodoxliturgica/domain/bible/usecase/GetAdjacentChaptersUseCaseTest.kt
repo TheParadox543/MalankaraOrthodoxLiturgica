@@ -4,6 +4,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookDet
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleBookName
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BibleChapterRef
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeBibleRepository
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -23,7 +24,7 @@ class GetAdjacentChaptersUseCaseTest {
         )
 
     @Test
-    fun `middle chapter returns prev and next within same book`() {
+    fun `middle chapter returns prev and next within same book`() = runTest {
         val books = listOf(simpleBook(5))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 2)
@@ -32,7 +33,7 @@ class GetAdjacentChaptersUseCaseTest {
     }
 
     @Test
-    fun `first chapter of first book has next only`() {
+    fun `first chapter of first book has next only`() = runTest {
         val books = listOf(simpleBook(3))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 0)
@@ -41,7 +42,7 @@ class GetAdjacentChaptersUseCaseTest {
     }
 
     @Test
-    fun `last chapter of book with next book`() {
+    fun `last chapter of book with next book`() = runTest {
         val books = listOf(simpleBook(2), simpleBook(4))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 1)
@@ -50,7 +51,7 @@ class GetAdjacentChaptersUseCaseTest {
     }
 
     @Test
-    fun `last chapter of last book returns prev only`() {
+    fun `last chapter of last book returns prev only`() = runTest {
         val books = listOf(simpleBook(1))
         val useCase = createUseCase(books)
         val (prev, next) = useCase(bookIndex = 0, chapterIndex = 0)

@@ -9,6 +9,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.BookNotFound
 import com.paradox543.malankaraorthodoxliturgica.domain.bible.model.ReferenceRange
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeBibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -31,7 +32,7 @@ class LoadBibleReadingUseCaseTest {
     )
 
     @Test
-    fun `loads a single verse from one chapter`() {
+    fun `loads a single verse from one chapter`() = runTest {
         val chapters = mapOf(makeChapter(bookIndex = 0, chapterIndex = 0, verseCount = 31))
         val repo = FakeBibleRepository(meta = listOf(makeBook()), chapters = chapters)
         val useCase = LoadBibleReadingUseCase(repo)
@@ -47,7 +48,7 @@ class LoadBibleReadingUseCaseTest {
     }
 
     @Test
-    fun `loads a verse range within the same chapter`() {
+    fun `loads a verse range within the same chapter`() = runTest {
         val chapters = mapOf(makeChapter(bookIndex = 0, chapterIndex = 0, verseCount = 31))
         val repo = FakeBibleRepository(meta = listOf(makeBook()), chapters = chapters)
         val useCase = LoadBibleReadingUseCase(repo)
@@ -64,7 +65,7 @@ class LoadBibleReadingUseCaseTest {
     }
 
     @Test
-    fun `loads a verse range spanning multiple chapters`() {
+    fun `loads a verse range spanning multiple chapters`() = runTest {
         val chapters = mapOf(
             makeChapter(bookIndex = 0, chapterIndex = 0, verseCount = 10),
             makeChapter(bookIndex = 0, chapterIndex = 1, verseCount = 10),
@@ -85,7 +86,7 @@ class LoadBibleReadingUseCaseTest {
     }
 
     @Test
-    fun `loads multiple references and concatenates verses`() {
+    fun `loads multiple references and concatenates verses`() = runTest {
         val chapters = mapOf(
             makeChapter(bookIndex = 0, chapterIndex = 0, verseCount = 10),
             makeChapter(bookIndex = 0, chapterIndex = 1, verseCount = 10),
@@ -109,7 +110,7 @@ class LoadBibleReadingUseCaseTest {
     }
 
     @Test
-    fun `throws BookNotFoundException when chapter is not found`() {
+    fun `throws BookNotFoundException when chapter is not found`() = runTest {
         val repo = FakeBibleRepository(meta = listOf(makeBook()), chapters = emptyMap())
         val useCase = LoadBibleReadingUseCase(repo)
 
@@ -124,7 +125,7 @@ class LoadBibleReadingUseCaseTest {
     }
 
     @Test
-    fun `throws BookNotFoundException for invalid verse range`() {
+    fun `throws BookNotFoundException for invalid verse range`() = runTest {
         // Chapter has only 5 verses but we request verse 10
         val chapters = mapOf(makeChapter(bookIndex = 0, chapterIndex = 0, verseCount = 5))
         val repo = FakeBibleRepository(meta = listOf(makeBook()), chapters = chapters)

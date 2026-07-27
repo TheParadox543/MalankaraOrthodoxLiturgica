@@ -143,6 +143,22 @@
         "en": "Appendix I",
         "ml": "അനുബന്ധം I"
     },
+    "appendixThree": {
+        "en": "Appendix III",
+        "ml": "അനുബന്ധം III"
+    },
+    "appendixFourteen": {
+        "en": "Appendix XIV",
+        "ml": "അനുബന്ധം XIV"
+    },
+    "appendixFifteen": {
+        "en": "Appendix XV",
+        "ml": "അനുബന്ധം XV"
+    },
+    "appendix": {
+        "en": "Appendices",
+        "ml": "അനുബന്ധങ്ങൾ"
+    },
     "men": {
         "en": "Men",
         "ml": "പുരുഷന്മാർ"
@@ -718,5 +734,13 @@
     "indexOfPrayers": {
         "en": "Index of prayers",
         "ml": "പ്രാർത്ഥനകളുടെ സൂചിക"
+    },
+    "institutionBlessing": {
+        "en": "Blessing of Institutions",
+        "ml": "സ്ഥാപന ശുദ്ധീകരണം"
+    },
+    "vehicleBlessing": {
+        "en": "Blessing of Vehicles",
+        "ml": "വാഹന ശുദ്ധീകരണം"
     }
 }

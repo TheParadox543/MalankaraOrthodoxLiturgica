@@ -1,5 +1,10 @@
 package com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase
 
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleRangeUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatBibleReadingEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.FormatGospelEntryUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.bible.usecase.LoadBibleReadingUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeBibleRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakeCalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.fakes.FakePrayerRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
@@ -15,8 +20,19 @@ class GetPrayerScreenContentUseCaseTest {
     private fun makeUseCase(elementsMap: Map<String, List<PrayerElement>>): GetPrayerScreenContentUseCase {
         val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
         val calendarRepo = FakeCalendarRepository()
+        val bibleRepo = FakeBibleRepository()
         val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
-        return GetPrayerScreenContentUseCase(prayerRepo, dynamicUseCase)
+        val loadBibleReadingUseCase = LoadBibleReadingUseCase(bibleRepo)
+        val formatBibleRangeUseCase = FormatBibleRangeUseCase()
+        val formatBibleReadingEntryUseCase = FormatBibleReadingEntryUseCase(bibleRepo, formatBibleRangeUseCase)
+        val formatGospelEntryUseCase = FormatGospelEntryUseCase(formatBibleReadingEntryUseCase)
+
+        return GetPrayerScreenContentUseCase(
+            prayerRepo,
+            dynamicUseCase,
+            loadBibleReadingUseCase,
+            formatGospelEntryUseCase,
+        )
     }
 
     @Test
@@ -118,8 +134,19 @@ class GetPrayerScreenContentUseCaseTest {
                     throwOnMissing = true,
                 )
             val calendarRepo = FakeCalendarRepository()
+            val bibleRepo = FakeBibleRepository()
             val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
-            val useCase = GetPrayerScreenContentUseCase(prayerRepo, dynamicUseCase)
+            val loadBibleReadingUseCase = LoadBibleReadingUseCase(bibleRepo)
+            val formatBibleRangeUseCase = FormatBibleRangeUseCase()
+            val formatBibleReadingEntryUseCase = FormatBibleReadingEntryUseCase(bibleRepo, formatBibleRangeUseCase)
+            val formatGospelEntryUseCase = FormatGospelEntryUseCase(formatBibleReadingEntryUseCase)
+
+            val useCase = GetPrayerScreenContentUseCase(
+                prayerRepo,
+                dynamicUseCase,
+                loadBibleReadingUseCase,
+                formatGospelEntryUseCase,
+            )
 
             val result = useCase("commonMain.json", AppLanguage.ENGLISH)
 

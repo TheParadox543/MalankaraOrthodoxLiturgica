@@ -4,6 +4,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import kotlinx.datetime.LocalDate
@@ -29,14 +30,14 @@ class FakeCalendarRepository(
 
     override suspend fun getSeasonDays(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<LiturgicalDay> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getSeasonWeeks(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<WeekItem> = emptyList()
 
     override suspend fun getMonthDays(

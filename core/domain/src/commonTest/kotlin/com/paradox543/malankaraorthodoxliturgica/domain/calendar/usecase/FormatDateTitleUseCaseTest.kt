@@ -68,7 +68,7 @@ class FormatDateTitleUseCaseTest {
     }
 
     @Test
-    fun `uses th suffix for 11th, 12th, 13th (special cases)`() {
+    fun `uses th suffix for 11th 12th 13th special cases`() {
         // 11th: startedYear = currentYear - 10
         val event11 = makeEvent(en = "Feast", startedYear = currentYear - 10)
         val result11 = useCase(event11, AppLanguage.ENGLISH, currentYear)

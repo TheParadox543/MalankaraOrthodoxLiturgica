@@ -272,8 +272,7 @@
     },
     "2024-12-10T00:00:00": {
       "events": [
-        "feastStBehanam",
-        "feastMarPhiloxenos"
+        "feastStBehanam"
       ],
       "season": "annunciation",
       "tune": 6,
