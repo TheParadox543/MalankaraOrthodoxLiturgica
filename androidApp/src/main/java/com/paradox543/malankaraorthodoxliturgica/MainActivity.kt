@@ -193,14 +193,19 @@ class MainActivity : ComponentActivity() {
             }
         }
         settingsViewModel.refreshDndPermissionStatus()
+        
+        // Re-apply sound mode on resume to handle background restoration
         soundModeManager.cancelRestoreWork()
-        val soundMode = settingsViewModel.soundMode.value
-        soundModeManager.apply(soundMode)
+        soundModeManager.apply(settingsViewModel.soundMode.value)
     }
 
     override fun onPause() {
         super.onPause()
         androidUpdateManager.onPause()
-        soundModeManager.scheduleRestore(settingsViewModel.soundRestoreDelay.value)
+        
+        // Only schedule restore if we are NOT rotating
+        if (!isChangingConfigurations) {
+            soundModeManager.scheduleRestore(settingsViewModel.soundRestoreDelay.value)
+        }
     }
 }

@@ -35,7 +35,9 @@ class SoundModeManagerImpl(
     override fun apply(mode: SoundMode) {
         requestedMode = mode
         val modified = soundModeService.applyUserPreference(mode, isSoundModified)
-        isSoundModified = modified
+        // Ensure we mark it as modified if a mode is active, even if the service 
+        // returned false (e.g., if it was already silent but we want to "own" the state)
+        isSoundModified = if (mode != SoundMode.OFF) true else modified
     }
 
     // -------------------------------------------------------------------------
