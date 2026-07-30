@@ -3,17 +3,20 @@ package com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -109,7 +112,13 @@ fun SectionScreen(
         val width = maxWidth
         if (width > 600.dp) {
             Row(
-                Modifier.padding(contentPadding),
+                Modifier.padding(
+                    top = contentPadding.calculateTopPadding(),
+                    bottom = contentPadding.calculateBottomPadding(),
+                    start = 8.dp,
+                    end = 0.dp,
+                ),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 DisplayIconography(displayIcon, "row")
                 LazyVerticalGrid(
@@ -117,7 +126,8 @@ fun SectionScreen(
                     modifier =
                         Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 20.dp),
+                            .weight(1f)
+                            .padding(start = 8.dp, end = 20.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
                     if (node.route == "malankara") {
@@ -219,21 +229,34 @@ private fun DisplayIconography(
     icon: DrawableResource,
     orientation: String,
 ) {
-    Image(
-        painter = painterResource(icon),
-        contentDescription = "icon",
-        modifier =
-            if (orientation == "row") {
+    if (orientation == "row") {
+        Box(
+            modifier = Modifier.width(200.dp).fillMaxHeight(),
+            contentAlignment = Alignment.Center,
+        ) {
+            Image(
+                painter = painterResource(icon),
+                contentDescription = "icon",
+                modifier =
+                    Modifier
+                        .sizeIn(maxWidth = 200.dp, maxHeight = 200.dp)
+                        .aspectRatio(1f),
+                contentScale = ContentScale.Fit,
+            )
+        }
+    } else {
+        Image(
+            painter = painterResource(icon),
+            contentDescription = "icon",
+            modifier =
                 Modifier
-                    .requiredWidthIn(min = 200.dp, max = 240.dp)
-                    .fillMaxHeight()
-            } else {
-                Modifier
+                    .fillMaxWidth()
                     .requiredWidthIn(max = 240.dp)
-            },
-        alignment = Alignment.TopStart,
-        contentScale = ContentScale.Crop,
-    )
+                    .aspectRatio(1f),
+            alignment = Alignment.Center,
+            contentScale = ContentScale.Fit,
+        )
+    }
 }
 
 @Composable

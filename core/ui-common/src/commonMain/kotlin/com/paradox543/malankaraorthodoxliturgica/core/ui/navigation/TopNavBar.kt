@@ -3,6 +3,7 @@ package com.paradox543.malankaraorthodoxliturgica.core.ui.navigation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -46,6 +47,7 @@ fun TopNavBar(
                 )
             }
         },
+        modifier = Modifier.height(90.dp),
         navigationIcon = {
             if (showBack) {
                 IconButton(onClick = onBack) {

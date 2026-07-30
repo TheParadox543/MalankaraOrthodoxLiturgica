@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Calendar_month
 import com.composables.icons.materialicons.rounded.Home
+import com.composables.icons.materialicons.rounded.Settings
 import com.paradox543.malankaraorthodoxliturgica.core.ui.Res
 import com.paradox543.malankaraorthodoxliturgica.core.ui.bible
 import com.paradox543.malankaraorthodoxliturgica.core.ui.clock
@@ -14,19 +15,19 @@ import org.jetbrains.compose.resources.painterResource
 
 val iconSize = 24.dp
 
-val bottomNavItems =
+val navItems =
     listOf(
-        BottomNavItem("home", "Home") {
+        NavigationItem("home", "Home") {
             Icon(MaterialIcons.Rounded.Home, "Home")
         },
-        BottomNavItem("prayNow", "Pray Now") {
+        NavigationItem("prayNow", "Pray Now") {
             Icon(
                 painterResource(Res.drawable.clock),
                 "Clock",
                 modifier = Modifier.size(iconSize),
             )
         },
-//        BottomNavItem(
+//        NavigationItem(
 //            "music",
 //            "Music",
 //        ) {
@@ -36,18 +37,25 @@ val bottomNavItems =
 //                modifier = Modifier.size(iconSize),
 //            )
 //        },
-        BottomNavItem("calendar", "Calendar") {
+        NavigationItem("calendar", "Calendar") {
             Icon(
                 MaterialIcons.Rounded.Calendar_month,
                 "Calendar",
                 Modifier.size(iconSize),
             )
         },
-        BottomNavItem("bible", "Bible") {
+        NavigationItem("bible", "Bible") {
             Icon(
                 painterResource(Res.drawable.bible),
                 "Bible",
                 modifier = Modifier.size(iconSize),
+            )
+        },
+        NavigationItem("settings", "Settings", isRailOnly = true) {
+            Icon(
+                MaterialIcons.Rounded.Settings,
+                "Settings",
+                Modifier.size(iconSize),
             )
         },
     )

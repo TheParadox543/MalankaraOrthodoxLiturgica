@@ -33,3 +33,6 @@ keystore.properties
 /iosApp/*/Packaging.log
 /iosApp/DistributionSummary.plist
 /iosApp/*/DistributionSummary.plist
+
+# IDE settings
+/.vscode/

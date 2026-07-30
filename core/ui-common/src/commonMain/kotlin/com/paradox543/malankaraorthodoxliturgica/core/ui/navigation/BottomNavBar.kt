@@ -16,7 +16,7 @@ fun BottomNavBar(
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.primary,
     ) {
-        bottomNavItems.forEach { item ->
+        navItems.forEach { item ->
             NavigationBarItem(
                 icon = item.icon,
                 label = { Text(item.label, textAlign = TextAlign.Center) },

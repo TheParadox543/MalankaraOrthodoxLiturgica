@@ -90,6 +90,7 @@ Version **2.0** introduces a major architectural overhaul, improved performance,
 
 - [@TheParadox543](https://github.com/TheParadox543) – Development, Implementation, UI Design, and Text Translations.  
 - [@ShriGaneshPurohit](https://github.com/ShriGaneshPurohit) – Guidance, Structural Planning, and Development Insights.
+- [@praneethm](https://github.com/praneethm05) - iOS version implementation.
 - **Jerin M George** – Assistance with Color Theme Fixes and Image Selection.  
 - **Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, Nohan George & Anoop Alex Koshy** – Additional Text Translations, Content and Preparation.  
 
