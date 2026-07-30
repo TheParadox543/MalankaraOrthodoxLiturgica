@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -122,23 +124,29 @@ fun BibleChapterScreen(
         val imageBitmap = qrMatrixToImageBitmap(matrix)
         QrDialog(imageBitmap) { showQrDialog = false }
     }
-    LazyColumn(
-        state = listState,
-        modifier =
-            Modifier
-                .padding(horizontal = 16.dp)
-                .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.onBackground,
     ) {
-        item {
-            Spacer(Modifier.padding(top = initialTopPadding.value))
-        }
-        items(data.verses.size) { index ->
-            val verseNumber = data.verses[index].id.toString()
-            val verseText = data.verses[index].verse
-            VerseItem(verseNumber, verseText)
-        }
-        item {
-            Spacer(Modifier.padding(bottom = initialBottomPadding.value))
+        LazyColumn(
+            state = listState,
+            modifier =
+                Modifier
+                    .padding(horizontal = 16.dp)
+                    .pointerInput(Unit) { detectTapGestures { isVisible.value = !isVisible.value } },
+        ) {
+            item {
+                Spacer(Modifier.padding(top = initialTopPadding.value))
+            }
+            items(data.verses.size) { index ->
+                val verseNumber = data.verses[index].id.toString()
+                val verseText = data.verses[index].verse
+                VerseItem(verseNumber, verseText)
+            }
+            item {
+                Spacer(Modifier.padding(bottom = initialBottomPadding.value))
+            }
         }
     }
 }
