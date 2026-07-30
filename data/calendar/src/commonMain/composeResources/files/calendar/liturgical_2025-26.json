@@ -2,7 +2,7 @@
   "version": "1.0",
   "liturgicalYear": "2025-26",
   "data": {
-    "2025-11-02T00:00:00": {
+    "2025-11-02": {
       "events": [
         "sanctification",
         "geevargheseMarGregorios",
@@ -12,19 +12,19 @@
       "tune": 1,
       "lent": null
     },
-    "2025-11-03T00:00:00": {
+    "2025-11-03": {
       "events": [],
       "season": "annunciation",
       "tune": 5,
       "lent": null
     },
-    "2025-11-04T00:00:00": {
+    "2025-11-04": {
       "events": [],
       "season": "annunciation",
       "tune": 1,
       "lent": null
     },
-    "2025-11-05T00:00:00": {
+    "2025-11-05": {
       "events": [
         "stephanosMarTheodosius"
       ],
@@ -32,7 +32,7 @@
       "tune": 5,
       "lent": 1
     },
-    "2025-11-06T00:00:00": {
+    "2025-11-06": {
       "events": [
         "vayaliparambilGeevargheseMarGregorios"
       ],
@@ -40,13 +40,13 @@
       "tune": 1,
       "lent": null
     },
-    "2025-11-07T00:00:00": {
+    "2025-11-07": {
       "events": [],
       "season": "annunciation",
       "tune": 5,
       "lent": 1
     },
-    "2025-11-08T00:00:00": {
+    "2025-11-08": {
       "events": [
         "baseliosMarthomaMathewsFirstCatholicos"
       ],
@@ -54,7 +54,7 @@
       "tune": 1,
       "lent": null
     },
-    "2025-11-09T00:00:00": {
+    "2025-11-09": {
       "events": [
         "dedication"
       ],
@@ -62,19 +62,19 @@
       "tune": 2,
       "lent": null
     },
-    "2025-11-10T00:00:00": {
+    "2025-11-10": {
       "events": [],
       "season": "annunciation",
       "tune": 6,
       "lent": null
     },
-    "2025-11-11T00:00:00": {
+    "2025-11-11": {
       "events": [],
       "season": "annunciation",
       "tune": 2,
       "lent": null
     },
-    "2025-11-12T00:00:00": {
+    "2025-11-12": {
       "events": [
         "philiposeRamban"
       ],
@@ -82,7 +82,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2025-11-13T00:00:00": {
+    "2025-11-13": {
       "events": [
         "feastStJohnChrysostom"
       ],
@@ -90,7 +90,7 @@
       "tune": 2,
       "lent": null
     },
-    "2025-11-14T00:00:00": {
+    "2025-11-14": {
       "events": [
         "feastStPhilipApostle"
       ],
@@ -98,13 +98,13 @@
       "tune": 6,
       "lent": 1
     },
-    "2025-11-15T00:00:00": {
+    "2025-11-15": {
       "events": [],
       "season": "annunciation",
       "tune": 2,
       "lent": null
     },
-    "2025-11-16T00:00:00": {
+    "2025-11-16": {
       "events": [
         "revelationToZachariah"
       ],
@@ -112,25 +112,25 @@
       "tune": 3,
       "lent": null
     },
-    "2025-11-17T00:00:00": {
+    "2025-11-17": {
       "events": [],
       "season": "annunciation",
       "tune": 7,
       "lent": null
     },
-    "2025-11-18T00:00:00": {
+    "2025-11-18": {
       "events": [],
       "season": "annunciation",
       "tune": 3,
       "lent": null
     },
-    "2025-11-19T00:00:00": {
+    "2025-11-19": {
       "events": [],
       "season": "annunciation",
       "tune": 7,
       "lent": 1
     },
-    "2025-11-20T00:00:00": {
+    "2025-11-20": {
       "events": [
         "jobMarPhiloxenos"
       ],
@@ -138,7 +138,7 @@
       "tune": 3,
       "lent": null
     },
-    "2025-11-21T00:00:00": {
+    "2025-11-21": {
       "events": [
         "entryStMary"
       ],
@@ -146,13 +146,13 @@
       "tune": 7,
       "lent": 1
     },
-    "2025-11-22T00:00:00": {
+    "2025-11-22": {
       "events": [],
       "season": "annunciation",
       "tune": 3,
       "lent": null
     },
-    "2025-11-23T00:00:00": {
+    "2025-11-23": {
       "events": [
         "annunciationToStMary"
       ],
@@ -160,7 +160,7 @@
       "tune": 4,
       "lent": null
     },
-    "2025-11-24T00:00:00": {
+    "2025-11-24": {
       "events": [
         "pulikkottilJosephMarDionysius",
         "pauloseMarGregorios"
@@ -169,25 +169,25 @@
       "tune": 8,
       "lent": null
     },
-    "2025-11-25T00:00:00": {
+    "2025-11-25": {
       "events": [],
       "season": "annunciation",
       "tune": 4,
       "lent": null
     },
-    "2025-11-26T00:00:00": {
+    "2025-11-26": {
       "events": [],
       "season": "annunciation",
       "tune": 8,
       "lent": 1
     },
-    "2025-11-27T00:00:00": {
+    "2025-11-27": {
       "events": [],
       "season": "annunciation",
       "tune": 4,
       "lent": null
     },
-    "2025-11-28T00:00:00": {
+    "2025-11-28": {
       "events": [
         "feastMarJacobBaradaeus"
       ],
@@ -195,7 +195,7 @@
       "tune": 8,
       "lent": 1
     },
-    "2025-11-29T00:00:00": {
+    "2025-11-29": {
       "events": [
         "feastMarJacobSerugh"
       ],
@@ -203,7 +203,7 @@
       "tune": 4,
       "lent": null
     },
-    "2025-11-30T00:00:00": {
+    "2025-11-30": {
       "events": [
         "feastStAndrewApostle",
         "visitationToElizabeth"
@@ -212,7 +212,7 @@
       "tune": 5,
       "lent": null
     },
-    "2025-12-01T00:00:00": {
+    "2025-12-01": {
       "events": [
         "nativityFastBeginning"
       ],
@@ -220,13 +220,13 @@
       "tune": 1,
       "lent": 1
     },
-    "2025-12-02T00:00:00": {
+    "2025-12-02": {
       "events": [],
       "season": "annunciation",
       "tune": 5,
       "lent": 1
     },
-    "2025-12-03T00:00:00": {
+    "2025-12-03": {
       "events": [
         "thomaMarDionysius"
       ],
@@ -234,7 +234,7 @@
       "tune": 1,
       "lent": 1
     },
-    "2025-12-04T00:00:00": {
+    "2025-12-04": {
       "events": [
         "feastMarthBarbara"
       ],
@@ -242,13 +242,13 @@
       "tune": 5,
       "lent": 1
     },
-    "2025-12-05T00:00:00": {
+    "2025-12-05": {
       "events": [],
       "season": "annunciation",
       "tune": 1,
       "lent": 1
     },
-    "2025-12-06T00:00:00": {
+    "2025-12-06": {
       "events": [
         "feastStSokhe"
       ],
@@ -256,7 +256,7 @@
       "tune": 5,
       "lent": 1
     },
-    "2025-12-07T00:00:00": {
+    "2025-12-07": {
       "events": [
         "birthOfJohnTheBaptist"
       ],
@@ -264,7 +264,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2025-12-08T00:00:00": {
+    "2025-12-08": {
       "events": [
         "baseliosMarAugen"
       ],
@@ -272,7 +272,7 @@
       "tune": 2,
       "lent": 1
     },
-    "2025-12-09T00:00:00": {
+    "2025-12-09": {
       "events": [
         "mathewsMarBarnabas"
       ],
@@ -280,7 +280,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2025-12-10T00:00:00": {
+    "2025-12-10": {
       "events": [
         "feastStBehanam"
       ],
@@ -288,19 +288,19 @@
       "tune": 2,
       "lent": 1
     },
-    "2025-12-11T00:00:00": {
+    "2025-12-11": {
       "events": [],
       "season": "annunciation",
       "tune": 6,
       "lent": 1
     },
-    "2025-12-12T00:00:00": {
+    "2025-12-12": {
       "events": [],
       "season": "annunciation",
       "tune": 2,
       "lent": 1
     },
-    "2025-12-13T00:00:00": {
+    "2025-12-13": {
       "events": [
         "danielMarPhiloxenos"
       ],
@@ -308,7 +308,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2025-12-14T00:00:00": {
+    "2025-12-14": {
       "events": [
         "revelationToJoseph"
       ],
@@ -316,19 +316,19 @@
       "tune": 7,
       "lent": 1
     },
-    "2025-12-15T00:00:00": {
+    "2025-12-15": {
       "events": [],
       "season": "annunciation",
       "tune": 3,
       "lent": 1
     },
-    "2025-12-16T00:00:00": {
+    "2025-12-16": {
       "events": [],
       "season": "annunciation",
       "tune": 7,
       "lent": 1
     },
-    "2025-12-17T00:00:00": {
+    "2025-12-17": {
       "events": [
         "baseliosMarGeevargheseFirstCatholicos"
       ],
@@ -336,7 +336,7 @@
       "tune": 3,
       "lent": 1
     },
-    "2025-12-18T00:00:00": {
+    "2025-12-18": {
       "events": [
         "feastStThomas"
       ],
@@ -344,13 +344,13 @@
       "tune": 7,
       "lent": 1
     },
-    "2025-12-19T00:00:00": {
+    "2025-12-19": {
       "events": [],
       "season": "annunciation",
       "tune": 3,
       "lent": 1
     },
-    "2025-12-20T00:00:00": {
+    "2025-12-20": {
       "events": [
         "feastMarIgnatiusNourono"
       ],
@@ -358,7 +358,7 @@
       "tune": 7,
       "lent": 1
     },
-    "2025-12-21T00:00:00": {
+    "2025-12-21": {
       "events": [
         "dukhrono",
         "sundayBeforeChristmas"
@@ -367,25 +367,25 @@
       "tune": 8,
       "lent": 1
     },
-    "2025-12-22T00:00:00": {
+    "2025-12-22": {
       "events": [],
       "season": "annunciation",
       "tune": 4,
       "lent": 1
     },
-    "2025-12-23T00:00:00": {
+    "2025-12-23": {
       "events": [],
       "season": "annunciation",
       "tune": 8,
       "lent": 1
     },
-    "2025-12-24T00:00:00": {
+    "2025-12-24": {
       "events": [],
       "season": "annunciation",
       "tune": 4,
       "lent": 1
     },
-    "2025-12-25T00:00:00": {
+    "2025-12-25": {
       "events": [
         "yeldho"
       ],
@@ -393,7 +393,7 @@
       "tune": 1,
       "lent": null
     },
-    "2025-12-26T00:00:00": {
+    "2025-12-26": {
       "events": [
         "glorificationOfStMary",
         "yakobMarPolicarpos"
@@ -402,7 +402,7 @@
       "tune": 1,
       "lent": 1
     },
-    "2025-12-27T00:00:00": {
+    "2025-12-27": {
       "events": [
         "massacreOfTheInfants"
       ],
@@ -410,7 +410,7 @@
       "tune": 8,
       "lent": null
     },
-    "2025-12-28T00:00:00": {
+    "2025-12-28": {
       "events": [
         "firstSundayAfterChristmas"
       ],
@@ -418,25 +418,25 @@
       "tune": 1,
       "lent": null
     },
-    "2025-12-29T00:00:00": {
+    "2025-12-29": {
       "events": [],
       "season": "epiphany",
       "tune": 5,
       "lent": null
     },
-    "2025-12-30T00:00:00": {
+    "2025-12-30": {
       "events": [],
       "season": "epiphany",
       "tune": 1,
       "lent": null
     },
-    "2025-12-31T00:00:00": {
+    "2025-12-31": {
       "events": [],
       "season": "epiphany",
       "tune": 5,
       "lent": 1
     },
-    "2026-01-01T00:00:00": {
+    "2026-01-01": {
       "events": [
         "circumcision",
         "feastStBasilStGregory"
@@ -445,13 +445,13 @@
       "tune": 8,
       "lent": null
     },
-    "2026-01-02T00:00:00": {
+    "2026-01-02": {
       "events": [],
       "season": "epiphany",
       "tune": 5,
       "lent": 1
     },
-    "2026-01-03T00:00:00": {
+    "2026-01-03": {
       "events": [
         "baseliosGeevargheseCatholicos",
         "koonamCross"
@@ -460,7 +460,7 @@
       "tune": 1,
       "lent": null
     },
-    "2026-01-04T00:00:00": {
+    "2026-01-04": {
       "events": [
         "secondSundayAfterChristmas"
       ],
@@ -468,13 +468,13 @@
       "tune": 2,
       "lent": null
     },
-    "2026-01-05T00:00:00": {
+    "2026-01-05": {
       "events": [],
       "season": "epiphany",
       "tune": 6,
       "lent": null
     },
-    "2026-01-06T00:00:00": {
+    "2026-01-06": {
       "events": [
         "epiphany"
       ],
@@ -482,7 +482,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-01-07T00:00:00": {
+    "2026-01-07": {
       "events": [
         "beheadingOfStJohnTheBaptist"
       ],
@@ -490,7 +490,7 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-01-08T00:00:00": {
+    "2026-01-08": {
       "events": [
         "feastOfStStephen"
       ],
@@ -498,19 +498,19 @@
       "tune": 8,
       "lent": null
     },
-    "2026-01-09T00:00:00": {
+    "2026-01-09": {
       "events": [],
       "season": "epiphany",
       "tune": 6,
       "lent": 1
     },
-    "2026-01-10T00:00:00": {
+    "2026-01-10": {
       "events": [],
       "season": "epiphany",
       "tune": 2,
       "lent": null
     },
-    "2026-01-11T00:00:00": {
+    "2026-01-11": {
       "events": [
         "firstSundayAfterEpiphany"
       ],
@@ -518,25 +518,25 @@
       "tune": 3,
       "lent": null
     },
-    "2026-01-12T00:00:00": {
+    "2026-01-12": {
       "events": [],
       "season": "epiphany",
       "tune": 7,
       "lent": null
     },
-    "2026-01-13T00:00:00": {
+    "2026-01-13": {
       "events": [],
       "season": "epiphany",
       "tune": 3,
       "lent": null
     },
-    "2026-01-14T00:00:00": {
+    "2026-01-14": {
       "events": [],
       "season": "epiphany",
       "tune": 7,
       "lent": 1
     },
-    "2026-01-15T00:00:00": {
+    "2026-01-15": {
       "events": [
         "feastStMarySeeds",
         "paulTheMonk"
@@ -545,19 +545,19 @@
       "tune": 3,
       "lent": null
     },
-    "2026-01-16T00:00:00": {
+    "2026-01-16": {
       "events": [],
       "season": "epiphany",
       "tune": 7,
       "lent": 1
     },
-    "2026-01-17T00:00:00": {
+    "2026-01-17": {
       "events": [],
       "season": "epiphany",
       "tune": 3,
       "lent": null
     },
-    "2026-01-18T00:00:00": {
+    "2026-01-18": {
       "events": [
         "secondSundayAfterEpiphany",
         "feastStSamuelStSimonStAntony"
@@ -566,19 +566,19 @@
       "tune": 4,
       "lent": null
     },
-    "2026-01-19T00:00:00": {
+    "2026-01-19": {
       "events": [],
       "season": "epiphany",
       "tune": 8,
       "lent": null
     },
-    "2026-01-20T00:00:00": {
+    "2026-01-20": {
       "events": [],
       "season": "epiphany",
       "tune": 4,
       "lent": null
     },
-    "2026-01-21T00:00:00": {
+    "2026-01-21": {
       "events": [
         "philiposeMarEusebius"
       ],
@@ -586,7 +586,7 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-01-22T00:00:00": {
+    "2026-01-22": {
       "events": [
         "marthomaEighth"
       ],
@@ -594,7 +594,7 @@
       "tune": 4,
       "lent": null
     },
-    "2026-01-23T00:00:00": {
+    "2026-01-23": {
       "events": [
         "augenTheMonk"
       ],
@@ -602,13 +602,13 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-01-24T00:00:00": {
+    "2026-01-24": {
       "events": [],
       "season": "epiphany",
       "tune": 4,
       "lent": null
     },
-    "2026-01-25T00:00:00": {
+    "2026-01-25": {
       "events": [
         "thirdSundayAfterEpiphany",
         "allDepartedHolyFathers"
@@ -617,7 +617,7 @@
       "tune": 6,
       "lent": null
     },
-    "2026-01-26T00:00:00": {
+    "2026-01-26": {
       "events": [
         "baseliosMarthomaMathewsSecondCatholicos",
         "pauloseMarAthanasios",
@@ -628,13 +628,13 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-01-27T00:00:00": {
+    "2026-01-27": {
       "events": [],
       "season": "epiphany",
       "tune": 6,
       "lent": 1
     },
-    "2026-01-28T00:00:00": {
+    "2026-01-28": {
       "events": [
         "ninevehLentEnd"
       ],
@@ -642,7 +642,7 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-01-29T00:00:00": {
+    "2026-01-29": {
       "events": [
         "marSeveriosPatriarch",
         "ninevehFeast"
@@ -651,19 +651,19 @@
       "tune": 6,
       "lent": null
     },
-    "2026-01-30T00:00:00": {
+    "2026-01-30": {
       "events": [],
       "season": "epiphany",
       "tune": 2,
       "lent": 1
     },
-    "2026-01-31T00:00:00": {
+    "2026-01-31": {
       "events": [],
       "season": "epiphany",
       "tune": 6,
       "lent": null
     },
-    "2026-02-01T00:00:00": {
+    "2026-02-01": {
       "events": [
         "allDepartedPriests"
       ],
@@ -671,7 +671,7 @@
       "tune": 7,
       "lent": null
     },
-    "2026-02-02T00:00:00": {
+    "2026-02-02": {
       "events": [
         "mayaltho",
         "stSimonHanna",
@@ -681,7 +681,7 @@
       "tune": 3,
       "lent": null
     },
-    "2026-02-03T00:00:00": {
+    "2026-02-03": {
       "events": [
         "feastStBarSoumo"
       ],
@@ -689,31 +689,31 @@
       "tune": 7,
       "lent": null
     },
-    "2026-02-04T00:00:00": {
+    "2026-02-04": {
       "events": [],
       "season": "epiphany",
       "tune": 3,
       "lent": 1
     },
-    "2026-02-05T00:00:00": {
+    "2026-02-05": {
       "events": [],
       "season": "epiphany",
       "tune": 7,
       "lent": null
     },
-    "2026-02-06T00:00:00": {
+    "2026-02-06": {
       "events": [],
       "season": "epiphany",
       "tune": 3,
       "lent": 1
     },
-    "2026-02-07T00:00:00": {
+    "2026-02-07": {
       "events": [],
       "season": "epiphany",
       "tune": 7,
       "lent": null
     },
-    "2026-02-08T00:00:00": {
+    "2026-02-08": {
       "events": [
         "feastSeveriosAntioch",
         "allDepartedFaithful"
@@ -722,7 +722,7 @@
       "tune": 8,
       "lent": null
     },
-    "2026-02-09T00:00:00": {
+    "2026-02-09": {
       "events": [
         "mathewsMarEpiphanios"
       ],
@@ -730,25 +730,25 @@
       "tune": 4,
       "lent": null
     },
-    "2026-02-10T00:00:00": {
+    "2026-02-10": {
       "events": [],
       "season": "epiphany",
       "tune": 8,
       "lent": null
     },
-    "2026-02-11T00:00:00": {
+    "2026-02-11": {
       "events": [],
       "season": "epiphany",
       "tune": 4,
       "lent": 1
     },
-    "2026-02-12T00:00:00": {
+    "2026-02-12": {
       "events": [],
       "season": "epiphany",
       "tune": 8,
       "lent": null
     },
-    "2026-02-13T00:00:00": {
+    "2026-02-13": {
       "events": [
         "ignatiusElias"
       ],
@@ -756,13 +756,13 @@
       "tune": 4,
       "lent": 1
     },
-    "2026-02-14T00:00:00": {
+    "2026-02-14": {
       "events": [],
       "season": "epiphany",
       "tune": 8,
       "lent": null
     },
-    "2026-02-15T00:00:00": {
+    "2026-02-15": {
       "events": [
         "kothine"
       ],
@@ -770,7 +770,7 @@
       "tune": 1,
       "lent": null
     },
-    "2026-02-16T00:00:00": {
+    "2026-02-16": {
       "events": [
         "geevargheseMarOsthathios",
         "greatLentStart"
@@ -779,31 +779,31 @@
       "tune": 5,
       "lent": 1
     },
-    "2026-02-17T00:00:00": {
+    "2026-02-17": {
       "events": [],
       "season": "greatLent",
       "tune": 1,
       "lent": 1
     },
-    "2026-02-18T00:00:00": {
+    "2026-02-18": {
       "events": [],
       "season": "greatLent",
       "tune": 5,
       "lent": 1
     },
-    "2026-02-19T00:00:00": {
+    "2026-02-19": {
       "events": [],
       "season": "greatLent",
       "tune": 1,
       "lent": 1
     },
-    "2026-02-20T00:00:00": {
+    "2026-02-20": {
       "events": [],
       "season": "greatLent",
       "tune": 5,
       "lent": 1
     },
-    "2026-02-21T00:00:00": {
+    "2026-02-21": {
       "events": [
         "feastStEphrem"
       ],
@@ -811,7 +811,7 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-02-22T00:00:00": {
+    "2026-02-22": {
       "events": [
         "lepersSunday"
       ],
@@ -819,7 +819,7 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-02-23T00:00:00": {
+    "2026-02-23": {
       "events": [
         "geevargheseMarDionysius",
         "thomasMarMakarios",
@@ -829,7 +829,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2026-02-24T00:00:00": {
+    "2026-02-24": {
       "events": [
         "mathewTheEvangelist"
       ],
@@ -837,25 +837,25 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-02-25T00:00:00": {
+    "2026-02-25": {
       "events": [],
       "season": "greatLent",
       "tune": 6,
       "lent": 1
     },
-    "2026-02-26T00:00:00": {
+    "2026-02-26": {
       "events": [],
       "season": "greatLent",
       "tune": 2,
       "lent": 1
     },
-    "2026-02-27T00:00:00": {
+    "2026-02-27": {
       "events": [],
       "season": "greatLent",
       "tune": 6,
       "lent": 1
     },
-    "2026-02-28T00:00:00": {
+    "2026-02-28": {
       "events": [
         "secondSaturdayOfGreatLent"
       ],
@@ -863,7 +863,7 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-03-01T00:00:00": {
+    "2026-03-01": {
       "events": [
         "palsySunday"
       ],
@@ -871,37 +871,37 @@
       "tune": 3,
       "lent": 1
     },
-    "2026-03-02T00:00:00": {
+    "2026-03-02": {
       "events": [],
       "season": "greatLent",
       "tune": 7,
       "lent": 1
     },
-    "2026-03-03T00:00:00": {
+    "2026-03-03": {
       "events": [],
       "season": "greatLent",
       "tune": 3,
       "lent": 1
     },
-    "2026-03-04T00:00:00": {
+    "2026-03-04": {
       "events": [],
       "season": "greatLent",
       "tune": 7,
       "lent": 1
     },
-    "2026-03-05T00:00:00": {
+    "2026-03-05": {
       "events": [],
       "season": "greatLent",
       "tune": 3,
       "lent": 1
     },
-    "2026-03-06T00:00:00": {
+    "2026-03-06": {
       "events": [],
       "season": "greatLent",
       "tune": 7,
       "lent": 1
     },
-    "2026-03-07T00:00:00": {
+    "2026-03-07": {
       "events": [
         "thirdSaturdayOfGreatLent"
       ],
@@ -909,7 +909,7 @@
       "tune": 3,
       "lent": 1
     },
-    "2026-03-08T00:00:00": {
+    "2026-03-08": {
       "events": [
         "canaaniteWoman"
       ],
@@ -917,7 +917,7 @@
       "tune": 4,
       "lent": 1
     },
-    "2026-03-09T00:00:00": {
+    "2026-03-09": {
       "events": [
         "memoryOfFortyMartyrs",
         "ambattuGeevargheseMarCoorilos"
@@ -926,13 +926,13 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-03-10T00:00:00": {
+    "2026-03-10": {
       "events": [],
       "season": "greatLent",
       "tune": 4,
       "lent": 1
     },
-    "2026-03-11T00:00:00": {
+    "2026-03-11": {
       "events": [
         "midLent"
       ],
@@ -940,19 +940,19 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-03-12T00:00:00": {
+    "2026-03-12": {
       "events": [],
       "season": "greatLent",
       "tune": 4,
       "lent": 1
     },
-    "2026-03-13T00:00:00": {
+    "2026-03-13": {
       "events": [],
       "season": "greatLent",
       "tune": 8,
       "lent": 1
     },
-    "2026-03-14T00:00:00": {
+    "2026-03-14": {
       "events": [
         "fourthSaturdayOfGreatLent"
       ],
@@ -960,7 +960,7 @@
       "tune": 4,
       "lent": 1
     },
-    "2026-03-15T00:00:00": {
+    "2026-03-15": {
       "events": [
         "crippledWoman"
       ],
@@ -968,19 +968,19 @@
       "tune": 5,
       "lent": 1
     },
-    "2026-03-16T00:00:00": {
+    "2026-03-16": {
       "events": [],
       "season": "greatLent",
       "tune": 1,
       "lent": 1
     },
-    "2026-03-17T00:00:00": {
+    "2026-03-17": {
       "events": [],
       "season": "greatLent",
       "tune": 5,
       "lent": 1
     },
-    "2026-03-18T00:00:00": {
+    "2026-03-18": {
       "events": [
         "pauloseMarSeverios"
       ],
@@ -988,7 +988,7 @@
       "tune": 1,
       "lent": 1
     },
-    "2026-03-19T00:00:00": {
+    "2026-03-19": {
       "events": [
         "sleebaMarOsthathios"
       ],
@@ -996,13 +996,13 @@
       "tune": 5,
       "lent": 1
     },
-    "2026-03-20T00:00:00": {
+    "2026-03-20": {
       "events": [],
       "season": "greatLent",
       "tune": 1,
       "lent": 1
     },
-    "2026-03-21T00:00:00": {
+    "2026-03-21": {
       "events": [
         "konattuGeevargheseMarJulius",
         "fifthSaturdayOfGreatLent"
@@ -1011,7 +1011,7 @@
       "tune": 5,
       "lent": 1
     },
-    "2026-03-22T00:00:00": {
+    "2026-03-22": {
       "events": [
         "blindMan",
         "catholicateDay"
@@ -1020,19 +1020,19 @@
       "tune": 6,
       "lent": 1
     },
-    "2026-03-23T00:00:00": {
+    "2026-03-23": {
       "events": [],
       "season": "greatLent",
       "tune": 2,
       "lent": 1
     },
-    "2026-03-24T00:00:00": {
+    "2026-03-24": {
       "events": [],
       "season": "greatLent",
       "tune": 6,
       "lent": 1
     },
-    "2026-03-25T00:00:00": {
+    "2026-03-25": {
       "events": [
         "annunciationToStMary",
         "marthomaFourth"
@@ -1041,13 +1041,13 @@
       "tune": 4,
       "lent": 1
     },
-    "2026-03-26T00:00:00": {
+    "2026-03-26": {
       "events": [],
       "season": "greatLent",
       "tune": 6,
       "lent": 1
     },
-    "2026-03-27T00:00:00": {
+    "2026-03-27": {
       "events": [
         "fortiethFriday"
       ],
@@ -1055,7 +1055,7 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-03-28T00:00:00": {
+    "2026-03-28": {
       "events": [
         "lazarusSaturday"
       ],
@@ -1063,7 +1063,7 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-03-29T00:00:00": {
+    "2026-03-29": {
       "events": [
         "palmSunday"
       ],
@@ -1071,7 +1071,7 @@
       "tune": 7,
       "lent": 1
     },
-    "2026-03-30T00:00:00": {
+    "2026-03-30": {
       "events": [
         "mondayOfHolyWeek"
       ],
@@ -1079,7 +1079,7 @@
       "tune": null,
       "lent": 1
     },
-    "2026-03-31T00:00:00": {
+    "2026-03-31": {
       "events": [
         "tuesdayOfHolyWeek"
       ],
@@ -1087,7 +1087,7 @@
       "tune": null,
       "lent": 1
     },
-    "2026-04-01T00:00:00": {
+    "2026-04-01": {
       "events": [
         "wednesdayOfHolyWeek"
       ],
@@ -1095,7 +1095,7 @@
       "tune": null,
       "lent": 1
     },
-    "2026-04-02T00:00:00": {
+    "2026-04-02": {
       "events": [
         "maundyThursday"
       ],
@@ -1103,7 +1103,7 @@
       "tune": null,
       "lent": 1
     },
-    "2026-04-03T00:00:00": {
+    "2026-04-03": {
       "events": [
         "goodFriday"
       ],
@@ -1111,7 +1111,7 @@
       "tune": null,
       "lent": 1
     },
-    "2026-04-04T00:00:00": {
+    "2026-04-04": {
       "events": [
         "saturdayOfAnnunciation"
       ],
@@ -1119,7 +1119,7 @@
       "tune": null,
       "lent": 1
     },
-    "2026-04-05T00:00:00": {
+    "2026-04-05": {
       "events": [
         "kuriakoseMarGregorios",
         "easter"
@@ -1128,7 +1128,7 @@
       "tune": 1,
       "lent": null
     },
-    "2026-04-06T00:00:00": {
+    "2026-04-06": {
       "events": [
         "hevoraeMonday"
       ],
@@ -1136,7 +1136,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-04-07T00:00:00": {
+    "2026-04-07": {
       "events": [
         "valiyaMarDionysius",
         "hevoraeTuesday"
@@ -1145,7 +1145,7 @@
       "tune": 3,
       "lent": null
     },
-    "2026-04-08T00:00:00": {
+    "2026-04-08": {
       "events": [
         "hevoraeWednesday"
       ],
@@ -1153,7 +1153,7 @@
       "tune": 4,
       "lent": null
     },
-    "2026-04-09T00:00:00": {
+    "2026-04-09": {
       "events": [
         "hevoraeThursday"
       ],
@@ -1161,7 +1161,7 @@
       "tune": 5,
       "lent": null
     },
-    "2026-04-10T00:00:00": {
+    "2026-04-10": {
       "events": [
         "hevoraeFriday"
       ],
@@ -1169,7 +1169,7 @@
       "tune": 6,
       "lent": null
     },
-    "2026-04-11T00:00:00": {
+    "2026-04-11": {
       "events": [
         "hevoraeSaturday"
       ],
@@ -1177,7 +1177,7 @@
       "tune": 7,
       "lent": null
     },
-    "2026-04-12T00:00:00": {
+    "2026-04-12": {
       "events": [
         "geevargheseMarIvanios",
         "newSunday",
@@ -1187,13 +1187,13 @@
       "tune": 1,
       "lent": null
     },
-    "2026-04-13T00:00:00": {
+    "2026-04-13": {
       "events": [],
       "season": "resurrection",
       "tune": 5,
       "lent": null
     },
-    "2026-04-14T00:00:00": {
+    "2026-04-14": {
       "events": [
         "marthomaSecond"
       ],
@@ -1201,19 +1201,19 @@
       "tune": 1,
       "lent": null
     },
-    "2026-04-15T00:00:00": {
+    "2026-04-15": {
       "events": [],
       "season": "resurrection",
       "tune": 5,
       "lent": null
     },
-    "2026-04-16T00:00:00": {
+    "2026-04-16": {
       "events": [],
       "season": "resurrection",
       "tune": 1,
       "lent": null
     },
-    "2026-04-17T00:00:00": {
+    "2026-04-17": {
       "events": [
         "geevargheseMarPhiloxenos"
       ],
@@ -1221,13 +1221,13 @@
       "tune": 5,
       "lent": null
     },
-    "2026-04-18T00:00:00": {
+    "2026-04-18": {
       "events": [],
       "season": "resurrection",
       "tune": 1,
       "lent": null
     },
-    "2026-04-19T00:00:00": {
+    "2026-04-19": {
       "events": [
         "firstSundayAfterNewSunday"
       ],
@@ -1235,13 +1235,13 @@
       "tune": 2,
       "lent": null
     },
-    "2026-04-20T00:00:00": {
+    "2026-04-20": {
       "events": [],
       "season": "resurrection",
       "tune": 6,
       "lent": null
     },
-    "2026-04-21T00:00:00": {
+    "2026-04-21": {
       "events": [
         "yuhanonMarIvanios"
       ],
@@ -1249,7 +1249,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-04-22T00:00:00": {
+    "2026-04-22": {
       "events": [
         "marthomaThird"
       ],
@@ -1257,7 +1257,7 @@
       "tune": 6,
       "lent": null
     },
-    "2026-04-23T00:00:00": {
+    "2026-04-23": {
       "events": [
         "feastStGeorge"
       ],
@@ -1265,13 +1265,13 @@
       "tune": 2,
       "lent": null
     },
-    "2026-04-24T00:00:00": {
+    "2026-04-24": {
       "events": [],
       "season": "resurrection",
       "tune": 6,
       "lent": null
     },
-    "2026-04-25T00:00:00": {
+    "2026-04-25": {
       "events": [
         "marthomaFirst",
         "markTheEvangelist"
@@ -1280,7 +1280,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-04-26T00:00:00": {
+    "2026-04-26": {
       "events": [
         "secondSundayAfterNewSunday"
       ],
@@ -1288,7 +1288,7 @@
       "tune": 3,
       "lent": null
     },
-    "2026-04-27T00:00:00": {
+    "2026-04-27": {
       "events": [
         "gregoriosAbdelJaleel"
       ],
@@ -1296,13 +1296,13 @@
       "tune": 7,
       "lent": null
     },
-    "2026-04-28T00:00:00": {
+    "2026-04-28": {
       "events": [],
       "season": "resurrection",
       "tune": 3,
       "lent": null
     },
-    "2026-04-29T00:00:00": {
+    "2026-04-29": {
       "events": [
         "marSaborMarAfroth"
       ],
@@ -1310,13 +1310,13 @@
       "tune": 7,
       "lent": null
     },
-    "2026-04-30T00:00:00": {
+    "2026-04-30": {
       "events": [],
       "season": "resurrection",
       "tune": 3,
       "lent": null
     },
-    "2026-05-01T00:00:00": {
+    "2026-05-01": {
       "events": [
         "stJamesApostle"
       ],
@@ -1324,13 +1324,13 @@
       "tune": 7,
       "lent": null
     },
-    "2026-05-02T00:00:00": {
+    "2026-05-02": {
       "events": [],
       "season": "resurrection",
       "tune": 3,
       "lent": null
     },
-    "2026-05-03T00:00:00": {
+    "2026-05-03": {
       "events": [
         "baseliosPaulose",
         "thirdSundayAfterNewSunday"
@@ -1339,31 +1339,31 @@
       "tune": 4,
       "lent": null
     },
-    "2026-05-04T00:00:00": {
+    "2026-05-04": {
       "events": [],
       "season": "resurrection",
       "tune": 8,
       "lent": null
     },
-    "2026-05-05T00:00:00": {
+    "2026-05-05": {
       "events": [],
       "season": "resurrection",
       "tune": 4,
       "lent": null
     },
-    "2026-05-06T00:00:00": {
+    "2026-05-06": {
       "events": [],
       "season": "resurrection",
       "tune": 8,
       "lent": null
     },
-    "2026-05-07T00:00:00": {
+    "2026-05-07": {
       "events": [],
       "season": "resurrection",
       "tune": 4,
       "lent": null
     },
-    "2026-05-08T00:00:00": {
+    "2026-05-08": {
       "events": [
         "feastStJohnTheApostle",
         "marthomaFifth"
@@ -1372,13 +1372,13 @@
       "tune": 8,
       "lent": null
     },
-    "2026-05-09T00:00:00": {
+    "2026-05-09": {
       "events": [],
       "season": "resurrection",
       "tune": 4,
       "lent": null
     },
-    "2026-05-10T00:00:00": {
+    "2026-05-10": {
       "events": [
         "feastStSimonTheZealot",
         "fourthSundayAfterNewSunday"
@@ -1387,25 +1387,25 @@
       "tune": 5,
       "lent": null
     },
-    "2026-05-11T00:00:00": {
+    "2026-05-11": {
       "events": [],
       "season": "resurrection",
       "tune": 1,
       "lent": null
     },
-    "2026-05-12T00:00:00": {
+    "2026-05-12": {
       "events": [],
       "season": "resurrection",
       "tune": 5,
       "lent": null
     },
-    "2026-05-13T00:00:00": {
+    "2026-05-13": {
       "events": [],
       "season": "resurrection",
       "tune": 1,
       "lent": null
     },
-    "2026-05-14T00:00:00": {
+    "2026-05-14": {
       "events": [
         "ascension"
       ],
@@ -1413,7 +1413,7 @@
       "tune": 5,
       "lent": null
     },
-    "2026-05-15T00:00:00": {
+    "2026-05-15": {
       "events": [
         "feastStMaryHarvest",
         "stIsaac"
@@ -1422,7 +1422,7 @@
       "tune": 1,
       "lent": null
     },
-    "2026-05-16T00:00:00": {
+    "2026-05-16": {
       "events": [
         "yuhanonMarSeverios"
       ],
@@ -1430,7 +1430,7 @@
       "tune": 5,
       "lent": null
     },
-    "2026-05-17T00:00:00": {
+    "2026-05-17": {
       "events": [
         "sundayBeforePentecost"
       ],
@@ -1438,13 +1438,13 @@
       "tune": 6,
       "lent": null
     },
-    "2026-05-18T00:00:00": {
+    "2026-05-18": {
       "events": [],
       "season": "resurrection",
       "tune": 2,
       "lent": null
     },
-    "2026-05-19T00:00:00": {
+    "2026-05-19": {
       "events": [
         "marDionysius"
       ],
@@ -1452,7 +1452,7 @@
       "tune": 6,
       "lent": null
     },
-    "2026-05-20T00:00:00": {
+    "2026-05-20": {
       "events": [
         "constantineHelen",
         "evangelistsEcumenicalSynods"
@@ -1461,25 +1461,25 @@
       "tune": 2,
       "lent": null
     },
-    "2026-05-21T00:00:00": {
+    "2026-05-21": {
       "events": [],
       "season": "resurrection",
       "tune": 6,
       "lent": null
     },
-    "2026-05-22T00:00:00": {
+    "2026-05-22": {
       "events": [],
       "season": "resurrection",
       "tune": 2,
       "lent": null
     },
-    "2026-05-23T00:00:00": {
+    "2026-05-23": {
       "events": [],
       "season": "resurrection",
       "tune": 6,
       "lent": null
     },
-    "2026-05-24T00:00:00": {
+    "2026-05-24": {
       "events": [
         "pentecost"
       ],
@@ -1487,13 +1487,13 @@
       "tune": 7,
       "lent": null
     },
-    "2026-05-25T00:00:00": {
+    "2026-05-25": {
       "events": [],
       "season": "pentecost",
       "tune": 3,
       "lent": null
     },
-    "2026-05-26T00:00:00": {
+    "2026-05-26": {
       "events": [
         "baseliosMarthomaDidymus"
       ],
@@ -1501,19 +1501,19 @@
       "tune": 7,
       "lent": null
     },
-    "2026-05-27T00:00:00": {
+    "2026-05-27": {
       "events": [],
       "season": "pentecost",
       "tune": 3,
       "lent": 1
     },
-    "2026-05-28T00:00:00": {
+    "2026-05-28": {
       "events": [],
       "season": "pentecost",
       "tune": 7,
       "lent": null
     },
-    "2026-05-29T00:00:00": {
+    "2026-05-29": {
       "events": [
         "goldenFriday"
       ],
@@ -1521,13 +1521,13 @@
       "tune": 3,
       "lent": 1
     },
-    "2026-05-30T00:00:00": {
+    "2026-05-30": {
       "events": [],
       "season": "pentecost",
       "tune": 7,
       "lent": null
     },
-    "2026-05-31T00:00:00": {
+    "2026-05-31": {
       "events": [
         "firstSundayAfterPentecost"
       ],
@@ -1535,31 +1535,31 @@
       "tune": 8,
       "lent": null
     },
-    "2026-06-01T00:00:00": {
+    "2026-06-01": {
       "events": [],
       "season": "pentecost",
       "tune": 4,
       "lent": null
     },
-    "2026-06-02T00:00:00": {
+    "2026-06-02": {
       "events": [],
       "season": "pentecost",
       "tune": 8,
       "lent": null
     },
-    "2026-06-03T00:00:00": {
+    "2026-06-03": {
       "events": [],
       "season": "pentecost",
       "tune": 4,
       "lent": 1
     },
-    "2026-06-04T00:00:00": {
+    "2026-06-04": {
       "events": [],
       "season": "pentecost",
       "tune": 8,
       "lent": null
     },
-    "2026-06-05T00:00:00": {
+    "2026-06-05": {
       "events": [
         "environmentDay"
       ],
@@ -1567,7 +1567,7 @@
       "tune": 4,
       "lent": 1
     },
-    "2026-06-06T00:00:00": {
+    "2026-06-06": {
       "events": [
         "yuyakimMarIvanios",
         "augenMarDionysius"
@@ -1576,7 +1576,7 @@
       "tune": 8,
       "lent": null
     },
-    "2026-06-07T00:00:00": {
+    "2026-06-07": {
       "events": [
         "secondSundayAfterPentecost"
       ],
@@ -1584,13 +1584,13 @@
       "tune": 1,
       "lent": null
     },
-    "2026-06-08T00:00:00": {
+    "2026-06-08": {
       "events": [],
       "season": "pentecost",
       "tune": 5,
       "lent": null
     },
-    "2026-06-09T00:00:00": {
+    "2026-06-09": {
       "events": [
         "stAaron"
       ],
@@ -1598,13 +1598,13 @@
       "tune": 1,
       "lent": null
     },
-    "2026-06-10T00:00:00": {
+    "2026-06-10": {
       "events": [],
       "season": "pentecost",
       "tune": 5,
       "lent": 1
     },
-    "2026-06-11T00:00:00": {
+    "2026-06-11": {
       "events": [
         "feastStBartholomew",
         "simonMarAthanasios"
@@ -1613,19 +1613,19 @@
       "tune": 1,
       "lent": null
     },
-    "2026-06-12T00:00:00": {
+    "2026-06-12": {
       "events": [],
       "season": "pentecost",
       "tune": 5,
       "lent": 1
     },
-    "2026-06-13T00:00:00": {
+    "2026-06-13": {
       "events": [],
       "season": "pentecost",
       "tune": 1,
       "lent": null
     },
-    "2026-06-14T00:00:00": {
+    "2026-06-14": {
       "events": [
         "thirdSundayAfterPentecost"
       ],
@@ -1633,7 +1633,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-06-15T00:00:00": {
+    "2026-06-15": {
       "events": [
         "feastStMary"
       ],
@@ -1641,7 +1641,7 @@
       "tune": 6,
       "lent": null
     },
-    "2026-06-16T00:00:00": {
+    "2026-06-16": {
       "events": [
         "apostlesFastBeginning"
       ],
@@ -1649,19 +1649,19 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-06-17T00:00:00": {
+    "2026-06-17": {
       "events": [],
       "season": "pentecost",
       "tune": 6,
       "lent": 1
     },
-    "2026-06-18T00:00:00": {
+    "2026-06-18": {
       "events": [],
       "season": "pentecost",
       "tune": 2,
       "lent": 1
     },
-    "2026-06-19T00:00:00": {
+    "2026-06-19": {
       "events": [
         "feastStJamesBrother"
       ],
@@ -1669,13 +1669,13 @@
       "tune": 6,
       "lent": 1
     },
-    "2026-06-20T00:00:00": {
+    "2026-06-20": {
       "events": [],
       "season": "pentecost",
       "tune": 2,
       "lent": 1
     },
-    "2026-06-21T00:00:00": {
+    "2026-06-21": {
       "events": [
         "fourthSundayAfterPentecost"
       ],
@@ -1683,19 +1683,19 @@
       "tune": 3,
       "lent": 1
     },
-    "2026-06-22T00:00:00": {
+    "2026-06-22": {
       "events": [],
       "season": "pentecost",
       "tune": 7,
       "lent": 1
     },
-    "2026-06-23T00:00:00": {
+    "2026-06-23": {
       "events": [],
       "season": "pentecost",
       "tune": 3,
       "lent": 1
     },
-    "2026-06-24T00:00:00": {
+    "2026-06-24": {
       "events": [
         "birthStJohn"
       ],
@@ -1703,25 +1703,25 @@
       "tune": 7,
       "lent": 1
     },
-    "2026-06-25T00:00:00": {
+    "2026-06-25": {
       "events": [],
       "season": "pentecost",
       "tune": 3,
       "lent": 1
     },
-    "2026-06-26T00:00:00": {
+    "2026-06-26": {
       "events": [],
       "season": "pentecost",
       "tune": 7,
       "lent": 1
     },
-    "2026-06-27T00:00:00": {
+    "2026-06-27": {
       "events": [],
       "season": "pentecost",
       "tune": 3,
       "lent": 1
     },
-    "2026-06-28T00:00:00": {
+    "2026-06-28": {
       "events": [
         "fifthSundayAfterPentecost"
       ],
@@ -1729,7 +1729,7 @@
       "tune": 4,
       "lent": 1
     },
-    "2026-06-29T00:00:00": {
+    "2026-06-29": {
       "events": [
         "feastOfApostlesFast"
       ],
@@ -1737,7 +1737,7 @@
       "tune": 5,
       "lent": null
     },
-    "2026-06-30T00:00:00": {
+    "2026-06-30": {
       "events": [
         "feastOfTwelveApostles"
       ],
@@ -1745,19 +1745,19 @@
       "tune": 8,
       "lent": null
     },
-    "2026-07-01T00:00:00": {
+    "2026-07-01": {
       "events": [],
       "season": "pentecost",
       "tune": 8,
       "lent": 1
     },
-    "2026-07-02T00:00:00": {
+    "2026-07-02": {
       "events": [],
       "season": "pentecost",
       "tune": 4,
       "lent": null
     },
-    "2026-07-03T00:00:00": {
+    "2026-07-03": {
       "events": [
         "dukharonoStThomas"
       ],
@@ -1765,13 +1765,13 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-07-04T00:00:00": {
+    "2026-07-04": {
       "events": [],
       "season": "pentecost",
       "tune": 4,
       "lent": null
     },
-    "2026-07-05T00:00:00": {
+    "2026-07-05": {
       "events": [
         "sixthSundayAfterPentecost",
         "missionSunday",
@@ -1782,13 +1782,13 @@
       "tune": 5,
       "lent": null
     },
-    "2026-07-06T00:00:00": {
+    "2026-07-06": {
       "events": [],
       "season": "pentecost",
       "tune": 1,
       "lent": null
     },
-    "2026-07-07T00:00:00": {
+    "2026-07-07": {
       "events": [
         "zachariahMarDionysius"
       ],
@@ -1796,19 +1796,19 @@
       "tune": 5,
       "lent": null
     },
-    "2026-07-08T00:00:00": {
+    "2026-07-08": {
       "events": [],
       "season": "pentecost",
       "tune": 1,
       "lent": 1
     },
-    "2026-07-09T00:00:00": {
+    "2026-07-09": {
       "events": [],
       "season": "pentecost",
       "tune": 5,
       "lent": null
     },
-    "2026-07-10T00:00:00": {
+    "2026-07-10": {
       "events": [
         "yuhannonMarGregorios"
       ],
@@ -1816,7 +1816,7 @@
       "tune": 1,
       "lent": 1
     },
-    "2026-07-11T00:00:00": {
+    "2026-07-11": {
       "events": [
         "josephMarDionysius"
       ],
@@ -1824,7 +1824,7 @@
       "tune": 5,
       "lent": null
     },
-    "2026-07-12T00:00:00": {
+    "2026-07-12": {
       "events": [
         "seventhSundayAfterPentecost",
         "baseliosMarthomaPaulose"
@@ -1833,19 +1833,19 @@
       "tune": 6,
       "lent": null
     },
-    "2026-07-13T00:00:00": {
+    "2026-07-13": {
       "events": [],
       "season": "pentecost",
       "tune": 2,
       "lent": null
     },
-    "2026-07-14T00:00:00": {
+    "2026-07-14": {
       "events": [],
       "season": "pentecost",
       "tune": 6,
       "lent": null
     },
-    "2026-07-15T00:00:00": {
+    "2026-07-15": {
       "events": [
         "feastStKuriakose"
       ],
@@ -1853,25 +1853,25 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-07-16T00:00:00": {
+    "2026-07-16": {
       "events": [],
       "season": "pentecost",
       "tune": 6,
       "lent": null
     },
-    "2026-07-17T00:00:00": {
+    "2026-07-17": {
       "events": [],
       "season": "pentecost",
       "tune": 2,
       "lent": 1
     },
-    "2026-07-18T00:00:00": {
+    "2026-07-18": {
       "events": [],
       "season": "pentecost",
       "tune": 6,
       "lent": null
     },
-    "2026-07-19T00:00:00": {
+    "2026-07-19": {
       "events": [
         "eighthSundayAfterPentecost"
       ],
@@ -1879,7 +1879,7 @@
       "tune": 7,
       "lent": null
     },
-    "2026-07-20T00:00:00": {
+    "2026-07-20": {
       "events": [
         "feastProphetMarElijah"
       ],
@@ -1887,13 +1887,13 @@
       "tune": 3,
       "lent": null
     },
-    "2026-07-21T00:00:00": {
+    "2026-07-21": {
       "events": [],
       "season": "pentecost",
       "tune": 7,
       "lent": null
     },
-    "2026-07-22T00:00:00": {
+    "2026-07-22": {
       "events": [
         "feastStMaryMagdalene"
       ],
@@ -1901,7 +1901,7 @@
       "tune": 3,
       "lent": 1
     },
-    "2026-07-23T00:00:00": {
+    "2026-07-23": {
       "events": [
         "geevargheseMarDioscoros"
       ],
@@ -1909,13 +1909,13 @@
       "tune": 7,
       "lent": null
     },
-    "2026-07-24T00:00:00": {
+    "2026-07-24": {
       "events": [],
       "season": "pentecost",
       "tune": 3,
       "lent": 1
     },
-    "2026-07-25T00:00:00": {
+    "2026-07-25": {
       "events": [
         "feastMarEpiphanios"
       ],
@@ -1923,7 +1923,7 @@
       "tune": 7,
       "lent": null
     },
-    "2026-07-26T00:00:00": {
+    "2026-07-26": {
       "events": [
         "ninthSundayAfterPentecost"
       ],
@@ -1931,7 +1931,7 @@
       "tune": 8,
       "lent": null
     },
-    "2026-07-27T00:00:00": {
+    "2026-07-27": {
       "events": [
         "feastStSimonStylite"
       ],
@@ -1939,25 +1939,25 @@
       "tune": 4,
       "lent": null
     },
-    "2026-07-28T00:00:00": {
+    "2026-07-28": {
       "events": [],
       "season": "pentecost",
       "tune": 8,
       "lent": null
     },
-    "2026-07-29T00:00:00": {
+    "2026-07-29": {
       "events": [],
       "season": "pentecost",
       "tune": 4,
       "lent": 1
     },
-    "2026-07-30T00:00:00": {
+    "2026-07-30": {
       "events": [],
       "season": "pentecost",
       "tune": 8,
       "lent": null
     },
-    "2026-07-31T00:00:00": {
+    "2026-07-31": {
       "events": [
         "feastMarGregorios"
       ],
@@ -1965,7 +1965,7 @@
       "tune": 4,
       "lent": 1
     },
-    "2026-08-01T00:00:00": {
+    "2026-08-01": {
       "events": [
         "assumptionFastBeginning",
         "feastMarthShmuni",
@@ -1975,7 +1975,7 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-08-02T00:00:00": {
+    "2026-08-02": {
       "events": [
         "tenthSundayAfterPentecost"
       ],
@@ -1983,25 +1983,25 @@
       "tune": 1,
       "lent": 1
     },
-    "2026-08-03T00:00:00": {
+    "2026-08-03": {
       "events": [],
       "season": "pentecost",
       "tune": 5,
       "lent": 1
     },
-    "2026-08-04T00:00:00": {
+    "2026-08-04": {
       "events": [],
       "season": "pentecost",
       "tune": 1,
       "lent": 1
     },
-    "2026-08-05T00:00:00": {
+    "2026-08-05": {
       "events": [],
       "season": "pentecost",
       "tune": 5,
       "lent": 1
     },
-    "2026-08-06T00:00:00": {
+    "2026-08-06": {
       "events": [
         "transfiguration",
         "alexiosMarTheodosios"
@@ -2010,7 +2010,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2026-08-07T00:00:00": {
+    "2026-08-07": {
       "events": [
         "feastStDemetrios",
         "yathivaryan"
@@ -2019,13 +2019,13 @@
       "tune": 5,
       "lent": 1
     },
-    "2026-08-08T00:00:00": {
+    "2026-08-08": {
       "events": [],
       "season": "transfiguration",
       "tune": 1,
       "lent": 1
     },
-    "2026-08-09T00:00:00": {
+    "2026-08-09": {
       "events": [
         "firstSundayAfterTransfiguration"
       ],
@@ -2033,19 +2033,19 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-08-10T00:00:00": {
+    "2026-08-10": {
       "events": [],
       "season": "transfiguration",
       "tune": 6,
       "lent": 1
     },
-    "2026-08-11T00:00:00": {
+    "2026-08-11": {
       "events": [],
       "season": "transfiguration",
       "tune": 2,
       "lent": 1
     },
-    "2026-08-12T00:00:00": {
+    "2026-08-12": {
       "events": [
         "feastStAzazayel"
       ],
@@ -2053,7 +2053,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2026-08-13T00:00:00": {
+    "2026-08-13": {
       "events": [
         "prophetMicah"
       ],
@@ -2061,13 +2061,13 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-08-14T00:00:00": {
+    "2026-08-14": {
       "events": [],
       "season": "transfiguration",
       "tune": 6,
       "lent": 1
     },
-    "2026-08-15T00:00:00": {
+    "2026-08-15": {
       "events": [
         "assumption",
         "independence",
@@ -2079,7 +2079,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-08-16T00:00:00": {
+    "2026-08-16": {
       "events": [
         "firstSundayAfterAssumption",
         "marIvaniosHidayatulla"
@@ -2088,19 +2088,19 @@
       "tune": 3,
       "lent": null
     },
-    "2026-08-17T00:00:00": {
+    "2026-08-17": {
       "events": [],
       "season": "transfiguration",
       "tune": 7,
       "lent": null
     },
-    "2026-08-18T00:00:00": {
+    "2026-08-18": {
       "events": [],
       "season": "transfiguration",
       "tune": 3,
       "lent": null
     },
-    "2026-08-19T00:00:00": {
+    "2026-08-19": {
       "events": [
         "feastAllProphets",
         "feastStLabbaeus",
@@ -2110,7 +2110,7 @@
       "tune": 7,
       "lent": 1
     },
-    "2026-08-20T00:00:00": {
+    "2026-08-20": {
       "events": [
         "zachariahMarAnthonios",
         "prophetSamuel"
@@ -2119,19 +2119,19 @@
       "tune": 3,
       "lent": null
     },
-    "2026-08-21T00:00:00": {
+    "2026-08-21": {
       "events": [],
       "season": "transfiguration",
       "tune": 7,
       "lent": 1
     },
-    "2026-08-22T00:00:00": {
+    "2026-08-22": {
       "events": [],
       "season": "transfiguration",
       "tune": 3,
       "lent": null
     },
-    "2026-08-23T00:00:00": {
+    "2026-08-23": {
       "events": [
         "secondSundayAfterAssumption"
       ],
@@ -2139,7 +2139,7 @@
       "tune": 4,
       "lent": null
     },
-    "2026-08-24T00:00:00": {
+    "2026-08-24": {
       "events": [
         "feastStMatthiasApostle",
         "thomasMarAthanasios"
@@ -2148,31 +2148,31 @@
       "tune": 8,
       "lent": null
     },
-    "2026-08-25T00:00:00": {
+    "2026-08-25": {
       "events": [],
       "season": "transfiguration",
       "tune": 4,
       "lent": null
     },
-    "2026-08-26T00:00:00": {
+    "2026-08-26": {
       "events": [],
       "season": "transfiguration",
       "tune": 8,
       "lent": 1
     },
-    "2026-08-27T00:00:00": {
+    "2026-08-27": {
       "events": [],
       "season": "transfiguration",
       "tune": 4,
       "lent": null
     },
-    "2026-08-28T00:00:00": {
+    "2026-08-28": {
       "events": [],
       "season": "transfiguration",
       "tune": 8,
       "lent": 1
     },
-    "2026-08-29T00:00:00": {
+    "2026-08-29": {
       "events": [
         "feastBeheadingStJohn"
       ],
@@ -2180,7 +2180,7 @@
       "tune": 4,
       "lent": null
     },
-    "2026-08-30T00:00:00": {
+    "2026-08-30": {
       "events": [
         "thirdSundayAfterAssumption"
       ],
@@ -2188,7 +2188,7 @@
       "tune": 5,
       "lent": null
     },
-    "2026-08-31T00:00:00": {
+    "2026-08-31": {
       "events": [
         "paretMathewsMarIvanios"
       ],
@@ -2196,13 +2196,13 @@
       "tune": 1,
       "lent": null
     },
-    "2026-09-01T00:00:00": {
+    "2026-09-01": {
       "events": [],
       "season": "transfiguration",
       "tune": 5,
       "lent": null
     },
-    "2026-09-02T00:00:00": {
+    "2026-09-02": {
       "events": [
         "yuyakimMarCoorilos"
       ],
@@ -2210,25 +2210,25 @@
       "tune": 1,
       "lent": 1
     },
-    "2026-09-03T00:00:00": {
+    "2026-09-03": {
       "events": [],
       "season": "transfiguration",
       "tune": 5,
       "lent": null
     },
-    "2026-09-04T00:00:00": {
+    "2026-09-04": {
       "events": [],
       "season": "transfiguration",
       "tune": 1,
       "lent": 1
     },
-    "2026-09-05T00:00:00": {
+    "2026-09-05": {
       "events": [],
       "season": "transfiguration",
       "tune": 5,
       "lent": null
     },
-    "2026-09-06T00:00:00": {
+    "2026-09-06": {
       "events": [
         "fourthSundayAfterAssumption"
       ],
@@ -2236,13 +2236,13 @@
       "tune": 6,
       "lent": null
     },
-    "2026-09-07T00:00:00": {
+    "2026-09-07": {
       "events": [],
       "season": "transfiguration",
       "tune": 2,
       "lent": null
     },
-    "2026-09-08T00:00:00": {
+    "2026-09-08": {
       "events": [
         "feastBirthStMary"
       ],
@@ -2250,7 +2250,7 @@
       "tune": 1,
       "lent": null
     },
-    "2026-09-09T00:00:00": {
+    "2026-09-09": {
       "events": [
         "feastStMaryParents"
       ],
@@ -2258,25 +2258,25 @@
       "tune": 2,
       "lent": 1
     },
-    "2026-09-10T00:00:00": {
+    "2026-09-10": {
       "events": [],
       "season": "transfiguration",
       "tune": 6,
       "lent": null
     },
-    "2026-09-11T00:00:00": {
+    "2026-09-11": {
       "events": [],
       "season": "transfiguration",
       "tune": 2,
       "lent": 1
     },
-    "2026-09-12T00:00:00": {
+    "2026-09-12": {
       "events": [],
       "season": "transfiguration",
       "tune": 6,
       "lent": null
     },
-    "2026-09-13T00:00:00": {
+    "2026-09-13": {
       "events": [
         "fifthSundayAfterAssumption"
       ],
@@ -2284,7 +2284,7 @@
       "tune": 7,
       "lent": null
     },
-    "2026-09-14T00:00:00": {
+    "2026-09-14": {
       "events": [
         "feastOfHolyCross"
       ],
@@ -2292,7 +2292,7 @@
       "tune": 8,
       "lent": null
     },
-    "2026-09-15T00:00:00": {
+    "2026-09-15": {
       "events": [
         "catholicate"
       ],
@@ -2300,31 +2300,31 @@
       "tune": 7,
       "lent": null
     },
-    "2026-09-16T00:00:00": {
+    "2026-09-16": {
       "events": [],
       "season": "holyCross",
       "tune": 3,
       "lent": 1
     },
-    "2026-09-17T00:00:00": {
+    "2026-09-17": {
       "events": [],
       "season": "holyCross",
       "tune": 7,
       "lent": null
     },
-    "2026-09-18T00:00:00": {
+    "2026-09-18": {
       "events": [],
       "season": "holyCross",
       "tune": 3,
       "lent": 1
     },
-    "2026-09-19T00:00:00": {
+    "2026-09-19": {
       "events": [],
       "season": "holyCross",
       "tune": 7,
       "lent": null
     },
-    "2026-09-20T00:00:00": {
+    "2026-09-20": {
       "events": [
         "firstSundayAfterHolyCross"
       ],
@@ -2332,19 +2332,19 @@
       "tune": 1,
       "lent": null
     },
-    "2026-09-21T00:00:00": {
+    "2026-09-21": {
       "events": [],
       "season": "holyCross",
       "tune": 5,
       "lent": null
     },
-    "2026-09-22T00:00:00": {
+    "2026-09-22": {
       "events": [],
       "season": "holyCross",
       "tune": 1,
       "lent": null
     },
-    "2026-09-23T00:00:00": {
+    "2026-09-23": {
       "events": [
         "alvarezMarJulius"
       ],
@@ -2352,7 +2352,7 @@
       "tune": 5,
       "lent": 1
     },
-    "2026-09-24T00:00:00": {
+    "2026-09-24": {
       "events": [
         "feastStDimeth"
       ],
@@ -2360,7 +2360,7 @@
       "tune": 1,
       "lent": null
     },
-    "2026-09-25T00:00:00": {
+    "2026-09-25": {
       "events": [
         "patriarchMarIgnatius"
       ],
@@ -2368,13 +2368,13 @@
       "tune": 5,
       "lent": 1
     },
-    "2026-09-26T00:00:00": {
+    "2026-09-26": {
       "events": [],
       "season": "holyCross",
       "tune": 1,
       "lent": null
     },
-    "2026-09-27T00:00:00": {
+    "2026-09-27": {
       "events": [
         "secondSundayAfterHolyCross"
       ],
@@ -2382,7 +2382,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-09-28T00:00:00": {
+    "2026-09-28": {
       "events": [
         "philiposeMarTheophilos"
       ],
@@ -2390,19 +2390,19 @@
       "tune": 6,
       "lent": null
     },
-    "2026-09-29T00:00:00": {
+    "2026-09-29": {
       "events": [],
       "season": "holyCross",
       "tune": 2,
       "lent": null
     },
-    "2026-09-30T00:00:00": {
+    "2026-09-30": {
       "events": [],
       "season": "holyCross",
       "tune": 6,
       "lent": 1
     },
-    "2026-10-01T00:00:00": {
+    "2026-10-01": {
       "events": [
         "feastAdai"
       ],
@@ -2410,7 +2410,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-10-02T00:00:00": {
+    "2026-10-02": {
       "events": [
         "shemavoonMarDionysius"
       ],
@@ -2418,7 +2418,7 @@
       "tune": 6,
       "lent": 1
     },
-    "2026-10-03T00:00:00": {
+    "2026-10-03": {
       "events": [
         "feastStBaselios"
       ],
@@ -2426,7 +2426,7 @@
       "tune": 2,
       "lent": null
     },
-    "2026-10-04T00:00:00": {
+    "2026-10-04": {
       "events": [
         "thirdSundayAfterHolyCross",
         "seminaryDay"
@@ -2435,19 +2435,19 @@
       "tune": 3,
       "lent": null
     },
-    "2026-10-05T00:00:00": {
+    "2026-10-05": {
       "events": [],
       "season": "holyCross",
       "tune": 7,
       "lent": null
     },
-    "2026-10-06T00:00:00": {
+    "2026-10-06": {
       "events": [],
       "season": "holyCross",
       "tune": 3,
       "lent": null
     },
-    "2026-10-07T00:00:00": {
+    "2026-10-07": {
       "events": [
         "feastSargisBakos"
       ],
@@ -2455,25 +2455,25 @@
       "tune": 7,
       "lent": 1
     },
-    "2026-10-08T00:00:00": {
+    "2026-10-08": {
       "events": [],
       "season": "holyCross",
       "tune": 3,
       "lent": null
     },
-    "2026-10-09T00:00:00": {
+    "2026-10-09": {
       "events": [],
       "season": "holyCross",
       "tune": 7,
       "lent": 1
     },
-    "2026-10-10T00:00:00": {
+    "2026-10-10": {
       "events": [],
       "season": "holyCross",
       "tune": 3,
       "lent": null
     },
-    "2026-10-11T00:00:00": {
+    "2026-10-11": {
       "events": [
         "fourthSundayAfterHolyCross"
       ],
@@ -2481,7 +2481,7 @@
       "tune": 4,
       "lent": null
     },
-    "2026-10-12T00:00:00": {
+    "2026-10-12": {
       "events": [
         "philiposeMarDionysius",
         "yuhannonMarAthanasios"
@@ -2490,13 +2490,13 @@
       "tune": 8,
       "lent": null
     },
-    "2026-10-13T00:00:00": {
+    "2026-10-13": {
       "events": [],
       "season": "holyCross",
       "tune": 4,
       "lent": null
     },
-    "2026-10-14T00:00:00": {
+    "2026-10-14": {
       "events": [
         "athanasiosAlexandria"
       ],
@@ -2504,7 +2504,7 @@
       "tune": 8,
       "lent": 1
     },
-    "2026-10-15T00:00:00": {
+    "2026-10-15": {
       "events": [
         "enthronementBaseliosMarthomaMathews",
         "feastStOsyo"
@@ -2513,19 +2513,19 @@
       "tune": 4,
       "lent": null
     },
-    "2026-10-16T00:00:00": {
+    "2026-10-16": {
       "events": [],
       "season": "holyCross",
       "tune": 8,
       "lent": 1
     },
-    "2026-10-17T00:00:00": {
+    "2026-10-17": {
       "events": [],
       "season": "holyCross",
       "tune": 4,
       "lent": null
     },
-    "2026-10-18T00:00:00": {
+    "2026-10-18": {
       "events": [
         "fifthSundayAfterHolyCross",
         "feastStLuke"
@@ -2534,25 +2534,25 @@
       "tune": 5,
       "lent": null
     },
-    "2026-10-19T00:00:00": {
+    "2026-10-19": {
       "events": [],
       "season": "holyCross",
       "tune": 1,
       "lent": null
     },
-    "2026-10-20T00:00:00": {
+    "2026-10-20": {
       "events": [],
       "season": "holyCross",
       "tune": 5,
       "lent": null
     },
-    "2026-10-21T00:00:00": {
+    "2026-10-21": {
       "events": [],
       "season": "holyCross",
       "tune": 1,
       "lent": 1
     },
-    "2026-10-22T00:00:00": {
+    "2026-10-22": {
       "events": [
         "marBaseliosShakralla",
         "feastStJamesApostle"
@@ -2561,13 +2561,13 @@
       "tune": 5,
       "lent": null
     },
-    "2026-10-23T00:00:00": {
+    "2026-10-23": {
       "events": [],
       "season": "holyCross",
       "tune": 1,
       "lent": 1
     },
-    "2026-10-24T00:00:00": {
+    "2026-10-24": {
       "events": [
         "zachariahMarTheophilos"
       ],
@@ -2575,7 +2575,7 @@
       "tune": 5,
       "lent": null
     },
-    "2026-10-25T00:00:00": {
+    "2026-10-25": {
       "events": [
         "sixthSundayAfterHolyCross"
       ],
@@ -2583,37 +2583,37 @@
       "tune": 6,
       "lent": null
     },
-    "2026-10-26T00:00:00": {
+    "2026-10-26": {
       "events": [],
       "season": "holyCross",
       "tune": 2,
       "lent": null
     },
-    "2026-10-27T00:00:00": {
+    "2026-10-27": {
       "events": [],
       "season": "holyCross",
       "tune": 6,
       "lent": null
     },
-    "2026-10-28T00:00:00": {
+    "2026-10-28": {
       "events": [],
       "season": "holyCross",
       "tune": 2,
       "lent": 1
     },
-    "2026-10-29T00:00:00": {
+    "2026-10-29": {
       "events": [],
       "season": "holyCross",
       "tune": 6,
       "lent": null
     },
-    "2026-10-30T00:00:00": {
+    "2026-10-30": {
       "events": [],
       "season": "holyCross",
       "tune": 2,
       "lent": 1
     },
-    "2026-10-31T00:00:00": {
+    "2026-10-31": {
       "events": [],
       "season": "holyCross",
       "tune": 6,

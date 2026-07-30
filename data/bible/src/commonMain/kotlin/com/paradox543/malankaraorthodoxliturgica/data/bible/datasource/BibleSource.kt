@@ -27,9 +27,9 @@ class BibleSource(
         }
     }
 
-    suspend fun readBibleDetails(): List<BibleBookDetailsDto> = readJson("bibleBookMetadata.json")
+    suspend fun readBibleDetails(): List<BibleBookDetailsDto> = readJson("bible/bibleBookMetadata.json")
 
-    suspend fun readPrefaceTemplates(): PrefaceTemplatesDto = readJson("bible_preface_templates.json")
+    suspend fun readPrefaceTemplates(): PrefaceTemplatesDto = readJson("bible/bible_preface_templates.json")
 
     suspend fun readBibleChapter(path: String): BibleChapterDto = readJson(path)
 }

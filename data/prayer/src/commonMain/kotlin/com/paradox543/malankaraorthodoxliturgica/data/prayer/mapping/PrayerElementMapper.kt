@@ -202,3 +202,5 @@ fun PrayerElement.toData(): PrayerElementDto =
 
         is PrayerElement.Error -> PrayerElementDto.Error(content)
     }
+
+fun List<PrayerElement>.toDataList(): List<PrayerElementDto> = map { it.toData() }

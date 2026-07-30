@@ -109,7 +109,7 @@ class CalendarRepositoryImpl(
                     }
                 }.associate { (liturgicalYear, dateString, dto) ->
 
-                    val date = LocalDateTime.parse(dateString).date
+                    val date = LocalDate.parse(dateString)
 
                     date to
                         LiturgicalDay(

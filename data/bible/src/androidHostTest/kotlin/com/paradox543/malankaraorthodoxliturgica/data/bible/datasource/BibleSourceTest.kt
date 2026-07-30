@@ -59,20 +59,20 @@ class BibleSourceTest {
     fun `readBibleDetails opens the correct asset path`(): Unit =
         runTest {
             stubContent(
-                "bibleBookMetadata.json",
+                "bible/bibleBookMetadata.json",
                 """[{"book":{"en":"Genesis","ml":"ഉൽപ്പത്തി"},"folder":"genesis","verseCount":[31]}]""",
             )
 
             source.readBibleDetails()
 
-            coVerify { reader.readText("bibleBookMetadata.json") }
+            coVerify { reader.readText("bible/bibleBookMetadata.json") }
         }
 
     @Test
     fun `readBibleDetails returns parsed list when asset is available`(): Unit =
         runTest {
             stubContent(
-                "bibleBookMetadata.json",
+                "bible/bibleBookMetadata.json",
                 """[{"book":{"en":"Genesis","ml":"ഉൽപ്പത്തി"},"folder":"genesis","verseCount":[31]}]""",
             )
 
@@ -86,7 +86,7 @@ class BibleSourceTest {
     @Test
     fun `readBibleDetails throws AssetReadException when asset cannot be opened`(): Unit =
         runTest {
-            stubThrows("bibleBookMetadata.json")
+            stubThrows("bible/bibleBookMetadata.json")
 
             assertFailsWith<AssetReadException> { source.readBibleDetails() }
         }
@@ -97,20 +97,20 @@ class BibleSourceTest {
     fun `readPrefaceTemplates opens the correct asset path`(): Unit =
         runTest {
             stubContent(
-                "bible_preface_templates.json",
+                "bible/bible_preface_templates.json",
                 """{"prophets":{"en":[],"ml":[]},"generalEpistle":{"en":[],"ml":[]},"paulineEpistle":{"en":[],"ml":[]}}""",
             )
 
             source.readPrefaceTemplates()
 
-            coVerify { reader.readText("bible_preface_templates.json") }
+            coVerify { reader.readText("bible/bible_preface_templates.json") }
         }
 
     @Test
     fun `readPrefaceTemplates returns parsed templates when asset is available`(): Unit =
         runTest {
             stubContent(
-                "bible_preface_templates.json",
+                "bible/bible_preface_templates.json",
                 """{"prophets":{"en":[],"ml":[]},"generalEpistle":{"en":[],"ml":[]},"paulineEpistle":{"en":[],"ml":[]}}""",
             )
 
@@ -123,7 +123,7 @@ class BibleSourceTest {
     @Test
     fun `readPrefaceTemplates throws AssetReadException when asset cannot be opened`(): Unit =
         runTest {
-            stubThrows("bible_preface_templates.json")
+            stubThrows("bible/bible_preface_templates.json")
 
             assertFailsWith<AssetReadException> { source.readPrefaceTemplates() }
         }
