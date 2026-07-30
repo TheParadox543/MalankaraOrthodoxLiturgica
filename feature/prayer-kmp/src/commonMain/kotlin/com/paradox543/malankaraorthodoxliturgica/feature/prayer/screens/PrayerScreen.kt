@@ -12,8 +12,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -171,48 +169,42 @@ fun PrayerScreen(
         QrDialog(imageBitmap) { showQrDialog = false }
     }
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background,
-        contentColor = MaterialTheme.colorScheme.onBackground,
-    ) {
-        BoxWithConstraints {
-            val availableWidth = maxWidth
+    BoxWithConstraints {
+        val availableWidth = maxWidth
 
-            if (isLoadingPrayers) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
+        if (isLoadingPrayers) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator()
+            }
+        } else {
+            LazyColumn(
+                modifier =
+                    Modifier
+                        .padding(horizontal = if (availableWidth > 600.dp) 40.dp else 20.dp)
+                        .pointerInput(Unit) {
+                            detectTapGestures {
+                                isVisible.value = !isVisible.value
+                            }
+                        },
+                state = listState,
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                item {
+                    Spacer(Modifier.padding(top = initialTopPadding.value))
                 }
-            } else {
-                LazyColumn(
-                    modifier =
-                        Modifier
-                            .padding(horizontal = if (availableWidth > 600.dp) 40.dp else 20.dp)
-                            .pointerInput(Unit) {
-                                detectTapGestures {
-                                    isVisible.value = !isVisible.value
-                                }
-                            },
-                    state = listState,
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                ) {
-                    item {
-                        Spacer(Modifier.padding(top = initialTopPadding.value))
-                    }
-                    items(prayers) { prayerElement ->
-                        PrayerElementRenderer(
-                            prayerElement,
-                            renderContext,
-                            currentFilename,
-                            onPrayerButtonClick,
-                        )
-                    }
-                    item {
-                        Spacer(Modifier.padding(bottom = initialBottomPadding.value))
-                    }
+                items(prayers) { prayerElement ->
+                    PrayerElementRenderer(
+                        prayerElement,
+                        renderContext,
+                        currentFilename,
+                        onPrayerButtonClick,
+                    )
+                }
+                item {
+                    Spacer(Modifier.padding(bottom = initialBottomPadding.value))
                 }
             }
         }

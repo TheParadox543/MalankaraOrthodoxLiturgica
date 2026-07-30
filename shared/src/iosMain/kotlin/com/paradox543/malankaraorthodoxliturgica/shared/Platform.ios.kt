@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -78,7 +80,14 @@ private fun themedComposeUIViewController(content: @Composable () -> Unit): UIVi
         val settingsViewModel = IOSSharedViewModels.settingsViewModel
         val language by settingsViewModel.selectedLanguage.collectAsState()
         val textScale by settingsViewModel.fontScale.collectAsState()
-        MalankaraOrthodoxLiturgicaTheme(language = language, textScale = textScale, content = content)
+        MalankaraOrthodoxLiturgicaTheme(language = language, textScale = textScale) {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.onBackground,
+                content = content
+            )
+        }
     }
 
 /**
