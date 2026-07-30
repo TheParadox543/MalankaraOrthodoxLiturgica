@@ -81,7 +81,6 @@ fun SoundModePage(
                 selectedSoundMode = soundMode,
                 onOptionSelected = { onboardingViewModel.setSoundMode(it) },
                 hasPermission = hasPermission,
-                modifier = Modifier.weight(1f),
             )
         }
 
