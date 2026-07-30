@@ -30,7 +30,14 @@ class OnboardingViewModel(
 ) : ViewModel() {
     val onboardingStage: StateFlow<OnboardingStage> =
         settingsRepository.onboardingStage
-            .map { OnboardingStage.fromInt(it) }
+            .map { stageInt ->
+                val stage = OnboardingStage.fromInt(stageInt)
+                if (stage == OnboardingStage.SOUND_MODE && !showSoundModePage) {
+                    OnboardingStage.SONG_WRAP
+                } else {
+                    stage
+                }
+            }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
