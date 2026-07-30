@@ -79,22 +79,43 @@ class OnboardingViewModel(
     val prayers: StateFlow<List<PrayerElement>> = _prayers
 
     val version = appInfoProvider.versionName
+    val showSoundModePage = soundModeCapability.isAvailable
 
     init {
         refreshDndPermissionStatus()
     }
 
     fun nextPage() {
-        val current = onboardingStage.value.value
-        if (current < OnboardingStage.COMPLETE.value) {
-            setOnboardingStage(current + 1)
+        val current = onboardingStage.value
+        val next =
+            when (current) {
+                OnboardingStage.WELCOME -> OnboardingStage.SONG_WRAP
+                OnboardingStage.SONG_WRAP -> {
+                    if (showSoundModePage) OnboardingStage.SOUND_MODE
+                    else OnboardingStage.COMPLETE
+                }
+                OnboardingStage.SOUND_MODE -> OnboardingStage.COMPLETE
+                OnboardingStage.COMPLETE -> OnboardingStage.COMPLETE
+            }
+        if (next != current) {
+            setOnboardingStage(next.value)
         }
     }
 
     fun previousPage() {
-        val current = onboardingStage.value.value
-        if (current > OnboardingStage.WELCOME.value) {
-            setOnboardingStage(current - 1)
+        val current = onboardingStage.value
+        val previous =
+            when (current) {
+                OnboardingStage.WELCOME -> OnboardingStage.WELCOME
+                OnboardingStage.SONG_WRAP -> OnboardingStage.WELCOME
+                OnboardingStage.SOUND_MODE -> OnboardingStage.SONG_WRAP
+                OnboardingStage.COMPLETE -> {
+                    if (showSoundModePage) OnboardingStage.SOUND_MODE
+                    else OnboardingStage.SONG_WRAP
+                }
+            }
+        if (previous != current) {
+            setOnboardingStage(previous.value)
         }
     }
 
