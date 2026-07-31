@@ -8,6 +8,12 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 ## 🔮 [Unreleased]
 
 - Unversioned changes
+
+### Feature 
+
+- Logging for search functionality in Index page
+
+
 ### Feature
 
 - Better UI for calendar.
