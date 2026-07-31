@@ -118,4 +118,20 @@ sealed class AnalyticsEvent {
         override val params: Map<String, Any?>?
             get() = null
     }
+
+    data class Search(
+        val searchTerm: String,
+        val selectedItemId: String,
+        val selectedItemName: String,
+    ) : AnalyticsEvent() {
+        override val name: String
+            get() = "search"
+        override val params: Map<String, Any?>
+            get() =
+                mapOf(
+                    "search_term" to searchTerm,
+                    "item_id" to selectedItemId,
+                    "item_name" to selectedItemName,
+                )
+    }
 }

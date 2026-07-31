@@ -144,6 +144,22 @@ class PrayerViewModel(
         analyticsService.logEvent(AnalyticsEvent.PrayNowItemSelected(prayerName, prayerId))
     }
 
+    fun logSearch(
+        query: String,
+        itemId: String,
+        itemName: String,
+    ) {
+        val trimmedQuery = query.trim()
+        val searchTerm = if (trimmedQuery.isEmpty()) "(no query)" else trimmedQuery
+        analyticsService.logEvent(
+            AnalyticsEvent.Search(
+                searchTerm = searchTerm,
+                selectedItemId = itemId,
+                selectedItemName = itemName,
+            ),
+        )
+    }
+
     fun reportError(
         errorMessage: String,
         errorLocation: String,
