@@ -9,7 +9,7 @@
     },
     "sacraments": {
         "en": "Sacramental Prayers",
-        "ml": "കൂദാശകൾ "
+        "ml": "കൂദാശകൾ"
     },
     "sleeba": {
         "en": "Sleeba Prayers",
@@ -228,60 +228,60 @@
         "ml": "വി. ദൈവമാതാവിൻ്റെ ഓർമ്മയിൽ"
     },
     "sheemaSleeba": {
-        "ml": "വി. സ്ലീബായുടെ",
-        "en": "For the Holy Cross"
+        "en": "For the Holy Cross",
+        "ml": "വി. സ്ലീബായുടെ"
     },
     "sheemaSaints": {
-        "ml": "പരിശുദ്ധന്മാരുടെ ഓർമ്മയിൽ",
-        "en": "For the Saints"
+        "en": "For the Saints",
+        "ml": "പരിശുദ്ധന്മാരുടെ ഓർമ്മയിൽ"
     },
     "sheemaApostle": {
-        "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ",
-        "en": "For the Apostles"
+        "en": "For the Apostles",
+        "ml": "പ. ശ്ലീഹന്മാരുടെ ഓർമ്മയിൽ"
     },
     "sheemaSaintOrMartyr": {
-        "ml": "ഒരു പരിശുദ്ധയുടെയോ ഒരു രക്തസാക്ഷിയുടെയോ ഓർമ്മയിൽ",
-        "en": "For a Saint or a Martyr"
+        "en": "For a Saint or a Martyr",
+        "ml": "ഒരു പരിശുദ്ധയുടെയോ ഒരു രക്തസാക്ഷിയുടെയോ ഓർമ്മയിൽ"
     },
     "sheemaRepentance": {
-        "ml": "അനുതാപത്തിന്റെ",
-        "en": "For Repentance"
+        "en": "For Repentance",
+        "ml": "അനുതാപത്തിന്റെ"
     },
     "sheemaPriest": {
-        "ml": "പുരോഹിതന്മ‌മാരുടെ ഓർമ്മയിൽ",
-        "en": "For the Priests"
+        "en": "For the Priests",
+        "ml": "പുരോഹിതന്മ‌മാരുടെ ഓർമ്മയിൽ"
     },
     "sheemaOneSaint": {
-        "ml": "ഒരു പരിശുദ്ധൻ്റെ ഓർമ്മയിൽ",
-        "en": "For a Saint"
+        "en": "For a Saint",
+        "ml": "ഒരു പരിശുദ്ധൻ്റെ ഓർമ്മയിൽ"
     },
     "sheemaOneMartyr": {
-        "ml": "ഒരു സഹദായുടെ ഓർമ്മയിൽ",
-        "en": "For a Martyr"
+        "en": "For a Martyr",
+        "ml": "ഒരു സഹദായുടെ ഓർമ്മയിൽ"
     },
     "sheemaDeparted": {
-        "ml": "പരേതരുടെ ഓർമ്മ",
-        "en": "For the Departed"
+        "en": "For the Departed",
+        "ml": "പരേതരുടെ ഓർമ്മ"
     },
     "sheemaGeneral": {
-        "ml": "പൊതുവായ ഓർമ്മയിൽ",
-        "en": "General Promiyon"
+        "en": "General Promiyon",
+        "ml": "പൊതുവായ ഓർമ്മയിൽ"
     },
     "cyclicPrayers": {
-        "ml": "ധൂപപ്രാർത്ഥനകൾ",
-        "en": "Cyclic prayers"
+        "en": "Cyclic prayers",
+        "ml": "ധൂപപ്രാർത്ഥനകൾ"
     },
     "feasts": {
         "en": "Feasts",
         "ml": "മോറാനായ പെരുന്നാളുകൾ"
     },
     "ascension": {
-        "ml": "സ്വർഗ്ഗാരോഹണ പെരുന്നാൾ",
-        "en": "Feast of Ascension"
+        "en": "Feast of Ascension",
+        "ml": "സ്വർഗ്ഗാരോഹണ പെരുന്നാൾ"
     },
     "pentecost": {
-        "ml": "പെന്തികൊസ്തി",
-        "en": "Pentecost"
+        "en": "Pentecost",
+        "ml": "പെന്തികൊസ്തി"
     },
     "prayNow": {
         "en": "Pray Now",
@@ -292,48 +292,48 @@
         "ml": "സന്ദർഭോചിത പ്രാർത്ഥനകൾ"
     },
     "beforeFood": {
-        "ml": "ഭക്ഷണം കഴിക്കുന്നതിനു മുമ്പ്",
-        "en": "Before Food"
+        "en": "Before Food",
+        "ml": "ഭക്ഷണം കഴിക്കുന്നതിനു മുമ്പ്"
     },
     "afterFood": {
         "en": "After Food",
         "ml": "ഭക്ഷണം കഴിച്ചശേഷം"
     },
     "forSick": {
-        "ml": "രോഗികൾക്കുവേണ്ടി",
-        "en": "For the Sick"
+        "en": "For the Sick",
+        "ml": "രോഗികൾക്കുവേണ്ടി"
     },
     "morningPraise": {
-        "ml": "പ്രഭാത സ്തുതിപ്പ്",
-        "en": "Morning Praise"
+        "en": "Morning Praise",
+        "ml": "പ്രഭാത സ്തുതിപ്പ്"
     },
     "homePrayers": {
-        "ml": "വീട്ടിൽ പ്രാർത്ഥനകൾ",
-        "en": "Home Prayers"
+        "en": "Home Prayers",
+        "ml": "വീട്ടിൽ പ്രാർത്ഥനകൾ"
     },
     "benedictionSongs": {
-        "ml": "കൈമുത്ത് പാട്ടുകൾ",
-        "en": "Benediction Songs"
+        "en": "Benediction Songs",
+        "ml": "കൈമുത്ത് പാട്ടുകൾ"
     },
     "intercessionToMary": {
-        "ml": "ദൈവമാതാവിനോടുള്ള മദ്ധ്യസ്ഥപ്രാർത്ഥന",
-        "en": "Intercession to St. Mary"
+        "en": "Intercession to St. Mary",
+        "ml": "ദൈവമാതാവിനോടുള്ള മദ്ധ്യസ്ഥപ്രാർത്ഥന"
     },
     "oldTestament": {
-        "ml": "പഴമ വായന",
-        "en": "Old Testament"
+        "en": "Old Testament",
+        "ml": "പഴമ വായന"
     },
     "christmas": {
-        "ml": "ജനനപെരുന്നാൾ",
-        "en": "Christmas"
+        "en": "Christmas",
+        "ml": "ജനനപെരുന്നാൾ"
     },
     "worshipOfCross": {
-        "ml": "സ്ലീബാ ആഘോഷം",
-        "en": "Worship of the Cross"
+        "en": "Worship of the Cross",
+        "ml": "സ്ലീബാ ആഘോഷം"
     },
     "epiphany": {
-        "ml": "ദനഹാ",
-        "en": "Epiphany"
+        "en": "Epiphany",
+        "ml": "ദനഹാ"
     },
     "reconciliationService": {
         "en": "Reconciliation Service",
@@ -369,7 +369,7 @@
     },
     "revelationToZachariah": {
         "en": "Revelation to Zachariah",
-        "ml": "സ്\u200cകറിയായോടുള്ള അറിയിപ്പ്"
+        "ml": "സ്‌കറിയായോടുള്ള അറിയിപ്പ്"
     },
     "annunciationToStMary": {
         "en": "Annunciation to St. Mary",
@@ -477,7 +477,7 @@
     },
     "maundyThursday": {
         "en": "Maundy Thursday",
-        "ml": "പെസഹാ വ്യാഴാഴ്\u200bച"
+        "ml": "പെസഹാ വ്യാഴാഴ്​ച"
     },
     "mayaltho": {
         "en": "Mayaltho",
@@ -553,7 +553,7 @@
     },
     "introduction": {
         "en": "Introduction",
-        "ml": "ആമുഖം "
+        "ml": "ആമുഖം"
     },
     "ragam": {
         "en": "Tune",
@@ -583,33 +583,33 @@
         "en": "Passion Week",
         "ml": "ഹാശാ ആഴ്ച"
     },
-    "goodFriday":{
+    "goodFriday": {
         "en": "Good Friday",
         "ml": "ദുഃഖവെള്ളിയാഴ്ച"
     },
     "procession": {
-        "ml": "ഒന്നാം പ്രദക്ഷിണം",
-        "en": "First Procession"
+        "en": "First Procession",
+        "ml": "ഒന്നാം പ്രദക്ഷിണം"
     },
     "passover": {
-        "ml": "പെസഹാ",
-        "en": "Passover"
+        "en": "Passover",
+        "ml": "പെസഹാ"
     },
     "general": {
-        "ml": "പൊതുവായ",
-        "en": "General"
+        "en": "General",
+        "ml": "പൊതുവായ"
     },
     "washingOfFeetService": {
-        "ml": "കാൽകഴുകൽ ശുശ്രൂഷ",
-        "en": "Washing of the Feet"
+        "en": "Washing of the Feet",
+        "ml": "കാൽകഴുകൽ ശുശ്രൂഷ"
     },
     "garbo": {
-        "ml": "ഗർബോ",
-        "en": "Garbo"
+        "en": "Garbo",
+        "ml": "ഗർബോ"
     },
     "hindiQurbanaSongs": {
-        "ml": "ഹിന്ദി കുർബാന പാട്ടുകൾ",
-        "en": "Hindi Qurbana Songs"
+        "en": "Hindi Qurbana Songs",
+        "ml": "ഹിന്ദി കുർബാന പാട്ടുകൾ"
     },
     "audio": {
         "en": "Songs",
@@ -679,15 +679,15 @@
         "en": "Mukti Dilaye",
         "ml": "Mukti Dilaye"
     },
-    "annunciation":  {
+    "annunciation": {
         "en": "Annunciation",
         "ml": "അറിയിപ്പു"
     },
-    "resurrection":  {
+    "resurrection": {
         "en": "Resurrection",
         "ml": "ഉയിർപ്പു"
     },
-    "transfigurationSeason":  {
+    "transfigurationSeason": {
         "en": "Transfiguration",
         "ml": "തേജസ്കരണ"
     },
