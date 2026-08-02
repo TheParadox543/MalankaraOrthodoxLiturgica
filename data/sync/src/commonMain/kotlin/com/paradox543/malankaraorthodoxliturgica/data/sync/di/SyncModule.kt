@@ -18,7 +18,7 @@ val syncKoinModule = module {
             coerceInputValues = true
         } 
     }
-    single<BundledContentSource> { CompositeBundledContentSource(getAll()) }
+    single<BundledContentSource> { CompositeBundledContentSource(getAll(), get()) }
     single<ContentResolver> { ContentResolverImpl(get(), get()) }
     single<Synchronizer> { SynchronizerImpl(get(), get(), get()) }
     single<SyncResourceTextReader> { SyncResourceTextReader(get()) }

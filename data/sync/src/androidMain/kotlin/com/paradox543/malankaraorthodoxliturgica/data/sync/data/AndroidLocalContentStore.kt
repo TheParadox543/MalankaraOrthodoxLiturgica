@@ -19,7 +19,7 @@ class AndroidLocalContentStore(
     }
 
     override suspend fun getRootManifest(): RootManifest? {
-        val file = File(baseDir, "root.json")
+        val file = File(baseDir, "manifest.json")
         return if (file.exists()) json.decodeFromString(file.readText()) else null
     }
 
@@ -29,7 +29,7 @@ class AndroidLocalContentStore(
     }
 
     override suspend fun saveRootManifest(manifest: RootManifest) {
-        val file = File(baseDir, "root.json")
+        val file = File(baseDir, "manifest.json")
         file.writeText(json.encodeToString(RootManifest.serializer(), manifest))
     }
 

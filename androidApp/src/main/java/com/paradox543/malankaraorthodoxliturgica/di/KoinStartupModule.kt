@@ -9,6 +9,7 @@ val startupModule =
         viewModel {
             StartupViewModel(
                 settingsRepository = get(),
+                synchronizer = get(),
             )
         }
     }

@@ -13,7 +13,7 @@ class FirebaseRemoteContentSource(
 ) : RemoteContentSource {
 
     override suspend fun fetchRootManifest(): RootManifest {
-        val bytes = storage.reference.child("content/root.json").getBytes(Long.MAX_VALUE).await()
+        val bytes = storage.reference.child("manifest.json").getBytes(Long.MAX_VALUE).await()
         return json.decodeFromString(bytes.decodeToString())
     }
 
@@ -23,7 +23,7 @@ class FirebaseRemoteContentSource(
     }
 
     override suspend fun downloadFile(path: String): String {
-        val bytes = storage.reference.child("content/files/$path").getBytes(Long.MAX_VALUE).await()
+        val bytes = storage.reference.child(path).getBytes(Long.MAX_VALUE).await()
         return bytes.decodeToString()
     }
 }
