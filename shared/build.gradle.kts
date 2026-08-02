@@ -38,7 +38,9 @@ kotlin {
             baseName = xcfName
 
             export(project(":core:domain"))
+            export(project(":core:logging"))
             export(project(":data:prayer"))
+            export(project(":data:sync"))
             export(project(":feature:prayer-kmp"))
             export(project(":analytics:firebase"))
         }
