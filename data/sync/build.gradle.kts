@@ -9,10 +9,9 @@ plugins {
 
 kotlin {
     androidLibrary {
-        namespace = "com.paradox543.malankaraorthodoxliturgica.data.bible"
+        namespace = "com.paradox543.malankaraorthodoxliturgica.data.sync"
         compileSdk = providers.gradleProperty("COMPILE_SDK").get().toInt()
         minSdk = providers.gradleProperty("MIN_SDK").get().toInt()
-        androidResources.enable = true
 
         withHostTestBuilder {
         }
@@ -24,7 +23,7 @@ kotlin {
         }
     }
 
-    val xcfName = "DataBibleKit"
+    val xcfName = "DataSyncKit"
 
     iosX64 {
         binaries.framework {
@@ -47,18 +46,13 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // Project imports
                 implementation(project(":core:domain"))
                 implementation(project(":data:core"))
-                implementation(project(":data:sync"))
 
-                // Dependency Injection
+                implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.koin.core)
-
-                // Data Serialization
                 implementation(libs.kotlinx.serialization.json)
-
-                // Shared resources
+                implementation(libs.kotlinx.datetime)
                 implementation(libs.components.resources)
                 implementation(libs.runtime)
             }
@@ -73,22 +67,8 @@ kotlin {
 
         androidMain {
             dependencies {
-            }
-        }
-
-        getByName("androidHostTest") {
-            dependencies {
-                implementation(libs.kotlin.test)
-                implementation(libs.mockk)
-                implementation(libs.kotlinx.coroutines.test)
-            }
-        }
-
-        getByName("androidDeviceTest") {
-            dependencies {
-                implementation(libs.androidx.runner)
-                implementation(libs.androidx.core)
-                implementation(libs.androidx.junit)
+                implementation(libs.firebase.storage)
+                implementation(libs.kotlinx.coroutines.play.services)
             }
         }
 
@@ -101,6 +81,10 @@ kotlin {
 
 compose.resources {
     publicResClass = true
-    packageOfResClass = "com.paradox543.malankaraorthodoxliturgica.data.bible"
+    packageOfResClass = "com.paradox543.malankaraorthodoxliturgica.data.sync"
     generateResClass = auto
+}
+
+dependencies {
+    "androidMainImplementation"(platform(libs.firebase.bom))
 }

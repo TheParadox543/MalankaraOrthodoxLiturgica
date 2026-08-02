@@ -7,6 +7,8 @@ import com.paradox543.malankaraorthodoxliturgica.data.core.di.dataCoreBridgeModu
 import com.paradox543.malankaraorthodoxliturgica.data.prayer.di.prayerDataModule
 import com.paradox543.malankaraorthodoxliturgica.data.settings.di.androidSettingsDataModule
 import com.paradox543.malankaraorthodoxliturgica.data.song.di.songDataModule
+import com.paradox543.malankaraorthodoxliturgica.data.sync.di.platformSyncModule
+import com.paradox543.malankaraorthodoxliturgica.data.sync.di.syncKoinModule
 import com.paradox543.malankaraorthodoxliturgica.data.translations.di.translationsDataModule
 import com.paradox543.malankaraorthodoxliturgica.di.platformKoinModule
 import com.paradox543.malankaraorthodoxliturgica.di.songModule
@@ -34,6 +36,8 @@ class LiturgicaApplication : Application() {
             monitoring()
 
             modules(
+                syncKoinModule,
+                platformSyncModule,
                 androidSettingsDataModule,
                 bibleDataModule,
                 translationsDataModule,

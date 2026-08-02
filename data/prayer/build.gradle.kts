@@ -53,6 +53,7 @@ kotlin {
                 // Project imports
                 implementation(project(":core:domain"))
                 implementation(project(":data:core"))
+                implementation(project(":data:sync"))
 
                 implementation(libs.kotlinx.coroutines.core)
                 // Dependency Injection

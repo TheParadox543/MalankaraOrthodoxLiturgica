@@ -92,6 +92,7 @@ dependencies {
     implementation(project(":data:settings"))
     implementation(project(":data:translations"))
     implementation(project(":data:song"))
+    implementation(project(":data:sync"))
 
     implementation(project(":qr"))
 

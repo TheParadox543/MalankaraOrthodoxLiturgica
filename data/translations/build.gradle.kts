@@ -54,6 +54,7 @@ kotlin {
                 // Project imports
                 implementation(project(":core:domain"))
                 implementation(project(":data:core"))
+                implementation(project(":data:sync"))
 
                 // Dependency Injection
                 implementation(libs.koin.core)
