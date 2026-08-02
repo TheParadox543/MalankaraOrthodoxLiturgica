@@ -7,7 +7,9 @@ import com.paradox543.malankaraorthodoxliturgica.data.sync.data.SyncResourceText
 import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.BundledContentSource
 import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.ContentResolver
 import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.Synchronizer
+import com.paradox543.malankaraorthodoxliturgica.domain.sync.ContentUpdateSignal
 import org.koin.core.module.Module
+import org.koin.dsl.bind
 import org.koin.dsl.module
 import kotlinx.serialization.json.Json
 
@@ -20,7 +22,7 @@ val syncKoinModule = module {
     }
     single<BundledContentSource> { CompositeBundledContentSource(getAll(), get()) }
     single<ContentResolver> { ContentResolverImpl(get(), get()) }
-    single<Synchronizer> { SynchronizerImpl(get(), get(), get()) }
+    single<Synchronizer> { SynchronizerImpl(get(), get(), get(), get()) } bind ContentUpdateSignal::class
     single<SyncResourceTextReader> { SyncResourceTextReader(get()) }
 }
 

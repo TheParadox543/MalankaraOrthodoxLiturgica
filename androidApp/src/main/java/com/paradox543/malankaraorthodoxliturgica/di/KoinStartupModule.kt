@@ -10,6 +10,7 @@ val startupModule =
             StartupViewModel(
                 settingsRepository = get(),
                 synchronizer = get(),
+                workManager = get(),
             )
         }
     }

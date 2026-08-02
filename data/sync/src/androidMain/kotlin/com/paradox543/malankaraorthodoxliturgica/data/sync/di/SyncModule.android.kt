@@ -8,8 +8,9 @@ import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.RemoteContentS
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual val platformSyncModule: Module = module {
-    single<LocalContentStore> { AndroidLocalContentStore(get(), get()) }
-    single { FirebaseStorage.getInstance() }
-    single<RemoteContentSource> { FirebaseRemoteContentSource(get(), get()) }
-}
+actual val platformSyncModule: Module =
+    module {
+        single<LocalContentStore> { AndroidLocalContentStore(get(), get()) }
+        single { FirebaseStorage.getInstance() }
+        single<RemoteContentSource> { FirebaseRemoteContentSource(get(), get()) }
+    }

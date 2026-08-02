@@ -47,6 +47,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(":core:domain"))
+                implementation(project(":core:logging"))
+                implementation(project(":core:platform-kmp"))
+                implementation(project(":core:app-info"))
                 implementation(project(":data:core"))
 
                 implementation(libs.kotlinx.coroutines.core)
@@ -69,6 +72,8 @@ kotlin {
             dependencies {
                 implementation(libs.firebase.storage)
                 implementation(libs.kotlinx.coroutines.play.services)
+                implementation(libs.androidx.work.runtime.ktx)
+                implementation(libs.koin.androidx.workmanager)
             }
         }
 

@@ -69,6 +69,8 @@ import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
+import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.Synchronizer
+import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.model.SyncStatus
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.globalPinchZoom
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.SectionNavBar
@@ -114,6 +116,8 @@ fun NavGraph(
     settingsViewModel: SettingsViewModel,
     onNavigateToOnboarding: ((NavController) -> Unit)? = null,
 ) {
+    val synchronizer: Synchronizer = org.koin.compose.koinInject()
+    val syncState by synchronizer.syncState.collectAsState()
     val navController = rememberNavController()
     val snackbarHostState = remember { SnackbarHostState() }
     val updateDownloaded by appUpdateManager.updateReady.collectAsState()
@@ -141,6 +145,16 @@ fun NavGraph(
             if (result == SnackbarResult.ActionPerformed) {
                 appUpdateManager.completeUpdate()
             }
+        }
+    }
+
+    // Show sync snackbar when content has been updated in background
+    LaunchedEffect(syncState) {
+        if (syncState.status == SyncStatus.SUCCESS && syncState.hasUpdate) {
+            snackbarHostState.showSnackbar(
+                message = "Content has been updated.",
+                duration = SnackbarDuration.Short
+            )
         }
     }
 

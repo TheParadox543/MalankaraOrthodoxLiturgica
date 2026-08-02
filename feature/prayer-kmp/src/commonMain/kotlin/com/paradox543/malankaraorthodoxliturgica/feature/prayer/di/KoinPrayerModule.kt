@@ -31,6 +31,7 @@ val prayerModule =
                 getPrayerNodesForCurrentTimeUseCase = get(),
                 createPrayerIndexUseCase = get(),
                 inAppReviewManager = get(),
+                contentUpdateSignal = get(),
             )
         }
     }

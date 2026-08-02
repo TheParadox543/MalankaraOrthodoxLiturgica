@@ -742,5 +742,9 @@
     "vehicleBlessing": {
         "en": "Blessing of Vehicles",
         "ml": "വാഹന ശുദ്ധീകരണം"
+    },
+    "pambakuda": {
+        "en": "Pambakuda Prayers",
+        "ml": "പാമ്പാക്കുട"
     }
 }

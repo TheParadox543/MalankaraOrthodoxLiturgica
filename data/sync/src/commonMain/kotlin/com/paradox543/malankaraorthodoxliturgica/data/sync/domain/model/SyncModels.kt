@@ -90,5 +90,6 @@ enum class SyncStatus {
 data class SyncState(
     val status: SyncStatus,
     val progress: Float = 0f,
+    val hasUpdate: Boolean = false,
     val error: Throwable? = null,
 )
