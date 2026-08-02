@@ -10,7 +10,7 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 - Unversioned changes
 
 ### Feature 
-
+- Offline sync: App updates content when it is online instead of depending on app updates alone.
 - Logging for search functionality in Index page
 
 
