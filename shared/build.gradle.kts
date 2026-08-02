@@ -76,11 +76,13 @@ kotlin {
             dependencies {
                 api(project(":core:domain"))
                 api(project(":core:di"))
+                api(project(":core:logging"))
                 api(project(":core:ui-common"))
                 api(project(":core:platform-kmp"))
                 api(project(":core:app-info"))
                 api(project(":analytics:firebase"))
                 api(project(":data:core"))
+                api(project(":data:sync"))
                 api(project(":data:bible"))
                 api(project(":data:calendar"))
                 api(project(":data:prayer"))

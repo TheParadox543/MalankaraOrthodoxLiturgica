@@ -106,6 +106,7 @@ dependencies {
     implementation(project(":feature:song"))
 
     implementation(project(":core:di"))
+    implementation(project(":core:logging"))
     implementation(project(":core:analytics"))
     implementation(project(":core:platform-kmp"))
     implementation(project(":analytics:firebase"))

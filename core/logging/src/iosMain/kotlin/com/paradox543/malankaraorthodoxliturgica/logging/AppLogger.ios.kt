@@ -3,6 +3,10 @@ package com.paradox543.malankaraorthodoxliturgica.logging
 actual object AppLogger {
     actual var level: LogLevel = LogLevel.INFO
 
+    actual fun initialize(debugMode: Boolean) {
+        level = if (debugMode) LogLevel.DEBUG else LogLevel.INFO
+    }
+
     private fun enabled(min: LogLevel) = level <= min
 
     actual fun v(
