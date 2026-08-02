@@ -1,16 +1,21 @@
 package com.paradox543.malankaraorthodoxliturgica.data.calendar.repository
 
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.datasource.CalendarSource
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalDayDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalEventDetailsDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.LiturgicalYearlyDatesDto
+import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.SeasonDto
 import com.paradox543.malankaraorthodoxliturgica.data.calendar.model.TitleStrDto
 import com.paradox543.malankaraorthodoxliturgica.data.core.exceptions.AssetReadException
-import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalCalendarDates
+import com.paradox543.malankaraorthodoxliturgica.logging.AppLogger
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkObject
+import io.mockk.unmockkObject
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -40,26 +45,33 @@ class CalendarRepositoryImplTest {
             title = TitleStrDto(en = "Great Lent"),
         )
 
-    /**
-     * Minimal liturgical calendar: April 2025 — Easter on the 20th, Great Lent starts on March 5th.
-     */
-    private val fakeDates: LiturgicalCalendarDates =
-        mapOf(
-            "2025" to
-                mapOf(
-                    "4" to
-                        mapOf(
-                            "20" to listOf("easter"),
-                        ),
-                    "3" to
-                        mapOf(
-                            "5" to listOf("great-lent"),
-                        ),
-                ),
+    private val fakeYearlyDates =
+        listOf(
+            LiturgicalYearlyDatesDto(
+                version = "1",
+                liturgicalYear = "2024-25",
+                data =
+                    mapOf(
+                        "2025-04-20" to
+                            LiturgicalDayDto(
+                                eventKeys = listOf("easter"),
+                                season = SeasonDto.RESURRECTION,
+                                tune = 1,
+                                lent = 0,
+                            ),
+                        "2025-03-05" to
+                            LiturgicalDayDto(
+                                eventKeys = listOf("great-lent"),
+                                season = SeasonDto.GREAT_LENT,
+                                tune = 1,
+                                lent = 1,
+                            ),
+                    ),
+            ),
         )
 
     private val fakeData =
-        mapOf(
+        mapOf<String, LiturgicalEventDetailsDto>(
             "easter" to easterDto,
             "great-lent" to greatLentDto,
         )
@@ -69,26 +81,23 @@ class CalendarRepositoryImplTest {
      */
     @BeforeTest
     fun setup() {
+        mockkObject(AppLogger)
+        every { AppLogger.d(any(), any()) } returns Unit
+        every { AppLogger.e(any(), any(), any()) } returns Unit
         repository = CalendarRepositoryImpl(source)
+    }
+
+    @kotlin.test.AfterTest
+    fun tearDown() {
+        unmockkObject(AppLogger)
     }
 
     // ─── Cache and error handling ─────────────────────────────────────────────
 
     @Test
-    fun `throws AssetReadException when liturgical dates asset is missing`() =
-        runTest {
-            coEvery { source.readLiturgicalDates() } throws AssetReadException("not found")
-            coEvery { source.readLiturgicalData() } returns fakeData
-
-            assertFailsWith<AssetReadException> {
-                repository.checkMonthDataExists(4, 2025)
-            }
-        }
-
-    @Test
     fun `throws AssetReadException when liturgical data asset is missing`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } throws AssetReadException("not found")
 
             assertFailsWith<AssetReadException> {
@@ -101,7 +110,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `checkMonthDataExists returns true when month has data`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
 
             assertTrue(repository.checkMonthDataExists(month = 4, year = 2025))
         }
@@ -109,7 +118,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `checkMonthDataExists returns false when month has no data`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
 
             assertFalse(repository.checkMonthDataExists(month = 6, year = 2025))
         }
@@ -117,7 +126,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `checkMonthDataExists returns false for unknown year`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
 
             assertFalse(repository.checkMonthDataExists(month = 4, year = 2099))
         }
@@ -127,7 +136,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData throws IllegalArgumentException for invalid month 0`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             assertFailsWith<IllegalArgumentException> {
@@ -138,7 +147,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData throws IllegalArgumentException for invalid month 13`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             assertFailsWith<IllegalArgumentException> {
@@ -149,7 +158,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData returns weeks where each week starts on Sunday`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val weeks = repository.loadMonthData(month = 4, year = 2025)
@@ -169,7 +178,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData returns weeks where each week has exactly 7 days`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val weeks = repository.loadMonthData(month = 4, year = 2025)
@@ -182,7 +191,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData includes every day of the requested month`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val weeks = repository.loadMonthData(month = 4, year = 2025)
@@ -196,7 +205,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData maps Easter event to the correct day`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val weeks = repository.loadMonthData(month = 4, year = 2025)
@@ -210,7 +219,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `loadMonthData returns empty events for days with no liturgical entry`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val weeks = repository.loadMonthData(month = 4, year = 2025)
@@ -223,11 +232,24 @@ class CalendarRepositoryImplTest {
     fun `loadMonthData throws IllegalArgumentException when event key is missing from data store`() =
         runTest {
             // Calendar references a key that is not in the data store
-            val missingKeyDates: LiturgicalCalendarDates =
-                mapOf(
-                    "2025" to mapOf("4" to mapOf("20" to listOf("unknown-key"))),
+            val missingKeyYearlyDates =
+                listOf(
+                    LiturgicalYearlyDatesDto(
+                        version = "1",
+                        liturgicalYear = "2024-25",
+                        data =
+                            mapOf(
+                                "2025-04-20" to
+                                    LiturgicalDayDto(
+                                        eventKeys = listOf("unknown-key"),
+                                        season = SeasonDto.RESURRECTION,
+                                        tune = 1,
+                                        lent = 0,
+                                    ),
+                            ),
+                    ),
                 )
-            coEvery { source.readLiturgicalDates() } returns missingKeyDates
+            coEvery { source.loadAllYears() } returns missingKeyYearlyDates
             coEvery { source.readLiturgicalData() } returns emptyMap()
 
             assertFailsWith<IllegalArgumentException> {
@@ -240,7 +262,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `getUpcomingWeekEvents returns exactly 7 days`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val result = repository.getUpcomingWeekEvents()
@@ -251,7 +273,7 @@ class CalendarRepositoryImplTest {
     @Test
     fun `getUpcomingWeekEvents starts from today`() =
         runTest {
-            coEvery { source.readLiturgicalDates() } returns fakeDates
+            coEvery { source.loadAllYears() } returns fakeYearlyDates
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val today =
@@ -275,17 +297,24 @@ class CalendarRepositoryImplTest {
                     .now()
                     .toLocalDateTime(TimeZone.currentSystemDefault())
                     .date
-            val datesWithTodayEvents: LiturgicalCalendarDates =
-                mapOf(
-                    today.year.toString() to
-                        mapOf(
-                            today.month.number.toString() to
-                                mapOf(
-                                    today.day.toString() to listOf("easter", "great-lent"),
-                                ),
-                        ),
+            val yearlyDatesWithTodayEvents =
+                listOf(
+                    LiturgicalYearlyDatesDto(
+                        version = "1",
+                        liturgicalYear = "2024-25",
+                        data =
+                            mapOf(
+                                today.toString() to
+                                    LiturgicalDayDto(
+                                        eventKeys = listOf("easter", "great-lent"),
+                                        season = SeasonDto.RESURRECTION,
+                                        tune = 1,
+                                        lent = 0,
+                                    ),
+                            ),
+                    ),
                 )
-            coEvery { source.readLiturgicalDates() } returns datesWithTodayEvents
+            coEvery { source.loadAllYears() } returns yearlyDatesWithTodayEvents
             coEvery { source.readLiturgicalData() } returns fakeData
 
             val items = repository.getUpcomingWeekEventItems()
