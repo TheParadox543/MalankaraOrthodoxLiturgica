@@ -1,41 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Malankara Orthodox Liturgica</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 2rem;
-      line-height: 1.6;
-      color: #333;
-    }
-    h1, h2 {
-      color: #222;
-    }
-    a {
-      color: #3366cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malankara Orthodox Liturgica - Support Page</title>
+    <meta name="description" content="Offline Orthodox prayer companion featuring daily prayers, liturgical calendar, Bible readings, multilingual support, and automatic content updates.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8b0000; /* Deep Red */
+            --accent-color: #d4af37;  /* Metallic Gold */
+            --text-dark: #1a1a1a;
+            --text-light: #f4f4f4;
+            --bg-light: #ffffff;
+            --bg-off-white: #fafafa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Crimson Text', serif;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        .hero img {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            background-color: white;
+        }
+
+        .hero h1 {
+            color: var(--text-light);
+            font-size: 3rem;
+            margin: 10px 0;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 60px 0;
+            background-color: var(--bg-off-white);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent-color);
+            transition: transform 0.2s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-item h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        /* Support & Legal */
+        .info-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .links-group {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #600000;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        footer {
+            background-color: #222;
+            color: #888;
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9rem;
+        }
+
+        footer p { margin: 5px 0; }
+
+        /* Video Section */
+        .video-section {
+            padding: 40px 0;
+            text-align: center;
+            background-color: var(--bg-light);
+            border-bottom: 1px solid #eee;
+        }
+
+        .btn-youtube {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-youtube:hover {
+            background-color: #cc0000;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+        }
+
+        .store-badges {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .store-badge {
+            transition: transform 0.2s;
+            display: block;
+        }
+
+        .store-badge img {
+            height: 44px;
+            width: auto;
+            border-radius: 0;
+            box-shadow: none;
+            margin-bottom: 0;
+            background-color: transparent;
+        }
+
+        .store-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .store-badge.disabled {
+            filter: grayscale(1);
+            opacity: 0.7;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .store-badge.disabled::after {
+            content: "COMING SOON";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            pointer-events: none;
+            font-weight: bold;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Malankara Orthodox Liturgica</h1>
-  <p>This is the official support page for the <strong>Malankara Orthodox Liturgica</strong> app, developed by Paradox543.</p>
-  
-  <h2>About the App</h2>
-  <p>The app provides liturgical prayers, resources, and related content for members of the Malankara Orthodox Syrian Church. It works offline and is built with care to ensure a smooth and ad-free experience for its users.</p>
 
-  <h2>Legal</h2>
-  <ul>
-    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-    <li><a href="terms-and-conditions.html">Terms and Conditions</a></li>
-  </ul>
+    <header class="hero">
+        <div class="container">
+            <img src="app_icon.png" alt="Malankara Orthodox Liturgica Icon">
+            <h1>Malankara Orthodox Liturgica</h1>
+            <p>Your spiritual companion for prayers and liturgical resources of the Malankara Orthodox Syrian Church.</p>
 
-  <p>For any queries, reach out at: <a href="mailto:samuel.alex.koshy@gmail.com">samuel.alex.koshy@gmail.com</a></p>
+            <div class="store-badges">
+                <a href="https://play.google.com/store/apps/details?id=com.paradox543.malankaraorthodoxliturgica" target="_blank" class="store-badge">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 64px; margin: -10px;">
+                </a>
+                <div class="store-badge disabled">
+                    <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <h2 style="text-align: center;">Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Offline Access</h3>
+                    <p>All prayers and resources are available offline, ensuring you can pray anytime, anywhere.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Liturgical Library</h3>
+                    <p>Access Daily Prayers, Sacramental resources, and seasonal content in one place.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Multilingual</h3>
+                    <p>Pray in your preferred language: Malayalam, Manglish, or English.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Liturgical Calendar</h3>
+                    <p>Stay updated with feasts, fasts, and daily Bible readings throughout the year.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Prayer Search</h3>
+                    <p>Find any prayer instantly with our index-based search functionality.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Automatic Updates</h3>
+                    <p>Receive the latest prayers, calendar updates, and liturgical resources automatically without waiting for an app update.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="container">
+            <a href="https://www.youtube.com/watch?v=Lcdahy7uapQ&list=PLbwsvKY9XRHk" target="_blank" class="btn btn-youtube">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" style="margin-right: 8px;">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Watch App Demos
+            </a>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <h2>Support & Legal</h2>
+            <p>For any queries, feedback, or technical issues, please feel free to reach out to us.</p>
+            <div class="links-group">
+                <a href="mailto:samuel.alex.koshy@gmail.com" class="btn btn-primary">Contact Support</a>
+                <a href="privacy-policy.html" class="btn btn-outline">Privacy Policy</a>
+                <a href="terms-and-conditions.html" class="btn btn-outline">Terms & Conditions</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Paradox543. All rights reserved.</p>
+            <p>Developed independently for the Malankara Orthodox Syrian Church community.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
