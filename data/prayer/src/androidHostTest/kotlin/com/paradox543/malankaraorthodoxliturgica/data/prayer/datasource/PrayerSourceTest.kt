@@ -49,32 +49,32 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerElements opens correct path for ENGLISH`(): Unit =
         runBlocking {
-            stubText("en/prayers/vespers.json", "[]")
+            stubText("prayers/en/vespers.json", "[]")
 
             source.loadPrayerElements("vespers.json", AppLanguage.ENGLISH)
 
-            coVerify { reader.readText("en/prayers/vespers.json") }
+            coVerify { reader.readText("prayers/en/vespers.json") }
         }
 
     @Test
     fun `loadPrayerElements opens correct path for MALAYALAM`(): Unit =
         runBlocking {
-            stubText("ml/prayers/vespers.json", "[]")
+            stubText("prayers/ml/vespers.json", "[]")
 
             source.loadPrayerElements("vespers.json", AppLanguage.MALAYALAM)
 
-            coVerify { reader.readText("ml/prayers/vespers.json") }
+            coVerify { reader.readText("prayers/ml/vespers.json") }
         }
 
     @Test
     fun `loadPrayerElements passes fileName through unmodified`(): Unit =
         runBlocking {
             val fileName = "sub/compline.json"
-            stubText("en/prayers/$fileName", "[]")
+            stubText("prayers/en/$fileName", "[]")
 
             source.loadPrayerElements(fileName, AppLanguage.ENGLISH)
 
-            coVerify { reader.readText("en/prayers/$fileName") }
+            coVerify { reader.readText("prayers/en/$fileName") }
         }
 
     // ─── loadPrayerElements: deserialization ─────────────────────────────────
@@ -82,7 +82,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerElements returns empty list for empty JSON array`(): Unit =
         runBlocking {
-            stubText("en/prayers/empty.json", "[]")
+            stubText("prayers/en/empty.json", "[]")
 
             val result = source.loadPrayerElements("empty.json", AppLanguage.ENGLISH)
 
@@ -93,7 +93,7 @@ class PrayerSourceTest {
     fun `loadPrayerElements parses a prose element`(): Unit =
         runBlocking {
             stubText(
-                "en/prayers/vespers.json",
+                "prayers/en/vespers.json",
                 """[{"type":"prose","content":"Glory to God"}]""",
             )
 
@@ -116,7 +116,7 @@ class PrayerSourceTest {
                   {"type":"link","file":"common.json"}
                 ]
                 """.trimIndent()
-            stubText("en/prayers/vespers.json", json)
+            stubText("prayers/en/vespers.json", json)
 
             val result = source.loadPrayerElements("vespers.json", AppLanguage.ENGLISH)
 
@@ -131,7 +131,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerElements throws PrayerParsingException when asset is missing`(): Unit =
         runBlocking {
-            stubThrows("en/prayers/missing.json")
+            stubThrows("prayers/en/missing.json")
 
             assertFailsWith<PrayerParsingException> {
                 source.loadPrayerElements("missing.json", AppLanguage.ENGLISH)
@@ -144,26 +144,26 @@ class PrayerSourceTest {
     fun `loadPrayerNavigationTree opens correct path for ENGLISH`(): Unit =
         runBlocking {
             stubText(
-                "en/prayers_tree.json",
+                "prayers/en/prayers_tree.json",
                 """{"route":"root","parent":null}""",
             )
 
             source.loadPrayerNavigationTree(AppLanguage.ENGLISH)
 
-            coVerify { reader.readText("en/prayers_tree.json") }
+            coVerify { reader.readText("prayers/en/prayers_tree.json") }
         }
 
     @Test
     fun `loadPrayerNavigationTree opens correct path for MALAYALAM`(): Unit =
         runBlocking {
             stubText(
-                "ml/prayers_tree.json",
+                "prayers/ml/prayers_tree.json",
                 """{"route":"root","parent":null}""",
             )
 
             source.loadPrayerNavigationTree(AppLanguage.MALAYALAM)
 
-            coVerify { reader.readText("ml/prayers_tree.json") }
+            coVerify { reader.readText("prayers/ml/prayers_tree.json") }
         }
 
     // ─── loadPrayerNavigationTree: deserialization ────────────────────────────
@@ -172,7 +172,7 @@ class PrayerSourceTest {
     fun `loadPrayerNavigationTree parses route and parent`(): Unit =
         runBlocking {
             stubText(
-                "en/prayers_tree.json",
+                "prayers/en/prayers_tree.json",
                 """{"route":"root","type":"section","parent":null,"children":[],"languages":["en","ml"]}""",
             )
 
@@ -197,7 +197,7 @@ class PrayerSourceTest {
                   ]
                 }
                 """.trimIndent()
-            stubText("en/prayers_tree.json", treeJson)
+            stubText("prayers/en/prayers_tree.json", treeJson)
 
             val result = source.loadPrayerNavigationTree(AppLanguage.ENGLISH)
 
@@ -209,7 +209,7 @@ class PrayerSourceTest {
     @Test
     fun `loadPrayerNavigationTree throws PrayerContentNotFoundException when asset is missing`(): Unit =
         runBlocking {
-            stubThrows("en/prayers_tree.json")
+            stubThrows("prayers/en/prayers_tree.json")
 
             assertFailsWith<PrayerContentNotFoundException> {
                 source.loadPrayerNavigationTree(AppLanguage.ENGLISH)

@@ -30,8 +30,14 @@ class OnboardingViewModel(
 ) : ViewModel() {
     val onboardingStage: StateFlow<OnboardingStage> =
         settingsRepository.onboardingStage
-            .map { OnboardingStage.fromInt(it) }
-            .stateIn(
+            .map { stageInt ->
+                val stage = OnboardingStage.fromInt(stageInt)
+                if (stage == OnboardingStage.SOUND_MODE && !showSoundModePage) {
+                    OnboardingStage.SONG_WRAP
+                } else {
+                    stage
+                }
+            }.stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),
                 initialValue = OnboardingStage.WELCOME,
@@ -79,22 +85,67 @@ class OnboardingViewModel(
     val prayers: StateFlow<List<PrayerElement>> = _prayers
 
     val version = appInfoProvider.versionName
+    val showSoundModePage = soundModeCapability.isAvailable
 
     init {
         refreshDndPermissionStatus()
     }
 
     fun nextPage() {
-        val current = onboardingStage.value.value
-        if (current < OnboardingStage.COMPLETE.value) {
-            setOnboardingStage(current + 1)
+        val current = onboardingStage.value
+        val next =
+            when (current) {
+                OnboardingStage.WELCOME -> {
+                    OnboardingStage.SONG_WRAP
+                }
+
+                OnboardingStage.SONG_WRAP -> {
+                    if (showSoundModePage) {
+                        OnboardingStage.SOUND_MODE
+                    } else {
+                        OnboardingStage.COMPLETE
+                    }
+                }
+
+                OnboardingStage.SOUND_MODE -> {
+                    OnboardingStage.COMPLETE
+                }
+
+                OnboardingStage.COMPLETE -> {
+                    OnboardingStage.COMPLETE
+                }
+            }
+        if (next != current) {
+            setOnboardingStage(next.value)
         }
     }
 
     fun previousPage() {
-        val current = onboardingStage.value.value
-        if (current > OnboardingStage.WELCOME.value) {
-            setOnboardingStage(current - 1)
+        val current = onboardingStage.value
+        val previous =
+            when (current) {
+                OnboardingStage.WELCOME -> {
+                    OnboardingStage.WELCOME
+                }
+
+                OnboardingStage.SONG_WRAP -> {
+                    OnboardingStage.WELCOME
+                }
+
+                OnboardingStage.SOUND_MODE -> {
+                    OnboardingStage.SONG_WRAP
+                }
+
+                OnboardingStage.COMPLETE -> {
+                    if (showSoundModePage) {
+                        OnboardingStage.SOUND_MODE
+                    } else {
+                        OnboardingStage.SONG_WRAP
+                    }
+                }
+            }
+        if (previous != current) {
+            setOnboardingStage(previous.value)
         }
     }
 
@@ -124,7 +175,7 @@ class OnboardingViewModel(
             try {
                 // Access the current language from SettingsViewModel
                 val language: AppLanguage = passedLanguage ?: selectedLanguage.value
-                val prayers = getPrayerScreenContentUseCase(filename, language)
+                val prayers = getPrayerScreenContentUseCase(filename, language, setOf("general"))
                 _prayers.value = prayers
             } catch (e: Exception) {
                 _prayers.value = listOf(PrayerElement.Error(e.message ?: "Unknown error"))

@@ -41,41 +41,6 @@ class CalendarSourceTest {
         coEvery { reader.readText(path) } throws Exception("Asset not found: $path")
     }
 
-    // ─── readLiturgicalDates ─────────────────────────────────────────────────
-
-    @Test
-    fun `readLiturgicalDates opens the correct asset path`() =
-        runBlocking {
-            stubAsset("calendar/liturgical_calendar.json", """{}""")
-
-            source.readLiturgicalDates()
-
-            verify { runBlocking { reader.readText("calendar/liturgical_calendar.json") } }
-        }
-
-    @Test
-    fun `readLiturgicalDates returns parsed map when asset is available`() =
-        runBlocking {
-            // LiturgicalCalendarDates = Map<String, YearEvents>
-            // YearEvents = Map<String, MonthEvents> = Map<String, Map<String, List<String>>>
-            stubAsset(
-                "calendar/liturgical_calendar.json",
-                """{"2025":{"4":{"20":["easter"]}}}""",
-            )
-
-            val result = source.readLiturgicalDates()
-
-            assertEquals(listOf("easter"), result["2025"]?.get("4")?.get("20"))
-        }
-
-    @Test
-    fun `readLiturgicalDates throws AssetReadException when asset cannot be opened`(): Unit =
-        runBlocking {
-            stubAssetThrows("calendar/liturgical_calendar.json")
-
-            assertFailsWith<AssetReadException> { source.readLiturgicalDates() }
-        }
-
     // ─── readLiturgicalData ──────────────────────────────────────────────────
 
     @Test

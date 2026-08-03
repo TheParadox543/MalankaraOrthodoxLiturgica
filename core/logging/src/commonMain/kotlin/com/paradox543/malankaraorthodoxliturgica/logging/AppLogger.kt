@@ -5,6 +5,8 @@ enum class LogLevel { VERBOSE, DEBUG, INFO, WARN, ERROR, NONE }
 expect object AppLogger {
     var level: LogLevel
 
+    fun initialize(debugMode: Boolean)
+
     fun v(
         tag: String = "App",
         message: () -> String,

@@ -11,6 +11,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetAdjace
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerNodesForCurrentTimeUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLanguage
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.domain.sync.ContentUpdateSignal
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +19,10 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.TimeZone
@@ -33,19 +37,24 @@ class PrayerNavViewModel(
     private val getPrayerNodesForCurrentTimeUseCase: GetPrayerNodesForCurrentTimeUseCase,
     private val createPrayerIndexUseCase: CreatePrayerIndexUseCase,
     private val inAppReviewManager: InAppReviewManager,
+    private val contentUpdateSignal: ContentUpdateSignal,
 ) : ViewModel() {
     private val initialTree = PageNode(route = "root", parent = null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val rootNode =
-        settingsRepository.language
-            .mapLatest { lang ->
-                prayerRepository.getPrayerNavigationTree(lang)
-            }.stateIn(
-                viewModelScope,
-                SharingStarted.WhileSubscribed(5000),
-                initialTree,
-            )
+        combine(
+            settingsRepository.language,
+            contentUpdateSignal.onDomainUpdated
+                .filter { it == "prayers" }
+                .onStart { emit("prayers") } // Trigger initial load
+        ) { lang, _ ->
+            prayerRepository.getPrayerNavigationTree(lang)
+        }.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            initialTree,
+        )
 
     val selectedLanguage: StateFlow<AppLanguage> =
         settingsRepository.language.stateIn(

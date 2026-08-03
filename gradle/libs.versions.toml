@@ -24,8 +24,8 @@ iconsMaterialIconsRoundedCmp = "2.2.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 koin = "4.1.1"
-kotlin = "2.1.21"
-kotlinx = "2.1.21"
+kotlin = "2.2.20"
+kotlinx = "2.2.20"
 kotlinxCoroutinesCore = "1.10.2"
 kotlinxCoroutinesPlayServices = "1.10.2"
 kotlinxCoroutinesTest = "1.10.2"
@@ -49,6 +49,7 @@ uiToolingPreview = "1.10.3"
 workRuntimeKtx = "2.10.5"
 zxingAndroidEmbedded = "4.3.0"
 zxingCore = "3.5.4"
+qrcodeKotlin = "4.5.0"
 uiTestJunit4 = "1.10.6"
 uiVersion = "1.10.6"
 
@@ -74,6 +75,7 @@ androidx-material-icons-core = { group = "androidx.compose.material", name = "ma
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "androidNavigation" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidNavigation" }
+material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
@@ -101,6 +103,7 @@ runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "run
 ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "ui" }
 ui-tooling-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "uiToolingPreview" }
 zxing-core = { module = "com.google.zxing:core", version.ref = "zxingCore" }
+qrcode-kotlin = { module = "io.github.g0dkar:qrcode-kotlin", version.ref = "qrcodeKotlin" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashalytics" }

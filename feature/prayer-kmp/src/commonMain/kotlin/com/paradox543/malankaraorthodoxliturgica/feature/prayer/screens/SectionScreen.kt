@@ -3,21 +3,26 @@ package com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidthIn
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -33,9 +38,16 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.composables.icons.materialicons.MaterialIcons
 import com.composables.icons.materialicons.rounded.Arrow_forward
@@ -58,6 +70,7 @@ import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.Prayer
 import kotlinx.coroutines.flow.collectLatest
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import kotlin.math.max
 
 @Composable
 fun SectionScreen(
@@ -92,6 +105,7 @@ fun SectionScreen(
             SeasonName.DUMMY -> Res.drawable.default
             null -> Res.drawable.default
         }
+    val listState = rememberLazyGridState()
 
     LaunchedEffect(title) { onScaffoldStateChanged(ScaffoldUiState.Standard(title)) }
 
@@ -109,7 +123,13 @@ fun SectionScreen(
         val width = maxWidth
         if (width > 600.dp) {
             Row(
-                Modifier.padding(contentPadding),
+                Modifier.padding(
+                    top = contentPadding.calculateTopPadding(),
+                    bottom = contentPadding.calculateBottomPadding(),
+                    start = 8.dp,
+                    end = 0.dp,
+                ),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 DisplayIconography(displayIcon, "row")
                 LazyVerticalGrid(
@@ -117,8 +137,17 @@ fun SectionScreen(
                     modifier =
                         Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 20.dp),
+                            .weight(1f)
+                            .padding(start = 8.dp, end = 20.dp)
+                            .verticalGridScrollbar(
+                                state = listState,
+                                isColumn = false,
+                                isMalankaraRoot = node.route == "malankara",
+                                itemCount = nodes.size,
+                            ),
                     horizontalArrangement = Arrangement.SpaceEvenly,
+                    state = listState,
+                    contentPadding = PaddingValues(end = 8.dp),
                 ) {
                     if (node.route == "malankara") {
                         item(span = { GridItemSpan(maxLineSpan) }) {
@@ -167,8 +196,16 @@ fun SectionScreen(
                         Modifier
                             .fillMaxSize()
                             .padding(horizontal = 20.dp)
-                            .weight(0.6f),
+                            .weight(0.6f)
+                            .verticalGridScrollbar(
+                                state = listState,
+                                isColumn = true,
+                                isMalankaraRoot = node.route == "malankara",
+                                itemCount = nodes.size,
+                            ),
                     horizontalArrangement = Arrangement.SpaceEvenly,
+                    state = listState,
+                    contentPadding = PaddingValues(end = 8.dp),
                 ) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         DisplayIconography(displayIcon, "column")
@@ -219,21 +256,34 @@ private fun DisplayIconography(
     icon: DrawableResource,
     orientation: String,
 ) {
-    Image(
-        painter = painterResource(icon),
-        contentDescription = "icon",
-        modifier =
-            if (orientation == "row") {
+    if (orientation == "row") {
+        Box(
+            modifier = Modifier.width(200.dp).fillMaxHeight(),
+            contentAlignment = Alignment.Center,
+        ) {
+            Image(
+                painter = painterResource(icon),
+                contentDescription = "icon",
+                modifier =
+                    Modifier
+                        .sizeIn(maxWidth = 200.dp, maxHeight = 200.dp)
+                        .aspectRatio(1f),
+                contentScale = ContentScale.Fit,
+            )
+        }
+    } else {
+        Image(
+            painter = painterResource(icon),
+            contentDescription = "icon",
+            modifier =
                 Modifier
-                    .requiredWidthIn(min = 200.dp, max = 240.dp)
-                    .fillMaxHeight()
-            } else {
-                Modifier
+                    .fillMaxWidth()
                     .requiredWidthIn(max = 240.dp)
-            },
-        alignment = Alignment.TopStart,
-        contentScale = ContentScale.Crop,
-    )
+                    .aspectRatio(1f),
+            alignment = Alignment.Center,
+            contentScale = ContentScale.Fit,
+        )
+    }
 }
 
 @Composable
@@ -397,3 +447,129 @@ private fun SeasonName.toDisplayName(): String =
         .lowercase()
         .replace(Regex("(?<=[a-z])(?=[A-Z])"), " ")
         .replaceFirstChar(Char::uppercase)
+
+/**
+ * A specialized vertical scrollbar for [LazyVerticalGrid] in [SectionScreen].
+ * It draws a scrollbar thumb on the right side of the content.
+ */
+fun Modifier.verticalGridScrollbar(
+    state: LazyGridState,
+    isColumn: Boolean,
+    isMalankaraRoot: Boolean,
+    itemCount: Int,
+    width: Dp = 4.dp,
+    padding: Dp = 2.dp,
+    color: Color? = null,
+    alpha: Float = 0.4f,
+): Modifier =
+    composed {
+        val scrollbarColor = color ?: MaterialTheme.colorScheme.onSurfaceVariant
+
+        drawWithContent {
+            drawContent()
+
+            val layoutInfo = state.layoutInfo
+            val visibleItemsInfo = layoutInfo.visibleItemsInfo
+
+            if (visibleItemsInfo.isEmpty() || (!state.canScrollForward && !state.canScrollBackward)) {
+                return@drawWithContent
+            }
+
+            val viewportHeight = size.height
+
+            // 1. Calculate individual component heights in pixels
+            // If the item is visible, use its actual height for better accuracy
+            fun getVisibleHeight(index: Int, defaultDp: Dp): Float {
+                return visibleItemsInfo.find { it.index == index }?.size?.height?.toFloat() ?: defaultDp.toPx()
+            }
+
+            val iconHeight = if (isColumn) getVisibleHeight(0, 240.dp) else 0f
+            var head = if (isColumn) 1 else 0
+            
+            val heroHeight = if (isMalankaraRoot) getVisibleHeight(head, 150.dp) else 0f
+            if (isMalankaraRoot) head++
+            
+            val indexHeight = if (isMalankaraRoot) getVisibleHeight(head, 56.dp) else 0f
+            if (isMalankaraRoot) head++
+
+            // Estimate average card height from visible cards
+            val visibleCards = visibleItemsInfo.filter { it.index >= head }
+            val averageCardHeight = if (visibleCards.isNotEmpty()) {
+                visibleCards.map { it.size.height }.average().toFloat()
+            } else {
+                90.dp.toPx()
+            }
+
+            // 2. Estimate total height
+            // We need to know how many columns are there to estimate rows for cards
+            val firstVisibleItem = visibleItemsInfo.first()
+            val firstCardItem =
+                visibleItemsInfo.firstOrNull {
+                    it.index >= (if (isColumn) 1 else 0) + (if (isMalankaraRoot) 2 else 0)
+                }
+
+            // Try to find the number of items per row from currently visible items
+            val itemsPerRow =
+                if (firstCardItem != null) {
+                    visibleItemsInfo.count { it.row == firstCardItem.row }
+                } else {
+                    1 // Fallback
+                }
+
+            val cardRows = (itemCount + itemsPerRow - 1) / max(1, itemsPerRow)
+            val totalContentHeight = iconHeight + heroHeight + indexHeight + (cardRows * averageCardHeight)
+
+            if (totalContentHeight <= viewportHeight) return@drawWithContent
+
+            val thumbHeight =
+                max(viewportHeight * viewportHeight / totalContentHeight, 24.dp.toPx())
+
+            // 3. Calculate current scroll offset in pixels
+            var currentScrollY = 0f
+            val firstVisibleIndex = firstVisibleItem.index
+
+            // Reset head for sequence logic
+            var currentHead = 0
+            if (isColumn) {
+                if (firstVisibleIndex > currentHead) {
+                    currentScrollY += iconHeight
+                } else if (firstVisibleIndex == currentHead) {
+                    currentScrollY += -firstVisibleItem.offset.y
+                }
+                currentHead++
+            }
+            if (isMalankaraRoot) {
+                // Hero
+                if (firstVisibleIndex > currentHead) {
+                    currentScrollY += heroHeight
+                } else if (firstVisibleIndex == currentHead) {
+                    currentScrollY += -firstVisibleItem.offset.y
+                }
+                currentHead++
+                // Index
+                if (firstVisibleIndex > currentHead) {
+                    currentScrollY += indexHeight
+                } else if (firstVisibleIndex == currentHead) {
+                    currentScrollY += -firstVisibleItem.offset.y
+                }
+                currentHead++
+            }
+
+            if (firstVisibleIndex >= currentHead) {
+                val cardIndex = firstVisibleIndex - currentHead
+                val currentRow = cardIndex / max(1, itemsPerRow)
+                currentScrollY += (currentRow * averageCardHeight) + (-firstVisibleItem.offset.y)
+            }
+
+            val scrollProgress =
+                (currentScrollY / (totalContentHeight - viewportHeight)).coerceIn(0f, 1f)
+            val thumbOffset = (viewportHeight - thumbHeight) * scrollProgress
+
+            drawRoundRect(
+                color = scrollbarColor.copy(alpha = alpha),
+                topLeft = Offset(size.width - width.toPx() - padding.toPx(), thumbOffset),
+                size = Size(width.toPx(), thumbHeight),
+                cornerRadius = CornerRadius(width.toPx() / 2, width.toPx() / 2),
+            )
+        }
+    }

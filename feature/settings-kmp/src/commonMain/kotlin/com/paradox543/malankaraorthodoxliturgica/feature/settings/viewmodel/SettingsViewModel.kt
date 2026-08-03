@@ -64,7 +64,7 @@ class SettingsViewModel(
         settingsRepository.soundRestoreDelay
             .stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000),
+                started = SharingStarted.Eagerly,
                 initialValue = 30,
             )
 

@@ -69,7 +69,7 @@ class BibleRepositoryImpl(
         val book = meta.getOrNull(bookIndex) ?: return null
 
         val bibleLanguage = language.properLanguageMapper()
-        val path = "$bibleLanguage/bible/${book.folder}/${(chapterIndex + 1).toString().padStart(3, '0')}.json"
+        val path = "bible/$bibleLanguage/${book.folder}/${(chapterIndex + 1).toString().padStart(3, '0')}.json"
 
         return try {
             source.readBibleChapter(path).toDomain()

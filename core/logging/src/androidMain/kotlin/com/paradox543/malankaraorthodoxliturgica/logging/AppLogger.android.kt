@@ -3,7 +3,12 @@ package com.paradox543.malankaraorthodoxliturgica.logging
 import android.util.Log
 
 actual object AppLogger {
-    actual var level: LogLevel = LogLevel.INFO
+    actual var level: LogLevel = LogLevel.DEBUG
+
+    actual fun initialize(debugMode: Boolean) {
+        level = if (debugMode) LogLevel.DEBUG else LogLevel.INFO
+        d("AppLogger") { "AppLogger initialized in $level mode." }
+    }
 
     private fun enabled(min: LogLevel) = level <= min
 

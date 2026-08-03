@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 3,
+  "generatedAt": "2026-08-01T08:46:21Z",
+  "domain": "translations",
+  "files": [
+    {
+      "name": "translations.json",
+      "location": "translations/translations.json",
+      "checksum": "998be4022c5d00307342688461581c64da1a1fcc0e04326992da09900127e645",
+      "sizeBytes": 23487,
+      "generatedAt": "2026-08-01T08:46:18Z"
+    }
+  ]
+}

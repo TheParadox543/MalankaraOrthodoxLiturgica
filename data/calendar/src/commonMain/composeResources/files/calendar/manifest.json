@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "generatedAt": "2026-07-31T10:08:20Z",
+  "domain": "calendar",
+  "files": [
+    {
+      "name": "liturgical_2024-25.json",
+      "location": "calendar/liturgical_2024-25.json",
+      "checksum": "fcac6df2c3df041e729d1c0071e9689d1a987bd0914b2d590ee8685fe1e0fc8c",
+      "sizeBytes": 51871,
+      "generatedAt": "2026-07-30T18:12:21Z"
+    },
+    {
+      "name": "liturgical_2025-26.json",
+      "location": "calendar/liturgical_2025-26.json",
+      "checksum": "ed1917672fe4e2f421626af8ff67019c7356c7c3a2c731cf203ac1b5d2e6f1b3",
+      "sizeBytes": 52082,
+      "generatedAt": "2026-07-30T10:23:04Z"
+    },
+    {
+      "name": "liturgical_data.json",
+      "location": "calendar/liturgical_data.json",
+      "checksum": "9972261facbe008b784c0a9814e5a92a4386dd09daf0ec34742d5aa7310d901c",
+      "sizeBytes": 443478,
+      "generatedAt": "2026-07-30T10:23:04Z"
+    }
+  ]
+}

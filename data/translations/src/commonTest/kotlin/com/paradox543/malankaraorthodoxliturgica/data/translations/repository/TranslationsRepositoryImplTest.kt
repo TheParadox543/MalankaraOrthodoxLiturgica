@@ -91,7 +91,7 @@ class TranslationsRepositoryImplTest {
         var loadCallCount: Int = 0
             private set
 
-        override fun loadRawTranslations(): Map<String, Map<String, String>> {
+        override suspend fun loadRawTranslations(): Map<String, Map<String, String>> {
             loadCallCount += 1
             return raw
         }

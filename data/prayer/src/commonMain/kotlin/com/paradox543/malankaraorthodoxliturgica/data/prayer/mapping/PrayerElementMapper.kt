@@ -130,3 +130,77 @@ fun PrayerElementDto.toDomain(): PrayerElement =
     }
 
 fun List<PrayerElementDto>.toDomainList(): List<PrayerElement> = map { it.toDomain() }
+
+// Extension-based mappers: domain -> data
+fun ReferenceRange.toData(): PrayerElementDto.ReferenceRange =
+    PrayerElementDto.ReferenceRange(
+        startChapter = startChapter,
+        endChapter = endChapter,
+        startVerse = startVerse,
+        endVerse = endVerse,
+    )
+
+fun BibleReference.toData(): PrayerElementDto.BibleReference =
+    PrayerElementDto.BibleReference(
+        bookNumber = bookNumber,
+        ranges = ranges.map { it.toData() },
+    )
+
+fun PrayerElement.DynamicSong.toData(): PrayerElementDto.DynamicSong =
+    PrayerElementDto.DynamicSong(
+        eventKey = eventKey,
+        eventTitle = eventTitle,
+        timeKey = timeKey,
+        items = items.map { it.toData() },
+    )
+
+fun PrayerElement.toData(): PrayerElementDto =
+    when (this) {
+        is PrayerElement.Title -> PrayerElementDto.Title(content)
+        is PrayerElement.Heading -> PrayerElementDto.Heading(content)
+        is PrayerElement.Subheading -> PrayerElementDto.Subheading(content)
+        is PrayerElement.Prose -> PrayerElementDto.Prose(content)
+        is PrayerElement.Song -> PrayerElementDto.Song(content)
+        is PrayerElement.Subtext -> PrayerElementDto.Subtext(content)
+        is PrayerElement.Source -> PrayerElementDto.Source(content)
+        is PrayerElement.Button -> PrayerElementDto.Button(link, label, replace)
+        is PrayerElement.Link -> PrayerElementDto.Link(file)
+        is PrayerElement.LinkCollapsible -> PrayerElementDto.LinkCollapsible(file)
+        is PrayerElement.CollapsibleBlock ->
+            PrayerElementDto.CollapsibleBlock(
+                title = title,
+                items = items.map { it.toData() },
+            )
+
+        is PrayerElement.DynamicSong -> this.toData()
+        is PrayerElement.DynamicSongsBlock ->
+            PrayerElementDto.DynamicSongsBlock(
+                timeKey = timeKey,
+                items = items.map { it.toData() },
+                defaultContent = defaultContent?.toData(),
+            )
+
+        is PrayerElement.AlternativeOption ->
+            PrayerElementDto.AlternativeOption(
+                label = label,
+                items = items.map { it.toData() },
+            )
+
+        is PrayerElement.AlternativePrayersBlock ->
+            PrayerElementDto.AlternativePrayersBlock(
+                title = title,
+                options =
+                    options.map { opt ->
+                        PrayerElementDto.AlternativeOption(opt.label, opt.items.map { it.toData() })
+                    },
+            )
+
+        is PrayerElement.PrayerBibleReading ->
+            PrayerElementDto.PrayerBibleReading(
+                readings = references.map { it.toData() },
+            )
+
+        is PrayerElement.Error -> PrayerElementDto.Error(content)
+    }
+
+fun List<PrayerElement>.toDataList(): List<PrayerElementDto> = map { it.toData() }

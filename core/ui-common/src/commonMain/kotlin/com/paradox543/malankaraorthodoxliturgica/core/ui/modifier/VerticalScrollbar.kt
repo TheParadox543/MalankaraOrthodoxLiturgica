@@ -35,7 +35,7 @@ fun Modifier.verticalScrollbar(
             val visibleItemsInfo = layoutInfo.visibleItemsInfo
             val totalItemsCount = layoutInfo.totalItemsCount
 
-            if (visibleItemsInfo.isEmpty() || totalItemsCount <= visibleItemsInfo.size) {
+            if (visibleItemsInfo.isEmpty() || (!state.canScrollForward && !state.canScrollBackward)) {
                 return@drawWithContent
             }
 
@@ -57,9 +57,11 @@ fun Modifier.verticalScrollbar(
 
             val scrollProgress =
                 (
-                    firstVisibleItem.index +
-                        (-firstVisibleItem.offset / averageItemHeight)
-                ) / (totalItemsCount - visibleItemsInfo.size)
+                    (
+                        firstVisibleItem.index +
+                            (-firstVisibleItem.offset / averageItemHeight)
+                    ) / (totalItemsCount - visibleItemsInfo.size)
+                ).coerceIn(0f, 1f)
 
             val thumbOffset = (viewportHeight - thumbHeight) * scrollProgress
 

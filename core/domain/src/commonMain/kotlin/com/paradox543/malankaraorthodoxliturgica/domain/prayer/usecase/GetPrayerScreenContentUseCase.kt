@@ -22,6 +22,7 @@ class GetPrayerScreenContentUseCase(
     suspend operator fun invoke(
         fileName: String,
         language: AppLanguage,
+        activeEventKeys: Set<String>,
         currentDepth: Int = 0,
     ): List<PrayerElement> {
         if (currentDepth > maxLinkDepth) {
@@ -30,12 +31,13 @@ class GetPrayerScreenContentUseCase(
             )
         }
         val rawElements = prayerRepository.loadPrayerElements(fileName, language)
-        return resolveList(rawElements, language, currentDepth)
+        return resolveList(rawElements, language, activeEventKeys, currentDepth)
     }
 
     private suspend fun resolveList(
         list: List<PrayerElement>,
         language: AppLanguage,
+        activeEventKeys: Set<String>,
         currentDepth: Int,
     ): List<PrayerElement> {
         val out = mutableListOf<PrayerElement>()
@@ -45,7 +47,7 @@ class GetPrayerScreenContentUseCase(
                 is PrayerElement.Link -> {
                     try {
                         val loaded = prayerRepository.loadPrayerElements(element.file, language)
-                        val resolved = resolveList(loaded, language, currentDepth + 1)
+                        val resolved = resolveList(loaded, language, activeEventKeys, currentDepth + 1)
                         out.addAll(resolved)
                     } catch (t: Throwable) {
                         out.add(PrayerElement.Error(t.message ?: "Error loading ${element.file}"))
@@ -55,7 +57,7 @@ class GetPrayerScreenContentUseCase(
                 is PrayerElement.LinkCollapsible -> {
                     try {
                         val loaded = prayerRepository.loadPrayerElements(element.file, language)
-                        val resolved = resolveList(loaded, language, currentDepth + 1)
+                        val resolved = resolveList(loaded, language, activeEventKeys, currentDepth + 1)
 
                         var title: String? = null
                         val items = mutableListOf<PrayerElement>()
@@ -79,17 +81,17 @@ class GetPrayerScreenContentUseCase(
                 }
 
                 is PrayerElement.CollapsibleBlock -> {
-                    val resolvedItems = resolveList(element.items, language, currentDepth)
+                    val resolvedItems = resolveList(element.items, language, activeEventKeys, currentDepth)
                     out.add(PrayerElement.CollapsibleBlock(element.title, resolvedItems))
                 }
 
                 is PrayerElement.DynamicSongsBlock -> {
-                    val resolved = getDynamicSongsUseCase(language, element, currentDepth)
+                    val resolved = getDynamicSongsUseCase(language, element, activeEventKeys, currentDepth)
                     out.add(resolved)
                 }
 
                 is PrayerElement.DynamicSong -> {
-                    val resolvedItems = resolveList(element.items, language, currentDepth)
+                    val resolvedItems = resolveList(element.items, language, activeEventKeys, currentDepth)
                     out.add(
                         PrayerElement.DynamicSong(
                             eventKey = element.eventKey,
@@ -104,7 +106,7 @@ class GetPrayerScreenContentUseCase(
                     val resolvedOptions =
                         element.options
                             .map { opt ->
-                                val resolvedItems = resolveList(opt.items, language, currentDepth)
+                                val resolvedItems = resolveList(opt.items, language, activeEventKeys, currentDepth)
                                 PrayerElement.AlternativeOption(opt.label, resolvedItems)
                             }
                     out.add(PrayerElement.AlternativePrayersBlock(element.title, resolvedOptions))

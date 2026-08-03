@@ -41,7 +41,7 @@ class PrayerSource(
         fileName: String,
         language: AppLanguage,
     ): List<PrayerElementDto> {
-        val filePath = "${language.code}/prayers/$fileName"
+        val filePath = "prayers/${language.code}/$fileName"
         return try {
             readJson(filePath)
         } catch (e: AssetReadException) {
@@ -57,7 +57,7 @@ class PrayerSource(
      * Throws [PrayerContentNotFoundException] if the asset cannot be read or parsed.
      */
     suspend fun loadPrayerNavigationTree(language: AppLanguage): PageNodeDto {
-        val filename = "${language.code}/prayers_tree.json"
+        val filename = "prayers/${language.code}/prayers_tree.json"
         return try {
             readJson(filename)
         } catch (e: AssetReadException) {

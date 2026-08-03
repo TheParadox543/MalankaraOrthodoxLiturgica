@@ -133,22 +133,22 @@ class BibleRepositoryImplTest {
     fun `loadBibleChapter calls source with correct path for English`(): Unit =
         runTest {
             coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-            coEvery { source.readBibleChapter("en/bible/genesis/001.json") } returns fakeChapterDto
+            coEvery { source.readBibleChapter("bible/en/genesis/001.json") } returns fakeChapterDto
 
             repository.loadBibleChapter(bookIndex = 0, chapterIndex = 0, language = AppLanguage.ENGLISH)
 
-            coVerify { source.readBibleChapter("en/bible/genesis/001.json") }
+            coVerify { source.readBibleChapter("bible/en/genesis/001.json") }
         }
 
     @Test
     fun `loadBibleChapter calls source with correct path for Malayalam`(): Unit =
         runTest {
             coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
-            coEvery { source.readBibleChapter("ml/bible/genesis/001.json") } returns fakeChapterDto
+            coEvery { source.readBibleChapter("bible/ml/genesis/001.json") } returns fakeChapterDto
 
             repository.loadBibleChapter(bookIndex = 0, chapterIndex = 0, language = AppLanguage.MALAYALAM)
 
-            coVerify { source.readBibleChapter("ml/bible/genesis/001.json") }
+            coVerify { source.readBibleChapter("bible/ml/genesis/001.json") }
         }
 
     @Test
@@ -156,11 +156,11 @@ class BibleRepositoryImplTest {
         runTest {
             coEvery { source.readBibleDetails() } returns listOf(fakeBookDetailsDto)
             // Chapter 10 → zero-padded to "010"
-            coEvery { source.readBibleChapter("en/bible/genesis/010.json") } returns fakeChapterDto
+            coEvery { source.readBibleChapter("bible/en/genesis/010.json") } returns fakeChapterDto
 
             repository.loadBibleChapter(bookIndex = 0, chapterIndex = 9, language = AppLanguage.ENGLISH)
 
-            coVerify { source.readBibleChapter("en/bible/genesis/010.json") }
+            coVerify { source.readBibleChapter("bible/en/genesis/010.json") }
         }
 
     @Test

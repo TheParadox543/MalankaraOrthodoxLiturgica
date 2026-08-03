@@ -1,5 +1,6 @@
 package com.paradox543.malankaraorthodoxliturgica.feature.prayer.di
 
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
@@ -14,11 +15,17 @@ val prayerModule =
                 settingsRepository = get(),
                 translationsRepository = get(),
                 analyticsService = get(),
-                loadPrayerScreenContent = { filename, language ->
-                    get<GetPrayerScreenContentUseCase>().invoke(filename, language)
+                loadPrayerScreenContent = { filename, language, activeKeys ->
+                    get<GetPrayerScreenContentUseCase>().invoke(filename, language, activeKeys)
                 },
                 getSongKeyPriority = {
                     get<GetSongKeyPriorityUseCase>().invoke()
+                },
+                getUpcomingWeekEventKeys = {
+                    get<CalendarRepository>()
+                        .getUpcomingWeekEventItems()
+                        .mapNotNull { it.specialSongsKey }
+                        .toSet()
                 },
             )
         }
@@ -31,6 +38,7 @@ val prayerModule =
                 getPrayerNodesForCurrentTimeUseCase = get(),
                 createPrayerIndexUseCase = get(),
                 inAppReviewManager = get(),
+                contentUpdateSignal = get(),
             )
         }
     }

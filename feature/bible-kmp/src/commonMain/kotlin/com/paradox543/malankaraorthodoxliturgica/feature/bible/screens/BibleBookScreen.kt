@@ -33,7 +33,8 @@ fun BibleBookScreen(
     onScaffoldStateChanged: (ScaffoldUiState) -> Unit,
 ) {
     val selectedLanguage by bibleViewModel.selectedLanguage.collectAsState()
-    val bibleBook = bibleViewModel.getBookOrNull(bookIndex) ?: return
+    val books by bibleViewModel.bibleBooks.collectAsState()
+    val bibleBook = books.getOrNull(bookIndex) ?: return
     val bookName = bibleBook.book.get(selectedLanguage)
     val chapters = bibleBook.chapters
 

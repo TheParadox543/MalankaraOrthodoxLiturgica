@@ -12,7 +12,7 @@ class TranslationSource(
     private val json: Json,
 ) : RawTranslationsSource {
     override suspend fun loadRawTranslations(): Map<String, Map<String, String>> {
-        val jsonString = reader.readText("translations.json")
+        val jsonString = reader.readText("translations/translations.json")
         return json.decodeFromString<Map<String, Map<String, String>>>(jsonString)
     }
 }

@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.viewmodel.PrayerNavViewModel
@@ -39,6 +43,7 @@ fun IndexScreen(
     val translations by prayerViewModel.translations.collectAsState()
     val indexItems by prayerNavViewModel.prayerIndex.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
 
     val filteredItems =
         remember(indexItems, searchQuery, translations) {
@@ -81,6 +86,18 @@ fun IndexScreen(
                     .padding(16.dp),
             placeholder = { Text(translations["search"] ?: "Search") },
             singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+            keyboardActions =
+                KeyboardActions(
+                    onSearch = {
+                        prayerViewModel.logSearch(
+                            query = searchQuery,
+                            itemId = "(item not found)",
+                            itemName = "(item not found)",
+                        )
+                        focusManager.clearFocus()
+                    },
+                ),
             colors =
                 TextFieldDefaults.colors(
                     focusedIndicatorColor = Color.Transparent,
@@ -112,6 +129,11 @@ fun IndexScreen(
                     },
                     modifier =
                         Modifier.clickable {
+                            prayerViewModel.logSearch(
+                                query = searchQuery,
+                                itemId = item.prayerId,
+                                itemName = title,
+                            )
                             onPrayerNavigate(item.prayerId)
                         },
                 )

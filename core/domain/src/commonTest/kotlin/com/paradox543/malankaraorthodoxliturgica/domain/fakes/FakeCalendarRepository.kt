@@ -4,6 +4,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarD
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.CalendarWeek
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalDay
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.LiturgicalEventDetails
+import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.SeasonName
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.model.WeekItem
 import com.paradox543.malankaraorthodoxliturgica.domain.calendar.repository.CalendarRepository
 import kotlinx.datetime.LocalDate
@@ -15,6 +16,7 @@ class FakeCalendarRepository(
     private val weeks: List<CalendarWeek> = emptyList(),
     private val upcomingDays: List<CalendarDay> = emptyList(),
     private val upcomingEventItems: List<LiturgicalEventDetails> = emptyList(),
+    private val eventsMap: Map<String, LiturgicalEventDetails> = emptyMap(),
 ) : CalendarRepository {
     override suspend fun getDay(day: LocalDate): LiturgicalDay? {
         TODO("Not yet implemented")
@@ -29,14 +31,14 @@ class FakeCalendarRepository(
 
     override suspend fun getSeasonDays(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<LiturgicalDay> {
         TODO("Not yet implemented")
     }
 
     override suspend fun getSeasonWeeks(
         liturgicalYear: String,
-        season: String,
+        seasonName: SeasonName,
     ): List<WeekItem> = emptyList()
 
     override suspend fun getMonthDays(
@@ -65,7 +67,8 @@ class FakeCalendarRepository(
 
     override suspend fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> = upcomingEventItems
 
-    override suspend fun getEvents(eventKeys: List<String>): List<LiturgicalEventDetails> = emptyList()
+    override suspend fun getEvents(eventKeys: List<String>): List<LiturgicalEventDetails> =
+        eventKeys.mapNotNull { eventsMap[it] }
 
     override suspend fun hasLiturgicalYear(liturgicalYear: String): Boolean = true
 }

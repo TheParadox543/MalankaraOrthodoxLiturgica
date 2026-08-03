@@ -13,15 +13,17 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 class GetDynamicSongsUseCase(
     private val prayerRepository: PrayerRepository,
     private val calendarRepository: CalendarRepository,
+    private val resolveDynamicSongUseCase: ResolveDynamicSongUseCase,
 ) {
     suspend operator fun invoke(
         language: AppLanguage,
         dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
+        activeEventKeys: Set<String>,
         currentDepth: Int = 0,
     ): PrayerElement.DynamicSongsBlock {
-        val resolvedBlock = dynamicSongsBlock.copy(items = dynamicSongsBlock.items.toMutableList())
+        val resolvedList = mutableListOf<PrayerElement.DynamicSong>()
 
-        // Handle default content (may be a link which needs to be resolved)
+        // Handle default content (maybe a link which needs to be resolved)
         val defaultContent = dynamicSongsBlock.defaultContent
         if (defaultContent != null) {
             val firstItem = defaultContent.items.firstOrNull()
@@ -30,71 +32,40 @@ class GetDynamicSongsUseCase(
                 val file = firstItem.file
                 val loadedItems = prayerRepository.loadPrayerElements(file, language)
                 val newDynamicSong = defaultContent.copy(items = loadedItems)
-                resolvedBlock.items.add(newDynamicSong)
+                resolvedList.add(newDynamicSong)
             } else {
-                resolvedBlock.items.add(defaultContent)
+                resolvedList.add(defaultContent)
             }
         }
 
-        // Add songs for upcoming week events
-        val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
-        for (event in weekEventItems) {
-            val specialSongsKey = event.specialSongsKey
-            if (specialSongsKey != null) {
-                val filename = "sacraments/qurbana/qurbanaSongs/${specialSongsKey.removeSuffix("Songs")}/${dynamicSongsBlock.timeKey}.json"
-                val songElements =
-                    try {
-                        prayerRepository.loadPrayerElements(filename, language)
-                    } catch (t: Throwable) {
-                        emptyList()
-                    }
-
-                if (songElements.isEmpty()) continue
-
-                val title =
-                    when (language) {
-                        AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
-                        AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> event.title.en
-                    }
-
-                resolvedBlock.items.add(
-                    PrayerElement.DynamicSong(
-                        eventKey = specialSongsKey,
-                        eventTitle = title,
-                        timeKey = dynamicSongsBlock.timeKey,
-                        items = songElements,
-                    ),
-                )
+        // Add songs for provided active event keys
+        for (specialSongsKey in activeEventKeys) {
+            val resolvedSong = resolveDynamicSongUseCase(language, specialSongsKey, "", dynamicSongsBlock.timeKey)
+            if (resolvedSong != null) {
+                resolvedList.add(resolvedSong)
             }
         }
 
         // Add prayers for the departed at the end if not already added
-        if (resolvedBlock.items.none { it.eventKey == "allDepartedFaithful" }) {
-            val departedFilename = "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/${dynamicSongsBlock.timeKey}.json"
-            val departedSongElements =
-                try {
-                    prayerRepository.loadPrayerElements(departedFilename, language)
-                } catch (t: Throwable) {
-                    emptyList()
+        if (resolvedList.none { it.eventKey == "allDepartedFaithfulSongs" }) {
+            val departedEvents = calendarRepository.getEvents(listOf("allDepartedFaithful"))
+            val departedEvent = departedEvents.firstOrNull()
+            if (departedEvent != null) {
+                val title = when (language) {
+                    AppLanguage.MALAYALAM -> departedEvent.title.ml ?: departedEvent.title.en
+                    AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> departedEvent.title.en
                 }
-
-            if (departedSongElements.isNotEmpty()) {
-                val title =
-                    when (language) {
-                        AppLanguage.MALAYALAM -> "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്\u200Cച"
-                        AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> "All Departed Faithful"
-                    }
-                resolvedBlock.items.add(
-                    PrayerElement.DynamicSong(
-                        eventKey = "allDepartedFaithful",
-                        eventTitle = title,
-                        timeKey = dynamicSongsBlock.timeKey,
-                        items = departedSongElements,
-                    ),
+                val resolvedDeparted = resolveDynamicSongUseCase(
+                    language,
+                    departedEvent.specialSongsKey ?: "allDepartedFaithfulSongs",
+                    title,
+                    dynamicSongsBlock.timeKey
                 )
+                if (resolvedDeparted != null) {
+                    resolvedList.add(resolvedDeparted)
+                }
             }
         }
-
-        return resolvedBlock
+        return dynamicSongsBlock.copy(items = resolvedList)
     }
 }

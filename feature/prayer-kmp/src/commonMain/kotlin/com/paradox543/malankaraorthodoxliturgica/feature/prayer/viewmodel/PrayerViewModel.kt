@@ -30,13 +30,15 @@ class PrayerViewModel(
     private val settingsRepository: SettingsRepository,
     private val translationsRepository: TranslationsRepository,
     private val analyticsService: AnalyticsService,
-    private val loadPrayerScreenContent: suspend (String, AppLanguage) -> List<PrayerElement>,
+    private val loadPrayerScreenContent: suspend (String, AppLanguage, Set<String>) -> List<PrayerElement>,
     private val getSongKeyPriority: suspend () -> String,
+    private val getUpcomingWeekEventKeys: suspend () -> Set<String>,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
     private data class PrayerLoadRequest(
         val filename: String,
         val language: AppLanguage,
+        val activeKeys: Set<String>,
     )
 
     private val minimumPrayerLoadingIndicatorDuration = 250.milliseconds
@@ -67,6 +69,9 @@ class PrayerViewModel(
     private val _isLoadingPrayers = MutableStateFlow(false)
     val isLoadingPrayers: StateFlow<Boolean> = _isLoadingPrayers.asStateFlow()
 
+    private val _activeEventKeys = MutableStateFlow<Set<String>>(emptySet())
+    val activeEventKeys: StateFlow<Set<String>> = _activeEventKeys.asStateFlow()
+
     private val _dynamicSongKey = MutableStateFlow<String?>(null)
     val dynamicSongKey: StateFlow<String?> = _dynamicSongKey.asStateFlow()
 
@@ -77,6 +82,11 @@ class PrayerViewModel(
                 // When the language changes (from DataStore), load translations
                 loadTranslations(language)
             }
+        }
+
+        viewModelScope.launch {
+            val upcomingKeys = withContext(backgroundDispatcher) { getUpcomingWeekEventKeys() }
+            _activeEventKeys.update { it + upcomingKeys }
         }
     }
 
@@ -90,7 +100,8 @@ class PrayerViewModel(
         passedLanguage: AppLanguage? = null,
     ) {
         val language: AppLanguage = passedLanguage ?: selectedLanguage.value
-        val request = PrayerLoadRequest(filename = filename, language = language)
+        val activeKeys = _activeEventKeys.value
+        val request = PrayerLoadRequest(filename = filename, language = language, activeKeys = activeKeys)
 
         // Skip duplicate work when we are already loading or already loaded the same request.
         if (request == inFlightPrayerRequest || (request == lastLoadedPrayerRequest && _prayers.value.isNotEmpty())) {
@@ -106,7 +117,7 @@ class PrayerViewModel(
                 try {
                     val prayers =
                         withContext(backgroundDispatcher) {
-                            loadPrayerScreenContent(filename, language)
+                            loadPrayerScreenContent(filename, language, activeKeys)
                         }
                     _prayers.value = prayers
                     if (_dynamicSongKey.value == null && prayers.any { it is PrayerElement.DynamicSongsBlock }) {
@@ -137,11 +148,36 @@ class PrayerViewModel(
         _dynamicSongKey.value = key
     }
 
+    fun addManualDynamicSong(specialSongsKey: String) {
+        _activeEventKeys.update { it + specialSongsKey }
+        // Re-load to resolve the new song into all blocks
+        lastLoadedPrayerRequest?.let { request ->
+            loadPrayerElements(request.filename, request.language)
+        }
+        setDynamicSongKey(specialSongsKey)
+    }
+
     fun onPrayerSelected(
         prayerName: String,
         prayerId: String,
     ) {
         analyticsService.logEvent(AnalyticsEvent.PrayNowItemSelected(prayerName, prayerId))
+    }
+
+    fun logSearch(
+        query: String,
+        itemId: String,
+        itemName: String,
+    ) {
+        val trimmedQuery = query.trim()
+        val searchTerm = if (trimmedQuery.isEmpty()) "(no query)" else trimmedQuery
+        analyticsService.logEvent(
+            AnalyticsEvent.Search(
+                searchTerm = searchTerm,
+                selectedItemId = itemId,
+                selectedItemName = itemName,
+            ),
+        )
     }
 
     fun reportError(
