@@ -33,7 +33,7 @@ class FirebaseAnalyticsServiceTest {
     }
 
     @Test
-    fun `logEvent for Error event should concatenate details and include app version`() {
+    fun `logEvent for Error event should include all params separately plus app_version and all_data`() {
         // Given
         val errorEvent = AnalyticsEvent.Error(
             description = "Some error",
@@ -45,7 +45,10 @@ class FirebaseAnalyticsServiceTest {
 
         // Then
         verify {
-            anyConstructed<Bundle>().putString("error_description", "Some error @ Some location (v1.2.3)")
+            anyConstructed<Bundle>().putString("error_description", "Some error")
+            anyConstructed<Bundle>().putString("error_location", "Some location")
+            anyConstructed<Bundle>().putString("app_version", "1.2.3")
+            anyConstructed<Bundle>().putString("all_data", "Some error @ Some location (v1.2.3)")
             firebaseAnalytics.logEvent("app_error", any())
         }
     }

@@ -17,6 +17,7 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ### Fix
 - Dynamic Songs fixed to show actual live data instead of only default values.
+- Error not logging properly in Firebase when related app_error event.
 
 ---
 

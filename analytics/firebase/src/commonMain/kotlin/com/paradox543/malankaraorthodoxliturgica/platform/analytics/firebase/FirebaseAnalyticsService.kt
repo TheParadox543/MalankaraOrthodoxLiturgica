@@ -9,12 +9,17 @@ class FirebaseAnalyticsService(
     private val appInfoProvider: AppInfoProvider,
 ) : AnalyticsService {
     override fun logEvent(event: AnalyticsEvent) {
-        val params = if (event is AnalyticsEvent.Error) {
-            val errorDetail = "${event.description} @ ${event.location} (v${appInfoProvider.versionName})"
-            mapOf("error_description" to errorDetail)
-        } else {
-            event.params
-        }
+        val params =
+            if (event is AnalyticsEvent.Error) {
+                val baseParams = event.params.toMutableMap() ?: mutableMapOf()
+                val allData = "${event.description} @ ${event.location} (v${appInfoProvider.versionName})"
+                baseParams.apply {
+                    put("app_version", appInfoProvider.versionName)
+                    put("all_data", allData)
+                }
+            } else {
+                event.params
+            }
         logger.logEvent(event.name, params)
     }
 }
