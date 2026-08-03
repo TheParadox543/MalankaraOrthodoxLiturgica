@@ -127,7 +127,7 @@ fun SectionScreen(
                     top = contentPadding.calculateTopPadding(),
                     bottom = contentPadding.calculateBottomPadding(),
                     start = 8.dp,
-                    end = 0.dp,
+                    end = 12.dp,
                 ),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -147,7 +147,7 @@ fun SectionScreen(
                             ),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     state = listState,
-                    contentPadding = PaddingValues(end = 8.dp),
+                    contentPadding = PaddingValues(end = 20.dp),
                 ) {
                     if (node.route == "malankara") {
                         item(span = { GridItemSpan(maxLineSpan) }) {
@@ -195,7 +195,7 @@ fun SectionScreen(
                     modifier =
                         Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 20.dp)
+                            .padding(start = 20.dp, end = 16.dp)
                             .weight(0.6f)
                             .verticalGridScrollbar(
                                 state = listState,
@@ -205,7 +205,7 @@ fun SectionScreen(
                             ),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     state = listState,
-                    contentPadding = PaddingValues(end = 8.dp),
+                    contentPadding = PaddingValues(end = 20.dp),
                 ) {
                     item(span = { GridItemSpan(maxLineSpan) }) {
                         DisplayIconography(displayIcon, "column")
@@ -479,26 +479,33 @@ fun Modifier.verticalGridScrollbar(
 
             // 1. Calculate individual component heights in pixels
             // If the item is visible, use its actual height for better accuracy
-            fun getVisibleHeight(index: Int, defaultDp: Dp): Float {
-                return visibleItemsInfo.find { it.index == index }?.size?.height?.toFloat() ?: defaultDp.toPx()
-            }
+            fun getVisibleHeight(
+                index: Int,
+                defaultDp: Dp,
+            ): Float =
+                visibleItemsInfo
+                    .find { it.index == index }
+                    ?.size
+                    ?.height
+                    ?.toFloat() ?: defaultDp.toPx()
 
             val iconHeight = if (isColumn) getVisibleHeight(0, 240.dp) else 0f
             var head = if (isColumn) 1 else 0
-            
+
             val heroHeight = if (isMalankaraRoot) getVisibleHeight(head, 150.dp) else 0f
             if (isMalankaraRoot) head++
-            
+
             val indexHeight = if (isMalankaraRoot) getVisibleHeight(head, 56.dp) else 0f
             if (isMalankaraRoot) head++
 
             // Estimate average card height from visible cards
             val visibleCards = visibleItemsInfo.filter { it.index >= head }
-            val averageCardHeight = if (visibleCards.isNotEmpty()) {
-                visibleCards.map { it.size.height }.average().toFloat()
-            } else {
-                90.dp.toPx()
-            }
+            val averageCardHeight =
+                if (visibleCards.isNotEmpty()) {
+                    visibleCards.map { it.size.height }.average().toFloat()
+                } else {
+                    90.dp.toPx()
+                }
 
             // 2. Estimate total height
             // We need to know how many columns are there to estimate rows for cards
