@@ -134,4 +134,18 @@ sealed class AnalyticsEvent {
                     "item_name" to selectedItemName,
                 )
     }
+
+    data class ManualDynamicSongAdded(
+        val specialSongsKey: String,
+        val eventTitle: String,
+    ) : AnalyticsEvent() {
+        override val name: String
+            get() = "manual_dynamic_song_added"
+        override val params: Map<String, Any?>
+            get() =
+                mapOf(
+                    "special_songs_key" to specialSongsKey,
+                    "event_title" to eventTitle,
+                )
+    }
 }

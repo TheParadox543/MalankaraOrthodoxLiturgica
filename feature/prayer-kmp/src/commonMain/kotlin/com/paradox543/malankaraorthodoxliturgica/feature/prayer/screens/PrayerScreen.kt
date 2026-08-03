@@ -114,7 +114,7 @@ fun PrayerScreen(
                 manualOptions = qurbanaSongsChildren,
                 onDynamicSongKeyChanged = prayerViewModel::setDynamicSongKey,
                 onAddManualDynamicSong = { key, title, timeKey ->
-                    prayerViewModel.addManualDynamicSong(key)
+                    prayerViewModel.addManualDynamicSong(key, title)
                 },
                 onError = prayerViewModel::reportError,
             )

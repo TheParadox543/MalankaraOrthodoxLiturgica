@@ -148,8 +148,13 @@ class PrayerViewModel(
         _dynamicSongKey.value = key
     }
 
-    fun addManualDynamicSong(specialSongsKey: String) {
+    fun addManualDynamicSong(
+        specialSongsKey: String,
+        eventTitle: String,
+    ) {
         _activeEventKeys.update { it + specialSongsKey }
+        analyticsService.logEvent(AnalyticsEvent.ManualDynamicSongAdded(specialSongsKey, eventTitle))
+
         // Re-load to resolve the new song into all blocks
         lastLoadedPrayerRequest?.let { request ->
             loadPrayerElements(request.filename, request.language)
