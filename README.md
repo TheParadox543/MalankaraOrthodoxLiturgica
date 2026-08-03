@@ -1,97 +1,82 @@
-# Malankara Orthodox Church Prayer App
-![Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?logo=jetpackcompose&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?logo=kotlin&logoColor=white)
+# Malankara Orthodox Liturgica
+![Compose Multiplatform](https://img.shields.io/badge/Compose%20Multiplatform-4285F4?logo=jetpackcompose&logoColor=white)
+![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin%20Multiplatform-7F52FF?logo=kotlin&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-000000?logo=apple&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?logo=firebase&logoColor=white)
 
 ## Overview  
 
-This mobile app provides a structured collection of prayers from the Malankara Orthodox Syrian Church. It includes daily prayers and sacramental prayers, with support for multiple languages and customizable font sizes.  
-Version **2.0** introduces a major architectural overhaul, improved performance, and significant feature expansions.
+**Malankara Orthodox Liturgica** is a modern, cross-platform prayer companion built using **Kotlin Multiplatform (KMP)** and **Compose Multiplatform (CMP)**. It provides a structured collection of liturgical prayers, sacramental resources, and spiritual content for the faithful of the Malankara Orthodox Syrian Church.
+
+The app is designed for high performance and offline-first usage, ensuring that prayers are accessible anytime, anywhere.
 
 ---
 
 ## Features  
 
-- 📖 **Extensive Prayer Collection** – Daily Prayers, Sacramental Prayers, seasonal content, and more.
-- 📂 **Hierarchical Section Navigation** – Organized using a static node-based navigation tree.
-- 🔤 **Multilingual Support** – **English, Malayalam, Manglish**.
-- 🔍 **Adjustable Font Size** – Five levels of text scaling.
-- ↔️ **Auto Landscape Mode** for large text.
-- 🕰️ **Pray Now** – Recommends prayers based on time of day.
-- 📖 **Bible Module** – Book/chapter navigation plus feast-based references.
-- 📅 **Liturgical Calendar** – Includes feasts, fasts, and readings.
-- 🎵 **Song Player** – Audio playback with caching and controls.
-- 📷 **QR Code Support** – Scan QR to jump directly to sections.
-- 📊 **Analytics Tracking** – Screen usage and error insight for improvements.
-- 🔕 **Auto Silent/DND feature** - Automatically trigger based on user preference.
-- ⭐ **In-App Review Prompts** – Smartly triggered based on meaningful usage.
+- 📖 **Extensive Prayer Collection** – Daily Prayers, Sacramental Prayers, and seasonal content.
+- 📂 **Modular Navigation** – Organized hierarchical structure for easy access to various sections.
+- 🔍 **Index Based Prayer Searching** – Quick search functionality to find prayers by their index or title.
+- 🔤 **Multilingual Support** – Malayalam, Manglish, and English.
+- 🔍 **Customizable Reading Experience** – Adjustable font sizes and auto-landscape support for optimal legibility.
+- 🕰️ **Pray Now** – Dynamic recommendations based on the liturgical time of day.
+- 📖 **Bible Module** – Integrated Bible with chapter navigation and feast-based references.
+- 📅 **Liturgical Calendar** – Comprehensive calendar with feasts, fasts, and daily readings.
+- 🎵 **Song Player** – Integrated audio playback for liturgical hymns with caching.
+- 📷 **QR Code Support** – Quick access to specific prayers and sections via QR scanning.
+- ☁️ **Cloud Sync** – Efficient synchronization of liturgical content and resources via Firebase.
+- 📊 **Performance & Analytics** – Anonymized monitoring using **Firebase** and **Kotzilla** to ensure a smooth experience.
 
 ---
 
-## Technical Details  
+## Architecture  
 
-### Architecture  
-![Architecture](https://img.shields.io/badge/Clean%20Architecture-6A1B9A?logo=diagram&logoColor=white)
+The project follows **Clean Architecture** principles and a **Modular Multi-module** structure to ensure scalability and maintainability across platforms.
 
-- **Clean Architecture** – Domain, data, and UI layers clearly separated.
-- **MVVM** – ViewModels handle logic and UI state.
-- **Jetpack Compose** – Declarative UI for improved maintainability.
-- **Hilt DI** – Dependency injection for ViewModels, services, and repositories.
-- **Navigation Compose** – Deep links, nested graphs, dynamic routing.
+- **Native Navigation**: Navigation is handled natively on both Android and iOS to provide the best platform-specific user experience.
+- **Shared Logic**: Business logic, data repositories, and domain models are shared across platforms using Kotlin Multiplatform.
+- **Compose Multiplatform**: The UI layer is built using Compose Multiplatform, allowing for a consistent design system while respecting platform nuances.
 
-### Key Components  
-📂 `domain/` – Core business logic, models, and use cases  
-📂 `data/` – Bible loader, calendar loader, prayer repositories, JSON parsing  
-📂 `ui/` – Screens, components, navigation, theming  
-📂 `services/` – Platform-specific operations (analytics, review, sharing, sound mode, etc.)  
+### Module Structure  
+📂 `core/` – Foundation modules (DI, Design System, UI Common, Platform-specific abstractions)  
+📂 `feature/` – Domain-specific UI features (Prayer, Bible, Calendar, Settings, Onboarding)  
+📂 `data/` – Data sources and repositories (Prayer, Bible, Calendar, Settings, Sync, Translations)  
+📂 `shared/` – The main KMP module that integrates all features and core components for consumption by platform apps.  
+📂 `androidApp/` & `iosApp/` – Platform-specific entry points and native navigation hosting.
 
-📂 Screens Included  
-- `PrayerScreen.kt` – Displays prayers, handles navigation and text adjustments.  
-- `SettingsScreen.kt` – Allows users to modify language and font size preferences.  
-- `DataStoreManager.kt` – Manages persistent settings storage.  
-- `PrayerViewModel.kt` – Handles business logic and data fetching.  
-- `NavViewModel.kt` – Manages section navigation and sequential navigation logic.  
-- `NodeTree.kt` – Represents the prayer structure and routes as a static tree within the app.
+---
 
-### 📦 Core Dependencies  
-![Compose](https://img.shields.io/badge/Compose-4285F4?logo=jetpackcompose&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?logo=kotlin&logoColor=white)
-![Android](https://img.shields.io/badge/Android%20SDK-3DDC84?logo=android&logoColor=white)
+## Technical Stack  
 
-- **Jetpack Compose** – For building declarative UIs.  
-- **Navigation Compose** – For in-app navigation with argument passing.  
-- **Hilt** – For dependency injection and ViewModel management.  
-- **DataStore Preferences** – To persist user settings like language and font size.  
-- **JSON** – For parsing JSON-based prayer content.  
-- **Accompanist System UI Controller** – For status bar and navigation bar customization.  
-- **Material Icons Extended** – For Compose-ready icon assets.  
-- **Lifecycle ViewModel Compose** – To integrate ViewModels cleanly with Compose screens.
-- **ExoPlayer** – For high-performance audio playback and media handling.
-- **ZXing** – For QR code generation and scanning.
-- **Firebase Analytics** – For anonymized screen usage and error tracking.
-- **Play Core In-App Review** – For triggering native review prompts inside the app.
-
+- **Kotlin Multiplatform (KMP)** – Cross-platform code sharing.
+- **Compose Multiplatform** – Shared UI framework.
+- **Koin** – Dependency Injection across all modules.
+- **ZXing (Android) / Native (iOS)** – High-performance QR code generation and scanning.
+- **Play Core (Android)** – Integrated In-App Reviews and Update management.
+- **Firebase** – Content Sync, Anonymized Analytics, and Crashlytics.
+- **Kotzilla** – Performance monitoring and optimization.
+- **Kotlinx Serialization** – Type-safe JSON parsing.
+- **DataStore Preferences** – Multiplatform persistent settings storage.
+- **Media3 (Android) / Native (iOS)** – High-performance audio handling.
 
 ---
 
 ## 🚀 Upcoming Features
 
-- 📑 **Bookmarks & Favorites**
-- 🔎 **Global Search** across prayers, Bible, and feasts
-- 🎤 **Expanded Audio Support**
-- 🧭 **Navigation 3 Migration** (Compose Multiplatform–friendly)
-- 🍎 **iOS Expansion** via Kotlin Multiplatform + Compose Multiplatform
-- 📲 **Potential Cloud Sync** (optional future feature)
+- 📑 **Bookmarks & Favorites** – Save frequently used prayers for quick access.
+- 🔎 **Global Search** – Search across the entire liturgical library, Bible, and calendar.
+- 🎤 **Expanded Audio Support** – More recorded hymns and liturgical chants.
+- 📲 **Enhanced Offline Support** – Improved caching and offline synchronization.
 
 ---
 
 ## 📜 Credits & Contributors  
 
-- [@TheParadox543](https://github.com/TheParadox543) – Development, Implementation, UI Design, and Text Translations.  
-- [@ShriGaneshPurohit](https://github.com/ShriGaneshPurohit) – Guidance, Structural Planning, and Development Insights.
-- [@praneethm](https://github.com/praneethm05) - iOS version implementation.
-- **Jerin M George** – Assistance with Color Theme Fixes and Image Selection.  
-- **Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, Nohan George & Anoop Alex Koshy** – Additional Text Translations, Content and Preparation.  
+- [@TheParadox543](https://github.com/TheParadox543) – Lead Developer, UI/UX Design, and Translations.  
+- [@ShriGaneshPurohit](https://github.com/ShriGaneshPurohit) – Architectural Guidance and Insights.
+- [@praneethm](https://github.com/praneethm05) – iOS Implementation Support.
+- **Jerin M George** – Design refinement and Content selection.
+- **Shaun John, Lisa Shibu George, Sabu John, Saira Susan Koshy, Sunitha Mathew, Nohan George, Anoop Alex Koshy, & Prasad Joseph Cheeran** – Content Preparation and Translations.
 
 🙏 **Glory to God!**  
