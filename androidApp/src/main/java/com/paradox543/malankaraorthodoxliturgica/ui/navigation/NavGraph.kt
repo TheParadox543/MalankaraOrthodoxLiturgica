@@ -904,7 +904,7 @@ private fun Bundle.readNavArgAsString(
     navType
         ?.let { type ->
             runCatching { type[this, key]?.toString() }.getOrNull()
-        } ?: getString(key)
+        } ?: get(key)?.toString()
 
 @Composable
 private fun ContentLoadingScreen(
