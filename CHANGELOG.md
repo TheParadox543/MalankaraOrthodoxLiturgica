@@ -11,8 +11,9 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 
 ### Feature 
 - Offline sync: App updates content when it is online instead of depending on app updates alone.
-- Logging for search functionality in Index page
-- Items can be added to dynamic songs block in prayer screen
+- Logging for search functionality in Index page.
+- Items can be added to dynamic songs block in prayer screen.
+- Scrollbar added to navigation pages of prayer sections.
 
 ### Fix
 - Dynamic Songs fixed to show actual live data instead of only default values.
