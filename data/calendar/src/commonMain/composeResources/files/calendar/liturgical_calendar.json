@@ -1,0 +1,277 @@
+{
+    "2025": {
+        "5": {
+            "1": ["stJamesApostle"],
+            "3": ["baseliosPaulose"],
+            "4": ["firstSundayAfterNewSunday"],
+            "8": ["feastStJohnTheApostle", "marthomaFifth"],
+            "10": ["feastStSimonTheZealot"],
+            "11": ["secondSundayAfterNewSunday"],
+            "15": ["feastStMaryHarvest", "stIsaac"],
+            "16": ["yuhanonMarSeverios"],
+            "18": ["thirdSundayAfterNewSunday"],
+            "19": ["marDionysius"],
+            "20": ["constantineHelen", "evangelistsEcumenicalSynods"],
+            "25": ["fourthSundayAfterNewSunday"],
+            "26": ["baseliosMarthomaDidymus"],
+            "29": ["ascension"]
+        },
+        "6": {
+            "1": ["sundayBeforePentecost"],
+            "5": ["environmentDay"],
+            "6": ["yuyakimMarIvanios", "augenMarDionysius"],
+            "8": ["pentecost"],
+            "9": ["stAaron"],
+            "11": ["feastStBartholomew"],
+            "13": ["goldenFriday"],
+            "15": ["firstSundayAfterPentecost", "feastStMary"],
+            "16": ["apostlesFastBeginning"],
+            "19": ["feastStJamesBrother"],
+            "22": ["secondSundayAfterPentecost"],
+            "24": ["birthStJohn"],
+            "29": ["thirdSundayAfterPentecost", "feastOfApostlesFast"],
+            "30": ["feastOfTwelveApostles"]
+        },
+        "7": {
+            "3": ["dukharonoStThomas"],
+            "5": ["seventyTwoEvangelists", "marthomaSeventh"],
+            "6": ["fourthSundayAfterPentecost", "missionSunday"],
+            "7": ["zachariahMarDionysius"],
+            "10": ["yuhannonMarGregorios"],
+            "11": ["josephMarDionysius"],
+            "12": ["baseliosMarthomaPaulose"],
+            "13": ["fifthSundayAfterPentecost"],
+            "15": ["feastStKuriakose"],
+            "20": ["sixthSundayAfterPentecost", "feastProphetMarElijah"],
+            "22": ["feastStMaryMagdalene"],
+            "25": ["feastMarEpiphanios"],
+            "27": ["seventhSundayAfterPentecost", "feastStSimonStylite"],
+            "31": ["feastMarGregorios"]
+        },
+        "8": {
+            "1": [
+                "assumptionFastBeginning",
+                "feastMarthShmuni",
+                "pauloseMarPachomios"
+            ],
+            "3": ["eighthSundayAfterPentecost"],
+            "6": [
+                "transfiguration",
+                "alexiosMarTheodosios"
+            ],
+            "7": [
+                "feastStDemetrios",
+                "yathivaryan"
+            ],
+            "10": ["firstSundayAfterTransfiguration"],
+            "12": ["feastStAzazayel"],
+            "13": ["prophetMicah"],
+            "15": [
+                "assumption",
+                "independence",
+                "patriarchMarIgnatios",
+                "marthaMariam",
+                "devalokam"
+            ],
+            "16": ["marIvaniosHidayatulla"],
+            "17": ["firstSundayAfterAssumption"],
+            "19": [
+                "feastAllProphets",
+                "feastStLabbaeus",
+                "josephMarPachomios"
+            ],
+            "20": [
+                "zachariahMarAnthonios",
+                "prophetSamuel"
+            ],
+            "24": [
+                "secondSundayAfterAssumption",
+                "feastStMatthiasApostle",
+                "thomasMarAthanasios"
+            ],
+            "29": ["feastBeheadingStJohn"],
+            "31": [
+                "thirdSundayAfterAssumption",
+                "paretMathewsMarIvanios"
+            ]
+        },
+        "9": {
+            "2": ["yuyakimMarCoorilos"],
+            "7": ["fourthSundayAfterAssumption"],
+            "8": ["feastBirthStMary"],
+            "9": ["feastStMaryParents"],
+            "14": ["fifthSundayAfterAssumption", "feastOfHolyCross"],
+            "15": ["catholicate"],
+            "21": ["firstSundayAfterHolyCross"],
+            "23": ["alvarezMarJulius"],
+            "24": ["feastStDimeth"],
+            "25": ["patriarchMarIgnatius"],
+            "28": ["secondSundayAfterHolyCross", "philiposeMarTheophilos"]
+        },
+        "10": {
+            "1": ["feastAdai"],
+            "2": ["shemavoonMarDionysius"],
+            "3": ["feastStBaselios"],
+            "5": ["thirdSundayAfterHolyCross", "seminaryDay"],
+            "7": ["feastSargisBakos"],
+            "12": [
+                "fourthSundayAfterHolyCross",
+                "philiposeMarDionysius",
+                "yuhannonMarAthanasios"
+            ],
+            "14": ["athanasiosAlexandria"],
+            "15": ["enthronementBaseliosMarthomaMathews", "feastStOsyo"],
+            "18": ["feastStLuke"],
+            "19": ["fifthSundayAfterHolyCross"],
+            "22": [
+                "marBaseliosShakralla",
+                "feastStJamesApostle"
+            ],
+            "24": ["zachariahMarTheophilos"],
+            "26": ["sixthSundayAfterHolyCross"]
+        },
+        "11": {
+            "1": ["feastAllSaints"],
+            "2": [
+                "sanctification",
+                "geevargheseMarGregorios",
+                "kadavilPauloseMarAthanasios"
+            ],
+            "5": ["stephanosMarTheodosius"],
+            "6": ["vayaliparambilGeevargheseMarGregorios"],
+            "8": ["baseliosMarthomaMathewsFirstCatholicos"],
+            "9": ["dedication"],
+            "12": ["philiposeRamban"],
+            "13": ["feastStJohnChrysostom"],
+            "14": ["feastStPhilipApostle"],
+            "16": ["revelationToZachariah"],
+            "20": ["jobMarPhiloxenos"],
+            "21": ["entryStMary"],
+            "23": ["annunciationToStMary"],
+            "24": [
+                "pulikkottilJosephMarDionysius",
+                "pauloseMarGregorios"
+            ],
+            "28": ["feastMarJacobBaradaeus"],
+            "29": ["feastMarJacobSerugh"],
+            "30": [
+                "visitationToElizabeth",
+                "feastStAndrewApostle"
+            ]
+        },
+        "12": {
+            "1": ["nativityFastBeginning"],
+            "3": ["thomaMarDionysius"],
+            "4": ["feastMarthBarbara"],
+            "6": ["feastStSokhe"],
+            "7": ["birthOfJohnTheBaptist"],
+            "8": ["baseliosMarAugen"],
+            "9": ["mathewsMarBarnabas"],
+            "10": ["feastStBehanam"],
+            "13": ["danielMarPhiloxenos"],
+            "14": ["revelationToJoseph"],
+            "17": ["baseliosMarGeevargheseFirstCatholicos"],
+            "18": ["feastStThomas"],
+            "20": ["feastMarIgnatiusNourono"],
+            "21": ["sundayBeforeChristmas"],
+            "25": ["yeldho"],
+            "26": ["glorificationOfStMary", "yakobMarPolicarpos"],
+            "27": ["massacreOfTheInfants"],
+            "28": ["firstSundayAfterChristmas"]
+        }
+    },
+    "2026": {
+        "1": {
+            "1": ["circumcision", "feastStBasilStGregory"],
+            "3": ["baseliosGeevargheseCatholicos", "koonamCross"],
+            "4": ["secondSundayAfterChristmas"],
+            "6": ["epiphany"],
+            "7": ["beheadingOfStJohnTheBaptist"],
+            "8": ["feastOfStStephen"],
+            "11": ["firstSundayAfterEpiphany"],
+            "15": ["feastStMarySeeds", "paulTheMonk"],
+            "18": ["secondSundayAfterEpiphany", "feastStSamuelStSimonStAntony"],
+            "21": ["philiposeMarEusebius"],
+            "22": ["marthomaEighth"],
+            "23": ["augenTheMonk"],
+            "25": ["allDepartedHolyFathers"],
+            "26": ["ninevehLentStart", "baseliosMarthomaMathewsSecondCatholicos", "pauloseMarAthanasios", "republicDay"],
+            "29": ["ninevehLentEnd", "marSeveriosPatriarch"]
+        },
+        "2": {
+            "1": ["allDepartedPriests"],
+            "2": ["mayaltho", "stSimonHanna", "pathroseMarOsthathios"],
+            "3": ["feastStBarSoumo"],
+            "8": ["allDepartedFaithful"],
+            "9": ["mathewsMarEpiphanios"],
+            "13": ["ignatiusElias"],
+            "15": ["kothine"],
+            "16": ["greatLentStart", "geevargheseMarOsthathios"],
+            "21": ["feastStEphrem"],
+            "22": ["lepersSunday"],
+            "23": ["geevargheseMarDionysius", "thomasMarMakarios", "policarpos"],
+            "24": ["mathewTheEvangelist"],
+            "28": ["secondSaturdayOfGreatLent"]
+        },
+        "3": {
+            "1": ["palsySunday"],
+            "7": ["thirdSaturdayOfGreatLent"],
+            "8": ["canaaniteWoman"],
+            "9": ["ambattuGeevargheseMarCoorilos"],
+            "11": ["midLent"],
+            "14": ["fourthSaturdayOfGreatLent"],
+            "15": ["crippledWoman"],
+            "18": ["pauloseMarSeverios"],
+            "19": ["sleebaMarOsthathios"],
+            "21": ["fifthSaturdayOfGreatLent", "konattuGeevargheseMarJulius"],
+            "22": ["blindMan", "catholicateDay"],
+            "25": ["annunciationToStMary", "marthomaFourth"],
+            "27": ["fortiethFriday"],
+            "28": ["lazarusSaturday"],
+            "29": ["hosanna"],
+            "30": ["mondayOfHolyWeek"],
+            "31": ["tuesdayOfHolyWeek"]
+        },
+        "4": {
+            "1": ["wednesdayOfHolyWeek"],
+            "2": ["maundyThursday"],
+            "3": ["goodFriday"],
+            "4": ["saturdayOfAnnunciation"],
+            "5": ["easter"],
+            "6": ["hevoraeMonday"],
+            "7": ["hevoraeTuesday", "valiyaMarDionysius"],
+            "8": ["hevoraeWednesday"],
+            "9": ["hevoraeThursday"],
+            "10": ["hevoraeFriday"],
+            "11": ["hevoraeSaturday"],
+            "12": ["newSunday", "geevargheseMarIvanios"],
+            "14": ["marthomaSecond"],
+            "17": ["geevargheseMarPhiloxenos"],
+            "19": ["firstSundayAfterNewSunday"],
+            "21": ["yuhanonMarIvanios"],
+            "22": ["marthomaThird"],
+            "23": ["feastStGeorge"],
+            "25": ["marthomaFirst"],
+            "26": ["secondSundayAfterNewSunday"],
+            "27": ["gregoriosAbdelJaleel"],
+            "29": ["marSaborMarAfroth"]
+        },
+        "5": {
+            "1": ["stJamesApostle"],
+            "3": ["thirdSundayAfterNewSunday", "baseliosPaulose"],
+            "8": ["feastStJohnTheApostle", "marthomaFifth"],
+            "10": ["fourthSundayAfterNewSunday", "feastStSimonTheZealot"],
+            "14": ["ascension"],
+            "15": ["feastStMaryHarvest", "stIsaac"],
+            "16": ["yuhanonMarSeverios"],
+            "17": ["sundayBeforePentecost"],
+            "19": ["marDionysius"],
+            "20": ["constantineHelen", "evangelistsEcumenicalSynods"],
+            "24": ["pentecost"],
+            "25": ["stAaron"],
+            "26": ["baseliosMarthomaDidymus"],
+            "29": ["goldenFriday"],
+            "31": ["firstSundayAfterPentecost"]
+        }
+    }
+}
