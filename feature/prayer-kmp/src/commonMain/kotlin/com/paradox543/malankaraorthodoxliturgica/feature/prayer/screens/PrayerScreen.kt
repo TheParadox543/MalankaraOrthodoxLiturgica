@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -112,7 +114,7 @@ fun PrayerScreen(
                 manualOptions = qurbanaSongsChildren,
                 onDynamicSongKeyChanged = prayerViewModel::setDynamicSongKey,
                 onAddManualDynamicSong = { key, title, timeKey ->
-                    prayerViewModel.addManualDynamicSong(key, title, timeKey)
+                    prayerViewModel.addManualDynamicSong(key)
                 },
                 onError = prayerViewModel::reportError,
             )
@@ -179,39 +181,54 @@ fun PrayerScreen(
     BoxWithConstraints {
         val availableWidth = maxWidth
 
-        if (isLoadingPrayers) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center,
-            ) {
-                CircularProgressIndicator()
+        Box(modifier = Modifier.fillMaxSize()) {
+            if (prayers.isNotEmpty()) {
+                LazyColumn(
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = if (availableWidth > 600.dp) 40.dp else 20.dp)
+                            .pointerInput(Unit) {
+                                detectTapGestures {
+                                    isVisible.value = !isVisible.value
+                                }
+                            },
+                    state = listState,
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    item {
+                        Spacer(Modifier.padding(top = initialTopPadding.value))
+                    }
+                    items(prayers) { prayerElement ->
+                        PrayerElementRenderer(
+                            prayerElement,
+                            renderContext,
+                            currentFilename,
+                            onPrayerButtonClick,
+                        )
+                    }
+                    item {
+                        Spacer(Modifier.padding(bottom = initialBottomPadding.value))
+                    }
+                }
             }
-        } else {
-            LazyColumn(
-                modifier =
-                    Modifier
-                        .padding(horizontal = if (availableWidth > 600.dp) 40.dp else 20.dp)
-                        .pointerInput(Unit) {
-                            detectTapGestures {
-                                isVisible.value = !isVisible.value
-                            }
-                        },
-                state = listState,
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                item {
-                    Spacer(Modifier.padding(top = initialTopPadding.value))
-                }
-                items(prayers) { prayerElement ->
-                    PrayerElementRenderer(
-                        prayerElement,
-                        renderContext,
-                        currentFilename,
-                        onPrayerButtonClick,
+
+            if (isLoadingPrayers) {
+                if (prayers.isEmpty()) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                } else {
+                    LinearProgressIndicator(
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(top = initialTopPadding.value)
+                                .align(Alignment.TopCenter),
                     )
-                }
-                item {
-                    Spacer(Modifier.padding(bottom = initialBottomPadding.value))
                 }
             }
         }

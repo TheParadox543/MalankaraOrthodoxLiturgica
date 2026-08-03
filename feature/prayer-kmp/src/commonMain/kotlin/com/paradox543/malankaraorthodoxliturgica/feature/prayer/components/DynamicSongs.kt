@@ -9,15 +9,16 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -29,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.verticalScrollbar
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PrayerElement
 import com.paradox543.malankaraorthodoxliturgica.feature.prayer.screens.PrayerElementRenderer
@@ -95,7 +97,7 @@ fun DynamicSongsBlockUI(
                         },
                         modifier =
                             Modifier
-                                .menuAnchor(MenuAnchorType.PrimaryNotEditable, true)
+                                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable, true)
                                 .fillMaxWidth(),
                     )
 
@@ -165,6 +167,8 @@ fun SpecialSongSelectionDialog(
             }
         }
 
+    val listState = rememberLazyListState()
+
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("Add Special Songs") },
@@ -180,7 +184,9 @@ fun SpecialSongSelectionDialog(
                     modifier =
                         Modifier
                             .heightIn(max = 400.dp)
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .verticalScrollbar(listState),
+                    state = listState,
                 ) {
                     items(filteredNodes) { node ->
                         val displayTitle = resolveNodeTitle(node)
@@ -188,7 +194,6 @@ fun SpecialSongSelectionDialog(
                             headlineContent = {
                                 Text(displayTitle)
                             },
-                            // supportingContent = { Text(node.route) },
                             modifier =
                                 Modifier.clickable {
                                     val key =

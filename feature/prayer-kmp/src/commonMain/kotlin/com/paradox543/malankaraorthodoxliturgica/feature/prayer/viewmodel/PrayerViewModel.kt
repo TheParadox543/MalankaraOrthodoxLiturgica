@@ -33,7 +33,6 @@ class PrayerViewModel(
     private val loadPrayerScreenContent: suspend (String, AppLanguage, Set<String>) -> List<PrayerElement>,
     private val getSongKeyPriority: suspend () -> String,
     private val getUpcomingWeekEventKeys: suspend () -> Set<String>,
-    private val resolveDynamicSong: suspend (AppLanguage, String, String, String) -> PrayerElement.DynamicSong?,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : ViewModel() {
     private data class PrayerLoadRequest(
@@ -149,11 +148,7 @@ class PrayerViewModel(
         _dynamicSongKey.value = key
     }
 
-    fun addManualDynamicSong(
-        specialSongsKey: String,
-        eventTitle: String,
-        timeKey: String,
-    ) {
+    fun addManualDynamicSong(specialSongsKey: String) {
         _activeEventKeys.update { it + specialSongsKey }
         // Re-load to resolve the new song into all blocks
         lastLoadedPrayerRequest?.let { request ->
