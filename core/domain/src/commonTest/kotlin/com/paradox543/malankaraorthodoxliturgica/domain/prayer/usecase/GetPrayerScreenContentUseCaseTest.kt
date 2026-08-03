@@ -21,7 +21,8 @@ class GetPrayerScreenContentUseCaseTest {
         val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
         val calendarRepo = FakeCalendarRepository()
         val bibleRepo = FakeBibleRepository()
-        val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
+        val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+        val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
         val loadBibleReadingUseCase = LoadBibleReadingUseCase(bibleRepo)
         val formatBibleRangeUseCase = FormatBibleRangeUseCase()
         val formatBibleReadingEntryUseCase = FormatBibleReadingEntryUseCase(bibleRepo, formatBibleRangeUseCase)
@@ -47,7 +48,7 @@ class GetPrayerScreenContentUseCaseTest {
                             PrayerElement.Prose("Some prose"),
                         ),
                 )
-            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             assertTrue(result.any { it is PrayerElement.Title && it.content == "Linked Title" })
             assertTrue(result.any { it is PrayerElement.Prose && it.content == "Some prose" })
@@ -65,7 +66,7 @@ class GetPrayerScreenContentUseCaseTest {
                             PrayerElement.Prose("Body text"),
                         ),
                 )
-            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -85,7 +86,7 @@ class GetPrayerScreenContentUseCaseTest {
                             PrayerElement.Prose("Body text"),
                         ),
                 )
-            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -100,7 +101,7 @@ class GetPrayerScreenContentUseCaseTest {
                     "commonMain.json" to listOf(PrayerElement.LinkCollapsible("linked.json")),
                     "linked.json" to listOf(PrayerElement.Prose("Body text")),
                 )
-            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -116,7 +117,7 @@ class GetPrayerScreenContentUseCaseTest {
                     // linked.json only has a Title, which is consumed as the heading, leaving no items
                     "linked.json" to listOf(PrayerElement.Title("Only Title")),
                 )
-            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             assertTrue(result.any { it is PrayerElement.Error })
         }
@@ -135,7 +136,8 @@ class GetPrayerScreenContentUseCaseTest {
                 )
             val calendarRepo = FakeCalendarRepository()
             val bibleRepo = FakeBibleRepository()
-            val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
+            val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+            val dynamicUseCase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
             val loadBibleReadingUseCase = LoadBibleReadingUseCase(bibleRepo)
             val formatBibleRangeUseCase = FormatBibleRangeUseCase()
             val formatBibleReadingEntryUseCase = FormatBibleReadingEntryUseCase(bibleRepo, formatBibleRangeUseCase)
@@ -148,7 +150,7 @@ class GetPrayerScreenContentUseCaseTest {
                 formatGospelEntryUseCase,
             )
 
-            val result = useCase("commonMain.json", AppLanguage.ENGLISH)
+            val result = useCase("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             assertTrue(result.any { it is PrayerElement.Error })
         }
@@ -164,7 +166,7 @@ class GetPrayerScreenContentUseCaseTest {
 
             var threw = false
             try {
-                useCase("commonMain.json", AppLanguage.ENGLISH, currentDepth = 6)
+                useCase("commonMain.json", AppLanguage.ENGLISH, emptySet(), currentDepth = 6)
             } catch (e: PrayerLinkDepthExceededException) {
                 threw = true
             }
@@ -184,7 +186,7 @@ class GetPrayerScreenContentUseCaseTest {
                     "commonMain.json" to listOf(innerBlock),
                     "linked.json" to listOf(PrayerElement.Prose("Resolved prose")),
                 )
-            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             val block = result.filterIsInstance<PrayerElement.CollapsibleBlock>().firstOrNull()
             assertNotNull(block)
@@ -209,7 +211,7 @@ class GetPrayerScreenContentUseCaseTest {
                     "commonMain.json" to listOf(block),
                     "linked.json" to listOf(PrayerElement.Prose("Option content")),
                 )
-            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH)
+            val result = makeUseCase(elementsMap)("commonMain.json", AppLanguage.ENGLISH, emptySet())
 
             val altBlock = result.filterIsInstance<PrayerElement.AlternativePrayersBlock>().firstOrNull()
             assertNotNull(altBlock)

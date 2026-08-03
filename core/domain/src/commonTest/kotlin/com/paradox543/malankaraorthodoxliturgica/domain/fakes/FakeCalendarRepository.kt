@@ -16,6 +16,7 @@ class FakeCalendarRepository(
     private val weeks: List<CalendarWeek> = emptyList(),
     private val upcomingDays: List<CalendarDay> = emptyList(),
     private val upcomingEventItems: List<LiturgicalEventDetails> = emptyList(),
+    private val eventsMap: Map<String, LiturgicalEventDetails> = emptyMap(),
 ) : CalendarRepository {
     override suspend fun getDay(day: LocalDate): LiturgicalDay? {
         TODO("Not yet implemented")
@@ -66,7 +67,8 @@ class FakeCalendarRepository(
 
     override suspend fun getUpcomingWeekEventItems(): List<LiturgicalEventDetails> = upcomingEventItems
 
-    override suspend fun getEvents(eventKeys: List<String>): List<LiturgicalEventDetails> = emptyList()
+    override suspend fun getEvents(eventKeys: List<String>): List<LiturgicalEventDetails> =
+        eventKeys.mapNotNull { eventsMap[it] }
 
     override suspend fun hasLiturgicalYear(liturgicalYear: String): Boolean = true
 }

@@ -14,6 +14,7 @@ import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayer
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetPrayerScreenContentUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetRecommendedPrayersUseCase
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.GetSongKeyPriorityUseCase
+import com.paradox543.malankaraorthodoxliturgica.domain.prayer.usecase.ResolveDynamicSongUseCase
 import org.koin.dsl.module
 
 val useCaseModule =
@@ -35,10 +36,13 @@ val useCaseModule =
             )
         }
 
+        single { ResolveDynamicSongUseCase(get()) }
+
         single {
             GetDynamicSongsUseCase(
                 prayerRepository = get(),
                 calendarRepository = get(),
+                resolveDynamicSongUseCase = get(),
             )
         }
 

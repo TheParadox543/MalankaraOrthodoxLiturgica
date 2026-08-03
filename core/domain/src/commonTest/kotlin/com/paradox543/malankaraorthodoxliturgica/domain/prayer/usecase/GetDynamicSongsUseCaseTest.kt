@@ -49,9 +49,10 @@ class GetDynamicSongsUseCaseTest {
                     startedYear = null,
                 )
 
-            val calendarRepo = FakeCalendarRepository(upcomingEventItems = listOf(eventDetail))
-            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
-            val resolved = usecase(AppLanguage.ENGLISH, makeBlock(defaultContent = defaultSong))
+            val calendarRepo = FakeCalendarRepository()
+            val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
+            val resolved = usecase(AppLanguage.ENGLISH, makeBlock(defaultContent = defaultSong), setOf("defaultKey"))
 
             assertTrue(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "defaultKey" })
         }
@@ -68,9 +69,10 @@ class GetDynamicSongsUseCaseTest {
                 )
             val prayerRepo = FakePrayerRepository()
             val calendarRepo = FakeCalendarRepository()
-            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
+            val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
 
-            val resolved = usecase(AppLanguage.ENGLISH, makeBlock(defaultContent = defaultSong))
+            val resolved = usecase(AppLanguage.ENGLISH, makeBlock(defaultContent = defaultSong), emptySet())
 
             assertTrue(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "default" })
         }
@@ -82,13 +84,20 @@ class GetDynamicSongsUseCaseTest {
                 mapOf(
                     "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
                 )
+            val eventDetail =
+                LiturgicalEventDetails(
+                    type = "feast",
+                    title = TitleStr(en = "All Departed Faithful"),
+                    specialSongsKey = "allDepartedFaithfulSongs",
+                )
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
-            val calendarRepo = FakeCalendarRepository()
-            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
+            val calendarRepo = FakeCalendarRepository(eventsMap = mapOf("allDepartedFaithful" to eventDetail))
+            val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
 
-            val resolved = usecase(AppLanguage.ENGLISH, makeBlock())
+            val resolved = usecase(AppLanguage.ENGLISH, makeBlock(), emptySet())
 
-            assertTrue(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "allDepartedFaithful" })
+            assertTrue(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "allDepartedFaithfulSongs" })
         }
 
     @Test
@@ -96,7 +105,7 @@ class GetDynamicSongsUseCaseTest {
         runBlocking {
             val alreadyPresent =
                 PrayerElement.DynamicSong(
-                    eventKey = "allDepartedFaithful",
+                    eventKey = "allDepartedFaithfulSongs",
                     eventTitle = "Departed",
                     timeKey = "afterGospel",
                     items = listOf(PrayerElement.Song("Song")),
@@ -107,17 +116,14 @@ class GetDynamicSongsUseCaseTest {
                     items = mutableListOf(alreadyPresent),
                     defaultContent = null,
                 )
-            val elementsMap =
-                mapOf(
-                    "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/afterGospel.json" to listOf(PrayerElement.Song("Departed song")),
-                )
-            val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
+            val prayerRepo = FakePrayerRepository()
             val calendarRepo = FakeCalendarRepository()
-            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
+            val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
 
-            val resolved = usecase(AppLanguage.ENGLISH, block)
+            val resolved = usecase(AppLanguage.ENGLISH, block, emptySet())
 
-            assertEquals(1, resolved.items.count { it is PrayerElement.DynamicSong && it.eventKey == "allDepartedFaithful" })
+            assertEquals(1, resolved.items.count { it is PrayerElement.DynamicSong && it.eventKey == "allDepartedFaithfulSongs" })
         }
 
     @Test
@@ -136,10 +142,11 @@ class GetDynamicSongsUseCaseTest {
                     specialSongsKey = "christmasSongs",
                 )
             val prayerRepo = FakePrayerRepository(elementsMap = elementsMap)
-            val calendarRepo = FakeCalendarRepository(upcomingEventItems = listOf(eventDetail))
-            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
+            val calendarRepo = FakeCalendarRepository()
+            val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
 
-            val resolved = usecase(AppLanguage.MALAYALAM, makeBlock())
+            val resolved = usecase(AppLanguage.MALAYALAM, makeBlock(), setOf("christmasSongs"))
 
             val song =
                 resolved.items
@@ -159,9 +166,10 @@ class GetDynamicSongsUseCaseTest {
                 )
             val prayerRepo = FakePrayerRepository()
             val calendarRepo = FakeCalendarRepository(upcomingEventItems = listOf(eventDetail))
-            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo)
+            val resolveDynamicSongUseCase = ResolveDynamicSongUseCase(prayerRepo)
+            val usecase = GetDynamicSongsUseCase(prayerRepo, calendarRepo, resolveDynamicSongUseCase)
 
-            val resolved = usecase(AppLanguage.ENGLISH, makeBlock())
+            val resolved = usecase(AppLanguage.ENGLISH, makeBlock(), emptySet())
 
             assertFalse(resolved.items.any { it is PrayerElement.DynamicSong && it.eventKey == "Generic Feast" })
         }

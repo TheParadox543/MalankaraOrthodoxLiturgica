@@ -68,6 +68,9 @@ fun PrayerScreen(
     val songScrollState by prayerViewModel.songScrollState.collectAsState()
     val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
 
+    val rootNode by prayerNavViewModel.rootNode.collectAsState()
+    val qurbanaSongsChildren = remember(rootNode) { rootNode.findByRoute("qurbanaSongs")?.children ?: emptyList() }
+
     var title = ""
     for (item in node.route.split("_")) {
         title += (translations[item] ?: item) + " "
@@ -101,12 +104,16 @@ fun PrayerScreen(
         }
 
     val renderContext =
-        remember(translations, dynamicSongKey, songScrollState) {
+        remember(translations, dynamicSongKey, songScrollState, qurbanaSongsChildren) {
             PrayerRenderContext(
                 translations = translations,
                 dynamicSongKey = dynamicSongKey,
                 isSongHorizontalScroll = songScrollState,
+                manualOptions = qurbanaSongsChildren,
                 onDynamicSongKeyChanged = prayerViewModel::setDynamicSongKey,
+                onAddManualDynamicSong = { key, title, timeKey ->
+                    prayerViewModel.addManualDynamicSong(key, title, timeKey)
+                },
                 onError = prayerViewModel::reportError,
             )
         }
@@ -215,7 +222,9 @@ data class PrayerRenderContext(
     val translations: Map<String, String>,
     val dynamicSongKey: String?,
     val isSongHorizontalScroll: Boolean,
+    val manualOptions: List<PageNode>,
     val onDynamicSongKeyChanged: (String) -> Unit,
+    val onAddManualDynamicSong: (String, String, String) -> Unit,
     val onError: (String, String) -> Unit,
 )
 

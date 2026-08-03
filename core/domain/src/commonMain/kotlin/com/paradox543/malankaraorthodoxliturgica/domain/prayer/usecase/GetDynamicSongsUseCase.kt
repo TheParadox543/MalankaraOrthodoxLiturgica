@@ -13,10 +13,12 @@ import com.paradox543.malankaraorthodoxliturgica.domain.settings.model.AppLangua
 class GetDynamicSongsUseCase(
     private val prayerRepository: PrayerRepository,
     private val calendarRepository: CalendarRepository,
+    private val resolveDynamicSongUseCase: ResolveDynamicSongUseCase,
 ) {
     suspend operator fun invoke(
         language: AppLanguage,
         dynamicSongsBlock: PrayerElement.DynamicSongsBlock,
+        activeEventKeys: Set<String>,
         currentDepth: Int = 0,
     ): PrayerElement.DynamicSongsBlock {
         val resolvedList = mutableListOf<PrayerElement.DynamicSong>()
@@ -36,62 +38,32 @@ class GetDynamicSongsUseCase(
             }
         }
 
-        // Add songs for upcoming week events
-        val weekEventItems = calendarRepository.getUpcomingWeekEventItems()
-        for (event in weekEventItems) {
-            val specialSongsKey = event.specialSongsKey
-            if (specialSongsKey != null) {
-                val filename = "sacraments/qurbana/qurbanaSongs/${specialSongsKey.removeSuffix("Songs")}/${dynamicSongsBlock.timeKey}.json"
-                val songElements =
-                    try {
-                        prayerRepository.loadPrayerElements(filename, language)
-                    } catch (t: Throwable) {
-                        emptyList()
-                    }
-
-                if (songElements.isEmpty()) continue
-
-                val title =
-                    when (language) {
-                        AppLanguage.MALAYALAM -> event.title.ml ?: event.title.en
-                        AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> event.title.en
-                    }
-
-                resolvedList.add(
-                    PrayerElement.DynamicSong(
-                        eventKey = specialSongsKey,
-                        eventTitle = title,
-                        timeKey = dynamicSongsBlock.timeKey,
-                        items = songElements,
-                    ),
-                )
+        // Add songs for provided active event keys
+        for (specialSongsKey in activeEventKeys) {
+            val resolvedSong = resolveDynamicSongUseCase(language, specialSongsKey, "", dynamicSongsBlock.timeKey)
+            if (resolvedSong != null) {
+                resolvedList.add(resolvedSong)
             }
         }
 
         // Add prayers for the departed at the end if not already added
-        if (resolvedList.none { it.eventKey == "allDepartedFaithful" }) {
-            val departedFilename = "sacraments/qurbana/qurbanaSongs/allDepartedFaithful/${dynamicSongsBlock.timeKey}.json"
-            val departedSongElements =
-                try {
-                    prayerRepository.loadPrayerElements(departedFilename, language)
-                } catch (t: Throwable) {
-                    emptyList()
+        if (resolvedList.none { it.eventKey == "allDepartedFaithfulSongs" }) {
+            val departedEvents = calendarRepository.getEvents(listOf("allDepartedFaithful"))
+            val departedEvent = departedEvents.firstOrNull()
+            if (departedEvent != null) {
+                val title = when (language) {
+                    AppLanguage.MALAYALAM -> departedEvent.title.ml ?: departedEvent.title.en
+                    AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> departedEvent.title.en
                 }
-
-            if (departedSongElements.isNotEmpty()) {
-                val title =
-                    when (language) {
-                        AppLanguage.MALAYALAM -> "സകല വാങ്ങിപ്പോയവരുടെയും ഞായറാഴ്\u200Cച"
-                        AppLanguage.ENGLISH, AppLanguage.MANGLISH, AppLanguage.INDIC -> "All Departed Faithful"
-                    }
-                resolvedList.add(
-                    PrayerElement.DynamicSong(
-                        eventKey = "allDepartedFaithful",
-                        eventTitle = title,
-                        timeKey = dynamicSongsBlock.timeKey,
-                        items = departedSongElements,
-                    ),
+                val resolvedDeparted = resolveDynamicSongUseCase(
+                    language,
+                    departedEvent.specialSongsKey ?: "allDepartedFaithfulSongs",
+                    title,
+                    dynamicSongsBlock.timeKey
                 )
+                if (resolvedDeparted != null) {
+                    resolvedList.add(resolvedDeparted)
+                }
             }
         }
         return dynamicSongsBlock.copy(items = resolvedList)
