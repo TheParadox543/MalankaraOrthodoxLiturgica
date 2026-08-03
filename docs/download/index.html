@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to Store - Malankara Orthodox Liturgica</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fafafa;
+            color: #333;
+            text-align: center;
+        }
+        .message {
+            padding: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #8b0000;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        a {
+            color: #8b0000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+    <script>
+        (function() {
+            var playStoreUrl = "https://play.google.com/store/apps/details?id=com.paradox543.malankaraorthodoxliturgica";
+            var homeUrl = "../index.html";
+
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Simple Android detection
+            if (/android/i.test(userAgent)) {
+                window.location.replace(playStoreUrl);
+            } else {
+                // For iOS or Desktop, take them to the main page which has all info
+                window.location.replace(homeUrl);
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="message">
+        <div class="spinner"></div>
+        <p>Redirecting you to the appropriate store...</p>
+        <p>If you are not redirected, <a href="../index.html">click here</a>.</p>
+    </div>
+</body>
+</html>
