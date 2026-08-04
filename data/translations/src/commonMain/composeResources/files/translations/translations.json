@@ -353,7 +353,7 @@
     },
     "transfigurationSongs": {
         "en": "Transfiguration",
-        "ml": "കൂടാര (മറുരൂപ) പ്പെരുന്നാൾ"
+        "ml": "കൂടാര (മറുരൂപ) പെരുന്നാൾ"
     },
     "afterHolyCrossSongs": {
         "en": "Sundays after Holy Cross Sunday",
@@ -746,5 +746,13 @@
     "pambakuda": {
         "en": "Pambakuda Prayers",
         "ml": "പാമ്പാക്കുട"
+    },
+    "partTwo": {
+        "en": "Special Prayers",
+        "ml": "പ്രത്യേക പ്രാർത്ഥനകൾ"
+    },
+    "shoonoyo": {
+        "en": "Dormition",
+        "ml": "ശൂനോയൊനോമ്പ്"
     }
 }

@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 3,
-  "generatedAt": "2026-08-01T08:46:21Z",
+  "contentVersion": 6,
+  "generatedAt": "2026-08-04T06:53:52Z",
   "domain": "translations",
   "files": [
     {
       "name": "translations.json",
       "location": "translations/translations.json",
-      "checksum": "998be4022c5d00307342688461581c64da1a1fcc0e04326992da09900127e645",
-      "sizeBytes": 23487,
-      "generatedAt": "2026-08-01T08:46:18Z"
+      "checksum": "e25851c782811634482df7b98d1006654f7e52db5a5c4cb44b6129ee3278c754",
+      "sizeBytes": 23841,
+      "generatedAt": "2026-08-04T06:53:48Z"
     }
   ]
 }
