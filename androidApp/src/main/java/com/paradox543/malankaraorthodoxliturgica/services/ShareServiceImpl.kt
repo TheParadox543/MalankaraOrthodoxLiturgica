@@ -11,20 +11,18 @@ class ShareServiceImpl(
     private val analyticsService: AnalyticsService,
 ) : ShareService {
     companion object {
-        private const val APP_PACKAGE_NAME = "com.paradox543.malankaraorthodoxliturgica"
-        private const val PLAY_STORE_BASE_URL = "https://play.google.com/store/apps/details"
+        private const val APP_SHARE_URL = "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/download"
     }
 
     /**
-     * Launches an Android share intent to share the app's Play Store link.
+     * Launches an Android share intent to share the app's landing page.
      * @param shareMessage An optional custom message to include.
      */
     override fun shareAppLink(
         shareSubject: String,
         shareMessage: String,
     ) {
-        val playStoreUrl = "$PLAY_STORE_BASE_URL?id=$APP_PACKAGE_NAME"
-        val shareText = if (shareMessage.isNotEmpty()) "$shareMessage\n\n$playStoreUrl" else playStoreUrl
+        val shareText = if (shareMessage.isNotEmpty()) "$shareMessage\n\n$APP_SHARE_URL" else APP_SHARE_URL
 
         val shareIntent =
             Intent(Intent.ACTION_SEND).apply {

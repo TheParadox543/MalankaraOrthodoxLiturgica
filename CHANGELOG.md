@@ -14,6 +14,8 @@ This project follows the principles of [Keep a Changelog](https://keepachangelog
 - Logging for search functionality in Index page.
 - Items can be added to dynamic songs block in prayer screen.
 - Scrollbar added to navigation pages of prayer sections.
+- Updated index of docs page.
+- Created a unified URL for sharing the AppStore and PlayStore links. Download path resolves the store based on device.
 
 ### Fix
 - Dynamic Songs fixed to show actual live data instead of only default values.

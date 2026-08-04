@@ -40,14 +40,22 @@
     </style>
     <script>
         (function() {
-            var playStoreUrl = "https://play.google.com/store/apps/details?id=com.paradox543.malankaraorthodoxliturgica";
+            var appId = "com.paradox543.malankaraorthodoxliturgica";
+            var playStoreUrl = "https://play.google.com/store/apps/details?id=" + appId;
+            var marketUrl = "market://details?id=" + appId;
             var homeUrl = "../index.html";
 
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
             // Simple Android detection
             if (/android/i.test(userAgent)) {
-                window.location.replace(playStoreUrl);
+                // Try opening the Play Store app directly
+                window.location.replace(marketUrl);
+
+                // Fallback to web URL if market scheme doesn't work after 1 second
+                setTimeout(function() {
+                    window.location.replace(playStoreUrl);
+                }, 1000);
             } else {
                 // For iOS or Desktop, take them to the main page which has all info
                 window.location.replace(homeUrl);

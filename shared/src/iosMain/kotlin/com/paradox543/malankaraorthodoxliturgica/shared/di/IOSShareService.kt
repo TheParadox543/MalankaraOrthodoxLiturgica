@@ -13,7 +13,8 @@ class IOSShareService(
         shareSubject: String,
         shareMessage: String,
     ) {
-        val shareText = shareMessage.ifEmpty { shareSubject }
+        val shareLink = "https://theparadox543.github.io/MalankaraOrthodoxLiturgica/download"
+        val shareText = (if (shareMessage.isNotEmpty()) "$shareMessage\n\n$shareLink" else shareLink)
         val activityViewController = UIActivityViewController(
             activityItems = listOf(shareText),
             applicationActivities = null,
