@@ -69,8 +69,6 @@ import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsEvent
 import com.paradox543.malankaraorthodoxliturgica.core.analytics.AnalyticsService
 import com.paradox543.malankaraorthodoxliturgica.core.platform.AppUpdateManager
 import com.paradox543.malankaraorthodoxliturgica.core.platform.ShareService
-import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.Synchronizer
-import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.model.SyncStatus
 import com.paradox543.malankaraorthodoxliturgica.core.ui.components.QrFabScan
 import com.paradox543.malankaraorthodoxliturgica.core.ui.modifier.globalPinchZoom
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.SectionNavBar
@@ -78,6 +76,8 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.TopNavBar
 import com.paradox543.malankaraorthodoxliturgica.core.ui.navigation.navItems
 import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiState
 import com.paradox543.malankaraorthodoxliturgica.core.ui.screens.ContentNotReadyScreen
+import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.Synchronizer
+import com.paradox543.malankaraorthodoxliturgica.data.sync.domain.model.SyncStatus
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
@@ -151,10 +151,18 @@ fun NavGraph(
     // Show sync snackbar when content has been updated in background
     LaunchedEffect(syncState) {
         if (syncState.status == SyncStatus.SUCCESS && syncState.hasUpdate) {
-            snackbarHostState.showSnackbar(
-                message = "Content has been updated.",
-                duration = SnackbarDuration.Short
-            )
+            val result =
+                snackbarHostState.showSnackbar(
+                    message = "Content has been updated. Restart if changes are not visible.",
+                    actionLabel = "RESTART",
+                    duration = SnackbarDuration.Long,
+                )
+            if (result == SnackbarResult.ActionPerformed) {
+                val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
+                intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                context.startActivity(intent)
+                (context as? android.app.Activity)?.finish()
+            }
         }
     }
 
