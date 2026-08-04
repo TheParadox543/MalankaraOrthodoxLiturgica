@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-04T06:53:52Z",
+  "generatedAt": "2026-08-04T17:14:01Z",
   "prayers": {
     "schemaVersion": 1,
-    "contentVersion": 6,
+    "contentVersion": 7,
     "manifest": "prayers/manifest.json"
   },
   "calendar": {
