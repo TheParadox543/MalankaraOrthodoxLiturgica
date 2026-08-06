@@ -14,7 +14,13 @@ struct PrayerPushedView: View {
             ComposeView(
                 fileName: route,
                 scroll: scroll,
-                onPrayerButtonClick: { _, _ in },
+                onPrayerButtonClick: { link, replace in
+                    if replace {
+                        router.replace(.prayer(link))
+                    } else {
+                        router.push(.prayer(link))
+                    }
+                },
                 chromeState: chromeState,
                 onSectionNavChanged: { prev, next, onGenerateQr in
                     prevRoute = prev
