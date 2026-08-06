@@ -8,6 +8,7 @@ struct SectionComposeView: UIViewControllerRepresentable {
     let onSongNavigate: (String) -> Void
     let onIndexNavigate: () -> Void
     @ObservedObject var chromeState: ChromeState
+    let onBackNavigation: () -> Void
 
     func makeUIViewController(context: Context) -> UIViewController {
         return Platform_iosKt.getSectionViewController(
@@ -18,7 +19,8 @@ struct SectionComposeView: UIViewControllerRepresentable {
             onIndexNavigate: onIndexNavigate,
             onChromeStateChanged: { title, showFab in
                 chromeState.update(title: title, showFab: showFab.boolValue)
-            }
+            },
+            onBackNavigation: onBackNavigation
         )
     }
 

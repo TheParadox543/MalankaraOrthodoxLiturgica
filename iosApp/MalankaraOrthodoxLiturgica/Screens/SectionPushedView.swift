@@ -12,7 +12,8 @@ struct SectionPushedView: View {
             onPrayerNavigate: { router.push(.prayer($0)) },
             onSongNavigate: { router.push(.song(route: $0)) },
             onIndexNavigate: { router.push(.index) },
-            chromeState: chromeState
+            chromeState: chromeState,
+            onBackNavigation: { router.pop() }
         )
         .navigationBarTitleDisplayMode(.inline)
         .withSettingsGear()

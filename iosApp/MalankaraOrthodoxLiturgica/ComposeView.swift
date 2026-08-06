@@ -7,6 +7,7 @@ struct ComposeView: UIViewControllerRepresentable {
     let onPrayerButtonClick: (String, Bool) -> Void
     @ObservedObject var chromeState: ChromeState
     let onSectionNavChanged: (String?, String?, @escaping () -> Void) -> Void
+    let onBackNavigation: () -> Void
 
     func makeUIViewController(context: Context) -> UIViewController {
         return Platform_iosKt.getPrayerViewController(
@@ -20,7 +21,8 @@ struct ComposeView: UIViewControllerRepresentable {
             },
             onSectionNavChanged: { prev, next, onGenerateQr in
                 onSectionNavChanged(prev, next, { onGenerateQr() })
-            }
+            },
+            onBackNavigation: onBackNavigation
         )
     }
 

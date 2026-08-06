@@ -20,7 +20,8 @@ struct PrayerPushedView: View {
                     prevRoute = prev
                     nextRoute = next
                     generateQr = onGenerateQr
-                }
+                },
+                onBackNavigation: { router.pop() }
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             SectionNavBar(

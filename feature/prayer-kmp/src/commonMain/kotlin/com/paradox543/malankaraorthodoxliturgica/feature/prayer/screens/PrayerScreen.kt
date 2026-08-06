@@ -67,6 +67,7 @@ fun PrayerScreen(
     val prayers by prayerViewModel.prayers.collectAsState()
     val isLoadingPrayers by prayerViewModel.isLoadingPrayers.collectAsState()
     val translations by prayerViewModel.translations.collectAsState()
+    val selectedLanguage by prayerViewModel.selectedLanguage.collectAsState()
     val songScrollState by prayerViewModel.songScrollState.collectAsState()
     val dynamicSongKey by prayerViewModel.dynamicSongKey.collectAsState()
 
@@ -84,9 +85,9 @@ fun PrayerScreen(
     val currentFilename = node.filename ?: "NoFileNameFound"
     val (prevNodeRoute, nextNodeRoute) = prayerNavViewModel.getAdjacentRoutes(node)
 
-    // Ensure prayers are loaded only when filename changes
-    LaunchedEffect(currentFilename) {
-        prayerViewModel.loadPrayerElements(currentFilename)
+    // Ensure prayers are loaded only when filename or language changes
+    LaunchedEffect(currentFilename, selectedLanguage) {
+        prayerViewModel.loadPrayerElements(currentFilename, selectedLanguage)
     }
 
     // Increment count of prayer screen visits for in-app review

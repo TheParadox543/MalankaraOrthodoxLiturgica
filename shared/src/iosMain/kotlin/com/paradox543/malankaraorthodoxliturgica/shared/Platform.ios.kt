@@ -19,6 +19,7 @@ import com.paradox543.malankaraorthodoxliturgica.core.ui.scaffold.ScaffoldUiStat
 import com.paradox543.malankaraorthodoxliturgica.core.ui.theme.MalankaraOrthodoxLiturgicaTheme
 import com.paradox543.malankaraorthodoxliturgica.domain.prayer.model.PageNode
 import com.paradox543.malankaraorthodoxliturgica.domain.settings.repository.SettingsRepository
+import com.paradox543.malankaraorthodoxliturgica.core.ui.screens.ContentNotReadyScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleBookScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleChapterScreen
 import com.paradox543.malankaraorthodoxliturgica.feature.bible.screens.BibleScreen
@@ -113,21 +114,32 @@ fun PrayerScreenWrapper(
     scrollIndex: Int,
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit,
-    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
+    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit,
+    onBackNavigation: () -> Unit
 ) {
     val prayerViewModel = IOSSharedViewModels.prayerViewModel
     val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
 
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
+    val isPrayerTreeLoaded = rootNode.children.isNotEmpty()
     val node = rootNode.findByRoute(route)
 
-    if (node == null) {
+    if (!isPrayerTreeLoaded) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
         LaunchedEffect(Unit) {
             onChromeStateChanged("", false)
         }
+    } else if (node == null) {
+        ContentNotReadyScreen(
+            message = route,
+            onBackNavigation = onBackNavigation,
+            onScaffoldStateChanged = { state ->
+                val (title, showFab) = state.toChromeState()
+                onChromeStateChanged(title, showFab)
+            }
+        )
     } else {
         PrayerScreen(
             onPrayerButtonClick = onPrayerButtonClick,
@@ -153,9 +165,10 @@ fun getPrayerViewController(
     scrollIndex: Int,
     onPrayerButtonClick: (String, Boolean) -> Unit,
     onChromeStateChanged: (String, Boolean) -> Unit,
-    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit
+    onSectionNavChanged: (String?, String?, () -> Unit) -> Unit,
+    onBackNavigation: () -> Unit
 ): UIViewController = themedComposeUIViewController {
-    PrayerScreenWrapper(route, scrollIndex, onPrayerButtonClick, onChromeStateChanged, onSectionNavChanged)
+    PrayerScreenWrapper(route, scrollIndex, onPrayerButtonClick, onChromeStateChanged, onSectionNavChanged, onBackNavigation)
 }
 
 @Composable
@@ -218,31 +231,51 @@ fun SectionScreenWrapper(
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
     onIndexNavigate: () -> Unit,
-    onChromeStateChanged: (String, Boolean) -> Unit
+    onChromeStateChanged: (String, Boolean) -> Unit,
+    onBackNavigation: () -> Unit
 ) {
     val prayerViewModel = IOSSharedViewModels.prayerViewModel
     val prayerNavViewModel = IOSSharedViewModels.prayerNavViewModel
     val calendarViewModel = IOSSharedViewModels.calendarViewModel
 
     val rootNode by prayerNavViewModel.rootNode.collectAsState()
-    val node = rootNode.findByRoute(route) ?: PageNode(route = route, parent = null)
+    val isPrayerTreeLoaded = rootNode.children.isNotEmpty()
+    val node = rootNode.findByRoute(route)
     val liturgicalDay by calendarViewModel.todayLiturgicalDay.collectAsState()
 
-    SectionScreen(
-        prayerViewModel = prayerViewModel,
-        prayerNavViewModel = prayerNavViewModel,
-        node = node,
-        contentPadding = PaddingValues(0.dp),
-        onScaffoldStateChanged = { state ->
-            val (title, showFab) = state.toChromeState()
-            onChromeStateChanged(title, showFab)
-        },
-        onSectionNavigate = onSectionNavigate,
-        onPrayerNavigate = onPrayerNavigate,
-        onSongNavigate = onSongNavigate,
-        onIndexNavigate = onIndexNavigate,
-        liturgicalDay = liturgicalDay
-    )
+    if (!isPrayerTreeLoaded) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+        LaunchedEffect(Unit) {
+            onChromeStateChanged("", false)
+        }
+    } else if (node == null) {
+        ContentNotReadyScreen(
+            message = route,
+            onBackNavigation = onBackNavigation,
+            onScaffoldStateChanged = { state ->
+                val (title, showFab) = state.toChromeState()
+                onChromeStateChanged(title, showFab)
+            }
+        )
+    } else {
+        SectionScreen(
+            prayerViewModel = prayerViewModel,
+            prayerNavViewModel = prayerNavViewModel,
+            node = node,
+            contentPadding = PaddingValues(0.dp),
+            onScaffoldStateChanged = { state ->
+                val (title, showFab) = state.toChromeState()
+                onChromeStateChanged(title, showFab)
+            },
+            onSectionNavigate = onSectionNavigate,
+            onPrayerNavigate = onPrayerNavigate,
+            onSongNavigate = onSongNavigate,
+            onIndexNavigate = onIndexNavigate,
+            liturgicalDay = liturgicalDay
+        )
+    }
 }
 
 fun getSectionViewController(
@@ -251,7 +284,8 @@ fun getSectionViewController(
     onPrayerNavigate: (String) -> Unit,
     onSongNavigate: (String) -> Unit,
     onIndexNavigate: () -> Unit,
-    onChromeStateChanged: (String, Boolean) -> Unit
+    onChromeStateChanged: (String, Boolean) -> Unit,
+    onBackNavigation: () -> Unit
 ): UIViewController = themedComposeUIViewController {
     SectionScreenWrapper(
         route,
@@ -259,7 +293,8 @@ fun getSectionViewController(
         onPrayerNavigate,
         onSongNavigate,
         onIndexNavigate,
-        onChromeStateChanged
+        onChromeStateChanged,
+        onBackNavigation
     )
 }
 
