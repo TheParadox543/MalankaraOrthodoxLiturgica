@@ -122,7 +122,7 @@ final class AppRouter: ObservableObject {
         guard let url = URL(string: scanned), let route = AppRoute(url: url) else {
             return false
         }
-        push(route)
+        replace(route)
         return true
     }
 }
