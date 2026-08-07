@@ -43,6 +43,7 @@
             var appId = "com.paradox543.malankaraorthodoxliturgica";
             var playStoreUrl = "https://play.google.com/store/apps/details?id=" + appId;
             var marketUrl = "market://details?id=" + appId;
+            var testFlightUrl = "https://testflight.apple.com/join/7hfZ2c7U";
             var homeUrl = "../index.html";
 
             var userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -56,8 +57,11 @@
                 setTimeout(function() {
                     window.location.replace(playStoreUrl);
                 }, 1000);
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // Redirect iOS users to TestFlight
+                window.location.replace(testFlightUrl);
             } else {
-                // For iOS or Desktop, take them to the main page which has all info
+                // For Desktop, take them to the main page which has all info
                 window.location.replace(homeUrl);
             }
         })();
